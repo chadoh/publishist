@@ -1,0 +1,20 @@
+- content_for :aside do
+  :markdown
+    This is a special, editors-only page. Or at least it will be.
+
+%h2= t('.title')
+
+%table
+  %thead
+    %tr
+      %th= Composition.human_attribute_name :title
+      %th= Composition.human_attribute_name :author
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for composition in @compositions
+      %tr{ :class => cycle(:odd, :even) }
+        %td= link_to composition.title, composition
+        %td= composition.author
+        %td.action= link_to t('edit'), edit_composition_path(composition)
+        %td.action= link_to t('destroy'), composition, :confirm => t('are_you_sure'), :method => :delete

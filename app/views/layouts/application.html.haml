@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %title Problem Child
+    %link(rel="shortcut icon" href="/images/favicon.ico")
+    = stylesheet_link_tag 'formtastic.css', 'compiled/layouts/application.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/layouts/print.css', :media => 'print'
+    = yield :special_styles
+    /[if lt IE 8]
+      = stylesheet_link_tag 'compiled/layouts/ie.css', :media => 'screen, projection'
+    = javascript_include_tag 'jquery-1.4.2.min', 'wysiwyg', 'autogrow'
+    = csrf_meta_tag
+  %body
+    #root
+      #header
+        #text
+          %h1 Problem Child
+          %p= t 'subtitle'
+      #content
+        #aside
+          #search_box
+            = form_tag('/#') do
+              %input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark_on" }
+              %input{ :type => 'submit', :value => "Search!" }
+          %br
+          %hr
+          = yield :aside
+        %ul#nav
+          %li= link_to_unless_current "Showcase", root_path
+          %li= link_to_unless_current "Submit", new_composition_path
+          %li= link_to_unless_current "Compositions", compositions_path
+        #main
+          = yield
+      #root_footer
+    #footer
+      #text

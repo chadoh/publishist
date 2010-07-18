@@ -1,0 +1,10 @@
+%h2.composition.title
+  = raw @composition.title
+.composition.body
+  = raw @composition.body
+%p.composition.author 
+  #{@composition.author}
+
+%p
+  = link_to t('back'), compositions_path
+  = link_to t('edit'), edit_composition_path(@composition)

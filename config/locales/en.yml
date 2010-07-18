@@ -1,0 +1,29 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  subtitle: 'A Penn State Literary Magazine'
+  actions: 'Actions'
+  show: 'Show'
+  edit: 'Edit'
+  destroy: 'Delete'
+  are_you_sure: 'Are you sure?'
+  submit: 'Submit'
+  back: "Back"
+  cancel: "Cancel"
+  search: "Search!"
+  compositions:
+    index:
+      title: "Compositions"
+      new_composition: "Submit something!"
+    new:
+      title: "Submit Something!"
+    edit:
+      title: "Edit This Composition"
+
+  formtastic:
+    actions:
+      create: "Create %{model}!"
+      composition:
+        create: "Submit!"
+        update: "Update"

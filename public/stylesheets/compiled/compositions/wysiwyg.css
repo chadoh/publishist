@@ -1,0 +1,100 @@
+/*
+Syntax error: Undefined mixin 'input-styles'.
+        on line 4 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/compositions/wysiwyg.sass, in `input-styles'
+        from line 4 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/compositions/wysiwyg.sass
+
+1: div.wysiwyg
+2:   width: 100%
+3:   clear: both
+4:   +input-styles
+5:   *
+6:     margin: 0
+7:     padding: 0
+8:   .trigger
+9:     padding-top: .2em
+
+Backtrace:
+/Users/chad/Dropbox/Sites/pc/app/stylesheets/compositions/wysiwyg.sass:4:in `input-styles'
+/Users/chad/Dropbox/Sites/pc/app/stylesheets/compositions/wysiwyg.sass:4
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/mixin_node.rb:74:in `perform!'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:301:in `_perform'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:209:in `perform'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:322:in `perform_children'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:322:in `map'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:322:in `perform_children'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:313:in `perform!'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/rule_node.rb:191:in `perform!'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:301:in `_perform'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:209:in `perform'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:322:in `perform_children'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:322:in `map'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:322:in `perform_children'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:313:in `perform!'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/root_node.rb:59:in `perform!'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:301:in `_perform'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/node.rb:209:in `perform'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/root_node.rb:37:in `perform'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/tree/root_node.rb:29:in `render'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/plugin.rb:221:in `update_stylesheet'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/plugin.rb:86:in `update_stylesheets'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/plugin.rb:79:in `each'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/plugin.rb:79:in `update_stylesheets'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/plugin.rb:77:in `each'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/plugin.rb:77:in `update_stylesheets'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/plugin.rb:51:in `check_for_updates'
+/Users/chad/.bundle/ruby/1.8/gems/haml-3.0.13/lib/sass/plugin/rack.rb:40:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/head.rb:14:in `call'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/methodoverride.rb:24:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/flash.rb:177:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/session/abstract_store.rb:106:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/cookies.rb:235:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0.beta4/lib/active_record/query_cache.rb:31:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0.beta4/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0.beta4/lib/active_record/query_cache.rb:11:in `cache'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0.beta4/lib/active_record/query_cache.rb:30:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0.beta4/lib/active_record/connection_adapters/abstract/connection_pool.rb:365:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.0.0.beta4/lib/active_support/callbacks.rb:414:in `_run_call_callbacks'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.0.0.beta4/lib/active_support/callbacks.rb:88:in `send'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.0.0.beta4/lib/active_support/callbacks.rb:88:in `run_callbacks'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/sendfile.rb:105:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/show_exceptions.rb:48:in `call'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0.beta4/lib/rails/rack/logger.rb:14:in `call'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/runtime.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.0.0.beta4/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/lock.rb:11:in `call'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/lock.rb:11:in `synchronize'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0.beta4/lib/action_dispatch/middleware/static.rb:30:in `call'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0.beta4/lib/rails/application.rb:145:in `call'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0.beta4/lib/rails/application.rb:81:in `send'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0.beta4/lib/rails/application.rb:81:in `method_missing'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0.beta4/lib/rails/rack/log_tailer.rb:15:in `call'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/content_length.rb:13:in `call'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/handler/webrick.rb:48:in `service'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/handler/webrick.rb:14:in `run'
+/Users/chad/.bundle/ruby/1.8/gems/rack-1.1.0/lib/rack/server.rb:155:in `start'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0.beta4/lib/rails/commands/server.rb:62:in `start'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0.beta4/lib/rails/commands.rb:30
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0.beta4/lib/rails/commands.rb:27:in `tap'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0.beta4/lib/rails/commands.rb:27
+script/rails:6:in `require'
+script/rails:6
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'input-styles'.\A         on line 4 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/compositions/wysiwyg.sass, in `input-styles'\A         from line 4 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/compositions/wysiwyg.sass\A \A 1: div.wysiwyg\A 2:   width: 100%\A 3:   clear: both\A 4:   +input-styles\A 5:   *\A 6:     margin: 0\A 7:     padding: 0\A 8:   .trigger\A 9:     padding-top: .2em"; }

@@ -1,0 +1,117 @@
+div.wysiwyg
+  width: 100%
+  clear: both
+  +input-styles
+  *
+    margin: 0
+    padding: 0
+  .trigger
+    padding-top: .2em
+    +clearfix
+  ul.panel
+    margin: 0 0 .4em
+    padding: 0
+    border-bottom: 1px solid #cccccc
+    float: left
+    width: 100%
+    li
+      list-style-type: none
+      float: left
+      margin: 1px 2px 3px 0
+      background: #ffffff
+      &.separator
+        height: 16px
+        margin: 0 4px
+        border-left: 1px solid #cccccc
+      a
+        text-indent: -5000px
+        +opacity(0.75)
+        display: block
+        width: 16px
+        height: 16px
+        background: url("/images/jquery.wysiwyg.gif") no-repeat -64px -80px
+        border: 0
+        cursor: pointer
+        padding: 1px
+        &:hover, &.active
+          +opacity(1)
+        &.active
+          background-color: #f9f9f9
+          border: 1px solid #cccccc
+          border-left-color: #aaaaaa
+          border-top-color: #aaaaaa
+          padding: 0
+        &.bold
+          background-position: 0 -16px
+        &.italic
+          background-position: -15px -16px
+        &.strikeThrough
+          background-position: -32px -16px
+        &.underline
+          background-position: -48px -15px
+        &.justifyLeft
+          background-position: 0 0
+        &.justifyCenter
+          background-position: -16px 0
+        &.justifyRight
+          background-position: -32px 0
+        &.justifyFull
+          background-position: -48px 0
+        &.indent
+          background-position: -63px 1px
+        &.outdent
+          background-position: -79px 1px
+        &.subscript
+          background-position: -64px -15px
+        &.superscript
+          background-position: -80px -17px
+        &.undo
+          background-position: 1px -62px
+        &.redo
+          background-position: -16px -63px
+        &.insertOrderedList
+          background-position: -32px -48px
+          height: 14px
+        &.insertUnorderedList
+          background-position: -15px -48px
+        &.insertHorizontalRule
+          background-position: 1px -45px
+        &.h1
+          background-position: 0 -32px
+        &.h2
+          background-position: -16px -32px
+        &.h3
+          background-position: -32px -32px
+        &.h4
+          background-position: -48px -32px
+        &.h5
+          background-position: -64px -32px
+        &.h6
+          background-position: -80px -32px
+        &.cut
+          background-position: -32px -64px
+        &.copy
+          background-position: -48px -64px
+        &.paste
+          background-position: -64px -64px
+        &.increaseFontSize
+          background-position: -16px -80px
+        &.decreaseFontSize
+          background-position: -32px -80px
+        &.createLink
+          background-position: -80px -47px
+        &.insertImage
+          background-position: -80px -80px
+        &.html
+          background-position: -47px -46px
+        &.removeFormat
+          background-position: -80px -63px
+        &.empty
+          background-position: -64px -80px
+  iframe
+    width: 100%
+    border-top: none
+  #composition_titleIFrame
+    height: 1.4em
+  #composition_bodyIFrame
+    min-height: 30em

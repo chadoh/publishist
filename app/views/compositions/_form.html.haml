@@ -1,0 +1,41 @@
+- content_for :special_styles do
+  = stylesheet_link_tag 'compiled/compositions/form.css', :media => 'screen, projection'
+
+= semantic_form_for @composition do |f|
+  - if @composition.errors.any?
+    #errorExplanation
+      %h3 There was an error!
+      %ul
+        - @composition.errors.full_messages.each do |msg|
+          %li= msg
+  
+  = f.inputs do
+    = f.input :title, :label => 'Title', :input_html => { :class => 'wysiwyg' }
+    = f.input :body, :label => 'Body', :required => false, :input_html => { :class => 'wysiwyg' }
+    = f.input :author, :label => 'Author'
+  = f.buttons do
+    = f.commit_button
+    -#%li.cancel
+      = link_to t('cancel'), :back
+
+:javascript
+  $(function(){
+    $("#composition_title").focus();
+    $(".wysiwyg").wysiwyg({
+      css: '/stylesheets/compiled/layouts/application.css',
+      controls: {
+        h1: { visible: false },
+        h2: { visible: false },
+        h3: { visible: false },
+        h1mozilla: { visible: false },
+        h2mozilla: { visible: false },
+        h3mozilla: { visible: false },
+        separator06: { visible: false },
+      }
+    });
+    $("#composition_title_input ul.panel").wrap('<div class="trigger"></div>').slideUp();
+    $(".trigger").hover(
+      function(){ $("#composition_title_input ul.panel").slideDown() }, 
+      function(){ $("#composition_title_input ul.panel").slideUp() }
+    );
+  });

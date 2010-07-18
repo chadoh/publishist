@@ -1,0 +1,49 @@
+// Only apply the blueprint form styles to forms with
+// a class of "bp". This makes it easier to style
+// forms from scratch if you need to.
+
+form.bp
+  +blueprint-form
+
+form, form.bp, textarea, input[type=text], form > fieldset > ol > li
+  width: 100% !important
+  max-width: 100% !important
+
+.watermark_on
+  color: $lgray
+  font-style: italic
+
+textarea, input[type=text]
+  +input-styles
+
+input[type=submit], button
+  background: $orange
+  +linear-gradient(color-stops($orange + #333, $orange - #111))
+  border: none
+  font-size: 140% !important
+  padding: 3px 9px !important
+  +box-shadow($dgray, 1px, 1px, 2px)
+  &:hover
+    +box-shadow($dgray, 0, 0, 2px)
+  &:active
+    +box-shadow($dgray, -1px, -1px, 1px)
+
+li.cancel
+  margin-left: 2em !important
+
+#search_box
+  width: $aside * $blueprint_grid_width + ($aside - 1) * $blueprint_grid_margin - 30px
+  margin: 0 auto
+  input[type="submit"]
+    display: none
+
+#errorExplanation
+  border: 1px solid $error
+  padding: .5em
+  background: $error + #888
+  margin-bottom: 20px
+  width: 100%
+  h3
+    font-size: 1.5em
+  ul
+    list-style: none inside none
