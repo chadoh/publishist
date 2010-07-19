@@ -14,7 +14,7 @@
   %tbody
     - for composition in @compositions
       %tr{ :class => cycle(:odd, :even) }
-        %td= link_to composition.title, composition
+        %td= link_to raw(composition.title), composition
         %td= composition.author
         %td.action= link_to t('edit'), edit_composition_path(composition)
         %td.action= link_to t('destroy'), composition, :confirm => t('are_you_sure'), :method => :delete

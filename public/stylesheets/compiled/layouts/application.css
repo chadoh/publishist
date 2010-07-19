@@ -1271,14 +1271,14 @@ html, body {
 }
 
 /* line 63, ../../../../app/stylesheets/layouts/application.sass */
-body.bp thead th {
+thead th {
   background: #cfb309;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f1d52b), color-stop(100%, #bea200));
   background-image: -moz-linear-gradient(top, #f1d52b 0%, #bea200 100%);
 }
 
 /* line 66, ../../../../app/stylesheets/layouts/application.sass */
-body.bp tr.even td {
+tr.even td {
   background: #f9f6de;
 }
 
