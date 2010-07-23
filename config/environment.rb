@@ -6,3 +6,7 @@ Pc::Application.initialize!
 
 # Needs to be set for compositions to turn out right!
 Haml::Template.options[:ugly] = true
+
+#Rails::Initializer.run do |config|
+  #config.action_view.sanitized_allowed_tags = 'b', 'i', 'em', 'strong', 'sub', 'sup'
+#end

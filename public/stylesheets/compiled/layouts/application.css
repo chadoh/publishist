@@ -638,30 +638,18 @@ body.two-col #content {
 /* line 1, ../../../../app/stylesheets/compositions/show.sass */
 .composition.title {
   font-size: 1.7em;
-}
-/* line 3, ../../../../app/stylesheets/compositions/show.sass */
-.composition.title p {
-  display: inline;
   margin: 0;
-  padding: 0;
 }
-/* line 7, ../../../../app/stylesheets/compositions/show.sass */
-.composition.title pre {
+/* line 4, ../../../../app/stylesheets/compositions/show.sass */
+.composition.title p, .composition.title pre, .composition.title div {
   display: inline;
   margin: 0;
   padding: 0;
 }
 
-/* line 12, ../../../../app/stylesheets/compositions/show.sass */
-.composition.body, .composition.title pre {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
+/* line 9, ../../../../app/stylesheets/compositions/show.sass */
+.composition.body {
+  margin: 1.5em 0;
 }
 
 /* line 22, ../../../../app/stylesheets/compositions/show.sass */

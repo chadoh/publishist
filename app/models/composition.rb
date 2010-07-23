@@ -4,7 +4,6 @@ class Composition < ActiveRecord::Base
 
   before_validation :anonymous_if_blank
   before_validation :untitled_if_blank
-  #before_save :htmlize_line_breaks
 
 protected
 
@@ -14,7 +13,4 @@ protected
   def untitled_if_blank
     self.title= "untitled" if self.title.blank?
   end
-  #def htmlize_line_breaks
-    #body.gsub!(/(\r)?\n/, '<br>')
-  #end
 end

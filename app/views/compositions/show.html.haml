@@ -1,7 +1,8 @@
+- title(strip_tags(@composition.title))
 %h2.composition.title
-  = raw @composition.title
+  = sanitize @composition.title
 .composition.body
-  = raw @composition.body
+  = sanitize @composition.body
 %p.composition.author 
   #{@composition.author}
 

@@ -1,5 +1,5 @@
-- content_for :special_styles do
-  = stylesheet_link_tag 'compiled/compositions/form.css', :media => 'screen, projection'
+- javascript 'wysiwyg'
+- stylesheet 'compiled/compositions/form.css', :media => 'screen, projection'
 
 = semantic_form_for @composition do |f|
   - if @composition.errors.any?
@@ -10,6 +10,7 @@
           %li= msg
   
   = f.inputs do
+    -# TODO: Make/find wysiwyg editor that inserts markdown and escape all tags on output
     = f.input :title, :label => 'Title', :input_html => { :class => 'wysiwyg' }
     = f.input :body, :label => 'Body', :required => false, :input_html => { :class => 'wysiwyg' }
     = f.input :author, :label => 'Author'
