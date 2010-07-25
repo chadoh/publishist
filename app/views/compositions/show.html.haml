@@ -1,4 +1,4 @@
-- title(strip_tags(@composition.title))
+- title(strip_tags(@composition.title), false)
 %h2.composition.title
   = sanitize @composition.title
 .composition.body

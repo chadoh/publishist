@@ -31,6 +31,7 @@
           %li= link_to_unless_current "Submit", new_composition_path
           %li= link_to_unless_current "Compositions", compositions_path
         #main
+          %h2= @content_for_page_heading if @show_title
           = yield
       #root_footer
     #footer
