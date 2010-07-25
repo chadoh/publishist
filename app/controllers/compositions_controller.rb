@@ -44,6 +44,7 @@ class CompositionsController < ApplicationController
 
     respond_to do |format|
       if @composition.save
+        Notifications.new_composition(@composition).deliver
         format.html { redirect_to(@composition, :notice => 'Composition was successfully created.') }
         format.xml  { render :xml => @composition, :status => :created, :location => @composition }
       else
