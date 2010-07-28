@@ -9,7 +9,7 @@ class Notifications < ActionMailer::Base
   #
   def new_composition(composition)
     @title = composition.title
-    @composition_body = composition.body
+    @composition_body = composition.body # using @body causes problems
     @author = composition.author
     @url = composition_url(composition)
 

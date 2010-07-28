@@ -3,6 +3,8 @@ Pc::Application.routes.draw do |map|
 
   map.resources :compositions
 
+  get "notifications/new_composition"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

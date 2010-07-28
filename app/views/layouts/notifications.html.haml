@@ -2,5 +2,10 @@
 %html
   %head
     %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
+    %style
+      :sass
+        @import /app/stylesheets/layouts/partials/base
+        h1
+          color: green
   %body
     = yield
