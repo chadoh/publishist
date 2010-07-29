@@ -1,7 +1,7 @@
 %h1.composition.title(style="font-size: 1.7em; color: #222; font-weight: normal;")
-  = @title
+  = sanitize @title
 %div.composition.body(style="margin-top: 1.5em; margin-bottom: 1.5em;")
-  = @composition_body
+  = sanitize @composition_body
 %p.composition.author(style="color: silver;")
   = @author
 - content_for :footer do
