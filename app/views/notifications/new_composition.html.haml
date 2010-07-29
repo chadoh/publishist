@@ -1,5 +1,9 @@
-:markdown
-  You can [view this on the website](#{@url}).
-%h1.composition.title= @title
-%div.composition.body= @composition_body
-%p.composition.author= @author
+%h1.composition.title(style="font-size: 1.7em; color: #222; font-weight: normal;")
+  = @title
+%div.composition.body(style="margin-top: 1.5em; margin-bottom: 1.5em;")
+  = @composition_body
+%p.composition.author(style="color: silver;")
+  = @author
+- content_for :footer do
+  :markdown
+    You can [view this on the website](#{@url}).
