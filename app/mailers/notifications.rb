@@ -13,6 +13,10 @@ class Notifications < ActionMailer::Base
     @author = composition.author
     @url = composition_url(composition)
 
+    @green = "#8daf25"
+    @blue = "#8bc7c7"
+    @font_family = "'Helvetica Neue', Arial, Helvetica, sans-serif"
+
     mail(:to => "admin@problemchildmag.com",
       :subject => "Submission: \"#{@title}\" by #{@author}"
     )
