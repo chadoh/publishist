@@ -13,6 +13,7 @@ class Notifications < ActionMailer::Base
     @author = composition.author
     @url = composition_url(composition)
 
+    @heading_image = "http://pcmag.heroku.com/images/mail/heading1.jpg"
     @green = "#8daf25"
     @blue = "#8bc7c7"
     @font_family = "'Helvetica Neue', Arial, Helvetica, sans-serif"
