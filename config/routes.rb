@@ -1,4 +1,6 @@
 Pc::Application.routes.draw do |map|
+  resources :users
+
   get "welcome/index"
 
   map.resources :compositions

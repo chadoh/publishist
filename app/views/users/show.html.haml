@@ -1,0 +1,14 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), users_path
+  = link_to t('edit'), edit_user_path(@user)
+
+%dl
+  %dt= User.human_attribute_name :name
+  %dd= @user.name
+  %dt= User.human_attribute_name :email
+  %dd= @user.email
+  %dt= User.human_attribute_name :hashed_password
+  %dd= @user.hashed_password
+  %dt= User.human_attribute_name :salt
+  %dd= @user.salt
