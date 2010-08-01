@@ -12,6 +12,7 @@ en:
   back: "Back"
   cancel: "Cancel"
   search: "Search!"
+
   compositions:
     index:
       title: "Compositions"
@@ -20,6 +21,15 @@ en:
       title: "Submit Something!"
     edit:
       title: "Edit This Composition"
+
+  users:
+    index:
+      title: "Users"
+      new_user: "New User"
+    new:
+      title: "New User"
+    edit:
+      title: "Edit User"
 
   formtastic:
     actions:

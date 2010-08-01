@@ -1,10 +1,11 @@
 Pc::Application.routes.draw do |map|
-  resources :users
 
   get "welcome/index"
 
   map.resources :compositions
+  resources :users, :except => :show
 
+  #testing emails
   get "notifications/new_composition"
 
   # The priority is based upon order of creation:

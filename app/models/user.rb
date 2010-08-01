@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   validate :password_must_be_present
+  validates_length_of :password, :minimum => 6
+
+  validates :first_name, :presence => true
 
   class << self
     def authenticate(email, password)
@@ -32,14 +35,18 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
 
-    def password_must_be_present
-      errors.add(:password, "Missing password") unless hashed_password.present?
-    end
+private
 
-    def generate_salt
-      self.salt = self.object_id.to_s + rand.to_s
-    end
+  def password_must_be_present
+    errors.add(:password, "Missing password") unless hashed_password.present?
+  end
+
+  def generate_salt
+    self.salt = self.object_id.to_s + rand.to_s
+  end
 
 end
