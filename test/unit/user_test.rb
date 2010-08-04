@@ -11,11 +11,6 @@ class UserTest < ActiveSupport::TestCase
       @new_user = User.new(:email => "snuffles@mcguffles.com")
     end
 
-    should "require that a password is set" do
-      assert !@new_user.valid?
-      assert_equal @new_user.errors[:password][0], "Missing password"
-    end
-
     should "require a password of at least six characters" do
       @new_user.password = "verey"
       assert !@new_user.valid?

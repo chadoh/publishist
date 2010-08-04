@@ -13,6 +13,5 @@
       %tr{ :class => cycle(:odd, :even) }
         %td= user.name
         %td= user.email
-        %td.action= link_to t('show'), user
         %td.action= link_to t('edit'), edit_user_path(user)
         %td.action= link_to t('destroy'), user, :confirm => t('are_you_sure'), :method => :delete

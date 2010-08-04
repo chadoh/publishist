@@ -1,27 +1,17 @@
-= form_for(@user) do |f|
+= semantic_form_for @user do |f|
   - if @user.errors.any?
     #errorExplanation
-      %h2= "#{pluralize(@user.errors.count, 'error')} prohibited this user from being saved:"
+      %h3 There #{pluralize_phrase(@user.errors.count, "was an error", "were some errors")}!
       %ul
       - @user.errors.full_messages.each do |msg|
         %li= msg
   
-  .field
-    = f.label :name
-    %br
-    = f.text_field :name
-  .field
-    = f.label :email
-    %br
-    = f.text_field :email
-  .field
-    = f.label :hashed_password
-    %br
-    = f.text_field :hashed_password
-  .field
-    = f.label :salt
-    %br
-    = f.text_field :salt
-
-  .actions
-    = f.submit
+  = f.inputs do
+    = f.input :first_name
+    = f.input :middle_name
+    = f.input :last_name
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
+  = f.buttons do
+    = f.commit_button

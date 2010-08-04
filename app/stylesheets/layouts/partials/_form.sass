@@ -5,7 +5,7 @@
 form.bp
   +blueprint-form
 
-form, form.bp, textarea, input[type=text], form > fieldset > ol > li
+form, form.bp, textarea, input[type=text], input[type=password], form > fieldset > ol > li
   width: 100% !important
   max-width: 100% !important
 
@@ -13,8 +13,11 @@ form, form.bp, textarea, input[type=text], form > fieldset > ol > li
   color: $lgray
   font-style: italic
 
-textarea, input[type=text]
+textarea, input[type=text], input[type=password]
   +input-styles
+
+form.formtastic fieldset.buttons
+  padding: 0
 
 input[type=submit], button
   background: $orange
