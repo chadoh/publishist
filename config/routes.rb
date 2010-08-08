@@ -1,4 +1,8 @@
 Pc::Application.routes.draw do |map|
+  resources :people
+
+  resources :sessions
+
 
   get "welcome/index"
 
