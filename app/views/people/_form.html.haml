@@ -1,0 +1,18 @@
+= semantic_form_for @person do |f|
+  - if @person.errors.any?
+    #errorExplanation
+      %h3 There #{pluralize_phrase(@person.errors.count, "was an error", "were some errors")}!
+      %ul
+        - @person.errors.full_messages.each do |msg|
+          %li= msg
+  
+  = f.inputs do
+    -# TODO: Make/find wysiwyg editor that inserts markdown and escape all tags on output
+    = f.input :first_name
+    = f.input :middle_name
+    = f.input :last_name
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation, :label => 'Password again'
+  = f.buttons do
+    = f.commit_button

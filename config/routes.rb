@@ -1,13 +1,11 @@
 Pc::Application.routes.draw do |map|
-  resources :people
-
-  resources :sessions
-
 
   get "welcome/index"
 
-  map.resources :compositions
+  resources :compositions
   resources :users, :except => :show
+  resources :people
+  resources :sessions
 
   #testing emails
   get "notifications/new_composition"

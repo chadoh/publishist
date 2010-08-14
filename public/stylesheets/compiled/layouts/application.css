@@ -1151,8 +1151,15 @@ html, body {
   margin-bottom: 0.1em;
   padding-top: 0.2em;
 }
+/* line 16, ../../../../app/stylesheets/layouts/application.sass */
+#header #account {
+  margin-right: 7em;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 
-/* line 17, ../../../../app/stylesheets/layouts/application.sass */
+/* line 22, ../../../../app/stylesheets/layouts/application.sass */
 #footer {
   background: #8daf25;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #8daf25), color-stop(100%, #496b00));
@@ -1160,21 +1167,21 @@ html, body {
   background-image: linear-gradient(top, #8daf25 0%, #496b00 100%);
 }
 
-/* line 21, ../../../../app/stylesheets/layouts/application.sass */
+/* line 26, ../../../../app/stylesheets/layouts/application.sass */
 #footer #text, #header #text {
   width: 950px;
   margin: 0 auto;
   display: block;
 }
 
-/* line 26, ../../../../app/stylesheets/layouts/application.sass */
+/* line 31, ../../../../app/stylesheets/layouts/application.sass */
 #content {
   width: 950px;
   display: block;
   margin: 0 auto;
   background: #eeeeee;
 }
-/* line 31, ../../../../app/stylesheets/layouts/application.sass */
+/* line 36, ../../../../app/stylesheets/layouts/application.sass */
 #content #aside {
   padding: 15px 0 0;
   display: inline;
@@ -1182,7 +1189,7 @@ html, body {
   margin-right: 20px;
   width: 230px;
 }
-/* line 32, ../../../../app/stylesheets/layouts/application.sass */
+/* line 37, ../../../../app/stylesheets/layouts/application.sass */
 #content #aside h2 {
   font-size: 1.5em;
 }
@@ -1190,7 +1197,7 @@ html, body {
 * html #content #aside {
   overflow-x: hidden;
 }
-/* line 36, ../../../../app/stylesheets/layouts/application.sass */
+/* line 41, ../../../../app/stylesheets/layouts/application.sass */
 #content #nav {
   display: inline;
   float: left;
@@ -1203,24 +1210,24 @@ html, body {
 * html #content #nav {
   overflow-x: hidden;
 }
-/* line 40, ../../../../app/stylesheets/layouts/application.sass */
+/* line 45, ../../../../app/stylesheets/layouts/application.sass */
 #content #nav li {
   font-size: 2.2em;
   color: #db8322;
   text-shadow: silver 1px 1px 2px;
 }
-/* line 44, ../../../../app/stylesheets/layouts/application.sass */
+/* line 49, ../../../../app/stylesheets/layouts/application.sass */
 #content #nav li a {
   text-shadow: white 0 0 1px;
   text-decoration: none;
   color: #cfb309;
 }
-/* line 48, ../../../../app/stylesheets/layouts/application.sass */
+/* line 53, ../../../../app/stylesheets/layouts/application.sass */
 #content #nav li a:hover {
   color: #e39c4d;
   text-shadow: silver 0 0 1px;
 }
-/* line 51, ../../../../app/stylesheets/layouts/application.sass */
+/* line 56, ../../../../app/stylesheets/layouts/application.sass */
 #content #main {
   padding-left: 20px;
   display: inline;
@@ -1233,19 +1240,19 @@ html, body {
   overflow-x: hidden;
 }
 
-/* line 55, ../../../../app/stylesheets/layouts/application.sass */
+/* line 60, ../../../../app/stylesheets/layouts/application.sass */
 #nav, #main {
   border-left: 1px solid #dddddd;
 }
 
-/* line 58, ../../../../app/stylesheets/layouts/application.sass */
+/* line 63, ../../../../app/stylesheets/layouts/application.sass */
 #root_footer {
   height: 80px;
   display: block;
   clear: both;
 }
 
-/* line 63, ../../../../app/stylesheets/layouts/application.sass */
+/* line 68, ../../../../app/stylesheets/layouts/application.sass */
 thead th {
   background: #cfb309;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f1d52b), color-stop(100%, #bea200));
@@ -1253,29 +1260,29 @@ thead th {
   background-image: linear-gradient(top, #f1d52b 0%, #bea200 100%);
 }
 
-/* line 66, ../../../../app/stylesheets/layouts/application.sass */
+/* line 71, ../../../../app/stylesheets/layouts/application.sass */
 tr.even td {
   background: #f9f6de;
 }
 
-/* line 69, ../../../../app/stylesheets/layouts/application.sass */
+/* line 74, ../../../../app/stylesheets/layouts/application.sass */
 ::selection {
   background-color: #f8e5d1;
 }
 
-/* line 72, ../../../../app/stylesheets/layouts/application.sass */
+/* line 77, ../../../../app/stylesheets/layouts/application.sass */
 body.bp .error {
   color: #db4522;
   background: none;
   border: none;
 }
 
-/* line 76, ../../../../app/stylesheets/layouts/application.sass */
+/* line 81, ../../../../app/stylesheets/layouts/application.sass */
 form.formtastic fieldset > ol > li p.inline-errors {
   color: #db4522;
 }
 
-/* line 79, ../../../../app/stylesheets/layouts/application.sass */
+/* line 84, ../../../../app/stylesheets/layouts/application.sass */
 blockquote {
   color: inherit;
   font-style: inherit;

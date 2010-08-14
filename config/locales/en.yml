@@ -22,14 +22,17 @@ en:
     edit:
       title: "Edit This Composition"
 
-  users:
-    index:
-      title: "Users"
-      new_user: "New User"
+  sessions:
     new:
-      title: "New User"
+      title: "Sign In"
+
+  people:
+    index:
+      title: "People"
+    new:
+      title: "Sign Up"
     edit:
-      title: "Edit User"
+      title: "Edit Your Account"
 
   formtastic:
     actions:
@@ -37,3 +40,5 @@ en:
       composition:
         create: "Submit!"
         update: "Update"
+      person:
+        create: "Sign Up!"

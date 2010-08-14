@@ -17,6 +17,16 @@
         #text
           %h1 Problem Child
           %p= t 'subtitle'
+          -# TODO: Make this a list
+          #account
+            - if @user
+              = link_to @user.name, edit_person_path('account')
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              = button_to "Sign out", @application_session, :method => :delete
+            - else
+              = link_to "Sign in", new_session_path
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              = link_to "Sign Up!", new_person_path
       #content
         #aside
           #search_box
@@ -31,6 +41,7 @@
           %li= link_to_unless_current "Submit", new_composition_path
           %li= link_to_unless_current "Compositions", compositions_path
         #main
+          #notice= flash[:notice] if flash[:notice]
           %h2= @content_for_page_heading if @show_title
           = yield
       #root_footer
