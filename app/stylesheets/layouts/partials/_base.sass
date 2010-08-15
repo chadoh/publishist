@@ -39,8 +39,10 @@ $blueprint_grid_width: 30px
 $blueprint_grid_margin: 20px
 
 // Combine the partials into a single screen stylesheet.
+@include blueprint-typography
 @import page
 @import form
 @import two_col
 @import ../../compositions/show
+@import ../../people/new
 @import compass/utilities/general/clearfix

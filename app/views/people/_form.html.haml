@@ -16,3 +16,17 @@
     = f.input :password_confirmation, :label => 'Password again'
   = f.buttons do
     = f.commit_button
+
+:javascript
+  $(function(){
+    $("#person_first_name").focus();
+
+    $("#person_first_name, #person_last_name").keyup(function(){
+      $("span.name").html($("#person_first_name").val());
+      if ($("#person_last_name").val() != "") {
+        $("span.name").append(" " + $("#person_last_name").val());
+      }
+      $("#aside #your_name_looks_like").fadeIn();
+    });
+
+  });

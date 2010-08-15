@@ -2,10 +2,14 @@ Pc::Application.routes.draw do |map|
 
   get "welcome/index"
 
-  resources :compositions
-  resources :users, :except => :show
-  resources :people
-  resources :sessions
+  resources :compositions, :people
+  resources :sessions, :only => [:new, :create, :destroy]
+
+  #aliases, kind of
+  match "me" => "people#show#1"
+  match "sign_in" => "sessions#new"
+  match "sign_up" => "people#new"
+  match "submit" => "compositions#new"
 
   #testing emails
   get "notifications/new_composition"

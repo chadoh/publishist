@@ -42,3 +42,5 @@ en:
         update: "Update"
       person:
         create: "Sign Up!"
+      session:
+        create: "Sign In"

@@ -18,15 +18,18 @@
           %h1 Problem Child
           %p= t 'subtitle'
           -# TODO: Make this a list
-          #account
-            - if @user
-              = link_to @user.name, edit_person_path('account')
+          - if @user
+            #account
+              %strong= @user.first_name
               &nbsp;&nbsp;|&nbsp;&nbsp;
-              = button_to "Sign out", @application_session, :method => :delete
-            - else
+              = link_to "Account", edit_person_path('account')
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              = button_to "Sign out", @application_session, :method => :delete, :class => "link"
+          - else
+            #account.sign_up
               = link_to "Sign in", new_session_path
               &nbsp;&nbsp;|&nbsp;&nbsp;
-              = link_to "Sign Up!", new_person_path
+              = link_to "Sign Up!", new_person_path, :class => "button"
       #content
         #aside
           #search_box
@@ -41,9 +44,12 @@
           %li= link_to_unless_current "Submit", new_composition_path
           %li= link_to_unless_current "Compositions", compositions_path
         #main
-          #notice= flash[:notice] if flash[:notice]
           %h2= @content_for_page_heading if @show_title
+          - if flash[:notice]
+            #notice= flash[:notice]
           = yield
       #root_footer
     #footer
       #text
+        :markdown
+          This website is in early alpha development; you may experience turbulence. Please let someone know if something is broken.

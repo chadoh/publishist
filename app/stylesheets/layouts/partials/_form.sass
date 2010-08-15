@@ -19,17 +19,43 @@ textarea, input[type=text], input[type=password]
 form.formtastic fieldset.buttons
   padding: 0
 
-input[type=submit], button
+input[type=submit], button, a.button
   background: $orange
   +linear-gradient(color-stops($orange + #333, $orange - #111))
   border: none
   font-size: 140% !important
   padding: 3px 9px !important
+  text-decoration: none
   +box-shadow($dgray, 1px, 1px, 2px)
   &:hover
     +box-shadow($dgray, 0, 0, 2px)
+    color: black
   &:active
     +box-shadow($dgray, -1px, -1px, 1px)
+    color: black
+  &.link
+    font-size: 100% !important
+    background: transparent
+    +box-shadow(#000, 0, 0, 0)
+    cursor: pointer
+    padding: 0 !important
+    display: inline
+
+form.button_to
+  display: inline
+  div
+    display: inline
+
+a.button
+  background: $yellow
+  +linear-gradient(color-stops($yellow + #333, $yellow - #111))
+a, input[type=submit].link
+  text-decoration: underline
+  color: black
+  &:hover
+    color: $dgray
+  &:active
+    color: $orange
 
 li.cancel
   margin-left: 2em !important
@@ -40,7 +66,7 @@ li.cancel
   input[type="submit"]
     display: none
 
-#errorExplanation
+#errorExplanation, #notice
   border: 1px solid $error
   padding: .5em
   background: $error + #888
@@ -50,3 +76,8 @@ li.cancel
     font-size: 1.5em
   ul
     list-style: none inside none
+
+#notice
+  margin-top: 1em
+  border-color: $blue
+  background-color: $blue + #555

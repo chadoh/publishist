@@ -24,7 +24,7 @@ private
     if session[:id]
       if @application_session = Session.find_by_id(session[:id])
         @application_session.update_attributes(
-          :ip_adddress => request.remote_addr,
+          :ip_address => request.remote_addr,
           :path => request.path_info
         )
         @user = @application_session.person
