@@ -19,17 +19,23 @@
           %p= t 'subtitle'
           -# TODO: Make this a list
           - if @user
-            #account
-              %strong= @user.first_name
-              &nbsp;&nbsp;|&nbsp;&nbsp;
-              = link_to "Account", edit_person_path('account')
-              &nbsp;&nbsp;|&nbsp;&nbsp;
-              = button_to "Sign out", @application_session, :method => :delete, :class => "link"
+            %ul#account
+              %li
+                %strong= @user.first_name
+              %li
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                = link_to_unless_current "Account", edit_person_path('account')
+              %li
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                = button_to "Sign out", @application_session, :method => :delete, :class => "link"
           - else
-            #account.sign_up
-              = link_to "Sign in", new_session_path
-              &nbsp;&nbsp;|&nbsp;&nbsp;
-              = link_to "Sign Up!", new_person_path, :class => "button"
+            %ul#account.sign_up
+              %li
+                = link_to_unless_current "Sign in", new_session_path
+              - unless current_page? new_person_path
+                %li
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  = link_to "Sign Up!", new_person_path, :class => "button"
       #content
         #aside
           #search_box
