@@ -2,14 +2,15 @@ Pc::Application.routes.draw do |map|
 
   get "welcome/index"
 
-  resources :compositions, :people
-  resources :sessions, :only => [:new, :create, :destroy]
+  resources :compositions, :path_names => { :new => "/submit" }
+  resources :people, :path_names => { :new => "/sign_up" }
+  resources :sessions, :only => [:new, :create, :destroy], :path_names => { :new => "/sign_in" }
 
   #aliases, kind of
-  match "me" => "people#show#1"
-  match "sign_in" => "sessions#new"
-  match "sign_up" => "people#new"
-  match "submit" => "compositions#new"
+  #get "me" => "people#show#1"
+  get "sign_in" => "sessions#new"
+  get "sign_up" => "people#new"
+  get "submit" => "compositions#new"
 
   #testing emails
   get "notifications/new_composition"
