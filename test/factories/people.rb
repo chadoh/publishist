@@ -1,10 +1,10 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 Factory.define :person do |f|
-  f.first_name "MyString"
-  f.middle_name "MyString"
-  f.last_name "MyString"
-  f.email "MyString"
-  f.salt "MyString"
-  f.encrypted_password "MyString"
+  f.first_name "Chad"
+  f.middle_name "Anthony"
+  f.last_name "Ostrowski"
+  f.email "chad@chadoh.com"
+  f.salt "some_salt"
+  f.encrypted_password "some_encryption"
 end
