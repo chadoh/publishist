@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.beta4'
+gem 'rails', '3.0.0.rc'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -17,7 +17,7 @@ gem 'pg'
 # gem 'ruby-debug'
 
 # Bundle the extra gems:
-gem 'haml', '3.0.13'
+gem 'haml', '3.0.17'
 gem 'compass', '~> 0.10.2'
 gem 'redgreen'
 gem 'rdiscount'
