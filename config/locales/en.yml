@@ -12,6 +12,7 @@ en:
   back: "Back"
   cancel: "Cancel"
   search: "Search!"
+
   compositions:
     index:
       title: "Compositions"
@@ -21,9 +22,26 @@ en:
     edit:
       title: "Edit This Composition"
 
+  sessions:
+    new:
+      title: "Sign In"
+
+  people:
+    index:
+      title: "People"
+    new:
+      title: "Sign Up"
+    edit:
+      title: "Edit Your Account"
+
   formtastic:
     actions:
       create: "Create %{model}!"
       composition:
         create: "Submit!"
         update: "Update"
+      person:
+        create: "Sign Up!"
+        update: "Save Changes"
+      session:
+        create: "Sign In"

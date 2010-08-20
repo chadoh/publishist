@@ -1,0 +1,10 @@
+- title @person.name
+%ul
+  %li Joined the website: #{@person.created_at.strftime("%B %d, %Y at %l:%M %p")}
+  %li
+    Email: 
+    = raw(mail_to @person.email)
+
+%p
+  = link_to t('back'), people_path
+  = link_to t('edit'), edit_person_path(@person)

@@ -8,8 +8,3 @@ body.bp ol, body.bp ul {
   padding: 0;
   margin: 0;
 }
-
-/* line 11, ../../../../app/stylesheets/compositions/form.sass */
-form.formtastic fieldset.buttons {
-  padding: 0;
-}

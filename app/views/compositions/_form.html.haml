@@ -4,7 +4,7 @@
 = semantic_form_for @composition do |f|
   - if @composition.errors.any?
     #errorExplanation
-      %h3 There was an error!
+      %h3 There #{pluralize_phrase(@composition.errors.count, "was an error", "were some errors")}!
       %ul
         - @composition.errors.full_messages.each do |msg|
           %li= msg

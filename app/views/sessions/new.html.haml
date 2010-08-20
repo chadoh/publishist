@@ -1,0 +1,14 @@
+- title t('.title')
+= semantic_form_for @session do |f|
+  - if @session.errors.any?
+    #errorExplanation
+      %h3 There #{pluralize_phrase(@session.errors.count, "was an error", "were some errors")}!
+      %ul
+        - @session.errors.full_messages.each do |msg|
+          %li= msg
+  
+  = f.inputs do
+    = f.input :email, :label => "Email"
+    = f.input :password, :label => "Password"
+  = f.buttons do
+    = f.commit_button

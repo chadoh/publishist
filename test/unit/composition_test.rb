@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class CompositionTest < ActiveSupport::TestCase
-  def setup
-    @composition = Factory.build(:composition)
-  end
-
   should validate_presence_of :body
 
   should "add 'Anonymous' for author if field left blank" do

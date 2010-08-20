@@ -1,6 +1,5 @@
 @import partials/base
 
-@include blueprint-typography
 @include sticky-footer($footer)
 
 html, body
@@ -13,15 +12,34 @@ html, body
   height: 70px
   background: $blue
   +linear-gradient(color-stops($blue + #444, $blue))
-
-#footer
-  background: $green
-  +linear-gradient(color-stops($green, $green - #444))
+  #account
+    +inline-list
+    position: absolute
+    right: 0
+    top: 0
+    text-align: right
+    margin: 0
+    padding: 0
+    &.sign_up
+      margin-top: 1em
 
 #footer #text, #header #text
   width: 950px
   margin: 0 auto
   display: block
+  position: relative
+
+#footer
+  background: $green
+  +linear-gradient(color-stops($green, $green - #444))
+  width: 100%
+  display: table
+  text-align: center
+  #text
+    vertical-align: middle
+    display: table-cell
+    p
+      margin: 0
 
 #content
   width: 950px
@@ -33,6 +51,9 @@ html, body
       font-size: 1.5em
     padding: 15px 0 0
     +column($aside)
+    ol, ul
+      margin: 0 0.5em 1.5em 0
+      padding-left: 2em
   #nav
     +column($nav)
     list-style: none inside none

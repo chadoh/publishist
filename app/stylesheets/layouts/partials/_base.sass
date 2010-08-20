@@ -33,14 +33,17 @@ $nav: 3.3
 @import compass/css3/text-shadow
 @import compass/css3/opacity
 @import compass/utilities/general/clearfix
+@import compass/utilities/lists/inline-list
 
 $blueprint_grid_columns: 19
 $blueprint_grid_width: 30px
 $blueprint_grid_margin: 20px
 
 // Combine the partials into a single screen stylesheet.
+@include blueprint-typography
 @import page
 @import form
 @import two_col
 @import ../../compositions/show
+@import ../../people/new
 @import compass/utilities/general/clearfix

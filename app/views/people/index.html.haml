@@ -1,0 +1,15 @@
+- title(t('.title'))
+%table
+  %thead
+    %tr
+      %th= Person.human_attribute_name :name
+      %th= Person.human_attribute_name :email
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for person in @people
+      %tr{ :class => cycle(:odd, :even) }
+        %td= link_to person.name, person
+        %td= mail_to(person.email)
+        %td.action= link_to t('edit'), edit_person_path(person)
+        %td.action= link_to t('destroy'), person, :confirm => t('are_you_sure'), :method => :delete

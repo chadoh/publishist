@@ -1,17 +1,14 @@
-= form_for(@<%= singular_name %>) do |f|
+= semantic_form_for(@<%= singular_name %>) do |f|
   - if @<%= singular_name %>.errors.any?
     #errorExplanation
-      %h2= "#{pluralize(@<%= singular_name %>.errors.count, 'error')} prohibited this user from being saved:"
+      %h3= "There #{pluralize_phrase(@<%= singular_name %>.errors.count, 'was an error', 'were some errors')}!"
       %ul
       - @<%= singular_name %>.errors.full_messages.each do |msg|
         %li= msg
-  
-<% for attribute in attributes -%>
-  .field
-    = f.label :<%= attribute.name %>
-    %br
-    = f.<%= attribute.field_type %> :<%= attribute.name %>
-<% end -%>
 
-  .actions
-    = f.submit
+  = f.inputs do
+<% for attribute in attributes -%>
+    = f.input :<%= attribute.name %>
+<% end -%>
+  = f.buttons do
+    = f.commit_button

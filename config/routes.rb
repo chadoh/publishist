@@ -1,8 +1,21 @@
 Pc::Application.routes.draw do |map|
+
+
   get "welcome/index"
 
-  map.resources :compositions
+  resources :compositions, :path_names => { :new => "/submit" }
+  resources :people, :shallow => true do
+    resources :ranks
+  end
+  resources :sessions, :only => [:new, :create, :destroy]
 
+  #aliases, kind of
+  #get "me" => "people#show#1"
+  get "sign_in" => "sessions#new"
+  get "sign_up" => "people#new"
+  get "submit" => "compositions#new"
+
+  #testing emails
   get "notifications/new_composition"
 
   # The priority is based upon order of creation:

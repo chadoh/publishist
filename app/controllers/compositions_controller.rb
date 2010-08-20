@@ -1,6 +1,6 @@
 class CompositionsController < ApplicationController
-  # GET /compositions
-  # GET /compositions.xml
+  before_filter :editor_only, :only => [:index]
+  before_filter :editor_and_owner_only, :only => [:show]
   def index
     @compositions = Composition.all
 
@@ -10,8 +10,6 @@ class CompositionsController < ApplicationController
     end
   end
 
-  # GET /compositions/1
-  # GET /compositions/1.xml
   def show
     @composition = Composition.find(params[:id])
 
@@ -21,8 +19,6 @@ class CompositionsController < ApplicationController
     end
   end
 
-  # GET /compositions/new
-  # GET /compositions/new.xml
   def new
     @composition = Composition.new
 
@@ -32,13 +28,10 @@ class CompositionsController < ApplicationController
     end
   end
 
-  # GET /compositions/1/edit
   def edit
     @composition = Composition.find(params[:id])
   end
 
-  # POST /compositions
-  # POST /compositions.xml
   def create
     @composition = Composition.new(params[:composition])
 
@@ -54,8 +47,6 @@ class CompositionsController < ApplicationController
     end
   end
 
-  # PUT /compositions/1
-  # PUT /compositions/1.xml
   def update
     @composition = Composition.find(params[:id])
 
@@ -70,8 +61,6 @@ class CompositionsController < ApplicationController
     end
   end
 
-  # DELETE /compositions/1
-  # DELETE /compositions/1.xml
   def destroy
     @composition = Composition.find(params[:id])
     @composition.destroy
@@ -79,6 +68,15 @@ class CompositionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(compositions_url) }
       format.xml  { head :ok }
+    end
+  end
+
+protected
+  
+  def editor_and_owner_only
+    unless @user && (@user.the_editor?)# || @user.compositions.include? @composition)
+      flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
+      redirect_to root_url
     end
   end
 end
