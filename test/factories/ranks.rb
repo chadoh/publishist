@@ -20,10 +20,3 @@ Factory.define :staff, :class => Rank do |f|
   f.rank_end "2009-08-16 12:12:23"
   f.association :person
 end
-
-Factory.define :webmember, :class => Rank do |f|
-  f.rank_type 0
-  f.rank_start "2005-08-16 12:12:23"
-  f.association :person
-end
-

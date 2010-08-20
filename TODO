@@ -1,12 +1,2 @@
-models
-------
-
-* new people are automatically web members
-* when new person created, make editor if there are no editors
-
-
-controllers & views
--------------------
-
 * add user rank management
 * restrict special pages to editors
