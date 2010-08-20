@@ -48,7 +48,8 @@
         %ul#nav
           %li= link_to_unless_current "Showcase", root_path
           %li= link_to_unless_current "Submit", submit_path
-          %li= link_to_unless_current "Compositions", compositions_path
+          - if @user && @user.the_editor?
+            %li= link_to_unless_current "Compositions", compositions_path
         #main
           %h2= @content_for_page_heading if @show_title
           - if flash[:notice]

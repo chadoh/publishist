@@ -14,7 +14,35 @@ class ApplicationController < ActionController::Base
   def ensure_logout
     if @user
       flash[:notice] = "You must sign out before you can sign in or register"
-      redirect_to(root_url)
+      redirect_to root_url
+    end
+  end
+
+  def staff_only
+    if !@user || @user.ranks.blank?
+      flash[:notice] = "Only staff can see that page."
+      redirect_to root_url
+    end
+  end
+
+  def editors_only
+    unless @user && (@user.highest_rank == 2 || @user.highest_rank == 3)
+      flash[:notice] = "Only the editors can see that."
+      redirect_to root_url
+    end
+  end
+
+  def coeditor_only
+    unless @user && @user.highest_rank == 2
+      flash[:notice] = "Only the coeditor can see that."
+      redirect_to root_url
+    end
+  end
+
+  def editor_only
+    unless @user && @user.the_editor?
+      flash[:notice] = "Only the editor can see that."
+      redirect_to root_url
     end
   end
 

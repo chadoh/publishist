@@ -54,6 +54,12 @@ class Person < ActiveRecord::Base
     rank == 2 || rank == 3
   end
 
+  def the_editor?
+    rank = self.highest_rank
+    rank = rank.rank_type if rank
+    rank == 3
+  end
+
   def highest_rank
     self.ranks.sort {|a,b| a.rank_type <=> b.rank_type }.last
   end

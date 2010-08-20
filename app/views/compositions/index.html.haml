@@ -1,7 +1,9 @@
 - title(t('.title'))
 - content_for :aside do
   :markdown
-    This is a special, editors-only page. Or at least it will be.
+    Hiya, #{@user.first_name}! You're the only person who can see this page.
+    
+    Hooray!
 
 %table
   %thead
