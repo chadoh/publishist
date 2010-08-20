@@ -6,6 +6,7 @@ class Person < ActiveRecord::Base
   ENCRYPT = Digest::SHA256
 
   has_many :sessions, :dependent => :destroy
+  has_many :ranks, :dependent => :destroy
 
   validates_uniqueness_of :email, :message => "has already been used by someone else"
 
@@ -40,6 +41,27 @@ class Person < ActiveRecord::Base
   def name
     "#{self.first_name} #{self.last_name}"
   end
+
+  def editor?
+    rank = self.highest_rank
+    rank = rank.rank_type if rank
+    rank == 2 || rank == 3
+  end
+
+  def highest_rank
+    self.ranks.sort {|a,b| a.rank_type <=> b.rank_type }.last
+  end
+
+  class << self
+    def current_editors
+      ranks = Rank.find(:all, :conditions => "(rank_type=2 OR rank_type=3) AND rank_end IS NULL")
+      ranks.collect {|r| r.person.name }
+    end
+  end
+
+  #def rank_numbers
+    #self.ranks.sort {|a,b| a.rank_type <=> b.rank_type }
+  #end
 
 private
 

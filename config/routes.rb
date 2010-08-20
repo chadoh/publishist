@@ -1,10 +1,13 @@
 Pc::Application.routes.draw do |map|
 
+
   get "welcome/index"
 
   resources :compositions, :path_names => { :new => "/submit" }
-  resources :people, :path_names => { :new => "/sign_up" }
-  resources :sessions, :only => [:new, :create, :destroy], :path_names => { :new => "/sign_in" }
+  resources :people, :shallow => true do
+    resources :ranks
+  end
+  resources :sessions, :only => [:new, :create, :destroy]
 
   #aliases, kind of
   #get "me" => "people#show#1"
