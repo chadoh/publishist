@@ -18,7 +18,8 @@ class Notifications < ActionMailer::Base
     @blue = "#8bc7c7"
     @font_family = "'Helvetica Neue', Arial, Helvetica, sans-serif"
 
-    mail(:to => "admin@problemchildmag.com",
+    mail(:to => "editor@problemchildmag.com",
+      :from => compositon.author_email,
       :subject => "Submission: \"#{@title}\" by #{@author}"
     )
   end

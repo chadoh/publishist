@@ -8,6 +8,7 @@
 %table
   %thead
     %tr
+      %th Submitted
       %th= Composition.human_attribute_name :title
       %th= Composition.human_attribute_name :author
       %th{:colspan => 3}= t 'actions'
@@ -15,11 +16,14 @@
   %tbody
     - for composition in @compositions
       %tr{ :class => cycle(:odd, :even) }
+        %td= composition.created_at.strftime("%d %b %Y")
         %td= link_to sanitize(composition.title), composition
-        %td
-          - if composition.author
-            = composition.author.name
+        %td<
+          = mail_to composition.author_email, email_image(composition)
+          - if composition.author_id
+            = link_to composition.author, Person.find(composition.author_id)
           - else
-            = composition.author_name
+            = composition.author
+          = " "
         %td.action= link_to t('edit'), edit_composition_path(composition)
         %td.action= link_to t('destroy'), composition, :confirm => t('are_you_sure'), :method => :delete

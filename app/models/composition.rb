@@ -7,10 +7,34 @@ class Composition < ActiveRecord::Base
   validates_presence_of :body
   validates_uniqueness_of :body
 
+  def author
+    if read_attribute(:author_id)
+      Person.find(read_attribute(:author_id)).name
+    else
+      author_name
+    end
+  end
+
+  def author_first
+    if read_attribute(:author_id)
+      Person.find(read_attribute(:author_id)).first_name
+    else
+      author_name.split(' ').first
+    end
+  end
+
+  def author_email
+    if read_attribute(:author_id)
+      Person.find(read_attribute(:author_id)).email
+    else
+      read_attribute(:author_email)
+    end
+  end
+
 protected
 
   def author_email_exists_if_user_not_signed_in
-    unless self.author
+    unless read_attribute(:author_id)
       author_anonymous_if_blank
       verify_author_email_exists
     end

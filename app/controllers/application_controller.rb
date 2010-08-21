@@ -26,22 +26,22 @@ class ApplicationController < ActionController::Base
   end
 
   def editors_only
-    unless @user && (@user.highest_rank == 2 || @user.highest_rank == 3)
-      flash[:notice] = "Only the editors can see that."
+    unless @user && @user.editor?
+      flash[:notice] = "Only #{Person.editors.collect{|e| e.name }.join(" & ")} can see that."
       redirect_to root_url
     end
   end
 
   def coeditor_only
     unless @user && @user.highest_rank == 2
-      flash[:notice] = "Only the coeditor can see that."
+      flash[:notice] = "Only #{Person.coeditor.name} can see that."
       redirect_to root_url
     end
   end
 
   def editor_only
     unless @user && @user.the_editor?
-      flash[:notice] = "Only the editor can see that."
+      flash[:notice] = "Only #{Person.editor.name} can see that."
       redirect_to root_url
     end
   end

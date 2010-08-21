@@ -1,9 +1,34 @@
 - title t('.title')
 - content_for :aside do
+  %h2 Oh, hi there!
+  - unless @user
+    :markdown
+      You should probably [sign in](#{sign_in_path})! (Or [sign up](#{sign_up_path})?)
+      ----------------------------
+
+      Wholly carp, submitting when signed in is *soo* much better.
+      Here's why:
+
+      * You get to see how your submissions are scored
+      * You'll have a profile page, where you can see everything you've submitted
+      * You'll have a profile page, where *other* people can see everything you've had published
+      
+      And trust us, there are other great reasons we can't think of right now.
+
+      Please consider!
+
+      Alright, so here's how this works:
+      ----------------------------------
+
+      
   :markdown
     Your name will be removed when this is reviewed; 
-    only the cheif editor will know you wrote this. 
-    And only the assistant editor will know how people 
-    score it. Everyone else has the privilege of 
-    judging it objectively.
+    only the editor (#{Person.editor.name}) will know you wrote this. 
+    And only the coeditor #{"(#{Person.coeditor.name})" if Person.coeditor}
+    will know how people score it.
+    Everyone else has the privilege of judging it objectively.
+
+    "Everyone else" means anyone who wanders into the weekly meeting
+    at which your submission is reviewed (you can go, too! It's a good
+    way to get very honest feedback).
 = render 'form'

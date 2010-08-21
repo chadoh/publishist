@@ -1,8 +1,8 @@
 class CompositionsController < ApplicationController
-  before_filter :editor_only, :only => [:index]
+  before_filter :editors_only, :only => [:index]
   before_filter :editor_and_owner_only, :only => [:show]
   def index
-    @compositions = Composition.all
+    @compositions = Composition.all.sort {|a, b| a.created_at <=> b.created_at }
 
     respond_to do |format|
       format.html # index.html.erb

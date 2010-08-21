@@ -3,4 +3,7 @@ module ApplicationHelper
     return singular_phrase if number == 1
     return plural_phrase if number > 1
   end
+  def email_image(composition)
+    image_tag('/images/email.png', :title => "Send an email to #{composition.author_first}", :alt => "Send email to #{composition.author}")
+  end
 end

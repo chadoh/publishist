@@ -13,9 +13,15 @@ class CompositionTest < ActiveSupport::TestCase
   end
 
   should "require author_email to be filled out if user not signed in" do
-    compo = Composition.new(:body => "some other text")
-    assert !compo.valid?
-    assert_equal compo.errors.keys.first, :author_email
+    #compo = Composition.new(:body => "some other text")
+    #assert !compo.valid?
+    #assert_equal compo.errors.keys.first, :author_email
+
+    sign_in_user
+    compo = Composition.new(:body => "some brand new thoughts", :author_id => @user.id)
+    puts @user
+    puts compo.author
+    assert compo.valid?
   end
 
   should "add 'untitled' for title if field left blank" do

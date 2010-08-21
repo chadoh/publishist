@@ -38,7 +38,7 @@ class Person < ActiveRecord::Base
 
 
   def make_editor_if_first_person
-    if Person.current_editors.count == 0
+    if Person.editors.count == 0
       Rank.new(:person_id => self.id, :rank_type => 3, :rank_start => self.created_at).save
     end
   end
@@ -66,10 +66,18 @@ class Person < ActiveRecord::Base
   end
 
   class << self
-    def current_editors
+    def editors
       ranks = Rank.find(:all, :conditions => "(rank_type=2 OR rank_type=3) AND rank_end IS NULL")
       ranks = ranks.sort_by {|a| a.rank_type }
-      ranks.collect {|r| r.person.name }
+      ranks.collect {|r| r.person}
+    end
+    def editor
+      rank = Rank.find(:first, :conditions => "rank_type=3 AND rank_end IS NULL")
+      rank.person
+    end
+    def coeditor
+      rank = Rank.find(:first, :conditions => "rank_type=2 AND rank_end IS NULL")
+      rank.person
     end
   end
 
