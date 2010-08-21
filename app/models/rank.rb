@@ -1,5 +1,5 @@
 class Rank < ActiveRecord::Base
-  belongs_to :person
+  belongs_to :person, :touch => true, :autosave => true
 
   validates_format_of :rank_type, :with => /\A[0-3]\Z/,
     :message => "can only be a number from 0 to 3"

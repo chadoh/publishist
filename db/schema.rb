@@ -10,14 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100816161223) do
+ActiveRecord::Schema.define(:version => 20100821014702) do
 
   create_table "compositions", :force => true do |t|
     t.text     "title"
     t.text     "body"
-    t.string   "author"
+    t.string   "author_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "author_id"
+    t.string   "author_email"
   end
 
   create_table "people", :force => true do |t|
@@ -47,5 +49,7 @@ ActiveRecord::Schema.define(:version => 20100816161223) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_foreign_key "compositions", "people", :name => "compositions_author_id_fk", :column => "author_id"
 
 end

@@ -4,7 +4,10 @@
 .composition.body
   = sanitize @composition.body
 %p.composition.author 
-  #{@composition.author}
+  - if @composition.author_id
+    = @composition.author.name
+  - else
+    = @composition.author_name
 
 %p
   = link_to t('back'), compositions_path

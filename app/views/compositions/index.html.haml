@@ -16,6 +16,10 @@
     - for composition in @compositions
       %tr{ :class => cycle(:odd, :even) }
         %td= link_to sanitize(composition.title), composition
-        %td= composition.author
+        %td
+          - if composition.author
+            = composition.author.name
+          - else
+            = composition.author_name
         %td.action= link_to t('edit'), edit_composition_path(composition)
         %td.action= link_to t('destroy'), composition, :confirm => t('are_you_sure'), :method => :delete

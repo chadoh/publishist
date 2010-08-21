@@ -20,7 +20,11 @@ class CompositionsController < ApplicationController
   end
 
   def new
-    @composition = Composition.new
+    if @user
+      @composition = Composition.new(:author_id => @user.id)
+    else
+      @composition = Composition.new
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,7 +42,14 @@ class CompositionsController < ApplicationController
     respond_to do |format|
       if @composition.save
         Notifications.new_composition(@composition).deliver
-        format.html { redirect_to(@composition, :notice => 'Composition was successfully created.') }
+        format.html {
+          flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
+          if @user
+            redirect_to(@composition)
+          else
+            redirect_to(root_url)
+          end
+        }
         format.xml  { render :xml => @composition, :status => :created, :location => @composition }
       else
         format.html { render :action => "new" }
@@ -74,7 +85,8 @@ class CompositionsController < ApplicationController
 protected
   
   def editor_and_owner_only
-    unless @user && (@user.the_editor?)# || @user.compositions.include? @composition)
+    @composition = Composition.find(params[:id])
+    unless @user && (@user.the_editor? || @user.compositions.include?(@composition))
       flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
       redirect_to root_url
     end

@@ -846,17 +846,22 @@ li.cancel {
   margin-left: 2em !important;
 }
 
-/* line 63, ../../../../app/stylesheets/layouts/partials/_form.sass */
+/* line 62, ../../../../app/stylesheets/layouts/partials/_form.sass */
+form.formtastic fieldset > ol > li p.inline-errors {
+  margin-left: 0;
+}
+
+/* line 65, ../../../../app/stylesheets/layouts/partials/_form.sass */
 #search_box {
   width: 200px;
   margin: 0 auto;
 }
-/* line 66, ../../../../app/stylesheets/layouts/partials/_form.sass */
+/* line 68, ../../../../app/stylesheets/layouts/partials/_form.sass */
 #search_box input[type="submit"] {
   display: none;
 }
 
-/* line 69, ../../../../app/stylesheets/layouts/partials/_form.sass */
+/* line 71, ../../../../app/stylesheets/layouts/partials/_form.sass */
 #errorExplanation, #notice {
   border: 1px solid #db4522;
   padding: 0.5em;
@@ -864,16 +869,16 @@ li.cancel {
   margin-bottom: 20px;
   width: 100%;
 }
-/* line 75, ../../../../app/stylesheets/layouts/partials/_form.sass */
+/* line 77, ../../../../app/stylesheets/layouts/partials/_form.sass */
 #errorExplanation h3, #notice h3 {
   font-size: 1.5em;
 }
-/* line 77, ../../../../app/stylesheets/layouts/partials/_form.sass */
+/* line 79, ../../../../app/stylesheets/layouts/partials/_form.sass */
 #errorExplanation ul, #notice ul {
   list-style: none inside none;
 }
 
-/* line 80, ../../../../app/stylesheets/layouts/partials/_form.sass */
+/* line 82, ../../../../app/stylesheets/layouts/partials/_form.sass */
 #notice {
   margin-top: 1em;
   border-color: #8bc7c7;

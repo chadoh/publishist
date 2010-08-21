@@ -1,4 +1,4 @@
-Pc::Application.routes.draw do |map|
+Pc::Application.routes.draw do
 
 
   get "welcome/index"

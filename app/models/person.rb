@@ -7,6 +7,7 @@ class Person < ActiveRecord::Base
 
   has_many :sessions, :dependent => :destroy
   has_many :ranks, :dependent => :destroy
+  has_many :compositions, :foreign_key => 'author_id'
 
   validates_uniqueness_of :email, :message => "has already been used by someone else"
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
