@@ -81,7 +81,6 @@ a img {
   border: none;
 }
 
-@import url(partials/base.css);
 /* line 39, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.4/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body {
   line-height: 1.5;
@@ -792,10 +791,10 @@ input[type=submit]:hover, button:hover, a.button:hover {
 }
 /* line 33, ../../../../app/stylesheets/layouts/partials/_form.sass */
 input[type=submit]:active, button:active, a.button:active {
-  -moz-box-shadow: #4a4a4a -1px -1px 1px 0;
-  -webkit-box-shadow: #4a4a4a -1px -1px 1px 0;
-  -o-box-shadow: #4a4a4a -1px -1px 1px 0;
-  box-shadow: #4a4a4a -1px -1px 1px 0;
+  -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
+  -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
+  -o-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
+  box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   color: black;
 }
 /* line 36, ../../../../app/stylesheets/layouts/partials/_form.sass */

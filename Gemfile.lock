@@ -8,6 +8,14 @@ GIT
       activesupport (>= 2.3.0)
       i18n (>= 0.4.0)
 
+GIT
+  remote: git://github.com/koppen/hassle.git
+  revision: a08c757
+  specs:
+    hassle (0.0.1)
+      haml
+      rack
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -97,6 +105,7 @@ DEPENDENCIES
   factory_girl_rails
   formtastic!
   haml (= 3.0.17)
+  hassle!
   matthuhiggins-foreigner
   pg
   rails (= 3.0.0.rc)

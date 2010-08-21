@@ -25,6 +25,7 @@ gem 'RedCloth'
 gem 'formtastic', :git => "git://github.com/justinfrench/formtastic.git", :branch => "rails3"
 gem 'rails3-generators', :group => :development
 gem 'matthuhiggins-foreigner', :require => 'foreigner'
+gem 'hassle', :git => 'git://github.com/koppen/hassle.git', :group => :production
 
 # Bundle gems for certain environments:
 # gem 'rspec', :group => :test
