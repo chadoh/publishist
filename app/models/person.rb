@@ -73,11 +73,11 @@ class Person < ActiveRecord::Base
     end
     def editor
       rank = Rank.find(:first, :conditions => "rank_type=3 AND rank_end IS NULL")
-      rank.person
+      rank.person if rank
     end
     def coeditor
       rank = Rank.find(:first, :conditions => "rank_type=2 AND rank_end IS NULL")
-      rank.person
+      rank.person if rank
     end
   end
 
