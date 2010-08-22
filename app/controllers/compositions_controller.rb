@@ -63,7 +63,7 @@ class CompositionsController < ApplicationController
 
     respond_to do |format|
       if @composition.update_attributes(params[:composition])
-        format.html { redirect_to(@composition, :notice => 'Composition was successfully updated.') }
+        format.html { redirect_to(@composition, :notice => 'Success!') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -18,9 +18,9 @@ en:
       title: "Compositions"
       new_composition: "Submit something!"
     new:
-      title: "Submit Something!"
+      title: "Submit Something"
     edit:
-      title: "Edit This Composition"
+      title: "Edit"
 
   sessions:
     new:
