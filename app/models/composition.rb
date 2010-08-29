@@ -4,12 +4,15 @@ class Composition < ActiveRecord::Base
   before_validation :untitled_if_blank
 
   validate :author_email_exists_if_user_not_signed_in
+  validates_attachment_content_type :photo, 
+    :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
+    :message => "must be an image"
 
   has_attached_file :photo,
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :path => "/:style/:filename",
-    :styles => { :medium => "500x500>" }
+    :styles => { :medium => "510x510>" }
 
   def author
     if read_attribute(:author_id)
