@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/justinfrench/formtastic.git
-  revision: 42b4eb8
+  revision: d4e5326
   branch: rails3
   specs:
-    formtastic (1.0.0)
+    formtastic (1.0.1)
       actionpack (>= 2.3.0)
       activesupport (>= 2.3.0)
       i18n (>= 0.4.0)
@@ -64,12 +64,12 @@ GEM
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
-    matthuhiggins-foreigner (0.6.1)
+    matthuhiggins-foreigner (0.6.4)
     mime-types (1.16)
     pg (0.9.0)
     polyglot (0.3.1)
     rack (1.2.1)
-    rack-mount (0.6.9)
+    rack-mount (0.6.12)
       rack (>= 1.0.0)
     rack-test (0.5.4)
       rack (>= 1.0)
@@ -94,7 +94,7 @@ GEM
     thor (0.14.0)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.22)
+    tzinfo (0.3.23)
 
 PLATFORMS
   ruby
