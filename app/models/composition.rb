@@ -6,6 +6,7 @@ class Composition < ActiveRecord::Base
   validate :author_email_exists_if_user_not_signed_in
   validates_attachment_content_type :photo, 
     :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
+    :if => Proc.new { |composition| composition.photo.file? },
     :message => "must be an image"
 
   has_attached_file :photo,
