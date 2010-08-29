@@ -49,6 +49,10 @@ GEM
     activesupport (3.0.0.rc)
     arel (0.4.0)
       activesupport (>= 3.0.0.beta)
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
     builder (2.1.2)
     compass (0.10.4)
       haml (>= 3.0.4)
@@ -66,6 +70,9 @@ GEM
       treetop (>= 1.4.5)
     matthuhiggins-foreigner (0.6.4)
     mime-types (1.16)
+    paperclip (2.3.3)
+      activerecord
+      activesupport
     pg (0.9.0)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -95,18 +102,21 @@ GEM
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
+    xml-simple (1.0.12)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   RedCloth
+  aws-s3 (~> 0.6.2)
   compass (~> 0.10.2)
   factory_girl_rails
   formtastic!
   haml (= 3.0.17)
   hassle!
   matthuhiggins-foreigner
+  paperclip (~> 2.3.3)
   pg
   rails (= 3.0.0.rc)
   rails3-generators

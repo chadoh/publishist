@@ -2,6 +2,9 @@
 %h2.composition.title
   = sanitize @composition.title
 .composition.body
-  = sanitize @composition.body
+  - if @composition.photo?
+    = image_tag @composition.photo.url(:medium)
+  - unless @composition.body.blank?
+    = sanitize @composition.body
 %p.composition.author 
   = @composition.author

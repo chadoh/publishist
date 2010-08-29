@@ -1,7 +1,7 @@
 - javascript 'wysiwyg'
 - stylesheet 'compiled/compositions/form.css', :media => 'screen, projection'
 
-= semantic_form_for @composition do |f|
+= semantic_form_for @composition, :html => { :enctype => 'multipart/form-data' } do |f|
   - if @composition.errors.any?
     #errorExplanation
       %h3 There #{pluralize_phrase(@composition.errors.count, "was an error", "were some errors")}!
@@ -18,10 +18,9 @@
       = f.input :author_email, :label => "Your Email Address"
     = f.input :title, :label => 'Title', :input_html => { :class => 'wysiwyg' }
     = f.input :body, :label => 'Body', :required => false, :input_html => { :class => 'wysiwyg' }
+    = f.input :photo, :label => "Or, submit an image:"
   = f.buttons do
     = f.commit_button
-    -#%li.cancel
-      = link_to t('cancel'), :back
 
 :javascript
   $(function(){
