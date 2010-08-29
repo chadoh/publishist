@@ -18,6 +18,7 @@
       = f.input :author_email, :label => "Your Email Address"
     = f.input :title, :label => 'Title', :input_html => { :class => 'wysiwyg' }
     = f.input :body, :label => 'Body', :required => false, :input_html => { :class => 'wysiwyg' }
+    = f.input :photo, :label => "Or, submit an image"
   = f.buttons do
     = f.commit_button
     -#%li.cancel

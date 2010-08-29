@@ -1,17 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.0.rc'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'pg'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug'
@@ -26,9 +16,9 @@ gem 'formtastic', :git => "git://github.com/justinfrench/formtastic.git", :branc
 gem 'rails3-generators', :group => :development
 gem 'matthuhiggins-foreigner', :require => 'foreigner'
 gem 'hassle', :git => 'git://github.com/koppen/hassle.git', :group => :production
+gem 'aws-s3', '~> 0.6.2'
+gem 'paperclip', '~> 2.3.3'
 
-# Bundle gems for certain environments:
-# gem 'rspec', :group => :test
 group :test do
   gem 'shoulda', '2.11.1'
   gem 'factory_girl_rails'

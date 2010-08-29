@@ -2,6 +2,7 @@
 %h2.composition.title
   = sanitize @composition.title
 .composition.body
+  = @composition.photo.url(:medium)
   = sanitize @composition.body
 %p.composition.author 
   = @composition.author
