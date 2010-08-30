@@ -1,10 +1,2 @@
 - title(strip_tags(@composition.title), false)
-%h2.composition.title
-  = sanitize @composition.title
-.composition.body
-  - if @composition.photo?
-    = image_tag @composition.photo.url(:medium)
-  - unless @composition.body.blank?
-    = sanitize @composition.body
-%p.composition.author 
-  = @composition.author
+= show_composition @composition

@@ -22,6 +22,7 @@
   = f.buttons do
     = f.commit_button
 
+- javascript "hoverIntent.min"
 :javascript
   $(function(){
     $(".wysiwyg").wysiwyg({
@@ -36,9 +37,13 @@
         separator06: { visible: false },
       }
     });
-    $("#composition_title_input ul.panel").wrap('<div class="trigger"></div>').slideUp();
-    $(".trigger").hover(
-      function(){ $("#composition_title_input ul.panel").slideDown() }, 
-      function(){ $("#composition_title_input ul.panel").slideUp() }
-    );
+    $("#composition_title_input ul.panel").wrap('<div class="trigger" style="cursor: pointer;"></div>').slideUp();
+    hiConfig = {
+      sensitivity: 1000,
+      interval: 200,
+      timeout: 1000,
+      over: function(){ $("#composition_title_input ul.panel").slideDown(); }, 
+      out: function(){ $("#composition_title_input ul.panel").slideUp(); }
+    }
+    $(".trigger").hoverIntent(hiConfig);
   });

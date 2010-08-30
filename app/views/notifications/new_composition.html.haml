@@ -1,9 +1,7 @@
-%h1.composition.title(style="font-size: 1.7em; color: #222; font-weight: normal;")
-  = sanitize @title
-%div.composition.body(style="margin-top: 1.5em; margin-bottom: 1.5em;")
-  = sanitize @composition_body
-%p.composition.author(style="color: silver;")
-  = @author
+= show_composition @composition,
+  { :style => "font-size: 1.7em; color: #222; font-weight: normal;" },
+  { :style => "margin-top: 1.5em; margin-bottom: 1.5em;" },
+  { :style => "color: silver;" }
 - content_for :footer do
   :markdown
     You can [view this on the website](#{@url}).
