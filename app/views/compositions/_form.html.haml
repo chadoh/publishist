@@ -1,5 +1,5 @@
-- javascript 'wysiwyg'
-- stylesheet 'compiled/compositions/form.css', :media => 'screen, projection'
+- javascript 'cleditor'
+- stylesheet 'cleditor'
 
 :markdown
   Please don't copy and paste this from Word!
@@ -36,18 +36,8 @@
 - javascript "hoverIntent.min"
 :javascript
   $(function(){
-    $(".wysiwyg").wysiwyg({
-      css: '/stylesheets/compiled/layouts/application.css',
-      controls: {
-        h1: { visible: false },
-        h2: { visible: false },
-        h3: { visible: false },
-        h1mozilla: { visible: false },
-        h2mozilla: { visible: false },
-        h3mozilla: { visible: false },
-        separator06: { visible: false },
-      }
-    });
+    $(".wysiwyg").cleditor();
+    /*
     $("#composition_title_input ul.panel").wrap('<div class="trigger" style="cursor: pointer;"></div>').slideUp();
     hiConfig = {
       sensitivity: 3,
@@ -57,4 +47,5 @@
       out: function(){ $("#composition_title_input ul.panel").slideUp(); }
     }
     $(".trigger").hoverIntent(hiConfig);
+    */
   });
