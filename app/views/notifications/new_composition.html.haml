@@ -1,7 +1,6 @@
-= show_composition @composition,
-  { :style => "font-size: 1.7em; color: #222; font-weight: normal;" },
-  { :style => "margin-top: 1.5em; margin-bottom: 1.5em;" },
-  { :style => "color: silver;" }
+= render :partial => 'compositions/composition', :locals => { :composition => @composition }
+%p.composition.author{ :style => "color: silver;" }
+  = @author
 - content_for :footer do
   :markdown
     You can [view this on the website](#{@url}).
