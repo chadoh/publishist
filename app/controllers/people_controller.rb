@@ -29,7 +29,7 @@ class PeopleController < ApplicationController
   end
 
   def edit
-    @person = Person.find(@user)
+    @person = Person.find(params[:id])
   end
 
   def update

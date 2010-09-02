@@ -3,8 +3,8 @@ module ApplicationHelper
     return singular_phrase if number == 1
     return plural_phrase if number > 1
   end
-  def email_image(composition)
-    image_tag('/images/email.png', :title => "Send an email to #{composition.author_first}", :alt => "Send email to #{composition.author}")
+  def email_image(name)
+    image_tag('/images/email.png', :title => "Send an email to #{name.split(' ').first}", :alt => "Send email to #{name}")
   end
 
   def pretty_date(date)
@@ -13,5 +13,17 @@ module ApplicationHelper
     else
       date.strftime("%d %b")
     end
+  end
+
+  def editor?
+    @user && @user.editor?
+  end
+
+  def the_editor?
+    @user && @user.the_editor?
+  end
+
+  def the_coeditor?
+    @user && @user.the_coeditor?
   end
 end

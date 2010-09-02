@@ -1,16 +1,10 @@
 - title(t('.title'))
-- content_for :aside do
-  :markdown
-    Hiya, #{@user.first_name}! Only the editors can see this page.
-    
-    Hooray!
-
 %table
   %thead
     %tr
       %th Submitted
       %th= Composition.human_attribute_name :title
-      - if @user.the_editor?
+      - if the_editor?
         %th= Composition.human_attribute_name :author
       %th{ :colspan => (@user.the_editor? ? 2 : 1) }= t 'actions'
   
@@ -19,13 +13,13 @@
       %tr{ :class => cycle(:odd, :even) }
         %td= pretty_date(composition.created_at)
         %td= link_to sanitize(composition.title), composition
-        - if @user.the_editor?
+        - if the_editor?
           %td<
-            = mail_to composition.author_email, email_image(composition)
+            = mail_to composition.author_email, email_image(composition.author)
             - if composition.author_id
               = link_to composition.author, Person.find(composition.author_id)
             - else
               = composition.author
-        - if @user.the_editor?
+        - if the_editor?
           %td.action= link_to t('edit'), edit_composition_path(composition)
         %td.action= link_to t('destroy'), composition, :confirm => t('are_you_sure'), :method => :delete

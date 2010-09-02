@@ -6,6 +6,6 @@
     %br
   - unless composition.body.blank?
     = sanitize composition.body
-- if @user && (@user.the_editor? || @user == composition.author)
+- if the_editor? || @user == composition.author
   %p.composition.author
     = composition.author

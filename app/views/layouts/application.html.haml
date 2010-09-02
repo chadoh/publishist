@@ -24,7 +24,7 @@
                 %strong= @user.first_name
               %li
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                = link_to_unless_current "Account", edit_person_path('me')
+                = link_to_unless_current "Account", edit_person_path(@user)
               %li
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 = button_to "Sign out", @application_session, :method => :delete, :class => "link"
@@ -48,7 +48,7 @@
         %ul#nav
           %li= link_to_unless_current "Showcase", root_path
           %li= link_to_unless_current "Submit", new_composition_path
-          - if @user && @user.editor?
+          - if editor?
             %li= link_to_unless_current "Compositions", compositions_path
             %li= link_to_unless_current "People", people_path
         #main
