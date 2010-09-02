@@ -5,7 +5,7 @@ class PeopleController < ApplicationController
   before_filter :editors_only, :only => [:destroy]
 
   def index
-    @people = Person.find(:all)
+    @people = Person.includes(:ranks).order('created_at')
   end
 
   def show
@@ -39,6 +39,32 @@ class PeopleController < ApplicationController
       redirect_to root_url
     else
       render :action => 'edit'
+    end
+  end
+
+  def make_staff
+    @person = Person.find(params[:id])
+    promote(@person, 1)
+  end
+
+  def make_coeditor
+    @person = Person.find(params[:id])
+    promote(@person, 2)
+  end
+
+  def make_editor
+    @person = Person.find(params[:id])
+    promote(@person, 3)
+  end
+
+  def promote(person, to_rank)
+    rank = Rank.new(:person => person, :rank_type => to_rank, :rank_start => Time.now)
+    if rank.save
+      flash[:notice] = "#{person.first_name} has been promoted!"
+      redirect_to :action => :index
+    else
+      flash[:alert] = "There was an error promoting #{person.first_name}. Try again."
+      redirect_to :action => :index
     end
   end
 
