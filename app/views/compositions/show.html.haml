@@ -1,2 +1,6 @@
 - title(strip_tags(@composition.title), false)
-= show_composition @composition
+= render :partial => 'composition', :locals => { :composition => @composition }
+- if the_editor? || @user == @composition.author
+  - if @user.editor?
+    = link_to "edit", edit_composition_url(@composition)
+  

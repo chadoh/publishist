@@ -3,25 +3,27 @@ module ApplicationHelper
     return singular_phrase if number == 1
     return plural_phrase if number > 1
   end
-  def email_image(composition)
-    image_tag('/images/email.png', :title => "Send an email to #{composition.author_first}", :alt => "Send email to #{composition.author}")
+  def email_image(name)
+    image_tag('/images/email.png', :title => "Send an email to #{name.split(' ').first}", :alt => "Send email to #{name}")
   end
 
-  def show_composition(compo, title_options = {}, body_options = {}, author_options = {})
-    title_options[:class] = "composition title"
-    body_options[:class] = "composition body"
-    author_options[:class] = "composition author"
+  def pretty_date(date)
+    if date < Time.now.years_ago(1)
+      date.strftime("%d %b %Y")
+    else
+      date.strftime("%d %b")
+    end
+  end
 
-    content = content_tag(:h2, title_options) do
-      sanitize compo.title
-    end
-    content << content_tag(:div, body_options) do
-      body = compo.photo? ? "#{image_tag(compo.photo.url(:medium))}<br>" : ''
-      body += compo.body.blank? ? '' : compo.body
-      sanitize body
-    end
-    content << content_tag(:p, author_options) do
-      compo.author
-    end
+  def editor?
+    @user && @user.editor?
+  end
+
+  def the_editor?
+    @user && @user.the_editor?
+  end
+
+  def the_coeditor?
+    @user && @user.the_coeditor?
   end
 end

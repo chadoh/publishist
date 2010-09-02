@@ -61,8 +61,27 @@ class Person < ActiveRecord::Base
     rank == 3
   end
 
+  def the_coeditor?
+    rank = self.highest_rank
+    rank = rank.rank_type if rank
+    rank == 2
+  end
+
   def highest_rank
-    self.ranks.sort {|a,b| a.rank_type <=> b.rank_type }.last
+    self.ranks.order("rank_type").last
+  end
+
+  def ranks_as_words
+    self.ranks.order("rank_type").collect do |rank|
+      rank = rank.rank_type
+      if rank == 1
+        "Staff"
+      elsif rank == 2
+        "Coeditor"
+      else rank == 3
+        "Editor"
+      end
+    end
   end
 
   class << self

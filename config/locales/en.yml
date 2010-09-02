@@ -32,7 +32,7 @@ en:
     new:
       title: "Sign Up"
     edit:
-      title: "Edit Your Account"
+      title: "Edit Account"
 
   formtastic:
     actions:

@@ -12,3 +12,8 @@
     = f.input :password, :label => "Password"
   = f.buttons do
     = f.commit_button
+
+:javascript
+  $(function(){
+    $("#session_email").focus();
+  });

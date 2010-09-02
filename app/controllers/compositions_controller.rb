@@ -1,8 +1,9 @@
 class CompositionsController < ApplicationController
   before_filter :editors_only, :only => [:index]
-  before_filter :editor_and_owner_only, :only => [:show]
+  before_filter :editors_and_owner_only, :only => [:show]
+  before_filter :editor_only, :only => [:edit, :destroy]
   def index
-    @compositions = Composition.all.sort {|a, b| a.created_at <=> b.created_at }
+    @compositions = Composition.order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -86,7 +87,14 @@ protected
   
   def editor_and_owner_only
     @composition = Composition.find(params[:id])
-    unless @user && (@user.the_editor? || @user.compositions.include?(@composition))
+    unless @user && (@user.the_editor? || @user == @composition.author)
+      flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
+      redirect_to root_url
+    end
+  end
+  def editors_and_owner_only
+    @composition = Composition.find(params[:id])
+    unless @user && (@user.editor? || @user == @composition.author)
       flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
       redirect_to root_url
     end
