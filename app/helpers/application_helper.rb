@@ -24,4 +24,12 @@ module ApplicationHelper
       compo.author
     end
   end
+
+  def pretty_date(date)
+    if date < Time.now.years_ago(1)
+      date.strftime("%d %b %Y")
+    else
+      date.strftime("%d %b")
+    end
+  end
 end
