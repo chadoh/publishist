@@ -59,8 +59,12 @@ class Person < ActiveRecord::Base
     rank == 2
   end
 
+  def is_staff?
+    self.ranks.where(:rank_end => nil).collect {|r| r.rank_type }.include? 1
+  end
+
   def highest_rank
-    self.ranks.order("rank_type").last
+    self.ranks.where(:rank_end => nil).order("rank_type").last
   end
 
   def current_ranks
