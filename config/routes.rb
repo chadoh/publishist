@@ -6,6 +6,11 @@ Pc::Application.routes.draw do
   resources :compositions, :path_names => { :new => "/submit" }
   resources :people, :shallow => true do
     resources :ranks
+    member do
+      post 'make_staff'
+      post 'make_coeditor'
+      post 'make_editor'
+    end
   end
   resources :sessions, :only => [:new, :create, :destroy]
 

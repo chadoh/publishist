@@ -18,7 +18,6 @@ class Person < ActiveRecord::Base
   validates_confirmation_of :password
   validates_presence_of :first_name
 
-  after_save :make_editor_if_first_person
   after_save :flush_passwords
 
   def self.find_by_email_and_password(email, password)
@@ -33,13 +32,6 @@ class Person < ActiveRecord::Base
     unless password_is_not_being_updated?
       self.salt = [Array.new(9){rand(256).chr}.join].pack('m').chomp
       self.encrypted_password = ENCRYPT.hexdigest(password + "chrouiNt" + self.salt)
-    end
-  end
-
-
-  def make_editor_if_first_person
-    if Person.editors.count == 0
-      Rank.new(:person_id => self.id, :rank_type => 3, :rank_start => self.created_at).save
     end
   end
 
@@ -71,9 +63,10 @@ class Person < ActiveRecord::Base
     self.ranks.order("rank_type").last
   end
 
-  def ranks_as_words
-    self.ranks.order("rank_type").collect do |rank|
-      rank = rank.rank_type
+  def current_ranks
+    ranks = self.ranks.where(:rank_end => nil)
+    ranks.collect do |r|
+      rank = r.rank_type
       if rank == 1
         "Staff"
       elsif rank == 2

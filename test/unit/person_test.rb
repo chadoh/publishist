@@ -17,14 +17,7 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   context "ranks: when making a new person" do
-    should "make them editor if there are no editors" do
-      assert_equal Person.count, 1
-      assert_equal Person.first, @person
-      assert_equal @person.ranks.count, 1
-      assert_equal @person.ranks.first.rank_type, 3
-    end
-
-    should "not give successive people any rank" do
+    should "not give people any rank" do
       @person2 = Factory(:person2)
       assert_equal @person2.ranks.count, 0
     end

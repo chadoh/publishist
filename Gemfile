@@ -1,13 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.rc'
+gem 'rails', '3.0.0'
 gem 'pg'
 
 # To use debugger
 # gem 'ruby-debug'
 
 # Bundle the extra gems:
-gem 'haml', '3.0.17'
+gem 'haml', '~> 3.0.18'
 gem 'compass', '~> 0.10.2'
 gem 'redgreen'
 gem 'rdiscount'
