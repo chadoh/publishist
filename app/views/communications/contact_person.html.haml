@@ -2,4 +2,4 @@
 %div= @message
 - content_for :footer do
   :markdown
-    #{@fromm.name} used the contact form on [your profile page](#{person_url(@to)}) to send this to you.
+    [#{@fromm.name}](#{person_url(@fromm)}) used the contact form on [your profile page](#{person_url(@to)}) to send this to you.
