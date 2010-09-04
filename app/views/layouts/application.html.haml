@@ -8,7 +8,7 @@
     = stylesheet_link_tag 'compiled/layouts/print.css', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/layouts/ie.css', :media => 'screen, projection'
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'rails'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'rails', 'application'
     = csrf_meta_tag
     = yield :head
   %body
