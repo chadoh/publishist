@@ -26,4 +26,8 @@ module ApplicationHelper
   def the_coeditor?
     @user && @user.the_coeditor?
   end
+
+  def staff?
+    @user && @user.is_staff?
+  end
 end

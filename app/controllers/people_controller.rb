@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
   before_filter :ensure_login, :only => [:edit, :update, :destroy]
   before_filter :ensure_logout, :only => [:new, :create]
-  before_filter :staff_only, :only => [:index, :show]
+  before_filter :staff_only, :only => [:index]
   before_filter :editors_only, :only => [:destroy]
 
   def index

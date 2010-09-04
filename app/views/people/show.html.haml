@@ -1,13 +1,14 @@
 - title @person.name
 %ul
   %li Joined the website: #{@person.created_at.strftime("%d %B %Y")}
-%a.toggle_next{:href => "#"}
-  Send #{@person.first_name} an email
-= semantic_form_for 'contact_person', :url => contact_person_path(@person) do |f|
-  = f.inputs do
-    = f.input :from, :as => :hidden, :input_html => { :value => @user.id }
-    = f.input :to, :as => :hidden, :input_html => { :value => @person.id }
-    = f.input :subject, :as => :string, :required => false
-    = f.input :message, :as => :text, :required => false
-  = f.buttons do
-    = f.commit_button "Send"
+- if staff? || editor?
+  %a.toggle_next{:href => "#"}
+    Send #{@person.first_name} an email
+  = semantic_form_for 'contact_person', :url => contact_person_path(@person) do |f|
+    = f.inputs do
+      = f.input :from, :as => :hidden, :input_html => { :value => @user.id }
+      = f.input :to, :as => :hidden, :input_html => { :value => @person.id }
+      = f.input :subject, :as => :string, :required => false
+      = f.input :message, :as => :text, :required => false
+    = f.buttons do
+      = f.commit_button "Send"

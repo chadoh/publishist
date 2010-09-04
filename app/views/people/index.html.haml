@@ -4,23 +4,26 @@
     %tr
       %th= Person.human_attribute_name :name
       %th Rank
-      %th Promote to
-      %th{:colspan => 2}= t 'actions'
+      - if editor?
+        %th Promote to
+        %th{:colspan => 2}= t 'actions'
   
   %tbody
     - for person in @people
       %tr{ :class => cycle(:odd, :even) }
         %td
-          = mail_to person.email, email_image(person.name)
+          - if editor?
+            = mail_to person.email, email_image(person.name)
           = link_to person.name, person
         %td
           = person.current_ranks.join(', ')
-        %td
-          - unless person.is_staff?
-            = button_to "Staff", make_staff_person_path(person), :class => 'link'
-          - unless person.the_coeditor?
-            = button_to "Coeditor", make_coeditor_person_path(person), :confirm => "This will REMOVE the current coeditor! Are you sure you want to do this now?", :class => 'link'
-          - unless person.the_editor?
-            = button_to "Editor", make_editor_person_path(person), :confirm => "This will REMOVE the current editor! Are you sure you want to do this now?", :class => 'link'
-        %td.action= link_to t('edit'), edit_person_path(person)
-        %td.action= link_to t('destroy'), person, :confirm => t('are_you_sure'), :method => :delete
+        - if editor?
+          %td
+            - unless person.is_staff?
+              = button_to "Staff", make_staff_person_path(person), :class => 'link'
+            - unless person.the_coeditor?
+              = button_to "Coeditor", make_coeditor_person_path(person), :confirm => "This will REMOVE the current coeditor! Are you sure you want to do this now?", :class => 'link'
+            - unless person.the_editor?
+              = button_to "Editor", make_editor_person_path(person), :confirm => "This will REMOVE the current editor! Are you sure you want to do this now?", :class => 'link'
+          %td.action= link_to t('edit'), edit_person_path(person)
+          %td.action= link_to t('destroy'), person, :confirm => t('are_you_sure'), :method => :delete
