@@ -50,6 +50,7 @@
           %li= link_to_unless_current "Submit", new_composition_path
           - if editor?
             %li= link_to_unless_current "Compositions", compositions_path
+          - if staff? || editor?
             %li= link_to_unless_current "People", people_path
         #main
           %h2= @content_for_page_heading if @show_title
@@ -60,4 +61,4 @@
     #footer
       #text
         :markdown
-          This website is in early alpha development; you may experience turbulence. Please let someone know if something is broken.
+          This website is in early alpha development; you may experience turbulence. Please let [someone](#{person_path(Person.chad)}) know if something is broken.

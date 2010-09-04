@@ -83,17 +83,20 @@ class Person < ActiveRecord::Base
 
   class << self
     def editors
-      ranks = Rank.find(:all, :conditions => "(rank_type=2 OR rank_type=3) AND rank_end IS NULL")
+      ranks = Rank.where(:rank_type => 2..3, :rank_end => nil).first
       ranks = ranks.sort_by {|a| a.rank_type }
       ranks.collect {|r| r.person}
     end
     def editor
-      rank = Rank.find(:first, :conditions => "rank_type=3 AND rank_end IS NULL")
+      rank = Rank.where(:rank_type => 3, :rank_end => nil).first
       rank.person if rank
     end
     def coeditor
-      rank = Rank.find(:first, :conditions => "rank_type=2 AND rank_end IS NULL")
+      rank = Rank.where(:rank_type => 2, :rank_end => nil).first
       rank.person if rank
+    end
+    def chad
+      chad = Person.where(:email => "chad.ostrowski@gmail.com").first
     end
   end
 
