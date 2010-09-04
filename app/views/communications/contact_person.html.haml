@@ -1,0 +1,5 @@
+%h1= @topic
+%div= @message
+- content_for :footer do
+  :markdown
+    #{@fromm.name} used the contact form on [your profile page](#{person_url(@to)}) to send this to you.

@@ -68,6 +68,16 @@ class PeopleController < ApplicationController
     end
   end
 
+  def contact
+    @to = Person.find(params[:contact_person][:to])
+    @from = Person.find(params[:contact_person][:from])
+    @subject = params[:contact_person][:subject]
+    @message = params[:contact_person][:message]
+    Communications.contact_person(@to, @from, @subject, @message).deliver
+    flash[:notice] = "Your message has been sent!"
+    redirect_to person_url(@to)
+  end
+
   def destroy
     Person.destroy(@user)
     session[:id] = @user = nil

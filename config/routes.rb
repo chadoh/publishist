@@ -10,6 +10,7 @@ Pc::Application.routes.draw do
       post 'make_staff'
       post 'make_coeditor'
       post 'make_editor'
+      post 'contact'
     end
   end
   resources :sessions, :only => [:new, :create, :destroy]
