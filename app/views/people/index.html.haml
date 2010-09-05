@@ -14,7 +14,7 @@
         %td
           - if editor?
             = mail_to person.email, email_image(person.name)
-          = link_to person.name, person
+          = link_to person.full_name, person
         %td
           = person.current_ranks.join(', ')
         - if editor?

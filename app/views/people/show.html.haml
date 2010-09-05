@@ -1,14 +1,17 @@
-- title @person.name
-%ul
-  %li Joined the website: #{@person.created_at.strftime("%d %B %Y")}
-- if staff? || editor?
-  %a.toggle_next{:href => "#"}
-    Send #{@person.first_name} an email
-  = semantic_form_for 'contact_person', :url => contact_person_path(@person) do |f|
-    = f.inputs do
-      = f.input :from, :as => :hidden, :input_html => { :value => @user.id }
-      = f.input :to, :as => :hidden, :input_html => { :value => @person.id }
-      = f.input :subject, :as => :string, :required => false
-      = f.input :message, :as => :text, :required => false
-    = f.buttons do
-      = f.commit_button "Send"
+- title @person.full_name
+- if @person == @user || the_editor?
+  - content_for :aside do
+    = render :partial => 'about', :locals => { :person => @person }
+  - if @person == @user
+    %h3 What you've submitted
+    - if @person.compositions.empty?
+      :markdown
+        Nothing, yet. [Get to it!](#{new_composition_path})
+  - else
+    %h3 What #{@person.first_name} has submitted
+    - if @person.compositions.empty?
+      %p Nothing yet.
+  - @person.compositions.each do |composition|
+    = render :partial => 'compositions/composition', :locals => { :composition => composition }
+- else
+  = render :partial => 'about', :locals => { :person => @person }

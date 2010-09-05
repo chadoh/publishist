@@ -41,6 +41,10 @@ class Person < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def full_name
+    "#{self.first_name} #{self.middle_name} #{self.last_name}"
+  end
+
   def editor?
     rank = self.highest_rank
     rank = rank.rank_type if rank
@@ -65,6 +69,36 @@ class Person < ActiveRecord::Base
 
   def highest_rank
     self.ranks.where(:rank_end => nil).order("rank_type").last
+  end
+
+  def editorships
+    self.ranks.where(:rank_type => 3).collect do |r|
+      if r.rank_end
+        "from #{r.rank_start.strftime("%e %b %Y")} until #{r.rank_end.strftime("%e %b %Y")}"
+      else
+        "since #{r.rank_start.strftime("%e %b %Y")}"
+      end
+    end
+  end
+
+  def coeditorships
+    self.ranks.where(:rank_type => 2).collect do |r|
+      if r.rank_end
+        "from #{r.rank_start.strftime("%e %b %Y")} until #{r.rank_end.strftime("%e %b %Y")}"
+      else
+        "since #{r.rank_start.strftime("%e %b %Y")}"
+      end
+    end
+  end
+
+  def staffships
+    self.ranks.where(:rank_type => 1).collect do |r|
+      if r.rank_end
+        "from #{r.rank_start.strftime("%e %b %Y")} until #{r.rank_end.strftime("%e %b %Y")}"
+      else
+        "since #{r.rank_start.strftime("%e %b %Y")}"
+      end
+    end
   end
 
   def current_ranks

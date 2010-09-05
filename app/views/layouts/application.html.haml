@@ -24,7 +24,7 @@
                 %strong= @user.first_name
               %li
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                = link_to_unless_current "Account", edit_person_path(@user)
+                = link_to_unless_current "Account", person_path(@user)
               %li
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 = button_to "Sign out", @application_session, :method => :delete, :class => "link"
