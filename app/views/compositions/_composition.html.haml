@@ -8,6 +8,7 @@
     = sanitize composition.body
 - if the_editor? || @user == composition.author
   %p.composition.author
+    by
     - if composition.author_id
       = link_to_unless_current composition.author, person_path(composition.author_id)
     - else

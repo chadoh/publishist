@@ -20,6 +20,8 @@ class Person < ActiveRecord::Base
 
   after_save :flush_passwords
 
+  is_gravtastic :email, :size => 200, :default => "http://pcmag.heroku.com/images/children.png", :rating => 'R'
+
   def self.find_by_email_and_password(email, password)
     person = self.find_by_email(email)
     if person and person.encrypted_password == ENCRYPT.hexdigest(password + "chrouiNt" + person.salt)

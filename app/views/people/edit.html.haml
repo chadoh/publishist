@@ -1,4 +1,7 @@
 - title t('.title')
 - content_for :aside do
   = render :partial => 'your_name_looks_like'
+= image_tag @person.gravatar_url, :alt => "A picture of you"
+:markdown
+  You can change this photo on [Gravatar](http://gravatar.com).
 = render 'form'
