@@ -10,6 +10,7 @@ class PeopleController < ApplicationController
 
   def show
     @person = Person.find(params[:id])
+    @compositions = @person.compositions.order("created_at DESC")
   end
 
   def new
