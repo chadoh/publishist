@@ -21,6 +21,21 @@ class SessionsController < ApplicationController
     end
   end
 
+  def recovery
+    begin
+      require 'lib/crypto'
+      key = Crypto.decrypt(params[:id]).split(/:/)
+      @person = Person.where(:id => key[0], :salt => key[1]).first
+      @session = @person.sessions.create
+      session[:id] = @session.id
+      flash[:notice] = "You need to change your password."
+      redirect_to edit_person_path(@person)
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = "That's not the link that you were emailed... Are you cheating?"
+      redirect_to root_url
+    end
+  end
+
   def destroy
     Session.destroy(@application_session)
     session[:id] = @user = nil

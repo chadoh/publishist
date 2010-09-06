@@ -43,6 +43,22 @@ class PeopleController < ApplicationController
     end
   end
 
+  def recover
+    require 'lib/crypto'
+    person = Person.find_by_email(params[:recover_password][:email])
+    if person
+      Notifications.forgot_password(Crypto.encrypt("#{person.id}:#{person.salt}"), person.email).deliver
+      flash[:notice] = "Please check your email."
+      redirect_to root_url
+    else
+      flash[:notice] = "Your account couldn't be found. Perhaps you entered the wrong email address?"
+      redirect_to new_session_path
+    end
+  end
+
+  def help
+  end
+
   def make_staff
     @person = Person.find(params[:id])
     promote(@person, 1)
