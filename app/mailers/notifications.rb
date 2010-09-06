@@ -39,9 +39,13 @@ class Notifications < ActionMailer::Base
   #
   #   en.actionmailer.notifications.forgot_password.subject
   #
-  def forgot_password
-    @greeting = "Hi"
+  def forgot_password(key, email)
+    @key = key
+    @url = recovery_session_url(@key)
 
-    mail :to => "to@example.org"
+    mail(
+      :to => "to@example.org",
+      :subject => "Problem Child Password Reset"
+    )
   end
 end

@@ -2,10 +2,8 @@
 = semantic_form_for @session do |f|
   - if @session.errors.any?
     #errorExplanation
-      %h3 There #{pluralize_phrase(@session.errors.count, "was an error", "were some errors")}!
-      %ul
-        - @session.errors.full_messages.each do |msg|
-          %li= msg
+      %h3 Wrong!
+      %p That email address and password didn't match up. Did you #{link_to "forget your password?", help_people_path}
   
   = f.inputs do
     = f.input :email, :label => "Email"
