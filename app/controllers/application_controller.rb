@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   layout 'application'
 
   before_filter :maintain_session_and_user
+  before_filter :check_that_user_is_verified
 
   def ensure_login
     unless @user
@@ -60,6 +61,13 @@ private
         session[:id] = nil
         redirect_to root_url
       end
+    end
+  end
+
+  def check_that_user_is_verified
+    if @user && @user.verified == false
+      flash[:notice] = "You need to set your password to continue"
+      redirect_to set_password_person_path(@user)
     end
   end
 end

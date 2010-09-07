@@ -3,6 +3,7 @@ class PeopleController < ApplicationController
   before_filter :ensure_logout, :only => [:new, :create]
   before_filter :staff_only, :only => [:index]
   before_filter :editors_only, :only => [:destroy]
+  skip_before_filter :check_that_user_is_verified, :only => [:set_password, :update]
 
   def index
     @people = Person.includes(:ranks).order('created_at')
@@ -52,8 +53,12 @@ class PeopleController < ApplicationController
       redirect_to root_url
     else
       flash[:notice] = "Your account couldn't be found. Perhaps you entered the wrong email address?"
-      redirect_to new_session_path
+      redirect_to help_people_path
     end
+  end
+
+  def set_password
+    @person = Person.find(params[:id])
   end
 
   def help

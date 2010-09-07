@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   before_filter :ensure_login, :only => :destroy
   before_filter :ensure_logout, :only => [:new, :create]
+  skip_before_filter :check_that_user_is_verified, :only => [:destroy]
 
   def index
     redirect_to new_session_path
@@ -29,7 +30,7 @@ class SessionsController < ApplicationController
       @session = @person.sessions.create
       session[:id] = @session.id
       flash[:notice] = "You need to change your password."
-      redirect_to edit_person_path(@person)
+      redirect_to set_password_path(@person)
     rescue ActiveRecord::RecordNotFound
       flash[:notice] = "That's not the link that you were emailed... Are you cheating?"
       redirect_to root_url

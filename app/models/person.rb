@@ -34,6 +34,7 @@ class Person < ActiveRecord::Base
     unless password_is_not_being_updated?
       self.salt = [Array.new(9){rand(256).chr}.join].pack('m').chomp
       self.encrypted_password = ENCRYPT.hexdigest(password + "chrouiNt" + self.salt)
+      self.verified = true
     end
   end
 
