@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
       @session = @person.sessions.create
       session[:id] = @session.id
       flash[:notice] = "You need to change your password."
-      redirect_to set_password_path(@person)
+      redirect_to set_password_person_path(@person)
     rescue ActiveRecord::RecordNotFound
       flash[:notice] = "That's not the link that you were emailed... Are you cheating?"
       redirect_to root_url
