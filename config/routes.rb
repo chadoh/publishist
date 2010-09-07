@@ -11,6 +11,7 @@ Pc::Application.routes.draw do
       post 'make_coeditor'
       post 'make_editor'
       post 'contact'
+      get 'set_password'
     end
     collection do
       get 'help'
