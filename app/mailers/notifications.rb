@@ -28,10 +28,15 @@ class Notifications < ActionMailer::Base
   #
   #   en.actionmailer.notifications.signup.subject
   #
-  def signup
-    @greeting = "Hi"
+  def signup(key, person)
+    @key = key
+    @url = recovery_session_url(@key)
+    @person = person
 
-    mail :to => "to@example.org"
+    mail(
+      :to => @person.email,
+      :subject => "Welcome to Problem Child!"
+    )
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
