@@ -16,7 +16,7 @@
       %strong Staff
       = person.staffships.join(" & then again ")
   %li Joined the website on #{person.created_at.strftime("%e %b %Y")}
-- if staff? || editor?
+- if @user
   %a.toggle_next{:href => "#"}
     Send #{person.first_name} an email
   = semantic_form_for 'contact_person', :url => contact_person_path(person) do |f|

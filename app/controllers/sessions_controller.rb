@@ -29,10 +29,14 @@ class SessionsController < ApplicationController
       @person = Person.where(:id => key[0], :salt => key[1]).first
       @session = @person.sessions.create
       session[:id] = @session.id
-      flash[:notice] = "You need to change your password."
+      if @person.salt == "n00b"
+        flash[:notice] = "You're thisclose to being all signed up. All you need to do is make a password!"
+      else
+        flash[:notice] = "You need to change your password."
+      end
       redirect_to set_password_person_path(@person)
     rescue
-      flash[:notice] = "That's not the link that you were emailed... Are you cheating?"
+      flash[:notice] = "There was no good in that link."
       redirect_to root_url
     end
   end

@@ -20,10 +20,13 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(params[:person])
+    o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
+    password  =  (0..10).map{ o[rand(o.length)]  }.join;    
+    @person.password = @person.password_confirmation = password
+    @person.salt = "n00b"
     if @person.save
-      @session = @person.sessions.create
-      session[:id] = @session.id
-      flash[:notice] = "Welcome, #{@person.name}, you are now registered"
+      Notifications.signup(Crypto.encrypt("#{@person.id}:#{@person.salt}"), @person).deliver
+      flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
       redirect_to root_url
     else
       render :action => 'new'
