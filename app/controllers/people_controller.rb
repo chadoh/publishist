@@ -26,6 +26,7 @@ class PeopleController < ApplicationController
     password  =  (0..10).map{ o[rand(o.length)]  }.join;    
     @person.password = @person.password_confirmation = password
     @person.salt = "n00b"
+    @person.verified = false
     if @person.save
       Notifications.signup(Crypto.encrypt("#{@person.id}:#{@person.salt}"), @person).deliver
       flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
