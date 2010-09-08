@@ -44,7 +44,7 @@ class Notifications < ActionMailer::Base
     @url = recovery_session_url(@key)
 
     mail(
-      :to => "to@example.org",
+      :to => email,
       :subject => "Problem Child Password Reset"
     )
   end
