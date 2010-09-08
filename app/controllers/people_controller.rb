@@ -1,3 +1,5 @@
+require 'lib/crypto'
+
 class PeopleController < ApplicationController
   before_filter :ensure_login, :only => [:edit, :update, :destroy]
   before_filter :ensure_logout, :only => [:new, :create]
@@ -48,7 +50,6 @@ class PeopleController < ApplicationController
   end
 
   def recover
-    require 'lib/crypto'
     person = Person.find_by_email(params[:recover_password][:email])
     if person
       Notifications.forgot_password(Crypto.encrypt("#{person.id}:#{person.salt}"), person.email).deliver
