@@ -49,7 +49,7 @@ class PeopleController < ApplicationController
     person = Person.find_by_email(params[:recover_password][:email])
     if person
       Notifications.forgot_password(Crypto.encrypt("#{person.id}:#{person.salt}"), person.email).deliver
-      Person.update_attributes(:verified => false)
+      person.update_attributes(:verified => false)
       flash[:notice] = "Please check your email."
       redirect_to root_url
     else
