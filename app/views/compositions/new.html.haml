@@ -22,7 +22,7 @@
   :markdown
     Your name will be removed when this is reviewed; 
     only the editor ([#{Person.editor.name}](#{person_path(Person.editor)})) will know you wrote this. 
-    And only the coeditor ([#{Person.coeditor.name}](#{person_path(Person.coeditor)}))
+    And only the coeditor #{"([#{Person.coeditor.name}](#{person_path(Person.coeditor)}))" if Person.coeditor }
     will know how people score it.
     Everyone else has the privilege of judging it objectively.
 
