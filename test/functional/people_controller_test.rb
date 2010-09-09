@@ -1,11 +1,30 @@
 require 'test_helper'
 
 class PeopleControllerTest < ActionController::TestCase
-  setup do
-    @person = Factory.create(:person)
+
+  def setup
+    sign_in_user
+  end
+
+  context "update action" do
+    should "display person's profile page when successful" do
+      Person.any_instance.stubs(:valid?).returns(true)
+      put :update, :id => @user.id, :person => { }
+      assert_redirected_to :action => 'show'
+      assert_equal session[:flash][:notice], "Your account has been updated"
+    end
+
+    should "display edit template again when unsuccessful" do
+      put :update, :id => @user.id, :person => { :password => 'secret', :password_confirmation => 'terces' }
+      assert_template 'edit'
+    end
   end
 
   context "Promoting" do
+    setup do
+      @person = Factory.create(:person2)
+    end
+
     should "make staff" do
       assert_equal Rank.count, 0
       post :make_staff, :id => @person.id

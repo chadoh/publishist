@@ -20,7 +20,8 @@ end
 class ActionController::TestCase
   def sign_in_user
     @user = Factory(:person)
-    @application_session = Session.create(:person => @user.email, :password => "secret") 
+    @application_session = Session.create(:email => @user.email, :password => "secret") 
+    session[:id] = @application_session.id
   end
 
   def current_user
@@ -29,5 +30,6 @@ class ActionController::TestCase
   
   def sign_out_user
     @application_session.destroy if @application_session
+    session.delete :id
   end
 end
