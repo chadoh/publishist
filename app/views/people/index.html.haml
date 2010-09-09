@@ -1,4 +1,10 @@
 - title(t('.title'))
+- content_for :aside do
+  :markdown
+    ## This is everyone.
+
+    Since you're a staff member, you get to see this list of everyone who has an account. Nifty!
+
 - if editor?
   %p= link_to "New", new_person_path, :title => "Make an account for someone else."
 %table
