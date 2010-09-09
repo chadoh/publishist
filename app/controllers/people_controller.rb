@@ -25,8 +25,13 @@ class PeopleController < InheritedResources::Base
     @person.verified = false
     if @person.save
       Notifications.signup(Crypto.encrypt("#{@person.id}:#{@person.salt}"), @person).deliver
-      flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
-      redirect_to root_url
+      unless session[:id]
+        flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
+        redirect_to root_url
+      else
+        flash[:notice] = "#{@person.first_name} will get a Welcome email soon."
+        redirect_to people_url
+      end
     else
       render :action => 'new'
     end
