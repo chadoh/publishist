@@ -10,7 +10,6 @@
           %li= msg
   
   = f.inputs do
-    -# TODO: Make/find wysiwyg editor that inserts markdown and escape all tags on output
     - unless @user
       = f.input :author_name, :label => "Your Name"
       = f.input :author_email, :label => "Your Email Address"

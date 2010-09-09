@@ -29,6 +29,9 @@ class CompositionTest < ActiveSupport::TestCase
       @user = Factory.create(:person)
       compo = Composition.new(:body => "some brand new thoughts", :author_id => @user.id, :author_email => "barn@cl.es")
       assert !compo.valid?
+
+      compo = Composition.new(:body => "some brand new thoughts", :author_id => @user.id, :author_name => "Smithy Brunswick")
+      assert !compo.valid?
     end
   end
 end

@@ -8,7 +8,7 @@ gem 'pg'
 
 # Bundle the extra gems:
 gem 'haml', '3.0.18'
-gem 'compass', '0.10.2'
+gem 'compass', '0.10.5'
 gem 'redgreen'
 gem 'rdiscount'
 gem 'RedCloth'

@@ -54,7 +54,7 @@ GEM
       mime-types
       xml-simple
     builder (2.1.2)
-    compass (0.10.2)
+    compass (0.10.5)
       haml (>= 3.0.4)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -118,7 +118,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth
   aws-s3 (= 0.6.2)
-  compass (= 0.10.2)
+  compass (= 0.10.5)
   factory_girl_rails
   formtastic!
   gravtastic (= 2.2.0)

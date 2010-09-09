@@ -15,7 +15,7 @@
         %td= link_to sanitize(composition.title), composition
         - if the_editor?
           %td<
-            = mail_to composition.author_email, email_image(composition.author)
+            = mail_to composition.email, email_image(composition.author)
             - if composition.author_id
               = link_to composition.author, Person.find(composition.author_id)
             - else
