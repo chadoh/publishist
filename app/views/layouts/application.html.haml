@@ -33,15 +33,15 @@
                   = link_to "Sign Up!", new_person_path, :class => "button"
       #content
         #aside
-          #search_box
-            = form_tag('/#') do
-              %input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark_on" }
-              %input{ :type => 'submit', :value => "Search!" }
-          %br
-          %hr
+          -##search_box
+            -#= form_tag('/#') do
+              -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark_on" }
+              -#%input{ :type => 'submit', :value => "Search!" }
+          -#%br
+          -#%hr
           = yield :aside
         %ul#nav
-          %li= link_to_unless_current "Showcase", root_path
+          %li= link_to_unless_current "About", root_path
           %li= link_to_unless_current "Submit", new_composition_path
           - if editor?
             %li= link_to_unless_current "Compositions", compositions_path
