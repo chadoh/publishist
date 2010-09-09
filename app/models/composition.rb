@@ -4,6 +4,8 @@ class Composition < ActiveRecord::Base
   before_validation :untitled_if_blank
 
   validate :author_email_exists_if_user_not_signed_in
+  validate :if_associated_to_Person_dont_allow_name_or_email_also
+
   validates_attachment_content_type :photo, 
     :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
     :if => Proc.new { |composition| composition.photo.file? },
@@ -31,7 +33,7 @@ class Composition < ActiveRecord::Base
     end
   end
 
-  def author_email
+  def email
     if read_attribute(:author_id)
       Person.find(read_attribute(:author_id)).email
     else
@@ -55,5 +57,12 @@ protected
   end
   def untitled_if_blank
     self.title= "untitled" if self.title.blank?
+  end
+  def if_associated_to_Person_dont_allow_name_or_email_also
+    if author_email.present? && author_id.present?
+      errors.add(:author_email, "... Now, it's confusing to have both this and to add a full-fledged, account-holding individual. To avoid confusion, please only fill in one.")
+    elsif author_name.present? && author_id.present?
+      errors.add(:author_name, "... Now, it's confusing to have both this and to add a full-fledged, account-holding individual. To avoid confusion, please only fill in one.")
+    end
   end
 end
