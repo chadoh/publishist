@@ -54,7 +54,7 @@ GEM
       mime-types
       xml-simple
     builder (2.1.2)
-    compass (0.10.4)
+    compass (0.10.2)
       haml (>= 3.0.4)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -117,17 +117,17 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
-  aws-s3 (~> 0.6.2)
-  compass (~> 0.10.2)
+  aws-s3 (= 0.6.2)
+  compass (= 0.10.2)
   factory_girl_rails
   formtastic!
-  gravtastic (~> 2.2.0)
-  haml (~> 3.0.18)
+  gravtastic (= 2.2.0)
+  haml (= 3.0.18)
   hassle!
-  inherited_resources (~> 1.1.2)
-  matthuhiggins-foreigner (~> 0.7.1)
-  mocha (~> 0.9.8)
-  paperclip (~> 2.3.3)
+  inherited_resources (= 1.1.2)
+  matthuhiggins-foreigner (= 0.7.1)
+  mocha (= 0.9.8)
+  paperclip (= 2.3.3)
   pg
   rails (= 3.0.0)
   rails3-generators

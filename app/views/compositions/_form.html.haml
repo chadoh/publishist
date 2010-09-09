@@ -11,14 +11,20 @@
   
   = f.inputs do
     -# TODO: Make/find wysiwyg editor that inserts markdown and escape all tags on output
-    - if @user
-      = f.input :author_id, :as => :hidden
-    - else
+    - unless @user
       = f.input :author_name, :label => "Your Name"
       = f.input :author_email, :label => "Your Email Address"
     = f.input :title, :label => 'Title', :input_html => { :class => 'wysiwyg' }
     = f.input :body, :label => 'Body', :required => false, :input_html => { :class => 'wysiwyg' }
     = f.input :photo, :label => "Or, submit an image:"
+    - if @user
+      - if the_editor?
+        = f.input :author, :collection => Person.order('first_name')
+        \- OR -
+        = f.input :author_name
+        = f.input :author_email, :input_html => { :value => "" }
+      - else
+        = f.input :author_id, :as => :hidden
   = f.buttons do
     = f.commit_button
 
