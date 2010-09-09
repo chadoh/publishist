@@ -55,4 +55,6 @@ ActiveRecord::Schema.define(:version => 20100907110927) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "compositions", "people", :name => "compositions_author_id_fk", :column => "author_id"
+
 end

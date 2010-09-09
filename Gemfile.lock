@@ -64,12 +64,19 @@ GEM
       rails (>= 3.0.0.beta4)
     gravtastic (2.2.0)
     haml (3.0.18)
+    has_scope (0.5.0)
     i18n (0.4.1)
+    inherited_resources (1.1.2)
+      has_scope (~> 0.5.0)
+      responders (~> 0.6.0)
     mail (2.2.5)
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
+    matthuhiggins-foreigner (0.7.1)
     mime-types (1.16)
+    mocha (0.9.8)
+      rake
     paperclip (2.3.3)
       activerecord
       activesupport
@@ -97,6 +104,7 @@ GEM
     rake (0.8.7)
     rdiscount (1.6.5)
     redgreen (1.2.2)
+    responders (0.6.0)
     shoulda (2.11.1)
     thor (0.14.0)
     treetop (1.4.8)
@@ -116,6 +124,9 @@ DEPENDENCIES
   gravtastic (~> 2.2.0)
   haml (~> 3.0.18)
   hassle!
+  inherited_resources (~> 1.1.2)
+  matthuhiggins-foreigner (~> 0.7.1)
+  mocha (~> 0.9.8)
   paperclip (~> 2.3.3)
   pg
   rails (= 3.0.0)

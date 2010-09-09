@@ -1,23 +1,19 @@
 require 'lib/crypto'
 
-class PeopleController < ApplicationController
+class PeopleController < InheritedResources::Base
+  before_filter :resource, :only => [:set_password, :make_staff, :make_editor, :make_coeditor]
   before_filter :ensure_login, :only => [:edit, :update, :destroy]
-  before_filter :ensure_logout, :only => [:new, :create]
+  before_filter :ensure_logout, :only => [:new, :create], :unless => :editor?
   before_filter :staff_only, :only => [:index]
   before_filter :editors_only, :only => [:destroy]
   skip_before_filter :check_that_user_is_verified, :only => [:set_password, :update]
 
-  def index
-    @people = Person.includes(:ranks).order('created_at')
-  end
-
   def show
     @person = Person.find(params[:id])
-    @compositions = @person.compositions.order("created_at DESC")
-  end
-
-  def new
-    @person = Person.new
+    if @user && (@user.the_editor? || @user == @person)
+      @compositions = @person.compositions.order("created_at DESC")
+    end
+    show!
   end
 
   def create
@@ -29,24 +25,21 @@ class PeopleController < ApplicationController
     @person.verified = false
     if @person.save
       Notifications.signup(Crypto.encrypt("#{@person.id}:#{@person.salt}"), @person).deliver
-      flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
-      redirect_to root_url
+      unless session[:id]
+        flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
+        redirect_to root_url
+      else
+        flash[:notice] = "#{@person.first_name} will get a Welcome email soon."
+        redirect_to people_url
+      end
     else
       render :action => 'new'
     end
   end
 
-  def edit
-    @person = Person.find(params[:id])
-  end
-
   def update
-    @person = Person.find(@user)
-    if @person.update_attributes(params[:person])
-      flash[:notice] = "Your account has been updated"
-      redirect_to root_url
-    else
-      render :action => 'edit'
+    update! do |success, failure|
+      failure.html { render :action => 'edit' }
     end
   end
 
@@ -63,25 +56,15 @@ class PeopleController < ApplicationController
     end
   end
 
-  def set_password
-    @person = Person.find(params[:id])
-  end
-
-  def help
-  end
-
   def make_staff
-    @person = Person.find(params[:id])
     promote(@person, 1)
   end
 
   def make_coeditor
-    @person = Person.find(params[:id])
     promote(@person, 2)
   end
 
   def make_editor
-    @person = Person.find(params[:id])
     promote(@person, 3)
   end
 
@@ -107,9 +90,24 @@ class PeopleController < ApplicationController
   end
 
   def destroy
-    Person.destroy(@user)
-    session[:id] = @user = nil
-    flash[:notice] = "Goodbye! We're sad to see you go."
-    redirect_to root_url
+    destroy! do |success, failure|
+      session[:id] = @user = nil
+      success.html { redirect_to root_url }
+      failure.html { render :action => 'edit' }
+    end
+  end
+
+protected
+
+  def collection
+    @people ||= end_of_association_chain.includes(:ranks).order('created_at')
+  end
+
+  def resource
+    @person ||= Person.find(params[:id])
+  end
+
+  def editor?
+    @user && @user.editor?
   end
 end

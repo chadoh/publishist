@@ -7,14 +7,14 @@ class ApplicationController < ActionController::Base
 
   def ensure_login
     unless @user
-      flash[:notice] = "Please sign in to continue"
+      flash[:notice] = "You have to be signed in to do that."
       redirect_to new_session_path
     end
   end
 
   def ensure_logout
     if @user
-      flash[:notice] = "You must sign out before you can sign in or register"
+      flash[:notice] = "You must sign out before you can sign in or up."
       redirect_to root_url
     end
   end

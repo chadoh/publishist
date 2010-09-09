@@ -45,3 +45,10 @@ en:
         update: "Save Changes"
       session:
         create: "Sign In"
+
+  flash:
+    people:
+      update:
+        notice: "Your account has been updated"
+      destroy:
+        notice: "Goodbye! We're sad to see you go."
