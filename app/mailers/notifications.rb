@@ -1,6 +1,6 @@
 class Notifications < ActionMailer::Base
   default :from => "admin@problemchildmag.com"
-  default_url_options[:host] = "pcmag.heroku.com"
+  default_url_options[:host] = "problemchildmag.com"
 
   helper :application
 

@@ -6,7 +6,7 @@
 
     Our apologies, this website is a bit rough around the edges, isn't it? It's currently being built, [rail by rail](http://en.wikipedia.org/wiki/Ruby_on_Rails), by [Chad Ostrowski](#{person_path Person.chad}), who was an editor for this magazine and is now working as a code author for [the Man](http://en.wikipedia.org/wiki/Comcast "A very benevolant Man who is gifting Chad with the equivalent of a degree in Computer Science. Hooray!").
 
-    The primary purpose of it is to help the editors with all the tedious parts of their jobs so they can focus on more important things, like social engineering and navigating the Penn State bureaucracy. But since all of the submissions will someday be entered here (along with their scores and which magazine they're part of), it will be a wondrous side-effect that you will be able to view everything we've ever published here. Woo!
+    The primary purpose of it is to help the editors with all the tedious parts of their jobs so they can focus on more important things, like social engineering and navigating the Penn State bureaucracy. It will also be where all of the published works can be found online!
 
     After that's taken care of, there are other fun things planned for this website:
 
@@ -37,7 +37,7 @@
 
   ### What happens at a meeting?
 
-  [Swati](#{person_path Person.editor}), our current editor, starts off the meetings with a poem to get us all in the right frame of mind. Jim Rose, an outlaw, will pass around an attendance sheet that always includes an awesome question to answer. These get read aloud, and we enjoy the answers immensely. Swati will also bring packets of submissions to the meeting. The packets range between 4 and 34 submissions, but generally have around 8. Each poem is read out loud and discussed. Sometimes we talk about them technically — *they used that em-dash all wrong!* — and sometimes we talk about them informally — *this line is way cool!* Then each member rates the poem on his or her own, according to that particular member’s tastes.
+  [#{Person.editor.first_name}](#{person_path Person.editor}), our current editor, starts off the meetings with a poem to get us all in the right frame of mind. Then [#{Person.coeditor.first_name}](#{person_path Person.coeditor}) will pass around an attendance sheet that always includes an awesome question to answer. These get read aloud, and we enjoy the answers immensely. #{Person.editor.first_name} will also bring packets of submissions to the meeting. The packets range between 4 and 34 submissions, but generally have around 8. Each poem is read out loud and discussed. Sometimes we talk about them technically — *they used that em-dash all wrong!* — and sometimes we talk about them informally — *this line is way cool!* Then each member rates the poem on his or her own, according to that particular member’s tastes.
 
   ### How do I join?
 
