@@ -65,6 +65,7 @@ GEM
     gravtastic (2.2.0)
     haml (3.0.18)
     has_scope (0.5.0)
+    heroku_san (0.2.4)
     i18n (0.4.1)
     inherited_resources (1.1.2)
       has_scope (~> 0.5.0)
@@ -124,6 +125,7 @@ DEPENDENCIES
   gravtastic (= 2.2.0)
   haml (= 3.0.18)
   hassle!
+  heroku_san (= 0.2.4)
   inherited_resources (= 1.1.2)
   matthuhiggins-foreigner (= 0.7.1)
   mocha (= 0.9.8)

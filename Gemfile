@@ -21,6 +21,7 @@ gem 'paperclip', '2.3.3'
 gem 'gravtastic', '2.2.0'
 gem 'inherited_resources', '1.1.2'
 gem 'mocha', '0.9.8'
+gem 'heroku_san', '0.2.4'
 
 group :test do
   gem 'shoulda', '2.11.1'
