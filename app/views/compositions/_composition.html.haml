@@ -6,7 +6,7 @@
     %br
   - unless composition.body.blank?
     = sanitize composition.body
-- if the_editor? || @user == composition.author
+- if the_editor_or_the_owner?(composition)
   %p.composition.author
     by
     - if composition.author_id

@@ -46,7 +46,7 @@ class CompositionsController < ApplicationController
         format.html {
           flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
           if @user
-            redirect_to(@composition)
+            redirect_to person_url(@user)
           else
             redirect_to(root_url)
           end
@@ -94,7 +94,7 @@ protected
   end
   def editors_and_owner_only
     @composition = Composition.find(params[:id])
-    unless @user && (@user.editor? || @user == @composition.author)
+    unless @user && (@user.editor? || @user.name == @composition.author)
       flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
       redirect_to root_url
     end
