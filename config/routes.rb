@@ -1,6 +1,8 @@
 Pc::Application.routes.draw do
 
 
+  resources :meetings
+
   get "welcome/index"
 
   resources :compositions, :path_names => { :new => "/submit" }
