@@ -18,7 +18,7 @@ class Notifications < ActionMailer::Base
 
     mail(
       :to => "editor@problemchildmag.com",
-      :from => composition.author_email,
+      :from => composition.email,
       :subject => "Submission: \"#{@title}\" by #{@author}"
     )
   end
