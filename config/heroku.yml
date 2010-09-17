@@ -1,4 +1,4 @@
 apps:
   # shorthand: heroku
-  production: pcmag
-  staging: pcmag-staging
+  production: 'pcmag'
+  staging: 'pcmag-staging'
