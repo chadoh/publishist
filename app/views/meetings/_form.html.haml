@@ -1,3 +1,6 @@
+- javascript "anytime.min"
+- stylesheet "anytime.min"
+
 = semantic_form_for(@meeting) do |f|
   - if @meeting.errors.any?
     #errorExplanation
@@ -7,7 +10,15 @@
         %li= msg
 
   = f.inputs do
-    = f.input :when
+    = f.input :when, :as => :string
     = f.input :question
   = f.buttons do
     = f.commit_button
+
+:javascript
+  $(function(){
+    $("#meeting_when").AnyTime_picker({
+      format: "%Y-%m-%d %h:%i %p",
+      placement: "inline"
+    });
+  });

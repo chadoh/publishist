@@ -1,10 +1,7 @@
-- title t('.title')
+- title "Meeting"
+%p= @meeting.when.strftime("On %A the %d of %B, %Y (at %I:%M %p)")
+%h3= @meeting.question
 %p
   = link_to t('back'), meetings_path
   = link_to t('edit'), edit_meeting_path(@meeting)
 
-%dl
-  %dt= Meeting.human_attribute_name :when
-  %dd= @meeting.when
-  %dt= Meeting.human_attribute_name :question
-  %dd= @meeting.question

@@ -34,6 +34,16 @@ en:
     edit:
       title: "Edit Account"
 
+  meetings:
+    index:
+      title: "Meetings"
+      new_meeting: "Schedule a new meeting"
+    new: 
+      title: "New Meeting"
+    edit:
+      title: "Edit Meeting"
+
+
   formtastic:
     actions:
       create: "Create %{model}!"
