@@ -5,3 +5,22 @@
   = link_to t('back'), meetings_path
   = link_to t('edit'), edit_meeting_path(@meeting)
 
+%h3 Attendance
+%table
+  %tr
+    %th Name
+    %th Answer
+    %th{:colspan => 2} Actions
+  - @meeting.attendances.each do |attendance|
+    %tr
+      %td= attendance.person.name
+      %td= attendance.answer
+      %td= link_to 'edit', edit_attendance_path(attendance)
+      %td= button_to 'remove', attendance_path(attendance), :method => :destroy
+= semantic_form_for @attendance do |f|
+  = f.inputs do
+    = f.input attendance.meeting, :as => :hidden, :value => @meeting
+    = f.input attendance.person
+    = f.input attendance.answer
+  = f.buttons do
+    = f.commit_button

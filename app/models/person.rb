@@ -8,6 +8,8 @@ class Person < ActiveRecord::Base
   has_many :sessions, :dependent => :destroy
   has_many :ranks, :dependent => :destroy
   has_many :compositions, :foreign_key => 'author_id'
+  has_many :attendances
+  has_many :meetings, :through => :attendances
 
   validates_presence_of :email
   validates_uniqueness_of :email, :message => "has already been used by someone else"

@@ -57,4 +57,4 @@
     #footer
       #text
         :markdown
-          This website is in early alpha development; you may experience turbulence. Please let [someone](#{person_path(Person.chad)}) know if something is broken.
+          This website is in early alpha development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.

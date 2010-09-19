@@ -7,7 +7,7 @@ gem 'redgreen'
 # Views
 gem 'haml', '3.0.18'
 gem 'compass', '0.10.5'
-gem 'formtastic', :git => "git://github.com/justinfrench/formtastic.git", :branch => "rails3"
+gem 'formtastic', '1.1.0'
 gem 'rdiscount'
 gem 'RedCloth'
 

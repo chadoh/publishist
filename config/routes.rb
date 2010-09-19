@@ -1,10 +1,8 @@
 Pc::Application.routes.draw do
 
-
-  resources :meetings
-
   get "welcome/index"
 
+  resources :meetings, :attendances
   resources :compositions, :path_names => { :new => "/submit" }
   resources :people, :shallow => true do
     resources :ranks

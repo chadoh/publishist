@@ -5,6 +5,9 @@ class PersonTest < ActiveSupport::TestCase
     @person = Factory(:person)
   end
 
+  should_have_many :attendances
+  should_have_many :meetings, :through => :attendances
+
   context "names" do
     should "require first_name to be set" do
       @person = Person.new( :first_name => "Thad",

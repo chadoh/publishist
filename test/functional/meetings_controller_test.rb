@@ -11,7 +11,7 @@ class MeetingsControllerTest < ActionController::TestCase
   context "editors" do
     should "be able to make and edit meetings" do
       rank = Factory.create(:current_editor)
-      sign_in_user(rank.person)
+      sign_in_user rank.person
       get :index
       assert_select "td", 4
       assert_select "a[href='#{new_meeting_path}']"
@@ -21,7 +21,7 @@ class MeetingsControllerTest < ActionController::TestCase
       Rank.last.delete
       rank = Factory.create(:current_coeditor)
       assert_equal rank.person.highest_rank, rank
-      sign_in_user(rank.person)
+      sign_in_user rank.person
       get :index
       assert_select "td", 4
       assert_select "a[href='#{new_meeting_path}']"
@@ -35,6 +35,29 @@ class MeetingsControllerTest < ActionController::TestCase
       get :index
       assert_select "td", 2
       assert_select "a[href='#{new_meeting_path}']", false
+    end
+  end
+
+  context "attendance" do
+    setup do
+      rank = Factory.create(:current_editor)
+      sign_in_user rank.person
+    end
+
+    should "be a prominent section of the show page" do
+      get :show, :id => @meeting.id
+      assert_select "h3", "Attendance"
+    end
+
+    should "display all currently documented attendees" do
+      attendance = Factory.create(:attendance)
+      get :show, :id => attendance.meeting_id
+      assert_select "td", 4
+    end
+
+    should "allow another attendance to be added" do
+      get :show, :id => @meeting.id
+      assert_select "form[id=attendance]"
     end
   end
 
