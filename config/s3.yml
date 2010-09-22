@@ -1,0 +1,9 @@
+development:
+  bucket: pcmag_dev
+  #key & secret are set in environment/config vars
+
+test:
+  bucket: pcmag_test
+
+production:
+  bucket: pcmag
