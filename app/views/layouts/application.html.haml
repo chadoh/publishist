@@ -4,11 +4,11 @@
     - @content_for_title ||= "Problem Child"
     %title= @content_for_title
     %link(rel="shortcut icon" href="/images/favicon.ico")
-    = stylesheet_link_tag 'formtastic.css', 'compiled/layouts/application.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'formtastic.css', 'compiled/layouts/application.css', 'jquery.autocomplete', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/layouts/print.css', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/layouts/ie.css', :media => 'screen, projection'
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', 'rails', 'application'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'jquery.autocomplete', 'rails', 'application'
     = csrf_meta_tag
     = yield :head
   %body
