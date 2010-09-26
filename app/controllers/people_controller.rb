@@ -7,6 +7,9 @@ class PeopleController < InheritedResources::Base
   before_filter :staff_only, :only => [:index]
   before_filter :editors_only, :only => [:destroy]
   skip_before_filter :check_that_user_is_verified, :only => [:set_password, :update]
+  auto_complete_for :person, [:first_name, :middle_name, :last_name, :email], :limit => 15 do |people|
+    people.map {|person| "\"#{person.full_name}\" &lt;#{person.email}&gt;" }.join "\n"
+  end
 
   def show
     @person = Person.find(params[:id])

@@ -17,10 +17,15 @@
       %td= attendance.answer
       %td= link_to 'edit', edit_attendance_path(attendance)
       %td= button_to 'remove', attendance_path(attendance), :method => :destroy
-= semantic_form_for @attendance do |f|
+= semantic_form_for [@meeting, Attendance.new] do |f|
   = f.inputs do
-    = f.input attendance.meeting, :as => :hidden, :value => @meeting
-    = f.input attendance.person
-    = f.input attendance.answer
+    = f.input :meeting, :as => :hidden, :value => @meeting
+    = f.input :person, :as => :string
+    = f.input :answer
   = f.buttons do
     = f.commit_button
+
+:javascript
+  $(function(){
+    $("#attendance_person").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}");
+  });
