@@ -21,6 +21,7 @@ class Person < ActiveRecord::Base
   validates_confirmation_of :password
   validates_presence_of :first_name
 
+  before_create :n00b_salt, :if => Proc.new { self.password.blank? }
   after_save :flush_passwords
 
   is_gravtastic :email, :size => 200, :default => "http://pcmag.heroku.com/images/children.png", :rating => 'R'
@@ -123,7 +124,7 @@ class Person < ActiveRecord::Base
 
   class << self
     def editors
-      ranks = Rank.where(:rank_type => 2..3, :rank_end => nil).first
+      ranks = Rank.where(:rank_type => 2..3, :rank_end => nil)
       ranks = ranks.sort_by {|a| a.rank_type }
       ranks.collect {|r| r.person}
     end
@@ -136,17 +137,43 @@ class Person < ActiveRecord::Base
       rank.person if rank
     end
     def chad
-      chad = Person.where(:email => "chad.ostrowski@gmail.com").first
+      chad = Person.find_by_email "chad.ostrowski@gmail.com"
+    end
+    def find_or_create formatted_name_and_email
+      if formatted_name_and_email =~ /\A.+<.+>\Z/
+        email = formatted_name_and_email.scan(/<.+>/).first.delete "<>"
+        person = Person.find_by_email email
+        unless person
+          names = formatted_name_and_email.scan(/.+</).first.gsub(/["<>[:cntrl:]]/, '').split(' ')
+          first = names.delete_at(0)
+          last = names.delete_at(names.length - 1) unless names.empty?
+          middles = names.join(' ') unless names.empty?
+          person = Person.create(
+            :first_name => first, 
+            :middle_name => middles, 
+            :last_name => last, 
+            :email => email
+          )
+        end
+      else
+        person = Person.new
+        person.errors.add(:id, "must be in the format \"first_name middle_name last_name\" <email@ddress.com>")
+      end 
+      person
     end
   end
 
-private
+protected
+
+  def n00b_salt
+    self.salt = "n00b"
+  end
 
   def flush_passwords
     @password = @password_confirmation = nil
   end
 
   def password_is_not_being_updated?
-    self.id and self.password.blank?
+    (self.id and self.password.blank?) || (!self.id && self.password.blank?)
   end
 end

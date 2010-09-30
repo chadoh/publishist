@@ -21,18 +21,13 @@ class PeopleController < InheritedResources::Base
 
   def create
     @person = Person.new(params[:person])
-    o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
-    password  =  (0..10).map{ o[rand(o.length)]  }.join;    
-    @person.password = @person.password_confirmation = password
-    @person.salt = "n00b"
-    @person.verified = false
     if @person.save
       Notifications.signup(Crypto.encrypt("#{@person.id}:#{@person.salt}"), @person).deliver
-      unless session[:id]
+      if !session[:id]
         flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
         redirect_to root_url
       else
-        flash[:notice] = "#{@person.first_name} will get a Welcome email soon."
+        flash[:notice] = "#{@person.first_name} will get a welcome email soon."
         redirect_to people_url
       end
     else

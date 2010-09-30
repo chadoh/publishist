@@ -19,7 +19,7 @@ end
 
 class ActionController::TestCase
   def sign_in_user(person = nil)
-    @user = person || Factory(:person)
+    @user = person || Factory.create(:person)
     @application_session = Session.create(:email => @user.email, :password => "secret") 
     session[:id] = @application_session.id
   end

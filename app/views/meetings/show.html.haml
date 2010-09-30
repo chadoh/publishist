@@ -15,8 +15,8 @@
     %tr
       %td= attendance.person.name
       %td= attendance.answer
-      %td= link_to 'edit', edit_attendance_path(attendance)
-      %td= button_to 'remove', attendance_path(attendance), :method => :destroy
+      %td= link_to 'edit', edit_meeting_attendance_path(attendance)
+      %td= button_to 'remove', meeting_attendance_path(attendance), :method => :destroy
 = semantic_form_for [@meeting, Attendance.new] do |f|
   = f.inputs do
     = f.input :meeting, :as => :hidden, :value => @meeting

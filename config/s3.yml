@@ -1,10 +1,12 @@
-development:
+development: &DEFAULTS
   bucket: pcmag_dev
   access_key_id: ENV['S3_KEY']
   secret_access_key: ENV['S3_SECRET']
 
 test:
+  <<: *DEFAULTS
   bucket: pcmag_test
 
 production:
+  <<: *DEFAULTS
   bucket: pcmag

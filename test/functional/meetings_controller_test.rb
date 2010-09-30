@@ -57,7 +57,7 @@ class MeetingsControllerTest < ActionController::TestCase
 
     should "allow another attendance to be added" do
       get :show, :id => @meeting.id
-      assert_select "form[id=attendance]"
+      assert_select "form[id=new_attendance]"
     end
   end
 

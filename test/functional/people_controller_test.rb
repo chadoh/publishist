@@ -2,11 +2,11 @@ require 'test_helper'
 
 class PeopleControllerTest < ActionController::TestCase
 
-  def setup
-    sign_in_user
-  end
-
   context "update action" do
+    setup do
+      sign_in_user
+    end
+
     should "display person's profile page when successful" do
       Person.any_instance.stubs(:valid?).returns(true)
       put :update, :id => @user.id, :person => { }
@@ -20,6 +20,23 @@ class PeopleControllerTest < ActionController::TestCase
     end
   end
 
+  context "create action" do
+    setup do
+      sign_out_user
+    end
+
+    should "make a new unverified account with no password and a salt of 'n00b'" do
+      post :create, :person => {
+        :first_name => "Marvin",
+        :last_name => "McGee",
+        :email => "duders@ranch.com" }
+      assert_redirected_to root_url
+      marvin = assigns(:person)
+      assert !marvin.verified?
+      assert_equal marvin.salt, 'n00b'
+    end
+  end
+  
   context "Promoting" do
     setup do
       @person = Factory.create(:person2)
