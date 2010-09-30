@@ -22,6 +22,7 @@ class Person < ActiveRecord::Base
   validates_presence_of :first_name
 
   before_create :n00b_salt, :if => Proc.new { self.password.blank? }
+  after_create :notify_of_account_creation, :if => Proc.new { self.password.blank? }
   after_save :flush_passwords
 
   is_gravtastic :email, :size => 200, :default => "http://pcmag.heroku.com/images/children.png", :rating => 'R'
@@ -164,6 +165,10 @@ class Person < ActiveRecord::Base
   end
 
 protected
+
+  def notify_of_account_creation
+    Notifications.signup(Crypto.encrypt("#{self.id}:#{self.salt}"), self).deliver
+  end
 
   def n00b_salt
     self.salt = "n00b"

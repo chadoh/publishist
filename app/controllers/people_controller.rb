@@ -8,7 +8,7 @@ class PeopleController < InheritedResources::Base
   before_filter :editors_only, :only => [:destroy]
   skip_before_filter :check_that_user_is_verified, :only => [:set_password, :update]
   auto_complete_for :person, [:first_name, :middle_name, :last_name, :email], :limit => 15 do |people|
-    people.map {|person| "\"#{person.full_name}\" &lt;#{person.email}&gt;" }.join "\n"
+    people.map {|person| "\"#{person.full_name}\" <#{person.email}>" }.join "\n"
   end
 
   def show
@@ -22,7 +22,6 @@ class PeopleController < InheritedResources::Base
   def create
     @person = Person.new(params[:person])
     if @person.save
-      Notifications.signup(Crypto.encrypt("#{@person.id}:#{@person.salt}"), @person).deliver
       if !session[:id]
         flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
         redirect_to root_url
