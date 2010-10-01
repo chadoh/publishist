@@ -1,10 +1,10 @@
 Pc::Application.routes.draw do
 
-
-  resources :meetings
-
   get "welcome/index"
 
+  resources :meetings do
+    resources :attendances
+  end
   resources :compositions, :path_names => { :new => "/submit" }
   resources :people, :shallow => true do
     resources :ranks
@@ -16,6 +16,7 @@ Pc::Application.routes.draw do
       get 'set_password'
     end
     collection do
+      get 'auto_complete_for_person_first_name_middle_name_last_name_email'
       get 'help'
       post 'recover'
     end
