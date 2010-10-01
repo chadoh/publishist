@@ -87,10 +87,15 @@ class PeopleController < InheritedResources::Base
   end
 
   def destroy
-    destroy! do |success, failure|
-      session[:id] = @user = nil
-      success.html { redirect_to root_url }
-      failure.html { render :action => 'edit' }
+    destroy! do |format|
+      if @user == resource
+        flash[:notice] = "Goodbye! We're sad to see you go."
+        session[:id] = @user = nil
+        format.html { redirect_to root_url }
+      else
+        flash[:notice] = "#{resource.first_name} is no more."
+        format.html { redirect_to people_url }
+      end
     end
   end
 

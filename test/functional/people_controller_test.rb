@@ -67,4 +67,21 @@ class PeopleControllerTest < ActionController::TestCase
       assert_equal @person.current_ranks.count, 2
     end
   end
+
+  context "destroy action" do
+    should "redirect to index page with a sad flash when someone deletes their own account" do
+      sign_out_user
+      assert_equal nil, session[:id]
+      assert_equal nil, @user
+      num_people = Person.count
+
+      p = Factory.create :person
+      sign_in_user p
+      assert_equal p, @user
+      assert_equal Person.count, num_people + 1
+
+      delete :destroy, :id => p.id
+      assert_redirected_to root_url
+    end
+  end
 end

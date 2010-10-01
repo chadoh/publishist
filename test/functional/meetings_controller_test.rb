@@ -35,6 +35,10 @@ class MeetingsControllerTest < ActionController::TestCase
       get :index
       assert_select "td", 2
       assert_select "a[href='#{new_meeting_path}']", false
+
+      get :show, :id => @meeting.id
+      assert_select "th", 2
+      assert_select "form", 1 #the sign-out button
     end
   end
 
@@ -52,7 +56,7 @@ class MeetingsControllerTest < ActionController::TestCase
     should "display all currently documented attendees" do
       attendance = Factory.create(:attendance)
       get :show, :id => attendance.meeting_id
-      assert_select "td", 4
+      assert_select "td", 3
     end
 
     should "allow another attendance to be added" do

@@ -8,7 +8,7 @@ class Person < ActiveRecord::Base
   has_many :sessions, :dependent => :destroy
   has_many :ranks, :dependent => :destroy
   has_many :compositions, :foreign_key => 'author_id'
-  has_many :attendances
+  has_many :attendances, :dependent => :destroy
   has_many :meetings, :through => :attendances
 
   validates_presence_of :email
@@ -157,8 +157,7 @@ class Person < ActiveRecord::Base
           )
         end
       else
-        person = Person.new
-        person.errors.add(:id, "must be in the format \"first_name middle_name last_name\" <email@ddress.com>")
+        person = nil
       end 
       person
     end

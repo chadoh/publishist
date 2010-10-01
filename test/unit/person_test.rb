@@ -61,7 +61,7 @@ class PersonTest < ActiveSupport::TestCase
       bads = ['"Chad Ostrowski"', '<chad.ostrowski@gmail.com>', 'stephen']
       bads.each do |bad|
         person = Person.find_or_create bad
-        assert_equal person.errors.count, 1
+        assert_equal person, nil
       end
 
       news = [

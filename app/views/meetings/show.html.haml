@@ -1,29 +1,37 @@
-- title "Meeting"
-%p= @meeting.when.strftime("On %A the %d of %B, %Y (at %I:%M %p)")
-%h3= @meeting.question
-%p
-  = link_to t('back'), meetings_path
-  = link_to t('edit'), edit_meeting_path(@meeting)
+- title @meeting.question
+%p= @meeting.when.strftime("A meeting held on %A, %d %B %Y at %I:%M %p")
+- if editor?
+  %p
+    = link_to t('.edit'), edit_meeting_path(@meeting)
 
 %h3 Attendance
 %table
-  %tr
-    %th Name
-    %th Answer
-    %th{:colspan => 2} Actions
-  - @meeting.attendances.each do |attendance|
+  %thead
     %tr
-      %td= attendance.person.name
-      %td= attendance.answer
-      %td= link_to 'edit', edit_meeting_attendance_path(attendance)
-      %td= button_to 'remove', meeting_attendance_path(attendance), :method => :destroy, :class => 'link'
-= semantic_form_for [@meeting, Attendance.new] do |f|
-  = f.inputs do
-    = f.input :meeting, :as => :hidden, :value => @meeting
-    = f.input :person, :as => :string
-    = f.input :answer
-  = f.buttons do
-    = f.commit_button
+      %th Name
+      %th Answer
+      - if editor?
+        %th
+  %tbody
+    - @meeting.attendances.each do |attendance|
+      %tr{ :class => cycle(:odd, :even) }
+        - if attendance.person
+          %td= link_to attendance.person.name, person_path(attendance.person)
+        - else
+          %td= attendance.person_name
+        %td= attendance.answer
+        - if editor?
+          %td= button_to 'remove', meeting_attendance_path(@meeting, attendance), :method => :delete, :class => 'link'
+
+- if editor?
+  = semantic_form_for [@meeting, Attendance.new] do |f|
+    = f.semantic_errors
+    = f.inputs do
+      = f.input :meeting, :as => :hidden, :value => @meeting
+      = f.input :person, :as => :string
+      = f.input :answer
+    = f.buttons do
+      = f.commit_button
 
 :javascript
   $(function(){

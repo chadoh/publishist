@@ -42,6 +42,8 @@ en:
       title: "New Meeting"
     edit:
       title: "Edit Meeting"
+    show:
+      edit: "Edit Meeting"
 
 
   formtastic:
@@ -55,10 +57,10 @@ en:
         update: "Save Changes"
       session:
         create: "Sign In"
+      attendance:
+        create: "Add"
 
   flash:
     people:
       update:
         notice: "Your account has been updated"
-      destroy:
-        notice: "Goodbye! We're sad to see you go."

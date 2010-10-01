@@ -56,7 +56,7 @@ class AttendancesControllerTest < ActionController::TestCase
     should "return a useful flash notice" do
       delete :destroy, :meeting_id => @meeting.id, :id => @attendance.id
       assert_redirected_to meeting_url @meeting
-      assert_equal session[:flash], {:notice => "#{@person.first_name} wasn't there, after all"}
+      assert_equal session[:flash], {:notice => "#{@attendance.first_name} wasn't there, after all"}
     end
   end
 end
