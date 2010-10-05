@@ -6,3 +6,4 @@ tmp/**/*
 *.sw*
 .dropbox
 Icon?
+*.dat

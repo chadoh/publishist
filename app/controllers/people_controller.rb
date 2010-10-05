@@ -7,6 +7,9 @@ class PeopleController < InheritedResources::Base
   before_filter :staff_only, :only => [:index]
   before_filter :editors_only, :only => [:destroy]
   skip_before_filter :check_that_user_is_verified, :only => [:set_password, :update]
+  auto_complete_for :person, [:first_name, :middle_name, :last_name, :email], :limit => 15 do |people|
+    people.map {|person| "\"#{person.full_name}\" <#{person.email}>" }.join "\n"
+  end
 
   def show
     @person = Person.find(params[:id])
@@ -18,18 +21,12 @@ class PeopleController < InheritedResources::Base
 
   def create
     @person = Person.new(params[:person])
-    o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
-    password  =  (0..10).map{ o[rand(o.length)]  }.join;    
-    @person.password = @person.password_confirmation = password
-    @person.salt = "n00b"
-    @person.verified = false
     if @person.save
-      Notifications.signup(Crypto.encrypt("#{@person.id}:#{@person.salt}"), @person).deliver
-      unless session[:id]
+      if !session[:id]
         flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
         redirect_to root_url
       else
-        flash[:notice] = "#{@person.first_name} will get a Welcome email soon."
+        flash[:notice] = "#{@person.first_name} will get a welcome email soon."
         redirect_to people_url
       end
     else
@@ -90,10 +87,15 @@ class PeopleController < InheritedResources::Base
   end
 
   def destroy
-    destroy! do |success, failure|
-      session[:id] = @user = nil
-      success.html { redirect_to root_url }
-      failure.html { render :action => 'edit' }
+    destroy! do |format|
+      if @user == resource
+        flash[:notice] = "Goodbye! We're sad to see you go."
+        session[:id] = @user = nil
+        format.html { redirect_to root_url }
+      else
+        flash[:notice] = "#{resource.first_name} is no more."
+        format.html { redirect_to people_url }
+      end
     end
   end
 

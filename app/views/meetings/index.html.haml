@@ -1,0 +1,20 @@
+- title t('.title')
+- if editor?
+  %p= link_to t('.new_meeting'), new_meeting_path
+
+%table
+  %thead
+    %tr
+      %th= Meeting.human_attribute_name :when
+      %th= Meeting.human_attribute_name :question
+      - if editor?
+        %th{:colspan => 2}= t 'actions'
+  
+  %tbody
+    - for meeting in @meetings
+      %tr{ :class => cycle(:odd, :even) }
+        %td= link_to pretty_date(meeting.when), meeting
+        %td= link_to meeting.question, meeting
+        - if editor?
+          %td.action= link_to t('edit'), edit_meeting_path(meeting)
+          %td.action= link_to t('destroy'), meeting, :confirm => t('are_you_sure'), :method => :delete

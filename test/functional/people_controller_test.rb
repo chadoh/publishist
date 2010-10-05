@@ -2,11 +2,11 @@ require 'test_helper'
 
 class PeopleControllerTest < ActionController::TestCase
 
-  def setup
-    sign_in_user
-  end
-
   context "update action" do
+    setup do
+      sign_in_user
+    end
+
     should "display person's profile page when successful" do
       Person.any_instance.stubs(:valid?).returns(true)
       put :update, :id => @user.id, :person => { }
@@ -20,6 +20,23 @@ class PeopleControllerTest < ActionController::TestCase
     end
   end
 
+  context "create action" do
+    setup do
+      sign_out_user
+    end
+
+    should "make a new unverified account with no password and a salt of 'n00b'" do
+      post :create, :person => {
+        :first_name => "Marvin",
+        :last_name => "McGee",
+        :email => "duders@ranch.com" }
+      assert_redirected_to root_url
+      marvin = assigns(:person)
+      assert !marvin.verified?
+      assert_equal marvin.salt, 'n00b'
+    end
+  end
+  
   context "Promoting" do
     setup do
       @person = Factory.create(:person2)
@@ -48,6 +65,23 @@ class PeopleControllerTest < ActionController::TestCase
       @person.reload
       assert_equal @person.highest_rank.rank_type, 3
       assert_equal @person.current_ranks.count, 2
+    end
+  end
+
+  context "destroy action" do
+    should "redirect to index page with a sad flash when someone deletes their own account" do
+      sign_out_user
+      assert_equal nil, session[:id]
+      assert_equal nil, @user
+      num_people = Person.count
+
+      p = Factory.create :person
+      sign_in_user p
+      assert_equal p, @user
+      assert_equal Person.count, num_people + 1
+
+      delete :destroy, :id => p.id
+      assert_redirected_to root_url
     end
   end
 end

@@ -4,7 +4,6 @@ class RankTest < ActiveSupport::TestCase
 
   def setup
     @person = Factory(:person)
-    @person.ranks.first.destroy # don't want them to be made editor automatically, want to do it manually
     @date = DateTime.parse("2006-08-16 12:12:23")
   end
 
@@ -58,16 +57,15 @@ class RankTest < ActiveSupport::TestCase
 
       @person2 = Factory(:person2)
       @person3 = Factory(:person3)
-      @person2.ranks.first.destroy #don't want them to automatically be made editor, want to do it manually
       @coeditor_rank = Rank.new(:person_id => @person.id, :rank_type => 2, :rank_start => @date).save
       @editor_rank = Rank.new(:person_id => @person2.id, :rank_type => 3, :rank_start => @date >> 12).save
       @new_editor = Rank.new(:person_id => @person3.id, :rank_type => 3, :rank_start => @date >> 24).save
       assert_equal Rank.all.count, 3
-      assert_equal Person.current_editors.count, 2
+      assert_equal Person.editors.count, 2
 
       @new_coeditor = Rank.new(:person_id => @person2.id, :rank_type => 2, :rank_start => @date >> 24).save
       assert_equal Rank.all.count, 4
-      assert_equal Person.current_editors.count, 2
+      assert_equal Person.editors.count, 2
     end
   end
 end

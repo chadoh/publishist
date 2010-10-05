@@ -34,6 +34,18 @@ en:
     edit:
       title: "Edit Account"
 
+  meetings:
+    index:
+      title: "Meetings"
+      new_meeting: "Schedule a new meeting"
+    new: 
+      title: "New Meeting"
+    edit:
+      title: "Edit Meeting"
+    show:
+      edit: "Edit Meeting"
+
+
   formtastic:
     actions:
       create: "Create %{model}!"
@@ -45,10 +57,10 @@ en:
         update: "Save Changes"
       session:
         create: "Sign In"
+      attendance:
+        create: "Add"
 
   flash:
     people:
       update:
         notice: "Your account has been updated"
-      destroy:
-        notice: "Goodbye! We're sad to see you go."

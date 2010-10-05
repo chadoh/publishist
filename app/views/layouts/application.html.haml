@@ -4,11 +4,11 @@
     - @content_for_title ||= "Problem Child"
     %title= @content_for_title
     %link(rel="shortcut icon" href="/images/favicon.ico")
-    = stylesheet_link_tag 'formtastic.css', 'compiled/layouts/application.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'formtastic.css', 'compiled/layouts/application.css', 'jquery.autocomplete', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/layouts/print.css', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/layouts/ie.css', :media => 'screen, projection'
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'rails', 'application'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'jquery.autocomplete', 'rails', 'application'
     = csrf_meta_tag
     = yield :head
   %body
@@ -47,6 +47,7 @@
             %li= link_to_unless_current "Compositions", compositions_path
           - if staff? || editor?
             %li= link_to_unless_current "People", people_path
+            %li= link_to_unless_current "Meetings", meetings_path
         #main
           %h2= @content_for_page_heading if @show_title
           - if flash[:notice]
@@ -56,4 +57,4 @@
     #footer
       #text
         :markdown
-          This website is in early alpha development; you may experience turbulence. Please let [someone](#{person_path(Person.chad)}) know if something is broken.
+          This website is in early alpha development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.
