@@ -30,6 +30,10 @@ module ApplicationHelper
   def staff?
     @user && @user.is_staff?
   end
+  
+  def member?
+    @user
+  end
 
   def the_editor_or_the_owner?(compo)
     @user && (@user.the_editor? || @user.name == compo.author)

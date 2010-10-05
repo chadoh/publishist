@@ -47,6 +47,7 @@
             %li= link_to_unless_current "Compositions", compositions_path
           - if staff? || editor?
             %li= link_to_unless_current "People", people_path
+          - if member?
             %li= link_to_unless_current "Meetings", meetings_path
         #main
           %h2= @content_for_page_heading if @show_title

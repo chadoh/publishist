@@ -19,6 +19,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def members_only
+    if !@user
+      flash[:notice] = "You have to sign up to see that page."
+      redirect_to root_url
+    end
+  end
+
   def staff_only
     if !@user || @user.ranks.blank?
       flash[:notice] = "Only staff can see that page."

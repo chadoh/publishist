@@ -1,5 +1,5 @@
 class MeetingsController < InheritedResources::Base
-  before_filter :staff_only
+  before_filter :members_only
   before_filter :attendance, :only => :show
 
 protected
