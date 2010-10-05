@@ -21,6 +21,7 @@ gem 'inherited_resources', '1.1.2'
 
 # Models
 gem 'matthuhiggins-foreigner', '0.7.1', :require => 'foreigner'
+gem 'acts_as_list', '~>0.1'
 
 group :development do
   gem 'rails3-generators'
