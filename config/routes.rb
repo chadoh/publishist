@@ -1,5 +1,7 @@
 Pc::Application.routes.draw do
 
+  resources :packets
+
   get "welcome/index"
 
   resources :meetings do

@@ -1,0 +1,2 @@
+class PacketsController < ApplicationController
+end

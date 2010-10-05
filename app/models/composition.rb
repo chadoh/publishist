@@ -1,5 +1,7 @@
 class Composition < ActiveRecord::Base
   belongs_to :author, :class_name => "Person"
+  has_many :packets, :dependent => :destroy
+  has_many :meetings, :through => :packets
 
   before_validation :untitled_if_blank
   before_validation :remove_ms_word_kruft

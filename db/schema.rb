@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101001025735) do
+ActiveRecord::Schema.define(:version => 20101005013747) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "meeting_id"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(:version => 20101001025735) do
   create_table "meetings", :force => true do |t|
     t.datetime "when"
     t.string   "question"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "packets", :force => true do |t|
+    t.integer  "meeting_id"
+    t.integer  "composition_id"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

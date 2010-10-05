@@ -6,6 +6,9 @@ class CompositionTest < ActiveSupport::TestCase
     @compo.save
   end
 
+  should have_many(:packets).dependent(:destroy)
+  should have_many(:meetings).through(:packets)
+
   should "add 'Anonymous' for author if field left blank" do
     assert_equal @compo.author_name, "Anonymous"
   end
