@@ -7,3 +7,4 @@ tmp/**/*
 .dropbox
 Icon?
 *.dat
+public/javascripts/jquery-1.4.1.min.js

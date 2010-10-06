@@ -24,6 +24,13 @@ class CompositionTest < ActiveSupport::TestCase
     assert_equal @compo.title, "untitled"
   end
 
+  should "remove kruft added by ms word" do
+    @compo.update_attributes :body => "<!--[if gte mso 9]><xml> <o:OfficeDocumentSettings> </style> <![endif]-->some text"
+    assert_equal @compo.body, "some text"
+    @compo.update_attributes :body => "<!--[if gte mso 9]><xml> <o:OfficeDocumentSettings> </style> <![endif]-->some text<!--[if gte mso 9]><xml> <o:OfficeDocumentSettings> </style> <![endif]-->"
+    assert_equal @compo.body, "some text"
+  end
+
   context "creating" do
     should "not allow both an association to a Person and the name &/or email fields to be filled out" do
       @user = Factory.create(:person)
