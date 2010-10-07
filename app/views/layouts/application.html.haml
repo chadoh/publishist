@@ -5,42 +5,33 @@
     %title= @content_for_title
     %link(rel="shortcut icon" href="/images/favicon.ico")
     = stylesheet_link_tag 'formtastic.css', 'compiled/screen', 'jquery.autocomplete', :media => 'screen, projection'
-    = stylesheet_link_tag 'compiled/layouts/print', :media => 'print'
+    = stylesheet_link_tag 'compiled/print', :media => 'print'
     /[if lt IE 8]
-      = stylesheet_link_tag 'compiled/layouts/ie.css', :media => 'screen, projection'
+      = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'jquery.autocomplete', 'rails', 'application'
     = csrf_meta_tag
     = yield :head
   %body
-    #root
-      #header
-        #text
-          %h1 Problem Child
-          %p= t 'subtitle'
-          %ul#account{ :class => ('sign_up' unless @user) }
-            - if @user
-              %li
-                %strong= link_to_unless_current @user.name, person_path(@user)
+    #page
+      %header{ :role => 'banner' }
+        %h1 Problem Child
+        %p= t 'subtitle'
+        -#%ul#account{ :class => ('sign_up' unless @user) }
+          - if @user
+            %li
+              %strong= link_to_unless_current @user.name, person_path(@user)
+            %li
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              = button_to "Sign out", @application_session, :method => :delete, :class => "link"
+          - else
+            %li
+              = link_to_unless_current "Sign in", new_session_path
+            - unless current_page? new_person_path
               %li
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                = button_to "Sign out", @application_session, :method => :delete, :class => "link"
-            - else
-              %li
-                = link_to_unless_current "Sign in", new_session_path
-              - unless current_page? new_person_path
-                %li
-                  &nbsp;&nbsp;|&nbsp;&nbsp;
-                  = link_to "Sign Up!", new_person_path, :class => "button"
-      #content
-        #aside
-          -##search_box
-            -#= form_tag('/#') do
-              -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark_on" }
-              -#%input{ :type => 'submit', :value => "Search!" }
-          -#%br
-          -#%hr
-          = yield :aside
-        %ul#nav
+                = link_to "Sign Up!", new_person_path, :class => "button"
+      %nav.site-nav{ :role => 'navigation' }
+        %ul
           %li= link_to_unless_current "About", root_path
           %li= link_to_unless_current "Submit", new_composition_path
           - if editor?
@@ -49,13 +40,21 @@
             %li= link_to_unless_current "People", people_path
           - if member?
             %li= link_to_unless_current "Meetings", meetings_path
-        #main
-          %h2= @content_for_page_heading if @show_title
+      #content{ :role => 'main' }
+        %aside
+          -##search_box
+            -#= form_tag('/#') do
+              -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark_on" }
+              -#%input{ :type => 'submit', :value => "Search!" }
+          -#%br
+          -#%hr
+          = yield :aside
+        %article{ :id => "#{@article_id}" }
+          %header
+            %h2= @content_for_page_heading if @show_title
           - if flash[:notice]
             #notice= flash[:notice]
           = yield
-      #root_footer
-    #footer
-      #text
+      %footer{ :role => 'contentinfo' }
         :markdown
           This website is in early alpha development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.
