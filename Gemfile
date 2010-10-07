@@ -7,6 +7,7 @@ gem 'redgreen'
 # Views
 gem 'haml', '3.0.18'
 gem 'compass', '0.10.5'
+gem 'compass-susy-plugin', '0.8.0'
 gem 'formtastic', '1.1.0'
 gem 'rdiscount'
 gem 'RedCloth'
