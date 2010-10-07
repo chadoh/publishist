@@ -1,12 +1,7 @@
 development: &DEFAULTS
   bucket: pcmag_dev
-<<<<<<< HEAD
   access_key_id: ENV['S3_KEY']
   secret_access_key: ENV['S3_SECRET']
-=======
-  access_key_id: AKIAI5KUQCHL7LCDKNXQ
-  secret_access_key: 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
->>>>>>> work on what the branch is intended for, you fool
 
 test:
   <<: *DEFAULTS

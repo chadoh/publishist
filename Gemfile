@@ -22,8 +22,6 @@ gem 'matthuhiggins-foreigner', '0.7.1', :require => 'foreigner'
 
 # Heroku
 gem 'hassle', :git => 'git://github.com/koppen/hassle.git', :group => :production
-gem 'aws-s3', '~> 0.6.2'
-gem 'paperclip', '~> 2.3.3'
 
 group :development do
   gem 'rails3-generators'
