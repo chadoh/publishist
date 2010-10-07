@@ -46,7 +46,7 @@ GEM
     builder (2.1.2)
     compass (0.10.5)
       haml (>= 3.0.4)
-    compass-susy-plugin (0.8.0)
+    compass-susy-plugin (0.8.1)
       compass (>= 0.10.0)
     configuration (1.1.0)
     erubis (2.6.6)
@@ -127,7 +127,7 @@ DEPENDENCIES
   RedCloth
   aws-s3 (= 0.6.2)
   compass (= 0.10.5)
-  compass-susy-plugin (= 0.8.0)
+  compass-susy-plugin (= 0.8.1)
   factory_girl_rails
   formtastic (= 1.1.0)
   gravtastic (= 2.2.0)
