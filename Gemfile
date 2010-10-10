@@ -21,9 +21,6 @@ gem 'inherited_resources', '1.1.2'
 # Models
 gem 'matthuhiggins-foreigner', '0.7.1', :require => 'foreigner'
 
-# Heroku
-gem 'hassle', :git => 'git://github.com/koppen/hassle.git', :group => :production
-
 group :development do
   gem 'rails3-generators'
   gem 'heroku_san', '0.2.4'
