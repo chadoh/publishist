@@ -1,0 +1,87 @@
+//** SCREEN STYLES **//
+
+// Imports --------------------------------------------------------------
+
+@import defaults
+@import compass/css3
+@import compass/layout/sticky-footer
+
+/* Layout --------------------------------------------------------------
+
++susy
+
+// change '.container' to match your HTML container element
+// or @extend it to apply multiple containers on your site.
+
+// show-grid loads a 64+16x24 grid image by default
+// For other grid settings, run `compass grid-img 30+10x20`
+// Where 30 is the column width, 10 is the gutter width,
+// and 20 is the (optional) line-height.
+
+/* Styles --------------------------------------------------------------
+
++sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'footer')
+
+#page
+  +container
+  //+show-grid('grid.png')
+
+  & > nav
+    +full
+    & > ul
+      +inline-block-list-container
+      +display-box
+      & > li
+        +inline-block-list-item
+        +adjust-font-size-to(20px, 2)
+        +box-flex(1)
+        +text-shadow($lgray, 1px, 1px, 2px)
+        text-align: center
+        &:first-child
+          text-align: left
+        &:last-child
+          text-align: right
+        &.current
+          +text-shadow($lgray, 1px, 1px, 2px)
+          color: $orange
+          text-decoration: underline overline line-through
+        & > a
+          color: $yellow
+          text-decoration: underline overline
+          &:hover
+            text-decoration: underline overline line-through
+
+        & > ul#account
+          +no-bullets
+          +adjust-font-size-to(13px, 0.7)
+
+  & > header
+    +full
+    background-color: $blue
+    text-align: center
+    +border-radius(20px 0)
+    +linear-gradient(color-stops(lighten($blue, 15%), $blue))
+
+    h1
+      +adjust-font-size-to(31px)
+      +trailer(0, 21px)
+
+  & > aside
+    +columns($sidebar)
+    +alpha
+
+  & > article
+    +columns($article)
+    +omega
+
+footer
+  +container
+  & > #footer
+    +full
+    +linear-gradient(color-stops(lighten($green, 5%), darken($green, 10%)))
+    +border-radius(0 20px)
+    +adjust-font-size-to(14px, 3)
+    text-align: center
+    background-color: $green
+    a
+      +links(yellow)

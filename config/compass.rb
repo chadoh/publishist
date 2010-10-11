@@ -1,3 +1,4 @@
+require 'susy'
 # This configuration file works with both the Compass command line tool and within Rails.
 # Require any additional compass plugins here.
 project_type = :rails
@@ -8,4 +9,4 @@ css_dir = "public/stylesheets/compiled"
 sass_dir = "app/stylesheets"
 environment = Compass::AppIntegration::Rails.env
 # To enable relative paths to assets via compass helper functions. Uncomment:
-# relative_assets = true
+#relative_assets = true

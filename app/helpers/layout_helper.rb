@@ -6,6 +6,7 @@ module LayoutHelper
   def title(page_title, show_title = true)
     @content_for_title = page_title.to_s + " | Problem Child"
     @content_for_page_heading = page_title.to_s
+    @article_id = page_title.parameterize
     @show_title = show_title
   end
   

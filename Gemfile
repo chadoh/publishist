@@ -7,6 +7,7 @@ gem 'redgreen'
 # Views
 gem 'haml', '3.0.18'
 gem 'compass', '0.10.5'
+gem 'compass-susy-plugin', '0.8.1'
 gem 'formtastic', '1.1.0'
 gem 'rdiscount'
 gem 'RedCloth'
@@ -19,9 +20,6 @@ gem 'inherited_resources', '1.1.2'
 
 # Models
 gem 'matthuhiggins-foreigner', '0.7.1', :require => 'foreigner'
-
-# Heroku
-gem 'hassle', :git => 'git://github.com/koppen/hassle.git', :group => :production
 
 group :development do
   gem 'rails3-generators'
