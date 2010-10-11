@@ -1,121 +1,479 @@
-/*
-Syntax error: Undefined mixin 'input-styles'.
-        on line 14 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass, in `input-styles'
-        from line 14 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass
-        from line 11 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/./_defaults.sass
-        from line 9 of app/stylesheets/print.sass
+/* Reset --------------------------------------------------------------*/
+/* line 14, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
 
-9: @import defaults
-10: 
-11: /* Print Defaults --------------------------------------------------------------
-12: 
-13: nav
-14:   display: none
-15: 
-16: *
-17:   background: transparent !important
-18:   color: #444444 !important
-19:   float: none !important
+/* line 17, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
+  line-height: 1;
+  color: black;
+  background: white;
+}
 
-Backtrace:
-/Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass:14:in `input-styles'
-/Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass:14
-/Users/chad/Dropbox/Sites/pc/app/stylesheets/./_defaults.sass:11
-app/stylesheets/print.sass:9
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/mixin_node.rb:74:in `perform!'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `map'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:317:in `perform!'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/rule_node.rb:191:in `perform!'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `map'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/import_node.rb:78:in `perform!'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/import_node.rb:64:in `_perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:37:in `perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `map'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/import_node.rb:78:in `perform!'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/import_node.rb:64:in `_perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:37:in `perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `map'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:317:in `perform!'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:59:in `perform!'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:37:in `perform'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:29:in `render'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:220:in `update_stylesheet'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:85:in `update_stylesheets'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:78:in `each'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:78:in `update_stylesheets'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:76:in `each'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:76:in `update_stylesheets'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:50:in `check_for_updates'
-/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin/rack.rb:40:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/head.rb:14:in `call'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/methodoverride.rb:24:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/flash.rb:182:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/cookies.rb:287:in `call'
-/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/query_cache.rb:32:in `call'
-/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
-/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/query_cache.rb:12:in `cache'
-/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/query_cache.rb:31:in `call'
-/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb:355:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
-/Library/Ruby/Gems/1.8/gems/activesupport-3.0.0/lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/sendfile.rb:107:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/show_exceptions.rb:46:in `call'
-/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/rack/logger.rb:13:in `call'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/runtime.rb:17:in `call'
-/Library/Ruby/Gems/1.8/gems/activesupport-3.0.0/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/lock.rb:11:in `call'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/lock.rb:11:in `synchronize'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/lock.rb:11:in `call'
-/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/static.rb:30:in `call'
-/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/application.rb:168:in `call'
-/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/application.rb:77:in `send'
-/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/application.rb:77:in `method_missing'
-/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/rack/log_tailer.rb:14:in `call'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/content_length.rb:13:in `call'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/handler/webrick.rb:52:in `service'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
-/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/handler/webrick.rb:13:in `run'
-/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/server.rb:213:in `start'
-/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/commands/server.rb:65:in `start'
-/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/commands.rb:30
-/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/commands.rb:27:in `tap'
-/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/commands.rb:27
-script/rails:6:in `require'
-script/rails:6
-*/
-body:before {
+/* line 19, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 21, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+
+/* line 23, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 25, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: "" "";
+}
+/* line 96, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+}
+
+/* line 27, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* HTML5 Reset --------------------------------------------------------------*/
+/* line 107, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* Typography -------------------------------------------------------------- */
+/* The following classes are for use with @extend. */
+/* line 19, ../../../app/stylesheets/_defaults.sass */
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 23, ../../../app/stylesheets/_defaults.sass */
+.serif, body {
+  font-family: Cambria, Georgia, serif;
+}
+
+/* line 26, ../../../app/stylesheets/_defaults.sass */
+.sans {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 29, ../../../app/stylesheets/_defaults.sass */
+.mono, pre, code, tt {
+  font-family: "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, Courier, monospace, sans-serif;
+}
+
+/* line 32, ../../../app/stylesheets/_defaults.sass */
+.caps, .allcaps, h1, h2, caption, .smallcaps, h4 {
+  letter-spacing: 0.1em;
+}
+
+/* line 35, ../../../app/stylesheets/_defaults.sass */
+.allcaps, h1, h2, caption {
+  text-transform: uppercase;
+}
+
+/* line 39, ../../../app/stylesheets/_defaults.sass */
+.smallcaps, h4 {
+  font-variant: small-caps;
+}
+
+/* Body -------------------------------------------------------------- */
+/* line 45, ../../../app/stylesheets/_defaults.sass */
+body {
+  color: #4c4c4c;
+}
+
+/* Selected Text -------------------------------------------------------------- */
+/* -moz- must be declared separately */
+/* line 58, ../../../app/stylesheets/_defaults.sass */
+::-moz-selection {
+  color: white;
+  background: #cfb309;
+  text-shadow: none;
+}
+
+/* line 63, ../../../app/stylesheets/_defaults.sass */
+::selection {
+  color: white;
+  background: #cfb309;
+  text-shadow: none;
+}
+
+/* Links -------------------------------------------------------------- */
+/* line 71, ../../../app/stylesheets/_defaults.sass */
+a:link, a:visited {
+  color: #db8322;
+  text-decoration: none;
+}
+/* line 74, ../../../app/stylesheets/_defaults.sass */
+a:link, a:visited, a:hover, a:active {
+  outline: none;
+}
+/* line 76, ../../../app/stylesheets/_defaults.sass */
+a:focus, a:hover {
+  color: #8bc7c7;
+  text-decoration: none;
+}
+/* line 79, ../../../app/stylesheets/_defaults.sass */
+a:active {
+  color: #c78b8b;
+}
+/* line 81, ../../../app/stylesheets/_defaults.sass */
+a:focus {
+  outline: thin dotted;
+}
+
+/* Headings -------------------------------------------------------------- */
+/* line 89, ../../../app/stylesheets/_defaults.sass */
+h2, h3, h4, h5, h6 {
+  margin-bottom: 1.5em;
+}
+
+/* line 92, ../../../app/stylesheets/_defaults.sass */
+h1 {
+  font-size: 1.313em;
+  line-height: 1.143em;
+  margin-bottom: 1.143em;
+}
+
+/* line 96, ../../../app/stylesheets/_defaults.sass */
+h1, h2 {
+  text-shadow: silver 1px 1px 2px;
+}
+
+/* line 100, ../../../app/stylesheets/_defaults.sass */
+h3 {
+  font-weight: bold;
+}
+
+/* line 103, ../../../app/stylesheets/_defaults.sass */
+h4 {
+  text-transform: lowercase;
+}
+
+/* line 107, ../../../app/stylesheets/_defaults.sass */
+h5, h6 {
+  font-style: italic;
+}
+
+/* Inline -------------------------------------------------------------- */
+/* line 112, ../../../app/stylesheets/_defaults.sass */
+cite, em, dfn, address, i {
+  font-style: italic;
+}
+
+/* line 115, ../../../app/stylesheets/_defaults.sass */
+strong, dfn, b {
+  font-weight: bold;
+}
+
+/* line 118, ../../../app/stylesheets/_defaults.sass */
+sup, sub {
+  font-size: smaller;
+  line-height: 0;
+}
+
+/* line 122, ../../../app/stylesheets/_defaults.sass */
+sup {
+  vertical-align: super;
+}
+
+/* line 125, ../../../app/stylesheets/_defaults.sass */
+sub {
+  vertical-align: sub;
+}
+
+/* line 128, ../../../app/stylesheets/_defaults.sass */
+abbr, acronym {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+/* line 132, ../../../app/stylesheets/_defaults.sass */
+ins {
+  text-decoration: underline;
+}
+
+/* line 135, ../../../app/stylesheets/_defaults.sass */
+del {
+  text-decoration: line-through;
+}
+
+/* line 138, ../../../app/stylesheets/_defaults.sass */
+mark {
+  background: #ffff99;
+  background-color: rgba(255, 255, 0, 0.5);
+  text-shadow: none;
+}
+
+/* line 143, ../../../app/stylesheets/_defaults.sass */
+small {
+  font-size: 0.75em;
+  line-height: 2em;
+}
+
+/* line 146, ../../../app/stylesheets/_defaults.sass */
+q {
+  font-style: italic;
+}
+/* line 148, ../../../app/stylesheets/_defaults.sass */
+q em {
+  font-style: normal;
+}
+
+/* Block -------------------------------------------------------------- */
+/* line 156, ../../../app/stylesheets/_defaults.sass */
+p {
+  margin-bottom: 1.5em;
+}
+
+/* line 159, ../../../app/stylesheets/_defaults.sass */
+pre {
+  margin: 1.5em;
   white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: Undefined mixin 'input-styles'.\A         on line 14 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass, in `input-styles'\A         from line 14 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass\A         from line 11 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/./_defaults.sass\A         from line 9 of app/stylesheets/print.sass\A \A 9: @import defaults\A 10: \A 11: /* Print Defaults --------------------------------------------------------------\A 12: \A 13: nav\A 14:   display: none\A 15: \A 16: *\A 17:   background: transparent !important\A 18:   color: #444444 !important\A 19:   float: none !important"; }
+  white-space: pre-wrap;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+/* line 166, ../../../app/stylesheets/_defaults.sass */
+blockquote {
+  margin: 1.5em;
+  font-style: italic;
+}
+
+/* Replaced -------------------------------------------------------------- */
+/* line 172, ../../../app/stylesheets/_defaults.sass */
+img {
+  vertical-align: text-bottom;
+  max-width: 100%;
+  -ms-interpolation-mode: bicubic;
+}
+
+/* Lists -------------------------------------------------------------- */
+/* line 179, ../../../app/stylesheets/_defaults.sass */
+ol, ul, dl {
+  margin-bottom: 1.5em;
+  margin-left: 1.5em;
+}
+
+/* line 183, ../../../app/stylesheets/_defaults.sass */
+ol {
+  list-style: decimal;
+}
+
+/* line 186, ../../../app/stylesheets/_defaults.sass */
+ul {
+  list-style: disc;
+}
+/* line 188, ../../../app/stylesheets/_defaults.sass */
+li ul {
+  list-style-type: circle;
+}
+
+/* line 191, ../../../app/stylesheets/_defaults.sass */
+dt {
+  margin-top: 1.5em;
+  font-style: italic;
+}
+
+/* line 195, ../../../app/stylesheets/_defaults.sass */
+dd {
+  padding-left: 1.5em;
+}
+
+/* Tables -------------------------------------------------------------- */
+/* tables still need 'cellspacing="0"' in the markup */
+/* line 201, ../../../app/stylesheets/_defaults.sass */
+table {
+  margin-bottom: 1.5em;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* line 207, ../../../app/stylesheets/_defaults.sass */
+table, td, th {
+  vertical-align: top;
+}
+
+/* line 210, ../../../app/stylesheets/_defaults.sass */
+th, thead th {
+  font-weight: bold;
+}
+
+/* line 213, ../../../app/stylesheets/_defaults.sass */
+th, td, caption {
+  padding: 0.75em;
+  text-align: left;
+  font-weight: normal;
+}
+
+/* line 218, ../../../app/stylesheets/_defaults.sass */
+table, th {
+  border-bottom-style: solid;
+  border-bottom-width: 0.063em;
+  padding-bottom: 0.688em;
+}
+
+/* line 221, ../../../app/stylesheets/_defaults.sass */
+tfoot {
+  font-size: 0.875em;
+  line-height: 1.714em;
+}
+
+/* Forms -------------------------------------------------------------- */
+/* line 229, ../../../app/stylesheets/_defaults.sass */
+fieldset {
+  margin-bottom: 1.5em;
+  border-style: solid;
+  border-width: 0.063em;
+  padding: 1.438em;
+}
+
+/* line 233, ../../../app/stylesheets/_defaults.sass */
+legend {
+  font-size: 1.125em;
+  line-height: 1.333em;
+  font-weight: bold;
+}
+
+/* line 237, ../../../app/stylesheets/_defaults.sass */
+input[type="radio"], input[type="checkbox"] {
+  vertical-align: baseline;
+}
+
+/* line 240, ../../../app/stylesheets/_defaults.sass */
+label, input[type=button], input[type=submit], button {
+  cursor: pointer;
+}
+
+/* line 243, ../../../app/stylesheets/_defaults.sass */
+label {
+  font-weight: bold;
+}
+
+/* line 248, ../../../app/stylesheets/_defaults.sass */
+.textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.875em;
+  line-height: 1.714em;
+  border-style: solid;
+  border-width: 0.071em;
+  padding: 0.357em;
+  margin-bottom: 0.75em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 0;
+  border-color: #4c4c4c;
+  height: 2.571em;
+}
+
+/* line 259, ../../../app/stylesheets/_defaults.sass */
+textarea {
+  height: 11.143em;
+  vertical-align: text-bottom;
+}
+
+/* line 270, ../../../app/stylesheets/_defaults.sass */
+input[type=search] {
+  -webkit-appearance: none;
+}
+/* line 272, ../../../app/stylesheets/_defaults.sass */
+input[type=search]::-webkit-search-decoration {
+  display: none;
+}
+
+/* line 275, ../../../app/stylesheets/_defaults.sass */
+button {
+  width: auto;
+  overflow: visible;
+}
+
+/* Print Defaults -------------------------------------------------------------- */
+/* line 13, app/stylesheets/print.sass */
+nav {
+  display: none;
+}
+
+/* line 16, app/stylesheets/print.sass */
+* {
+  background: transparent !important;
+  color: #444444 !important;
+  float: none !important;
+  text-shadow: none !important;
+}
+
+/* line 22, app/stylesheets/print.sass */
+body {
+  font-family: Cambria, Georgia, serif;
+  font-size: 12pt;
+  background: white;
+  color: black;
+}
+
+/* line 29, app/stylesheets/print.sass */
+a:link, a:visited {
+  color: #444444 !important;
+  text-decoration: underline;
+}
+/* line 32, app/stylesheets/print.sass */
+a:after {
+  content: " (" attr(href) ") ";
+  font-size: smaller;
+}
+
+/* line 36, app/stylesheets/print.sass */
+abbr:after {
+  content: " (" attr(title) ")";
+  font-size: smaller;
+}
+
+/* line 40, app/stylesheets/print.sass */
+pre, blockquote, img {
+  page-break-inside: avoid;
+}
+
+@page {
+  margin: 0.5cm;
+}
+
+/* line 47, app/stylesheets/print.sass */
+p, h2, h3 {
+  orphans: 3;
+  widows: 3;
+}
+
+/* line 51, app/stylesheets/print.sass */
+h2, h3 {
+  page-break-after: avoid;
+}

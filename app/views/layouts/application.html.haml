@@ -34,21 +34,21 @@
                 %li
                   = link_to_unless_current "Sign in", new_session_path
                 %li
-                  = link_to_unless_current "Sign Up!", new_person_path, :class => "button"
+                  = link_to_unless_current "Sign Up!", new_person_path
       %header{ :role => 'banner' }
         %h1 Problem Child
         %p= t 'subtitle'
-      %aside
+      %aside{ :id => "#{@article_id}" }
         -##search_box
           -#= form_tag('/#') do
-            -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark_on" }
+            -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark" }
             -#%input{ :type => 'submit', :value => "Search!" }
         -#%br
         -#%hr
         = yield :aside
       %article{ :id => "#{@article_id}", :role => 'main' }
         %header
-          %h2= @content_for_page_heading if @show_title
+          %h1= @content_for_page_heading if @show_title
         - if flash[:notice]
           #notice= flash[:notice]
         = yield

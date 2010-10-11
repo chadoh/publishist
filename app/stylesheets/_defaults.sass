@@ -8,11 +8,13 @@
 // Imports --------------------------------------------------------------
 
 @import base
-@import form
 @import susy/reset
 
 /* Typography --------------------------------------------------------------
 /* The following classes are for use with @extend.
+
+$default-text-shadow-color: $lgray
+$default-text-shadow-blur: 2px
 
 html
   text-rendering: optimizeLegibility
@@ -93,6 +95,7 @@ h1
 
 h1, h2
   @extend .allcaps
+  +text-shadow
 
 h3
   font-weight: bold

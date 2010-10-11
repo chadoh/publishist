@@ -3,6 +3,7 @@
 // Imports --------------------------------------------------------------
 
 @import defaults
+@import form
 @import compass/css3
 @import compass/layout/sticky-footer
 
@@ -35,14 +36,14 @@
         +inline-block-list-item
         +adjust-font-size-to(20px, 2)
         +box-flex(1)
-        +text-shadow($lgray, 1px, 1px, 2px)
+        +text-shadow
         text-align: center
         &:first-child
           text-align: left
         &:last-child
           text-align: right
         &.current
-          +text-shadow($lgray, 1px, 1px, 2px)
+          +text-shadow
           color: $orange
           text-decoration: underline overline line-through
         & > a
@@ -68,14 +69,15 @@
 
   & > aside
     +columns($sidebar)
-    +alpha
+    +omega
 
   & > article
     +columns($article)
-    +omega
+    +alpha
 
 footer
   +container
+  //margin-top: $base-rhythm-unit * 4
   & > #footer
     +full
     +linear-gradient(color-stops(lighten($green, 5%), darken($green, 10%)))
