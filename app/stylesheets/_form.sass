@@ -1,0 +1,82 @@
+// Only apply the blueprint form styles to forms with
+// a class of "bp". This makes it easier to style
+// forms from scratch if you need to.
+
+form, form.bp, textarea, input[type=text], input[type=password], form > fieldset > ol > li
+  width: 100% !important
+  max-width: 100% !important
+
+.watermark_on
+  color: $lgray
+  font-style: italic
+
+textarea, input[type=text], input[type=password]
+  +input-styles
+
+form.formtastic fieldset.buttons
+  padding: 0
+
+input[type=submit], button, a.button
+  background: $orange
+  +linear-gradient(color-stops($orange + #333, $orange - #111))
+  border: none
+  font-size: 140% !important
+  padding: 3px 9px !important
+  text-decoration: none
+  +box-shadow($dgray, 1px, 1px, 2px)
+  &:hover
+    +box-shadow($dgray, 0, 0, 2px)
+    color: black
+  &:active
+    +box-shadow($dgray, 1px, 1px, 1px, 0, inset)
+    color: black
+  &.link
+    font-size: 100% !important
+    background: transparent
+    +box-shadow(#000, 0, 0, 0)
+    cursor: pointer
+    padding: 0 !important
+    display: inline
+
+form.button_to
+  display: inline
+  div
+    display: inline
+
+a.button
+  background: $yellow
+  +linear-gradient(color-stops($yellow + #333, $yellow - #111))
+a, input[type=submit].link
+  text-decoration: underline
+  color: black
+  &:hover
+    color: $dgray
+  &:active
+    color: $orange
+
+li.cancel
+  margin-left: 2em !important
+form.formtastic fieldset > ol > li p.inline-errors
+  margin-left: 0
+
+#search_box
+  width: $aside * $blueprint_grid_width + ($aside - 1) * $blueprint_grid_margin - 30px
+  margin: 0 auto
+  input[type="submit"]
+    display: none
+
+#errorExplanation, #notice
+  border: 1px solid $error
+  padding: .5em
+  background: $error + #888
+  margin-bottom: 20px
+  width: 100%
+  h3
+    font-size: 1.5em
+  ul
+    list-style: none inside none
+
+#notice
+  margin-top: 1em
+  border-color: $blue
+  background-color: $blue + #555

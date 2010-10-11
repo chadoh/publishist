@@ -1,646 +1,121 @@
-/* Reset --------------------------------------------------------------*/
-/* line 14, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-}
+/*
+Syntax error: Undefined mixin 'input-styles'.
+        on line 14 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass, in `input-styles'
+        from line 14 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass
+        from line 11 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/./_defaults.sass
+        from line 5 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/screen.sass
 
-/* line 17, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-body {
-  line-height: 1;
-  color: black;
-  background: white;
-}
+9: /* Layout --------------------------------------------------------------
+10: 
+11: +susy
+12: 
+13: // change '.container' to match your HTML container element
+14: // or @extend it to apply multiple containers on your site.
+15: 
+16: // show-grid loads a 64+16x24 grid image by default
+17: // For other grid settings, run `compass grid-img 30+10x20`
+18: // Where 30 is the column width, 10 is the gutter width,
+19: // and 20 is the (optional) line-height.
 
-/* line 19, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-ol, ul {
-  list-style: none;
-}
-
-/* line 21, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  vertical-align: middle;
-}
-
-/* line 23, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-
-/* line 25, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-q, blockquote {
-  quotes: "" "";
-}
-/* line 96, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-q:before, q:after, blockquote:before, blockquote:after {
-  content: "";
-}
-
-/* line 27, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-a img {
-  border: none;
-}
-
-/* HTML5 Reset --------------------------------------------------------------*/
-/* line 107, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
-  display: block;
-}
-
-/* Typography -------------------------------------------------------------- */
-/* The following classes are for use with @extend. */
-/* line 16, ../../../app/stylesheets/_defaults.sass */
-html {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* line 20, ../../../app/stylesheets/_defaults.sass */
-.serif, body {
-  font-family: Cambria, Georgia, serif;
-}
-
-/* line 23, ../../../app/stylesheets/_defaults.sass */
-.sans {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-/* line 26, ../../../app/stylesheets/_defaults.sass */
-.mono, pre, code, tt {
-  font-family: "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, Courier, monospace, sans-serif;
-}
-
-/* line 29, ../../../app/stylesheets/_defaults.sass */
-.caps, .allcaps, h1, h2, caption, .smallcaps, h4 {
-  letter-spacing: 0.1em;
-}
-
-/* line 32, ../../../app/stylesheets/_defaults.sass */
-.allcaps, h1, h2, caption {
-  text-transform: uppercase;
-}
-
-/* line 36, ../../../app/stylesheets/_defaults.sass */
-.smallcaps, h4 {
-  font-variant: small-caps;
-}
-
-/* Body -------------------------------------------------------------- */
-/* line 42, ../../../app/stylesheets/_defaults.sass */
-body {
-  color: #4c4c4c;
-}
-
-/* Selected Text -------------------------------------------------------------- */
-/* -moz- must be declared separately */
-/* line 55, ../../../app/stylesheets/_defaults.sass */
-::-moz-selection {
-  color: white;
-  background: #cfb309;
-  text-shadow: none;
-}
-
-/* line 60, ../../../app/stylesheets/_defaults.sass */
-::selection {
-  color: white;
-  background: #cfb309;
-  text-shadow: none;
-}
-
-/* Links -------------------------------------------------------------- */
-/* line 68, ../../../app/stylesheets/_defaults.sass */
-a:link, a:visited {
-  color: #db8322;
-  text-decoration: none;
-}
-/* line 71, ../../../app/stylesheets/_defaults.sass */
-a:link, a:visited, a:hover, a:active {
-  outline: none;
-}
-/* line 73, ../../../app/stylesheets/_defaults.sass */
-a:focus, a:hover {
-  color: #8bc7c7;
-  text-decoration: none;
-}
-/* line 76, ../../../app/stylesheets/_defaults.sass */
-a:active {
-  color: #c78b8b;
-}
-/* line 78, ../../../app/stylesheets/_defaults.sass */
-a:focus {
-  outline: thin dotted;
-}
-
-/* Headings -------------------------------------------------------------- */
-/* line 86, ../../../app/stylesheets/_defaults.sass */
-h2, h3, h4, h5, h6 {
-  margin-bottom: 1.5em;
-}
-
-/* line 89, ../../../app/stylesheets/_defaults.sass */
-h1 {
-  font-size: 1.313em;
-  line-height: 1.143em;
-  margin-bottom: 1.143em;
-}
-
-/* line 96, ../../../app/stylesheets/_defaults.sass */
-h3 {
-  font-weight: bold;
-}
-
-/* line 99, ../../../app/stylesheets/_defaults.sass */
-h4 {
-  text-transform: lowercase;
-}
-
-/* line 103, ../../../app/stylesheets/_defaults.sass */
-h5, h6 {
-  font-style: italic;
-}
-
-/* Inline -------------------------------------------------------------- */
-/* line 108, ../../../app/stylesheets/_defaults.sass */
-cite, em, dfn, address, i {
-  font-style: italic;
-}
-
-/* line 111, ../../../app/stylesheets/_defaults.sass */
-strong, dfn, b {
-  font-weight: bold;
-}
-
-/* line 114, ../../../app/stylesheets/_defaults.sass */
-sup, sub {
-  font-size: smaller;
-  line-height: 0;
-}
-
-/* line 118, ../../../app/stylesheets/_defaults.sass */
-sup {
-  vertical-align: super;
-}
-
-/* line 121, ../../../app/stylesheets/_defaults.sass */
-sub {
-  vertical-align: sub;
-}
-
-/* line 124, ../../../app/stylesheets/_defaults.sass */
-abbr, acronym {
-  border-bottom: 1px dotted;
-  cursor: help;
-}
-
-/* line 128, ../../../app/stylesheets/_defaults.sass */
-ins {
-  text-decoration: underline;
-}
-
-/* line 131, ../../../app/stylesheets/_defaults.sass */
-del {
-  text-decoration: line-through;
-}
-
-/* line 134, ../../../app/stylesheets/_defaults.sass */
-mark {
-  background: #ffff99;
-  background-color: rgba(255, 255, 0, 0.5);
-  text-shadow: none;
-}
-
-/* line 139, ../../../app/stylesheets/_defaults.sass */
-small {
-  font-size: 0.75em;
-  line-height: 2em;
-}
-
-/* line 142, ../../../app/stylesheets/_defaults.sass */
-q {
-  font-style: italic;
-}
-/* line 144, ../../../app/stylesheets/_defaults.sass */
-q em {
-  font-style: normal;
-}
-
-/* Block -------------------------------------------------------------- */
-/* line 152, ../../../app/stylesheets/_defaults.sass */
-p {
-  margin-bottom: 1.5em;
-}
-
-/* line 155, ../../../app/stylesheets/_defaults.sass */
-pre {
-  margin: 1.5em;
+Backtrace:
+/Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass:14:in `input-styles'
+/Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass:14
+/Users/chad/Dropbox/Sites/pc/app/stylesheets/./_defaults.sass:11
+/Users/chad/Dropbox/Sites/pc/app/stylesheets/screen.sass:5
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/mixin_node.rb:74:in `perform!'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `map'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:317:in `perform!'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/rule_node.rb:191:in `perform!'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `map'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/import_node.rb:78:in `perform!'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/import_node.rb:64:in `_perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:37:in `perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `map'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/import_node.rb:78:in `perform!'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/import_node.rb:64:in `_perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:37:in `perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `map'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:326:in `perform_children'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:317:in `perform!'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:59:in `perform!'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:305:in `_perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/node.rb:213:in `perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:37:in `perform'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/tree/root_node.rb:29:in `render'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:220:in `update_stylesheet'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:85:in `update_stylesheets'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:78:in `each'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:78:in `update_stylesheets'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:76:in `each'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:76:in `update_stylesheets'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin.rb:50:in `check_for_updates'
+/Library/Ruby/Gems/1.8/gems/haml-3.0.18/lib/sass/plugin/rack.rb:40:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/head.rb:14:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/methodoverride.rb:24:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/flash.rb:182:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/cookies.rb:287:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/query_cache.rb:32:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/query_cache.rb:12:in `cache'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/query_cache.rb:31:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb:355:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.0.0/lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/sendfile.rb:107:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/show_exceptions.rb:46:in `call'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/rack/logger.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/runtime.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.0.0/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/lock.rb:11:in `synchronize'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.0/lib/action_dispatch/middleware/static.rb:30:in `call'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/application.rb:168:in `call'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/application.rb:77:in `send'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/application.rb:77:in `method_missing'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/rack/log_tailer.rb:14:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/content_length.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/handler/webrick.rb:52:in `service'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/handler/webrick.rb:13:in `run'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.1/lib/rack/server.rb:213:in `start'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/commands/server.rb:65:in `start'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/commands.rb:30
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/commands.rb:27:in `tap'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.0/lib/rails/commands.rb:27
+script/rails:6:in `require'
+script/rails:6
+*/
+body:before {
   white-space: pre;
-  white-space: pre-wrap;
-  white-space: pre-line;
-  word-wrap: break-word;
-}
-
-/* line 162, ../../../app/stylesheets/_defaults.sass */
-blockquote {
-  margin: 1.5em;
-  font-style: italic;
-}
-
-/* Replaced -------------------------------------------------------------- */
-/* line 168, ../../../app/stylesheets/_defaults.sass */
-img {
-  vertical-align: text-bottom;
-  max-width: 100%;
-  -ms-interpolation-mode: bicubic;
-}
-
-/* Lists -------------------------------------------------------------- */
-/* line 175, ../../../app/stylesheets/_defaults.sass */
-ol, ul, dl {
-  margin-bottom: 1.5em;
-  margin-left: 1.5em;
-}
-
-/* line 179, ../../../app/stylesheets/_defaults.sass */
-ol {
-  list-style: decimal;
-}
-
-/* line 182, ../../../app/stylesheets/_defaults.sass */
-ul {
-  list-style: disc;
-}
-/* line 184, ../../../app/stylesheets/_defaults.sass */
-li ul {
-  list-style-type: circle;
-}
-
-/* line 187, ../../../app/stylesheets/_defaults.sass */
-dt {
-  margin-top: 1.5em;
-  font-style: italic;
-}
-
-/* line 191, ../../../app/stylesheets/_defaults.sass */
-dd {
-  padding-left: 1.5em;
-}
-
-/* Tables -------------------------------------------------------------- */
-/* tables still need 'cellspacing="0"' in the markup */
-/* line 197, ../../../app/stylesheets/_defaults.sass */
-table {
-  margin-bottom: 1.5em;
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-/* line 203, ../../../app/stylesheets/_defaults.sass */
-table, td, th {
-  vertical-align: top;
-}
-
-/* line 206, ../../../app/stylesheets/_defaults.sass */
-th, thead th {
-  font-weight: bold;
-}
-
-/* line 209, ../../../app/stylesheets/_defaults.sass */
-th, td, caption {
-  padding: 0.75em;
-  text-align: left;
-  font-weight: normal;
-}
-
-/* line 214, ../../../app/stylesheets/_defaults.sass */
-table, th {
-  border-bottom-style: solid;
-  border-bottom-width: 0.063em;
-  padding-bottom: 0.688em;
-}
-
-/* line 217, ../../../app/stylesheets/_defaults.sass */
-tfoot {
-  font-size: 0.875em;
-  line-height: 1.714em;
-}
-
-/* Forms -------------------------------------------------------------- */
-/* line 225, ../../../app/stylesheets/_defaults.sass */
-fieldset {
-  margin-bottom: 1.5em;
-  border-style: solid;
-  border-width: 0.063em;
-  padding: 1.438em;
-}
-
-/* line 229, ../../../app/stylesheets/_defaults.sass */
-legend {
-  font-size: 1.125em;
-  line-height: 1.333em;
-  font-weight: bold;
-}
-
-/* line 233, ../../../app/stylesheets/_defaults.sass */
-input[type="radio"], input[type="checkbox"] {
-  vertical-align: baseline;
-}
-
-/* line 236, ../../../app/stylesheets/_defaults.sass */
-label, input[type=button], input[type=submit], button {
-  cursor: pointer;
-}
-
-/* line 239, ../../../app/stylesheets/_defaults.sass */
-label {
-  font-weight: bold;
-}
-
-/* line 244, ../../../app/stylesheets/_defaults.sass */
-.textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.875em;
-  line-height: 1.714em;
-  border-style: solid;
-  border-width: 0.071em;
-  padding: 0.357em;
-  margin-bottom: 0.75em;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-  margin-top: 0;
-  border-color: #4c4c4c;
-  height: 2.571em;
-}
-
-/* line 255, ../../../app/stylesheets/_defaults.sass */
-textarea {
-  height: 11.143em;
-  vertical-align: text-bottom;
-}
-
-/* line 266, ../../../app/stylesheets/_defaults.sass */
-input[type=search] {
-  -webkit-appearance: none;
-}
-/* line 268, ../../../app/stylesheets/_defaults.sass */
-input[type=search]::-webkit-search-decoration {
-  display: none;
-}
-
-/* line 271, ../../../app/stylesheets/_defaults.sass */
-button {
-  width: auto;
-  overflow: visible;
-}
-
-/* Layout -------------------------------------------------------------- */
-/* line 29, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-susy-plugin-0.8.1/sass/susy/_vertical_rhythm.scss */
-body {
-  font-size: 100%;
-  line-height: 1.5em;
-}
-
-/* line 33, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-susy-plugin-0.8.1/sass/susy/_vertical_rhythm.scss */
-html > body {
-  font-size: 16px;
-}
-
-/* Styles -------------------------------------------------------------- */
-/* line 10, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
-html, body {
-  height: 100%;
-}
-
-/* line 12, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
-#page {
-  clear: both;
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin-bottom: -6em;
-}
-/* line 18, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
-#page #page-footer {
-  height: 6em;
-}
-
-/* line 20, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
-footer {
-  clear: both;
-  position: relative;
-  height: 6em;
-}
-
-/* line 25, ../../../app/stylesheets/screen.sass */
-#page {
-  *zoom: 1;
-  margin-left: auto;
-  margin-right: auto;
-  width: 56.5em;
-  max-width: 100%;
-}
-/* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
-#page:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  clear: both;
-  overflow: hidden;
-  visibility: hidden;
-}
-/* line 29, ../../../app/stylesheets/screen.sass */
-#page > nav {
-  clear: both;
-  margin-right: 0.885%;
-  margin-left: 0.885%;
-}
-/* line 31, ../../../app/stylesheets/screen.sass */
-#page > nav > ul {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  overflow: hidden;
-  *zoom: 1;
-  display: -moz-box;
-  display: -webkit-box;
-  display: box;
-}
-/* line 34, ../../../app/stylesheets/screen.sass */
-#page > nav > ul > li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0px;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *display: inline;
-  *vertical-align: auto;
-  white-space: nowrap;
-  font-size: 1.25em;
-  line-height: 2.4em;
-  -moz-box-flex: 1;
-  -webkit-box-flex: 1;
-  box-flex: 1;
-  display: block;
-  text-shadow: silver 1px 1px 2px;
-  text-align: center;
-}
-/* line 40, ../../../app/stylesheets/screen.sass */
-#page > nav > ul > li:first-child {
-  text-align: left;
-}
-/* line 42, ../../../app/stylesheets/screen.sass */
-#page > nav > ul > li:last-child {
-  text-align: right;
-}
-/* line 44, ../../../app/stylesheets/screen.sass */
-#page > nav > ul > li.current {
-  text-shadow: silver 1px 1px 2px;
-  color: #db8322;
-  text-decoration: underline overline line-through;
-}
-/* line 48, ../../../app/stylesheets/screen.sass */
-#page > nav > ul > li > a {
-  color: #cfb309;
-  text-decoration: underline overline;
-}
-/* line 51, ../../../app/stylesheets/screen.sass */
-#page > nav > ul > li > a:hover {
-  text-decoration: underline overline line-through;
-}
-/* line 54, ../../../app/stylesheets/screen.sass */
-#page > nav > ul > li > ul#account {
-  list-style: none;
-  font-size: 0.813em;
-  line-height: 1.292em;
-}
-/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
-#page > nav > ul > li > ul#account li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0px;
-}
-/* line 58, ../../../app/stylesheets/screen.sass */
-#page > header {
-  clear: both;
-  margin-right: 0.885%;
-  margin-left: 0.885%;
-  background-color: #8bc7c7;
-  text-align: center;
-  -moz-border-radius: 20px 0;
-  -webkit-border-radius: 20px 0;
-  -o-border-radius: 20px 0;
-  -ms-border-radius: 20px 0;
-  -khtml-border-radius: 20px 0;
-  border-radius: 20px 0;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #bfe0e0), color-stop(100%, #8bc7c7));
-  background-image: -moz-linear-gradient(top, #bfe0e0 0%, #8bc7c7 100%);
-  background-image: linear-gradient(top, #bfe0e0 0%, #8bc7c7 100%);
-}
-/* line 65, ../../../app/stylesheets/screen.sass */
-#page > header h1 {
-  font-size: 1.938em;
-  line-height: 1.548em;
-  margin-bottom: 0em;
-}
-/* line 69, ../../../app/stylesheets/screen.sass */
-#page > aside {
-  display: inline;
-  float: left;
-  width: 30.088%;
-  margin-right: 0.885%;
-  margin-left: 0.885%;
-}
-/* line 73, ../../../app/stylesheets/screen.sass */
-#page > article {
-  display: inline;
-  float: left;
-  width: 67.257%;
-  margin-right: 0.885%;
-  display: inline;
-  float: right;
-  margin-right: 0.885%;
-  #margin-left: -0.5em;
-}
-
-/* line 77, ../../../app/stylesheets/screen.sass */
-footer {
-  *zoom: 1;
-  margin-left: auto;
-  margin-right: auto;
-  width: 56.5em;
-  max-width: 100%;
-}
-/* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
-footer:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  clear: both;
-  overflow: hidden;
-  visibility: hidden;
-}
-/* line 79, ../../../app/stylesheets/screen.sass */
-footer > #footer {
-  clear: both;
-  margin-right: 0.885%;
-  margin-left: 0.885%;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #9ec429), color-stop(100%, #6b851c));
-  background-image: -moz-linear-gradient(top, #9ec429 0%, #6b851c 100%);
-  background-image: linear-gradient(top, #9ec429 0%, #6b851c 100%);
-  -moz-border-radius: 0 20px;
-  -webkit-border-radius: 0 20px;
-  -o-border-radius: 0 20px;
-  -ms-border-radius: 0 20px;
-  -khtml-border-radius: 0 20px;
-  border-radius: 0 20px;
-  font-size: 0.875em;
-  line-height: 5.143em;
-  text-align: center;
-  background-color: #8daf25;
-}
-/* line 68, ../../../app/stylesheets/_defaults.sass */
-footer > #footer a:link, footer > #footer a:visited {
-  color: yellow;
-  text-decoration: none;
-}
-/* line 71, ../../../app/stylesheets/_defaults.sass */
-footer > #footer a:link, footer > #footer a:visited, footer > #footer a:hover, footer > #footer a:active {
-  outline: none;
-}
-/* line 73, ../../../app/stylesheets/_defaults.sass */
-footer > #footer a:focus, footer > #footer a:hover {
-  color: #8bc7c7;
-  text-decoration: none;
-}
-/* line 76, ../../../app/stylesheets/_defaults.sass */
-footer > #footer a:active {
-  color: #c78b8b;
-}
-/* line 78, ../../../app/stylesheets/_defaults.sass */
-footer > #footer a:focus {
-  outline: thin dotted;
-}
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'input-styles'.\A         on line 14 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass, in `input-styles'\A         from line 14 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/././_form.sass\A         from line 11 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/./_defaults.sass\A         from line 5 of /Users/chad/Dropbox/Sites/pc/app/stylesheets/screen.sass\A \A 9: /* Layout --------------------------------------------------------------\A 10: \A 11: +susy\A 12: \A 13: // change '.container' to match your HTML container element\A 14: // or @extend it to apply multiple containers on your site.\A 15: \A 16: // show-grid loads a 64+16x24 grid image by default\A 17: // For other grid settings, run `compass grid-img 30+10x20`\A 18: // Where 30 is the column width, 10 is the gutter width,\A 19: // and 20 is the (optional) line-height."; }
