@@ -1,15 +1,13 @@
 - title t('.title')
-= semantic_form_for @session do |f|
+= simple_form_for @session do |f|
   - if @session.errors.any?
     #errorExplanation
       %h3 Wrong!
       %p That email address and password didn't match up. Did you #{link_to "forget your password?", help_people_path}
   
-  = f.inputs do
-    = f.input :email, :label => "Email"
-    = f.input :password, :label => "Password"
-  = f.buttons do
-    = f.commit_button
+  = f.input :email
+  = f.input :password
+  = f.button :submit
 
 :javascript
   $(function(){

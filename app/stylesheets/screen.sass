@@ -21,7 +21,9 @@
 
 /* Styles --------------------------------------------------------------
 
-+sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'footer')
+/* Layout -----------------------------------------
+
++sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'body > footer')
 
 #page
   +container
@@ -36,27 +38,27 @@
         +inline-block-list-item
         +adjust-font-size-to(20px, 2)
         +box-flex(1)
-        +text-shadow
         text-align: center
-        &:first-child
-          text-align: left
-        &:last-child
+        //&:last-child
           text-align: right
-        &.current
-          +text-shadow
-          color: $orange
-          text-decoration: underline overline line-through
         & > a
           color: $yellow
           text-decoration: underline overline
           &:hover
             text-decoration: underline overline line-through
+        &.current
+          +text-shadow
+          color: $orange
+          text-decoration: underline overline line-through
+          & > a
+            color: $orange
 
         & > ul#account
           +no-bullets
           +adjust-font-size-to(13px, 0.7)
 
   & > header
+    +box-shadow($lgray, 0, 0, 3px, inset)
     +full
     background-color: $blue
     text-align: center
@@ -67,6 +69,12 @@
       +adjust-font-size-to(31px)
       +trailer(0, 21px)
 
+  & > #notice
+    +full
+    text-align: center
+    +trailer(1)
+    +horizontal-borders(1px, 0)
+
   & > aside
     +columns($sidebar)
     +omega
@@ -75,11 +83,14 @@
     +columns($article)
     +alpha
 
-footer
+  & > #page-footer
+    +full
+
+body > footer
   +container
-  //margin-top: $base-rhythm-unit * 4
   & > #footer
     +full
+    +box-shadow($lgray, 0, 0, 3px, inset)
     +linear-gradient(color-stops(lighten($green, 5%), darken($green, 10%)))
     +border-radius(0 20px)
     +adjust-font-size-to(14px, 3)
@@ -87,3 +98,24 @@ footer
     background-color: $green
     a
       +links(yellow)
+
+/* Individual pages ---------------------------------
+
+section.user-profile
+  h2
+    +trailer(0)
+  ul
+    +no-bullets
+    margin-left: 0
+
+section.composition
+  +rhythm-borders(1px, 1, $base-font-size, dashed)
+  border-color: $lgray
+  +leader
+  +trailer
+#your_name_looks_like
+  display: none
+
+  footer.author
+    +leader
+    color: $lgray

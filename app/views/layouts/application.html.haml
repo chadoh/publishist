@@ -4,7 +4,7 @@
     - @content_for_title ||= "Problem Child"
     %title= @content_for_title
     %link(rel="shortcut icon" href="/images/favicon.ico")
-    = stylesheet_link_tag 'formtastic.css', 'compiled/screen', 'jquery.autocomplete', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/screen', 'jquery.autocomplete', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/print', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
@@ -27,7 +27,7 @@
             %ul#account
               - if @user
                 %li
-                  %strong= link_to_unless_current @user.name, person_path(@user)
+                  = link_to_unless_current @user.name, person_path(@user)
                 %li
                   = button_to "Sign out", @application_session, :method => :delete, :class => "link"
               - else
@@ -38,6 +38,12 @@
       %header{ :role => 'banner' }
         %h1 Problem Child
         %p= t 'subtitle'
+      - if flash[:notice]
+        #notice= flash[:notice]
+      %article{ :id => "#{@article_id}", :role => 'main' }
+        %header
+          %h1= @content_for_page_heading if @show_title
+        = yield
       %aside{ :id => "#{@article_id}" }
         -##search_box
           -#= form_tag('/#') do
@@ -46,13 +52,7 @@
         -#%br
         -#%hr
         = yield :aside
-      %article{ :id => "#{@article_id}", :role => 'main' }
-        %header
-          %h1= @content_for_page_heading if @show_title
-        - if flash[:notice]
-          #notice= flash[:notice]
-        = yield
-      #page-footer
+      #page-footer &nbsp;
     %footer{ :role => 'contentinfo' }
       #footer
         :markdown

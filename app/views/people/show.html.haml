@@ -3,15 +3,17 @@
   - content_for :aside do
     = render :partial => 'about', :locals => { :person => @person }
   - if @person == @user
-    %p What you've submitted
-    - if @compositions.empty?
-      :markdown
-        Nothing, yet. [Get to it!](#{new_composition_path})
+    %p
+      What you've submitted:
+      - if @compositions.empty?
+        nothing, yet.
+        = link_to "Get to it!", new_composition_path
   - else
-    %p What #{@person.first_name} has submitted
-    - if @compositions.empty?
-      %p Nothing yet.
+    %p
+      What #{@person.first_name} has submitted:
+      - if @compositions.empty?
+        nothing yet.
   - @compositions.each do |composition|
-    = render :partial => 'compositions/composition', :locals => { :composition => composition }
+    = render :partial => 'compositions/show', :locals => { :composition => composition }
 - else
   = render :partial => 'about', :locals => { :person => @person }

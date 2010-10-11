@@ -4,34 +4,40 @@
   %p
     = link_to t('.edit'), edit_meeting_path(@meeting)
 
-%h3 Attendance
-%table
-  %thead
-    %tr
-      %th Name
-      %th Answer
-      - if editor?
-        %th
-  %tbody
-    - @meeting.attendances.each do |attendance|
-      %tr{ :class => cycle(:odd, :even) }
-        - if attendance.person
-          %td= link_to attendance.person.name, person_path(attendance.person)
-        - else
-          %td= attendance.person_name
-        %td= attendance.answer
+%section#attendance
+  %header
+    %h2 Attedance
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Answer
         - if editor?
-          %td= button_to 'remove', meeting_attendance_path(@meeting, attendance), :method => :delete, :class => 'link'
+          %th
+    %tbody
+      - @meeting.attendances.each do |attendance|
+        %tr{ :class => cycle(:odd, :even) }
+          - if attendance.person
+            %td= link_to attendance.person.name, person_path(attendance.person)
+          - else
+            %td= attendance.person_name
+          %td= attendance.answer
+          - if editor?
+            %td= button_to 'remove', meeting_attendance_path(@meeting, attendance), :method => :delete, :class => 'link'
 
-- if editor?
-  = semantic_form_for [@meeting, Attendance.new] do |f|
-    = f.semantic_errors
-    = f.inputs do
+  - if editor?
+    = simple_form_for [@meeting, Attendance.new] do |f|
+      - if @attendance.errors.any?
+        #errorExplanation
+          %h3 There #{pluralize_phrase(@attendance.errors.count, "was an error", "were some errors")}!
+          %ul
+            - @attendance.errors.full_messages.each do |msg|
+              %li= msg
+    
       = f.input :meeting, :as => :hidden, :value => @meeting
       = f.input :person, :as => :string
       = f.input :answer
-    = f.buttons do
-      = f.commit_button
+      = f.button :submit
 
 :javascript
   $(function(){

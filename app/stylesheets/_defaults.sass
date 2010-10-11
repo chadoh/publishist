@@ -68,6 +68,7 @@ body
 /* Links --------------------------------------------------------------
 
 =links($normal: $orange, $hover: $blue)
+  color: $normal
   &:link, &:visited
     color: $normal
     text-decoration: none
@@ -253,7 +254,8 @@ label
   +box-sizing(border-box)
   width: 100%
   margin-top: 0
-  border-color: $base
+  border-color: $lgray
+  +box-shadow($blue, 0, 0, 3px)
   height: $base-line-height / 14px * 1.5em
 
 textarea
@@ -275,3 +277,34 @@ input
 button
   width: auto
   overflow: visible
+
+input[type=submit], button
+  @extend .serif
+  +adjust-font-size-to(16px)
+  background: $orange
+  +linear-gradient(color-stops($orange + #333, $orange - #111))
+  border: none
+  text-decoration: none
+  +trailer
+  +leader
+  +pad(0.25, 0.25)
+  +box-shadow($dgray, 1px, 1px, 2px)
+  &:hover
+    +box-shadow($dgray, 0, 0, 2px)
+    color: $base
+  &:active
+    +box-shadow($dgray, 1px, 1px, 1px, 0, inset)
+    color: $base
+  &.link
+    background: transparent
+    +box-shadow(#000, 0, 0, 0)
+    +rhythm
+    cursor: pointer
+    padding: 0
+    display: inline
+    +links
+
+form.button_to
+  display: inline
+  div
+    display: inline

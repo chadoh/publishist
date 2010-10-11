@@ -1,5 +1,16 @@
-- title(strip_tags(@composition.title), false)
-= render :partial => 'composition', :locals => { :composition => @composition }
-- if the_editor? || @user == @composition.author
-  - if @user.editor?
-    = link_to "edit", edit_composition_url(@composition)
+- title strip_tags(@composition.title)
+
+- if @composition.photo?
+  = image_tag @composition.photo.url(:medium)
+- unless @composition.body.blank?
+  = sanitize @composition.body
+
+- if the_editor_or_the_owner?(@composition)
+  %footer.author
+    - if @composition.author_id
+      = link_to @composition.author, person_path(@composition.author_id)
+    - else
+      = @composition.author
+
+- if @user.editor?
+  %p= link_to "Edit \"#{@composition.title}\"", edit_composition_url(@composition)

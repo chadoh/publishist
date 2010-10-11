@@ -7,7 +7,7 @@
   it will wreak havoc on your submission.
   Just rewrite it, por favor!
 
-= semantic_form_for @composition, :html => { :enctype => 'multipart/form-data' } do |f|
+= simple_form_for @composition, :html => { :enctype => 'multipart/form-data' } do |f|
   - if @composition.errors.any?
     #errorExplanation
       %h3 There #{pluralize_phrase(@composition.errors.count, "was an error", "were some errors")}!
@@ -15,23 +15,21 @@
         - @composition.errors.full_messages.each do |msg|
           %li= msg
   
-  = f.inputs do
-    - unless @user
-      = f.input :author_name, :label => "Your Name"
-      = f.input :author_email, :label => "Your Email Address"
-    = f.input :title, :label => 'Title', :input_html => { :class => 'wysiwyg' }
-    = f.input :body, :label => "Body", :required => false, :input_html => { :class => 'wysiwyg' }
-    = f.input :photo, :label => "Or, submit an image:"
-    - if @user
-      - if the_editor?
-        = f.input :author, :collection => Person.order('first_name')
-        \- OR -
-        = f.input :author_name
-        = f.input :author_email, :input_html => { :value => "" }
-      - else
-        = f.input :author_id, :as => :hidden
-  = f.buttons do
-    = f.commit_button
+  - unless @user
+    = f.input :author_name, :label => "Your Name"
+    = f.input :author_email, :label => "Your Email Address"
+  = f.input :title, :label => 'Title', :input_html => { :class => 'wysiwyg' }
+  = f.input :body, :label => "Body", :required => false, :input_html => { :class => 'wysiwyg' }
+  = f.input :photo, :label => "Or, submit an image:"
+  - if @user
+    - if the_editor?
+      = f.input :author, :collection => Person.order('first_name')
+      \- OR -
+      = f.input :author_name
+      = f.input :author_email, :input_html => { :value => "" }
+    - else
+      = f.input :author_id, :as => :hidden
+  = f.button :submit
 
 - javascript "hoverIntent.min"
 :javascript
