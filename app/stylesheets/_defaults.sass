@@ -54,26 +54,32 @@ body
 
 \::-moz-selection
   +accessible-color($alt)
-  background: $alt
+  background: $yellow
   text-shadow: none
 
 \::selection
   +accessible-color($alt)
-  background: $alt
+  background: $yellow
   text-shadow: none
 
 /* Links --------------------------------------------------------------
 
-a
+=links($normal: $orange, $hover: $blue)
   &:link, &:visited
-    color: $alt
+    color: $normal
+    text-decoration: none
   &:link, &:visited, &:hover, &:active
     outline: none
-  &:focus, &:hover, &:active
-    color: complement($alt)
+  &:focus, &:hover
+    color: $hover
     text-decoration: none
+  &:active
+    color: complement($hover)
   &:focus
     outline: thin dotted
+
+a
+  +links
 
 /* Headings --------------------------------------------------------------
 

@@ -13,48 +13,47 @@
     = yield :head
   %body
     #page
+      %nav.site-nav{ :role => 'navigation' }
+        %ul
+          %li{ :class => params[:controller] == 'welcome' && 'current' }= link_to_unless_current "About", root_path
+          %li{ :class => current_page?(new_composition_path) && 'current' }= link_to_unless_current "Submit", new_composition_path
+          - if editor?
+            %li{ :class => params[:controller] == 'compositions' && params[:action] != 'new' && 'current' }= link_to_unless_current "Compositions", compositions_path
+          - if staff? || editor?
+            %li{ :class => params[:controller] == 'people' && 'current' }= link_to_unless_current "People", people_path
+          - if member?
+            %li{ :class => params[:controller] == 'meetings' && 'current' }= link_to_unless_current "Meetings", meetings_path
+          %li
+            %ul#account
+              - if @user
+                %li
+                  %strong= link_to_unless_current @user.name, person_path(@user)
+                %li
+                  = button_to "Sign out", @application_session, :method => :delete, :class => "link"
+              - else
+                %li
+                  = link_to_unless_current "Sign in", new_session_path
+                %li
+                  = link_to_unless_current "Sign Up!", new_person_path, :class => "button"
       %header{ :role => 'banner' }
         %h1 Problem Child
         %p= t 'subtitle'
-        -#%ul#account{ :class => ('sign_up' unless @user) }
-          - if @user
-            %li
-              %strong= link_to_unless_current @user.name, person_path(@user)
-            %li
-              &nbsp;&nbsp;|&nbsp;&nbsp;
-              = button_to "Sign out", @application_session, :method => :delete, :class => "link"
-          - else
-            %li
-              = link_to_unless_current "Sign in", new_session_path
-            - unless current_page? new_person_path
-              %li
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                = link_to "Sign Up!", new_person_path, :class => "button"
-      %nav.site-nav{ :role => 'navigation' }
-        %ul
-          %li= link_to_unless_current "About", root_path
-          %li= link_to_unless_current "Submit", new_composition_path
-          - if editor?
-            %li= link_to_unless_current "Compositions", compositions_path
-          - if staff? || editor?
-            %li= link_to_unless_current "People", people_path
-          - if member?
-            %li= link_to_unless_current "Meetings", meetings_path
-      #content{ :role => 'main' }
-        %aside
-          -##search_box
-            -#= form_tag('/#') do
-              -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark_on" }
-              -#%input{ :type => 'submit', :value => "Search!" }
-          -#%br
-          -#%hr
-          = yield :aside
-        %article{ :id => "#{@article_id}" }
-          %header
-            %h2= @content_for_page_heading if @show_title
-          - if flash[:notice]
-            #notice= flash[:notice]
-          = yield
-      %footer{ :role => 'contentinfo' }
+      %aside
+        -##search_box
+          -#= form_tag('/#') do
+            -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark_on" }
+            -#%input{ :type => 'submit', :value => "Search!" }
+        -#%br
+        -#%hr
+        = yield :aside
+      %article{ :id => "#{@article_id}", :role => 'main' }
+        %header
+          %h2= @content_for_page_heading if @show_title
+        - if flash[:notice]
+          #notice= flash[:notice]
+        = yield
+      #page-footer
+    %footer{ :role => 'contentinfo' }
+      #footer
         :markdown
           This website is in early alpha development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.

@@ -7,4 +7,4 @@ Pc::Application.initialize!
 # Needs to be set for compositions to turn out right!
 Haml::Template.options[:ugly] = true
 
-Sass::Plugin.options[:template_location] = { 'app/stylesheets' => 'public/stylesheets/compiled' }
+Sass::Plugin.options[:css_location] = 'public/stylesheets/compiled'
