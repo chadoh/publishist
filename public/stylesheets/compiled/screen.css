@@ -550,7 +550,7 @@ body > footer {
   height: 6em;
 }
 
-/* line 28, ../../../app/stylesheets/screen.sass */
+/* line 29, ../../../app/stylesheets/screen.sass */
 #page {
   *zoom: 1;
   margin-left: auto;
@@ -567,13 +567,13 @@ body > footer {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 32, ../../../app/stylesheets/screen.sass */
+/* line 33, ../../../app/stylesheets/screen.sass */
 #page > nav {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 34, ../../../app/stylesheets/screen.sass */
+/* line 35, ../../../app/stylesheets/screen.sass */
 #page > nav > ul {
   margin: 0;
   padding: 0;
@@ -585,7 +585,7 @@ body > footer {
   display: -webkit-box;
   display: box;
 }
-/* line 37, ../../../app/stylesheets/screen.sass */
+/* line 38, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li {
   list-style-image: none;
   list-style-type: none;
@@ -605,26 +605,26 @@ body > footer {
   display: block;
   text-align: center;
 }
-/* line 44, ../../../app/stylesheets/screen.sass */
+/* line 45, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > a {
   color: #cfb309;
   text-decoration: underline overline;
 }
-/* line 47, ../../../app/stylesheets/screen.sass */
+/* line 48, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > a:hover {
   text-decoration: underline overline line-through;
 }
-/* line 49, ../../../app/stylesheets/screen.sass */
+/* line 50, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li.current {
   text-shadow: silver 1px 1px 2px;
   color: #db8322;
   text-decoration: underline overline;
 }
-/* line 53, ../../../app/stylesheets/screen.sass */
+/* line 54, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li.current > a {
   color: #db8322;
 }
-/* line 56, ../../../app/stylesheets/screen.sass */
+/* line 57, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > ul#account {
   list-style: none;
   font-size: 0.813em;
@@ -636,7 +636,7 @@ body > footer {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 60, ../../../app/stylesheets/screen.sass */
+/* line 61, ../../../app/stylesheets/screen.sass */
 #page > header {
   -moz-box-shadow: silver 0 0 3px inset;
   -webkit-box-shadow: silver 0 0 3px inset;
@@ -657,13 +657,13 @@ body > footer {
   background-image: -moz-linear-gradient(top, #bfe0e0 0%, #8bc7c7 100%);
   background-image: linear-gradient(top, #bfe0e0 0%, #8bc7c7 100%);
 }
-/* line 68, ../../../app/stylesheets/screen.sass */
+/* line 69, ../../../app/stylesheets/screen.sass */
 #page > header h1 {
   font-size: 1.938em;
   line-height: 1.548em;
   margin-bottom: 0em;
 }
-/* line 72, ../../../app/stylesheets/screen.sass */
+/* line 73, ../../../app/stylesheets/screen.sass */
 #page > #notice {
   clear: both;
   margin-right: 0.885%;
@@ -677,7 +677,7 @@ body > footer {
   border-bottom-width: 0.063em;
   padding-bottom: -0.063em;
 }
-/* line 78, ../../../app/stylesheets/screen.sass */
+/* line 79, ../../../app/stylesheets/screen.sass */
 #page > article {
   display: inline;
   float: left;
@@ -685,14 +685,14 @@ body > footer {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 81, ../../../app/stylesheets/screen.sass */
+/* line 82, ../../../app/stylesheets/screen.sass */
 #page > article.full-width {
   display: inline;
   float: left;
   width: 98.23%;
   margin-right: 0.885%;
 }
-/* line 84, ../../../app/stylesheets/screen.sass */
+/* line 85, ../../../app/stylesheets/screen.sass */
 #page > aside {
   display: inline;
   float: left;
@@ -703,14 +703,14 @@ body > footer {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 88, ../../../app/stylesheets/screen.sass */
+/* line 89, ../../../app/stylesheets/screen.sass */
 #page > #page-footer {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
 
-/* line 91, ../../../app/stylesheets/screen.sass */
+/* line 92, ../../../app/stylesheets/screen.sass */
 body > footer {
   *zoom: 1;
   margin-left: auto;
@@ -727,7 +727,7 @@ body > footer:after {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 93, ../../../app/stylesheets/screen.sass */
+/* line 94, ../../../app/stylesheets/screen.sass */
 body > footer > #footer {
   clear: both;
   margin-right: 0.885%;
@@ -750,7 +750,7 @@ body > footer > #footer {
   text-align: center;
   background-color: #8daf25;
 }
-/* line 101, ../../../app/stylesheets/screen.sass */
+/* line 102, ../../../app/stylesheets/screen.sass */
 body > footer > #footer a {
   color: yellow;
 }
@@ -778,11 +778,11 @@ body > footer > #footer a:focus {
 }
 
 /* Individual pages --------------------------------- */
-/* line 107, ../../../app/stylesheets/screen.sass */
+/* line 108, ../../../app/stylesheets/screen.sass */
 section.user-profile h2 {
   margin-bottom: 0em;
 }
-/* line 109, ../../../app/stylesheets/screen.sass */
+/* line 110, ../../../app/stylesheets/screen.sass */
 section.user-profile ul {
   list-style: none;
   margin-left: 0;
@@ -794,7 +794,7 @@ section.user-profile ul li {
   margin-left: 0px;
 }
 
-/* line 113, ../../../app/stylesheets/screen.sass */
+/* line 114, ../../../app/stylesheets/screen.sass */
 section.composition {
   border-style: dashed;
   border-width: 0.063em;
@@ -805,18 +805,18 @@ section.composition {
   margin-bottom: 1.5em;
 }
 
-/* line 119, ../../../app/stylesheets/screen.sass */
+/* line 120, ../../../app/stylesheets/screen.sass */
 footer.composition-details {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-/* line 122, ../../../app/stylesheets/screen.sass */
+/* line 123, ../../../app/stylesheets/screen.sass */
 footer.composition-details p {
   margin-bottom: 0em;
   color: silver;
 }
 
-/* line 127, ../../../app/stylesheets/screen.sass */
+/* line 128, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition {
   border-style: solid;
   border-width: 0em;
@@ -825,7 +825,7 @@ article#compositions > section.composition {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 130, ../../../app/stylesheets/screen.sass */
+/* line 131, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition > header {
   display: inline;
   float: left;
@@ -833,14 +833,13 @@ article#compositions > section.composition > header {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 133, ../../../app/stylesheets/screen.sass */
+/* line 134, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition > div.body {
   display: none;
 }
-/* line 135, ../../../app/stylesheets/screen.sass */
+/* line 136, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition > footer {
   margin-top: 0em;
-  margin-bottom: 0em;
   display: inline;
   float: left;
   width: 67.257%;
@@ -858,14 +857,14 @@ article#compositions > section.composition > footer p:last-child {
   #margin-left: -0.5em;
 }
 /* line 142, ../../../app/stylesheets/screen.sass */
-article#compositions > section.composition > footer > .author, article#compositions > section.composition > footer > .actions {
+article#compositions > section.composition > footer p:first-child, article#compositions > section.composition > footer p:last-child {
   display: inline;
   float: left;
   width: 30.088%;
   margin-right: 0.885%;
 }
 /* line 144, ../../../app/stylesheets/screen.sass */
-article#compositions > section.composition > footer > .submitted {
+article#compositions > section.composition > footer p:nth-child(2) {
   display: inline;
   float: left;
   width: 36.283%;
@@ -873,6 +872,140 @@ article#compositions > section.composition > footer > .submitted {
 }
 
 /* line 147, ../../../app/stylesheets/screen.sass */
+section.meeting {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+}
+/* line 149, ../../../app/stylesheets/screen.sass */
+section.meeting span.when {
+  display: inline;
+  float: left;
+  width: 17.699%;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+}
+/* line 152, ../../../app/stylesheets/screen.sass */
+section.meeting span.question {
+  display: inline;
+  float: left;
+  width: 61.062%;
+  margin-right: 0.885%;
+}
+/* line 154, ../../../app/stylesheets/screen.sass */
+section.meeting span.actions {
+  display: inline;
+  float: left;
+  width: 17.699%;
+  margin-right: 0.885%;
+  display: inline;
+  float: right;
+  margin-right: 0.885%;
+  #margin-left: -0.5em;
+}
+
+/* line 158, ../../../app/stylesheets/screen.sass */
+section.person {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+}
+/* line 160, ../../../app/stylesheets/screen.sass */
+section.person span.name {
+  display: inline;
+  float: left;
+  width: 23.894%;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+}
+/* line 163, ../../../app/stylesheets/screen.sass */
+section.person span.rank {
+  display: inline;
+  float: left;
+  width: 11.504%;
+  margin-right: 0.885%;
+}
+/* line 165, ../../../app/stylesheets/screen.sass */
+section.person span.promote-to {
+  display: inline;
+  float: left;
+  width: 42.478%;
+  margin-right: 0.885%;
+}
+/* line 167, ../../../app/stylesheets/screen.sass */
+section.person span.promote-to > ul {
+  list-style-type: none;
+}
+/* line 5, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_inline-list.scss */
+section.person span.promote-to > ul, section.person span.promote-to > ul li {
+  margin: 0px;
+  padding: 0px;
+  display: inline;
+}
+/* line 24, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_inline-list.scss */
+section.person span.promote-to > ul li:after {
+  content: ", ";
+}
+/* line 26, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_inline-list.scss */
+section.person span.promote-to > ul li:last-child:after, section.person span.promote-to > ul li.last:after {
+  content: "";
+}
+/* line 169, ../../../app/stylesheets/screen.sass */
+section.person span.actions {
+  display: inline;
+  float: left;
+  width: 17.699%;
+  margin-right: 0.885%;
+  display: inline;
+  float: right;
+  margin-right: 0.885%;
+  #margin-left: -0.5em;
+}
+
+/* line 173, ../../../app/stylesheets/screen.sass */
+section.attendance {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 176, ../../../app/stylesheets/screen.sass */
+section.attendance span.person {
+  margin-left: 0.885%;
+  display: inline;
+  float: left;
+  width: 23.894%;
+  margin-right: 0.885%;
+}
+/* line 179, ../../../app/stylesheets/screen.sass */
+section.attendance span.answer {
+  display: inline;
+  float: left;
+  width: 61.062%;
+  margin-right: 0.885%;
+}
+/* line 181, ../../../app/stylesheets/screen.sass */
+section.attendance span.actions {
+  display: inline;
+  float: left;
+  width: 11.504%;
+  margin-right: 0.885%;
+  display: inline;
+  float: right;
+  margin-right: 0.885%;
+  #margin-left: -0.5em;
+}
+
+/* line 184, ../../../app/stylesheets/screen.sass */
+form.attendance {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+  margin-top: 1.5em;
+}
+
+/* line 188, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

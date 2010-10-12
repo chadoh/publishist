@@ -1,5 +1,5 @@
 class AttendancesController < InheritedResources::Base
-  actions :all, :except => [:index, :show, :new]
+  actions :all, :except => [:index, :show, :new, :edit]
   belongs_to :meeting
 
   def create

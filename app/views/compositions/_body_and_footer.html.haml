@@ -6,12 +6,12 @@
   - if the_editor_or_the_owner?(composition)
 %footer.composition-details
   - if the_editor? or @user.email == composition.email
-  %p.author
-    = mail_to composition.email, email_image(composition.author)
-    - if composition.author_id
-      = link_to_unless_current composition.author, person_path(composition.author_id)
-    - else
-      = composition.author
+    %p.author
+      = mail_to composition.email, email_image(composition.author)
+      - if composition.author_id
+        = link_to_unless_current composition.author, person_path(composition.author_id)
+      - else
+        = composition.author
   %p.submitted
     Submitted #{distance_of_time_in_words(composition.created_at, Time.now)} ago
   - if the_editor?

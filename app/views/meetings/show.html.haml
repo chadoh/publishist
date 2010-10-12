@@ -4,26 +4,11 @@
   %p
     = link_to t('.edit'), edit_meeting_path(@meeting)
 
-%section#attendance
+%section#attendances
   %header
     %h2 Attedance
-  %table
-    %thead
-      %tr
-        %th Name
-        %th Answer
-        - if editor?
-          %th
-    %tbody
-      - @meeting.attendances.each do |attendance|
-        %tr{ :class => cycle(:odd, :even) }
-          - if attendance.person
-            %td= link_to attendance.person.name, person_path(attendance.person)
-          - else
-            %td= attendance.person_name
-          %td= attendance.answer
-          - if editor?
-            %td= button_to 'remove', meeting_attendance_path(@meeting, attendance), :method => :delete, :class => 'link'
+  - for attendance in @meeting.attendances
+    = render :partial => 'attendances/show', :locals => { :attendance => attendance }
 
   - if editor?
     = simple_form_for [@meeting, Attendance.new] do |f|

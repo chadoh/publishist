@@ -9,10 +9,10 @@
       = person.name
   %ul
     %li
-    - if person == @user
-      = link_to(image_tag(person.gravatar_url, :alt => "A picture of you"), "http://gravatar.com", :title => "You can change this on Gravatar.com")
-    - else
-      = image_tag person.gravatar_url, :alt => "A picture of #{person.first_name}"
+      - if person == @user
+        = link_to(image_tag(person.gravatar_url, :alt => "A picture of you"), "http://gravatar.com", :title => "You can change this on Gravatar.com")
+      - else
+        = image_tag person.gravatar_url, :alt => "A picture of #{person.first_name}"
     - unless person.editorships.blank?
       %li
         %strong Editor

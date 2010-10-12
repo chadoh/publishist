@@ -6,6 +6,7 @@
 @import form
 @import compass/css3
 @import compass/layout/sticky-footer
+@import compass/utilities/lists/inline-list
 
 /* Layout --------------------------------------------------------------
 
@@ -134,15 +135,55 @@ article#compositions
       display: none
     & > footer
       +leader(0)
-      +trailer(0)
       +columns($article)
       +omega
       p:last-child
         +omega
-      & > .author, & > .actions
+      p:first-child, p:last-child
         +columns(floor($total-cols / 3))
-      & > .submitted
+      p:nth-child(2)
         +columns(ceil($total-cols / 3))
+
+section.meeting
+  +full
+  span.when
+    +columns(floor($total-cols * (1/5)))
+    +alpha
+  span.question
+    +columns(ceil( $total-cols * (3/5)))
+  span.actions
+    +columns(floor($total-cols * (1/5)))
+    +omega
+
+section.person
+  +full
+  span.name
+    +columns(floor($total-cols * (4/16)))
+    +alpha
+  span.rank
+    +columns(floor($total-cols * (2/16)))
+  span.promote-to
+    +columns(ceil( $total-cols * (7/16)))
+    & > ul
+      +comma-delimited-list
+  span.actions
+    +columns(floor($total-cols * (3/16)))
+    +omega
+
+section.attendance
+  +full
+  +clearfix
+  span.person
+    +alpha
+    +columns($total-cols * (4/16))
+  span.answer
+    +columns($total-cols * (10/16))
+  span.actions
+    +columns($total-cols * (2/16))
+    +omega
+form.attendance
+  +full
+  +leader
 
 #your_name_looks_like
   display: none

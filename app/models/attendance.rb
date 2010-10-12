@@ -13,6 +13,14 @@ class Attendance < ActiveRecord::Base
     end
   end
 
+  def name
+    if self.person
+      self.person.name
+    elsif self.person_name
+      self.person_name
+    end
+  end
+
 protected
   
   def presence_of_person
