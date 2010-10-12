@@ -1,0 +1,10 @@
+= simple_form_for(resource, :url => resource.new_record? ? collection_url : resource_url(resource)) do |f|
+  - if resource.errors.any?
+    #errorExplanation
+      %h3 There #{pluralize_phrase(resource.errors.count, "was an error", "were some errors")}!
+      %ul
+        - resource.errors.full_messages.each do |msg|
+          %li= msg
+  - resource.attributes.each do |a|
+    = f.input a[0].to_sym
+  = f.button :submit

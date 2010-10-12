@@ -49,7 +49,7 @@
         &.current
           +text-shadow
           color: $orange
-          text-decoration: underline overline line-through
+          text-decoration: underline overline
           & > a
             color: $orange
 
@@ -75,13 +75,15 @@
     +trailer(1)
     +horizontal-borders(1px, 0)
 
-  & > aside
-    +columns($sidebar)
-    +omega
-
   & > article
     +columns($article)
     +alpha
+    &.full-width
+      +columns($total-cols)
+
+  & > aside
+    +columns($sidebar)
+    +omega
 
   & > #page-footer
     +full
@@ -110,12 +112,16 @@ section.user-profile
 
 section.composition
   +rhythm-borders(1px, 1, $base-font-size, dashed)
+  +padding-trailer(0)
   border-color: $lgray
   +leader
   +trailer
+footer.composition-details
+  +leader
+  +trailer
+  p
+    +trailer(0)
+    color: $lgray
+
 #your_name_looks_like
   display: none
-
-  footer.author
-    +leader
-    color: $lgray

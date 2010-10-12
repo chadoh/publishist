@@ -40,18 +40,19 @@
         %p= t 'subtitle'
       - if flash[:notice]
         #notice= flash[:notice]
-      %article{ :id => "#{@article_id}", :role => 'main' }
+      %article{ :id => "#{@article_id}", :role => 'main', :class => !content_for?(:aside) && 'full-width' }
         %header
           %h1= @content_for_page_heading if @show_title
         = yield
-      %aside{ :id => "#{@article_id}" }
-        -##search_box
-          -#= form_tag('/#') do
-            -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark" }
-            -#%input{ :type => 'submit', :value => "Search!" }
-        -#%br
-        -#%hr
-        = yield :aside
+      - if content_for? :aside
+        %aside{ :id => "#{@article_id}-aside" }
+          -##search_box
+            -#= form_tag('/#') do
+              -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark" }
+              -#%input{ :type => 'submit', :value => "Search!" }
+          -#%br
+          -#%hr
+          = yield :aside
       #page-footer &nbsp;
     %footer{ :role => 'contentinfo' }
       #footer

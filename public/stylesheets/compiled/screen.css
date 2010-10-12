@@ -275,7 +275,7 @@ blockquote {
 /* Replaced -------------------------------------------------------------- */
 /* line 173, ../../../app/stylesheets/_defaults.sass */
 img {
-  vertical-align: text-bottom;
+  vertical-align: text-middle;
   max-width: 100%;
   -ms-interpolation-mode: bicubic;
 }
@@ -618,7 +618,7 @@ body > footer {
 #page > nav > ul > li.current {
   text-shadow: silver 1px 1px 2px;
   color: #db8322;
-  text-decoration: underline overline line-through;
+  text-decoration: underline overline;
 }
 /* line 53, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li.current > a {
@@ -678,6 +678,21 @@ body > footer {
   padding-bottom: -0.063em;
 }
 /* line 78, ../../../app/stylesheets/screen.sass */
+#page > article {
+  display: inline;
+  float: left;
+  width: 67.257%;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+}
+/* line 81, ../../../app/stylesheets/screen.sass */
+#page > article.full-width {
+  display: inline;
+  float: left;
+  width: 98.23%;
+  margin-right: 0.885%;
+}
+/* line 84, ../../../app/stylesheets/screen.sass */
 #page > aside {
   display: inline;
   float: left;
@@ -688,22 +703,14 @@ body > footer {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 82, ../../../app/stylesheets/screen.sass */
-#page > article {
-  display: inline;
-  float: left;
-  width: 67.257%;
-  margin-right: 0.885%;
-  margin-left: 0.885%;
-}
-/* line 86, ../../../app/stylesheets/screen.sass */
+/* line 88, ../../../app/stylesheets/screen.sass */
 #page > #page-footer {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
 
-/* line 89, ../../../app/stylesheets/screen.sass */
+/* line 91, ../../../app/stylesheets/screen.sass */
 body > footer {
   *zoom: 1;
   margin-left: auto;
@@ -720,7 +727,7 @@ body > footer:after {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 91, ../../../app/stylesheets/screen.sass */
+/* line 93, ../../../app/stylesheets/screen.sass */
 body > footer > #footer {
   clear: both;
   margin-right: 0.885%;
@@ -743,7 +750,7 @@ body > footer > #footer {
   text-align: center;
   background-color: #8daf25;
 }
-/* line 99, ../../../app/stylesheets/screen.sass */
+/* line 101, ../../../app/stylesheets/screen.sass */
 body > footer > #footer a {
   color: yellow;
 }
@@ -771,11 +778,11 @@ body > footer > #footer a:focus {
 }
 
 /* Individual pages --------------------------------- */
-/* line 105, ../../../app/stylesheets/screen.sass */
+/* line 107, ../../../app/stylesheets/screen.sass */
 section.user-profile h2 {
   margin-bottom: 0em;
 }
-/* line 107, ../../../app/stylesheets/screen.sass */
+/* line 109, ../../../app/stylesheets/screen.sass */
 section.user-profile ul {
   list-style: none;
   margin-left: 0;
@@ -787,22 +794,29 @@ section.user-profile ul li {
   margin-left: 0px;
 }
 
-/* line 111, ../../../app/stylesheets/screen.sass */
+/* line 113, ../../../app/stylesheets/screen.sass */
 section.composition {
   border-style: dashed;
   border-width: 0.063em;
   padding: 1.438em;
+  padding-bottom: 0em;
   border-color: silver;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
-/* line 116, ../../../app/stylesheets/screen.sass */
+/* line 119, ../../../app/stylesheets/screen.sass */
+footer.composition-details {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+/* line 122, ../../../app/stylesheets/screen.sass */
+footer.composition-details p {
+  margin-bottom: 0em;
+  color: silver;
+}
+
+/* line 126, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
-}
-/* line 119, ../../../app/stylesheets/screen.sass */
-#your_name_looks_like footer.author {
-  margin-top: 1.5em;
-  color: silver;
 }

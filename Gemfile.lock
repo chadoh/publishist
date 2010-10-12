@@ -59,6 +59,8 @@ GEM
     inherited_resources (1.1.2)
       has_scope (~> 0.5.0)
       responders (~> 0.6.0)
+    inherited_resources_views (0.3.1)
+      inherited_resources (>= 1.0)
     json_pure (1.4.6)
     launchy (0.3.5)
       configuration (>= 0.0.5)
@@ -123,6 +125,7 @@ DEPENDENCIES
   heroku
   heroku_san (= 0.2.4)
   inherited_resources (= 1.1.2)
+  inherited_resources_views (= 0.3.1)
   matthuhiggins-foreigner (= 0.7.1)
   mocha (= 0.9.8)
   paperclip (= 2.3.3)

@@ -11,6 +11,7 @@ gem 'compass-susy-plugin', '0.8.1'
 gem 'simple_form', '1.2.2'
 gem 'rdiscount'
 gem 'RedCloth'
+gem 'inherited_resources_views', '0.3.1'
 
 # Controllers
 gem 'aws-s3', '0.6.2'

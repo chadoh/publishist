@@ -275,7 +275,7 @@ blockquote {
 /* Replaced -------------------------------------------------------------- */
 /* line 173, ../../../app/stylesheets/_defaults.sass */
 img {
-  vertical-align: text-bottom;
+  vertical-align: text-middle;
   max-width: 100%;
   -ms-interpolation-mode: bicubic;
 }
