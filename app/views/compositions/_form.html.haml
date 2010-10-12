@@ -23,7 +23,7 @@
   = f.input :photo, :label => "Or, submit an image:"
   - if @user
     - if the_editor?
-      = f.input :author, :collection => Person.order('first_name')
+      = f.association :author, :collection => Person.order('first_name')
       \- OR -
       = f.input :author_name
       = f.input :author_email, :input_html => { :value => "" }

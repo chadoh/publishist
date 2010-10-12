@@ -123,5 +123,26 @@ footer.composition-details
     +trailer(0)
     color: $lgray
 
+article#compositions
+  & > section.composition
+    +rhythm-borders(0px, 0)
+    +full
+    & > header
+      +columns($sidebar)
+      +alpha
+    & > div.body
+      display: none
+    & > footer
+      +leader(0)
+      +trailer(0)
+      +columns($article)
+      +omega
+      p:last-child
+        +omega
+      & > .author, & > .actions
+        +columns(floor($total-cols / 3))
+      & > .submitted
+        +columns(ceil($total-cols / 3))
+
 #your_name_looks_like
   display: none

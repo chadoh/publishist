@@ -816,7 +816,63 @@ footer.composition-details p {
   color: silver;
 }
 
-/* line 126, ../../../app/stylesheets/screen.sass */
+/* line 127, ../../../app/stylesheets/screen.sass */
+article#compositions > section.composition {
+  border-style: solid;
+  border-width: 0em;
+  padding: 0em;
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+}
+/* line 130, ../../../app/stylesheets/screen.sass */
+article#compositions > section.composition > header {
+  display: inline;
+  float: left;
+  width: 30.088%;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+}
+/* line 133, ../../../app/stylesheets/screen.sass */
+article#compositions > section.composition > div.body {
+  display: none;
+}
+/* line 135, ../../../app/stylesheets/screen.sass */
+article#compositions > section.composition > footer {
+  margin-top: 0em;
+  margin-bottom: 0em;
+  display: inline;
+  float: left;
+  width: 67.257%;
+  margin-right: 0.885%;
+  display: inline;
+  float: right;
+  margin-right: 0.885%;
+  #margin-left: -0.5em;
+}
+/* line 140, ../../../app/stylesheets/screen.sass */
+article#compositions > section.composition > footer p:last-child {
+  display: inline;
+  float: right;
+  margin-right: 0.885%;
+  #margin-left: -0.5em;
+}
+/* line 142, ../../../app/stylesheets/screen.sass */
+article#compositions > section.composition > footer > .author, article#compositions > section.composition > footer > .actions {
+  display: inline;
+  float: left;
+  width: 30.088%;
+  margin-right: 0.885%;
+}
+/* line 144, ../../../app/stylesheets/screen.sass */
+article#compositions > section.composition > footer > .submitted {
+  display: inline;
+  float: left;
+  width: 36.283%;
+  margin-right: 0.885%;
+}
+
+/* line 147, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

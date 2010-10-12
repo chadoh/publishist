@@ -1,25 +1,3 @@
 - title(t('.title'))
-%table
-  %thead
-    %tr
-      %th Submitted
-      %th= Composition.human_attribute_name :title
-      - if the_editor?
-        %th= Composition.human_attribute_name :author
-      %th{ :colspan => (@user.the_editor? ? 2 : 1) }= t 'actions'
-  
-  %tbody
-    - for composition in @compositions
-      %tr{ :class => cycle(:odd, :even) }
-        %td= pretty_date(composition.created_at)
-        %td= link_to sanitize(composition.title), composition
-        - if the_editor?
-          %td<
-            = mail_to composition.email, email_image(composition.author)
-            - if composition.author_id
-              = link_to composition.author, Person.find(composition.author_id)
-            - else
-              = composition.author
-        - if the_editor?
-          %td.action= link_to t('edit'), edit_composition_path(composition)
-        %td.action= link_to t('destroy'), composition, :confirm => t('are_you_sure'), :method => :delete
+- for composition in @compositions
+  = render :partial => 'show', :locals => { :composition => composition }
