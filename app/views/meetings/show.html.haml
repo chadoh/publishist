@@ -19,7 +19,6 @@
             - @attendance.errors.full_messages.each do |msg|
               %li= msg
     
-      = f.input :meeting, :as => :hidden, :value => @meeting
       = f.input :person, :as => :string
       = f.input :answer
       = f.button :submit

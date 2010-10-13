@@ -282,7 +282,7 @@ img {
 
 /* Lists -------------------------------------------------------------- */
 /* line 180, ../../../app/stylesheets/_defaults.sass */
-ol, ul, dl {
+ol, ul {
   margin-bottom: 1.5em;
   margin-left: 1.5em;
 }
@@ -303,18 +303,33 @@ li ul {
 
 /* line 192, ../../../app/stylesheets/_defaults.sass */
 dt {
-  margin-top: 1.5em;
-  font-style: italic;
+  cursor: pointer;
+}
+/* line 194, ../../../app/stylesheets/_defaults.sass */
+dt span.arrow {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *display: inline;
+  *vertical-align: auto;
+}
+/* line 196, ../../../app/stylesheets/_defaults.sass */
+dt span.arrow.rotated {
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
-/* line 196, ../../../app/stylesheets/_defaults.sass */
+/* line 199, ../../../app/stylesheets/_defaults.sass */
 dd {
   padding-left: 1.5em;
 }
 
 /* Tables -------------------------------------------------------------- */
 /* tables still need 'cellspacing="0"' in the markup */
-/* line 202, ../../../app/stylesheets/_defaults.sass */
+/* line 205, ../../../app/stylesheets/_defaults.sass */
 table {
   margin-bottom: 1.5em;
   width: 100%;
@@ -322,38 +337,38 @@ table {
   border-spacing: 0;
 }
 
-/* line 208, ../../../app/stylesheets/_defaults.sass */
+/* line 211, ../../../app/stylesheets/_defaults.sass */
 table, td, th {
   vertical-align: top;
 }
 
-/* line 211, ../../../app/stylesheets/_defaults.sass */
+/* line 214, ../../../app/stylesheets/_defaults.sass */
 th, thead th {
   font-weight: bold;
 }
 
-/* line 214, ../../../app/stylesheets/_defaults.sass */
+/* line 217, ../../../app/stylesheets/_defaults.sass */
 th, td, caption {
   padding: 0.75em;
   text-align: left;
   font-weight: normal;
 }
 
-/* line 219, ../../../app/stylesheets/_defaults.sass */
+/* line 222, ../../../app/stylesheets/_defaults.sass */
 table, th {
   border-bottom-style: solid;
   border-bottom-width: 0.063em;
   padding-bottom: 0.688em;
 }
 
-/* line 222, ../../../app/stylesheets/_defaults.sass */
+/* line 225, ../../../app/stylesheets/_defaults.sass */
 tfoot {
   font-size: 0.875em;
   line-height: 1.714em;
 }
 
 /* Forms -------------------------------------------------------------- */
-/* line 230, ../../../app/stylesheets/_defaults.sass */
+/* line 233, ../../../app/stylesheets/_defaults.sass */
 fieldset {
   margin-bottom: 1.5em;
   border-style: solid;
@@ -361,29 +376,29 @@ fieldset {
   padding: 1.438em;
 }
 
-/* line 234, ../../../app/stylesheets/_defaults.sass */
+/* line 237, ../../../app/stylesheets/_defaults.sass */
 legend {
   font-size: 1.125em;
   line-height: 1.333em;
   font-weight: bold;
 }
 
-/* line 238, ../../../app/stylesheets/_defaults.sass */
+/* line 241, ../../../app/stylesheets/_defaults.sass */
 input[type="radio"], input[type="checkbox"] {
   vertical-align: baseline;
 }
 
-/* line 241, ../../../app/stylesheets/_defaults.sass */
+/* line 244, ../../../app/stylesheets/_defaults.sass */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 244, ../../../app/stylesheets/_defaults.sass */
+/* line 247, ../../../app/stylesheets/_defaults.sass */
 label {
   font-weight: bold;
 }
 
-/* line 249, ../../../app/stylesheets/_defaults.sass */
+/* line 252, ../../../app/stylesheets/_defaults.sass */
 .textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.875em;
@@ -406,28 +421,28 @@ label {
   height: 2.571em;
 }
 
-/* line 261, ../../../app/stylesheets/_defaults.sass */
+/* line 264, ../../../app/stylesheets/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 272, ../../../app/stylesheets/_defaults.sass */
+/* line 275, ../../../app/stylesheets/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 274, ../../../app/stylesheets/_defaults.sass */
+/* line 277, ../../../app/stylesheets/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 277, ../../../app/stylesheets/_defaults.sass */
+/* line 280, ../../../app/stylesheets/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 281, ../../../app/stylesheets/_defaults.sass */
+/* line 284, ../../../app/stylesheets/_defaults.sass */
 input[type=submit], button {
   font-size: 1em;
   line-height: 1.5em;
@@ -446,7 +461,7 @@ input[type=submit], button {
   -o-box-shadow: #4a4a4a 1px 1px 2px 0;
   box-shadow: #4a4a4a 1px 1px 2px 0;
 }
-/* line 292, ../../../app/stylesheets/_defaults.sass */
+/* line 295, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
   -moz-box-shadow: #4a4a4a 0 0 2px 0;
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
@@ -454,7 +469,7 @@ input[type=submit]:hover, button:hover {
   box-shadow: #4a4a4a 0 0 2px 0;
   color: #4c4c4c;
 }
-/* line 295, ../../../app/stylesheets/_defaults.sass */
+/* line 298, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
@@ -462,7 +477,7 @@ input[type=submit]:active, button:active {
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   color: #4c4c4c;
 }
-/* line 298, ../../../app/stylesheets/_defaults.sass */
+/* line 301, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: black 0 0 0 0;
@@ -501,16 +516,15 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 307, ../../../app/stylesheets/_defaults.sass */
+/* line 310, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 309, ../../../app/stylesheets/_defaults.sass */
+/* line 312, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
 
-@import url(form.css);
 /* Layout -------------------------------------------------------------- */
 /* line 29, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-susy-plugin-0.8.1/sass/susy/_vertical_rhythm.scss */
 body {
@@ -550,7 +564,7 @@ body > footer {
   height: 6em;
 }
 
-/* line 29, ../../../app/stylesheets/screen.sass */
+/* line 28, ../../../app/stylesheets/screen.sass */
 #page {
   *zoom: 1;
   margin-left: auto;
@@ -567,13 +581,13 @@ body > footer {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 33, ../../../app/stylesheets/screen.sass */
+/* line 32, ../../../app/stylesheets/screen.sass */
 #page > nav {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 35, ../../../app/stylesheets/screen.sass */
+/* line 34, ../../../app/stylesheets/screen.sass */
 #page > nav > ul {
   margin: 0;
   padding: 0;
@@ -585,7 +599,7 @@ body > footer {
   display: -webkit-box;
   display: box;
 }
-/* line 38, ../../../app/stylesheets/screen.sass */
+/* line 37, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li {
   list-style-image: none;
   list-style-type: none;
@@ -605,26 +619,26 @@ body > footer {
   display: block;
   text-align: center;
 }
-/* line 45, ../../../app/stylesheets/screen.sass */
+/* line 44, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > a {
   color: #cfb309;
   text-decoration: underline overline;
 }
-/* line 48, ../../../app/stylesheets/screen.sass */
+/* line 47, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > a:hover {
   text-decoration: underline overline line-through;
 }
-/* line 50, ../../../app/stylesheets/screen.sass */
+/* line 49, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li.current {
   text-shadow: silver 1px 1px 2px;
   color: #db8322;
   text-decoration: underline overline;
 }
-/* line 54, ../../../app/stylesheets/screen.sass */
+/* line 53, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li.current > a {
   color: #db8322;
 }
-/* line 57, ../../../app/stylesheets/screen.sass */
+/* line 56, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > ul#account {
   list-style: none;
   font-size: 0.813em;
@@ -636,7 +650,7 @@ body > footer {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 61, ../../../app/stylesheets/screen.sass */
+/* line 60, ../../../app/stylesheets/screen.sass */
 #page > header {
   -moz-box-shadow: silver 0 0 3px inset;
   -webkit-box-shadow: silver 0 0 3px inset;
@@ -657,13 +671,13 @@ body > footer {
   background-image: -moz-linear-gradient(top, #bfe0e0 0%, #8bc7c7 100%);
   background-image: linear-gradient(top, #bfe0e0 0%, #8bc7c7 100%);
 }
-/* line 69, ../../../app/stylesheets/screen.sass */
+/* line 68, ../../../app/stylesheets/screen.sass */
 #page > header h1 {
   font-size: 1.938em;
   line-height: 1.548em;
   margin-bottom: 0em;
 }
-/* line 73, ../../../app/stylesheets/screen.sass */
+/* line 72, ../../../app/stylesheets/screen.sass */
 #page > #notice {
   clear: both;
   margin-right: 0.885%;
@@ -677,7 +691,7 @@ body > footer {
   border-bottom-width: 0.063em;
   padding-bottom: -0.063em;
 }
-/* line 79, ../../../app/stylesheets/screen.sass */
+/* line 78, ../../../app/stylesheets/screen.sass */
 #page > article {
   display: inline;
   float: left;
@@ -685,14 +699,14 @@ body > footer {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 82, ../../../app/stylesheets/screen.sass */
+/* line 81, ../../../app/stylesheets/screen.sass */
 #page > article.full-width {
   display: inline;
   float: left;
   width: 98.23%;
   margin-right: 0.885%;
 }
-/* line 85, ../../../app/stylesheets/screen.sass */
+/* line 84, ../../../app/stylesheets/screen.sass */
 #page > aside {
   display: inline;
   float: left;
@@ -703,14 +717,14 @@ body > footer {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 89, ../../../app/stylesheets/screen.sass */
+/* line 88, ../../../app/stylesheets/screen.sass */
 #page > #page-footer {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
 
-/* line 92, ../../../app/stylesheets/screen.sass */
+/* line 91, ../../../app/stylesheets/screen.sass */
 body > footer {
   *zoom: 1;
   margin-left: auto;
@@ -727,7 +741,7 @@ body > footer:after {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 94, ../../../app/stylesheets/screen.sass */
+/* line 93, ../../../app/stylesheets/screen.sass */
 body > footer > #footer {
   clear: both;
   margin-right: 0.885%;
@@ -750,7 +764,7 @@ body > footer > #footer {
   text-align: center;
   background-color: #8daf25;
 }
-/* line 102, ../../../app/stylesheets/screen.sass */
+/* line 101, ../../../app/stylesheets/screen.sass */
 body > footer > #footer a {
   color: yellow;
 }
@@ -778,11 +792,11 @@ body > footer > #footer a:focus {
 }
 
 /* Individual pages --------------------------------- */
-/* line 108, ../../../app/stylesheets/screen.sass */
+/* line 107, ../../../app/stylesheets/screen.sass */
 section.user-profile h2 {
   margin-bottom: 0em;
 }
-/* line 110, ../../../app/stylesheets/screen.sass */
+/* line 109, ../../../app/stylesheets/screen.sass */
 section.user-profile ul {
   list-style: none;
   margin-left: 0;
@@ -794,7 +808,7 @@ section.user-profile ul li {
   margin-left: 0px;
 }
 
-/* line 114, ../../../app/stylesheets/screen.sass */
+/* line 113, ../../../app/stylesheets/screen.sass */
 section.composition {
   border-style: dashed;
   border-width: 0.063em;
@@ -805,18 +819,18 @@ section.composition {
   margin-bottom: 1.5em;
 }
 
-/* line 120, ../../../app/stylesheets/screen.sass */
+/* line 119, ../../../app/stylesheets/screen.sass */
 footer.composition-details {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-/* line 123, ../../../app/stylesheets/screen.sass */
+/* line 122, ../../../app/stylesheets/screen.sass */
 footer.composition-details p {
   margin-bottom: 0em;
   color: silver;
 }
 
-/* line 128, ../../../app/stylesheets/screen.sass */
+/* line 127, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition {
   border-style: solid;
   border-width: 0em;
@@ -825,7 +839,7 @@ article#compositions > section.composition {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 131, ../../../app/stylesheets/screen.sass */
+/* line 130, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition > header {
   display: inline;
   float: left;
@@ -833,11 +847,11 @@ article#compositions > section.composition > header {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 134, ../../../app/stylesheets/screen.sass */
+/* line 133, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition > div.body {
   display: none;
 }
-/* line 136, ../../../app/stylesheets/screen.sass */
+/* line 135, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition > footer {
   margin-top: 0em;
   display: inline;
@@ -849,21 +863,21 @@ article#compositions > section.composition > footer {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 140, ../../../app/stylesheets/screen.sass */
+/* line 139, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition > footer p:last-child {
   display: inline;
   float: right;
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 142, ../../../app/stylesheets/screen.sass */
+/* line 141, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition > footer p:first-child, article#compositions > section.composition > footer p:last-child {
   display: inline;
   float: left;
   width: 30.088%;
   margin-right: 0.885%;
 }
-/* line 144, ../../../app/stylesheets/screen.sass */
+/* line 143, ../../../app/stylesheets/screen.sass */
 article#compositions > section.composition > footer p:nth-child(2) {
   display: inline;
   float: left;
@@ -871,13 +885,13 @@ article#compositions > section.composition > footer p:nth-child(2) {
   margin-right: 0.885%;
 }
 
-/* line 147, ../../../app/stylesheets/screen.sass */
+/* line 146, ../../../app/stylesheets/screen.sass */
 section.meeting {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 149, ../../../app/stylesheets/screen.sass */
+/* line 148, ../../../app/stylesheets/screen.sass */
 section.meeting span.when {
   display: inline;
   float: left;
@@ -885,14 +899,14 @@ section.meeting span.when {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 152, ../../../app/stylesheets/screen.sass */
+/* line 151, ../../../app/stylesheets/screen.sass */
 section.meeting span.question {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 154, ../../../app/stylesheets/screen.sass */
+/* line 153, ../../../app/stylesheets/screen.sass */
 section.meeting span.actions {
   display: inline;
   float: left;
@@ -904,13 +918,13 @@ section.meeting span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 158, ../../../app/stylesheets/screen.sass */
+/* line 157, ../../../app/stylesheets/screen.sass */
 section.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 160, ../../../app/stylesheets/screen.sass */
+/* line 159, ../../../app/stylesheets/screen.sass */
 section.person span.name {
   display: inline;
   float: left;
@@ -918,21 +932,21 @@ section.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 163, ../../../app/stylesheets/screen.sass */
+/* line 162, ../../../app/stylesheets/screen.sass */
 section.person span.rank {
   display: inline;
   float: left;
   width: 11.504%;
   margin-right: 0.885%;
 }
-/* line 165, ../../../app/stylesheets/screen.sass */
+/* line 164, ../../../app/stylesheets/screen.sass */
 section.person span.promote-to {
   display: inline;
   float: left;
   width: 42.478%;
   margin-right: 0.885%;
 }
-/* line 167, ../../../app/stylesheets/screen.sass */
+/* line 166, ../../../app/stylesheets/screen.sass */
 section.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -950,7 +964,7 @@ section.person span.promote-to > ul li:after {
 section.person span.promote-to > ul li:last-child:after, section.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 169, ../../../app/stylesheets/screen.sass */
+/* line 168, ../../../app/stylesheets/screen.sass */
 section.person span.actions {
   display: inline;
   float: left;
@@ -962,7 +976,7 @@ section.person span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 173, ../../../app/stylesheets/screen.sass */
+/* line 172, ../../../app/stylesheets/screen.sass */
 section.attendance {
   clear: both;
   margin-right: 0.885%;
@@ -970,7 +984,7 @@ section.attendance {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 176, ../../../app/stylesheets/screen.sass */
+/* line 175, ../../../app/stylesheets/screen.sass */
 section.attendance span.person {
   margin-left: 0.885%;
   display: inline;
@@ -978,14 +992,14 @@ section.attendance span.person {
   width: 23.894%;
   margin-right: 0.885%;
 }
-/* line 179, ../../../app/stylesheets/screen.sass */
+/* line 178, ../../../app/stylesheets/screen.sass */
 section.attendance span.answer {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 181, ../../../app/stylesheets/screen.sass */
+/* line 180, ../../../app/stylesheets/screen.sass */
 section.attendance span.actions {
   display: inline;
   float: left;
@@ -997,7 +1011,7 @@ section.attendance span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 184, ../../../app/stylesheets/screen.sass */
+/* line 183, ../../../app/stylesheets/screen.sass */
 form.attendance {
   clear: both;
   margin-right: 0.885%;
@@ -1005,7 +1019,7 @@ form.attendance {
   margin-top: 1.5em;
 }
 
-/* line 188, ../../../app/stylesheets/screen.sass */
+/* line 187, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

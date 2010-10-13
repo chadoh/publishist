@@ -23,7 +23,7 @@
   = f.input :photo, :label => "Or, submit an image:"
   - if @user
     - if the_editor?
-      = f.association :author, :collection => Person.order('first_name')
+      = f.input :author, :as => :string, :input_html => { :value => "" }
       \- OR -
       = f.input :author_name
       = f.input :author_email, :input_html => { :value => "" }
@@ -34,6 +34,8 @@
 - javascript "hoverIntent.min"
 :javascript
   $(function(){
+    $("#composition_author").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}");
+
     $(".wysiwyg").cleditor();
     /*
     $("#composition_title_input ul.panel").wrap('<div class="trigger" style="cursor: pointer;"></div>').slideUp();

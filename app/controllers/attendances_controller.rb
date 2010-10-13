@@ -3,15 +3,11 @@ class AttendancesController < InheritedResources::Base
   belongs_to :meeting
 
   def create
-    person_string = params[:attendance][:person]
-    person = Person.find_or_create person_string
-    if person
+    if person = Person.find_or_create(params[:attendance][:person])
       params[:attendance][:person] = person
     else
-      params[:attendance].delete :person
-      params[:attendance][:person_name] = person_string
+      params[:attendance][:person_name] = params[:attendance].delete :person
     end
-    params[:attendance].delete :meeting
     create! do |format|
       flash[:notice] = "#{resource.first_name} was there"
       format.html { redirect_to parent_url }

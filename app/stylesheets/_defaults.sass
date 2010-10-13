@@ -177,7 +177,7 @@ img
 
 /* Lists --------------------------------------------------------------
 
-ol, ul, dl
+ol, ul
   +trailer
   margin-left: $base-rhythm-unit
 
@@ -190,8 +190,11 @@ ul
     list-style-type: circle
 
 dt
-  +leader
-  font-style: italic
+  cursor: pointer
+  span.arrow
+    +inline-block
+    &.rotated
+      +rotate(90deg)
 
 dd
   padding-left: $base-rhythm-unit
