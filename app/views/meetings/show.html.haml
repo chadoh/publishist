@@ -6,7 +6,7 @@
 
 %section#attendances
   %header
-    %h2 Attedance
+    %h2 Attendance
   - for attendance in @meeting.attendances
     = render :partial => 'attendances/show', :locals => { :attendance => attendance }
 
