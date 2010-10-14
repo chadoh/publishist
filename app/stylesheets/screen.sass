@@ -1,0 +1,219 @@
+//** SCREEN STYLES **//
+
+// Imports --------------------------------------------------------------
+
+@import defaults
+@import compass/css3
+@import compass/layout/sticky-footer
+@import compass/utilities/lists/inline-list
+
+/* Layout --------------------------------------------------------------
+
++susy
+
+/* Styles --------------------------------------------------------------
+
+/* Layout -----------------------------------------
+
++sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'body > footer')
+
+#page
+  +container
+  //+show-grid('grid.png')
+  // --> show-grid loads a 64+16x24 grid image by default
+  // For other grid settings, run `compass grid-img 30+10x20`
+  // Where 30 is the column width, 10 is the gutter width,
+  // and 20 is the (optional) line-height.
+
+
+  & > nav
+    +full
+    & > ul
+      +inline-block-list-container
+      +display-box
+      +box-lines('multiple')
+      & > li
+        +inline-block-list-item
+        +adjust-font-size-to(20px, 2)
+        +box-flex(1)
+        text-align: center
+        //&:last-child
+          text-align: right
+        & > a
+          color: $yellow
+          display: block
+          height: 100%
+          width: 100%
+          text-decoration: underline overline
+          &:hover
+            text-decoration: underline overline line-through
+        &.current
+          +text-shadow
+          color: $orange
+          text-decoration: underline overline
+          & > a
+            color: $orange
+
+        & > ul#account
+          +no-bullets
+          +adjust-font-size-to(13px, 0.7)
+
+  & > header
+    background-image: url('/images/clouds.png')
+    +full
+
+    h1
+      +adjust-font-size-to(31px)
+      +trailer(0, 21px)
+
+    .gradient
+      +box-shadow($lgray, 0, 0, 3px, inset)
+      width: 100%
+      background-color: $blue
+      text-align: center
+      +linear-gradient(color-stops(lighten($blue, 15%), $blue))
+      +opacity(0.9)
+    &, .gradient
+      +border-radius(20px 0)
+
+  & > #notice
+    +full
+    text-align: center
+    +trailer(1)
+    +horizontal-borders(1px, 0)
+
+  & > article
+    +columns($article)
+    +alpha
+    &.full-width
+      +full
+
+  & > aside
+    +columns($sidebar)
+    +omega
+
+  & > #page-footer
+    +full
+
+body > footer
+  +container
+  & > #footer
+    background-image: url('/images/grass.jpg')
+    +full
+    .gradient
+      width: 100%
+      background-color: $green
+      +linear-gradient(color-stops(lighten($green, 5%), darken($green, 10%)))
+      +box-shadow($lgray, 0, 0, 3px, inset)
+      +opacity(0.92)
+      +adjust-font-size-to(14px, 3)
+      text-align: center
+      a
+        +links(yellow)
+    &, .gradient
+      +border-radius(0 20px)
+
+@media screen and (max-width: 600px)
+  #page
+    & > article, & > aside
+      +full
+      width: auto
+
+/* Individual pages ---------------------------------
+
+section.user-profile
+  h2
+    +trailer(0)
+  ul
+    +no-bullets
+    margin-left: 0
+
+section.composition
+  +rhythm-borders(1px, 1, $base-font-size, dashed)
+  +padding-trailer(0)
+  border-color: $lgray
+  +leader
+  +trailer
+footer.composition-details
+  +leader
+  +trailer
+  p
+    +trailer(0)
+    color: $lgray
+
+article#compositions
+  & > section.composition
+    +rhythm-borders(0px, 0)
+    +full
+    & > header
+      h2
+        +trailer(0)
+      +columns($sidebar)
+      +alpha
+    & > div.body
+      display: none
+    & > footer
+      +leader(0)
+      +trailer(0)
+      +columns($article)
+      +omega
+      & > p.author
+        +omega
+        +columns($total-cols * 6/16)
+      & > p.submitted
+        +columns($total-cols * 7/16)
+      & > p.actions
+        +columns($total-cols * 3/16)
+        +omega
+
+article#submit-something
+  textarea#composition_body
+    height: $base-line-height / 14px * 18em
+  textarea#composition_title
+    height: $base-line-height / 14px * 1.5em
+  .trigger
+    height: 5px
+
+section.meeting
+  +full
+  span.when
+    +columns(floor($total-cols * (1/5)))
+    +alpha
+  span.question
+    +columns(ceil( $total-cols * (3/5)))
+  span.actions
+    +columns(floor($total-cols * (1/5)))
+    +omega
+
+section.person
+  +full
+  span.name
+    +columns(floor($total-cols * (4/16)))
+    +alpha
+  span.rank
+    +columns(floor($total-cols * (2/16)))
+  span.promote-to
+    +columns(ceil( $total-cols * (7/16)))
+    & > ul
+      +comma-delimited-list
+  span.actions
+    +columns(floor($total-cols * (3/16)))
+    +omega
+
+section.attendance
+  +full
+  +clearfix
+  span.person
+    +alpha
+    +columns($total-cols * (4/16))
+  span.answer
+    +columns($total-cols * (10/16))
+  span.actions
+    +columns($total-cols * (2/16))
+    +omega
+form.attendance
+  +full
+  +leader
+
+#your_name_looks_like
+  display: none

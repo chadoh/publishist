@@ -1,4 +1,4 @@
-= semantic_form_for @person do |f|
+= simple_form_for @person do |f|
   - if @person.errors.any?
     #errorExplanation
       %h3 There #{pluralize_phrase(@person.errors.count, "was an error", "were some errors")}!
@@ -6,17 +6,14 @@
         - @person.errors.full_messages.each do |msg|
           %li= msg
   
-  = f.inputs do
-    -# TODO: Make/find wysiwyg editor that inserts markdown and escape all tags on output
-    = f.input :first_name
-    = f.input :middle_name
-    = f.input :last_name
-    = f.input :email
-    - if params[:action] == 'edit'
-      = f.input :password, :label => 'New password'
-      = f.input :password_confirmation, :label => 'New password again'
-  = f.buttons do
-    = f.commit_button
+  = f.input :first_name
+  = f.input :middle_name
+  = f.input :last_name
+  = f.input :email
+  - if params[:action] == 'edit'
+    = f.input :password, :label => 'New password'
+    = f.input :password_confirmation, :label => 'New password again'
+  = f.button :submit
 
 :javascript
   $(function(){
@@ -27,7 +24,7 @@
       if ($("#person_last_name").val() != "") {
         $("span.name").append(" " + $("#person_last_name").val());
       }
-      $("#aside #your_name_looks_like").fadeIn();
+      $("#your_name_looks_like").fadeIn();
     });
 
   });

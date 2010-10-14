@@ -4,58 +4,59 @@
     - @content_for_title ||= "Problem Child"
     %title= @content_for_title
     %link(rel="shortcut icon" href="/images/favicon.ico")
-    = stylesheet_link_tag 'formtastic.css', 'compiled/layouts/application.css', 'jquery.autocomplete', :media => 'screen, projection'
-    = stylesheet_link_tag 'compiled/layouts/print.css', :media => 'print'
+    = stylesheet_link_tag 'compiled/screen', 'jquery.autocomplete', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/print', :media => 'print'
     /[if lt IE 8]
-      = stylesheet_link_tag 'compiled/layouts/ie.css', :media => 'screen, projection'
+      = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'jquery.autocomplete', 'rails', 'application'
     = csrf_meta_tag
     = yield :head
   %body
-    #root
-      #header
-        #text
+    #page
+      %nav.site-nav{ :role => 'navigation' }
+        %ul
+          %li{ :class => params[:controller] == 'welcome' && 'current' }= link_to_unless_current "About", root_path
+          %li{ :class => current_page?(new_composition_path) && 'current' }= link_to_unless_current "Submit", new_composition_path
+          - if editor?
+            %li{ :class => params[:controller] == 'compositions' && params[:action] != 'new' && 'current' }= link_to_unless_current "Compositions", compositions_path
+          - if staff? || editor?
+            %li{ :class => params[:controller] == 'people' && 'current' }= link_to_unless_current "People", people_path
+          - if member?
+            %li{ :class => params[:controller] == 'meetings' && 'current' }= link_to_unless_current "Meetings", meetings_path
+          %li
+            %ul#account
+              - if @user
+                %li
+                  = link_to_unless_current @user.name, person_path(@user)
+                %li
+                  = button_to "Sign out", @application_session, :method => :delete, :class => "link"
+              - else
+                %li
+                  = link_to_unless_current "Sign in", new_session_path
+                %li
+                  = link_to_unless_current "Sign Up!", new_person_path
+      %header{ :role => 'banner' }
+        .gradient
           %h1 Problem Child
           %p= t 'subtitle'
-          %ul#account{ :class => ('sign_up' unless @user) }
-            - if @user
-              %li
-                %strong= link_to_unless_current @user.name, person_path(@user)
-              %li
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                = button_to "Sign out", @application_session, :method => :delete, :class => "link"
-            - else
-              %li
-                = link_to_unless_current "Sign in", new_session_path
-              - unless current_page? new_person_path
-                %li
-                  &nbsp;&nbsp;|&nbsp;&nbsp;
-                  = link_to "Sign Up!", new_person_path, :class => "button"
-      #content
-        #aside
+      - if flash[:notice]
+        #notice= flash[:notice]
+      %article{ :id => "#{@article_id}", :role => 'main', :class => !content_for?(:aside) && 'full-width' }
+        %header
+          %h1= @content_for_page_heading if @show_title
+        = yield
+      - if content_for? :aside
+        %aside{ :id => "#{@article_id}-aside" }
           -##search_box
             -#= form_tag('/#') do
-              -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark_on" }
+              -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark" }
               -#%input{ :type => 'submit', :value => "Search!" }
           -#%br
           -#%hr
           = yield :aside
-        %ul#nav
-          %li= link_to_unless_current "About", root_path
-          %li= link_to_unless_current "Submit", new_composition_path
-          - if editor?
-            %li= link_to_unless_current "Compositions", compositions_path
-          - if staff? || editor?
-            %li= link_to_unless_current "People", people_path
-          - if member?
-            %li= link_to_unless_current "Meetings", meetings_path
-        #main
-          %h2= @content_for_page_heading if @show_title
-          - if flash[:notice]
-            #notice= flash[:notice]
-          = yield
-      #root_footer
-    #footer
-      #text
-        :markdown
-          This website is in early alpha development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.
+      #page-footer &nbsp;
+    %footer{ :role => 'contentinfo' }
+      #footer
+        .gradient
+          :markdown
+            This website is in early alpha development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.

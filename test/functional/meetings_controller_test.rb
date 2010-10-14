@@ -13,7 +13,7 @@ class MeetingsControllerTest < ActionController::TestCase
       rank = Factory.create(:current_editor)
       sign_in_user rank.person
       get :index
-      assert_select "td", 4
+      assert_select "span.actions"
       assert_select "a[href='#{new_meeting_path}']"
       sign_out_user
 
@@ -23,7 +23,7 @@ class MeetingsControllerTest < ActionController::TestCase
       assert_equal rank.person.highest_rank, rank
       sign_in_user rank.person
       get :index
-      assert_select "td", 4
+      assert_select "span.actions"
       assert_select "a[href='#{new_meeting_path}']"
     end
   end
@@ -33,11 +33,11 @@ class MeetingsControllerTest < ActionController::TestCase
       rank = Factory.create(:current_staff)
       sign_in_user rank.person
       get :index
-      assert_select "td", 2
+      assert_select "span.actions", false
       assert_select "a[href='#{new_meeting_path}']", false
 
       get :show, :id => @meeting.id
-      assert_select "th", 2
+      assert_select "h1", @meeting.question
       assert_select "form", 1 #the sign-out button
     end
   end
@@ -50,13 +50,13 @@ class MeetingsControllerTest < ActionController::TestCase
 
     should "be a prominent section of the show page" do
       get :show, :id => @meeting.id
-      assert_select "h3", "Attendance"
+      assert_select "h2", "Attendance"
     end
 
     should "display all currently documented attendees" do
       attendance = Factory.create(:attendance)
       get :show, :id => attendance.meeting_id
-      assert_select "td", 3
+      assert_select "span", attendance.answer
     end
 
     should "allow another attendance to be added" do

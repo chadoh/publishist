@@ -45,9 +45,13 @@ en:
     show:
       edit: "Edit Meeting"
 
+  flash:
+    people:
+      update:
+        notice: "Your account has been updated"
 
-  formtastic:
-    actions:
+  helpers:
+    submit:
       create: "Create %{model}!"
       composition:
         create: "Submit!"
@@ -59,8 +63,3 @@ en:
         create: "Sign In"
       attendance:
         create: "Add"
-
-  flash:
-    people:
-      update:
-        notice: "Your account has been updated"

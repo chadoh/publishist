@@ -10,3 +10,7 @@ test:
 production:
   <<: *DEFAULTS
   bucket: pcmag
+
+staging:
+  <<: *DEFAULTS
+  bucket: pcmag_staging
