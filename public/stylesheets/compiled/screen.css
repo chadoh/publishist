@@ -733,9 +733,10 @@ body > footer {
 }
 /* line 88, ../../../app/stylesheets/screen.sass */
 #page > article.full-width {
-  clear: both;
+  display: inline;
+  float: left;
+  width: 98.23%;
   margin-right: 0.885%;
-  margin-left: 0.885%;
 }
 /* line 91, ../../../app/stylesheets/screen.sass */
 #page > aside {
