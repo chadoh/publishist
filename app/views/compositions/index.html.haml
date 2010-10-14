@@ -1,3 +1,4 @@
 - title(t('.title'))
-- for composition in @compositions
-  = render :partial => 'show', :locals => { :composition => composition }
+%ul.compositions
+  - for composition in @compositions
+    = render :partial => 'show', :locals => { :composition => composition }

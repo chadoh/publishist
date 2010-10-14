@@ -2,12 +2,11 @@
 
 Factory.define :packet do |f|
   f.association :meeting
-  f.association :poetry_submission
-  f.position 1
+  f.association :composition, :factory => :poetry_submission
 end
 
 Factory.define :packet2, :class => Packet do |f|
   f.association :meeting
-  f.association :anonymous_poetry_submission
+  f.association :composition, :factory => :anonymous_poetry_submission
   f.position 2
 end

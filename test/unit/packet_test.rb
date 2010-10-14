@@ -6,19 +6,19 @@ class PacketTest < ActiveSupport::TestCase
 
   should validate_presence_of :meeting_id
   should validate_presence_of :composition_id
-  should validate_presence_of :position
 
   context "a packet" do
     setup do
       @p1 = Factory.create :packet
-      @p2 = Factory.create :packet2
       @meeting = @p1.meeting
+      @p2 = Packet.create :meeting => @meeting,
+        :composition => Factory.create(:anonymous_poetry_submission)
     end
 
     should "be able to be sorted up and down" do
-      assert_equal @meeting.last, @p2
-      @meeting.first.move_lower
-      assert_equal @meeting.last, @p1
+      assert_equal @meeting.packets.last, @p2
+      @meeting.packets.first.move_lower
+      assert_equal @meeting.packets.last, @p1
     end
   end
 end

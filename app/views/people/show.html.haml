@@ -13,7 +13,8 @@
       What #{@person.first_name} has submitted:
       - if @compositions.empty?
         nothing yet.
-  - @compositions.each do |composition|
-    = render :partial => 'compositions/show', :locals => { :composition => composition }
+  %ul.compositions
+    - @compositions.each do |composition|
+      = render :partial => 'compositions/show', :locals => { :composition => composition }
 - else
   = render :partial => 'about', :locals => { :person => @person }

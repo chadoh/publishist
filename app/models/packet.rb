@@ -5,5 +5,4 @@ class Packet < ActiveRecord::Base
 
   validates_presence_of :meeting_id
   validates_presence_of :composition_id
-  validates_presence_of :position
 end

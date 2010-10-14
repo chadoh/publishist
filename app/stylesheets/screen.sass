@@ -128,12 +128,21 @@ section.user-profile
     +no-bullets
     margin-left: 0
 
-section.composition
-  +rhythm-borders(1px, 1, $base-font-size, dashed)
-  +padding-trailer(0)
-  border-color: $lgray
-  +leader
-  +trailer
+ul.compositions
+  margin-left: 0
+  & > li.composition
+    +no-bullet
+    +rhythm-borders(1px, 1, $base-font-size, dashed)
+    +padding-trailer(0)
+    border-color: $lgray
+    +leader
+    +trailer
+    ul
+      list-style-type: disc
+    ul, ol
+      +trailer
+      ul, ol
+        +trailer(0)
 footer.composition-details
   +leader
   +trailer
@@ -142,7 +151,7 @@ footer.composition-details
     color: $lgray
 
 article#compositions
-  & > section.composition
+  li.composition
     +rhythm-borders(0px, 0)
     +full
     & > header
