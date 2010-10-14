@@ -55,16 +55,22 @@
           +adjust-font-size-to(13px, 0.7)
 
   & > header
-    +box-shadow($lgray, 0, 0, 3px, inset)
+    background-image: url('/images/clouds.png')
     +full
-    background-color: $blue
-    text-align: center
-    +border-radius(20px 0)
-    +linear-gradient(color-stops(lighten($blue, 15%), $blue))
 
     h1
       +adjust-font-size-to(31px)
       +trailer(0, 21px)
+
+    .gradient
+      +box-shadow($lgray, 0, 0, 3px, inset)
+      width: 100%
+      background-color: $blue
+      text-align: center
+      +linear-gradient(color-stops(lighten($blue, 15%), $blue))
+      +opacity(0.9)
+    &, .gradient
+      +border-radius(20px 0)
 
   & > #notice
     +full
@@ -88,15 +94,20 @@
 body > footer
   +container
   & > #footer
+    background-image: url('/images/grass.jpg')
     +full
-    +box-shadow($lgray, 0, 0, 3px, inset)
-    +linear-gradient(color-stops(lighten($green, 5%), darken($green, 10%)))
-    +border-radius(0 20px)
-    +adjust-font-size-to(14px, 3)
-    text-align: center
-    background-color: $green
-    a
-      +links(yellow)
+    .gradient
+      width: 100%
+      background-color: $green
+      +linear-gradient(color-stops(lighten($green, 5%), darken($green, 10%)))
+      +box-shadow($lgray, 0, 0, 3px, inset)
+      +opacity(0.92)
+      +adjust-font-size-to(14px, 3)
+      text-align: center
+      a
+        +links(yellow)
+    &, .gradient
+      +border-radius(0 20px)
 
 /* Individual pages ---------------------------------
 

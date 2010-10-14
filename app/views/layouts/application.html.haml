@@ -36,8 +36,9 @@
                 %li
                   = link_to_unless_current "Sign Up!", new_person_path
       %header{ :role => 'banner' }
-        %h1 Problem Child
-        %p= t 'subtitle'
+        .gradient
+          %h1 Problem Child
+          %p= t 'subtitle'
       - if flash[:notice]
         #notice= flash[:notice]
       %article{ :id => "#{@article_id}", :role => 'main', :class => !content_for?(:aside) && 'full-width' }
@@ -56,5 +57,6 @@
       #page-footer &nbsp;
     %footer{ :role => 'contentinfo' }
       #footer
-        :markdown
-          This website is in early alpha development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.
+        .gradient
+          :markdown
+            This website is in early alpha development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.
