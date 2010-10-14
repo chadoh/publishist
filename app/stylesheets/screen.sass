@@ -31,6 +31,7 @@
     & > ul
       +inline-block-list-container
       +display-box
+      +box-lines('multiple')
       & > li
         +inline-block-list-item
         +adjust-font-size-to(20px, 2)
@@ -40,6 +41,9 @@
           text-align: right
         & > a
           color: $yellow
+          display: block
+          height: 100%
+          width: 100%
           text-decoration: underline overline
           &:hover
             text-decoration: underline overline line-through
@@ -82,7 +86,7 @@
     +columns($article)
     +alpha
     &.full-width
-      +columns($total-cols)
+      +full
 
   & > aside
     +columns($sidebar)
@@ -108,6 +112,12 @@ body > footer
         +links(yellow)
     &, .gradient
       +border-radius(0 20px)
+
+@media screen and (max-width: 600px)
+  #page
+    & > article, & > aside
+      +full
+      width: auto
 
 /* Individual pages ---------------------------------
 
