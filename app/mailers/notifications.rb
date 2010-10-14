@@ -1,5 +1,5 @@
 class Notifications < ActionMailer::Base
-  default :from => "admin@problemchildmag.com"
+  default :from => ENV['ADMIN_EMAIL']
   default_url_options[:host] = "problemchildmag.com"
 
   helper :application
@@ -17,7 +17,7 @@ class Notifications < ActionMailer::Base
     @url = composition_url(composition)
 
     mail(
-      :to => "editor@problemchildmag.com",
+      :to => ENV['EDITOR_EMAIL'],
       :from => composition.email,
       :subject => "Submission: \"#{@title}\" by #{@author}"
     )

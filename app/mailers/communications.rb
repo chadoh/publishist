@@ -1,5 +1,5 @@
 class Communications < ActionMailer::Base
-  default :from => "admin@problemchildmag.com"
+  default :from => ENV['ADMIN_EMAIL']
   default_url_options[:host] = "problemchildmag.com"
 
   layout 'notifications'
