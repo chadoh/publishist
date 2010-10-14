@@ -1,39 +1,50 @@
 - title t('.title')
 - content_for :aside do
-  %header
-    %h2 Oh, hi there!
-  - unless @user
-    %section#sign-in-please
-      %header
-        :markdown
-          You should probably [sign in](#{new_session_path})! (Or maybe [sign up](#{new_person_path})?)
-          ----------------------------
-
-      :markdown
-        Here's why submitting when signed in is a good idea:
-
-        * You get to see how your submissions are scored
-        * You'll have a profile page, where you can see everything you've submitted and where other people can see everything you've had published
-        
-        And trust us, there are other great reasons we can't think of right now.
-
-        Please consider!
-
-        ## Alright, so here's how this works:
-      
-  %section#how-it-works
-    :markdown
-      Your name will be removed when this is reviewed; 
-      only the editor ([#{Person.editor.name}](#{person_path(Person.editor)})) will know you wrote this. 
-      And only the coeditor #{"([#{Person.coeditor.name}](#{person_path(Person.coeditor)}))" if Person.coeditor }
-      will know how people score it.
-      Everyone else has the privilege of judging it objectively.
-
-      "Everyone else" means anyone who wanders into the weekly meeting
-      at which your submission is reviewed (you can go, too! It's a good
-      way to get very honest feedback). For more info on meetings, visit the [about page](#{root_path}).
-
+  %section#tips
+    %header
+      %h2 Tips
     %dl
+      - unless @user
+        %dt
+          %span.arrow &raquo;
+          :markdown
+            You should probably [sign in](#{new_session_path})! (Or maybe [sign up](#{new_person_path})?)Why??
+        %dd
+          :markdown
+            Here's why submitting when signed in is a good idea:
+
+            * You get to see how your submissions are scored
+            * You'll have a profile page, where you can see everything you've submitted and where other people can see everything you've had published
+            
+            And trust us, there are other great reasons we can't think of right now.
+
+            Please consider!
+      %dt
+        %span.arrow &raquo;
+        :markdown
+          Use the *Paste as Text* option in the toolbar when pasting from Word
+      %dd
+        :markdown
+          Your submission will be badly mangled if you don't. It won't look like it now, but just you wait until it's submitted!
+
+  %section#answers
+    %header
+      %h2 Answers
+    %dl
+      %dt
+        %span.arrow &raquo;
+        How will you review my submission?
+      %dd
+        :markdown
+          Your name will be removed when this is reviewed; 
+          only the editor ([#{Person.editor.name}](#{person_path(Person.editor)})) will know you wrote this. 
+          And only the coeditor #{"([#{Person.coeditor.name}](#{person_path(Person.coeditor)}))" if Person.coeditor }
+          will know how people score it.
+          Everyone else has the privilege of judging it objectively.
+
+          "Everyone else" means anyone who wanders into the weekly meeting
+          at which your submission is reviewed (you can go, too! It's a good
+          way to get very honest feedback). For more info on meetings, visit the [about page](#{root_path}).
       %dt
         %span.arrow &raquo;
         What can I submit?

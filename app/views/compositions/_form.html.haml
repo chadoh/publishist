@@ -1,12 +1,6 @@
 - javascript 'cleditor'
 - stylesheet 'cleditor'
 
-:markdown
-  Please don't copy and paste this from Word!
-  By mid-October, it won't matter, but for now,
-  it will wreak havoc on your submission.
-  Just rewrite it, por favor!
-
 = simple_form_for @composition, :html => { :enctype => 'multipart/form-data' } do |f|
   - if @composition.errors.any?
     #errorExplanation
@@ -18,8 +12,8 @@
   - unless @user
     = f.input :author_name, :label => "Your Name"
     = f.input :author_email, :label => "Your Email Address"
-  = f.input :title, :label => 'Title', :input_html => { :class => 'wysiwyg' }
-  = f.input :body, :label => "Body", :required => false, :input_html => { :class => 'wysiwyg' }
+  = f.input :title, :label => 'Title'
+  = f.input :body, :label => "Body", :required => false
   = f.input :photo, :label => "Or, submit an image:"
   - if @user
     - if the_editor?
@@ -36,16 +30,38 @@
   $(function(){
     $("#composition_author").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}");
 
-    $(".wysiwyg").cleditor();
+    cloptions = {
+      width: '99%',
+      height: 500,
+      useCSS: false,
+      docType: '<!DOCTYPE html>',
+      bodyStyle: 'font-family: Cambria, Georgia, serif;',
+      controls:     // controls to add to the toolbar
+        "bold italic underline strikethrough subscript superscript | " +
+        "color highlight removeformat | bullets numbering | outdent " +
+        "indent | alignleft center alignright justify | " +
+        "rule image link unlink | pastetext source"
+    }
+
+    $("#composition_body").cleditor(cloptions);
+
+    cloptions.height = 62;
+    cloptions.controls = "bold italic underline strikethrough subscript superscript | " +
+        "pastetext source"
+    $("#composition_title").cleditor(cloptions);
+
+
     /*
-    $("#composition_title_input ul.panel").wrap('<div class="trigger" style="cursor: pointer;"></div>').slideUp();
+    title_toolbar = $("label[for=composition_title]").next().find('.cleditorToolbar');
+    title_toolbar.wrap('<div class="trigger" style="cursor: pointer;"></div>').slideUp();
     hiConfig = {
       sensitivity: 3,
       interval: 200,
       timeout: 1000,
-      over: function(){ $("#composition_title_input ul.panel").slideDown(); }, 
-      out: function(){ $("#composition_title_input ul.panel").slideUp(); }
+      over: function(){ title_toolbar.slideDown(); }, 
+      out:  function(){ title_toolbar.slideUp();   }
     }
     $(".trigger").hoverIntent(hiConfig);
     */
+
   });

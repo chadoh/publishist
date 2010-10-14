@@ -61,6 +61,7 @@ class CompositionsController < ApplicationController
   end
 
   def update
+    params[:composition][:author] = Person.find_or_create(params[:composition][:author])
     @composition = Composition.find(params[:id])
 
     respond_to do |format|

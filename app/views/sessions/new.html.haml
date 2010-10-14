@@ -5,7 +5,7 @@
       %h3 Wrong!
       %p That email address and password didn't match up. Did you #{link_to "forget your password?", help_people_path}
   
-  = f.input :email
+  = f.input :email, :as => :email
   = f.input :password
   = f.button :submit
 

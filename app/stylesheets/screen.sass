@@ -125,20 +125,33 @@ article#compositions
     +rhythm-borders(0px, 0)
     +full
     & > header
+      h2
+        +trailer(0)
       +columns($sidebar)
       +alpha
     & > div.body
       display: none
     & > footer
       +leader(0)
+      +trailer(0)
       +columns($article)
       +omega
-      p:last-child
+      & > p.author
         +omega
-      p:first-child, p:last-child
-        +columns(floor($total-cols / 3))
-      p:nth-child(2)
-        +columns(ceil($total-cols / 3))
+        +columns($total-cols * 6/16)
+      & > p.submitted
+        +columns($total-cols * 7/16)
+      & > p.actions
+        +columns($total-cols * 3/16)
+        +omega
+
+article#submit-something
+  textarea#composition_body
+    height: $base-line-height / 14px * 18em
+  textarea#composition_title
+    height: $base-line-height / 14px * 1.5em
+  .trigger
+    height: 5px
 
 section.meeting
   +full

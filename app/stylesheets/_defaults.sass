@@ -166,7 +166,6 @@ pre
 
 blockquote
   margin: $base-rhythm-unit
-  font-style: italic
 
 /* Replaced --------------------------------------------------------------
 
@@ -180,6 +179,8 @@ img
 ol, ul
   +trailer
   margin-left: $base-rhythm-unit
+  ol, ul
+    +trailer(0)
 
 ol
   list-style: decimal
@@ -189,8 +190,13 @@ ul
   li &
     list-style-type: circle
 
+dl
+  +trailer
+  +leader(0)
 dt
   cursor: pointer
+  p
+    display: inline
   span.arrow
     +inline-block
     &.rotated
@@ -250,8 +256,8 @@ label
 // box-sizing helps us control the width of inputs
 // which are otherwise very hard to manage in the grid.
 .textinput
-  +sans-family
-  +adjust-font-size-to(14px, 1, 16px)
+  +serif-family
+  +adjust-font-size-to($base-font-size, 1, 16px)
   +rhythm-borders(1px, 0.25, 14px)
   +trailer(0.5)
   +box-sizing(border-box)
