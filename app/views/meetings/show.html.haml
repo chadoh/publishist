@@ -4,11 +4,12 @@
   %p
     = link_to t('.edit'), edit_meeting_path(@meeting)
 
-%section#attendances
+%section#attendance
   %header
     %h2 Attendance
-  - for attendance in @meeting.attendances
-    = render :partial => 'attendances/show', :locals => { :attendance => attendance }
+  %ul.attendances
+    - for attendance in @meeting.attendances
+      = render :partial => 'attendances/show', :locals => { :attendance => attendance }
 
   - if editor?
     = simple_form_for [@meeting, Attendance.new] do |f|
@@ -19,11 +20,17 @@
             - @attendance.errors.full_messages.each do |msg|
               %li= msg
     
-      = f.input :person, :as => :string
-      = f.input :answer
+      = f.input :person, :as => :string, :label => "Attendee (you can create an account by entering someone's name & email address)"
+      = f.input :answer, :label => "<span class='name'></span> Answer"
       = f.button :submit
 
 :javascript
   $(function(){
-    $("#attendance_person").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}");
+    $("#attendance_person").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}")
+      .live('blur', function() {
+        if($(this).val() == '')
+          $('span.name').html($(this).val().split(' ')[0].replace(/"/g, ''));
+        else
+          $('span.name').html($(this).val().split(' ')[0].replace(/"/g, '') + "'s");
+      });
   });

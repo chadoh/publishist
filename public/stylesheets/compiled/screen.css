@@ -1076,30 +1076,41 @@ section.person span.actions {
 }
 
 /* line 213, ../../../app/stylesheets/screen.sass */
-section.attendance {
+ul.attendances {
+  list-style: none;
+  margin-left: 0;
+}
+/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+ul.attendances li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+}
+/* line 216, ../../../app/stylesheets/screen.sass */
+ul.attendances li.attendance {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 216, ../../../app/stylesheets/screen.sass */
-section.attendance span.person {
+/* line 219, ../../../app/stylesheets/screen.sass */
+ul.attendances li.attendance span.person {
   margin-left: 0.885%;
   display: inline;
   float: left;
   width: 23.894%;
   margin-right: 0.885%;
 }
-/* line 219, ../../../app/stylesheets/screen.sass */
-section.attendance span.answer {
+/* line 222, ../../../app/stylesheets/screen.sass */
+ul.attendances li.attendance span.answer {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 221, ../../../app/stylesheets/screen.sass */
-section.attendance span.actions {
+/* line 224, ../../../app/stylesheets/screen.sass */
+ul.attendances li.attendance span.actions {
   display: inline;
   float: left;
   width: 11.504%;
@@ -1110,7 +1121,7 @@ section.attendance span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 224, ../../../app/stylesheets/screen.sass */
+/* line 227, ../../../app/stylesheets/screen.sass */
 form.attendance {
   clear: both;
   margin-right: 0.885%;
@@ -1118,7 +1129,7 @@ form.attendance {
   margin-top: 1.5em;
 }
 
-/* line 228, ../../../app/stylesheets/screen.sass */
+/* line 231, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }
