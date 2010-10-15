@@ -17,15 +17,13 @@
   = f.input :photo, :label => "Or, submit an image:"
   - if @user
     - if the_editor?
-      = f.input :author, :as => :string, :input_html => { :value => "" }
-      \- OR -
-      = f.input :author_name
-      = f.input :author_email, :input_html => { :value => "" }
+      = f.input :author, :as => :string, :label => "Author (you can submit for anyone with an account here, or create an account for someone by entering their name and email address)", :input_html => { :value => "#{"\"#{@composition.author(true).name}\" <#{@composition.author(true).email}>" if @composition.author(true)}" }
+      = f.input :author_name, :label => "Or if you want to submit for someone without creating an account for them, put their name here"
+      = f.input :author_email, :input_html => { :value => "" }, :label => "...and their email address here"
     - else
       = f.input :author_id, :as => :hidden
   = f.button :submit
 
-- javascript "hoverIntent.min"
 :javascript
   $(function(){
     $("#composition_author").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}");
@@ -49,19 +47,5 @@
     cloptions.controls = "bold italic underline strikethrough subscript superscript | " +
         "pastetext source"
     $("#composition_title").cleditor(cloptions);
-
-
-    /*
-    title_toolbar = $("label[for=composition_title]").next().find('.cleditorToolbar');
-    title_toolbar.wrap('<div class="trigger" style="cursor: pointer;"></div>').slideUp();
-    hiConfig = {
-      sensitivity: 3,
-      interval: 200,
-      timeout: 1000,
-      over: function(){ title_toolbar.slideDown(); }, 
-      out:  function(){ title_toolbar.slideUp();   }
-    }
-    $(".trigger").hoverIntent(hiConfig);
-    */
 
   });

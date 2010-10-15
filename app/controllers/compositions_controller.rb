@@ -46,7 +46,9 @@ class CompositionsController < ApplicationController
         Notifications.new_composition(@composition).deliver
         format.html {
           flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-          if @user
+          if @user and @user.the_editor?
+            redirect_to compositions_url
+          elsif @user
             redirect_to person_url(@user)
           else
             redirect_to(root_url)

@@ -20,11 +20,12 @@ class Composition < ActiveRecord::Base
     :path => "/:style/:filename",
     :styles => { :medium => "510x510>" }
 
-  def author
+  def author(picky = false)
     if read_attribute(:author_id)
-      Person.find(read_attribute(:author_id)).name
+      person = Person.find(read_attribute(:author_id))
+      picky ? person : person.name
     else
-      author_name
+      picky ? nil : author_name
     end
   end
 
