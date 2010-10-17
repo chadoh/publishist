@@ -60,10 +60,6 @@ class CompositionTest < ActiveSupport::TestCase
     assert compo.valid?
   end
 
-  should "add 'untitled' for title if field left blank" do
-    assert_equal @compo.title, "untitled"
-  end
-
   should "remove kruft added by ms word" do
     @compo.update_attributes :body => "<!--[if gte mso 9]><xml> <o:OfficeDocumentSettings> </style> <![endif]-->some text"
     assert_equal @compo.body, "some text"

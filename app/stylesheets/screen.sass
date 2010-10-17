@@ -25,7 +25,6 @@
   // Where 30 is the column width, 10 is the gutter width,
   // and 20 is the (optional) line-height.
 
-
   & > nav
     +full
     & > ul
@@ -138,6 +137,7 @@ ul.compositions
     border-color: $lgray
     +leader
     +trailer
+    +clearfix
     ul
       list-style-type: disc
     ul, ol
@@ -150,31 +150,53 @@ footer.composition-details
   p
     +trailer(0)
     color: $lgray
+  p.author a:last-child
+    +inline-block
+    width: 90%
 
 article#compositions
-  li.composition
-    +rhythm-borders(0px, 0)
-    +full
-    & > header
-      h2
-        +trailer(0)
-      +columns($sidebar)
-      +alpha
-    & > div.body
-      display: none
-    & > footer
-      +leader(0)
+  section
+    & > header > h2
       +trailer(0)
-      +columns($article)
-      +omega
-      & > p.author
+    +full
+    +trailer
+    +clearfix
+
+    li.composition.collapsed
+      cursor: move
+      background-image: url('/images/drag.gif')
+      border-color: $noticeable
+      +border-radius(5px)
+      +rhythm-borders(0px, 0)
+      +full
+      +trailer(0)
+      +leader(0)
+      .handle
+        cursor: default
+        background-color: white
+        +clearfix
+        +columns($total-cols - 0.05)
         +omega
-        +columns($total-cols * 6/16)
-      & > p.submitted
-        +columns($total-cols * 7/16)
-      & > p.actions
-        +columns($total-cols * 3/16)
-        +omega
+        & > header
+          h2
+            +trailer(0)
+          +columns($sidebar)
+          +alpha
+        & > div.body
+          display: none
+        & > footer
+          +leader(0)
+          +trailer(0)
+          +columns($article)
+          +omega
+          & > p.author
+            +alpha
+            +columns($total-cols * 6/16)
+          & > p.submitted
+            +columns($total-cols * 7/16)
+          & > p.actions
+            +columns($total-cols * 3/16)
+            +omega
 
 article#submit-something
   textarea#composition_body
@@ -184,16 +206,20 @@ article#submit-something
   .trigger
     height: 5px
 
-section.meeting
-  +full
-  span.when
-    +columns(floor($total-cols * (1/5)))
-    +alpha
-  span.question
-    +columns(ceil( $total-cols * (3/5)))
-  span.actions
-    +columns(floor($total-cols * (1/5)))
-    +omega
+ul.meetings
+  +no-bullets
+  margin-left: 0
+  li.meeting
+    +full
+    +clearfix
+    span.when
+      +columns(floor($total-cols * (1/5)))
+      +alpha
+    span.question
+      +columns(ceil( $total-cols * (3/5)))
+    span.actions
+      +columns(floor($total-cols * (1/5)))
+      +omega
 
 section.person
   +full

@@ -7,7 +7,8 @@
 %footer.composition-details
   - if the_editor? or @user.email == composition.email
     %p.author
-      = mail_to composition.email, email_image(composition.author)
+      - if the_editor?
+        = mail_to composition.email, email_image(composition.author)
       - if composition.author_id
         = link_to_unless_current composition.author, person_path(composition.author_id)
       - else

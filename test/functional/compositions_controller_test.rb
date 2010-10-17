@@ -2,6 +2,24 @@ require 'test_helper'
 
 class CompositionsControllerTest < ActionController::TestCase
 
+  context "#index" do
+    setup do
+      rank = Factory.create :current_editor
+      @p = rank.person
+      @m = Factory.create :meeting
+      sign_in_user @p
+      get :index
+    end
+
+    should "have a section for unscheduled compositions" do
+      assert_select "section#unscheduled"
+    end
+
+    should "have sections for each meeting" do
+      assert_select "section#meeting_#{@m.id}"
+    end
+  end
+
   context "#create" do
     context "when not signed in" do
       should "redirect to the root url" do

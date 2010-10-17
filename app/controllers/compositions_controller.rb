@@ -1,14 +1,14 @@
-class CompositionsController < ApplicationController
+class CompositionsController < InheritedResources::Base
   before_filter :editors_only, :only => [:index]
   before_filter :editors_and_owner_only, :only => [:show]
   before_filter :editor_only, :only => [:edit, :destroy]
-  def index
-    @compositions = Composition.order("created_at DESC")
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @compositions }
-    end
+  def index
+    @meetings = Meeting.all
+    @meetings_to_come = @meetings.inject([]) {|ms, m| if Time.now - m.when <= 0 then ms << m end } || []
+    @meetings_gone_by = @meetings.inject([]) {|ms, m| if Time.now - m.when > 0 then ms << m end } || []
+    @compositions = Composition.order("created_at DESC")
+    index!
   end
 
   def show
