@@ -150,9 +150,12 @@ footer.composition-details
   p
     +trailer(0)
     color: $lgray
-  p.author a:last-child
-    +inline-block
-    width: 90%
+  p.author
+    a:last-child
+      +inline-block
+      width: 90%
+    a:first-child
+      display: inline
 
 article#compositions
   section
