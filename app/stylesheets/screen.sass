@@ -128,7 +128,7 @@ section.user-profile
     +no-bullets
     margin-left: 0
 
-ul.compositions
+ul.compositions, ol.packets
   margin-left: 0
   & > li.composition
     +no-bullet
@@ -164,6 +164,9 @@ article#compositions
     +full
     +trailer
     +clearfix
+    &.drop-here
+      +rhythm-borders(1px, 0, $base-font-size, dashed)
+      border-color: $noticeable
 
     li.composition.collapsed
       cursor: move

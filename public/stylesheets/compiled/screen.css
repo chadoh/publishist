@@ -868,11 +868,11 @@ section.user-profile ul li {
 }
 
 /* line 131, ../../../app/stylesheets/screen.sass */
-ul.compositions {
+ul.compositions, ol.packets {
   margin-left: 0;
 }
 /* line 133, ../../../app/stylesheets/screen.sass */
-ul.compositions > li.composition {
+ul.compositions > li.composition, ol.packets > li.composition {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0px;
@@ -887,15 +887,15 @@ ul.compositions > li.composition {
   *zoom: 1;
 }
 /* line 141, ../../../app/stylesheets/screen.sass */
-ul.compositions > li.composition ul {
+ul.compositions > li.composition ul, ol.packets > li.composition ul {
   list-style-type: disc;
 }
 /* line 143, ../../../app/stylesheets/screen.sass */
-ul.compositions > li.composition ul, ul.compositions > li.composition ol {
+ul.compositions > li.composition ul, ul.compositions > li.composition ol, ol.packets > li.composition ul, ol.packets > li.composition ol {
   margin-bottom: 1.5em;
 }
 /* line 145, ../../../app/stylesheets/screen.sass */
-ul.compositions > li.composition ul ul, ul.compositions > li.composition ul ol, ul.compositions > li.composition ol ul, ul.compositions > li.composition ol ol {
+ul.compositions > li.composition ul ul, ul.compositions > li.composition ul ol, ul.compositions > li.composition ol ul, ul.compositions > li.composition ol ol, ol.packets > li.composition ul ul, ol.packets > li.composition ul ol, ol.packets > li.composition ol ul, ol.packets > li.composition ol ol {
   margin-bottom: 0em;
 }
 
@@ -937,7 +937,14 @@ article#compositions section {
 article#compositions section > header > h2 {
   margin-bottom: 0em;
 }
-/* line 168, ../../../app/stylesheets/screen.sass */
+/* line 167, ../../../app/stylesheets/screen.sass */
+article#compositions section.drop-here {
+  border-style: dashed;
+  border-width: 0.063em;
+  padding: -0.063em;
+  border-color: #dddddd;
+}
+/* line 171, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed {
   cursor: move;
   background: url("/images/drag.gif");
@@ -971,7 +978,7 @@ article#compositions section li.composition.collapsed:after {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 179, ../../../app/stylesheets/screen.sass */
+/* line 182, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle {
   background-color: white;
   overflow: hidden;
@@ -985,7 +992,7 @@ article#compositions section li.composition.collapsed .handle {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 184, ../../../app/stylesheets/screen.sass */
+/* line 187, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > header {
   display: inline;
   float: left;
@@ -993,15 +1000,15 @@ article#compositions section li.composition.collapsed .handle > header {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 185, ../../../app/stylesheets/screen.sass */
+/* line 188, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > header h2 {
   margin-bottom: 0em;
 }
-/* line 189, ../../../app/stylesheets/screen.sass */
+/* line 192, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > div.body {
   display: none;
 }
-/* line 191, ../../../app/stylesheets/screen.sass */
+/* line 194, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > footer {
   margin-top: 0em;
   margin-bottom: 0em;
@@ -1014,7 +1021,7 @@ article#compositions section li.composition.collapsed .handle > footer {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 196, ../../../app/stylesheets/screen.sass */
+/* line 199, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > footer > p.author {
   margin-left: 0.885%;
   display: inline;
@@ -1022,14 +1029,14 @@ article#compositions section li.composition.collapsed .handle > footer > p.autho
   width: 36.283%;
   margin-right: 0.885%;
 }
-/* line 199, ../../../app/stylesheets/screen.sass */
+/* line 202, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > footer > p.submitted {
   display: inline;
   float: left;
   width: 42.478%;
   margin-right: 0.885%;
 }
-/* line 201, ../../../app/stylesheets/screen.sass */
+/* line 204, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > footer > p.actions {
   display: inline;
   float: left;
@@ -1041,20 +1048,20 @@ article#compositions section li.composition.collapsed .handle > footer > p.actio
   #margin-left: -0.5em;
 }
 
-/* line 206, ../../../app/stylesheets/screen.sass */
+/* line 209, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#composition_body {
   height: 30.857em;
 }
-/* line 208, ../../../app/stylesheets/screen.sass */
+/* line 211, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#composition_title {
   height: 2.571em;
 }
-/* line 210, ../../../app/stylesheets/screen.sass */
+/* line 213, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 213, ../../../app/stylesheets/screen.sass */
+/* line 216, ../../../app/stylesheets/screen.sass */
 ul.meetings {
   list-style: none;
   margin-left: 0;
@@ -1065,7 +1072,7 @@ ul.meetings li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 216, ../../../app/stylesheets/screen.sass */
+/* line 219, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting {
   clear: both;
   margin-right: 0.885%;
@@ -1073,7 +1080,7 @@ ul.meetings li.meeting {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 219, ../../../app/stylesheets/screen.sass */
+/* line 222, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.when {
   display: inline;
   float: left;
@@ -1081,14 +1088,14 @@ ul.meetings li.meeting span.when {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 222, ../../../app/stylesheets/screen.sass */
+/* line 225, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.question {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 224, ../../../app/stylesheets/screen.sass */
+/* line 227, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.actions {
   display: inline;
   float: left;
@@ -1100,13 +1107,13 @@ ul.meetings li.meeting span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 228, ../../../app/stylesheets/screen.sass */
+/* line 231, ../../../app/stylesheets/screen.sass */
 section.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 230, ../../../app/stylesheets/screen.sass */
+/* line 233, ../../../app/stylesheets/screen.sass */
 section.person span.name {
   display: inline;
   float: left;
@@ -1114,21 +1121,21 @@ section.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 233, ../../../app/stylesheets/screen.sass */
+/* line 236, ../../../app/stylesheets/screen.sass */
 section.person span.rank {
   display: inline;
   float: left;
   width: 11.504%;
   margin-right: 0.885%;
 }
-/* line 235, ../../../app/stylesheets/screen.sass */
+/* line 238, ../../../app/stylesheets/screen.sass */
 section.person span.promote-to {
   display: inline;
   float: left;
   width: 42.478%;
   margin-right: 0.885%;
 }
-/* line 237, ../../../app/stylesheets/screen.sass */
+/* line 240, ../../../app/stylesheets/screen.sass */
 section.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1146,7 +1153,7 @@ section.person span.promote-to > ul li:after {
 section.person span.promote-to > ul li:last-child:after, section.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 239, ../../../app/stylesheets/screen.sass */
+/* line 242, ../../../app/stylesheets/screen.sass */
 section.person span.actions {
   display: inline;
   float: left;
@@ -1158,7 +1165,7 @@ section.person span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 243, ../../../app/stylesheets/screen.sass */
+/* line 246, ../../../app/stylesheets/screen.sass */
 ul.attendances {
   list-style: none;
   margin-left: 0;
@@ -1169,7 +1176,7 @@ ul.attendances li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 246, ../../../app/stylesheets/screen.sass */
+/* line 249, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance {
   clear: both;
   margin-right: 0.885%;
@@ -1177,7 +1184,7 @@ ul.attendances li.attendance {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 249, ../../../app/stylesheets/screen.sass */
+/* line 252, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.person {
   margin-left: 0.885%;
   display: inline;
@@ -1185,14 +1192,14 @@ ul.attendances li.attendance span.person {
   width: 23.894%;
   margin-right: 0.885%;
 }
-/* line 252, ../../../app/stylesheets/screen.sass */
+/* line 255, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.answer {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 254, ../../../app/stylesheets/screen.sass */
+/* line 257, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.actions {
   display: inline;
   float: left;
@@ -1204,7 +1211,7 @@ ul.attendances li.attendance span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 257, ../../../app/stylesheets/screen.sass */
+/* line 260, ../../../app/stylesheets/screen.sass */
 form.attendance {
   clear: both;
   margin-right: 0.885%;
@@ -1212,7 +1219,7 @@ form.attendance {
   margin-top: 1.5em;
 }
 
-/* line 261, ../../../app/stylesheets/screen.sass */
+/* line 264, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

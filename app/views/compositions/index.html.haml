@@ -4,6 +4,9 @@
   %section[meeting]
     %header
       %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
+    %ol.packets
+      - for packet in meeting.packets
+        = render :partial => 'show', :locals => { :composition => packet.composition }
 
 %section#unscheduled
   %header
@@ -16,5 +19,8 @@
   %section[meeting]
     %header
       %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
+    %ol.packets
+      - for packet in meeting.packets
+        = render :partial => 'show', :locals => { :composition => packet.composition }
 
 - javascript 'compositions'

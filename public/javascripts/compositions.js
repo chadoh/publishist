@@ -6,11 +6,22 @@ $(function(){
   });
 
   $('li.composition').draggable({
-    revert: true,
-    revertDuration: 150,
     stack: 'article',
     zIndex: 1,
     helper: 'clone'
+  });
+
+  $('section').droppable({
+    hoverClass: 'drop-here',
+    drop: function( event, ui ) {
+      $.ajax({
+        type: 'POST',
+        url: '/packets',
+        data: {
+          meeting: $(this).attr('id'),
+          composition:   ui.draggable.attr('id') }
+      });
+    }
   });
 
 });
