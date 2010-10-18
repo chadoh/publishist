@@ -940,7 +940,7 @@ article#compositions section > header > h2 {
 /* line 168, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed {
   cursor: move;
-  background-image: url("/images/drag.gif");
+  background: url("/images/drag.gif");
   border-color: #dddddd;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -954,12 +954,25 @@ article#compositions section li.composition.collapsed {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
+  *zoom: 1;
+  margin-left: auto;
+  margin-right: auto;
+  width: 54.5em;
+  max-width: 100%;
   margin-bottom: 0em;
   margin-top: 0em;
 }
-/* line 177, ../../../app/stylesheets/screen.sass */
+/* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+article#compositions section li.composition.collapsed:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+/* line 179, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle {
-  cursor: default;
   background-color: white;
   overflow: hidden;
   *zoom: 1;
@@ -972,7 +985,7 @@ article#compositions section li.composition.collapsed .handle {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 183, ../../../app/stylesheets/screen.sass */
+/* line 184, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > header {
   display: inline;
   float: left;
@@ -980,15 +993,15 @@ article#compositions section li.composition.collapsed .handle > header {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 184, ../../../app/stylesheets/screen.sass */
+/* line 185, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > header h2 {
   margin-bottom: 0em;
 }
-/* line 188, ../../../app/stylesheets/screen.sass */
+/* line 189, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > div.body {
   display: none;
 }
-/* line 190, ../../../app/stylesheets/screen.sass */
+/* line 191, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > footer {
   margin-top: 0em;
   margin-bottom: 0em;
@@ -1001,7 +1014,7 @@ article#compositions section li.composition.collapsed .handle > footer {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 195, ../../../app/stylesheets/screen.sass */
+/* line 196, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > footer > p.author {
   margin-left: 0.885%;
   display: inline;
@@ -1009,14 +1022,14 @@ article#compositions section li.composition.collapsed .handle > footer > p.autho
   width: 36.283%;
   margin-right: 0.885%;
 }
-/* line 198, ../../../app/stylesheets/screen.sass */
+/* line 199, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > footer > p.submitted {
   display: inline;
   float: left;
   width: 42.478%;
   margin-right: 0.885%;
 }
-/* line 200, ../../../app/stylesheets/screen.sass */
+/* line 201, ../../../app/stylesheets/screen.sass */
 article#compositions section li.composition.collapsed .handle > footer > p.actions {
   display: inline;
   float: left;
@@ -1028,20 +1041,20 @@ article#compositions section li.composition.collapsed .handle > footer > p.actio
   #margin-left: -0.5em;
 }
 
-/* line 205, ../../../app/stylesheets/screen.sass */
+/* line 206, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#composition_body {
   height: 30.857em;
 }
-/* line 207, ../../../app/stylesheets/screen.sass */
+/* line 208, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#composition_title {
   height: 2.571em;
 }
-/* line 209, ../../../app/stylesheets/screen.sass */
+/* line 210, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 212, ../../../app/stylesheets/screen.sass */
+/* line 213, ../../../app/stylesheets/screen.sass */
 ul.meetings {
   list-style: none;
   margin-left: 0;
@@ -1052,7 +1065,7 @@ ul.meetings li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 215, ../../../app/stylesheets/screen.sass */
+/* line 216, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting {
   clear: both;
   margin-right: 0.885%;
@@ -1060,7 +1073,7 @@ ul.meetings li.meeting {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 218, ../../../app/stylesheets/screen.sass */
+/* line 219, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.when {
   display: inline;
   float: left;
@@ -1068,14 +1081,14 @@ ul.meetings li.meeting span.when {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 221, ../../../app/stylesheets/screen.sass */
+/* line 222, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.question {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 223, ../../../app/stylesheets/screen.sass */
+/* line 224, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.actions {
   display: inline;
   float: left;
@@ -1087,13 +1100,13 @@ ul.meetings li.meeting span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 227, ../../../app/stylesheets/screen.sass */
+/* line 228, ../../../app/stylesheets/screen.sass */
 section.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 229, ../../../app/stylesheets/screen.sass */
+/* line 230, ../../../app/stylesheets/screen.sass */
 section.person span.name {
   display: inline;
   float: left;
@@ -1101,21 +1114,21 @@ section.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 232, ../../../app/stylesheets/screen.sass */
+/* line 233, ../../../app/stylesheets/screen.sass */
 section.person span.rank {
   display: inline;
   float: left;
   width: 11.504%;
   margin-right: 0.885%;
 }
-/* line 234, ../../../app/stylesheets/screen.sass */
+/* line 235, ../../../app/stylesheets/screen.sass */
 section.person span.promote-to {
   display: inline;
   float: left;
   width: 42.478%;
   margin-right: 0.885%;
 }
-/* line 236, ../../../app/stylesheets/screen.sass */
+/* line 237, ../../../app/stylesheets/screen.sass */
 section.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1133,7 +1146,7 @@ section.person span.promote-to > ul li:after {
 section.person span.promote-to > ul li:last-child:after, section.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 238, ../../../app/stylesheets/screen.sass */
+/* line 239, ../../../app/stylesheets/screen.sass */
 section.person span.actions {
   display: inline;
   float: left;
@@ -1145,7 +1158,7 @@ section.person span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 242, ../../../app/stylesheets/screen.sass */
+/* line 243, ../../../app/stylesheets/screen.sass */
 ul.attendances {
   list-style: none;
   margin-left: 0;
@@ -1156,7 +1169,7 @@ ul.attendances li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 245, ../../../app/stylesheets/screen.sass */
+/* line 246, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance {
   clear: both;
   margin-right: 0.885%;
@@ -1164,7 +1177,7 @@ ul.attendances li.attendance {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 248, ../../../app/stylesheets/screen.sass */
+/* line 249, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.person {
   margin-left: 0.885%;
   display: inline;
@@ -1172,14 +1185,14 @@ ul.attendances li.attendance span.person {
   width: 23.894%;
   margin-right: 0.885%;
 }
-/* line 251, ../../../app/stylesheets/screen.sass */
+/* line 252, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.answer {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 253, ../../../app/stylesheets/screen.sass */
+/* line 254, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.actions {
   display: inline;
   float: left;
@@ -1191,7 +1204,7 @@ ul.attendances li.attendance span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 256, ../../../app/stylesheets/screen.sass */
+/* line 257, ../../../app/stylesheets/screen.sass */
 form.attendance {
   clear: both;
   margin-right: 0.885%;
@@ -1199,7 +1212,7 @@ form.attendance {
   margin-top: 1.5em;
 }
 
-/* line 260, ../../../app/stylesheets/screen.sass */
+/* line 261, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

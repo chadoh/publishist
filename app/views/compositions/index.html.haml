@@ -17,10 +17,4 @@
     %header
       %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
 
-:javascript
-  $(function(){
-    $('li.composition header h2').live('click', function(e){
-      e.preventDefault();
-      $(this).parents('li.composition').toggleClass('collapsed');
-    });
-  });
+- javascript 'compositions'

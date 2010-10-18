@@ -167,15 +167,16 @@ article#compositions
 
     li.composition.collapsed
       cursor: move
-      background-image: url('/images/drag.gif')
+      background: url('/images/drag.gif')
       border-color: $noticeable
       +border-radius(5px)
       +rhythm-borders(0px, 0)
       +full
+      $container-width: $container-width - $side-gutter-width * 4
+      +container
       +trailer(0)
       +leader(0)
       .handle
-        cursor: default
         background-color: white
         +clearfix
         +columns($total-cols - 0.05)
