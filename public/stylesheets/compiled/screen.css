@@ -872,7 +872,7 @@ ul.compositions, ol.packets {
   margin-left: 0;
 }
 /* line 133, ../../../app/stylesheets/screen.sass */
-ul.compositions > li.composition, ol.packets > li.composition {
+ul.compositions > li.composition, ul.compositions > li.packet, ol.packets > li.composition, ol.packets > li.packet {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0px;
@@ -887,15 +887,15 @@ ul.compositions > li.composition, ol.packets > li.composition {
   *zoom: 1;
 }
 /* line 141, ../../../app/stylesheets/screen.sass */
-ul.compositions > li.composition ul, ol.packets > li.composition ul {
+ul.compositions > li.composition ul, ul.compositions > li.packet ul, ol.packets > li.composition ul, ol.packets > li.packet ul {
   list-style-type: disc;
 }
 /* line 143, ../../../app/stylesheets/screen.sass */
-ul.compositions > li.composition ul, ul.compositions > li.composition ol, ol.packets > li.composition ul, ol.packets > li.composition ol {
+ul.compositions > li.composition ul, ul.compositions > li.composition ol, ul.compositions > li.packet ul, ul.compositions > li.packet ol, ol.packets > li.composition ul, ol.packets > li.composition ol, ol.packets > li.packet ul, ol.packets > li.packet ol {
   margin-bottom: 1.5em;
 }
 /* line 145, ../../../app/stylesheets/screen.sass */
-ul.compositions > li.composition ul ul, ul.compositions > li.composition ul ol, ul.compositions > li.composition ol ul, ul.compositions > li.composition ol ol, ol.packets > li.composition ul ul, ol.packets > li.composition ul ol, ol.packets > li.composition ol ul, ol.packets > li.composition ol ol {
+ul.compositions > li.composition ul ul, ul.compositions > li.composition ul ol, ul.compositions > li.composition ol ul, ul.compositions > li.composition ol ol, ul.compositions > li.packet ul ul, ul.compositions > li.packet ul ol, ul.compositions > li.packet ol ul, ul.compositions > li.packet ol ol, ol.packets > li.composition ul ul, ol.packets > li.composition ul ol, ol.packets > li.composition ol ul, ol.packets > li.composition ol ol, ol.packets > li.packet ul ul, ol.packets > li.packet ul ol, ol.packets > li.packet ol ul, ol.packets > li.packet ol ol {
   margin-bottom: 0em;
 }
 
@@ -945,7 +945,7 @@ article#compositions section.drop-here {
   border-color: #dddddd;
 }
 /* line 171, ../../../app/stylesheets/screen.sass */
-article#compositions section li.composition.collapsed {
+article#compositions section li.composition.collapsed, article#compositions section li.packet.collapsed {
   cursor: move;
   background: url("/images/drag.gif");
   border-color: #dddddd;
@@ -970,7 +970,7 @@ article#compositions section li.composition.collapsed {
   margin-top: 0em;
 }
 /* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
-article#compositions section li.composition.collapsed:after {
+article#compositions section li.composition.collapsed:after, article#compositions section li.packet.collapsed:after {
   content: "\0020";
   display: block;
   height: 0;
@@ -979,7 +979,7 @@ article#compositions section li.composition.collapsed:after {
   visibility: hidden;
 }
 /* line 182, ../../../app/stylesheets/screen.sass */
-article#compositions section li.composition.collapsed .handle {
+article#compositions section li.composition.collapsed .handle, article#compositions section li.packet.collapsed .handle {
   background-color: white;
   overflow: hidden;
   *zoom: 1;
@@ -993,7 +993,7 @@ article#compositions section li.composition.collapsed .handle {
   #margin-left: -0.5em;
 }
 /* line 187, ../../../app/stylesheets/screen.sass */
-article#compositions section li.composition.collapsed .handle > header {
+article#compositions section li.composition.collapsed .handle > header, article#compositions section li.packet.collapsed .handle > header {
   display: inline;
   float: left;
   width: 30.088%;
@@ -1001,15 +1001,15 @@ article#compositions section li.composition.collapsed .handle > header {
   margin-left: 0.885%;
 }
 /* line 188, ../../../app/stylesheets/screen.sass */
-article#compositions section li.composition.collapsed .handle > header h2 {
+article#compositions section li.composition.collapsed .handle > header h2, article#compositions section li.packet.collapsed .handle > header h2 {
   margin-bottom: 0em;
 }
 /* line 192, ../../../app/stylesheets/screen.sass */
-article#compositions section li.composition.collapsed .handle > div.body {
+article#compositions section li.composition.collapsed .handle > div.body, article#compositions section li.packet.collapsed .handle > div.body {
   display: none;
 }
 /* line 194, ../../../app/stylesheets/screen.sass */
-article#compositions section li.composition.collapsed .handle > footer {
+article#compositions section li.composition.collapsed .handle > footer, article#compositions section li.packet.collapsed .handle > footer {
   margin-top: 0em;
   margin-bottom: 0em;
   display: inline;
@@ -1022,7 +1022,7 @@ article#compositions section li.composition.collapsed .handle > footer {
   #margin-left: -0.5em;
 }
 /* line 199, ../../../app/stylesheets/screen.sass */
-article#compositions section li.composition.collapsed .handle > footer > p.author {
+article#compositions section li.composition.collapsed .handle > footer > p.author, article#compositions section li.packet.collapsed .handle > footer > p.author {
   margin-left: 0.885%;
   display: inline;
   float: left;
@@ -1030,14 +1030,14 @@ article#compositions section li.composition.collapsed .handle > footer > p.autho
   margin-right: 0.885%;
 }
 /* line 202, ../../../app/stylesheets/screen.sass */
-article#compositions section li.composition.collapsed .handle > footer > p.submitted {
+article#compositions section li.composition.collapsed .handle > footer > p.submitted, article#compositions section li.packet.collapsed .handle > footer > p.submitted {
   display: inline;
   float: left;
   width: 42.478%;
   margin-right: 0.885%;
 }
 /* line 204, ../../../app/stylesheets/screen.sass */
-article#compositions section li.composition.collapsed .handle > footer > p.actions {
+article#compositions section li.composition.collapsed .handle > footer > p.actions, article#compositions section li.packet.collapsed .handle > footer > p.actions {
   display: inline;
   float: left;
   width: 17.699%;

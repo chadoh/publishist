@@ -1,8 +1,8 @@
 $(function(){
 
-  $('li.composition header h2').live('click', function(e){
+  $('li:regex(class,(composition|packet)) header h2').live('click', function(e){
     e.preventDefault();
-    $(this).parents('li.composition').toggleClass('collapsed');
+    $(this).parents('li:regex(class,(composition|packet))').toggleClass('collapsed');
   });
 
   $('li.composition').draggable({

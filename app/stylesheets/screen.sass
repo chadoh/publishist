@@ -130,7 +130,7 @@ section.user-profile
 
 ul.compositions, ol.packets
   margin-left: 0
-  & > li.composition
+  & > li.composition, & > li.packet
     +no-bullet
     +rhythm-borders(1px, 1, $base-font-size, dashed)
     +padding-trailer(0)
@@ -168,7 +168,7 @@ article#compositions
       +rhythm-borders(1px, 0, $base-font-size, dashed)
       border-color: $noticeable
 
-    li.composition.collapsed
+    li.composition.collapsed, li.packet.collapsed
       cursor: move
       background: url('/images/drag.gif')
       border-color: $noticeable

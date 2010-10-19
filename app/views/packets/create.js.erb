@@ -1,2 +1,4 @@
-li = $("li#composition_<%= @composition.id %>");
+sel = "li#composition_<%= @composition.id %>"
+$(sel + " header h2").prepend("<%= @packet.position %>. ")
+li = $(sel);
 $("ol.packets").append(li);

@@ -1,12 +1,14 @@
 - title(t('.title'))
 
+%p= link_to "Schedule a new meeting", new_meeting_path
+
 - for meeting in @meetings_to_come
   %section[meeting]
     %header
       %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
     %ol.packets
       - for packet in meeting.packets
-        = render :partial => 'show', :locals => { :composition => packet.composition }
+        = render :partial => 'packets/show', :locals => { :composition => packet }
 
 %section#unscheduled
   %header
@@ -21,6 +23,6 @@
       %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
     %ol.packets
       - for packet in meeting.packets
-        = render :partial => 'show', :locals => { :composition => packet.composition }
+        = render :partial => 'packets/show', :locals => { :packet => packet }
 
 - javascript 'compositions'
