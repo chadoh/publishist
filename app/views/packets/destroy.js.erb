@@ -1,0 +1,5 @@
+sel = "li#packet_<%= @packet.id %>";
+li = $(sel);
+li.addClass('composition').removeClass('packet');
+li.attr('id', 'composition_<%= @packet.composition.id %>');
+$('ul.compositions').append(li);

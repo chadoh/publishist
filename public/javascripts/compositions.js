@@ -5,7 +5,8 @@ $(function(){
     $(this).parents('li:regex(class,(composition|packet))').toggleClass('collapsed');
   });
 
-  $('li.composition').draggable({
+  $('li:regex(class,(composition|packet))').draggable({
+    axis: 'y',
     stack: 'article',
     zIndex: 1,
     helper: 'clone'
@@ -16,10 +17,11 @@ $(function(){
     drop: function( event, ui ) {
       $.ajax({
         type: 'POST',
-        url: '/packets',
+        url: '/packets/create_update_or_destroy',
         data: {
-          meeting: $(this).attr('id'),
-          composition:   ui.draggable.attr('id') }
+          the_thing:   ui.draggable.attr('id'),
+          coming_from: ui.draggable.parents('li.regex(class,(composition|packet))').attr('id'),
+          going_to:    $(this).attr('id') }
       });
     }
   });

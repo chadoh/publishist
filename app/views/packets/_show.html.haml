@@ -2,5 +2,5 @@
   .handle
     %header
       %a{ :href => composition_url(packet.composition) }
-        %h2.nocaps= "#{packet.position}. #{sanitize(packet.composition.title)}".html_safe
+        %h2.nocaps= sanitize(packet.composition.title)
     = render :partial => 'compositions/body_and_footer', :locals => { :composition => packet.composition }

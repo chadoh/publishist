@@ -1,11 +1,15 @@
 Pc::Application.routes.draw do
 
-  resources :packets
 
   get "welcome/index"
 
   resources :meetings do
     resources :attendances
+  end
+  resources :packets do
+    collection do
+      post 'create_update_or_destroy'
+    end
   end
   resources :compositions, :path_names => { :new => "/submit" }
   resources :people, :shallow => true do

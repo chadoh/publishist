@@ -1,4 +1,5 @@
-sel = "li#composition_<%= @composition.id %>"
-$(sel + " header h2").prepend("<%= @packet.position %>. ")
+sel = "li#composition_<%= @composition.id %>";
 li = $(sel);
-$("ol.packets").append(li);
+li.attr('id', 'packet_<%= @packet.id %>');
+li.addClass('packet').removeClass('composition');
+$("section#meeting_<%= @meeting.id %> ol.packets").append(li);

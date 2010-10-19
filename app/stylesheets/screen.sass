@@ -128,7 +128,7 @@ section.user-profile
     +no-bullets
     margin-left: 0
 
-ul.compositions, ol.packets
+ul.compositions
   margin-left: 0
   & > li.composition, & > li.packet
     +no-bullet
@@ -168,42 +168,47 @@ article#compositions
       +rhythm-borders(1px, 0, $base-font-size, dashed)
       border-color: $noticeable
 
-    li.composition.collapsed, li.packet.collapsed
-      cursor: move
-      background: url('/images/drag.gif')
-      border-color: $noticeable
-      +border-radius(5px)
-      +rhythm-borders(0px, 0)
-      +full
-      $container-width: $container-width - $side-gutter-width * 4
-      +container
-      +trailer(0)
-      +leader(0)
-      .handle
-        background-color: white
-        +clearfix
-        +columns($total-cols - 0.05)
-        +omega
-        & > header
-          h2
-            +trailer(0)
-          +columns($sidebar)
-          +alpha
-        & > div.body
-          display: none
-        & > footer
-          +leader(0)
-          +trailer(0)
-          +columns($article)
+    li.collapsed
+      &.composition
+        $container-width: $container-width - $side-gutter-width * 5
+        width: $container-width
+      &.packet
+        $container-width: $container-width - $side-gutter-width * 3
+        width: $container-width
+      &.composition, &.packet
+        cursor: move
+        background: url('/images/drag.gif')
+        border-color: $noticeable
+        +border-radius(5px)
+        +rhythm-borders(0px, 0)
+        +full
+        +trailer(0)
+        +leader(0)
+        .handle
+          background-color: white
+          +clearfix
+          +columns($total-cols - 0.05)
           +omega
-          & > p.author
+          & > header
+            h2
+              +trailer(0)
+            +columns($sidebar)
             +alpha
-            +columns($total-cols * 6/16)
-          & > p.submitted
-            +columns($total-cols * 7/16)
-          & > p.actions
-            +columns($total-cols * 3/16)
+          & > div.body
+            display: none
+          & > footer
+            +leader(0)
+            +trailer(0)
+            +columns($article)
             +omega
+            & > p.author
+              +alpha
+              +columns($total-cols * 6/16)
+            & > p.submitted
+              +columns($total-cols * 7/16)
+            & > p.actions
+              +columns($total-cols * 3/16)
+              +omega
 
 article#submit-something
   textarea#composition_body
