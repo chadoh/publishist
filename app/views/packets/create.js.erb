@@ -1,5 +1,4 @@
-sel = "li#composition_<%= @composition.id %>";
-li = $(sel);
+li = $("li#composition_<%= @composition.id %>");
 li.attr('id', 'packet_<%= @packet.id %>');
 li.addClass('packet').removeClass('composition');
 $("section#meeting_<%= @meeting.id %> ol.packets").append(li);

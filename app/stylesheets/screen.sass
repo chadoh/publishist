@@ -172,32 +172,30 @@ article#compositions
       &.composition
         list-style-type: disc
       &.composition, &.packet
-        cursor: move
         +rhythm-borders(0px, 0)
-        +trailer(0)
         +leader(0)
-        .handle
-          +clearfix
-          & > header
-            h2
-              +trailer(0)
-            +columns($sidebar)
-            +alpha
-          & > div.body
-            display: none
-          & > footer
-            +leader(0)
+        +trailer(0)
+        cursor: move
+        & > header
+          +inline-block
+          width: $sidebar * $col-width
+          h2
             +trailer(0)
-            +columns($article)
+        & > div.body
+          display: none
+        & > footer
+          +inline-block
+          width: $article * $col-width + ($article - 5) * $gutter-width
+          +trailer(0)
+          +leader(0)
+          & > p.author
+            +alpha
+            +columns($total-cols * 6/16)
+          & > p.submitted
+            +columns($total-cols * 7/16)
+          & > p.actions
+            +columns($total-cols * 3/16)
             +omega
-            & > p.author
-              +alpha
-              +columns($total-cols * 6/16)
-            & > p.submitted
-              +columns($total-cols * 7/16)
-            & > p.actions
-              +columns($total-cols * 3/16)
-              +omega
 
 article#submit-something
   textarea#composition_body

@@ -6,7 +6,8 @@ class CompositionsControllerTest < ActionController::TestCase
     setup do
       rank = Factory.create :current_editor
       @p = rank.person
-      @m = Factory.create :meeting
+      @m = @m2 = Factory.create(:meeting)
+      @m2.update_attributes :when => DateTime.now + 7
       sign_in_user @p
       get :index
     end
@@ -16,6 +17,7 @@ class CompositionsControllerTest < ActionController::TestCase
     end
 
     should "have sections for each meeting" do
+      assert_select "section#meeting_#{@m2.id}"
       assert_select "section#meeting_#{@m.id}"
     end
   end

@@ -1,6 +1,5 @@
 %li.collapsed[composition]
-  .handle
-    %header
-      %a{ :href => composition_url(composition) }
-        %h2.nocaps= sanitize(composition.title)
-    = render :partial => 'compositions/body_and_footer', :locals => { :composition => composition }
+  %header
+    %a{ :href => composition_url(composition) }
+      %h2.nocaps= sanitize(composition.title)
+  = render :partial => 'compositions/body_and_footer', :locals => { :composition => composition }

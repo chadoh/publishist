@@ -5,8 +5,8 @@ class CompositionsController < InheritedResources::Base
 
   def index
     @meetings = Meeting.all
-    @meetings_to_come = @meetings.inject([]) {|ms, m| if Time.now - m.when <= 0 then ms << m end } || []
-    @meetings_gone_by = @meetings.inject([]) {|ms, m| if Time.now - m.when > 0 then ms << m end } || []
+    @meetings_to_come = @meetings.select {|m| Time.now - m.when < 0}
+    @meetings_gone_by = @meetings - @meetings_to_come
     @compositions = Composition.order("created_at DESC") - Packet.all.collect(&:composition)
     index!
   end
