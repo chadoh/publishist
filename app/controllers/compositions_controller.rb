@@ -4,7 +4,7 @@ class CompositionsController < InheritedResources::Base
   before_filter :editor_only, :only => [:edit, :destroy]
 
   def index
-    @meetings = Meeting.all
+    @meetings = Meeting.all.sort_by(&:when).reverse
     @meetings_to_come = @meetings.select {|m| Time.now - m.when < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
     @compositions = Composition.order("created_at DESC") - Packet.all.collect(&:composition)

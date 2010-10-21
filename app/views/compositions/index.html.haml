@@ -3,14 +3,14 @@
 %p= link_to "Schedule a new meeting", new_meeting_path
 
 - for meeting in @meetings_to_come
-  %section[meeting]
+  %section.future[meeting]
     %header
       %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
     %ol.packets
       - for packet in meeting.packets
-        = render :partial => 'packets/show', :locals => { :composition => packet }
+        = render :partial => 'packets/show', :locals => { :packet => packet }
 
-%section#unscheduled
+%section#unscheduled.unscheduled
   %header
     %h2 Unscheduled
   %ul.compositions
@@ -18,9 +18,9 @@
       = render :partial => 'show', :locals => { :composition => composition }
 
 - for meeting in @meetings_gone_by
-  %section[meeting]
+  %section.past[meeting]
     %header
-      %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
+      %h2 Reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
     %ol.packets
       - for packet in meeting.packets
         = render :partial => 'packets/show', :locals => { :packet => packet }

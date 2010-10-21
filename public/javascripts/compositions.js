@@ -15,14 +15,33 @@ $(function(){
   $('section').droppable({
     hoverClass: 'drop-here',
     drop: function( event, ui ) {
-      $.ajax({
-        type: 'POST',
-        url: '/packets/create_update_or_destroy',
-        data: {
-          the_thing:   ui.draggable.attr('id'),
-          coming_from: ui.draggable.parents('li.regex(class,(composition|packet))').attr('id'),
-          going_to:    $(this).attr('id') }
-      });
+      li = ui.draggable;
+      section = $(this)
+      if(section.hasClass('unscheduled') && li.hasClass('packet')) {
+        packet_id = li.attr('id').split('_')[1];
+        $.ajax({
+          type: 'DELETE',
+          url: '/packets/' + packet_id
+        }); }
+      else if(li.parents('section').attr('id') != section.attr('id')) {
+        if(li.hasClass('composition')) {
+          $.ajax({
+            type: 'POST',
+            url: '/packets',
+            data: {
+              composition: li.attr('id').split('_')[1],
+              meeting:     section.attr('id').split('_')[1] }
+          }); }
+        else {
+          $.ajax({
+            type: 'POST',
+            url: '/packets',
+            data: {
+              packet:  li.attr('id').split('_')[1],
+              meeting: section.attr('id').split('_')[1] }
+          });
+        }
+      }
     }
   });
 

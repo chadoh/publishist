@@ -1,21 +1,16 @@
 class PacketsController < InheritedResources::Base
-  actions :create, :update, :destroy
+  actions :create, :destroy
 
-  def create_update_or_destroy
-    the_thing = params[:the_thing].split('_').first
-    coming_from = params[:coming_from].split('_').first
-    going_to = params[:going_to].split('_').first
+  def create
+    @old_packet = params[:packet]
+    @composition = params[:composition] ? Composition.find(params[:composition]) : Packet.find(params[:packet]).composition
+    @meeting = Meeting.find params[:meeting]
+    @packet = Packet.create :meeting => @meeting, :composition => @composition
+  end
 
-    if the_thing == 'composition'
-      @composition = Composition.find params[:the_thing].split('_').last
-      @meeting = Meeting.find params[:going_to].split('_').last
-      @packet = Packet.create :meeting_id => @meeting.id, :composition_id => @composition.id
-      render :action => "create"
-    elsif the_thing == 'packet' && going_to == 'unscheduled'
-      @packet = Packet.find params[:the_thing].split('_').last
-      @packet.destroy
-      render :action => 'destroy'
-    end
+  def destroy
+    @packet = Packet.find params[:id]
+    @packet.destroy
   end
 
 end

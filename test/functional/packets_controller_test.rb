@@ -8,45 +8,36 @@ class PacketsControllerTest < ActionController::TestCase
     @p = Factory.create :packet2
   end
 
-  context "#create_update_or_destroy" do
-    should "route to the create action if a composition is dropped on a meeting" do
-      xhr :post, :create_update_or_destroy, {
-        :the_thing => "composition_#{@c.id}",
-        :coming_from => "unscheduled",
-        :going_to => "meeting_#{@m.id}" }
+  context "#create" do
+    should "work when sent a composition" do
+      xhr :post, :create, {
+        :meeting => @m.id,
+        :composition => @c.id }
       assert_template :create
     end
 
-    should "route to the destroy action if a packet is dropped on 'unscheduled'" do
-      xhr :post, :create_update_or_destroy, {
-        :the_thing => "packet_#{@p.id}",
-        :coming_from => "meeting_#{@m.id}",
-        :going_to => "unscheduled" }
-      assert_template :destroy
+    should "work when sent a packet instead of a composition" do
+      @m2 = Factory.create :meeting2
+      xhr :post, :create, {
+        :meeting => @m2.id,
+        :packet => @p.id }
+      assert_template :create
     end
-  end
 
-  #context "#create" do
-    #setup do
-      #post :create, :packet => {
-        #:meeting_id => @m.id,
-        #:composition_id => @c.id }
-    #end
-
-    #should "not render any action" do
-      #assert_template nil
-    #end
-
-    #should "assign a position" do
-      #assert_equal 1, assigns(:packet).position
-    #end
-
-  #end
-
-  context "#update" do
   end
 
   context "#destroy" do
+    setup do
+      xhr :delete, :destroy, :id => @p.id
+    end
+
+    should "use the destroy.js.erb template" do
+      assert_template :destroy
+    end
+
+    should "destroy the packet" do
+      assert_equal 0, Packet.count
+    end
   end
                 
 end
