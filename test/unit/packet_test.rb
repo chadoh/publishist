@@ -13,6 +13,19 @@ class PacketTest < ActiveSupport::TestCase
     assert !@p2.valid?
   end
 
+  should "allow a composition to be reviewed at more than one meeting" do
+    @p1 = Factory.create :packet
+    @m2 = Factory.create :meeting2
+    @p2 = Packet.new :composition => @p1.composition, :meeting => @m2
+    assert @p2.valid?
+
+    @p2 = Factory.create :packet2
+    assert_not_equal @p2.meeting, @p1.meeting
+    assert_not_equal @p2.composition, @p1.composition
+    @p3 = Packet.new :composition => @p2.composition, :meeting => @p1.meeting
+    assert @p3.valid?
+  end
+
   context "a packet" do
     setup do
       @p1 = Factory.create :packet

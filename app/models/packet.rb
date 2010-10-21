@@ -10,11 +10,10 @@ class Packet < ActiveRecord::Base
 
   def review_a_composition_only_once_per_meeting
     packets = Packet.all
-    packets.delete(self)
-    compositions = packets.collect(&:composition)
-    meetings = packets.collect(&:meeting)
-    if compositions.include?(self.composition) and meetings.include?(self.meeting)
-      errors.add(:composition, "can only be reviewed once at each meeting")
+    for packet in packets
+      if packet.composition == self.composition && packet.meeting == self.meeting
+        errors.add(:composition, "can only be review once per meeting")
+      end
     end
   end
 end
