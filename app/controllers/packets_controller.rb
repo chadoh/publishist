@@ -3,9 +3,14 @@ class PacketsController < InheritedResources::Base
 
   def create
     @old_packet = params[:packet]
-    @composition = params[:composition] ? Composition.find(params[:composition]) : Packet.find(params[:packet]).composition
+    @composition = @old_packet ? Packet.find(@old_packet).composition : Composition.find(params[:composition])
     @meeting = Meeting.find params[:meeting]
-    @packet = Packet.create :meeting => @meeting, :composition => @composition
+    @packet = Packet.new(:meeting => @meeting, :composition => @composition)
+    if @packet.valid?
+      @packet.save
+    else
+      render :debug
+    end
   end
 
   def destroy

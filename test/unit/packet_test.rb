@@ -7,6 +7,12 @@ class PacketTest < ActiveSupport::TestCase
   should validate_presence_of :meeting_id
   should validate_presence_of :composition_id
 
+  should "only allow a composition to be reviewed once in a meeting" do
+    @p1 = Factory.create :packet
+    @p2 = Packet.new :composition => @p1.composition, :meeting => @p1.meeting
+    assert !@p2.valid?
+  end
+
   context "a packet" do
     setup do
       @p1 = Factory.create :packet

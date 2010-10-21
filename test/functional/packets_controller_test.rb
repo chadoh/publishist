@@ -24,6 +24,13 @@ class PacketsControllerTest < ActionController::TestCase
       assert_template :create
     end
 
+    should "render nothing if creation fails" do
+      xhr :post, :create, {
+       :meeting => @p.meeting,
+       :composition => @p.composition }
+      assert_template nil
+    end
+
   end
 
   context "#destroy" do
