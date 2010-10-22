@@ -16,11 +16,6 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 
 $(function(){
 
-  $('li:regex(class,(composition|packet)) header h2').live('click', function(e){
-    e.preventDefault();
-    $(this).parents('li:regex(class,(composition|packet))').toggleClass('collapsed');
-  });
-
   $('a.toggle_next').next().hide().end().live('click', function(e){
     e.preventDefault();
     $(this).next().slideToggle();

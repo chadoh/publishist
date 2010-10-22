@@ -1,5 +1,10 @@
 $(function(){
 
+  $('li:regex(class,(composition|packet)) header h2').live('click', function(e){
+    e.preventDefault();
+    $(this).parents('li:regex(class,(composition|packet))').toggleClass('collapsed');
+  });
+
   $('li:regex(class,(composition|packet))').draggable({
     axis: 'y',
     stack: 'article',
