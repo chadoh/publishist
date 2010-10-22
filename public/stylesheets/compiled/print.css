@@ -432,6 +432,7 @@ label {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
+  max-width: 38.5em;
   margin-top: 0;
   border-color: silver;
   -moz-box-shadow: #8bc7c7 0 0 3px 0;
@@ -441,28 +442,28 @@ label {
   height: 2.571em;
 }
 
-/* line 276, ../../../app/stylesheets/_defaults.sass */
+/* line 277, ../../../app/stylesheets/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 287, ../../../app/stylesheets/_defaults.sass */
+/* line 288, ../../../app/stylesheets/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 289, ../../../app/stylesheets/_defaults.sass */
+/* line 290, ../../../app/stylesheets/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 292, ../../../app/stylesheets/_defaults.sass */
+/* line 293, ../../../app/stylesheets/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 296, ../../../app/stylesheets/_defaults.sass */
+/* line 297, ../../../app/stylesheets/_defaults.sass */
 input[type=submit], button {
   font-size: 1em;
   line-height: 1.5em;
@@ -481,7 +482,7 @@ input[type=submit], button {
   -o-box-shadow: #4a4a4a 1px 1px 2px 0;
   box-shadow: #4a4a4a 1px 1px 2px 0;
 }
-/* line 307, ../../../app/stylesheets/_defaults.sass */
+/* line 308, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
   -moz-box-shadow: #4a4a4a 0 0 2px 0;
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
@@ -489,7 +490,7 @@ input[type=submit]:hover, button:hover {
   box-shadow: #4a4a4a 0 0 2px 0;
   color: #4c4c4c;
 }
-/* line 310, ../../../app/stylesheets/_defaults.sass */
+/* line 311, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
@@ -497,7 +498,7 @@ input[type=submit]:active, button:active {
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   color: #4c4c4c;
 }
-/* line 313, ../../../app/stylesheets/_defaults.sass */
+/* line 314, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: black 0 0 0 0;
@@ -536,11 +537,11 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 322, ../../../app/stylesheets/_defaults.sass */
+/* line 323, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 324, ../../../app/stylesheets/_defaults.sass */
+/* line 325, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }

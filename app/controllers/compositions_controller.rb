@@ -1,6 +1,5 @@
 class CompositionsController < InheritedResources::Base
   before_filter :editors_only, :only => [:index]
-  before_filter :editors_and_owner_only, :only => [:show]
   before_filter :editor_only, :only => [:edit, :destroy]
 
   def index

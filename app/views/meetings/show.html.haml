@@ -4,6 +4,13 @@
   %p
     = link_to t('.edit'), edit_meeting_path(@meeting)
 
+%section#packet
+  %header
+    %h2 Packet
+  %ol.packets
+    - for packet in @meeting.packets
+      = render :partial => 'packets/show', :locals => { :packet => packet, :show_author => false }
+
 %section#attendance
   %header
     %h2 Attendance
