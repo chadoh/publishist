@@ -5,7 +5,9 @@ $(function(){
     $(this).parents('li:regex(class,(composition|packet))').toggleClass('collapsed');
   });
 
+  $('span.drag-handle').css('display', 'inline-block')
   $('li:regex(class,(composition|packet))').draggable({
+    handle: 'span.drag-handle',
     axis: 'y',
     stack: 'article',
     zIndex: 1,
@@ -16,7 +18,7 @@ $(function(){
     hoverClass: 'drop-here',
     drop: function( event, ui ) {
       li = ui.draggable;
-      section = $(this)
+      section = $(this);
       if(section.hasClass('unscheduled') && li.hasClass('packet')) {
         packet_id = li.attr('id').split('_')[1];
         $.ajax({

@@ -33,6 +33,25 @@ class PacketsControllerTest < ActionController::TestCase
 
   end
 
+  context "#update_position" do
+    setup do
+      @p2 = Packet.create :meeting => @p.meeting,
+        :composition => Factory.create(:anonymous_poetry_submission)
+      xhr :put, :update_position, {
+        :id => @p.id,
+        :position => 2 }
+      @p.reload
+    end
+
+    should "render nothing" do
+      assert_template nil
+    end
+
+    should "change the position for the identified packet and update the rest to match" do
+      assert_equal @p.position, 2
+    end
+  end
+
   context "#destroy" do
     setup do
       xhr :delete, :destroy, :id => @p.id

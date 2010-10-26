@@ -118,15 +118,15 @@ body {
 /* -moz- must be declared separately */
 /* line 62, ../../../app/stylesheets/_defaults.sass */
 ::-moz-selection {
-  color: white;
-  background: #cfb309;
+  color: #4c4c4c;
+  background: #bfe0e0;
   text-shadow: none;
 }
 
 /* line 67, ../../../app/stylesheets/_defaults.sass */
 ::selection {
-  color: white;
-  background: #cfb309;
+  color: #4c4c4c;
+  background: #bfe0e0;
   text-shadow: none;
 }
 

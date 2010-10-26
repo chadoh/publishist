@@ -8,9 +8,19 @@ $(function(){
         $('span.name').html($(this).val().split(' ')[0].replace(/"/g, '') + "'s");
     });
 
-  $('li:regex(class,(composition|packet)) header h2').live('click', function(e){
-    e.preventDefault();
-    $(this).parents('li:regex(class,(composition|packet))').toggleClass('collapsed');
+  $('span.drag-handle').css('display', 'inline-block')
+  $('ol.packets').sortable({
+    axis: 'y',
+    items: 'li',
+    handle: 'span.drag-handle',
+    update: function(event, ui){
+      li = ui.item;
+      packet_id = li.attr('id').split('_')[1];
+      $.ajax({
+        type: 'PUT',
+        url: '/packets/' + packet_id + '/update_position',
+        data: { position: li.prevAll().length }
+      });
+    }
   });
-
 });
