@@ -548,19 +548,18 @@ form.button_to div {
 
 /* Print Defaults -------------------------------------------------------------- */
 /* line 13, ../../../app/stylesheets/print.sass */
-nav {
+#page > nav, #page > header, body > footer {
   display: none;
 }
 
 /* line 16, ../../../app/stylesheets/print.sass */
 * {
   background: transparent !important;
-  color: #444444 !important;
   float: none !important;
   text-shadow: none !important;
 }
 
-/* line 22, ../../../app/stylesheets/print.sass */
+/* line 21, ../../../app/stylesheets/print.sass */
 body {
   font-family: Cambria, Georgia, serif;
   font-size: 12pt;
@@ -568,39 +567,61 @@ body {
   color: black;
 }
 
-/* line 29, ../../../app/stylesheets/print.sass */
+/* line 28, ../../../app/stylesheets/print.sass */
 a:link, a:visited {
-  color: #444444 !important;
-  text-decoration: underline;
-}
-/* line 32, ../../../app/stylesheets/print.sass */
-a:after {
-  content: " (" attr(href) ") ";
-  font-size: smaller;
+  color: #444444;
+  font-weight: bold;
 }
 
-/* line 36, ../../../app/stylesheets/print.sass */
+/* line 35, ../../../app/stylesheets/print.sass */
 abbr:after {
   content: " (" attr(title) ")";
   font-size: smaller;
 }
 
-/* line 40, ../../../app/stylesheets/print.sass */
+/* line 39, ../../../app/stylesheets/print.sass */
 pre, blockquote, img {
-  page-break-inside: avoid;
+  page-break-inside: avoid !important;
 }
 
 @page {
-  margin: 0.5cm;
+  margin: 1cm;
 }
 
-/* line 47, ../../../app/stylesheets/print.sass */
+/* line 46, ../../../app/stylesheets/print.sass */
 p, h2, h3 {
   orphans: 3;
   widows: 3;
 }
 
-/* line 51, ../../../app/stylesheets/print.sass */
-h2, h3 {
+/* line 50, ../../../app/stylesheets/print.sass */
+h2, h3, header {
   page-break-after: avoid;
+}
+
+/* line 53, ../../../app/stylesheets/print.sass */
+section#packet {
+  margin-top: 24pt;
+}
+
+/* line 56, ../../../app/stylesheets/print.sass */
+li.packet, li.composition {
+  margin-bottom: 24pt;
+}
+/* line 58, ../../../app/stylesheets/print.sass */
+li.packet ul, li.composition ul {
+  list-style-type: disc;
+}
+/* line 60, ../../../app/stylesheets/print.sass */
+li.packet ol, li.packet ul, li.composition ol, li.composition ul {
+  margin-bottom: 12pt;
+}
+/* line 62, ../../../app/stylesheets/print.sass */
+li.packet ol ol, li.packet ol ul, li.packet ul ol, li.packet ul ul, li.composition ol ol, li.composition ol ul, li.composition ul ol, li.composition ul ul {
+  margin-bottom: 0;
+}
+
+/* line 65, ../../../app/stylesheets/print.sass */
+form, p.submitted, p.actions, span.drag-handle, section#attendance {
+  display: none !important;
 }

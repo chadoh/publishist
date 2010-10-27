@@ -151,11 +151,12 @@ footer.composition-details
   p.author
     a:last-child
       +inline-block
-      width: 90%
+      width: 85%
     a:first-child
       display: inline
 
 span.drag-handle
+  display: none
   cursor: move
   +rotate(90deg)
   letter-spacing: -1px
@@ -195,12 +196,11 @@ article#compositions, article.meetings
             +leader(0)
             & > p.author
               +alpha
-              +columns($total-cols * 6/16)
+              +columns($total-cols * 5/16)
             & > p.submitted
-              +columns($total-cols * 6/16)
+              +columns($total-cols * 7/16)
             & > p.actions
-              +columns($total-cols * 4/16)
-              +omega
+              +columns($total-cols * 3/16)
 
 ul.attendances
   li.attendance
@@ -210,9 +210,9 @@ ul.attendances
     span.person
       width: $sidebar * $col-width
     span.answer
-      width: ($article - 2) * $col-width
+      width: ($article - 1.3) * $col-width
     span.actions
-      width: 2 * $col-width
+      width: 1.3 * $col-width
 form.attendance
   +full
   +leader

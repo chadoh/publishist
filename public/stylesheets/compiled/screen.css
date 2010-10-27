@@ -915,7 +915,7 @@ footer.composition-details p.author a:last-child {
   vertical-align: middle;
   *display: inline;
   *vertical-align: auto;
-  width: 90%;
+  width: 85%;
 }
 /* line 155, ../../../app/stylesheets/screen.sass */
 footer.composition-details p.author a:first-child {
@@ -924,6 +924,7 @@ footer.composition-details p.author a:first-child {
 
 /* line 158, ../../../app/stylesheets/screen.sass */
 span.drag-handle {
+  display: none;
   cursor: move;
   -moz-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -932,7 +933,7 @@ span.drag-handle {
   letter-spacing: -1px;
 }
 
-/* line 164, ../../../app/stylesheets/screen.sass */
+/* line 165, ../../../app/stylesheets/screen.sass */
 article#compositions section, article.meetings section {
   clear: both;
   margin-right: 0.885%;
@@ -941,26 +942,26 @@ article#compositions section, article.meetings section {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 165, ../../../app/stylesheets/screen.sass */
+/* line 166, ../../../app/stylesheets/screen.sass */
 article#compositions section > header > h2, article.meetings section > header > h2 {
   margin-bottom: 0em;
 }
-/* line 170, ../../../app/stylesheets/screen.sass */
+/* line 171, ../../../app/stylesheets/screen.sass */
 article#compositions section.drop-here, article.meetings section.drop-here {
   border-style: dashed;
   border-width: 0.063em;
   padding: -0.063em;
   border-color: #dddddd;
 }
-/* line 176, ../../../app/stylesheets/screen.sass */
+/* line 177, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.packet, article#compositions section ul.compositions li.collapsed.packet, article.meetings section ol.packets li.collapsed.packet, article.meetings section ul.compositions li.collapsed.packet {
   list-style-type: decimal;
 }
-/* line 178, ../../../app/stylesheets/screen.sass */
+/* line 179, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition, article#compositions section ul.compositions li.collapsed.composition, article.meetings section ol.packets li.collapsed.composition, article.meetings section ul.compositions li.collapsed.composition {
   list-style-type: disc;
 }
-/* line 180, ../../../app/stylesheets/screen.sass */
+/* line 181, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition, article#compositions section ol.packets li.collapsed.packet, article#compositions section ul.compositions li.collapsed.composition, article#compositions section ul.compositions li.collapsed.packet, article.meetings section ol.packets li.collapsed.composition, article.meetings section ol.packets li.collapsed.packet, article.meetings section ul.compositions li.collapsed.composition, article.meetings section ul.compositions li.collapsed.packet {
   border-style: solid;
   border-width: 0em;
@@ -968,7 +969,7 @@ article#compositions section ol.packets li.collapsed.composition, article#compos
   margin-top: 0em;
   margin-bottom: 0em;
 }
-/* line 184, ../../../app/stylesheets/screen.sass */
+/* line 185, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > header, article#compositions section ol.packets li.collapsed.packet > header, article#compositions section ul.compositions li.collapsed.composition > header, article#compositions section ul.compositions li.collapsed.packet > header, article.meetings section ol.packets li.collapsed.composition > header, article.meetings section ol.packets li.collapsed.packet > header, article.meetings section ul.compositions li.collapsed.composition > header, article.meetings section ul.compositions li.collapsed.packet > header {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -978,15 +979,15 @@ article#compositions section ol.packets li.collapsed.composition > header, artic
   *vertical-align: auto;
   width: 15em;
 }
-/* line 187, ../../../app/stylesheets/screen.sass */
+/* line 188, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > header h2, article#compositions section ol.packets li.collapsed.packet > header h2, article#compositions section ul.compositions li.collapsed.composition > header h2, article#compositions section ul.compositions li.collapsed.packet > header h2, article.meetings section ol.packets li.collapsed.composition > header h2, article.meetings section ol.packets li.collapsed.packet > header h2, article.meetings section ul.compositions li.collapsed.composition > header h2, article.meetings section ul.compositions li.collapsed.packet > header h2 {
   margin-bottom: 0em;
 }
-/* line 189, ../../../app/stylesheets/screen.sass */
+/* line 190, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > div.body, article#compositions section ol.packets li.collapsed.packet > div.body, article#compositions section ul.compositions li.collapsed.composition > div.body, article#compositions section ul.compositions li.collapsed.packet > div.body, article.meetings section ol.packets li.collapsed.composition > div.body, article.meetings section ol.packets li.collapsed.packet > div.body, article.meetings section ul.compositions li.collapsed.composition > div.body, article.meetings section ul.compositions li.collapsed.packet > div.body {
   display: none;
 }
-/* line 191, ../../../app/stylesheets/screen.sass */
+/* line 192, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > footer, article#compositions section ol.packets li.collapsed.packet > footer, article#compositions section ul.compositions li.collapsed.composition > footer, article#compositions section ul.compositions li.collapsed.packet > footer, article.meetings section ol.packets li.collapsed.composition > footer, article.meetings section ol.packets li.collapsed.packet > footer, article.meetings section ul.compositions li.collapsed.composition > footer, article.meetings section ul.compositions li.collapsed.packet > footer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -998,31 +999,27 @@ article#compositions section ol.packets li.collapsed.composition > footer, artic
   margin-bottom: 0em;
   margin-top: 0em;
 }
-/* line 196, ../../../app/stylesheets/screen.sass */
+/* line 197, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > footer > p.author, article#compositions section ol.packets li.collapsed.packet > footer > p.author, article#compositions section ul.compositions li.collapsed.composition > footer > p.author, article#compositions section ul.compositions li.collapsed.packet > footer > p.author, article.meetings section ol.packets li.collapsed.composition > footer > p.author, article.meetings section ol.packets li.collapsed.packet > footer > p.author, article.meetings section ul.compositions li.collapsed.composition > footer > p.author, article.meetings section ul.compositions li.collapsed.packet > footer > p.author {
   margin-left: 0.885%;
   display: inline;
   float: left;
-  width: 36.283%;
+  width: 30.088%;
   margin-right: 0.885%;
 }
-/* line 199, ../../../app/stylesheets/screen.sass */
+/* line 200, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > footer > p.submitted, article#compositions section ol.packets li.collapsed.packet > footer > p.submitted, article#compositions section ul.compositions li.collapsed.composition > footer > p.submitted, article#compositions section ul.compositions li.collapsed.packet > footer > p.submitted, article.meetings section ol.packets li.collapsed.composition > footer > p.submitted, article.meetings section ol.packets li.collapsed.packet > footer > p.submitted, article.meetings section ul.compositions li.collapsed.composition > footer > p.submitted, article.meetings section ul.compositions li.collapsed.packet > footer > p.submitted {
   display: inline;
   float: left;
-  width: 36.283%;
+  width: 42.478%;
   margin-right: 0.885%;
 }
-/* line 201, ../../../app/stylesheets/screen.sass */
+/* line 202, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > footer > p.actions, article#compositions section ol.packets li.collapsed.packet > footer > p.actions, article#compositions section ul.compositions li.collapsed.composition > footer > p.actions, article#compositions section ul.compositions li.collapsed.packet > footer > p.actions, article.meetings section ol.packets li.collapsed.composition > footer > p.actions, article.meetings section ol.packets li.collapsed.packet > footer > p.actions, article.meetings section ul.compositions li.collapsed.composition > footer > p.actions, article.meetings section ul.compositions li.collapsed.packet > footer > p.actions {
   display: inline;
   float: left;
-  width: 23.894%;
+  width: 17.699%;
   margin-right: 0.885%;
-  display: inline;
-  float: right;
-  margin-right: 0.885%;
-  #margin-left: -0.5em;
 }
 
 /* line 206, ../../../app/stylesheets/screen.sass */
@@ -1046,11 +1043,11 @@ ul.attendances li.attendance span.person {
 }
 /* line 212, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.answer {
-  width: 27em;
+  width: 29.1em;
 }
 /* line 214, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.actions {
-  width: 6em;
+  width: 3.9em;
 }
 
 /* line 216, ../../../app/stylesheets/screen.sass */
