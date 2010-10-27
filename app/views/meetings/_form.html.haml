@@ -9,7 +9,7 @@
       - @meeting.errors.full_messages.each do |msg|
         %li= msg
 
-  = f.input :when, :as => :string, :input_html => { :value => @meeting.when.strftime("%Y-%m-%d %I:%M %p") }
+  = f.input :when, :as => :string, :input_html => { :value => (@meeting.when ? @meeting.when.strftime("%Y-%m-%d %I:%M %p") : nil) }
   = f.input :question
   = f.button :submit
 
