@@ -1,8 +1,8 @@
-%section[attendance]
+%li[attendance]
   %span.person
     - if editor? && attendance.person
       = mail_to attendance.person.email, email_image(attendance.name)
-    = link_to attendance.name, attendance.person
+    = link_to_if attendance.person, attendance.name, attendance.person
   %span.answer= attendance.answer
   -if editor?
     %span.actions

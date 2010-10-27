@@ -2,5 +2,6 @@
 - if editor?
   %p= link_to t('.new_meeting'), new_meeting_path
 
-- for meeting in @meetings
-  = render :partial => 'show', :locals => { :meeting => meeting }
+%ul.meetings
+  - for meeting in @meetings
+    = render :partial => 'show', :locals => { :meeting => meeting }

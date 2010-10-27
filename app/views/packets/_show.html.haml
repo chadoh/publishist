@@ -1,0 +1,5 @@
+%li.collapsed[packet]
+  %header
+    %a{ :href => composition_url(packet.composition) }
+      %h2.nocaps= sanitize(packet.composition.title)
+  = render :partial => 'compositions/body_and_footer', :locals => { :composition => packet.composition, :show_author => show_author }

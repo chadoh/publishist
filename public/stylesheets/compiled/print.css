@@ -89,7 +89,7 @@ html {
 }
 
 /* line 32, ../../../app/stylesheets/_defaults.sass */
-.caps, .allcaps, h1, h2, caption, .smallcaps, h4 {
+.caps, .allcaps, h1, h2, caption, .smallcaps, h4, .nocaps {
   letter-spacing: 0.1em;
 }
 
@@ -103,161 +103,166 @@ html {
   font-variant: small-caps;
 }
 
+/* line 43, ../../../app/stylesheets/_defaults.sass */
+.nocaps {
+  text-transform: none;
+}
+
 /* Body -------------------------------------------------------------- */
-/* line 45, ../../../app/stylesheets/_defaults.sass */
+/* line 49, ../../../app/stylesheets/_defaults.sass */
 body {
   color: #4c4c4c;
 }
 
 /* Selected Text -------------------------------------------------------------- */
 /* -moz- must be declared separately */
-/* line 58, ../../../app/stylesheets/_defaults.sass */
+/* line 62, ../../../app/stylesheets/_defaults.sass */
 ::-moz-selection {
-  color: white;
-  background: #cfb309;
+  color: #4c4c4c;
+  background: #bfe0e0;
   text-shadow: none;
 }
 
-/* line 63, ../../../app/stylesheets/_defaults.sass */
+/* line 67, ../../../app/stylesheets/_defaults.sass */
 ::selection {
-  color: white;
-  background: #cfb309;
+  color: #4c4c4c;
+  background: #bfe0e0;
   text-shadow: none;
 }
 
 /* Links -------------------------------------------------------------- */
-/* line 85, ../../../app/stylesheets/_defaults.sass */
+/* line 89, ../../../app/stylesheets/_defaults.sass */
 a {
   color: #db8322;
 }
-/* line 72, ../../../app/stylesheets/_defaults.sass */
+/* line 76, ../../../app/stylesheets/_defaults.sass */
 a:link, a:visited {
   color: #db8322;
   text-decoration: none;
 }
-/* line 75, ../../../app/stylesheets/_defaults.sass */
+/* line 79, ../../../app/stylesheets/_defaults.sass */
 a:link, a:visited, a:hover, a:active {
   outline: none;
 }
-/* line 77, ../../../app/stylesheets/_defaults.sass */
+/* line 81, ../../../app/stylesheets/_defaults.sass */
 a:focus, a:hover {
   color: #8bc7c7;
   text-decoration: none;
 }
-/* line 80, ../../../app/stylesheets/_defaults.sass */
+/* line 84, ../../../app/stylesheets/_defaults.sass */
 a:active {
   color: #c78b8b;
 }
-/* line 82, ../../../app/stylesheets/_defaults.sass */
+/* line 86, ../../../app/stylesheets/_defaults.sass */
 a:focus {
   outline: thin dotted;
 }
 
 /* Headings -------------------------------------------------------------- */
-/* line 90, ../../../app/stylesheets/_defaults.sass */
+/* line 94, ../../../app/stylesheets/_defaults.sass */
 h2, h3, h4, h5, h6 {
   margin-bottom: 1.5em;
 }
 
-/* line 93, ../../../app/stylesheets/_defaults.sass */
+/* line 97, ../../../app/stylesheets/_defaults.sass */
 h1 {
   font-size: 1.313em;
   line-height: 1.143em;
   margin-bottom: 1.143em;
 }
 
-/* line 97, ../../../app/stylesheets/_defaults.sass */
+/* line 101, ../../../app/stylesheets/_defaults.sass */
 h1, h2 {
   text-shadow: silver 1px 1px 2px;
 }
 
-/* line 101, ../../../app/stylesheets/_defaults.sass */
+/* line 105, ../../../app/stylesheets/_defaults.sass */
 h3 {
   font-weight: bold;
 }
 
-/* line 104, ../../../app/stylesheets/_defaults.sass */
+/* line 108, ../../../app/stylesheets/_defaults.sass */
 h4 {
   text-transform: lowercase;
 }
 
-/* line 108, ../../../app/stylesheets/_defaults.sass */
+/* line 112, ../../../app/stylesheets/_defaults.sass */
 h5, h6 {
   font-style: italic;
 }
 
 /* Inline -------------------------------------------------------------- */
-/* line 113, ../../../app/stylesheets/_defaults.sass */
+/* line 117, ../../../app/stylesheets/_defaults.sass */
 cite, em, dfn, address, i {
   font-style: italic;
 }
 
-/* line 116, ../../../app/stylesheets/_defaults.sass */
+/* line 120, ../../../app/stylesheets/_defaults.sass */
 strong, dfn, b {
   font-weight: bold;
 }
 
-/* line 119, ../../../app/stylesheets/_defaults.sass */
+/* line 123, ../../../app/stylesheets/_defaults.sass */
 sup, sub {
   font-size: smaller;
   line-height: 0;
 }
 
-/* line 123, ../../../app/stylesheets/_defaults.sass */
+/* line 127, ../../../app/stylesheets/_defaults.sass */
 sup {
   vertical-align: super;
 }
 
-/* line 126, ../../../app/stylesheets/_defaults.sass */
+/* line 130, ../../../app/stylesheets/_defaults.sass */
 sub {
   vertical-align: sub;
 }
 
-/* line 129, ../../../app/stylesheets/_defaults.sass */
+/* line 133, ../../../app/stylesheets/_defaults.sass */
 abbr, acronym {
   border-bottom: 1px dotted;
   cursor: help;
 }
 
-/* line 133, ../../../app/stylesheets/_defaults.sass */
+/* line 137, ../../../app/stylesheets/_defaults.sass */
 ins {
   text-decoration: underline;
 }
 
-/* line 136, ../../../app/stylesheets/_defaults.sass */
+/* line 140, ../../../app/stylesheets/_defaults.sass */
 del {
   text-decoration: line-through;
 }
 
-/* line 139, ../../../app/stylesheets/_defaults.sass */
+/* line 143, ../../../app/stylesheets/_defaults.sass */
 mark {
   background: #ffff99;
   background-color: rgba(255, 255, 0, 0.5);
   text-shadow: none;
 }
 
-/* line 144, ../../../app/stylesheets/_defaults.sass */
+/* line 148, ../../../app/stylesheets/_defaults.sass */
 small {
   font-size: 0.75em;
   line-height: 2em;
 }
 
-/* line 147, ../../../app/stylesheets/_defaults.sass */
+/* line 151, ../../../app/stylesheets/_defaults.sass */
 q {
   font-style: italic;
 }
-/* line 149, ../../../app/stylesheets/_defaults.sass */
+/* line 153, ../../../app/stylesheets/_defaults.sass */
 q em {
   font-style: normal;
 }
 
 /* Block -------------------------------------------------------------- */
-/* line 157, ../../../app/stylesheets/_defaults.sass */
+/* line 161, ../../../app/stylesheets/_defaults.sass */
 p {
   margin-bottom: 1.5em;
 }
 
-/* line 160, ../../../app/stylesheets/_defaults.sass */
+/* line 164, ../../../app/stylesheets/_defaults.sass */
 pre {
   margin: 1.5em;
   white-space: pre;
@@ -266,13 +271,13 @@ pre {
   word-wrap: break-word;
 }
 
-/* line 167, ../../../app/stylesheets/_defaults.sass */
+/* line 171, ../../../app/stylesheets/_defaults.sass */
 blockquote {
   margin: 1.5em;
 }
 
 /* Replaced -------------------------------------------------------------- */
-/* line 172, ../../../app/stylesheets/_defaults.sass */
+/* line 176, ../../../app/stylesheets/_defaults.sass */
 img {
   vertical-align: text-middle;
   max-width: 100%;
@@ -280,45 +285,45 @@ img {
 }
 
 /* Lists -------------------------------------------------------------- */
-/* line 179, ../../../app/stylesheets/_defaults.sass */
+/* line 183, ../../../app/stylesheets/_defaults.sass */
 ol, ul {
   margin-bottom: 1.5em;
   margin-left: 1.5em;
 }
-/* line 182, ../../../app/stylesheets/_defaults.sass */
+/* line 186, ../../../app/stylesheets/_defaults.sass */
 ol ol, ol ul, ul ol, ul ul {
   margin-bottom: 0em;
 }
 
-/* line 185, ../../../app/stylesheets/_defaults.sass */
+/* line 189, ../../../app/stylesheets/_defaults.sass */
 ol {
   list-style: decimal;
 }
 
-/* line 188, ../../../app/stylesheets/_defaults.sass */
+/* line 192, ../../../app/stylesheets/_defaults.sass */
 ul {
   list-style: disc;
 }
-/* line 190, ../../../app/stylesheets/_defaults.sass */
+/* line 194, ../../../app/stylesheets/_defaults.sass */
 li ul {
   list-style-type: circle;
 }
 
-/* line 193, ../../../app/stylesheets/_defaults.sass */
+/* line 197, ../../../app/stylesheets/_defaults.sass */
 dl {
   margin-bottom: 1.5em;
   margin-top: 0em;
 }
 
-/* line 196, ../../../app/stylesheets/_defaults.sass */
+/* line 200, ../../../app/stylesheets/_defaults.sass */
 dt {
   cursor: pointer;
 }
-/* line 198, ../../../app/stylesheets/_defaults.sass */
+/* line 202, ../../../app/stylesheets/_defaults.sass */
 dt p {
   display: inline;
 }
-/* line 200, ../../../app/stylesheets/_defaults.sass */
+/* line 204, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -327,7 +332,7 @@ dt span.arrow {
   *display: inline;
   *vertical-align: auto;
 }
-/* line 202, ../../../app/stylesheets/_defaults.sass */
+/* line 206, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow.rotated {
   -moz-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -335,14 +340,14 @@ dt span.arrow.rotated {
   transform: rotate(90deg);
 }
 
-/* line 205, ../../../app/stylesheets/_defaults.sass */
+/* line 209, ../../../app/stylesheets/_defaults.sass */
 dd {
   padding-left: 1.5em;
 }
 
 /* Tables -------------------------------------------------------------- */
 /* tables still need 'cellspacing="0"' in the markup */
-/* line 211, ../../../app/stylesheets/_defaults.sass */
+/* line 215, ../../../app/stylesheets/_defaults.sass */
 table {
   margin-bottom: 1.5em;
   width: 100%;
@@ -350,38 +355,38 @@ table {
   border-spacing: 0;
 }
 
-/* line 217, ../../../app/stylesheets/_defaults.sass */
+/* line 221, ../../../app/stylesheets/_defaults.sass */
 table, td, th {
   vertical-align: top;
 }
 
-/* line 220, ../../../app/stylesheets/_defaults.sass */
+/* line 224, ../../../app/stylesheets/_defaults.sass */
 th, thead th {
   font-weight: bold;
 }
 
-/* line 223, ../../../app/stylesheets/_defaults.sass */
+/* line 227, ../../../app/stylesheets/_defaults.sass */
 th, td, caption {
   padding: 0.75em;
   text-align: left;
   font-weight: normal;
 }
 
-/* line 228, ../../../app/stylesheets/_defaults.sass */
+/* line 232, ../../../app/stylesheets/_defaults.sass */
 table, th {
   border-bottom-style: solid;
   border-bottom-width: 0.063em;
   padding-bottom: 0.688em;
 }
 
-/* line 231, ../../../app/stylesheets/_defaults.sass */
+/* line 235, ../../../app/stylesheets/_defaults.sass */
 tfoot {
   font-size: 0.875em;
   line-height: 1.714em;
 }
 
 /* Forms -------------------------------------------------------------- */
-/* line 239, ../../../app/stylesheets/_defaults.sass */
+/* line 243, ../../../app/stylesheets/_defaults.sass */
 fieldset {
   margin-bottom: 1.5em;
   border-style: solid;
@@ -389,31 +394,31 @@ fieldset {
   padding: 1.438em;
 }
 
-/* line 243, ../../../app/stylesheets/_defaults.sass */
+/* line 247, ../../../app/stylesheets/_defaults.sass */
 legend {
   font-size: 1.125em;
   line-height: 1.333em;
   font-weight: bold;
 }
 
-/* line 247, ../../../app/stylesheets/_defaults.sass */
+/* line 251, ../../../app/stylesheets/_defaults.sass */
 input[type="radio"], input[type="checkbox"] {
   vertical-align: baseline;
 }
 
-/* line 250, ../../../app/stylesheets/_defaults.sass */
+/* line 254, ../../../app/stylesheets/_defaults.sass */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 253, ../../../app/stylesheets/_defaults.sass */
+/* line 257, ../../../app/stylesheets/_defaults.sass */
 label {
   margin-top: 1.5em;
   display: block;
   font-weight: bold;
 }
 
-/* line 260, ../../../app/stylesheets/_defaults.sass */
+/* line 264, ../../../app/stylesheets/_defaults.sass */
 .textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
   font-family: Cambria, Georgia, serif;
   font-size: 1em;
@@ -427,6 +432,7 @@ label {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
+  max-width: 38.5em;
   margin-top: 0;
   border-color: silver;
   -moz-box-shadow: #8bc7c7 0 0 3px 0;
@@ -436,28 +442,28 @@ label {
   height: 2.571em;
 }
 
-/* line 272, ../../../app/stylesheets/_defaults.sass */
+/* line 277, ../../../app/stylesheets/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 283, ../../../app/stylesheets/_defaults.sass */
+/* line 288, ../../../app/stylesheets/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 285, ../../../app/stylesheets/_defaults.sass */
+/* line 290, ../../../app/stylesheets/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 288, ../../../app/stylesheets/_defaults.sass */
+/* line 293, ../../../app/stylesheets/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 292, ../../../app/stylesheets/_defaults.sass */
+/* line 297, ../../../app/stylesheets/_defaults.sass */
 input[type=submit], button {
   font-size: 1em;
   line-height: 1.5em;
@@ -476,7 +482,7 @@ input[type=submit], button {
   -o-box-shadow: #4a4a4a 1px 1px 2px 0;
   box-shadow: #4a4a4a 1px 1px 2px 0;
 }
-/* line 303, ../../../app/stylesheets/_defaults.sass */
+/* line 308, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
   -moz-box-shadow: #4a4a4a 0 0 2px 0;
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
@@ -484,7 +490,7 @@ input[type=submit]:hover, button:hover {
   box-shadow: #4a4a4a 0 0 2px 0;
   color: #4c4c4c;
 }
-/* line 306, ../../../app/stylesheets/_defaults.sass */
+/* line 311, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
@@ -492,7 +498,7 @@ input[type=submit]:active, button:active {
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   color: #4c4c4c;
 }
-/* line 309, ../../../app/stylesheets/_defaults.sass */
+/* line 314, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: black 0 0 0 0;
@@ -508,53 +514,52 @@ input[type=submit].link, button.link {
   display: inline;
   color: #db8322;
 }
-/* line 72, ../../../app/stylesheets/_defaults.sass */
+/* line 76, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:link, input[type=submit].link:visited, button.link:link, button.link:visited {
   color: #db8322;
   text-decoration: none;
 }
-/* line 75, ../../../app/stylesheets/_defaults.sass */
+/* line 79, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:link, input[type=submit].link:visited, input[type=submit].link:hover, input[type=submit].link:active, button.link:link, button.link:visited, button.link:hover, button.link:active {
   outline: none;
 }
-/* line 77, ../../../app/stylesheets/_defaults.sass */
+/* line 81, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:focus, input[type=submit].link:hover, button.link:focus, button.link:hover {
   color: #8bc7c7;
   text-decoration: none;
 }
-/* line 80, ../../../app/stylesheets/_defaults.sass */
+/* line 84, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:active, button.link:active {
   color: #c78b8b;
 }
-/* line 82, ../../../app/stylesheets/_defaults.sass */
+/* line 86, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 318, ../../../app/stylesheets/_defaults.sass */
+/* line 323, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 320, ../../../app/stylesheets/_defaults.sass */
+/* line 325, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
 
 /* Print Defaults -------------------------------------------------------------- */
 /* line 13, ../../../app/stylesheets/print.sass */
-nav {
+#page > nav, #page > header, body > footer {
   display: none;
 }
 
 /* line 16, ../../../app/stylesheets/print.sass */
 * {
   background: transparent !important;
-  color: #444444 !important;
   float: none !important;
   text-shadow: none !important;
 }
 
-/* line 22, ../../../app/stylesheets/print.sass */
+/* line 21, ../../../app/stylesheets/print.sass */
 body {
   font-family: Cambria, Georgia, serif;
   font-size: 12pt;
@@ -562,39 +567,61 @@ body {
   color: black;
 }
 
-/* line 29, ../../../app/stylesheets/print.sass */
+/* line 28, ../../../app/stylesheets/print.sass */
 a:link, a:visited {
-  color: #444444 !important;
-  text-decoration: underline;
-}
-/* line 32, ../../../app/stylesheets/print.sass */
-a:after {
-  content: " (" attr(href) ") ";
-  font-size: smaller;
+  color: #444444;
+  font-weight: bold;
 }
 
-/* line 36, ../../../app/stylesheets/print.sass */
+/* line 35, ../../../app/stylesheets/print.sass */
 abbr:after {
   content: " (" attr(title) ")";
   font-size: smaller;
 }
 
-/* line 40, ../../../app/stylesheets/print.sass */
+/* line 39, ../../../app/stylesheets/print.sass */
 pre, blockquote, img {
-  page-break-inside: avoid;
+  page-break-inside: avoid !important;
 }
 
 @page {
-  margin: 0.5cm;
+  margin: 1cm;
 }
 
-/* line 47, ../../../app/stylesheets/print.sass */
+/* line 46, ../../../app/stylesheets/print.sass */
 p, h2, h3 {
   orphans: 3;
   widows: 3;
 }
 
-/* line 51, ../../../app/stylesheets/print.sass */
-h2, h3 {
+/* line 50, ../../../app/stylesheets/print.sass */
+h2, h3, header {
   page-break-after: avoid;
+}
+
+/* line 53, ../../../app/stylesheets/print.sass */
+section#packet {
+  margin-top: 24pt;
+}
+
+/* line 56, ../../../app/stylesheets/print.sass */
+li.packet, li.composition {
+  margin-bottom: 24pt;
+}
+/* line 58, ../../../app/stylesheets/print.sass */
+li.packet ul, li.composition ul {
+  list-style-type: disc;
+}
+/* line 60, ../../../app/stylesheets/print.sass */
+li.packet ol, li.packet ul, li.composition ol, li.composition ul {
+  margin-bottom: 12pt;
+}
+/* line 62, ../../../app/stylesheets/print.sass */
+li.packet ol ol, li.packet ol ul, li.packet ul ol, li.packet ul ul, li.composition ol ol, li.composition ol ul, li.composition ul ol, li.composition ul ul {
+  margin-bottom: 0;
+}
+
+/* line 65, ../../../app/stylesheets/print.sass */
+form, p.submitted, p.actions, span.drag-handle, section#attendance {
+  display: none !important;
 }

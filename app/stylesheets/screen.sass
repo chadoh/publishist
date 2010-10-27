@@ -25,13 +25,13 @@
   // Where 30 is the column width, 10 is the gutter width,
   // and 20 is the (optional) line-height.
 
-
   & > nav
     +full
     & > ul
       +inline-block-list-container
       +display-box
       +box-lines('multiple')
+      width: 100%
       & > li
         +inline-block-list-item
         +adjust-font-size-to(20px, 2)
@@ -128,43 +128,94 @@ section.user-profile
     +no-bullets
     margin-left: 0
 
-section.composition
+li.composition, li.packet
+  +no-bullet
+  +full
   +rhythm-borders(1px, 1, $base-font-size, dashed)
   +padding-trailer(0)
   border-color: $lgray
   +leader
   +trailer
+  ul
+    list-style-type: disc
+  ul, ol
+    +trailer
+    ul, ol
+      +trailer(0)
 footer.composition-details
   +leader
   +trailer
-  p
+  p, span
     +trailer(0)
     color: $lgray
+  p.author
+    a:last-child
+      +inline-block
+      width: 85%
+    a:first-child
+      display: inline
 
-article#compositions
-  & > section.composition
-    +rhythm-borders(0px, 0)
-    +full
-    & > header
-      h2
-        +trailer(0)
-      +columns($sidebar)
-      +alpha
-    & > div.body
-      display: none
-    & > footer
-      +leader(0)
+span.drag-handle
+  display: none
+  cursor: move
+  +rotate(90deg)
+  letter-spacing: -1px
+
+article#compositions, article.meetings
+  section
+    & > header > h2
       +trailer(0)
-      +columns($article)
-      +omega
-      & > p.author
-        +omega
-        +columns($total-cols * 6/16)
-      & > p.submitted
-        +columns($total-cols * 7/16)
-      & > p.actions
-        +columns($total-cols * 3/16)
-        +omega
+    +full
+    +trailer
+    +clearfix
+    &.drop-here
+      +rhythm-borders(1px, 0, $base-font-size, dashed)
+      border-color: $noticeable
+
+    ol.packets, ul.compositions
+      li.collapsed
+        &.packet
+          list-style-type: decimal
+        &.composition
+          list-style-type: disc
+        &.composition, &.packet
+          +rhythm-borders(0px, 0)
+          +leader(0)
+          +trailer(0)
+          & > header
+            +inline-block
+            width: $sidebar * $col-width
+            h2
+              +trailer(0)
+          & > div.body
+            display: none
+          & > footer
+            +inline-block
+            width: $article * $col-width + ($article - 5) * $gutter-width
+            +trailer(0)
+            +leader(0)
+            & > p.author
+              +alpha
+              +columns($total-cols * 5/16)
+            & > p.submitted
+              +columns($total-cols * 7/16)
+            & > p.actions
+              +columns($total-cols * 3/16)
+
+ul.attendances
+  li.attendance
+    +full
+    span
+      +inline-block
+    span.person
+      width: $sidebar * $col-width
+    span.answer
+      width: ($article - 1.3) * $col-width
+    span.actions
+      width: 1.3 * $col-width
+form.attendance
+  +full
+  +leader
 
 article#submit-something
   textarea#composition_body
@@ -174,16 +225,20 @@ article#submit-something
   .trigger
     height: 5px
 
-section.meeting
-  +full
-  span.when
-    +columns(floor($total-cols * (1/5)))
-    +alpha
-  span.question
-    +columns(ceil( $total-cols * (3/5)))
-  span.actions
-    +columns(floor($total-cols * (1/5)))
-    +omega
+ul.meetings
+  +no-bullets
+  margin-left: 0
+  li.meeting
+    +full
+    +clearfix
+    span.when
+      +columns(floor($total-cols * (1/5)))
+      +alpha
+    span.question
+      +columns(ceil( $total-cols * (3/5)))
+    span.actions
+      +columns(floor($total-cols * (1/5)))
+      +omega
 
 section.person
   +full
@@ -199,21 +254,6 @@ section.person
   span.actions
     +columns(floor($total-cols * (3/16)))
     +omega
-
-section.attendance
-  +full
-  +clearfix
-  span.person
-    +alpha
-    +columns($total-cols * (4/16))
-  span.answer
-    +columns($total-cols * (10/16))
-  span.actions
-    +columns($total-cols * (2/16))
-    +omega
-form.attendance
-  +full
-  +leader
 
 #your_name_looks_like
   display: none

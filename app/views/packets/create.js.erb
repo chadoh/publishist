@@ -1,0 +1,10 @@
+if(<%= @old_packet %>) {
+  li = $("li#packet_<%= @old_packet %>").clone();
+  li.attr('id', 'packet_<%= @packet.id %>'); }
+else {
+  li = $("li#composition_<%= @composition.id %>");
+  li.attr('id', "packet_<%= @packet.id %>");
+  li.addClass('packet').removeClass('composition');
+}
+meeting = $("section#meeting_<%= @meeting.id %> ol.packets");
+li.appendTo(meeting);

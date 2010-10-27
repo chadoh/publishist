@@ -1,9 +1,15 @@
 Pc::Application.routes.draw do
 
+
   get "welcome/index"
 
   resources :meetings do
     resources :attendances
+  end
+  resources :packets do
+    member do
+      put 'update_position'
+    end
   end
   resources :compositions, :path_names => { :new => "/submit" }
   resources :people, :shallow => true do

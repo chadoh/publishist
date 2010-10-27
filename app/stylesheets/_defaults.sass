@@ -40,6 +40,10 @@ html
   @extend .caps
   font-variant: small-caps
 
+.nocaps
+  @extend .caps
+  text-transform: none
+
 /* Body --------------------------------------------------------------
 
 body
@@ -56,13 +60,13 @@ body
     color: white
 
 \::-moz-selection
-  +accessible-color($alt)
-  background: $yellow
+  +accessible-color($lblue)
+  background: $lblue
   text-shadow: none
 
 \::selection
-  +accessible-color($alt)
-  background: $yellow
+  +accessible-color($lblue)
+  background: $lblue
   text-shadow: none
 
 /* Links --------------------------------------------------------------
@@ -264,6 +268,7 @@ label
   +trailer(0.5)
   +box-sizing(border-box)
   width: 100%
+  max-width: $article * $col-width + $article * $gutter-width
   margin-top: 0
   border-color: $lgray
   +box-shadow($blue, 0, 0, 3px)

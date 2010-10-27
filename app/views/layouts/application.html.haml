@@ -8,7 +8,7 @@
     = stylesheet_link_tag 'compiled/print', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'jquery.autocomplete', 'rails', 'application'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', 'jquery.autocomplete', 'rails', 'application'
     = csrf_meta_tag
     = yield :head
   %body
@@ -41,9 +41,10 @@
           %p= t 'subtitle'
       - if flash[:notice]
         #notice= flash[:notice]
-      %article{ :id => "#{@article_id}", :role => 'main', :class => !content_for?(:aside) && 'full-width' }
+      %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:aside) && 'full-width', params[:controller]] }
         %header
-          %h1= @content_for_page_heading if @show_title
+          %h1{ :class => params[:controller] == 'compositions' && params[:action] == 'show' && 'nocaps' }<
+            = @content_for_page_heading if show_title?
         = yield
       - if content_for? :aside
         %aside{ :id => "#{@article_id}-aside" }

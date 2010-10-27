@@ -1,14 +1,13 @@
-class CompositionsController < ApplicationController
+class CompositionsController < InheritedResources::Base
   before_filter :editors_only, :only => [:index]
-  before_filter :editors_and_owner_only, :only => [:show]
   before_filter :editor_only, :only => [:edit, :destroy]
-  def index
-    @compositions = Composition.order("created_at DESC")
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @compositions }
-    end
+  def index
+    @meetings = Meeting.all.sort_by(&:when).reverse
+    @meetings_to_come = @meetings.select {|m| Time.now - m.when < 0}
+    @meetings_gone_by = @meetings - @meetings_to_come
+    @compositions = Composition.order("created_at DESC") - Packet.all.collect(&:composition)
+    index!
   end
 
   def show
@@ -46,7 +45,9 @@ class CompositionsController < ApplicationController
         Notifications.new_composition(@composition).deliver
         format.html {
           flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-          if @user
+          if @user and @user.the_editor?
+            redirect_to compositions_url
+          elsif @user
             redirect_to person_url(@user)
           else
             redirect_to(root_url)

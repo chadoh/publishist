@@ -1,4 +1,5 @@
-%section[composition]
+%li.collapsed[composition]
   %header
-    %h2= link_to sanitize(composition.title), composition_url(composition)
-  = render :partial => 'compositions/body_and_footer', :locals => { :composition => composition }
+    %a{ :href => composition_url(composition) }
+      %h2.nocaps= sanitize(composition.title)
+  = render :partial => 'compositions/body_and_footer', :locals => { :composition => composition, :show_author => show_author }

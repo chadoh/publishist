@@ -5,9 +5,11 @@
     = sanitize composition.body
   - if the_editor_or_the_owner?(composition)
 %footer.composition-details
-  - if the_editor? or @user.email == composition.email
+  - show_author = show_author.nil? ? true : show_author
+  - if show_author and (the_editor? or @user.email == composition.email)
     %p.author
-      = mail_to composition.email, email_image(composition.author)
+      - if the_editor?
+        = mail_to composition.email, email_image(composition.author)
       - if composition.author_id
         = link_to_unless_current composition.author, person_path(composition.author_id)
       - else
@@ -18,4 +20,5 @@
     %p.actions
       = link_to "Edit", edit_composition_url(composition)
       |
-      = link_to "Delete", composition_url(composition), :method => :delete, :confirm => "Really really?"
+      = link_to "Delete", composition_url(composition), :method => :delete, :confirm => "Are you sure you want to delete this composition? If you just want to unschedule it, you can do that by dragging it to the \"Unscheduled\" section on the \"Compositions\" page."
+  %span.drag-handle <>

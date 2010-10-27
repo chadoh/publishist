@@ -1,7 +1,8 @@
 class Composition < ActiveRecord::Base
   belongs_to :author, :class_name => "Person"
+  has_many :packets, :dependent => :destroy
+  has_many :meetings, :through => :packets
 
-  before_validation :untitled_if_blank
   before_validation :remove_ms_word_kruft
 
   validate :author_email_exists_if_user_not_signed_in
@@ -18,11 +19,12 @@ class Composition < ActiveRecord::Base
     :path => "/:style/:filename",
     :styles => { :medium => "510x510>" }
 
-  def author
+  def author(picky = false)
     if read_attribute(:author_id)
-      Person.find(read_attribute(:author_id)).name
+      person = Person.find(read_attribute(:author_id))
+      picky ? person : person.name
     else
-      author_name
+      picky ? nil : author_name
     end
   end
 
@@ -61,10 +63,6 @@ protected
 
   def author_anonymous_if_blank
     self.author_name = "Anonymous" if self.author.blank?
-  end
-
-  def untitled_if_blank
-    self.title= "untitled" if self.title.blank?
   end
 
   def if_associated_to_Person_dont_allow_name_or_email_also

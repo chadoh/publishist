@@ -40,18 +40,6 @@ class AttendancesControllerTest < ActionController::TestCase
     end
   end
 
-  context "update" do
-    should "return a useful flash notice" do
-      put :update, :meeting_id => @meeting.id, :id => @attendance.id, :attendance => {
-        :answer => "Claro kasey!"
-      }
-      assert_redirected_to meeting_url @meeting
-      @attendance.reload
-      assert_not_equal @attendance.answer, 'meh'
-      assert_equal session[:flash], {:notice => "#{@person.first_name}'s answer was changed"}
-    end
-  end
-
   context "destroy" do
     should "return a useful flash notice" do
       delete :destroy, :meeting_id => @meeting.id, :id => @attendance.id

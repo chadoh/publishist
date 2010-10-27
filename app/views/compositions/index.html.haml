@@ -1,3 +1,28 @@
 - title(t('.title'))
-- for composition in @compositions
-  = render :partial => 'show', :locals => { :composition => composition }
+
+%p= link_to "Schedule a new meeting", new_meeting_path
+
+- for meeting in @meetings_to_come
+  %section.future[meeting]
+    %header
+      %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
+    %ol.packets
+      - for packet in meeting.packets
+        = render :partial => 'packets/show', :locals => { :packet => packet, :show_author => true }
+
+%section#unscheduled.unscheduled
+  %header
+    %h2 Unscheduled
+  %ul.compositions
+    - for composition in @compositions
+      = render :partial => 'show', :locals => { :composition => composition, :show_author => true }
+
+- for meeting in @meetings_gone_by
+  %section.past[meeting]
+    %header
+      %h2 Reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
+    %ol.packets
+      - for packet in meeting.packets
+        = render :partial => 'packets/show', :locals => { :packet => packet, :show_author => true }
+
+- javascript 'compositions'

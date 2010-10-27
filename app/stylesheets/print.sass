@@ -10,12 +10,11 @@
 
 /* Print Defaults --------------------------------------------------------------
 
-nav
+#page > nav, #page > header, body > footer
   display: none
 
 *
   background: transparent !important
-  color: #444444 !important
   float: none !important
   text-shadow: none !important
 
@@ -27,9 +26,9 @@ body
 
 a
   &:link, &:visited
-    color: #444444 !important
-    text-decoration: underline
-  &:after
+    color: #444444
+    font-weight: bold
+  //&:after
     content: " (" attr(href) ") "
     font-size: smaller
 
@@ -38,15 +37,30 @@ abbr:after
   font-size: smaller
 
 pre, blockquote, img
-  page-break-inside: avoid
+  page-break-inside: avoid !important
 
 @page
-  margin: 0.5cm
+  margin: 1cm
 
 
 p, h2, h3
   orphans: 3
   widows: 3
 
-h2, h3
+h2, h3, header
   page-break-after: avoid
+
+section#packet
+  margin-top: 24pt
+
+li.packet, li.composition
+  margin-bottom: 24pt
+  ul
+    list-style-type: disc
+  ol, ul
+    margin-bottom: 12pt
+    ol, ul
+      margin-bottom: 0
+
+form, p.submitted, p.actions, span.drag-handle, section#attendance
+  display: none !important

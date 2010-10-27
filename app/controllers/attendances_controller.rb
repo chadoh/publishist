@@ -1,5 +1,5 @@
 class AttendancesController < InheritedResources::Base
-  actions :all, :except => [:index, :show, :new, :edit]
+  actions :create, :destroy
   belongs_to :meeting
 
   def create
@@ -12,10 +12,6 @@ class AttendancesController < InheritedResources::Base
       flash[:notice] = "#{resource.first_name} was there"
       format.html { redirect_to parent_url }
     end
-  end
-
-  def update
-    update!(:notice => "#{resource.first_name}'s answer was changed") { parent_url }
   end
 
   def destroy
