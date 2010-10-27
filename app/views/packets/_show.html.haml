@@ -1,4 +1,7 @@
 %li.collapsed[packet]
+  - if editor?
+    %span.drag-handle-wrap
+      %span.drag-handle &lt;&gt;
   %header
     %a{ :href => composition_url(packet.composition) }
       %h2.nocaps= sanitize(packet.composition.title)

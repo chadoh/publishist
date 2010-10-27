@@ -5,7 +5,6 @@ $(function(){
     $(this).parents('li:regex(class,(composition|packet))').toggleClass('collapsed');
   });
 
-  $('span.drag-handle').css('display', 'inline-block');
   $('li:regex(class,(composition|packet))').draggable({
     handle: 'span.drag-handle',
     axis: 'y',
