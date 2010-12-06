@@ -19,21 +19,16 @@ gem 'gravtastic', '~> 2.2.0'
 gem 'inherited_resources', '~> 1.1.2'
 
 # Models
-gem 'matthuhiggins-foreigner', '~> 0.7.1', :require => 'foreigner'
-gem 'acts_as_list', '~> 0.1'
+gem 'foreigner', :require => 'foreigner'
+gem 'acts_as_list'
 
 group :development do
   gem 'rails3-generators'
   gem 'heroku_san', '~> 0.2.4'
 end
 
-group :test do
-  gem 'shoulda', '~> 2.11.1'
-  gem 'factory_girl_rails'
-  gem 'mocha', '~> 0.9.8'
-end
-
 group :development, :test do
+  gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'cucumber-rails'
   gem 'capybara'
