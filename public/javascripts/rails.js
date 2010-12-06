@@ -57,6 +57,15 @@ jQuery(function ($) {
         }
     });
 
+
+    /**
+     * remote handlers
+     */
+    $('form[data-remote]').live('submit', function (e) {
+        $(this).callRemote();
+        e.preventDefault();
+    });
+
     /**
      *  confirmation handler
      */
@@ -67,15 +76,6 @@ jQuery(function ($) {
                 return false;
             }
         }
-    });
-
-
-    /**
-     * remote handlers
-     */
-    $('form[data-remote]').live('submit', function (e) {
-        $(this).callRemote();
-        e.preventDefault();
     });
 
     $('a[data-remote],input[data-remote]').live('click', function (e) {

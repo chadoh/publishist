@@ -155,11 +155,8 @@ footer.composition-details
     a:first-child
       display: inline
 
-span.drag-handle
+span.drag-handle-wrap
   display: none
-  cursor: move
-  +rotate(90deg)
-  letter-spacing: -1px
 
 article#compositions, article.meetings
   section
@@ -173,6 +170,9 @@ article#compositions, article.meetings
       border-color: $noticeable
 
     ol.packets, ul.compositions
+      margin:
+        left: 0
+        bottom: 0
       li.collapsed
         &.packet
           list-style-type: decimal
@@ -189,18 +189,29 @@ article#compositions, article.meetings
               +trailer(0)
           & > div.body
             display: none
+          & > span.drag-handle-wrap
+            width: 3em
+            display: inline-block
+            float: left
+            margin-top: -1px
+            & > span.drag-handle
+              +inline-block
+              color: $lgray
+              cursor: move
+              +rotate(90deg)
+              letter-spacing: -1px
           & > footer
             +inline-block
-            width: $article * $col-width + ($article - 5) * $gutter-width
+            width: $article * $col-width
             +trailer(0)
             +leader(0)
             & > p.author
               +alpha
-              +columns($total-cols * 5/16)
+              +columns(5)
             & > p.submitted
-              +columns($total-cols * 7/16)
+              +columns(8)
             & > p.actions
-              +columns($total-cols * 3/16)
+              +columns(3)
 
 ul.attendances
   li.attendance
@@ -240,20 +251,24 @@ ul.meetings
       +columns(floor($total-cols * (1/5)))
       +omega
 
-section.person
-  +full
-  span.name
-    +columns(floor($total-cols * (4/16)))
-    +alpha
-  span.rank
-    +columns(floor($total-cols * (2/16)))
-  span.promote-to
-    +columns(ceil( $total-cols * (7/16)))
-    & > ul
-      +comma-delimited-list
-  span.actions
-    +columns(floor($total-cols * (3/16)))
-    +omega
+ul#people
+  +no-bullets
+  margin-left: 0
+  li.person
+    +full
+    span.name
+      +columns(4)
+      +alpha
+    span.rank
+      +columns(3)
+      margin-right: 0
+    span.promote-to
+      +columns(6.5)
+      & > ul
+        +comma-delimited-list
+    span.actions
+      +columns(2.5)
+      +omega
 
 #your_name_looks_like
   display: none

@@ -1,5 +1,6 @@
+@charset "UTF-8";
 /* Reset --------------------------------------------------------------*/
-/* line 14, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 14, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -19,49 +20,53 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   vertical-align: baseline;
 }
 
-/* line 17, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 body {
   line-height: 1;
   color: black;
   background: white;
 }
 
-/* line 19, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 19, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 21, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 21, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: separate;
   border-spacing: 0;
   vertical-align: middle;
 }
 
-/* line 23, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 23, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 25, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 25, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: "" "";
 }
-/* line 96, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 96, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
 }
 
-/* line 27, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 27, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
 /* HTML5 Reset --------------------------------------------------------------*/
-/* line 107, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 108, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
   display: block;
 }
 
@@ -329,8 +334,11 @@ dt span.arrow {
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: middle;
-  *display: inline;
   *vertical-align: auto;
+}
+/* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+dt span.arrow {
+  *display: inline;
 }
 /* line 206, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow.rotated {
@@ -560,12 +568,12 @@ html > body {
 
 /* Styles -------------------------------------------------------------- */
 /* Layout ----------------------------------------- */
-/* line 10, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+/* line 10, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
 html, body {
   height: 100%;
 }
 
-/* line 12, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+/* line 12, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
 #page {
   clear: both;
   min-height: 100%;
@@ -573,12 +581,12 @@ html, body {
   height: 100%;
   margin-bottom: -6em;
 }
-/* line 18, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+/* line 18, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
 #page #page-footer {
   height: 6em;
 }
 
-/* line 20, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+/* line 20, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
 body > footer {
   clear: both;
   position: relative;
@@ -593,7 +601,7 @@ body > footer {
   width: 56.5em;
   max-width: 100%;
 }
-/* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+/* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 #page:after {
   content: "\0020";
   display: block;
@@ -633,7 +641,6 @@ body > footer {
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: middle;
-  *display: inline;
   *vertical-align: auto;
   white-space: nowrap;
   font-size: 1.25em;
@@ -643,6 +650,10 @@ body > footer {
   box-flex: 1;
   display: block;
   text-align: center;
+}
+/* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+#page > nav > ul > li {
+  *display: inline;
 }
 /* line 42, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > a {
@@ -672,7 +683,7 @@ body > footer {
   font-size: 0.813em;
   line-height: 1.292em;
 }
-/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
 #page > nav > ul > li > ul#account li {
   list-style-image: none;
   list-style-type: none;
@@ -771,7 +782,7 @@ body > footer {
   width: 56.5em;
   max-width: 100%;
 }
-/* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+/* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 body > footer:after {
   content: "\0020";
   display: block;
@@ -861,7 +872,7 @@ section.user-profile ul {
   list-style: none;
   margin-left: 0;
 }
-/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
 section.user-profile ul li {
   list-style-image: none;
   list-style-type: none;
@@ -913,9 +924,12 @@ footer.composition-details p.author a:last-child {
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: middle;
-  *display: inline;
   *vertical-align: auto;
   width: 85%;
+}
+/* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+footer.composition-details p.author a:last-child {
+  *display: inline;
 }
 /* line 155, ../../../app/stylesheets/screen.sass */
 footer.composition-details p.author a:first-child {
@@ -923,17 +937,11 @@ footer.composition-details p.author a:first-child {
 }
 
 /* line 158, ../../../app/stylesheets/screen.sass */
-span.drag-handle {
+span.drag-handle-wrap {
   display: none;
-  cursor: move;
-  -moz-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
-  letter-spacing: -1px;
 }
 
-/* line 165, ../../../app/stylesheets/screen.sass */
+/* line 162, ../../../app/stylesheets/screen.sass */
 article#compositions section, article.meetings section {
   clear: both;
   margin-right: 0.885%;
@@ -942,16 +950,21 @@ article#compositions section, article.meetings section {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 166, ../../../app/stylesheets/screen.sass */
+/* line 163, ../../../app/stylesheets/screen.sass */
 article#compositions section > header > h2, article.meetings section > header > h2 {
   margin-bottom: 0em;
 }
-/* line 171, ../../../app/stylesheets/screen.sass */
+/* line 168, ../../../app/stylesheets/screen.sass */
 article#compositions section.drop-here, article.meetings section.drop-here {
   border-style: dashed;
   border-width: 0.063em;
   padding: -0.063em;
   border-color: #dddddd;
+}
+/* line 172, ../../../app/stylesheets/screen.sass */
+article#compositions section ol.packets, article#compositions section ul.compositions, article.meetings section ol.packets, article.meetings section ul.compositions {
+  margin-left: 0;
+  margin-bottom: 0;
 }
 /* line 177, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.packet, article#compositions section ul.compositions li.collapsed.packet, article.meetings section ol.packets li.collapsed.packet, article.meetings section ul.compositions li.collapsed.packet {
@@ -975,9 +988,12 @@ article#compositions section ol.packets li.collapsed.composition > header, artic
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: middle;
-  *display: inline;
   *vertical-align: auto;
   width: 15em;
+}
+/* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+article#compositions section ol.packets li.collapsed.composition > header, article#compositions section ol.packets li.collapsed.packet > header, article#compositions section ul.compositions li.collapsed.composition > header, article#compositions section ul.compositions li.collapsed.packet > header, article.meetings section ol.packets li.collapsed.composition > header, article.meetings section ol.packets li.collapsed.packet > header, article.meetings section ul.compositions li.collapsed.composition > header, article.meetings section ul.compositions li.collapsed.packet > header {
+  *display: inline;
 }
 /* line 188, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > header h2, article#compositions section ol.packets li.collapsed.packet > header h2, article#compositions section ul.compositions li.collapsed.composition > header h2, article#compositions section ul.compositions li.collapsed.packet > header h2, article.meetings section ol.packets li.collapsed.composition > header h2, article.meetings section ol.packets li.collapsed.packet > header h2, article.meetings section ul.compositions li.collapsed.composition > header h2, article.meetings section ul.compositions li.collapsed.packet > header h2 {
@@ -988,18 +1004,47 @@ article#compositions section ol.packets li.collapsed.composition > div.body, art
   display: none;
 }
 /* line 192, ../../../app/stylesheets/screen.sass */
+article#compositions section ol.packets li.collapsed.composition > span.drag-handle-wrap, article#compositions section ol.packets li.collapsed.packet > span.drag-handle-wrap, article#compositions section ul.compositions li.collapsed.composition > span.drag-handle-wrap, article#compositions section ul.compositions li.collapsed.packet > span.drag-handle-wrap, article.meetings section ol.packets li.collapsed.composition > span.drag-handle-wrap, article.meetings section ol.packets li.collapsed.packet > span.drag-handle-wrap, article.meetings section ul.compositions li.collapsed.composition > span.drag-handle-wrap, article.meetings section ul.compositions li.collapsed.packet > span.drag-handle-wrap {
+  width: 3em;
+  display: inline-block;
+  float: left;
+  margin-top: -1px;
+}
+/* line 197, ../../../app/stylesheets/screen.sass */
+article#compositions section ol.packets li.collapsed.composition > span.drag-handle-wrap > span.drag-handle, article#compositions section ol.packets li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, article#compositions section ul.compositions li.collapsed.composition > span.drag-handle-wrap > span.drag-handle, article#compositions section ul.compositions li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, article.meetings section ol.packets li.collapsed.composition > span.drag-handle-wrap > span.drag-handle, article.meetings section ol.packets li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, article.meetings section ul.compositions li.collapsed.composition > span.drag-handle-wrap > span.drag-handle, article.meetings section ul.compositions li.collapsed.packet > span.drag-handle-wrap > span.drag-handle {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  color: silver;
+  cursor: move;
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  letter-spacing: -1px;
+}
+/* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+article#compositions section ol.packets li.collapsed.composition > span.drag-handle-wrap > span.drag-handle, article#compositions section ol.packets li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, article#compositions section ul.compositions li.collapsed.composition > span.drag-handle-wrap > span.drag-handle, article#compositions section ul.compositions li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, article.meetings section ol.packets li.collapsed.composition > span.drag-handle-wrap > span.drag-handle, article.meetings section ol.packets li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, article.meetings section ul.compositions li.collapsed.composition > span.drag-handle-wrap > span.drag-handle, article.meetings section ul.compositions li.collapsed.packet > span.drag-handle-wrap > span.drag-handle {
+  *display: inline;
+}
+/* line 203, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > footer, article#compositions section ol.packets li.collapsed.packet > footer, article#compositions section ul.compositions li.collapsed.composition > footer, article#compositions section ul.compositions li.collapsed.packet > footer, article.meetings section ol.packets li.collapsed.composition > footer, article.meetings section ol.packets li.collapsed.packet > footer, article.meetings section ul.compositions li.collapsed.composition > footer, article.meetings section ul.compositions li.collapsed.packet > footer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: middle;
-  *display: inline;
   *vertical-align: auto;
-  width: 36em;
+  width: 33em;
   margin-bottom: 0em;
   margin-top: 0em;
 }
-/* line 197, ../../../app/stylesheets/screen.sass */
+/* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+article#compositions section ol.packets li.collapsed.composition > footer, article#compositions section ol.packets li.collapsed.packet > footer, article#compositions section ul.compositions li.collapsed.composition > footer, article#compositions section ul.compositions li.collapsed.packet > footer, article.meetings section ol.packets li.collapsed.composition > footer, article.meetings section ol.packets li.collapsed.packet > footer, article.meetings section ul.compositions li.collapsed.composition > footer, article.meetings section ul.compositions li.collapsed.packet > footer {
+  *display: inline;
+}
+/* line 208, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > footer > p.author, article#compositions section ol.packets li.collapsed.packet > footer > p.author, article#compositions section ul.compositions li.collapsed.composition > footer > p.author, article#compositions section ul.compositions li.collapsed.packet > footer > p.author, article.meetings section ol.packets li.collapsed.composition > footer > p.author, article.meetings section ol.packets li.collapsed.packet > footer > p.author, article.meetings section ul.compositions li.collapsed.composition > footer > p.author, article.meetings section ul.compositions li.collapsed.packet > footer > p.author {
   margin-left: 0.885%;
   display: inline;
@@ -1007,14 +1052,14 @@ article#compositions section ol.packets li.collapsed.composition > footer > p.au
   width: 30.088%;
   margin-right: 0.885%;
 }
-/* line 200, ../../../app/stylesheets/screen.sass */
+/* line 211, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > footer > p.submitted, article#compositions section ol.packets li.collapsed.packet > footer > p.submitted, article#compositions section ul.compositions li.collapsed.composition > footer > p.submitted, article#compositions section ul.compositions li.collapsed.packet > footer > p.submitted, article.meetings section ol.packets li.collapsed.composition > footer > p.submitted, article.meetings section ol.packets li.collapsed.packet > footer > p.submitted, article.meetings section ul.compositions li.collapsed.composition > footer > p.submitted, article.meetings section ul.compositions li.collapsed.packet > footer > p.submitted {
   display: inline;
   float: left;
-  width: 42.478%;
+  width: 48.673%;
   margin-right: 0.885%;
 }
-/* line 202, ../../../app/stylesheets/screen.sass */
+/* line 213, ../../../app/stylesheets/screen.sass */
 article#compositions section ol.packets li.collapsed.composition > footer > p.actions, article#compositions section ol.packets li.collapsed.packet > footer > p.actions, article#compositions section ul.compositions li.collapsed.composition > footer > p.actions, article#compositions section ul.compositions li.collapsed.packet > footer > p.actions, article.meetings section ol.packets li.collapsed.composition > footer > p.actions, article.meetings section ol.packets li.collapsed.packet > footer > p.actions, article.meetings section ul.compositions li.collapsed.composition > footer > p.actions, article.meetings section ul.compositions li.collapsed.packet > footer > p.actions {
   display: inline;
   float: left;
@@ -1022,35 +1067,38 @@ article#compositions section ol.packets li.collapsed.composition > footer > p.ac
   margin-right: 0.885%;
 }
 
-/* line 206, ../../../app/stylesheets/screen.sass */
+/* line 217, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 208, ../../../app/stylesheets/screen.sass */
+/* line 219, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: middle;
-  *display: inline;
   *vertical-align: auto;
 }
-/* line 210, ../../../app/stylesheets/screen.sass */
+/* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+ul.attendances li.attendance span {
+  *display: inline;
+}
+/* line 221, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.person {
   width: 15em;
 }
-/* line 212, ../../../app/stylesheets/screen.sass */
+/* line 223, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.answer {
   width: 29.1em;
 }
-/* line 214, ../../../app/stylesheets/screen.sass */
+/* line 225, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.actions {
   width: 3.9em;
 }
 
-/* line 216, ../../../app/stylesheets/screen.sass */
+/* line 227, ../../../app/stylesheets/screen.sass */
 form.attendance {
   clear: both;
   margin-right: 0.885%;
@@ -1058,31 +1106,31 @@ form.attendance {
   margin-top: 1.5em;
 }
 
-/* line 221, ../../../app/stylesheets/screen.sass */
+/* line 232, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#composition_body {
   height: 30.857em;
 }
-/* line 223, ../../../app/stylesheets/screen.sass */
+/* line 234, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#composition_title {
   height: 2.571em;
 }
-/* line 225, ../../../app/stylesheets/screen.sass */
+/* line 236, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 228, ../../../app/stylesheets/screen.sass */
+/* line 239, ../../../app/stylesheets/screen.sass */
 ul.meetings {
   list-style: none;
   margin-left: 0;
 }
-/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
 ul.meetings li {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 231, ../../../app/stylesheets/screen.sass */
+/* line 242, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting {
   clear: both;
   margin-right: 0.885%;
@@ -1090,7 +1138,7 @@ ul.meetings li.meeting {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 234, ../../../app/stylesheets/screen.sass */
+/* line 245, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.when {
   display: inline;
   float: left;
@@ -1098,14 +1146,14 @@ ul.meetings li.meeting span.when {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 237, ../../../app/stylesheets/screen.sass */
+/* line 248, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.question {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 239, ../../../app/stylesheets/screen.sass */
+/* line 250, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.actions {
   display: inline;
   float: left;
@@ -1117,57 +1165,69 @@ ul.meetings li.meeting span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 243, ../../../app/stylesheets/screen.sass */
-section.person {
+/* line 254, ../../../app/stylesheets/screen.sass */
+ul#people {
+  list-style: none;
+  margin-left: 0;
+}
+/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+ul#people li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+}
+/* line 257, ../../../app/stylesheets/screen.sass */
+ul#people li.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 245, ../../../app/stylesheets/screen.sass */
-section.person span.name {
+/* line 259, ../../../app/stylesheets/screen.sass */
+ul#people li.person span.name {
   display: inline;
   float: left;
   width: 23.894%;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 248, ../../../app/stylesheets/screen.sass */
-section.person span.rank {
+/* line 262, ../../../app/stylesheets/screen.sass */
+ul#people li.person span.rank {
   display: inline;
   float: left;
-  width: 11.504%;
+  width: 17.699%;
   margin-right: 0.885%;
+  margin-right: 0;
 }
-/* line 250, ../../../app/stylesheets/screen.sass */
-section.person span.promote-to {
+/* line 265, ../../../app/stylesheets/screen.sass */
+ul#people li.person span.promote-to {
   display: inline;
   float: left;
-  width: 42.478%;
+  width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 252, ../../../app/stylesheets/screen.sass */
-section.person span.promote-to > ul {
+/* line 267, ../../../app/stylesheets/screen.sass */
+ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
-/* line 5, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_inline-list.scss */
-section.person span.promote-to > ul, section.person span.promote-to > ul li {
+/* line 5, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_inline-list.scss */
+ul#people li.person span.promote-to > ul, ul#people li.person span.promote-to > ul li {
   margin: 0px;
   padding: 0px;
   display: inline;
 }
-/* line 24, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_inline-list.scss */
-section.person span.promote-to > ul li:after {
+/* line 24, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_inline-list.scss */
+ul#people li.person span.promote-to > ul li:after {
   content: ", ";
 }
-/* line 26, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/utilities/lists/_inline-list.scss */
-section.person span.promote-to > ul li:last-child:after, section.person span.promote-to > ul li.last:after {
+/* line 26, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_inline-list.scss */
+ul#people li.person span.promote-to > ul li:last-child:after, ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 254, ../../../app/stylesheets/screen.sass */
-section.person span.actions {
+/* line 269, ../../../app/stylesheets/screen.sass */
+ul#people li.person span.actions {
   display: inline;
   float: left;
-  width: 17.699%;
+  width: 15.044%;
   margin-right: 0.885%;
   display: inline;
   float: right;
@@ -1175,7 +1235,7 @@ section.person span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 258, ../../../app/stylesheets/screen.sass */
+/* line 273, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

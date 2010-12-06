@@ -3,5 +3,5 @@
   %p= link_to t('.new_meeting'), new_meeting_path
 
 %ul.meetings
-  - for meeting in @meetings
+  - for meeting in collection
     = render :partial => 'show', :locals => { :meeting => meeting }

@@ -7,5 +7,6 @@
 
 - if editor?
   %p= link_to "New", new_person_path, :title => "Make an account for someone else."
-- for person in @people
-  = render :partial => 'show', :locals => { :person => person }
+%ul#people
+  - for person in @people
+    = render :partial => 'show', :locals => { :person => person }

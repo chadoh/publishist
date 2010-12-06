@@ -1,7 +1,0 @@
-%table
-  - resource.attributes.each do |a|
-    %tr
-      %th= a[0]
-      %td= a[1]
-%p= link_to "Edit", edit_resource_url(resource)
-%p= link_to "Back", collection_url
