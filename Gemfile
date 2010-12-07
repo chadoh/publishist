@@ -1,14 +1,14 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.0.1'
+gem 'rails'
 gem 'pg', '~> 0.9.0'
 gem 'redgreen'
 
 # Views
-gem 'haml', '~> 3.0.18'
-gem 'compass', '~> 0.10.5'
-gem 'compass-susy-plugin', '~> 0.8.1'
-gem 'simple_form', '~> 1.2.2'
+gem 'haml'
+gem 'compass'
+gem 'compass-susy-plugin'
+gem 'simple_form'
 gem 'rdiscount'
 gem 'RedCloth'
 
