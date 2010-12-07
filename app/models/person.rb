@@ -2,6 +2,7 @@ require 'digest/sha2'
 
 class Person < ActiveRecord::Base
   attr_reader :password
+  include Gravtastic
 
   ENCRYPT = Digest::SHA256
 
@@ -25,7 +26,7 @@ class Person < ActiveRecord::Base
   after_create :notify_of_account_creation, :if => Proc.new { self.password.blank? }
   after_save :flush_passwords
 
-  is_gravtastic :email, :size => 200, :default => "http://pcmag.heroku.com/images/children.png", :rating => 'R'
+  gravtastic :size => 200, :default => "http://pcmag.heroku.com/images/children.png", :rating => 'R'
 
   def self.find_by_email_and_password(email, password)
     person = self.find_by_email(email)

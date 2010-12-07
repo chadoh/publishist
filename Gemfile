@@ -13,10 +13,10 @@ gem 'rdiscount'
 gem 'RedCloth'
 
 # Controllers
-gem 'aws-s3', '~> 0.6.2'
-gem 'paperclip', '~> 2.3.3'
-gem 'gravtastic', '~> 2.2.0'
-gem 'inherited_resources', '~> 1.1.2'
+gem 'aws-s3'
+gem 'paperclip'
+gem 'gravtastic'
+gem 'inherited_resources'
 
 # Models
 gem 'foreigner', :require => 'foreigner'
@@ -24,12 +24,13 @@ gem 'acts_as_list'
 
 group :development do
   gem 'rails3-generators'
-  gem 'heroku_san', '~> 0.2.4'
+  gem 'heroku_san'
 end
 
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'shoulda'
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'launchy'

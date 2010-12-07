@@ -81,10 +81,15 @@ GEM
     gherkin (2.2.9)
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
-    gravtastic (2.2.0)
+    gravtastic (3.1.0)
     haml (3.0.24)
     has_scope (0.5.0)
-    heroku_san (0.2.4)
+    heroku (1.14.8)
+      json_pure (>= 1.2.0, < 1.5.0)
+      launchy (~> 0.3.2)
+      rest-client (>= 1.4.0, < 1.7.0)
+    heroku_san (1.0.6)
+      heroku
     i18n (0.5.0)
     inherited_resources (1.1.2)
       has_scope (~> 0.5.0)
@@ -131,6 +136,8 @@ GEM
     rdiscount (1.6.5)
     redgreen (1.2.2)
     responders (0.6.2)
+    rest-client (1.6.1)
+      mime-types (>= 1.16)
     rspec (2.2.0)
       rspec-core (~> 2.2)
       rspec-expectations (~> 2.2)
@@ -150,6 +157,7 @@ GEM
       ffi (~> 0.6.3)
       json_pure
       rubyzip
+    shoulda (2.11.3)
     simple_form (1.2.2)
     stackdeck (0.2.0)
     term-ansicolor (1.0.5)
@@ -167,7 +175,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth
   acts_as_list
-  aws-s3 (~> 0.6.2)
+  aws-s3
   capybara
   capybara-envjs
   compass (~> 0.10.5)
@@ -176,16 +184,17 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   foreigner
-  gravtastic (~> 2.2.0)
+  gravtastic
   haml (~> 3.0.18)
-  heroku_san (~> 0.2.4)
-  inherited_resources (~> 1.1.2)
+  heroku_san
+  inherited_resources
   launchy
-  paperclip (~> 2.3.3)
+  paperclip
   pg (~> 0.9.0)
   rails (~> 3.0.1)
   rails3-generators
   rdiscount
   redgreen
   rspec-rails
+  shoulda
   simple_form (~> 1.2.2)
