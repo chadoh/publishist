@@ -19,6 +19,7 @@ gem 'gravtastic'
 gem 'inherited_resources'
 
 # Models
+gem 'devise'
 gem 'foreigner', :require => 'foreigner'
 gem 'acts_as_list'
 

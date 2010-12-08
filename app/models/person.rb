@@ -1,49 +1,23 @@
 require 'digest/sha2'
 
 class Person < ActiveRecord::Base
+  devise :database_authenticatable, :omniauthable, :confirmable,
+         :recoverable, :registerable, :rememberable, :trackable,
+         :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_reader :password
-  include Gravtastic
 
-  ENCRYPT = Digest::SHA256
-
-  has_many :sessions, :dependent => :destroy
   has_many :ranks, :dependent => :destroy
   has_many :compositions, :foreign_key => 'author_id'
   has_many :attendances, :dependent => :destroy
   has_many :meetings, :through => :attendances
 
-  validates_presence_of :email
-  validates_uniqueness_of :email, :message => "has already been used by someone else"
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
-    :on => :create
-  validates_format_of :password, :with => /\A([\x20-\x7E]){6,}\Z/,
-    :message => "must be at least 6 characters",
-    :unless => :password_is_not_being_updated?
-  validates_confirmation_of :password
   validates_presence_of :first_name
 
-  before_create :n00b_salt, :if => Proc.new { self.password.blank? }
-  after_create :notify_of_account_creation, :if => Proc.new { self.password.blank? }
-  after_save :flush_passwords
-
+  include Gravtastic
   gravtastic :size => 200, :default => "http://pcmag.heroku.com/images/children.png", :rating => 'R'
-
-  def self.find_by_email_and_password(email, password)
-    person = self.find_by_email(email)
-    if person and person.encrypted_password == ENCRYPT.hexdigest(password + "chrouiNt" + person.salt)
-      return person
-    end
-  end
-
-  def password=(password)
-    @password = password
-    unless password_is_not_being_updated?
-      self.salt = [Array.new(9){rand(256).chr}.join].pack('m').chomp
-      self.encrypted_password = ENCRYPT.hexdigest(password + "chrouiNt" + self.salt)
-      self.verified = true
-    end
-  end
-
 
   # CONVENIENCES
   def name
@@ -162,23 +136,5 @@ class Person < ActiveRecord::Base
       end 
       person
     end
-  end
-
-protected
-
-  def notify_of_account_creation
-    Notifications.signup(Crypto.encrypt("#{self.id}:#{self.salt}"), self).deliver
-  end
-
-  def n00b_salt
-    self.salt = "n00b"
-  end
-
-  def flush_passwords
-    @password = @password_confirmation = nil
-  end
-
-  def password_is_not_being_updated?
-    (self.id and self.password.blank?) || (!self.id && self.password.blank?)
   end
 end

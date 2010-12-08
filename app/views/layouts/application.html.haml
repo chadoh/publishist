@@ -41,6 +41,8 @@
           %p= t 'subtitle'
       - if flash[:notice]
         #notice= flash[:notice]
+      - if flash[:alert]
+        #notice= flash[:alert]
       %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:aside) && 'full-width', params[:controller]] }
         %header
           %h1{ :class => params[:controller] == 'compositions' && params[:action] == 'show' && 'nocaps' }<

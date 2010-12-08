@@ -1,6 +1,11 @@
 Pc::Application.routes.draw do
 
 
+  devise_for :people do
+    get "sign_in", :to => "devise/sessions#new"
+    get "sign_up", :to => "devise/registrations#new"
+  end
+
   get "welcome/index"
 
   resources :meetings do
@@ -19,23 +24,14 @@ Pc::Application.routes.draw do
       post 'make_coeditor'
       post 'make_editor'
       post 'contact'
-      get 'set_password'
     end
     collection do
       get 'auto_complete_for_person_first_name_middle_name_last_name_email'
-      get 'help'
-      post 'recover'
-    end
-  end
-  resources :sessions, :only => [:new, :create, :destroy] do
-    member do
-      get 'recovery'
     end
   end
 
   #aliases, kind of
   #get "me" => "people#show#1"
-  get "sign_in" => "sessions#new", :as => :new_session
   get "sign_up" => "people#new", :as => :new_person
   get "submit" => "compositions#new", :as => :new_composition
 

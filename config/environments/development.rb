@@ -18,4 +18,6 @@ Pc::Application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.active_support.deprecation = :log
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
