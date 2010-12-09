@@ -1,5 +1,3 @@
-require 'digest/sha2'
-
 class Person < ActiveRecord::Base
   devise :database_authenticatable, :omniauthable, :confirmable,
          :recoverable, :registerable, :rememberable, :trackable,
