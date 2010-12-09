@@ -32,9 +32,9 @@
                   = button_to "Sign out", @application_session, :method => :delete, :class => "link"
               - else
                 %li
-                  = link_to_unless_current "Sign in", new_session_path
+                  = link_to_unless_current "Sign in", sign_in_path
                 %li
-                  = link_to_unless_current "Sign Up!", new_person_path
+                  = link_to_unless_current "Sign Up!", sign_up_path
       %header{ :role => 'banner' }
         .gradient
           %h1 Problem Child
