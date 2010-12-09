@@ -3,7 +3,8 @@ class DeviseAlterPeopleAndDropSessions < ActiveRecord::Migration
     drop_table :sessions
     change_table(:people) do |t|
       t.rename :salt, :password_salt
-      t.database_authenticatable :null => false
+      t.remove :verified
+      #t.database_authenticatable :null => false
       t.recoverable
       t.rememberable
       t.trackable
@@ -26,13 +27,16 @@ class DeviseAlterPeopleAndDropSessions < ActiveRecord::Migration
       t.timestamps
     end
     change_table :people do |t|
-      t.rename :password_salt, :salt
-      t.remove :confirmation_token, :confirmed_at,
-               :confirmation_sent_at, :reset_password_token,
-               :remember_token, :remember_created_at,
-               :sign_in_count, :current_sign_in_at,
-               :last_sign_in_at, :current_sign_in_ip,
-               :last_sign_in_ip, :authentication_token
+      t.rename  :password_salt, :salt
+      t.boolean :verified
+      t.remove  :confirmation_token, :confirmed_at,
+                :confirmation_sent_at, :reset_password_token,
+                :remember_token, :remember_created_at,
+                :sign_in_count, :current_sign_in_at,
+                :last_sign_in_at, :current_sign_in_ip,
+                :last_sign_in_ip
     end
+
+    remove_index :people, :email
   end
 end
