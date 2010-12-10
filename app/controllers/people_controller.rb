@@ -13,7 +13,7 @@ class PeopleController < InheritedResources::Base
 
   def show
     @person = Person.find(params[:id])
-    if @user && (@user.the_editor? || @user == @person)
+    if person_signed_in? && (current_person.the_editor? || current_person == @person)
       @compositions = @person.compositions.order("created_at DESC")
     end
     show!
@@ -86,19 +86,6 @@ class PeopleController < InheritedResources::Base
     redirect_to person_url(@to)
   end
 
-  def destroy
-    destroy! do |format|
-      if @user == resource
-        flash[:notice] = "Goodbye! We're sad to see you go."
-        session[:id] = @user = nil
-        format.html { redirect_to root_url }
-      else
-        flash[:notice] = "#{resource.first_name} is no more."
-        format.html { redirect_to people_url }
-      end
-    end
-  end
-
 protected
 
   def collection
@@ -110,6 +97,6 @@ protected
   end
 
   def editor?
-    @user && @user.editor?
+    person_signed_in? && current_person.editor?
   end
 end

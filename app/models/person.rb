@@ -15,7 +15,7 @@ class Person < ActiveRecord::Base
   validates_presence_of :first_name
 
   include Gravtastic
-  gravtastic :size => 200, :default => "http://pcmag.heroku.com/images/children.png", :rating => 'R'
+  gravtastic :size => 200, :default => "/images/children.png", :rating => 'R'
 
   # CONVENIENCES
   def name

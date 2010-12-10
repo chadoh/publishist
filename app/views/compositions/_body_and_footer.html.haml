@@ -6,7 +6,7 @@
   - if the_editor_or_the_owner?(composition)
 %footer.composition-details
   - show_author = show_author.nil? ? true : show_author
-  - if show_author and (the_editor? or @user.email == composition.email)
+  - if show_author and (the_editor? or current_person.email == composition.email)
     %p.author
       - if the_editor?
         = mail_to composition.email, email_image(composition.author)

@@ -16,26 +16,26 @@ module ApplicationHelper
   end
 
   def editor?
-    @user && @user.editor?
+    person_signed_in? && current_person.editor?
   end
 
   def the_editor?
-    @user && @user.the_editor?
+    person_signed_in? && current_person.the_editor?
   end
 
   def the_coeditor?
-    @user && @user.the_coeditor?
+    person_signed_in? && current_person.the_coeditor?
   end
 
   def staff?
-    @user && @user.is_staff?
+    person_signed_in? && current_person.is_staff?
   end
   
   def member?
-    @user
+    person_signed_in?
   end
 
   def the_editor_or_the_owner?(compo)
-    @user && (@user.the_editor? || @user.name == compo.author)
+    person_signed_in? && (current_person.the_editor? || current_person.name == compo.author)
   end
 end

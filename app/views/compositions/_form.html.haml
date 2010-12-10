@@ -9,13 +9,13 @@
         - @composition.errors.full_messages.each do |msg|
           %li= msg
   
-  - unless @user
+  - unless person_signed_in?
     = f.input :author_name, :label => "Your Name"
     = f.input :author_email, :label => "Your Email Address"
   = f.input :title, :label => 'Title'
   = f.input :body, :label => "Body", :required => false
   = f.input :photo, :label => "Or, submit an image:"
-  - if @user
+  - if person_signed_in?
     - if the_editor?
       = f.input :author, :as => :string, :label => "Author (you can submit for anyone with an account here, or create an account for someone by entering their name and email address)", :input_html => { :value => "#{"\"#{@composition.author(true).name}\" <#{@composition.author(true).email}>" if @composition.author(true)}" }
       = f.input :author_name, :label => "Or if you want to submit for someone without creating an account for them, put their name here"

@@ -25,11 +25,11 @@
             %li{ :class => params[:controller] == 'meetings' && 'current' }= link_to_unless_current "Meetings", meetings_path
           %li
             %ul#account
-              - if @user
+              - if person_signed_in?
                 %li
-                  = link_to_unless_current @user.name, person_path(@user)
+                  = link_to_unless_current current_person.name, person_path(current_person)
                 %li
-                  = button_to "Sign out", @application_session, :method => :delete, :class => "link"
+                  = link_to "Sign out", destroy_person_session_path
               - else
                 %li
                   = link_to_unless_current "Sign in", sign_in_path
