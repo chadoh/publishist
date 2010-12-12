@@ -1,6 +1,6 @@
 - title @person.full_name
 - if @person == current_person || the_editor?
-  - content_for :aside do
+  - content_for :sidebar do
     = render :partial => 'about', :locals => { :person => @person }
   - if @person == current_person
     %p

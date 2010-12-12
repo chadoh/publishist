@@ -43,20 +43,20 @@
         #notice= flash[:notice]
       - if flash[:alert]
         #notice= flash[:alert]
-      %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:aside) && 'full-width', params[:controller]] }
+      %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:sidebar) && 'full-width', params[:controller]] }
         %header
           %h1{ :class => params[:controller] == 'compositions' && params[:action] == 'show' && 'nocaps' }<
             = @content_for_page_heading if show_title?
         = yield
-      - if content_for? :aside
-        %aside{ :id => "#{@article_id}-aside" }
+      - if content_for? :sidebar
+        %section.sidebar{ :id => "#{@article_id}-sidebar" }
           -##search_box
             -#= form_tag('/#') do
               -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark" }
               -#%input{ :type => 'submit', :value => "Search!" }
           -#%br
           -#%hr
-          = yield :aside
+          = yield :sidebar
       #page-footer &nbsp;
     %footer{ :role => 'contentinfo' }
       #footer

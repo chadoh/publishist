@@ -88,7 +88,7 @@
     &.full-width
       +columns($total-cols)
 
-  & > aside
+  & > section.sidebar
     +columns($sidebar)
     +omega
 
@@ -115,7 +115,7 @@ body > footer
 
 @media screen and (max-width: 600px)
   #page
-    & > article, & > aside
+    & > article, & > section.sidebar
       +full
       width: auto
 
