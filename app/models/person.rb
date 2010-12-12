@@ -3,8 +3,6 @@ class Person < ActiveRecord::Base
          :recoverable, :registerable, :rememberable, :trackable,
          :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_reader :password
 
   has_many :ranks, :dependent => :destroy
@@ -117,18 +115,18 @@ class Person < ActiveRecord::Base
       if formatted_name_and_email =~ /\A.+<.+>\Z/
         email = formatted_name_and_email.scan(/<.+>/).first.delete "<>"
         person = Person.find_by_email email
-        unless person
-          names = formatted_name_and_email.scan(/.+</).first.gsub(/["<>[:cntrl:]]/, '').split(' ')
-          first = names.delete_at(0)
-          last = names.delete_at(names.length - 1) unless names.empty?
-          middles = names.join(' ') unless names.empty?
-          person = Person.create(
-            :first_name => first, 
-            :middle_name => middles, 
-            :last_name => last, 
-            :email => email
-          )
-        end
+        # unless person
+        #   names = formatted_name_and_email.scan(/.+</).first.gsub(/["<>[:cntrl:]]/, '').split(' ')
+        #   first = names.delete_at(0)
+        #   last = names.delete_at(names.length - 1) unless names.empty?
+        #   middles = names.join(' ') unless names.empty?
+        #   person = Person.create(
+        #     :first_name => first, 
+        #     :middle_name => middles, 
+        #     :last_name => last, 
+        #     :email => email
+        #   )
+        # end
       else
         person = nil
       end 
