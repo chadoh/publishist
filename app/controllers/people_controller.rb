@@ -1,12 +1,9 @@
 require 'lib/crypto'
 
 class PeopleController < InheritedResources::Base
-  before_filter :resource, :only => [:set_password, :make_staff, :make_editor, :make_coeditor]
-  before_filter :ensure_login, :only => [:edit, :update, :destroy]
-  before_filter :ensure_logout, :only => [:new, :create], :unless => :editor?
+  before_filter :resource, :only => [:make_staff, :make_editor, :make_coeditor]
   before_filter :staff_only, :only => [:index]
   before_filter :editors_only, :only => [:destroy]
-  skip_before_filter :check_that_user_is_verified, :only => [:set_password, :update]
   auto_complete_for :person, [:first_name, :middle_name, :last_name, :email], :limit => 15 do |people|
     people.map {|person| "\"#{person.full_name}\" <#{person.email}>" }.join "\n"
   end

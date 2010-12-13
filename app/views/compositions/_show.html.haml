@@ -1,4 +1,6 @@
-%li.collapsed[composition]
+- collapsed   = collapsed.nil?   ? true : collapsed
+- show_author = show_author.nil? ? true : show_author
+%li[composition]{ :class => collapsed && "collapsed" }
   - if editor?
     %span.drag-handle-wrap
       %span.drag-handle &lt;&gt;

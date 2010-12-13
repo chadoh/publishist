@@ -15,6 +15,6 @@
         nothing yet.
   %ul.compositions
     - @compositions.each do |composition|
-      = render :partial => 'compositions/show', :locals => { :composition => composition, :show_author => true }
+      = render :partial => 'compositions/show', :locals => { :composition => composition, :collapsed => false }
 - else
   = render :partial => 'about', :locals => { :person => @person }
