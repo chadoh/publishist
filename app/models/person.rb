@@ -1,49 +1,29 @@
 require 'digest/sha2'
 
 class Person < ActiveRecord::Base
+  devise :database_authenticatable, :omniauthable, :confirmable,
+         :recoverable, :registerable, :rememberable, :trackable,
+         :validatable
+
   attr_reader :password
-  include Gravtastic
 
   ENCRYPT = Digest::SHA256
+  def self.find_by_email_and_password(email, password)
+    person = self.find_by_email(email)
+    if person and person.encrypted_password == ENCRYPT.hexdigest(password + "chrouiNt" + person.password_salt)
+      return person
+    end
+  end
 
-  has_many :sessions, :dependent => :destroy
   has_many :ranks, :dependent => :destroy
   has_many :compositions, :foreign_key => 'author_id'
   has_many :attendances, :dependent => :destroy
   has_many :meetings, :through => :attendances
 
-  validates_presence_of :email
-  validates_uniqueness_of :email, :message => "has already been used by someone else"
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
-    :on => :create
-  validates_format_of :password, :with => /\A([\x20-\x7E]){6,}\Z/,
-    :message => "must be at least 6 characters",
-    :unless => :password_is_not_being_updated?
-  validates_confirmation_of :password
   validates_presence_of :first_name
 
-  before_create :n00b_salt, :if => Proc.new { self.password.blank? }
-  after_create :notify_of_account_creation, :if => Proc.new { self.password.blank? }
-  after_save :flush_passwords
-
-  gravtastic :size => 200, :default => "http://pcmag.heroku.com/images/children.png", :rating => 'R'
-
-  def self.find_by_email_and_password(email, password)
-    person = self.find_by_email(email)
-    if person and person.encrypted_password == ENCRYPT.hexdigest(password + "chrouiNt" + person.salt)
-      return person
-    end
-  end
-
-  def password=(password)
-    @password = password
-    unless password_is_not_being_updated?
-      self.salt = [Array.new(9){rand(256).chr}.join].pack('m').chomp
-      self.encrypted_password = ENCRYPT.hexdigest(password + "chrouiNt" + self.salt)
-      self.verified = true
-    end
-  end
-
+  include Gravtastic
+  gravtastic :size => 200, :default => "http://problemchildmag.com/images/children.png", :rating => 'R'
 
   # CONVENIENCES
   def name
@@ -145,40 +125,22 @@ class Person < ActiveRecord::Base
       if formatted_name_and_email =~ /\A.+<.+>\Z/
         email = formatted_name_and_email.scan(/<.+>/).first.delete "<>"
         person = Person.find_by_email email
-        unless person
-          names = formatted_name_and_email.scan(/.+</).first.gsub(/["<>[:cntrl:]]/, '').split(' ')
-          first = names.delete_at(0)
-          last = names.delete_at(names.length - 1) unless names.empty?
-          middles = names.join(' ') unless names.empty?
-          person = Person.create(
-            :first_name => first, 
-            :middle_name => middles, 
-            :last_name => last, 
-            :email => email
-          )
-        end
+        # unless person
+        #   names = formatted_name_and_email.scan(/.+</).first.gsub(/["<>[:cntrl:]]/, '').split(' ')
+        #   first = names.delete_at(0)
+        #   last = names.delete_at(names.length - 1) unless names.empty?
+        #   middles = names.join(' ') unless names.empty?
+        #   person = Person.create(
+        #     :first_name => first, 
+        #     :middle_name => middles, 
+        #     :last_name => last, 
+        #     :email => email
+        #   )
+        # end
       else
         person = nil
       end 
       person
     end
-  end
-
-protected
-
-  def notify_of_account_creation
-    Notifications.signup(Crypto.encrypt("#{self.id}:#{self.salt}"), self).deliver
-  end
-
-  def n00b_salt
-    self.salt = "n00b"
-  end
-
-  def flush_passwords
-    @password = @password_confirmation = nil
-  end
-
-  def password_is_not_being_updated?
-    (self.id and self.password.blank?) || (!self.id && self.password.blank?)
   end
 end

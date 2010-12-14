@@ -1,4 +1,4 @@
-- title t('.title')
+- title "Sign up"
 - content_for :sidebar do
   %h2 Why should I?
   :markdown
@@ -9,6 +9,8 @@
     * If you're a staff member, it will make keeping track of your attendence a breeze
     * and more!
   
-  = render :partial => 'your_name_looks_like'
+  = render :partial => 'people/your_name_looks_like'
 
-= render 'form'
+= render :partial => 'form'
+
+= render :partial => "devise/shared/links"

@@ -2,7 +2,7 @@ class Communications < ActionMailer::Base
   default :from => ENV['ADMIN_EMAIL']
   default_url_options[:host] = "problemchildmag.com"
 
-  layout 'notifications'
+  layout 'devise/mailer'
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:

@@ -415,18 +415,24 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 /* line 254, ../../../app/stylesheets/_defaults.sass */
+label.boolean {
+  display: inline-block;
+  width: 80%;
+}
+
+/* line 258, ../../../app/stylesheets/_defaults.sass */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 257, ../../../app/stylesheets/_defaults.sass */
+/* line 261, ../../../app/stylesheets/_defaults.sass */
 label {
   margin-top: 1.5em;
   display: block;
   font-weight: bold;
 }
 
-/* line 264, ../../../app/stylesheets/_defaults.sass */
+/* line 268, ../../../app/stylesheets/_defaults.sass */
 .textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
   font-family: Cambria, Georgia, serif;
   font-size: 1em;
@@ -450,28 +456,28 @@ label {
   height: 2.571em;
 }
 
-/* line 277, ../../../app/stylesheets/_defaults.sass */
+/* line 281, ../../../app/stylesheets/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 288, ../../../app/stylesheets/_defaults.sass */
+/* line 292, ../../../app/stylesheets/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 290, ../../../app/stylesheets/_defaults.sass */
+/* line 294, ../../../app/stylesheets/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 293, ../../../app/stylesheets/_defaults.sass */
+/* line 297, ../../../app/stylesheets/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 297, ../../../app/stylesheets/_defaults.sass */
+/* line 301, ../../../app/stylesheets/_defaults.sass */
 input[type=submit], button {
   font-size: 1em;
   line-height: 1.5em;
@@ -490,7 +496,7 @@ input[type=submit], button {
   -o-box-shadow: #4a4a4a 1px 1px 2px 0;
   box-shadow: #4a4a4a 1px 1px 2px 0;
 }
-/* line 308, ../../../app/stylesheets/_defaults.sass */
+/* line 312, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
   -moz-box-shadow: #4a4a4a 0 0 2px 0;
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
@@ -498,7 +504,7 @@ input[type=submit]:hover, button:hover {
   box-shadow: #4a4a4a 0 0 2px 0;
   color: #4c4c4c;
 }
-/* line 311, ../../../app/stylesheets/_defaults.sass */
+/* line 315, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
@@ -506,7 +512,7 @@ input[type=submit]:active, button:active {
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   color: #4c4c4c;
 }
-/* line 314, ../../../app/stylesheets/_defaults.sass */
+/* line 318, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: black 0 0 0 0;
@@ -545,11 +551,11 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 323, ../../../app/stylesheets/_defaults.sass */
+/* line 327, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 325, ../../../app/stylesheets/_defaults.sass */
+/* line 329, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }

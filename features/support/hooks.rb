@@ -8,7 +8,7 @@ Before('@editor') do
   visit '/sign_in'
   fill_in 'Email', :with => @editor.email
   fill_in 'Password', :with => 'secret'
-  click_button 'Sign In'
+  click_button 'Sign in'
 end
 
 Before('@coeditor') do
@@ -16,7 +16,7 @@ Before('@coeditor') do
   visit '/sign_in'
   fill_in 'Email', :with => @coeditor.email
   fill_in 'Password', :with => 'secret'
-  click_button 'Sign In'
+  click_button 'Sign in'
 end
 
 #Around('@editor', '@coeditor') do |block|
@@ -44,7 +44,7 @@ Before('@webmember') do
   visit '/sign_in'
   fill_in 'Email', :with => @user.email
   fill_in 'Password', :with => 'secret'
-  click_button 'Sign In'
+  click_button 'Sign in'
 end
 
 Before('@meetings') do

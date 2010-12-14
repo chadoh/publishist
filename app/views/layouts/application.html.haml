@@ -25,36 +25,38 @@
             %li{ :class => params[:controller] == 'meetings' && 'current' }= link_to_unless_current "Meetings", meetings_path
           %li
             %ul#account
-              - if @user
+              - if person_signed_in?
                 %li
-                  = link_to_unless_current @user.name, person_path(@user)
+                  = link_to_unless_current current_person.name, person_path(current_person)
                 %li
-                  = button_to "Sign out", @application_session, :method => :delete, :class => "link"
+                  = link_to "Sign out", destroy_person_session_path
               - else
                 %li
-                  = link_to_unless_current "Sign in", new_session_path
+                  = link_to_unless_current "Sign in", sign_in_path
                 %li
-                  = link_to_unless_current "Sign Up!", new_person_path
+                  = link_to_unless_current "Sign Up!", sign_up_path
       %header{ :role => 'banner' }
         .gradient
           %h1 Problem Child
           %p= t 'subtitle'
       - if flash[:notice]
         #notice= flash[:notice]
-      %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:aside) && 'full-width', params[:controller]] }
+      - if flash[:alert]
+        #notice= flash[:alert]
+      %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:sidebar) && 'full-width', params[:controller]] }
         %header
           %h1{ :class => params[:controller] == 'compositions' && params[:action] == 'show' && 'nocaps' }<
             = @content_for_page_heading if show_title?
         = yield
-      - if content_for? :aside
-        %aside{ :id => "#{@article_id}-aside" }
+      - if content_for? :sidebar
+        %section.sidebar{ :id => "#{@article_id}-sidebar" }
           -##search_box
             -#= form_tag('/#') do
               -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark" }
               -#%input{ :type => 'submit', :value => "Search!" }
           -#%br
           -#%hr
-          = yield :aside
+          = yield :sidebar
       #page-footer &nbsp;
     %footer{ :role => 'contentinfo' }
       #footer

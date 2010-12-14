@@ -1,19 +1,16 @@
 require 'lib/crypto'
 
 class PeopleController < InheritedResources::Base
-  before_filter :resource, :only => [:set_password, :make_staff, :make_editor, :make_coeditor]
-  before_filter :ensure_login, :only => [:edit, :update, :destroy]
-  before_filter :ensure_logout, :only => [:new, :create], :unless => :editor?
+  before_filter :resource, :only => [:make_staff, :make_editor, :make_coeditor]
   before_filter :staff_only, :only => [:index]
   before_filter :editors_only, :only => [:destroy]
-  skip_before_filter :check_that_user_is_verified, :only => [:set_password, :update]
   auto_complete_for :person, [:first_name, :middle_name, :last_name, :email], :limit => 15 do |people|
     people.map {|person| "\"#{person.full_name}\" <#{person.email}>" }.join "\n"
   end
 
   def show
     @person = Person.find(params[:id])
-    if @user && (@user.the_editor? || @user == @person)
+    if person_signed_in? && (current_person.the_editor? || current_person == @person)
       @compositions = @person.compositions.order("created_at DESC")
     end
     show!
@@ -86,19 +83,6 @@ class PeopleController < InheritedResources::Base
     redirect_to person_url(@to)
   end
 
-  def destroy
-    destroy! do |format|
-      if @user == resource
-        flash[:notice] = "Goodbye! We're sad to see you go."
-        session[:id] = @user = nil
-        format.html { redirect_to root_url }
-      else
-        flash[:notice] = "#{resource.first_name} is no more."
-        format.html { redirect_to people_url }
-      end
-    end
-  end
-
 protected
 
   def collection
@@ -110,6 +94,6 @@ protected
   end
 
   def editor?
-    @user && @user.editor?
+    person_signed_in? && current_person.editor?
   end
 end

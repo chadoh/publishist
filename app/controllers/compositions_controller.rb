@@ -20,8 +20,8 @@ class CompositionsController < InheritedResources::Base
   end
 
   def new
-    if @user
-      @composition = Composition.new(:author_id => @user.id)
+    if person_signed_in?
+      @composition = Composition.new(:author_id => current_person.id)
     else
       @composition = Composition.new
     end
@@ -45,10 +45,10 @@ class CompositionsController < InheritedResources::Base
         Notifications.new_composition(@composition).deliver
         format.html {
           flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-          if @user and @user.the_editor?
+          if person_signed_in? and current_person.the_editor?
             redirect_to compositions_url
-          elsif @user
-            redirect_to person_url(@user)
+          elsif person_signed_in?
+            redirect_to person_url(current_person)
           else
             redirect_to(root_url)
           end
@@ -90,14 +90,14 @@ protected
   
   def editor_and_owner_only
     @composition = Composition.find(params[:id])
-    unless @user && (@user.the_editor? || @user == @composition.author)
+    unless person_signed_in? and (current_person.the_editor? || current_person == @composition.author)
       flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
       redirect_to root_url
     end
   end
   def editors_and_owner_only
     @composition = Composition.find(params[:id])
-    unless @user && (@user.editor? || @user.name == @composition.author)
+    unless person_signed_in? and (current_person.editor? || current_person.name == @composition.author)
       flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
       redirect_to root_url
     end

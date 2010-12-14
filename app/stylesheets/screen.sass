@@ -88,7 +88,7 @@
     &.full-width
       +columns($total-cols)
 
-  & > aside
+  & > section.sidebar
     +columns($sidebar)
     +omega
 
@@ -115,7 +115,7 @@ body > footer
 
 @media screen and (max-width: 600px)
   #page
-    & > article, & > aside
+    & > article, & > section.sidebar
       +full
       width: auto
 
@@ -128,7 +128,7 @@ section.user-profile
     +no-bullets
     margin-left: 0
 
-li.composition, li.packet
+li.composition, li.packet, section.composition
   +no-bullet
   +full
   +rhythm-borders(1px, 1, $base-font-size, dashed)
@@ -169,49 +169,49 @@ article#compositions, article.meetings
       +rhythm-borders(1px, 0, $base-font-size, dashed)
       border-color: $noticeable
 
-    ol.packets, ul.compositions
-      margin:
-        left: 0
-        bottom: 0
-      li.collapsed
-        &.packet
-          list-style-type: decimal
-        &.composition
-          list-style-type: disc
-        &.composition, &.packet
-          +rhythm-borders(0px, 0)
-          +leader(0)
+ol.packets, ul.compositions
+  margin:
+    left: 0
+    bottom: 0
+  li.collapsed
+    &.packet
+      list-style-type: decimal
+    &.composition
+      list-style-type: disc
+    &.composition, &.packet
+      +rhythm-borders(0px, 0)
+      +leader(0)
+      +trailer(0)
+      & > header
+        +inline-block
+        width: $sidebar * $col-width
+        h2
           +trailer(0)
-          & > header
-            +inline-block
-            width: $sidebar * $col-width
-            h2
-              +trailer(0)
-          & > div.body
-            display: none
-          & > span.drag-handle-wrap
-            width: 3em
-            display: inline-block
-            float: left
-            margin-top: -1px
-            & > span.drag-handle
-              +inline-block
-              color: $lgray
-              cursor: move
-              +rotate(90deg)
-              letter-spacing: -1px
-          & > footer
-            +inline-block
-            width: $article * $col-width
-            +trailer(0)
-            +leader(0)
-            & > p.author
-              +alpha
-              +columns(5)
-            & > p.submitted
-              +columns(8)
-            & > p.actions
-              +columns(3)
+      & > div.body
+        display: none
+      & > span.drag-handle-wrap
+        width: 3em
+        display: inline-block
+        float: left
+        margin-top: -1px
+        & > span.drag-handle
+          +inline-block
+          color: $lgray
+          cursor: move
+          +rotate(90deg)
+          letter-spacing: -1px
+      & > footer
+        +inline-block
+        width: $article * $col-width
+        +trailer(0)
+        +leader(0)
+        & > p.author
+          +alpha
+          +columns(5)
+        & > p.submitted
+          +columns(8)
+        & > p.actions
+          +columns(3)
 
 ul.attendances
   li.attendance
