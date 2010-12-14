@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20101207020010) do
     t.string   "encrypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "verified",             :default => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -84,7 +85,5 @@ ActiveRecord::Schema.define(:version => 20101207020010) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_foreign_key "compositions", "people", :name => "compositions_author_id_fk", :column => "author_id"
 
 end

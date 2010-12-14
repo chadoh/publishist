@@ -3,7 +3,7 @@ class DeviseAlterPeopleAndDropSessions < ActiveRecord::Migration
     drop_table :sessions
     change_table(:people) do |t|
       t.rename :salt, :password_salt
-      t.remove :verified
+      #t.remove :verified
       #t.database_authenticatable :null => false
       t.recoverable
       t.rememberable

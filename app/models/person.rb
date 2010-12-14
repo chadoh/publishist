@@ -1,9 +1,19 @@
+require 'digest/sha2'
+
 class Person < ActiveRecord::Base
   devise :database_authenticatable, :omniauthable, :confirmable,
          :recoverable, :registerable, :rememberable, :trackable,
          :validatable
 
   attr_reader :password
+
+  ENCRYPT = Digest::SHA256
+  def self.find_by_email_and_password(email, password)
+    person = self.find_by_email(email)
+    if person and person.encrypted_password == ENCRYPT.hexdigest(password + "chrouiNt" + person.password_salt)
+      return person
+    end
+  end
 
   has_many :ranks, :dependent => :destroy
   has_many :compositions, :foreign_key => 'author_id'
