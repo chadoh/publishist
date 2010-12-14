@@ -2,7 +2,7 @@ Pc::Application.routes.draw do
 
 
   devise_for :people, :controllers => { :sessions => "people/sessions" } do
-    get "sign_in", :to => "devise/sessions#new"
+    get "sign_in", :to => "people/sessions#new"
     get "sign_up", :to => "devise/registrations#new"
   end
 

@@ -20,7 +20,7 @@
             - @attendance.errors.full_messages.each do |msg|
               %li= msg
     
-      = f.input :person, :as => :string, :label => "Attendee (you can create an account by entering someone's name & email address)"
+      = f.input :person, :as => :string, :label => "Attendee"
       = f.input :answer, :label => "<span class='name'></span> Answer"
       = f.button :submit
 
