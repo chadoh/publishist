@@ -1,0 +1,4 @@
+$("li#packet_<%= resource.packet.id %> div.score")
+  .html("<%= escape_javascript(
+    render :partial => 'form', :locals => { :score => resource }
+  )%>");

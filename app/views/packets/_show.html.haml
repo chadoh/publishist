@@ -5,4 +5,5 @@
   %header
     %a{ :href => submission_url(packet.submission) }
       %h2.nocaps= sanitize(packet.submission.title)
-  = render :partial => 'submissions/body_and_footer', :locals => { :submission => packet.submission, :show_author => show_author }
+  - show_score = show_score.nil? ? false : show_score
+  = render :partial => 'submissions/body_and_footer', :locals => { :submission => packet.submission, :show_author => show_author, :packet => packet }

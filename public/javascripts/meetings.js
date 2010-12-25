@@ -22,4 +22,13 @@ $(function(){
       });
     }
   });
+
+  $('form.score input[type=submit]').hide();
+  $('input[type=number]').live('mouseout blur', function(){
+    var orig    = $(this).attr('data-original'),
+        current = $(this).val();
+    if (orig != current) {
+      $(this).parents('form').submit();
+    }
+  });
 });

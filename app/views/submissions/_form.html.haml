@@ -2,12 +2,7 @@
 - stylesheet 'cleditor'
 
 = simple_form_for @submission, :html => { :enctype => 'multipart/form-data' } do |f|
-  - if @submission.errors.any?
-    #errorExplanation
-      %h3 There #{pluralize_phrase(@submission.errors.count, "was an error", "were some errors")}!
-      %ul
-        - @submission.errors.full_messages.each do |msg|
-          %li= msg
+  = render :partial => 'error_messages'
   
   - unless person_signed_in?
     = f.input :author_name, :label => "Your Name"

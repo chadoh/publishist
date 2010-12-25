@@ -18,7 +18,7 @@ Feature: an editor records attendance
     When I press "Remove"
     Then I should see "Chad wasn't there, after all"
 
-  @wip
+  @pending
   @editor
   Scenario: Creating an account for a new person by recording attendance correctly
     Given I am on the first meeting page

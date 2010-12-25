@@ -502,17 +502,15 @@ input[type=submit]:hover, button:hover {
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
   -o-box-shadow: #4a4a4a 0 0 2px 0;
   box-shadow: #4a4a4a 0 0 2px 0;
-  color: #4c4c4c;
 }
-/* line 315, ../../../app/stylesheets/_defaults.sass */
+/* line 314, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -o-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
-  color: #4c4c4c;
 }
-/* line 318, ../../../app/stylesheets/_defaults.sass */
+/* line 316, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: black 0 0 0 0;
@@ -551,11 +549,11 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 327, ../../../app/stylesheets/_defaults.sass */
+/* line 325, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 329, ../../../app/stylesheets/_defaults.sass */
+/* line 327, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
@@ -972,19 +970,15 @@ article#submissions section.drop-here, article.meetings section.drop-here {
   border-color: #dddddd;
 }
 
-/* line 175, ../../../app/stylesheets/screen.sass */
-ol.packets, ul.submissions {
-  margin-bottom: 0;
-}
-/* line 179, ../../../app/stylesheets/screen.sass */
+/* line 177, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.packet, ul.submissions li.collapsed.packet {
   list-style-type: decimal;
 }
-/* line 181, ../../../app/stylesheets/screen.sass */
+/* line 179, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission, ul.submissions li.collapsed.submission {
   list-style-type: disc;
 }
-/* line 183, ../../../app/stylesheets/screen.sass */
+/* line 181, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission, ol.packets li.collapsed.packet, ul.submissions li.collapsed.submission, ul.submissions li.collapsed.packet {
   border-style: solid;
   border-width: 0em;
@@ -992,7 +986,7 @@ ol.packets li.collapsed.submission, ol.packets li.collapsed.packet, ul.submissio
   margin-top: 0em;
   margin-bottom: 0em;
 }
-/* line 187, ../../../app/stylesheets/screen.sass */
+/* line 185, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission > header, ol.packets li.collapsed.packet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packet > header {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1005,15 +999,15 @@ ol.packets li.collapsed.submission > header, ol.packets li.collapsed.packet > he
 ol.packets li.collapsed.submission > header, ol.packets li.collapsed.packet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packet > header {
   *display: inline;
 }
-/* line 190, ../../../app/stylesheets/screen.sass */
+/* line 188, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission > header h2, ol.packets li.collapsed.packet > header h2, ul.submissions li.collapsed.submission > header h2, ul.submissions li.collapsed.packet > header h2 {
   margin-bottom: 0em;
 }
-/* line 192, ../../../app/stylesheets/screen.sass */
+/* line 190, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission > div.body, ol.packets li.collapsed.packet > div.body, ul.submissions li.collapsed.submission > div.body, ul.submissions li.collapsed.packet > div.body {
   display: none;
 }
-/* line 194, ../../../app/stylesheets/screen.sass */
+/* line 192, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission > span.drag-handle-wrap, ol.packets li.collapsed.packet > span.drag-handle-wrap, ul.submissions li.collapsed.submission > span.drag-handle-wrap, ul.submissions li.collapsed.packet > span.drag-handle-wrap {
   width: 3em;
   display: inline-block;
@@ -1022,7 +1016,7 @@ ol.packets li.collapsed.submission > span.drag-handle-wrap, ol.packets li.collap
   margin-left: -1.5em;
   cursor: move;
 }
-/* line 202, ../../../app/stylesheets/screen.sass */
+/* line 200, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packets li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packet > span.drag-handle-wrap > span.drag-handle {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1040,7 +1034,7 @@ ol.packets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, o
 ol.packets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packets li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packet > span.drag-handle-wrap > span.drag-handle {
   *display: inline;
 }
-/* line 207, ../../../app/stylesheets/screen.sass */
+/* line 205, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission > footer, ol.packets li.collapsed.packet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packet > footer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1055,7 +1049,7 @@ ol.packets li.collapsed.submission > footer, ol.packets li.collapsed.packet > fo
 ol.packets li.collapsed.submission > footer, ol.packets li.collapsed.packet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packet > footer {
   *display: inline;
 }
-/* line 212, ../../../app/stylesheets/screen.sass */
+/* line 210, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission > footer > p.author, ol.packets li.collapsed.packet > footer > p.author, ul.submissions li.collapsed.submission > footer > p.author, ul.submissions li.collapsed.packet > footer > p.author {
   margin-left: 0.885%;
   display: inline;
@@ -1063,14 +1057,22 @@ ol.packets li.collapsed.submission > footer > p.author, ol.packets li.collapsed.
   width: 30.088%;
   margin-right: 0.885%;
 }
-/* line 215, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > footer > p.submitted, ol.packets li.collapsed.packet > footer > p.submitted, ul.submissions li.collapsed.submission > footer > p.submitted, ul.submissions li.collapsed.packet > footer > p.submitted {
+/* line 213, ../../../app/stylesheets/screen.sass */
+ol.packets li.collapsed.submission > footer > div.score, ol.packets li.collapsed.packet > footer > div.score, ul.submissions li.collapsed.submission > footer > div.score, ul.submissions li.collapsed.packet > footer > div.score {
   display: inline;
   float: left;
-  width: 48.673%;
+  width: 54.867%;
   margin-right: 0.885%;
 }
+/* line 215, ../../../app/stylesheets/screen.sass */
+ol.packets li.collapsed.submission > footer > div.score > form.score, ol.packets li.collapsed.packet > footer > div.score > form.score, ul.submissions li.collapsed.submission > footer > div.score > form.score, ul.submissions li.collapsed.packet > footer > div.score > form.score {
+  display: inline;
+}
 /* line 217, ../../../app/stylesheets/screen.sass */
+ol.packets li.collapsed.submission > footer > p.submitted, ol.packets li.collapsed.packet > footer > p.submitted, ul.submissions li.collapsed.submission > footer > p.submitted, ul.submissions li.collapsed.packet > footer > p.submitted {
+  display: none;
+}
+/* line 219, ../../../app/stylesheets/screen.sass */
 ol.packets li.collapsed.submission > footer > p.actions, ol.packets li.collapsed.packet > footer > p.actions, ul.submissions li.collapsed.submission > footer > p.actions, ul.submissions li.collapsed.packet > footer > p.actions {
   display: inline;
   float: left;
@@ -1078,13 +1080,49 @@ ol.packets li.collapsed.submission > footer > p.actions, ol.packets li.collapsed
   margin-right: 0.885%;
 }
 
-/* line 221, ../../../app/stylesheets/screen.sass */
+/* line 223, ../../../app/stylesheets/screen.sass */
+form.score input[type=submit] {
+  display: inline;
+  margin-bottom: 0em;
+  margin-top: 0em;
+  height: 1.2em;
+  line-height: 1.05em;
+}
+/* line 229, ../../../app/stylesheets/screen.sass */
+form.score div {
+  display: inline;
+}
+/* line 231, ../../../app/stylesheets/screen.sass */
+form.score div label {
+  font-weight: normal;
+  display: inline;
+}
+/* line 232, ../../../app/stylesheets/screen.sass */
+form.score div label:after {
+  content: ": ";
+}
+/* line 236, ../../../app/stylesheets/screen.sass */
+form.score div input[type=number] {
+  margin-bottom: 0em;
+  text-align: center;
+  width: 4em;
+  display: inline;
+  height: 1.5em;
+  font-size: 0.875em;
+  line-height: 1.714em;
+  border-style: solid;
+  border-width: 0.071em;
+  padding: 0.014em;
+  line-height: 1.05em;
+}
+
+/* line 247, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 223, ../../../app/stylesheets/screen.sass */
+/* line 249, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1096,20 +1134,20 @@ ul.attendances li.attendance span {
 ul.attendances li.attendance span {
   *display: inline;
 }
-/* line 225, ../../../app/stylesheets/screen.sass */
+/* line 251, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.person {
   width: 15em;
 }
-/* line 227, ../../../app/stylesheets/screen.sass */
+/* line 253, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.answer {
   width: 29.1em;
 }
-/* line 229, ../../../app/stylesheets/screen.sass */
+/* line 255, ../../../app/stylesheets/screen.sass */
 ul.attendances li.attendance span.actions {
   width: 3.9em;
 }
 
-/* line 231, ../../../app/stylesheets/screen.sass */
+/* line 257, ../../../app/stylesheets/screen.sass */
 form.attendance {
   clear: both;
   margin-right: 0.885%;
@@ -1117,20 +1155,20 @@ form.attendance {
   margin-top: 1.5em;
 }
 
-/* line 236, ../../../app/stylesheets/screen.sass */
+/* line 262, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_body {
   height: 30.857em;
 }
-/* line 238, ../../../app/stylesheets/screen.sass */
+/* line 264, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_title {
   height: 2.571em;
 }
-/* line 240, ../../../app/stylesheets/screen.sass */
+/* line 266, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 243, ../../../app/stylesheets/screen.sass */
+/* line 269, ../../../app/stylesheets/screen.sass */
 ul.meetings {
   list-style: none;
   margin-left: 0;
@@ -1141,7 +1179,7 @@ ul.meetings li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 246, ../../../app/stylesheets/screen.sass */
+/* line 272, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting {
   clear: both;
   margin-right: 0.885%;
@@ -1149,7 +1187,7 @@ ul.meetings li.meeting {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 249, ../../../app/stylesheets/screen.sass */
+/* line 275, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.when {
   display: inline;
   float: left;
@@ -1157,14 +1195,14 @@ ul.meetings li.meeting span.when {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 252, ../../../app/stylesheets/screen.sass */
+/* line 278, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.question {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 254, ../../../app/stylesheets/screen.sass */
+/* line 280, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.actions {
   display: inline;
   float: left;
@@ -1176,7 +1214,7 @@ ul.meetings li.meeting span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 258, ../../../app/stylesheets/screen.sass */
+/* line 284, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1187,13 +1225,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 261, ../../../app/stylesheets/screen.sass */
+/* line 287, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 263, ../../../app/stylesheets/screen.sass */
+/* line 289, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1201,7 +1239,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 266, ../../../app/stylesheets/screen.sass */
+/* line 292, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1209,14 +1247,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 269, ../../../app/stylesheets/screen.sass */
+/* line 295, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 271, ../../../app/stylesheets/screen.sass */
+/* line 297, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1234,7 +1272,7 @@ ul#people li.person span.promote-to > ul li:after {
 ul#people li.person span.promote-to > ul li:last-child:after, ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 273, ../../../app/stylesheets/screen.sass */
+/* line 299, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1246,7 +1284,7 @@ ul#people li.person span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 277, ../../../app/stylesheets/screen.sass */
+/* line 303, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

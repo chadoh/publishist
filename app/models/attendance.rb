@@ -2,6 +2,8 @@ class Attendance < ActiveRecord::Base
   belongs_to :meeting
   belongs_to :person
 
+  has_many :scores
+
   validates_presence_of :meeting_id
   validate :presence_of_person
 

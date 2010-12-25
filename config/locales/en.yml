@@ -63,3 +63,6 @@ en:
         create: "Sign In"
       attendance:
         create: "Add"
+      score:
+        create: "Save"
+        update: "Save"

@@ -38,4 +38,5 @@ module ApplicationHelper
   def the_editor_or_the_owner?(compo)
     person_signed_in? && (current_person.the_editor? || current_person.name == compo.author)
   end
+
 end

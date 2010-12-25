@@ -3,8 +3,10 @@
     = image_tag submission.photo.url(:medium)
   - unless submission.body.blank?
     = sanitize submission.body
-  - if the_editor_or_the_owner?(submission)
 %footer.submission-details
+  - if @show_score
+    %div.score
+      = render :partial => 'scores/form', :locals => { :score => Score.with(@attendance, packet) }
   - show_author = show_author.nil? ? true : show_author
   - if show_author and (the_editor? or current_person.email == submission.email)
     %p.author

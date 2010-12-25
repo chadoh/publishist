@@ -4,26 +4,6 @@
   %p.actions
     = link_to t('.edit'), edit_meeting_path(@meeting)
 
-%section#attendance
-  %header
-    %h2 Attendance
-  %ul.attendances
-    - for attendance in @meeting.attendances
-      = render :partial => 'attendances/show', :locals => { :attendance => attendance }
-
-  - if editor?
-    = simple_form_for [@meeting, Attendance.new] do |f|
-      - if @attendance.errors.any?
-        #errorExplanation
-          %h3 There #{pluralize_phrase(@attendance.errors.count, "was an error", "were some errors")}!
-          %ul
-            - @attendance.errors.full_messages.each do |msg|
-              %li= msg
-    
-      = f.input :person, :as => :string, :label => "Attendee"
-      = f.input :answer, :label => "<span class='name'></span> Answer"
-      = f.button :submit
-
 %section#packet
   %header
     %h2 Submissions
@@ -39,5 +19,19 @@
     });
   });
 
-- if editor?
-  - javascript 'meetings'
+%section#attendance
+  %header
+    %h2 Attendance
+  %ul.attendances
+    - for attendance in @meeting.attendances
+      = render :partial => 'attendances/show', :locals => { :attendance => attendance }
+
+  - if editor?
+    = simple_form_for [@meeting, Attendance.new] do |f|
+      = render :partial => 'error_messages'
+
+      = f.input :person, :as => :string, :label => "Attendee"
+      = f.input :answer, :label => "<span class='name'></span> Answer"
+      = f.button :submit
+
+- javascript 'meetings'
