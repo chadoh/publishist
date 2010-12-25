@@ -37,6 +37,7 @@ development: &DEFAULTS
 test: &test
   <<: *DEFAULTS
   database: pc_test
+  min_messages: warning
 
 production:
   <<: *DEFAULTS
