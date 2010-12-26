@@ -4,12 +4,13 @@
   = f.input :first_name
   = f.input :middle_name
   = f.input :last_name
-  = f.input :password
-  = f.input :password_confirmation
+  - if params[:action] == 'new'
+    = f.input :password
+    = f.input :password_confirmation
   - if params[:action] == 'edit'
-    = f.input :password, :label => 'New password'
+    = f.input :password, :label => 'New password', :required => false
     = f.input :password_confirmation, :label => 'New password again'
-    = f.input :current_password, :label => 'Current password (we need your current password to confirm your changes)'
+    = f.input :current_password, :label => "Current password (if you're changing it)"
   = f.button :submit
 
 :javascript
