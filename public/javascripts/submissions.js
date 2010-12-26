@@ -1,12 +1,12 @@
 $(function(){
 
-  $('li:regex(class,(composition|packet)) header h2').live('click', function(e){
+  $('li:regex(class,(submission|packet)) header h2').live('click', function(e){
     e.preventDefault();
-    $(this).parents('li:regex(class,(composition|packet))').toggleClass('collapsed');
+    $(this).parents('li:regex(class,(submission|packet))').toggleClass('collapsed');
   });
 
-  $('li:regex(class,(composition|packet))').draggable({
-    handle: 'span.drag-handle',
+  $('li:regex(class,(submission|packet))').draggable({
+    handle: 'span.drag-handle-wrap',
     axis: 'y',
     stack: 'article',
     zIndex: 1,
@@ -25,12 +25,12 @@ $(function(){
           url: '/packets/' + packet_id
         }); }
       else if(li.parents('section').attr('id') != section.attr('id')) {
-        if(li.hasClass('composition')) {
+        if(li.hasClass('submission')) {
           $.ajax({
             type: 'POST',
             url: '/packets',
             data: {
-              composition: li.attr('id').split('_')[1],
+              submission: li.attr('id').split('_')[1],
               meeting:     section.attr('id').split('_')[1] }
           }); }
         else {

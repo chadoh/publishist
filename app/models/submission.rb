@@ -1,4 +1,4 @@
-class Composition < ActiveRecord::Base
+class Submission < ActiveRecord::Base
   belongs_to :author, :class_name => "Person"
   has_many :packets, :dependent => :destroy
   has_many :meetings, :through => :packets
@@ -10,7 +10,7 @@ class Composition < ActiveRecord::Base
 
   validates_attachment_content_type :photo, 
     :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
-    :if => Proc.new { |composition| composition.photo.file? },
+    :if => Proc.new { |submission| submission.photo.file? },
     :message => "must be an image"
 
   has_attached_file :photo,

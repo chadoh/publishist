@@ -1,8 +1,8 @@
 li = $("li#packet_<%= @packet.id %>");
-li.addClass('composition').removeClass('packet');
-li.attr('id', 'composition_<%= @packet.composition.id %>');
-if(<%= Packet.all.collect(&:composition).include? @packet.composition %>) {
+li.addClass('submission').removeClass('packet');
+li.attr('id', 'submission_<%= @packet.submission.id %>');
+if(<%= Packet.all.collect(&:submission).include? @packet.submission %>) {
   li.remove(); }
 else {
-  $('ul.compositions').append(li);
+  $('ul.submissions').append(li);
 }

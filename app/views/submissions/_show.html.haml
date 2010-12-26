@@ -1,0 +1,10 @@
+- collapsed   = collapsed.nil?   ? true : collapsed
+- show_author = show_author.nil? ? true : show_author
+%li[submission]{ :class => collapsed && "collapsed" }
+  - if editor?
+    %span.drag-handle-wrap
+      %span.drag-handle &lt;&gt;
+  %header
+    %a{ :href => submission_url(submission) }
+      %h2.nocaps= sanitize(submission.title)
+  = render :partial => 'submissions/body_and_footer', :locals => { :submission => submission, :show_author => show_author }

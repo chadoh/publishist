@@ -16,7 +16,7 @@ class Person < ActiveRecord::Base
   end
 
   has_many :ranks, :dependent => :destroy
-  has_many :compositions, :foreign_key => 'author_id'
+  has_many :submissions, :foreign_key => 'author_id'
   has_many :attendances, :dependent => :destroy
   has_many :meetings, :through => :attendances
 

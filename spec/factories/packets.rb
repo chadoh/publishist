@@ -1,4 +1,4 @@
 Factory.define :packet do |f|
   f.association :meeting
-  f.association :composition
+  f.association :submission
 end

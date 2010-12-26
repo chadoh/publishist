@@ -1,25 +1,25 @@
 Feature: An editor organizes submissions into packets
   In order to organize submissions for review at meetings
   As an editor or coeditor
-  I want to drag and drop them into place from the compositions page
+  I want to drag and drop them into place from the submissions page
 
   @editor @javascript
   Scenario: Scheduling unscheduled submissions into two future meetings
-    Given there are several compositions
+    Given there are several submissions
     And there are several meetings
-    And I am on the compositions page
-    When I drag "Composition 1" to "Meeting 1"
-    Then I should not see "Composition 1" under "Unscheduled"
-    And I should see "Composition 1" under "Meeting 1"
+    And I am on the submissions page
+    When I drag "Submission 1" to "Meeting 1"
+    Then I should not see "Submission 1" under "Unscheduled"
+    And I should see "Submission 1" under "Meeting 1"
 
-    When I drag "Composition 1" to "Meeting 2"
-    Then I should see "Composition 1" under "Meeting 1"
-    And I should see "Composition 1" under "Meeting 2"
+    When I drag "Submission 1" to "Meeting 2"
+    Then I should see "Submission 1" under "Meeting 1"
+    And I should see "Submission 1" under "Meeting 2"
 
-    When I drag "Composition 1" from "Meeting 1" to "Unscheduled"
-    Then I should not see "Composition 1" under "Meeting 1"
-    And I should see "Composition 1" under "Meeting 2"
-    And I should not see "Composition 1" under "Unscheduled"
+    When I drag "Submission 1" from "Meeting 1" to "Unscheduled"
+    Then I should not see "Submission 1" under "Meeting 1"
+    And I should see "Submission 1" under "Meeting 2"
+    And I should not see "Submission 1" under "Unscheduled"
 
   @wip
   @editor @javascript

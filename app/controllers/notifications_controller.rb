@@ -1,9 +1,9 @@
 class NotificationsController < ApplicationController
-  def new_composition
-    @composition = Composition.first
-    @title = @composition.title
-    @composition_body = @composition.body
-    @author = @composition.author
+  def new_submission
+    @submission = Submission.first
+    @title = @submission.title
+    @submission_body = @submission.body
+    @author = @submission.author
     @url = "#"
 
     @heading_image = "http://pcmag.heroku.com/images/mail/heading1.jpg"

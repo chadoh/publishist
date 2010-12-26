@@ -13,10 +13,10 @@ en:
   cancel: "Cancel"
   search: "Search!"
 
-  compositions:
+  submissions:
     index:
-      title: "Compositions"
-      new_composition: "Submit something!"
+      title: "Submissions"
+      new_submission: "Submit something!"
     new:
       title: "Submit Something"
     edit:
@@ -53,7 +53,7 @@ en:
   helpers:
     submit:
       create: "Create %{model}!"
-      composition:
+      submission:
         create: "Submit!"
         update: "Update"
       person:

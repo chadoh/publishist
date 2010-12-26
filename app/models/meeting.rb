@@ -2,5 +2,5 @@ class Meeting < ActiveRecord::Base
   has_many :attendances, :dependent => :destroy
   has_many :people, :through => :attendances
   has_many :packets, :dependent => :destroy, :order => 'position'
-  has_many :compositions, :through => :packets
+  has_many :submissions, :through => :packets
 end

@@ -5,16 +5,16 @@
   - if @person == current_person
     %p
       What you've submitted:
-      - if @compositions.empty?
+      - if @submissions.empty?
         nothing, yet.
-        = link_to "Get to it!", new_composition_path
+        = link_to "Get to it!", new_submission_path
   - else
     %p
       What #{@person.first_name} has submitted:
-      - if @compositions.empty?
+      - if @submissions.empty?
         nothing yet.
-  %ul.compositions
-    - @compositions.each do |composition|
-      = render :partial => 'compositions/show', :locals => { :composition => composition, :collapsed => false }
+  %ul.submissions
+    - @submissions.each do |submission|
+      = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
 - else
   = render :partial => 'about', :locals => { :person => @person }

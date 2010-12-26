@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Composition do
+describe Submission do
   before(:each) do
     @person = Factory.create :person
   end
@@ -13,7 +13,7 @@ describe Composition do
   describe "#author" do
     context "when there is an associated author" do
       before(:each) do
-        @compo = Composition.create(
+        @compo = Submission.create(
           :title  => ';-)',
           :body   => 'he winks and smiles <br><br> both',
           :author => @person)
@@ -30,7 +30,7 @@ describe Composition do
 
     context "when there is no associated author" do
       before(:each) do
-        @compo = Composition.create :title => ';-)',
+        @compo = Submission.create :title => ';-)',
           :body => 'he winks and smiles <br><br> both',
           :author_email => 'me@you.com',
           :author_name => @person

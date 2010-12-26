@@ -16,9 +16,9 @@
       %nav.site-nav{ :role => 'navigation' }
         %ul
           %li{ :class => params[:controller] == 'welcome' && 'current' }= link_to_unless_current "About", root_path
-          %li{ :class => current_page?(new_composition_path) && 'current' }= link_to_unless_current "Submit", new_composition_path
+          %li{ :class => current_page?(new_submission_path) && 'current' }= link_to_unless_current "Submit", new_submission_path
           - if editor?
-            %li{ :class => params[:controller] == 'compositions' && params[:action] != 'new' && 'current' }= link_to_unless_current "Compositions", compositions_path
+            %li{ :class => params[:controller] == 'submissions' && params[:action] != 'new' && 'current' }= link_to_unless_current "Submissions", submissions_path
           - if staff? || editor?
             %li{ :class => params[:controller] == 'people' && 'current' }= link_to_unless_current "People", people_path
           - if member?
@@ -45,7 +45,7 @@
         #notice= flash[:alert]
       %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:sidebar) && 'full-width', params[:controller]] }
         %header
-          %h1{ :class => params[:controller] == 'compositions' && params[:action] == 'show' && 'nocaps' }<
+          %h1{ :class => params[:controller] == 'submissions' && params[:action] == 'show' && 'nocaps' }<
             = @content_for_page_heading if show_title?
         = yield
       - if content_for? :sidebar

@@ -1,12 +1,12 @@
 - javascript 'cleditor'
 - stylesheet 'cleditor'
 
-= simple_form_for @composition, :html => { :enctype => 'multipart/form-data' } do |f|
-  - if @composition.errors.any?
+= simple_form_for @submission, :html => { :enctype => 'multipart/form-data' } do |f|
+  - if @submission.errors.any?
     #errorExplanation
-      %h3 There #{pluralize_phrase(@composition.errors.count, "was an error", "were some errors")}!
+      %h3 There #{pluralize_phrase(@submission.errors.count, "was an error", "were some errors")}!
       %ul
-        - @composition.errors.full_messages.each do |msg|
+        - @submission.errors.full_messages.each do |msg|
           %li= msg
   
   - unless person_signed_in?
@@ -17,7 +17,7 @@
   = f.input :photo, :label => "Or, submit an image:"
   - if person_signed_in?
     - if the_editor?
-      = f.input :author, :as => :string, :label => "Author (you can submit for anyone with an account here, or create an account for someone by entering their name and email address)", :input_html => { :value => "#{"\"#{@composition.author(true).name}\" <#{@composition.author(true).email}>" if @composition.author(true)}" }
+      = f.input :author, :as => :string, :label => "Author (you can submit for anyone with an account here, or create an account for someone by entering their name and email address)", :input_html => { :value => "#{"\"#{@submission.author(true).name}\" <#{@submission.author(true).email}>" if @submission.author(true)}" }
       = f.input :author_name, :label => "Or if you want to submit for someone without creating an account for them, put their name here"
       = f.input :author_email, :input_html => { :value => "" }, :label => "...and their email address here"
     - else
@@ -26,7 +26,7 @@
 
 :javascript
   $(function(){
-    $("#composition_author").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}");
+    $("#submission_author").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}");
 
     cloptions = {
       width: '99%',
@@ -41,11 +41,11 @@
         "rule image link unlink | pastetext source"
     }
 
-    $("#composition_body").cleditor(cloptions);
+    $("#submission_body").cleditor(cloptions);
 
     cloptions.height = 62;
     cloptions.controls = "bold italic underline strikethrough subscript superscript | " +
         "pastetext source"
-    $("#composition_title").cleditor(cloptions);
+    $("#submission_title").cleditor(cloptions);
 
   });

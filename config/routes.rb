@@ -16,7 +16,7 @@ Pc::Application.routes.draw do
       put 'update_position'
     end
   end
-  resources :compositions, :path_names => { :new => "/submit" }
+  resources :submissions, :path_names => { :new => "/submit" }
   resources :people, :shallow => true do
     resources :ranks
     member do
@@ -33,10 +33,10 @@ Pc::Application.routes.draw do
   #aliases, kind of
   #get "me" => "people#show#1"
   get "sign_up" => "people#new", :as => :new_person
-  get "submit" => "compositions#new", :as => :new_composition
+  get "submit" => "submissions#new", :as => :new_submission
 
   #testing emails
-  get "notifications/new_composition"
+  get "notifications/new_submission"
 
   root :to => "welcome#index"
 end

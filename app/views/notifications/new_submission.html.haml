@@ -1,0 +1,6 @@
+%h1.submission.title= @title
+.submission.body= @submission_body
+%p.submission.author{ :style => "color: silver;" }= @author
+- content_for :footer do
+  :markdown
+    You can [view this on the website](#{@url}).

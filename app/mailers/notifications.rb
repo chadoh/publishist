@@ -7,18 +7,18 @@ class Notifications < ActionMailer::Base
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
-  #   en.actionmailer.notifications.new_composition.subject
+  #   en.actionmailer.notifications.new_submission.subject
   #
-  def new_composition(composition)
-    @composition = composition
-    @title = composition.title
-    @composition_body = composition.body # using @body causes problems
-    @author = composition.author
-    @url = composition_url(composition)
+  def new_submission(submission)
+    @submission = submission
+    @title = submission.title
+    @submission_body = submission.body # using @body causes problems
+    @author = submission.author
+    @url = submission_url(submission)
 
     mail(
       :to => ENV['EDITOR_EMAIL'],
-      :from => composition.email,
+      :from => submission.email,
       :subject => "Submission: \"#{@title}\" by #{@author}"
     )
   end

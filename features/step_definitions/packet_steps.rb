@@ -1,29 +1,29 @@
-Given /^there are several compositions$/ do
-  3.times { Factory.create :composition }
+Given /^there are several submissions$/ do
+  3.times { Factory.create :submission }
 end
 
 Given /^there are several meetings$/ do
   2.times { Factory.create :meeting }
 end
 
-When /^I drag "([^"]*)" to "([^"]*)"$/ do |composition_name, destination|
-  composition = find("li", :text => composition_name).find("span.drag-handle")
+When /^I drag "([^"]*)" to "([^"]*)"$/ do |submission_name, destination|
+  submission = find("li", :text => submission_name).find("span.drag-handle")
   destination = find "section##{destination.parameterize('_')}"
-  composition.drag_to destination
+  submission.drag_to destination
 end
 
-When /^I drag "([^"]*)" from "([^"]*)" to "([^"]*)"$/ do |composition_name, origin, destination|
+When /^I drag "([^"]*)" from "([^"]*)" to "([^"]*)"$/ do |submission_name, origin, destination|
   origin      = find "section##{origin.parameterize('_')}"
-  composition = origin.find("li", :text => composition_name).find("span.drag-handle")
+  submission = origin.find("li", :text => submission_name).find("span.drag-handle")
   destination = find "section##{destination.parameterize('_')}"
-  composition.drag_to destination
+  submission.drag_to destination
 end
 
 Given /^the following submissions are scheduled for a meeting a week from now:$/ do |submissions_table|
   meeting = Factory.create :meeting
   submissions_table.hashes.each do |attributes|
-    composition = Composition.create(attributes)
-    Packet.create :meeting => meeting, :composition => composition
+    submission = Submission.create(attributes)
+    Packet.create :meeting => meeting, :submission => submission
   end
 end
 

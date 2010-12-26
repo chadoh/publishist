@@ -5,16 +5,16 @@ Feature: people of various ranks submit something
 
   @editor
   Scenario: The editor submits something
-    Given I am on the new composition page
+    Given I am on the new submission page
     When I fill in the following:
       | Title | Old King Scole |
       | Body  | Chewed Tobaccy |
     And I press "Submit!"
-    Then I should be on the compositions page
+    Then I should be on the submissions page
 
   @webmember
   Scenario: Some other signed-in person submits something
-    Given I am on the new composition page
+    Given I am on the new submission page
     When I fill in the following:
       | Title | Merry Wives |
       | Body  | of Pilates  |
@@ -22,7 +22,7 @@ Feature: people of various ranks submit something
     Then I should be on my profile page
 
   Scenario: An anonymous visitor submits something
-    Given I am on the new composition page
+    Given I am on the new submission page
     When I fill in the following:
       | Title              | Jackson, a favorite       |
       | Body               | of both Johnny and Sufjan |

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101207020010) do
+ActiveRecord::Schema.define(:version => 20101225225538) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "meeting_id"
@@ -19,20 +19,6 @@ ActiveRecord::Schema.define(:version => 20101207020010) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "person_name"
-  end
-
-  create_table "compositions", :force => true do |t|
-    t.text     "title"
-    t.text     "body"
-    t.string   "author_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "author_id"
-    t.string   "author_email"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
   end
 
   create_table "meetings", :force => true do |t|
@@ -44,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20101207020010) do
 
   create_table "packets", :force => true do |t|
     t.integer  "meeting_id"
-    t.integer  "composition_id"
+    t.integer  "submission_id"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -84,6 +70,38 @@ ActiveRecord::Schema.define(:version => 20101207020010) do
     t.datetime "rank_end"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "scores", :force => true do |t|
+    t.integer  "amount"
+    t.integer  "person_id"
+    t.integer  "packet_id"
+    t.boolean  "entered_by_coeditor?"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "simple_captcha_data", :force => true do |t|
+    t.string   "key",        :limit => 40
+    t.string   "value",      :limit => 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simple_captcha_data", ["key"], :name => "idx_key"
+
+  create_table "submissions", :force => true do |t|
+    t.text     "title"
+    t.text     "body"
+    t.string   "author_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "author_id"
+    t.string   "author_email"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
 end

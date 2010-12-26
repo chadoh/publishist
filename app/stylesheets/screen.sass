@@ -128,7 +128,7 @@ section.user-profile
     +no-bullets
     margin-left: 0
 
-li.composition, li.packet, section.composition
+li.submission, li.packet, section.submission
   +no-bullet
   +full
   +rhythm-borders(1px, 1, $base-font-size, dashed)
@@ -145,7 +145,7 @@ li.composition, li.packet, section.composition
   & > header h2
     min-height: $base-line-height
 
-footer.composition-details
+footer.submission-details
   +leader
   +trailer
   p, span
@@ -161,7 +161,7 @@ footer.composition-details
 span.drag-handle-wrap
   display: none
 
-article#compositions, article.meetings
+article#submissions, article.meetings
   section
     & > header > h2
       +trailer(0)
@@ -172,16 +172,16 @@ article#compositions, article.meetings
       +rhythm-borders(1px, 0, $base-font-size, dashed)
       border-color: $noticeable
 
-ol.packets, ul.compositions
+ol.packets, ul.submissions
   margin:
     left: 0
     bottom: 0
   li.collapsed
     &.packet
       list-style-type: decimal
-    &.composition
+    &.submission
       list-style-type: disc
-    &.composition, &.packet
+    &.submission, &.packet
       +rhythm-borders(0px, 0)
       +leader(0)
       +trailer(0)
@@ -197,10 +197,10 @@ ol.packets, ul.compositions
         display: inline-block
         float: left
         margin-top: -1px
+        cursor: move
         & > span.drag-handle
           +inline-block
           color: $lgray
-          cursor: move
           +rotate(90deg)
           letter-spacing: -1px
       & > footer
@@ -232,9 +232,9 @@ form.attendance
   +leader
 
 article#submit-something
-  textarea#composition_body
+  textarea#submission_body
     height: $base-line-height / 14px * 18em
-  textarea#composition_title
+  textarea#submission_title
     height: $base-line-height / 14px * 1.5em
   .trigger
     height: 5px
