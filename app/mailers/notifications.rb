@@ -23,34 +23,4 @@ class Notifications < ActionMailer::Base
     )
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.actionmailer.notifications.signup.subject
-  #
-  def signup(key, person)
-    @key = key
-    @url = recovery_session_url(@key)
-    @person = person
-
-    mail(
-      :to => @person.email,
-      :subject => "Welcome to Problem Child!"
-    )
-  end
-
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.actionmailer.notifications.forgot_password.subject
-  #
-  def forgot_password(key, email)
-    @key = key
-    @url = recovery_session_url(@key)
-
-    mail(
-      :to => email,
-      :subject => "Problem Child Password Reset"
-    )
-  end
 end
