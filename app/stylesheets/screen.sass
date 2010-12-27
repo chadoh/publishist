@@ -174,7 +174,6 @@ article#submissions, article.meetings
 
 ol.packets, ul.submissions
   margin:
-    left: 0
     bottom: 0
   li.collapsed
     &.packet
@@ -196,7 +195,9 @@ ol.packets, ul.submissions
         width: 3em
         display: inline-block
         float: left
-        margin-top: -1px
+        margin:
+          top: -1px
+          left: -1.5em
         cursor: move
         & > span.drag-handle
           +inline-block
