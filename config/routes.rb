@@ -8,6 +8,8 @@ Pc::Application.routes.draw do
 
   get "welcome/index"
 
+  resources :scores
+
   resources :meetings do
     resources :attendances
   end

@@ -502,17 +502,15 @@ input[type=submit]:hover, button:hover {
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
   -o-box-shadow: #4a4a4a 0 0 2px 0;
   box-shadow: #4a4a4a 0 0 2px 0;
-  color: #4c4c4c;
 }
-/* line 315, ../../../app/stylesheets/_defaults.sass */
+/* line 314, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -o-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
-  color: #4c4c4c;
 }
-/* line 318, ../../../app/stylesheets/_defaults.sass */
+/* line 316, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: black 0 0 0 0;
@@ -551,11 +549,11 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 327, ../../../app/stylesheets/_defaults.sass */
+/* line 325, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 329, ../../../app/stylesheets/_defaults.sass */
+/* line 327, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }

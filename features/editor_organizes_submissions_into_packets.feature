@@ -21,7 +21,7 @@ Feature: An editor organizes submissions into packets
     And I should see "Submission 1" under "Meeting 2"
     And I should not see "Submission 1" under "Unscheduled"
 
-  @wip
+  @pending
   @editor @javascript
   Scenario: The editor sorts submissions within the packet
     Given the following submissions are scheduled for a meeting a week from now:
@@ -30,7 +30,7 @@ Feature: An editor organizes submissions into packets
       | Lunatics' Rant    | Stopstopstopstop | daffy@loony.com    |
     And I am on the first meeting page
     When I drag "Lunatics' Rant" on top
-    And save and open page
+    And pending
     Then "Lunatics' Rant" should be above "A Hydrogen Baloon"
 
     When I refresh the page

@@ -4,6 +4,7 @@ describe Packet do
   it {
     should belong_to :meeting
     should belong_to :submission
+    should have_many :scores
 
     should validate_presence_of :meeting_id
     should validate_presence_of :submission_id

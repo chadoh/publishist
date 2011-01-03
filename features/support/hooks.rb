@@ -46,8 +46,3 @@ Before('@webmember') do
   fill_in 'Password', :with => 'secret'
   click_button 'Sign in'
 end
-
-Before('@meetings') do
-  Factory.create :meeting
-  Factory.create :meeting2
-end

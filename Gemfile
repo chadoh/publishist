@@ -11,6 +11,7 @@ gem 'compass-susy-plugin'
 gem 'simple_form'
 gem 'rdiscount'
 gem 'RedCloth'
+gem 'inherited_resources_views'
 
 # Controllers
 gem 'aws-s3'
@@ -20,7 +21,7 @@ gem 'inherited_resources'
 
 # Models
 gem 'devise'
-gem 'foreigner', :require => 'foreigner'
+gem 'foreigner'
 gem 'acts_as_list'
 
 group :development do

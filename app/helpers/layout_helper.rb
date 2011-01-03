@@ -22,10 +22,7 @@ module LayoutHelper
     content_for(:head) { javascript_include_tag(*args) }
   end
 
-  #Helper function to add class="selected" to the active tab
-  #Allows passing in either a simple string with the route name
-  #to flag on,
-  #or an array of strings if multiple states receive a flag
+  # Helper function to add class="selected" to the active tab
   def selected_tab_if(active_tab)
     (active_tab == @active_tab) ? 'selected' : 'not_selected'
   end

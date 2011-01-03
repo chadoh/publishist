@@ -173,8 +173,6 @@ article#submissions, article.meetings
       border-color: $noticeable
 
 ol.packets, ul.submissions
-  margin:
-    bottom: 0
   li.collapsed
     &.packet
       list-style-type: decimal
@@ -212,10 +210,38 @@ ol.packets, ul.submissions
         & > p.author
           +alpha
           +columns(5)
+        & > div.score
+          +columns(9)
+          & > form.score
+            display: inline
         & > p.submitted
-          +columns(8)
+          display: none
         & > p.actions
           +columns(3)
+
+form.score
+  input[type=submit]
+    display: inline
+    +trailer(0)
+    +leader(0)
+    height: $base-line-height / 16px * 0.8em
+    line-height: $base-line-height / 16px * 0.7em
+  div
+    display: inline
+    label
+      &:after
+        content: ": "
+      font-weight: normal
+      display: inline
+    input[type=number]
+      +trailer(0)
+      text-align: center
+      width: 4em
+      display: inline
+      height: $base-line-height / 16px * 1em
+      +adjust_font_size_to(14px)
+      +rhythm-borders(1px, 0.05, 14px)
+      line-height: $base-line-height / 16px * 0.7em
 
 ul.attendances
   li.attendance
@@ -276,3 +302,4 @@ ul#people
 
 #your_name_looks_like
   display: none
+

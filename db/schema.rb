@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(:version => 20101225225538) do
 
   create_table "scores", :force => true do |t|
     t.integer  "amount"
-    t.integer  "person_id"
+    t.integer  "attendance_id"
     t.integer  "packet_id"
-    t.boolean  "entered_by_coeditor?"
+    t.boolean  "entered_by_coeditor", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

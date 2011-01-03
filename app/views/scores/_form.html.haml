@@ -1,0 +1,10 @@
+= simple_form_for score, :remote => true do |f|
+  = render :partial => 'error_messages'
+  = f.input :amount, :label => "Your score", :required => false,
+                     :input_html => { :min => 1, :max => 10, 'data-original' => "#{score.amount || ''}" }
+  = f.input :attendance_id, :as => :hidden
+  = f.input :packet_id, :as => :hidden
+  - unless request.xhr?
+    = f.button :submit
+- if score.id
+  = button_to "Remove", score_path(score), :method => :delete, :class => "link", :remote => true
