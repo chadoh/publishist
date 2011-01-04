@@ -8,7 +8,7 @@
     %div.score
       = render :partial => 'scores/form', :locals => { :score => Score.with(@attendance, packet) }
   - show_author = show_author.nil? ? true : show_author
-  - if show_author and (the_editor? or current_person.email == submission.email)
+  - if (@show_author.nil? or @show_author) and (the_editor? or current_person.email == submission.email)
     %p.author
       - if the_editor?
         = mail_to submission.email, email_image(submission.author)

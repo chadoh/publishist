@@ -1,5 +1,10 @@
 $(function(){
 
+  $('li:regex(class,(submission|packet)) header h2').live('click', function(e){
+    e.preventDefault();
+    $(this).parents('li:regex(class,(submission|packet))').toggleClass('collapsed');
+  });
+
   $("#attendance_person").autocomplete("/people/auto_complete_for_person_first_name_middle_name_last_name_email")
     .live('blur', function() {
       if($(this).val() == '')

@@ -10,6 +10,7 @@ class MeetingsController < InheritedResources::Base
     else
       @show_score = false
     end
+    @show_author = false
     show!
   end
 
