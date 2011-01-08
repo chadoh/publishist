@@ -10,8 +10,8 @@
   %ol.packets
     - for packet in @meeting.packets
       = render :partial => 'packets/show', :locals => { :packet => packet }
-  - if coeditor?
-    %p= link_to "Enter scores for everyone", create_meeting_scores_path
+  - if the_coeditor?
+    %p= link_to "Enter scores for everyone", scores_for_meeting_path(resource)
 
 %section#attendance
   %header
