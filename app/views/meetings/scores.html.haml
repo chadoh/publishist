@@ -1,0 +1,9 @@
+- javascript "meetings"
+
+%div.column#packet_titles
+  - for packet in @packets
+    = render :partial => "packets/title", :locals => { :packet => packet }
+- for person in @people
+  %div.column.scores
+    - for packet in @packets
+      = render :partial => "scores/form", :locals => { :score => Score.with(person, packet), :entered_by_coeditor => true }
