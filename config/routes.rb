@@ -14,7 +14,6 @@ Pc::Application.routes.draw do
     resources :attendances
     member do
       get  'scores' => :scores, :as => 'scores_for'
-      post 'scores' => :create_scores, :as => 'create_scores_for'
     end
   end
 

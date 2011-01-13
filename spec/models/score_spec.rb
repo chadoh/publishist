@@ -53,6 +53,11 @@ describe Score do
       @s.attendance.should == @attendance
       @s.packet.should == @packet
     end
+
+    it "should set 'entered_by_coeditor' to true told to do so" do
+      @s = Score.with @attendance, @packet, :entered_by_coeditor => true
+      @s.should be_entered_by_coeditor
+    end
   end
 
 end

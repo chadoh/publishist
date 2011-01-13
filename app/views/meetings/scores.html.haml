@@ -1,9 +1,9 @@
 - javascript "meetings"
 
 %div.column#packet_titles
-  - for packet in @packets
+  - for packet in resource.packets
     = render :partial => "packets/title", :locals => { :packet => packet }
-- for person in @people
+- for attendee in @attendees
   %div.column.scores
-    - for packet in @packets
-      = render :partial => "scores/form", :locals => { :score => Score.with(person, packet), :entered_by_coeditor => true }
+    - for packet in resource.packets
+      = render :partial => "scores/form", :locals => { :score => Score.with(attendee, packet, :entered_by_coeditor => true) }
