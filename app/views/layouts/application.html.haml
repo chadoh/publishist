@@ -4,7 +4,7 @@
     - @content_for_title ||= "Problem Child"
     %title= @content_for_title
     %link(rel="shortcut icon" href="/images/favicon.ico")
-    = stylesheet_link_tag 'compiled/screen', 'jquery.autocomplete', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/screen', 'jquery.autocomplete', 'compiled/ellipsis', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/print', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'

@@ -1,9 +1,17 @@
 - javascript "meetings"
 
-%div.column#packet_titles
-  - for packet in resource.packets
-    = render :partial => "packets/title", :locals => { :packet => packet }
-- for attendee in @attendees
-  %div.column.scores
+- title "Scores for \"#{resource.question}\""
+:markdown
+  Here you can enter scores for those who attended this meeting
+  #{distance_of_time_in_words(Time.now, resource.when)} ago
+  but didn't enter any scores online themselves.  
+  #{link_to "Back to meeting", meeting_path(resource)}
+
+%section#scores
+  #packet_titles
     - for packet in resource.packets
-      = render :partial => "scores/form", :locals => { :score => Score.with(attendee, packet, :entered_by_coeditor => true) }
+      = render :partial => "packets/title", :locals => { :packet => packet }
+  - for attendee in @attendees
+    .scores[attendee]
+      - for packet in resource.packets
+        = render :partial => "scores/form", :locals => { :score => Score.with(attendee, packet, :entered_by_coeditor => true) }

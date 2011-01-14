@@ -6,6 +6,8 @@
 @import compass/css3
 @import compass/layout/sticky-footer
 @import compass/utilities/lists/inline-list
+@import compass/utilities/text/ellipses
+$use-mozilla-ellipsis-binding = true
 
 /* Layout --------------------------------------------------------------
 
@@ -210,7 +212,7 @@ ol.packets, ul.submissions
         & > p.author
           +alpha
           +columns(5)
-        & > div.score
+        & > span.score
           +columns(9)
           & > form.score
             display: inline
@@ -219,30 +221,52 @@ ol.packets, ul.submissions
         & > p.actions
           +columns(3)
 
-form.score
-  display: inline
-  input[type=submit]
+span.score
+  form.button_to
+    +adjust-font-size-to(9px)
+    line-height: 1em
+    input[type=submit]
+      vertical-align: top
+  form.score
     display: inline
-    +trailer(0)
-    +leader(0)
-    height: $base-line-height / 16px * 0.8em
-    line-height: $base-line-height / 16px * 0.7em
-  div
-    display: inline
-    label
-      &:after
-        content: ": "
-      font-weight: normal
+    input[type=submit]
       display: inline
-    input[type=number]
       +trailer(0)
-      text-align: center
-      width: 4em
-      display: inline
-      height: $base-line-height / 16px * 1em
-      +adjust_font_size_to(14px)
-      +rhythm-borders(1px, 0.05, 14px)
+      +leader(0)
+      height: $base-line-height / 16px * 0.8em
       line-height: $base-line-height / 16px * 0.7em
+    div
+      display: inline
+      label
+        &:after
+          content: ": "
+        font-weight: normal
+        display: inline
+      input[type=number]
+        +trailer(0)
+        text-align: center
+        width: 2.5em
+        display: inline
+        height: $base-line-height / 16px * 1em
+        +adjust-font-size-to(13px)
+        +rhythm-borders(1px, 0.05, 14px)
+        line-height: $base-line-height / 16px * 0.7em
+
+section#scores
+  +full
+  +leader
+  #packet_titles
+    +alpha
+    +columns(2)
+    +trailer
+    .title
+      text-align: right
+      +ellipsis
+  .scores
+    +columns(1)
+    +trailer
+    &:last
+      +omega
 
 ul.attendances
   li.attendance
