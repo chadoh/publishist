@@ -1,4 +1,4 @@
-$("li#packet_<%= resource.packet.id %> div.score")
-  .html("<%= escape_javascript(
+$("span.score[data-packet=<%= resource.packet.id %>][data-attendance=<%= resource.attendance.id %>]")
+  .replaceWith("<%= escape_javascript(
     render :partial => 'form', :locals => { :score => resource }
   )%>");

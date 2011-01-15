@@ -9,15 +9,9 @@
     %h2 Submissions
   %ol.packets
     - for packet in @meeting.packets
-      = render :partial => 'packets/show', :locals => { :packet => packet, :show_author => false }
-
-:javascript
-  $(function(){
-    $('li:regex(class,(submission|packet)) header h2').live('click', function(e){
-      e.preventDefault();
-      $(this).parents('li:regex(class,(submission|packet))').toggleClass('collapsed');
-    });
-  });
+      = render :partial => 'packets/show', :locals => { :packet => packet }
+  - if the_coeditor?
+    %p= link_to "Enter scores for everyone", scores_for_meeting_path(resource)
 
 %section#attendance
   %header

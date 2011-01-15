@@ -5,6 +5,8 @@ describe Score do
     should belong_to :packet
     should belong_to :attendance
 
+    should validate_presence_of :packet
+    should validate_presence_of :attendance
     should validate_presence_of :amount
     should validate_numericality_of :amount
     should ensure_inclusion_of(:amount).in_range(1..10)
@@ -52,6 +54,11 @@ describe Score do
       @s.amount.should be_nil
       @s.attendance.should == @attendance
       @s.packet.should == @packet
+    end
+
+    it "should set 'entered_by_coeditor' to true told to do so" do
+      @s = Score.with @attendance, @packet, :entered_by_coeditor => true
+      @s.should be_entered_by_coeditor
     end
   end
 

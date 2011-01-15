@@ -19,4 +19,8 @@ class Packet < ActiveRecord::Base
       end
     end
   end
+
+  def scores_not_entered_by_coeditor
+    scores.select{ |s| s.entered_by_coeditor == false }.flatten
+  end
 end

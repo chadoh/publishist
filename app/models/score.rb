@@ -2,19 +2,22 @@ class Score < ActiveRecord::Base
   belongs_to :packet
   belongs_to :attendance
 
+  validates_presence_of :packet
+  validates_presence_of :attendance
   validates_presence_of :amount
   validates_numericality_of :amount
   validates_inclusion_of :amount, :in => 1..10
   #validate :one_per_attendance_and_packet_combo
 
   class << self
-    def with(attendance, packet)
+    def with(attendance, packet, options = {})
       Score.where(
         :attendance_id => attendance.id,
         :packet_id => packet.id).first ||
       Score.new(
         :attendance => attendance,
-        :packet => packet)
+        :packet => packet,
+        :entered_by_coeditor => options[:entered_by_coeditor] || false)
     end
   end
 
