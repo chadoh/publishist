@@ -44,5 +44,5 @@ Then /^I should not be able to score "([^"]*)"$/ do |title|
 end
 
 Then /^I should see (\d) score fields$/ do |number|
-  page.split("input#score_amount").length.should == number + 1
+  page.should have_field("score_amount", :count => number)
 end

@@ -8,17 +8,17 @@ Feature: An editor organizes submissions into packets
     Given there are several submissions
     And there are several meetings
     And I am on the submissions page
-    When I drag "Submission 1" to "Meeting 1"
+    When I drag "Submission 1" to the first meeting
     Then I should not see "Submission 1" under "Unscheduled"
-    And I should see "Submission 1" under "Meeting 1"
+    And I should see "Submission 1" under the first meeting
 
-    When I drag "Submission 1" to "Meeting 2"
-    Then I should see "Submission 1" under "Meeting 1"
-    And I should see "Submission 1" under "Meeting 2"
+    When I drag "Submission 1" to the second meeting
+    Then I should see "Submission 1" under the first meeting
+    And I should see "Submission 1" under the second meeting
 
-    When I drag "Submission 1" from "Meeting 1" to "Unscheduled"
-    Then I should not see "Submission 1" under "Meeting 1"
-    And I should see "Submission 1" under "Meeting 2"
+    When I drag "Submission 1" from the first meeting to "Unscheduled"
+    Then I should not see "Submission 1" under the first meeting
+    And I should see "Submission 1" under the second meeting
     And I should not see "Submission 1" under "Unscheduled"
 
   @pending

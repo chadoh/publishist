@@ -35,7 +35,6 @@ group :development, :test do
   gem 'shoulda'
   gem 'cucumber-rails'
   gem 'capybara'
-  gem 'webrat'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'capybara-envjs', :require => 'capybara/envjs'

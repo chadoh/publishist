@@ -5,6 +5,8 @@ describe Score do
     should belong_to :packet
     should belong_to :attendance
 
+    should validate_presence_of :packet
+    should validate_presence_of :attendance
     should validate_presence_of :amount
     should validate_numericality_of :amount
     should ensure_inclusion_of(:amount).in_range(1..10)

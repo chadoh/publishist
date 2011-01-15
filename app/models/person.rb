@@ -25,7 +25,6 @@ class Person < ActiveRecord::Base
   include Gravtastic
   gravtastic :size => 200, :default => "http://problemchildmag.com/images/children.png", :rating => 'R'
 
-  # CONVENIENCES
   def name
     "#{self.first_name} #{self.last_name}"
   end
@@ -100,6 +99,22 @@ class Person < ActiveRecord::Base
         "Coeditor"
       else rank == 3
         "Editor"
+      end
+    end
+  end
+
+  def can_enter_scores_for? meeting
+    unless attendance = Attendance.find_by_person_id_and_meeting_id(self.id, meeting.id)
+      false
+    else
+      if (scores = attendance.scores).empty?
+        true
+      else
+        if scores.select {|s| s.entered_by_coeditor? }.empty?
+          true
+        else
+          false
+        end
       end
     end
   end

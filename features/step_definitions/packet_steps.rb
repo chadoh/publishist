@@ -6,14 +6,30 @@ Given /^there are several meetings$/ do
   2.times { Factory.create :meeting }
 end
 
-When /^I drag "([^"]*)" to "([^"]*)"$/ do |submission_name, destination|
+When /^I drag "([^"]*)" to the (.*) meeting$/ do |submission_name, destination|
+  destination = if destination == "first" then "meeting_#{Meeting.first.id}"
+    else "meeting_#{Meeting.last.id}" end
   submission = find("li", :text => submission_name).find("span.drag-handle")
-  destination = find "section##{destination.parameterize('_')}"
+  destination = find "section##{destination}"
   submission.drag_to destination
 end
 
-When /^I drag "([^"]*)" from "([^"]*)" to "([^"]*)"$/ do |submission_name, origin, destination|
-  origin      = find "section##{origin.parameterize('_')}"
+Then /^I should see "([^"]*)" under the (.*) meeting$/ do |text, heading|
+  section = if heading == "first" then "meeting_#{Meeting.first.id}"
+    else "meeting_#{Meeting.last.id}" end
+  find("section##{section}").should have_content(text)
+end
+
+Then /^I should not see "([^"]*)" under the (.*) meeting$/ do |text, heading|
+  section = if heading == "first" then "meeting_#{Meeting.first.id}"
+    else "meeting_#{Meeting.last.id}" end
+  find("section##{section}").should_not have_content(text)
+end
+
+When /^I drag "([^"]*)" from the (.*) meeting to "([^"]*)"$/ do |submission_name, origin, destination|
+  origin = if origin == "first" then "meeting_#{Meeting.first.id}"
+    else "meeting_#{Meeting.last.id}" end
+  origin      = find "section##{origin}"
   submission = origin.find("li", :text => submission_name).find("span.drag-handle")
   destination = find "section##{destination.parameterize('_')}"
   submission.drag_to destination

@@ -7,10 +7,9 @@ class MeetingsController < InheritedResources::Base
   actions :index, :show, :new, :create, :update, :destroy, :scores
 
   def show
-    @show_score = if person_viewing_attended? and editor_didnt_enter_their_score?
-      then true else false end
+    @show_score = current_person.can_enter_scores_for? resource
     @show_author = false
-    @attendance = Attendance.new
+    @attendance = Attendance.find_by_person_id_and_meeting_id(current_person.id, resource.id)
     show!
   end
 
@@ -19,19 +18,6 @@ class MeetingsController < InheritedResources::Base
   end
 
 protected
-
-  def viewers_attendance
-    @viewers_attendance ||= resource.attendances.select  do |a|
-      a.person == current_person
-    end
-  end
-
-  def person_viewing_attended?
-    viewers_attendance.present?
-  end
-
-  def editor_didnt_enter_their_score?
-  end
 
   def resource
     @meeting = Meeting.includes(:attendances).find(params[:id])

@@ -2,6 +2,8 @@ class Score < ActiveRecord::Base
   belongs_to :packet
   belongs_to :attendance
 
+  validates_presence_of :packet
+  validates_presence_of :attendance
   validates_presence_of :amount
   validates_numericality_of :amount
   validates_inclusion_of :amount, :in => 1..10

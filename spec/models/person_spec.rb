@@ -8,6 +8,45 @@ describe Person do
     should validate_presence_of(:first_name)
   }
 
+  describe "#can_enter_scores_for?(meeting)" do
+    let(:person)  { Factory.create :person }
+    let(:meeting) { Factory.create :meeting }
+
+    it "returns false if person didn't attend meeting" do
+      person.can_enter_scores_for?(meeting).should be_false
+    end
+
+    context "when person attended the meeting," do
+      before do
+        @attendance = meeting.attendances.create :person => person
+        submission = Factory.create :submission
+        @packet = meeting.packets.create :submission => submission
+      end
+
+      it "returns true if person hasn't scored anything" do
+        person.can_enter_scores_for?(meeting).should be_true
+      end
+
+      it "returns false if the coeditor scored for them" do
+        @attendance.scores.create :amount => 5, :entered_by_coeditor => true, :packet => @packet
+        person.can_enter_scores_for?(meeting).should be_false
+      end
+
+      it "returns true if person scored stuff and coeditor didn't" do
+        @attendance.scores.create :amount => 5, :packet => @packet
+        person.can_enter_scores_for?(meeting).should be_true
+      end
+
+      it "returns false if, somehow!, the person and the coeditor both entered scores" do
+        submission = Factory.create :submission
+        packet_2   = meeting.packets.create :submission => submission
+        @attendance.scores.create :amount => 5, :packet => @packet, :packet => packet_2
+        @attendance.scores.create :amount => 5, :entered_by_coeditor => true, :packet => @packet
+        person.can_enter_scores_for?(meeting).should be_false
+      end
+    end
+  end
+
   describe "self.find_or_create" do
     it "finds a person when formatted as '(anything) <persons@email.address>" do
       @person = Factory.create :person
