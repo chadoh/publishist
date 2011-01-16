@@ -1,10 +1,10 @@
-if(<%= @old_packet %>) {
-  li = $("li#packet_<%= @old_packet %>").clone();
-  li.attr('id', 'packet_<%= @packet.id %>'); }
+if(<%= @old_packlet %>) {
+  li = $("li#packlet_<%= @old_packlet %>").clone();
+  li.attr('id', 'packlet_<%= @packlet.id %>'); }
 else {
   li = $("li#submission_<%= @submission.id %>");
-  li.attr('id', "packet_<%= @packet.id %>");
-  li.addClass('packet').removeClass('submission');
+  li.attr('id', "packlet_<%= @packlet.id %>");
+  li.addClass('packlet').removeClass('submission');
 }
-meeting = $("section#meeting_<%= @meeting.id %> ol.packets");
+meeting = $("section#meeting_<%= @meeting.id %> ol.packlets");
 li.appendTo(meeting);

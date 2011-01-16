@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Person do
 
   it {
-    should have_many(:attendances)
-    should have_many(:meetings).through(:attendances)
+    should have_many(:attendees)
+    should have_many(:meetings).through(:attendees)
     should validate_presence_of(:first_name)
   }
 
@@ -18,9 +18,9 @@ describe Person do
 
     context "when person attended the meeting," do
       before do
-        @attendance = meeting.attendances.create :person => person
+        @attendee = meeting.attendees.create :person => person
         submission = Factory.create :submission
-        @packet = meeting.packets.create :submission => submission
+        @packlet = meeting.packlets.create :submission => submission
       end
 
       it "returns true if person hasn't scored anything" do
@@ -28,20 +28,20 @@ describe Person do
       end
 
       it "returns false if the coeditor scored for them" do
-        @attendance.scores.create :amount => 5, :entered_by_coeditor => true, :packet => @packet
+        @attendee.scores.create :amount => 5, :entered_by_coeditor => true, :packlet => @packlet
         person.can_enter_scores_for?(meeting).should be_false
       end
 
       it "returns true if person scored stuff and coeditor didn't" do
-        @attendance.scores.create :amount => 5, :packet => @packet
+        @attendee.scores.create :amount => 5, :packlet => @packlet
         person.can_enter_scores_for?(meeting).should be_true
       end
 
       it "returns false if, somehow!, the person and the coeditor both entered scores" do
         submission = Factory.create :submission
-        packet_2   = meeting.packets.create :submission => submission
-        @attendance.scores.create :amount => 5, :packet => @packet, :packet => packet_2
-        @attendance.scores.create :amount => 5, :entered_by_coeditor => true, :packet => @packet
+        packlet_2   = meeting.packlets.create :submission => submission
+        @attendee.scores.create :amount => 5, :packlet => @packlet, :packlet => packlet_2
+        @attendee.scores.create :amount => 5, :entered_by_coeditor => true, :packlet => @packlet
         person.can_enter_scores_for?(meeting).should be_false
       end
     end

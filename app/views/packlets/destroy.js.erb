@@ -1,7 +1,7 @@
-li = $("li#packet_<%= @packet.id %>");
-li.addClass('submission').removeClass('packet');
-li.attr('id', 'submission_<%= @packet.submission.id %>');
-if(<%= Packet.all.collect(&:submission).include? @packet.submission %>) {
+li = $("li#packlet_<%= @packlet.id %>");
+li.addClass('submission').removeClass('packlet');
+li.attr('id', 'submission_<%= @packlet.submission.id %>');
+if(<%= Packlet.all.collect(&:submission).include? @packlet.submission %>) {
   li.remove(); }
 else {
   $('ul.submissions').append(li);

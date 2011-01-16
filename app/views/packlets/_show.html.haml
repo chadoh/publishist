@@ -1,8 +1,8 @@
-%li.collapsed[packet]
+%li.collapsed[packlet]
   - if editor?
     %span.drag-handle-wrap
       %span.drag-handle &lt;&gt;
   %header
-    %a{ :href => submission_url(packet.submission) }
-      %h2.nocaps= sanitize(packet.submission.title)
-  = render :partial => 'submissions/body_and_footer', :locals => { :submission => packet.submission, :packet => packet }
+    %a{ :href => submission_url(packlet.submission) }
+      %h2.nocaps= sanitize(packlet.submission.title)
+  = render :partial => 'submissions/body_and_footer', :locals => { :submission => packlet.submission, :packlet => packlet }

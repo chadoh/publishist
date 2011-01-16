@@ -1,9 +1,9 @@
-%li[attendance]
+%li[attendee]
   %span.person
-    - if editor? && attendance.person
-      = mail_to attendance.person.email, email_image(attendance.name)
-    = link_to_if attendance.person, attendance.name, attendance.person
-  %span.answer= attendance.answer
+    - if editor? && attendee.person
+      = mail_to attendee.person.email, email_image(attendee.name)
+    = link_to_if attendee.person, attendee.name, attendee.person
+  %span.answer= attendee.answer
   -if editor?
     %span.actions
-      = button_to "Remove", meeting_attendance_path(@meeting, attendance), :method => :delete, :class => 'link'
+      = button_to "Remove", meeting_attendee_path(@meeting, attendee), :method => :delete, :class => 'link'

@@ -39,14 +39,14 @@ Given /^the following submissions are scheduled for a meeting a week from now:$/
   meeting = Factory.create :meeting
   submissions_table.hashes.each do |attributes|
     submission = Submission.create(attributes)
-    Packet.create :meeting => meeting, :submission => submission
+    Packlet.create :meeting => meeting, :submission => submission
   end
 end
 
 When /^I drag "([^"]*)" on top$/ do |title|
-  packet = find("li", :text => title).find('span.drag-handle')
-  destination = find "section#packet li > footer"
-  packet.drag_to destination
+  packlet = find("li", :text => title).find('span.drag-handle')
+  destination = find "section#packlet li > footer"
+  packlet.drag_to destination
   # When you get this working, post how here: http://stackoverflow.com/questions/4044327/how-can-i-test-jquery-ui-sortable-with-cucumber
 end
 

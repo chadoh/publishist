@@ -1,4 +1,4 @@
-class Packet < ActiveRecord::Base
+class Packlet < ActiveRecord::Base
   belongs_to :meeting
   belongs_to :submission
 
@@ -12,9 +12,9 @@ class Packet < ActiveRecord::Base
   validate :review_a_submission_only_once_per_meeting
 
   def review_a_submission_only_once_per_meeting
-    packets = Packet.all
-    for packet in packets
-      if packet.submission == self.submission && packet.meeting == self.meeting
+    packlets = Packlet.all
+    for packlet in packlets
+      if packlet.submission == self.submission && packlet.meeting == self.meeting
         errors.add(:submission, "can only be review once per meeting")
       end
     end

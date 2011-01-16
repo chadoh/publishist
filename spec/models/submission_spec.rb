@@ -6,8 +6,8 @@ describe Submission do
   end
 
   it {
-    should have_many(:packets).dependent(:destroy)
-    should have_many(:meetings).through(:packets)
+    should have_many(:packlets).dependent(:destroy)
+    should have_many(:meetings).through(:packlets)
   }
 
   describe "#author" do

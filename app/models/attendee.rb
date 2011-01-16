@@ -1,4 +1,4 @@
-class Attendance < ActiveRecord::Base
+class Attendee < ActiveRecord::Base
   belongs_to :meeting
   belongs_to :person
 

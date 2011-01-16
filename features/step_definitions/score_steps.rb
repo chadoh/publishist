@@ -2,17 +2,17 @@ Given /^I did not attend the first meeting$/ do
 end
 
 Given /^I attend the first meeting$/ do
-  Attendance.create(
+  Attendee.create(
     :meeting => Factory.create(:meeting),
     :person => Person.first)
 end
 
 Given /^I and (\d) more people attend the first meeting$/ do |number|
-  Attendance.create(
+  Attendee.create(
     :meeting => Factory.create(:meeting),
     :person => Person.first)
   number.to_i.times do
-    Attendance.create(
+    Attendee.create(
       :meeting => Meeting.first,
       :person => Factory.create(:person))
   end
@@ -24,7 +24,7 @@ Given /^there is a submission called "([^"]*)" scheduled for the first meeting$/
     :body => "Yes, I said it. #{title}.",
     :author_email => "chad@chadoh.com")
   meeting = Meeting.first || Factory.create(:meeting)
-  Packet.create(
+  Packlet.create(
     :meeting => meeting,
     :submission => submission)
 end

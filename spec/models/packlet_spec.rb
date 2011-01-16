@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Packet do
+describe Packlet do
   it {
     should belong_to :meeting
     should belong_to :submission
@@ -11,32 +11,32 @@ describe Packet do
   }
 
   it "only allows a submission to be reviewed once per meeting" do
-    @p1 = Factory.create :packet
-    @p2 = Packet.new :submission => @p1.submission, :meeting => @p1.meeting
+    @p1 = Factory.create :packlet
+    @p2 = Packlet.new :submission => @p1.submission, :meeting => @p1.meeting
     @p2.should_not be_valid
   end
 
   it "allows a submission to be reviewed at multiple meetings" do
-    @p1 = Factory.create :packet
+    @p1 = Factory.create :packlet
     @m2 = Factory.create :meeting
-    @p2 = Packet.new :submission => @p1.submission, :meeting => @m2
+    @p2 = Packlet.new :submission => @p1.submission, :meeting => @m2
     @p2.should be_valid
 
-    @p2 = Factory.create :packet
+    @p2 = Factory.create :packlet
     @p2.meeting.should_not == @p1.meeting
     @p2.submission.should_not == @p1.submission
 
-    @p3 = Packet.new :submission => @p2.submission, :meeting => @p1.meeting
+    @p3 = Packlet.new :submission => @p2.submission, :meeting => @p1.meeting
     @p3.should be_valid
   end
 
   describe "#scores_not_entered_by_coeditor" do
     before do
-      @p1 = Factory.create :packet
+      @p1 = Factory.create :packlet
       3.times do
         p = Factory.create :person
-        a = Attendance.create :person => p, :meeting => @p1.meeting
-        Score.create :attendance => a, :packet => @p1, :amount => 5
+        a = Attendee.create :person => p, :meeting => @p1.meeting
+        Score.create :attendee => a, :packlet => @p1, :amount => 5
       end
     end
 

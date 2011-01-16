@@ -1,27 +1,27 @@
-class PacketsController < InheritedResources::Base
+class PackletsController < InheritedResources::Base
   actions :create, :destroy
 
   def create
-    @old_packet = params[:packet] || false
-    @submission = @old_packet ? Packet.find(@old_packet).submission : Submission.find(params[:submission])
+    @old_packlet = params[:packlet] || false
+    @submission = @old_packlet ? Packlet.find(@old_packlet).submission : Submission.find(params[:submission])
     @meeting = Meeting.find params[:meeting]
-    @packet = Packet.new(:meeting => @meeting, :submission => @submission)
-    if @packet.valid?
-      @packet.save
+    @packlet = Packlet.new(:meeting => @meeting, :submission => @submission)
+    if @packlet.valid?
+      @packlet.save
     else
       render :nothing => true
     end
   end
 
   def update_position
-    @packet = Packet.find params[:id]
-    @packet.insert_at params[:position]
+    @packlet = Packlet.find params[:id]
+    @packlet.insert_at params[:position]
     render :nothing => true
   end
 
   def destroy
-    @packet = Packet.find params[:id]
-    @packet.destroy
+    @packlet = Packlet.find params[:id]
+    @packlet.destroy
   end
 
 end

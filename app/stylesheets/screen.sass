@@ -130,7 +130,7 @@ section.user-profile
     +no-bullets
     margin-left: 0
 
-li.submission, li.packet, section.submission
+li.submission, li.packlet, section.submission
   +no-bullet
   +full
   +rhythm-borders(1px, 1, $base-font-size, dashed)
@@ -174,13 +174,13 @@ article#submissions, article.meetings
       +rhythm-borders(1px, 0, $base-font-size, dashed)
       border-color: $noticeable
 
-ol.packets, ul.submissions
+ol.packlets, ul.submissions
   li.collapsed
-    &.packet
+    &.packlet
       list-style-type: decimal
     &.submission
       list-style-type: disc
-    &.submission, &.packet
+    &.submission, &.packlet
       +rhythm-borders(0px, 0)
       +leader(0)
       +trailer(0)
@@ -255,7 +255,7 @@ span.score
 section#scores
   +full
   +leader
-  #packet_titles
+  #packlet_titles
     +alpha
     +columns(2)
     +trailer
@@ -268,8 +268,8 @@ section#scores
     &:last
       +omega
 
-ul.attendances
-  li.attendance
+ul.attendees
+  li.attendee
     +full
     span
       +inline-block
@@ -279,7 +279,7 @@ ul.attendances
       width: ($article - 1.3) * $col-width
     span.actions
       width: 1.3 * $col-width
-form.attendance
+form.attendee
   +full
   +leader
 
