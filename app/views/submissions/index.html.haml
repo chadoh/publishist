@@ -1,6 +1,8 @@
 - title(t('.title'))
 
-%p= link_to "Schedule a new meeting", new_meeting_path
+:markdown
+  #{link_to "Submit something", new_submission_path}  
+  #{link_to "Schedule a new meeting", new_meeting_path}  
 
 - for meeting in @meetings_to_come
   %section.future[meeting]

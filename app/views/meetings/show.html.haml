@@ -13,9 +13,9 @@
   - if the_coeditor?
     %p= link_to "Enter scores for everyone", scores_for_meeting_path(resource)
 
-%section#attendee
+%section#attendance
   %header
-    %h2 Attendee
+    %h2 Attendance
   %ul.attendees
     - for attendee in @meeting.attendees
       = render :partial => 'attendees/show', :locals => { :attendee => attendee }

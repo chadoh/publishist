@@ -16,9 +16,10 @@
       %nav.site-nav{ :role => 'navigation' }
         %ul
           %li{ :class => params[:controller] == 'welcome' && 'current' }= link_to_unless_current "About", root_path
-          %li{ :class => current_page?(new_submission_path) && 'current' }= link_to_unless_current "Submit", new_submission_path
+          - unless editor?
+            %li{ :class => current_page?(new_submission_path) && 'current' }= link_to_unless_current "Submit", new_submission_path
           - if editor?
-            %li{ :class => params[:controller] == 'submissions' && params[:action] != 'new' && 'current' }= link_to_unless_current "Submissions", submissions_path
+            %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current "Submissions", submissions_path
           - if staff? || editor?
             %li{ :class => params[:controller] == 'people' && 'current' }= link_to_unless_current "People", people_path
           - if member?
