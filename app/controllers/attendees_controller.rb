@@ -1,12 +1,12 @@
-class AttendancesController < InheritedResources::Base
+class AttendeesController < InheritedResources::Base
   actions :create, :destroy
   belongs_to :meeting
 
   def create
-    if person = Person.find_or_create(params[:attendance][:person])
-      params[:attendance][:person] = person
+    if person = Person.find_or_create(params[:attendee][:person])
+      params[:attendee][:person] = person
     else
-      params[:attendance][:person_name] = params[:attendance].delete :person
+      params[:attendee][:person_name] = params[:attendee].delete :person
     end
     create! do |format|
       flash[:notice] = "#{resource.first_name} was there"

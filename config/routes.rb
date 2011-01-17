@@ -11,13 +11,13 @@ Pc::Application.routes.draw do
   resources :scores
 
   resources :meetings do
-    resources :attendances
+    resources :attendees
     member do
       get  'scores' => :scores, :as => 'scores_for'
     end
   end
 
-  resources :packets do
+  resources :packlets do
     member do
       put 'update_position'
     end

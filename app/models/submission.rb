@@ -1,7 +1,7 @@
 class Submission < ActiveRecord::Base
   belongs_to :author, :class_name => "Person"
-  has_many :packets, :dependent => :destroy
-  has_many :meetings, :through => :packets
+  has_many :packlets, :dependent => :destroy
+  has_many :meetings, :through => :packlets
 
   before_validation :remove_ms_word_kruft
 

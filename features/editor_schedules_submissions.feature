@@ -1,4 +1,4 @@
-Feature: An editor organizes submissions into packets
+Feature: An editor organizes submissions into packlets
   In order to organize submissions for review at meetings
   As an editor or coeditor
   I want to drag and drop them into place from the submissions page
@@ -16,14 +16,14 @@ Feature: An editor organizes submissions into packets
     Then I should see "Submission 1" under the first meeting
     And I should see "Submission 1" under the second meeting
 
-    When I drag "Submission 1" from the first meeting to "Unscheduled"
-    Then I should not see "Submission 1" under the first meeting
-    And I should see "Submission 1" under the second meeting
+    When I drag "Submission 1" from the second meeting to "Unscheduled"
+    Then I should not see "Submission 1" under the second meeting
+    And I should see "Submission 1" under the first meeting
     And I should not see "Submission 1" under "Unscheduled"
 
   @pending
   @editor @javascript
-  Scenario: The editor sorts submissions within the packet
+  Scenario: The editor sorts submissions within the packlet
     Given the following submissions are scheduled for a meeting a week from now:
       | title             | body             | author_email       |
       | A Hydrogen Baloon | Oh the humanatee | cookies@yomyom.com |

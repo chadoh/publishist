@@ -885,7 +885,7 @@ section.user-profile ul li {
 }
 
 /* line 133, ../../../app/stylesheets/screen.sass */
-li.submission, li.packet, section.submission {
+li.submission, li.packlet, section.submission {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0px;
@@ -901,19 +901,19 @@ li.submission, li.packet, section.submission {
   margin-bottom: 1.5em;
 }
 /* line 141, ../../../app/stylesheets/screen.sass */
-li.submission ul, li.packet ul, section.submission ul {
+li.submission ul, li.packlet ul, section.submission ul {
   list-style-type: disc;
 }
 /* line 143, ../../../app/stylesheets/screen.sass */
-li.submission ul, li.submission ol, li.packet ul, li.packet ol, section.submission ul, section.submission ol {
+li.submission ul, li.submission ol, li.packlet ul, li.packlet ol, section.submission ul, section.submission ol {
   margin-bottom: 1.5em;
 }
 /* line 145, ../../../app/stylesheets/screen.sass */
-li.submission ul ul, li.submission ul ol, li.submission ol ul, li.submission ol ol, li.packet ul ul, li.packet ul ol, li.packet ol ul, li.packet ol ol, section.submission ul ul, section.submission ul ol, section.submission ol ul, section.submission ol ol {
+li.submission ul ul, li.submission ul ol, li.submission ol ul, li.submission ol ol, li.packlet ul ul, li.packlet ul ol, li.packlet ol ul, li.packlet ol ol, section.submission ul ul, section.submission ul ol, section.submission ol ul, section.submission ol ol {
   margin-bottom: 0em;
 }
 /* line 147, ../../../app/stylesheets/screen.sass */
-li.submission > header h2, li.packet > header h2, section.submission > header h2 {
+li.submission > header h2, li.packlet > header h2, section.submission > header h2 {
   min-height: 24px;
 }
 
@@ -972,15 +972,15 @@ article#submissions section.drop-here, article.meetings section.drop-here {
 }
 
 /* line 179, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.packet, ul.submissions li.collapsed.packet {
+ol.packlets li.collapsed.packlet, ul.submissions li.collapsed.packlet {
   list-style-type: decimal;
 }
 /* line 181, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission, ul.submissions li.collapsed.submission {
+ol.packlets li.collapsed.submission, ul.submissions li.collapsed.submission {
   list-style-type: disc;
 }
 /* line 183, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission, ol.packets li.collapsed.packet, ul.submissions li.collapsed.submission, ul.submissions li.collapsed.packet {
+ol.packlets li.collapsed.submission, ol.packlets li.collapsed.packlet, ul.submissions li.collapsed.submission, ul.submissions li.collapsed.packlet {
   border-style: solid;
   border-width: 0em;
   padding: 0em;
@@ -988,7 +988,7 @@ ol.packets li.collapsed.submission, ol.packets li.collapsed.packet, ul.submissio
   margin-bottom: 0em;
 }
 /* line 187, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > header, ol.packets li.collapsed.packet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packet > header {
+ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packlet > header {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -997,19 +997,19 @@ ol.packets li.collapsed.submission > header, ol.packets li.collapsed.packet > he
   width: 15em;
 }
 /* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
-ol.packets li.collapsed.submission > header, ol.packets li.collapsed.packet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packet > header {
+ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packlet > header {
   *display: inline;
 }
 /* line 190, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > header h2, ol.packets li.collapsed.packet > header h2, ul.submissions li.collapsed.submission > header h2, ul.submissions li.collapsed.packet > header h2 {
+ol.packlets li.collapsed.submission > header h2, ol.packlets li.collapsed.packlet > header h2, ul.submissions li.collapsed.submission > header h2, ul.submissions li.collapsed.packlet > header h2 {
   margin-bottom: 0em;
 }
 /* line 192, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > div.body, ol.packets li.collapsed.packet > div.body, ul.submissions li.collapsed.submission > div.body, ul.submissions li.collapsed.packet > div.body {
+ol.packlets li.collapsed.submission > div.body, ol.packlets li.collapsed.packlet > div.body, ul.submissions li.collapsed.submission > div.body, ul.submissions li.collapsed.packlet > div.body {
   display: none;
 }
 /* line 194, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > span.drag-handle-wrap, ol.packets li.collapsed.packet > span.drag-handle-wrap, ul.submissions li.collapsed.submission > span.drag-handle-wrap, ul.submissions li.collapsed.packet > span.drag-handle-wrap {
+ol.packlets li.collapsed.submission > span.drag-handle-wrap, ol.packlets li.collapsed.packlet > span.drag-handle-wrap, ul.submissions li.collapsed.submission > span.drag-handle-wrap, ul.submissions li.collapsed.packlet > span.drag-handle-wrap {
   width: 3em;
   display: inline-block;
   float: left;
@@ -1018,7 +1018,7 @@ ol.packets li.collapsed.submission > span.drag-handle-wrap, ol.packets li.collap
   cursor: move;
 }
 /* line 202, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packets li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packet > span.drag-handle-wrap > span.drag-handle {
+ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packlets li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -1032,11 +1032,11 @@ ol.packets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, o
   letter-spacing: -1px;
 }
 /* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
-ol.packets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packets li.collapsed.packet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packet > span.drag-handle-wrap > span.drag-handle {
+ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packlets li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle {
   *display: inline;
 }
 /* line 207, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > footer, ol.packets li.collapsed.packet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packet > footer {
+ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packlet > footer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -1047,11 +1047,11 @@ ol.packets li.collapsed.submission > footer, ol.packets li.collapsed.packet > fo
   margin-top: 0em;
 }
 /* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
-ol.packets li.collapsed.submission > footer, ol.packets li.collapsed.packet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packet > footer {
+ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packlet > footer {
   *display: inline;
 }
 /* line 212, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > footer > p.author, ol.packets li.collapsed.packet > footer > p.author, ul.submissions li.collapsed.submission > footer > p.author, ul.submissions li.collapsed.packet > footer > p.author {
+ol.packlets li.collapsed.submission > footer > p.author, ol.packlets li.collapsed.packlet > footer > p.author, ul.submissions li.collapsed.submission > footer > p.author, ul.submissions li.collapsed.packlet > footer > p.author {
   margin-left: 0.885%;
   display: inline;
   float: left;
@@ -1059,22 +1059,22 @@ ol.packets li.collapsed.submission > footer > p.author, ol.packets li.collapsed.
   margin-right: 0.885%;
 }
 /* line 215, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > footer > span.score, ol.packets li.collapsed.packet > footer > span.score, ul.submissions li.collapsed.submission > footer > span.score, ul.submissions li.collapsed.packet > footer > span.score {
+ol.packlets li.collapsed.submission > footer > span.score, ol.packlets li.collapsed.packlet > footer > span.score, ul.submissions li.collapsed.submission > footer > span.score, ul.submissions li.collapsed.packlet > footer > span.score {
   display: inline;
   float: left;
   width: 54.867%;
   margin-right: 0.885%;
 }
 /* line 217, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > footer > span.score > form.score, ol.packets li.collapsed.packet > footer > span.score > form.score, ul.submissions li.collapsed.submission > footer > span.score > form.score, ul.submissions li.collapsed.packet > footer > span.score > form.score {
+ol.packlets li.collapsed.submission > footer > span.score > form.score, ol.packlets li.collapsed.packlet > footer > span.score > form.score, ul.submissions li.collapsed.submission > footer > span.score > form.score, ul.submissions li.collapsed.packlet > footer > span.score > form.score {
   display: inline;
 }
 /* line 219, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > footer > p.submitted, ol.packets li.collapsed.packet > footer > p.submitted, ul.submissions li.collapsed.submission > footer > p.submitted, ul.submissions li.collapsed.packet > footer > p.submitted {
+ol.packlets li.collapsed.submission > footer > p.submitted, ol.packlets li.collapsed.packlet > footer > p.submitted, ul.submissions li.collapsed.submission > footer > p.submitted, ul.submissions li.collapsed.packlet > footer > p.submitted {
   display: none;
 }
 /* line 221, ../../../app/stylesheets/screen.sass */
-ol.packets li.collapsed.submission > footer > p.actions, ol.packets li.collapsed.packet > footer > p.actions, ul.submissions li.collapsed.submission > footer > p.actions, ul.submissions li.collapsed.packet > footer > p.actions {
+ol.packlets li.collapsed.submission > footer > p.actions, ol.packlets li.collapsed.packlet > footer > p.actions, ul.submissions li.collapsed.submission > footer > p.actions, ul.submissions li.collapsed.packlet > footer > p.actions {
   display: inline;
   float: left;
   width: 17.699%;
@@ -1139,7 +1139,7 @@ section#scores {
   margin-top: 1.5em;
 }
 /* line 258, ../../../app/stylesheets/screen.sass */
-section#scores #packet_titles {
+section#scores #packlet_titles {
   margin-left: 0.885%;
   display: inline;
   float: left;
@@ -1148,7 +1148,7 @@ section#scores #packet_titles {
   margin-bottom: 1.5em;
 }
 /* line 262, ../../../app/stylesheets/screen.sass */
-section#scores #packet_titles .title {
+section#scores #packlet_titles .title {
   text-align: right;
   white-space: nowrap;
   overflow: hidden;
@@ -1174,13 +1174,13 @@ section#scores .scores:last {
 }
 
 /* line 272, ../../../app/stylesheets/screen.sass */
-ul.attendances li.attendance {
+ul.attendees li.attendee {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
 /* line 274, ../../../app/stylesheets/screen.sass */
-ul.attendances li.attendance span {
+ul.attendees li.attendee span {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -1188,24 +1188,24 @@ ul.attendances li.attendance span {
   *vertical-align: auto;
 }
 /* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
-ul.attendances li.attendance span {
+ul.attendees li.attendee span {
   *display: inline;
 }
 /* line 276, ../../../app/stylesheets/screen.sass */
-ul.attendances li.attendance span.person {
+ul.attendees li.attendee span.person {
   width: 15em;
 }
 /* line 278, ../../../app/stylesheets/screen.sass */
-ul.attendances li.attendance span.answer {
+ul.attendees li.attendee span.answer {
   width: 29.1em;
 }
 /* line 280, ../../../app/stylesheets/screen.sass */
-ul.attendances li.attendance span.actions {
+ul.attendees li.attendee span.actions {
   width: 3.9em;
 }
 
 /* line 282, ../../../app/stylesheets/screen.sass */
-form.attendance {
+form.attendee {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;

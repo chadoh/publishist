@@ -1,4 +1,4 @@
-$("span.score[data-packet=<%= resource.packet.id %>][data-attendance=<%= resource.attendance.id %>]")
+$("span.score[data-packlet=<%= resource.packlet.id %>][data-attendee=<%= resource.attendee.id %>]")
   .replaceWith("<%= escape_javascript(
-    render :partial => 'form', :locals => { :score => Score.with(resource.attendance, resource.packet) }
+    render :partial => 'form', :locals => { :score => Score.with(resource.attendee, resource.packlet) }
   )%>");

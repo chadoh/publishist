@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Attendance do
+describe Attendee do
 
   it {
     should belong_to :meeting
@@ -12,7 +12,7 @@ describe Attendance do
   before(:each) do
     @m = Factory.create :meeting
     @p = Factory.create :person
-    @a = @m.attendances.new
+    @a = @m.attendees.new
   end
 
   it "validates presence of either person_id or person_name" do

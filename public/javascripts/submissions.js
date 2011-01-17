@@ -1,11 +1,11 @@
 $(function(){
 
-  $('li:regex(class,(submission|packet)) header h2').live('click', function(e){
+  $('li:regex(class,(submission|packlet)) header h2').live('click', function(e){
     e.preventDefault();
-    $(this).parents('li:regex(class,(submission|packet))').toggleClass('collapsed');
+    $(this).parents('li:regex(class,(submission|packlet))').toggleClass('collapsed');
   });
 
-  $('li:regex(class,(submission|packet))').draggable({
+  $('li:regex(class,(submission|packlet))').draggable({
     handle: 'span.drag-handle-wrap',
     axis: 'y',
     stack: 'article',
@@ -18,17 +18,17 @@ $(function(){
     drop: function( event, ui ) {
       li = ui.draggable;
       section = $(this);
-      if(section.hasClass('unscheduled') && li.hasClass('packet')) {
-        packet_id = li.attr('id').split('_')[1];
+      if(section.hasClass('unscheduled') && li.hasClass('packlet')) {
+        packlet_id = li.attr('id').split('_')[1];
         $.ajax({
           type: 'DELETE',
-          url: '/packets/' + packet_id
+          url: '/packlets/' + packlet_id
         }); }
       else if(li.parents('section').attr('id') != section.attr('id')) {
         if(li.hasClass('submission')) {
           $.ajax({
             type: 'POST',
-            url: '/packets',
+            url: '/packlets',
             data: {
               submission: li.attr('id').split('_')[1],
               meeting:     section.attr('id').split('_')[1] }
@@ -36,9 +36,9 @@ $(function(){
         else {
           $.ajax({
             type: 'POST',
-            url: '/packets',
+            url: '/packlets',
             data: {
-              packet:  li.attr('id').split('_')[1],
+              packlet:  li.attr('id').split('_')[1],
               meeting: section.attr('id').split('_')[1] }
           });
         }

@@ -612,28 +612,28 @@ h2, h3, header {
 }
 
 /* line 53, ../../../app/stylesheets/print.sass */
-section#packet {
+section#packlet {
   margin-top: 24pt;
 }
 
 /* line 56, ../../../app/stylesheets/print.sass */
-li.packet, li.submission {
+li.packlet, li.submission {
   margin-bottom: 24pt;
 }
 /* line 58, ../../../app/stylesheets/print.sass */
-li.packet ul, li.submission ul {
+li.packlet ul, li.submission ul {
   list-style-type: disc;
 }
 /* line 60, ../../../app/stylesheets/print.sass */
-li.packet ol, li.packet ul, li.submission ol, li.submission ul {
+li.packlet ol, li.packlet ul, li.submission ol, li.submission ul {
   margin-bottom: 12pt;
 }
 /* line 62, ../../../app/stylesheets/print.sass */
-li.packet ol ol, li.packet ol ul, li.packet ul ol, li.packet ul ul, li.submission ol ol, li.submission ol ul, li.submission ul ol, li.submission ul ul {
+li.packlet ol ol, li.packlet ol ul, li.packlet ul ol, li.packlet ul ul, li.submission ol ol, li.submission ol ul, li.submission ul ol, li.submission ul ul {
   margin-bottom: 0;
 }
 
 /* line 65, ../../../app/stylesheets/print.sass */
-form, p.submitted, p.actions, span.drag-handle, section#attendance {
+form, p.submitted, p.actions, span.drag-handle, section#attendee {
   display: none !important;
 }

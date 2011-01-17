@@ -61,7 +61,7 @@ en:
         update: "Save Changes"
       session:
         create: "Sign In"
-      attendance:
+      attendee:
         create: "Add"
       score:
         create: "Save"

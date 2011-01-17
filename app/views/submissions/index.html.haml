@@ -6,9 +6,9 @@
   %section.future[meeting]
     %header
       %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
-    %ol.packets
-      - for packet in meeting.packets
-        = render :partial => 'packets/show', :locals => { :packet => packet, :show_author => true }
+    %ol.packlets
+      - for packlet in meeting.packlets
+        = render :partial => 'packlets/show', :locals => { :packlet => packlet, :show_author => true }
 
 %section#unscheduled.unscheduled
   %header
@@ -21,8 +21,8 @@
   %section.past[meeting]
     %header
       %h2 Reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
-    %ol.packets
-      - for packet in meeting.packets
-        = render :partial => 'packets/show', :locals => { :packet => packet, :show_author => true }
+    %ol.packlets
+      - for packlet in meeting.packlets
+        = render :partial => 'packlets/show', :locals => { :packlet => packlet, :show_author => true }
 
 - javascript 'submissions'

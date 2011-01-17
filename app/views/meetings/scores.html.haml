@@ -8,10 +8,10 @@
   #{link_to "Back to meeting", meeting_path(resource)}
 
 %section#scores
-  #packet_titles
-    - for packet in resource.packets
-      = render :partial => "packets/title", :locals => { :packet => packet }
+  #packlet_titles
+    - for packlet in resource.packlets
+      = render :partial => "packlets/title", :locals => { :packlet => packlet }
   - for attendee in @attendees
     .scores[attendee]
-      - for packet in resource.packets
-        = render :partial => "scores/form", :locals => { :score => Score.with(attendee, packet, :entered_by_coeditor => true) }
+      - for packlet in resource.packlets
+        = render :partial => "scores/form", :locals => { :score => Score.with(attendee, packlet, :entered_by_coeditor => true) }

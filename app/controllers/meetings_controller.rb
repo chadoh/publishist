@@ -9,7 +9,7 @@ class MeetingsController < InheritedResources::Base
   def show
     @show_score = current_person.can_enter_scores_for? resource
     @show_author = false
-    @attendance = Attendance.find_by_person_id_and_meeting_id(current_person.id, resource.id)
+    @attendee = Attendee.find_by_person_id_and_meeting_id(current_person.id, resource.id)
     show!
   end
 
@@ -20,6 +20,6 @@ class MeetingsController < InheritedResources::Base
 protected
 
   def resource
-    @meeting = Meeting.includes(:attendances).find(params[:id])
+    @meeting = Meeting.includes(:attendees).find(params[:id])
   end
 end

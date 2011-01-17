@@ -17,8 +17,8 @@ class Person < ActiveRecord::Base
 
   has_many :ranks, :dependent => :destroy
   has_many :submissions, :foreign_key => 'author_id'
-  has_many :attendances, :dependent => :destroy
-  has_many :meetings, :through => :attendances
+  has_many :attendees, :dependent => :destroy
+  has_many :meetings, :through => :attendees
 
   validates_presence_of :first_name
 
@@ -104,10 +104,10 @@ class Person < ActiveRecord::Base
   end
 
   def can_enter_scores_for? meeting
-    unless attendance = Attendance.find_by_person_id_and_meeting_id(self.id, meeting.id)
+    unless attendee = Attendee.find_by_person_id_and_meeting_id(self.id, meeting.id)
       false
     else
-      if (scores = attendance.scores).empty?
+      if (scores = attendee.scores).empty?
         true
       else
         if scores.select {|s| s.entered_by_coeditor? }.empty?

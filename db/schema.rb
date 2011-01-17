@@ -10,9 +10,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101225225538) do
+ActiveRecord::Schema.define(:version => 20110116143419) do
 
-  create_table "attendances", :force => true do |t|
+  create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
     t.integer  "person_id"
     t.string   "answer"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20101225225538) do
     t.datetime "updated_at"
   end
 
-  create_table "packets", :force => true do |t|
+  create_table "packlets", :force => true do |t|
     t.integer  "meeting_id"
     t.integer  "submission_id"
     t.integer  "position"
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20101225225538) do
 
   create_table "scores", :force => true do |t|
     t.integer  "amount"
-    t.integer  "attendance_id"
-    t.integer  "packet_id"
+    t.integer  "attendee_id"
+    t.integer  "packlet_id"
     t.boolean  "entered_by_coeditor", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
