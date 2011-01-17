@@ -16,9 +16,9 @@ Feature: An editor organizes submissions into packlets
     Then I should see "Submission 1" under the first meeting
     And I should see "Submission 1" under the second meeting
 
-    When I drag "Submission 1" from the first meeting to "Unscheduled"
-    Then I should not see "Submission 1" under the first meeting
-    And I should see "Submission 1" under the second meeting
+    When I drag "Submission 1" from the second meeting to "Unscheduled"
+    Then I should not see "Submission 1" under the second meeting
+    And I should see "Submission 1" under the first meeting
     And I should not see "Submission 1" under "Unscheduled"
 
   @pending

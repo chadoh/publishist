@@ -5,7 +5,7 @@ class PackletsController < InheritedResources::Base
     @old_packlet = params[:packlet] || false
     @submission = @old_packlet ? Packlet.find(@old_packlet).submission : Submission.find(params[:submission])
     @meeting = Meeting.find params[:meeting]
-    @packlet = Packlet.new(:meeting => @meeting, :submission => @submission)
+    @packlet = @meeting.packlets.new :submission => @submission
     if @packlet.valid?
       @packlet.save
     else

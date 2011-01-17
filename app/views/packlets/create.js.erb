@@ -1,10 +1,17 @@
 if(<%= @old_packlet %>) {
   li = $("li#packlet_<%= @old_packlet %>").clone();
-  li.attr('id', 'packlet_<%= @packlet.id %>'); }
+  li.attr("id", "packlet_<%= @packlet.id %>");
+  li.draggable({
+    handle: 'span.drag-handle-wrap',
+    axis: 'y',
+    stack: 'article',
+    zIndex: 1,
+    helper: 'clone'
+  }); }
 else {
   li = $("li#submission_<%= @submission.id %>");
-  li.attr('id', "packlet_<%= @packlet.id %>");
-  li.addClass('packlet').removeClass('submission');
+  li.attr("id", "packlet_<%= @packlet.id %>");
+  li.addClass("packlet").removeClass("submission");
 }
 meeting = $("section#meeting_<%= @meeting.id %> ol.packlets");
 li.appendTo(meeting);

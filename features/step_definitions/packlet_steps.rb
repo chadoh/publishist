@@ -26,12 +26,13 @@ Then /^I should not see "([^"]*)" under the (.*) meeting$/ do |text, heading|
   find("section##{section}").should_not have_content(text)
 end
 
-When /^I drag "([^"]*)" from the (.*) meeting to "([^"]*)"$/ do |submission_name, origin, destination|
-  origin = if origin == "first" then "meeting_#{Meeting.first.id}"
-    else "meeting_#{Meeting.last.id}" end
-  origin      = find "section##{origin}"
-  submission = origin.find("li", :text => submission_name).find("span.drag-handle")
+When /^I drag "([^"]*)" from the (.*) meeting to "([^"]*)"$/ do |submission_name, first_or_second, destination|
+  meeting = first_or_second == "first" ? "meeting_#{Meeting.first.id}" : "meeting_#{Meeting.last.id}"
+  origin  = find "section##{meeting}"
+
+  submission  = origin.find("li", :text => submission_name).find("span.drag-handle")
   destination = find "section##{destination.parameterize('_')}"
+
   submission.drag_to destination
 end
 

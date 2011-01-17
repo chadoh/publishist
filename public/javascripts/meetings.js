@@ -1,11 +1,11 @@
 $(function(){
 
-  $('li:regex(class,(submission|packet)) header h2').live('click', function(e){
+  $('li:regex(class,(submission|packlet)) header h2').live('click', function(e){
     e.preventDefault();
-    $(this).parents('li:regex(class,(submission|packet))').toggleClass('collapsed');
+    $(this).parents('li:regex(class,(submission|packlet))').toggleClass('collapsed');
   });
 
-  $("#attendance_person").autocomplete("/people/auto_complete_for_person_first_name_middle_name_last_name_email")
+  $("#attendee_person").autocomplete("/people/auto_complete_for_person_first_name_middle_name_last_name_email")
     .live('blur', function() {
       if($(this).val() == '')
         $('span.name').html($(this).val().split(' ')[0].replace(/"/g, ''));
@@ -13,16 +13,16 @@ $(function(){
         $('span.name').html($(this).val().split(' ')[0].replace(/"/g, '') + "'s");
     });
 
-  $('ol.packets').sortable({
+  $('ol.packlets').sortable({
     axis: 'y',
     items: 'li',
     handle: 'span.drag-handle-wrap',
     update: function(event, ui){
       li = ui.item;
-      packet_id = li.attr('id').split('_')[1];
+      packlet_id = li.attr('id').split('_')[1];
       $.ajax({
         type: 'PUT',
-        url: '/packets/' + packet_id + '/update_position',
+        url: '/packlets/' + packlet_id + '/update_position',
         data: { position: li.prevAll().length }
       });
     }
