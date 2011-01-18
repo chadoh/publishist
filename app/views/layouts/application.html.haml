@@ -51,16 +51,10 @@
         = yield
       - if content_for? :sidebar
         %section.sidebar{ :id => "#{@article_id}-sidebar" }
-          -##search_box
-            -#= form_tag('/#') do
-              -#%input{ :type => 'text', :name => "search", :id => "search", :value => "Nothing to search!", :class => "watermark" }
-              -#%input{ :type => 'submit', :value => "Search!" }
-          -#%br
-          -#%hr
           = yield :sidebar
       #page-footer &nbsp;
     %footer{ :role => 'contentinfo' }
       #footer
         .gradient
           :markdown
-            This website is in early alpha development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.
+            This website is in early hobbyist development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.
