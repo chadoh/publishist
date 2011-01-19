@@ -20,4 +20,6 @@ Pc::Application.configure do
   config.active_support.deprecation = :log
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  Paperclip.options[:command_path] = "DYLD_LIBRARY_PATH='/usr/local/Cellar/imagemagick/6.6.3-9/lib' /usr/local/Cellar/imagemagick/6.6.3-9/bin"
 end
