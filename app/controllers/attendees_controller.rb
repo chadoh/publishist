@@ -8,13 +8,17 @@ class AttendeesController < InheritedResources::Base
     else
       params[:attendee][:person_name] = params[:attendee].delete :person
     end
-    create! do |format|
-      flash[:notice] = "#{resource.first_name} was there"
-      format.html { redirect_to parent_url }
+
+    create! do |wants|
+      wants.html { redirect_to parent_url }
+      wants.js
     end
   end
 
   def destroy
-    destroy!(:notice => "#{resource.first_name} wasn't there, after all") { parent_url }
+    destroy! do |wants|
+      wants.html { redirect_to parent_url }
+      wants.js
+    end
   end
 end

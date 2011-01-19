@@ -1,0 +1,6 @@
+= simple_form_for [resource, Attendee.new], :remote => true do |f|
+  = render :partial => 'error_messages'
+
+  = f.input :person, :as => :string, :label => "Attendee"
+  = f.input :answer, :label => "<span class='name'></span> Answer"
+  = f.button :submit
