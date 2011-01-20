@@ -27,4 +27,8 @@ $(function(){
     $(this).next().slideToggle();
   });
 
+  $("li .destroy[data-remote]").live("ajax:success", function(){
+    $(this).closest('li').fadeOut();
+  });
+
 });

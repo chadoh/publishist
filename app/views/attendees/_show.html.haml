@@ -6,8 +6,8 @@
   %span.answer= attendee.answer
   -if editor?
     %span.actions
-      = button_to "Remove", meeting_attendee_path(@meeting, attendee),
+      = link_to "Remove", meeting_attendee_path(@meeting, attendee),
                   :remote => true,
                   :method => :delete,
                   :confirm => "This will remove any scores #{attendee.first_name} has entered! (Or that have been entered for #{attendee.first_name}!)",
-                  :class => 'link'
+                  :class => 'destroy'

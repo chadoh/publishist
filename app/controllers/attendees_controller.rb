@@ -10,7 +10,10 @@ class AttendeesController < InheritedResources::Base
     end
 
     create! do |wants|
-      wants.html { redirect_to parent_url }
+      wants.html do
+        flash[:notice] = "Hello, #{resource.first_name}."
+        redirect_to parent_url
+      end
       wants.js
     end
   end
@@ -18,7 +21,7 @@ class AttendeesController < InheritedResources::Base
   def destroy
     destroy! do |wants|
       wants.html { redirect_to parent_url }
-      wants.js
+      wants.js { render :nothing => true }
     end
   end
 end

@@ -36,4 +36,10 @@ $(function(){
       $(this).parents('form').submit();
     }
   });
+
+  $('form#new_attendee[data-remote]').live('ajax:before', function(){
+    attendee_email = $(this).find("input#attendee_person").val().split('<')[1].replace('>', '');
+    if ($(this).attr('data-viewer') == attendee_email) {
+      $(this).submit(); }
+  });
 });
