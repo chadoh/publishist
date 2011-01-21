@@ -1,5 +1,5 @@
 class AttendeesController < InheritedResources::Base
-  actions :create, :destroy
+  actions :create, :edit, :destroy
   belongs_to :meeting
 
   def create

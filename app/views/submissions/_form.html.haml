@@ -12,7 +12,7 @@
   = f.input :photo, :label => "Or, submit an image:"
   - if person_signed_in?
     - if the_editor?
-      = f.input :author, :as => :string, :label => "Author (you can submit for anyone with an account here)", :input_html => { :value => "#{"\"#{@submission.author(true).name}\" <#{@submission.author(true).email}>" if @submission.author(true)}" }
+      = f.input :author, :as => :string, :label => "Author (you can submit for anyone with an account here)", :input_html => { :value => "#{resource.author(true).name_and_email if @submission.author(true)}" }
       = f.input :author_name, :label => "To submit for someone without an account, put their name here"
       = f.input :author_email, :input_html => { :value => "" }, :label => "...and their email address here"
     - else

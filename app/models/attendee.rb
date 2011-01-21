@@ -23,6 +23,14 @@ class Attendee < ActiveRecord::Base
     end
   end
 
+  def name_and_email
+    if self.person
+      self.person.name_and_email
+    else
+      self.person_name
+    end
+  end
+
 protected
   
   def presence_of_person

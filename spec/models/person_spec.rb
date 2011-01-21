@@ -8,6 +8,19 @@ describe Person do
     should validate_presence_of(:first_name)
   }
 
+  describe "#name_and_email" do
+    it "formats someone's name as 'first last <email@ddress>'" do
+      person = Person.create(
+        :first_name            => "Papa",
+        :middle_name           => "Smurf",
+        :email                 => "papa@smurf.me",
+        :password              => "secret",
+        :password_confirmation => "secret"
+      )
+      person.name_and_email.should == "Papa Smurf <email@ddress>"
+    end
+  end
+
   describe "#can_enter_scores_for?(meeting)" do
     let(:person)  { Factory.create :person }
     let(:meeting) { Factory.create :meeting }

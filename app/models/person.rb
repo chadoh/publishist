@@ -119,6 +119,10 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def name_and_email
+    "#{name} <#{email}>"
+  end
+
   class << self
     def editors
       ranks = Rank.where(:rank_type => 2..3, :rank_end => nil)
