@@ -31,4 +31,19 @@ $(function(){
     $(this).closest('li').fadeOut();
   });
 
+  $("span[contenteditable]").live('blur', function(){
+    var model     = $(this).attr("data-model"),
+        attribute = $(this).attr("class"),
+        value     = $(this).text(),
+        path      = $(this).attr("data-path"),
+        updateData = {};
+    updateData[model] = {};
+    updateData[model][attribute] = value;
+    $.ajax({
+      type: 'PUT',
+      url:  path,
+      data: updateData
+    });
+  });
+
 });

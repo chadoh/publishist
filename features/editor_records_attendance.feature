@@ -47,11 +47,3 @@ Feature: an editor records attendee
     And I press "Update Attendee"
     Then I should see "Cookie Monster"
     And I should not see "O. J. Simpson"
-
-  @wip
-  @editor @javascript
-  Scenario: I edit an attendance record with javascript turned on
-    Given someone named "O. J. Simpson" attended the first meeting
-    And I am on the first meeting page
-    Then I should not see "Edit"
-

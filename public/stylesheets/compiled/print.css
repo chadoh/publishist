@@ -563,6 +563,27 @@ form.button_to div {
   display: inline;
 }
 
+/* line 334, ../../../app/stylesheets/_defaults.sass */
+span[contenteditable]:hover {
+  background-color: #e0ca44;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e7d770), color-stop(100%, #e0ca44));
+  background-image: -moz-linear-gradient(top, #e7d770 0%, #e0ca44 100%);
+  background-image: linear-gradient(top, #e7d770 0%, #e0ca44 100%);
+  cursor: pointer;
+}
+/* line 338, ../../../app/stylesheets/_defaults.sass */
+span[contenteditable]:focus {
+  background-color: #e7a863;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #eec18f), color-stop(100%, #e7a863));
+  background-image: -moz-linear-gradient(top, #eec18f 0%, #e7a863 100%);
+  background-image: linear-gradient(top, #eec18f 0%, #e7a863 100%);
+  cursor: text;
+  -moz-box-shadow: silver 0 0 3px inset;
+  -webkit-box-shadow: silver 0 0 3px inset;
+  -o-box-shadow: silver 0 0 3px inset;
+  box-shadow: silver 0 0 3px inset;
+}
+
 /* Print Defaults -------------------------------------------------------------- */
 /* line 13, ../../../app/stylesheets/print.sass */
 #page > nav, #page > header, body > footer {

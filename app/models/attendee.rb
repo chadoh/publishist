@@ -7,6 +7,8 @@ class Attendee < ActiveRecord::Base
   validates_presence_of :meeting_id
   validate :presence_of_person
 
+  default_scope order 'created_at'
+
   def first_name
     if self.person
       self.person.first_name

@@ -1,6 +1,7 @@
 class AttendeesController < InheritedResources::Base
   actions :create, :edit, :update, :destroy
   belongs_to :meeting
+  respond_to :html, :js
 
   def create
     params[:attendee] = set_person_param_from_string params[:attendee]
@@ -15,12 +16,18 @@ class AttendeesController < InheritedResources::Base
   end
 
   def update
-    params[:attendee] = set_person_param_from_string params[:attendee]
+    @meeting = Meeting.find params[:meeting_id]
+    @attendee = @meeting.attendees.find params[:id]
 
-    update! do |wants|
-      wants.html do
-        flash[:notice] = "Attendance record for #{resource.first_name} was updated"
-        redirect_to parent_url
+    params[:attendee] = set_person_param_from_string params[:attendee] if params[:attendee][:person]
+
+    respond_to do |wants|
+      if @attendee.update_attributes(params[:attendee])
+        wants.js { head :accepted }
+        wants.html { redirect_to parent_url }
+      else
+        wants.js { head :not_acceptable }
+        wants.html { render :edit }
       end
     end
   end
