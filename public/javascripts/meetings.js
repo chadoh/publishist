@@ -38,8 +38,13 @@ $(function(){
   });
 
   $('form#new_attendee[data-remote]').live('ajax:before', function(){
-    attendee_email = $(this).find("input#attendee_person").val().split('<')[1].replace('>', '');
+    attendee_email = $(this).find("input#attendee_person").val().split(',')[1].replace(' ', '');
     if ($(this).attr('data-viewer') == attendee_email) {
       $(this).submit(); }
+  });
+
+  $('span.actions').each(function(index, Element){
+    remove_form = $(this).find('form');
+    $(this).html(remove_form);
   });
 });

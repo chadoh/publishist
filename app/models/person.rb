@@ -26,11 +26,11 @@ class Person < ActiveRecord::Base
   gravtastic :size => 200, :default => "http://problemchildmag.com/images/children.png", :rating => 'R'
 
   def name
-    "#{self.first_name} #{self.last_name}"
+    "#{first_name}#{" #{last_name}" if last_name}"
   end
 
   def full_name
-    "#{self.first_name} #{self.middle_name} #{self.last_name}"
+    "#{first_name}#{" #{middle_name}" if middle_name}#{" #{last_name}" if last_name}"
   end
 
   def editor?
@@ -120,7 +120,7 @@ class Person < ActiveRecord::Base
   end
 
   def name_and_email
-    "#{name} <#{email}>"
+    "#{full_name}, #{email}"
   end
 
   class << self
@@ -141,8 +141,8 @@ class Person < ActiveRecord::Base
       chad = Person.find_by_email "chad.ostrowski@gmail.com"
     end
     def find_or_create formatted_name_and_email
-      if formatted_name_and_email =~ /\A.+<.+>\Z/
-        email = formatted_name_and_email.scan(/<.+>/).first.delete "<>"
+      if formatted_name_and_email =~ /^.+, .+$/
+        email = formatted_name_and_email.scan(/, .+$/).first.delete ", "
         person = Person.find_by_email email
         # unless person
         #   names = formatted_name_and_email.scan(/.+</).first.gsub(/["<>[:cntrl:]]/, '').split(' ')

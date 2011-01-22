@@ -1,15 +1,17 @@
 %li[attendee]
-  %span.person
+  %span.person{ :contenteditable => true }
     - if editor? && attendee.person
       = mail_to attendee.person.email, email_image(attendee.name)
     = link_to_if attendee.person, attendee.name, attendee.person
-  %span.answer= attendee.answer
+  %span.answer{ :contenteditable => true }
+    = attendee.answer
   -if editor?
     %span.actions
-      = link_to "Edit", edit_meeting_attendee_path(resource, attendee)
-      |
-      = link_to "Remove", meeting_attendee_path(@meeting, attendee),
+      - unless request.xhr?
+        = link_to "Edit", edit_meeting_attendee_path(resource, attendee)
+        |
+      = button_to "Remove", meeting_attendee_path(@meeting, attendee),
                   :remote => true,
                   :method => :delete,
                   :confirm => "This will remove any scores #{attendee.first_name} has entered! (Or that have been entered for #{attendee.first_name}!)",
-                  :class => 'destroy'
+                  :class => 'link destroy'

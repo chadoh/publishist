@@ -33,9 +33,9 @@ describe Attendee do
   end
 
   describe "#name_and_email" do
-    it "returns the attendee's name & email as 'first last <email@ddress>' if associated with a person" do
+    it "returns the attendee's name & email as 'first last, email@ddress' if associated with a person" do
       @a.person = @p
-      @a.name_and_email.should == "#{@p.name} <#{@p.email}>"
+      @a.name_and_email.should == "#{@p.full_name}, #{@p.email}"
     end
     it "returns the attendee#person_name if not associated with a person" do
       @a.person_name = "Goofy Spoofy"

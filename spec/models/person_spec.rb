@@ -9,15 +9,15 @@ describe Person do
   }
 
   describe "#name_and_email" do
-    it "formats someone's name as 'first last <email@ddress>'" do
+    it "formats someone's name as 'first last, email@ddress'" do
       person = Person.create(
         :first_name            => "Papa",
-        :middle_name           => "Smurf",
+        :last_name             => "Smurf",
         :email                 => "papa@smurf.me",
         :password              => "secret",
         :password_confirmation => "secret"
       )
-      person.name_and_email.should == "Papa Smurf <email@ddress>"
+      person.name_and_email.should == "Papa Smurf, papa@smurf.me"
     end
   end
 
@@ -61,9 +61,9 @@ describe Person do
   end
 
   describe "self.find_or_create" do
-    it "finds a person when formatted as '(anything) <persons@email.address>" do
+    it "finds a person when formatted as '(anything), persons@email.address" do
       @person = Factory.create :person
-      Person.find_or_create(":-D <#{@person.email}>").should == @person
+      Person.find_or_create(":-D, #{@person.email}").should == @person
     end
 
     it "returns nil if no email address is given" do
@@ -82,15 +82,15 @@ describe Person do
       end
     end
 
-    it "creates a new person if formatted as '(\")some text(\") <email@ddress.com>'" do
+    it "creates a new person if formatted as '(\")some text(\"), email@ddress.com'" do
       pending "need to fork Devise and make confirmable work by setting password after receiving email" do
         news = [
-          ['"', 'Steven', ' ', ''                      , '' , 'Dunlop' , '" <stephen.dunlop@gmail.com>'],
-          ['"', 'Marvin', ' ', 'the'                   , ' ', 'Martian', '" <marvin@yes.mars>'],
-          ['"', 'Wendy' , ' ', 'with many middle names', ' ', 'Yoder'  , '" <walace.yoder@gmail.com>'],
-          ['' , 'No'    , ' ', 'quotes'                , ' ', 'here!'  , '  <whatchagonedo@bout.it>'],
-          ['' , 'Máça'  , ' ', ''                      , '' , 'Fascia' , '  <desli@yiis.net>'],
-          ['' , 'Morgan', ' ', ''                      , '' , ''       , '  <morgan@yes.gov>']
+          ['"', 'Steven', ' ', ''                      , '' , 'Dunlop,' , '" stephen.dunlop@gmail.com'],
+          ['"', 'Marvin', ' ', 'the'                   , ' ', 'Martian,', '" marvin@yes.mars'],
+          ['"', 'Wendy' , ' ', 'with many middle names', ' ', 'Yoder,'  , '" walace.yoder@gmail.com'],
+          ['' , 'No'    , ' ', 'quotes'                , ' ', 'here!,'  , '  whatchagonedo@bout.it'],
+          ['' , 'Máça'  , ' ', ''                      , '' , 'Fascia,' , '  desli@yiis.net'],
+          ['' , 'Morgan', '' , ''                      , '' , ','       , '  morgan@yes.gov']
         ]
         news.each do |new|
           person = Person.find_or_create new.join('')
