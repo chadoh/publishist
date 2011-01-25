@@ -152,7 +152,7 @@ footer.submission-details
   +trailer
   p, span
     +trailer(0)
-    color: $lgray
+    +grayed-out
   p.author
     a:last-child
       +inline-block
@@ -276,9 +276,13 @@ ul.attendees
     span.person
       width: $sidebar * $col-width
     span.answer
-      width: ($article - 1.3) * $col-width
+      width: ($article - 2) * $col-width
+      padding-left: 0.5em
+      +border-radius
+      min-height: $base-line-height
     span.actions
-      width: 1.3 * $col-width
+      width: 2 * $col-width + $gutter-width * 4
+      text-align: right
 form.attendee
   +full
   +leader

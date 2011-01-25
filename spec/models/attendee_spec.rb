@@ -32,6 +32,17 @@ describe Attendee do
     @a.should_not be_valid
   end
 
+  describe "#name_and_email" do
+    it "returns the attendee's name & email as 'first last, email@ddress' if associated with a person" do
+      @a.person = @p
+      @a.name_and_email.should == "#{@p.full_name}, #{@p.email}"
+    end
+    it "returns the attendee#person_name if not associated with a person" do
+      @a.person_name = "Goofy Spoofy"
+      @a.name_and_email.should == "Goofy Spoofy"
+    end
+  end
+
   describe "#first_name" do
     it "returns the first name from person_name" do
       @a.person_name = "Macy Tiders"

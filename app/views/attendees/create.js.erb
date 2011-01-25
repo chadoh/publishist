@@ -1,0 +1,9 @@
+$("ul.attendees").append("<%= 
+  escape_javascript(
+    render(:partial => "show", :locals => { :attendee => resource })
+  )
+%>");
+
+$("form#new_attendee input#attendee_person").val("").focus();
+$("form#new_attendee label[for=attendee_answer]").html("Answer");
+$("form#new_attendee input#attendee_answer").val("");

@@ -6,28 +6,26 @@ Feature: an editor records attendee
 
   @editor
   Scenario: Recording attendee for someone who has an account
-    Given there is a person named "Chad Ostrowski" with email address "chad@chadoh.com"
+    Given there is a person named "Peas Porridge Cold" with email address "chad@chadoh.com"
     And I am on the first meeting page
     When I fill in the following:
-      | attendee_person | ;-) <chad@chadoh.com>   |
+      | attendee_person | ;-), chad@chadoh.com           |
       | attendee_answer | This is not a laughing matter. |
     And I press "Add"
-    Then I should see "Chad was there"
-    And I should see a "Chad Ostrowski" link under "Attendee"
+    Then I should see a "Peas Cold" link under "Attendance"
 
     When I press "Remove"
-    Then I should see "Chad wasn't there, after all"
+    Then I should not see "Peas Cold"
 
   @pending
   @editor
   Scenario: Creating an account for a new person by recording attendee correctly
     Given I am on the first meeting page
     When I fill in the following:
-      | attendee_person | Cookie Monster <cookies@yomyom.com>   |
+      | attendee_person | Cookie Monster, cookies@yomyom.com   |
       | attendee_answer | This is not a laughing matter. |
     And I press "Add"
-    Then I should see "Cookie was there"
-    And I should see a "Cookie Monster" link under "Attendee"
+    Then I should see a "Cookie Monster" link under "Attendance"
 
   @editor
   Scenario: Recording attendee for someone without making them an account
@@ -36,5 +34,16 @@ Feature: an editor records attendee
       | attendee_person | Cookie Monster |
       | attendee_answer | No more moon!  |
     And I press "Add"
-    Then I should see "Cookie was there"
-    And I should see "Cookie Monster" under "Attendee"
+    Then I should see "Cookie Monster" under "Attendance"
+
+  @editor
+  Scenario: I edit an attendance record with javascript turned off
+    Given someone named "O. J. Simpson" attended the first meeting
+    And I am on the first meeting page
+    When I follow "Edit"
+    And I fill in the following:
+      | attendee_person | Cookie Monster |
+      | attendee_answer | No more moon!  |
+    And I press "Update Attendee"
+    Then I should see "Cookie Monster"
+    And I should not see "O. J. Simpson"

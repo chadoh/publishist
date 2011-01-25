@@ -5,7 +5,7 @@ class PeopleController < InheritedResources::Base
   before_filter :staff_only, :only => [:index]
   before_filter :editors_only, :only => [:destroy]
   auto_complete_for :person, [:first_name, :middle_name, :last_name, :email], :limit => 15 do |people|
-    people.map {|person| "\"#{person.full_name}\" <#{person.email}>" }.join "\n"
+    people.map {|person| "#{person.full_name}, #{person.email}" }.join "\n"
   end
 
   def show

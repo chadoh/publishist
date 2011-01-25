@@ -563,6 +563,36 @@ form.button_to div {
   display: inline;
 }
 
+/* line 334, ../../../app/stylesheets/_defaults.sass */
+span[contenteditable]:hover {
+  background-color: #e0ca44;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e7d770), color-stop(100%, #e0ca44));
+  background-image: -moz-linear-gradient(top, #e7d770 0%, #e0ca44 100%);
+  background-image: linear-gradient(top, #e7d770 0%, #e0ca44 100%);
+  cursor: pointer;
+}
+/* line 338, ../../../app/stylesheets/_defaults.sass */
+span[contenteditable]:focus {
+  background-color: #e7a863;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #eec18f), color-stop(100%, #e7a863));
+  background-image: -moz-linear-gradient(top, #eec18f 0%, #e7a863 100%);
+  background-image: linear-gradient(top, #eec18f 0%, #e7a863 100%);
+  cursor: text;
+  -moz-box-shadow: silver 0 0 3px inset;
+  -webkit-box-shadow: silver 0 0 3px inset;
+  -o-box-shadow: silver 0 0 3px inset;
+  box-shadow: silver 0 0 3px inset;
+}
+
+/* line 350, ../../../app/stylesheets/_defaults.sass */
+.grayed-out {
+  color: silver;
+}
+/* line 347, ../../../app/stylesheets/_defaults.sass */
+.grayed-out a, .grayed-out input.link, .grayed-out input {
+  color: silver;
+}
+
 @import url(compass/utilities/text/ellipses.css);
 /* Layout -------------------------------------------------------------- */
 /* line 29, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-susy-plugin-0.8.1/sass/susy/_vertical_rhythm.scss */
@@ -1202,14 +1232,23 @@ ul.attendees li.attendee span.person {
 }
 /* line 278, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.answer {
-  width: 29.1em;
+  width: 27em;
+  padding-left: 0.5em;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  min-height: 24px;
 }
-/* line 280, ../../../app/stylesheets/screen.sass */
+/* line 283, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.actions {
-  width: 3.9em;
+  width: 8em;
+  text-align: right;
 }
 
-/* line 282, ../../../app/stylesheets/screen.sass */
+/* line 286, ../../../app/stylesheets/screen.sass */
 form.attendee {
   clear: both;
   margin-right: 0.885%;
@@ -1217,20 +1256,20 @@ form.attendee {
   margin-top: 1.5em;
 }
 
-/* line 287, ../../../app/stylesheets/screen.sass */
+/* line 291, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_body {
   height: 30.857em;
 }
-/* line 289, ../../../app/stylesheets/screen.sass */
+/* line 293, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_title {
   height: 2.571em;
 }
-/* line 291, ../../../app/stylesheets/screen.sass */
+/* line 295, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 294, ../../../app/stylesheets/screen.sass */
+/* line 298, ../../../app/stylesheets/screen.sass */
 ul.meetings {
   list-style: none;
   margin-left: 0;
@@ -1241,7 +1280,7 @@ ul.meetings li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 297, ../../../app/stylesheets/screen.sass */
+/* line 301, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting {
   clear: both;
   margin-right: 0.885%;
@@ -1249,7 +1288,7 @@ ul.meetings li.meeting {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 300, ../../../app/stylesheets/screen.sass */
+/* line 304, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.when {
   display: inline;
   float: left;
@@ -1257,14 +1296,14 @@ ul.meetings li.meeting span.when {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 303, ../../../app/stylesheets/screen.sass */
+/* line 307, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.question {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 305, ../../../app/stylesheets/screen.sass */
+/* line 309, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.actions {
   display: inline;
   float: left;
@@ -1276,7 +1315,7 @@ ul.meetings li.meeting span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 309, ../../../app/stylesheets/screen.sass */
+/* line 313, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1287,13 +1326,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 312, ../../../app/stylesheets/screen.sass */
+/* line 316, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 314, ../../../app/stylesheets/screen.sass */
+/* line 318, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1301,7 +1340,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 317, ../../../app/stylesheets/screen.sass */
+/* line 321, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1309,14 +1348,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 320, ../../../app/stylesheets/screen.sass */
+/* line 324, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 322, ../../../app/stylesheets/screen.sass */
+/* line 326, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1334,7 +1373,7 @@ ul#people li.person span.promote-to > ul li:after {
 ul#people li.person span.promote-to > ul li:last-child:after, ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 324, ../../../app/stylesheets/screen.sass */
+/* line 328, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1346,7 +1385,7 @@ ul#people li.person span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 328, ../../../app/stylesheets/screen.sass */
+/* line 332, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

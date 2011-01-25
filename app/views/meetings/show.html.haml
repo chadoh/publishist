@@ -1,14 +1,14 @@
-- title @meeting.question
-%p= @meeting.when.strftime("A meeting held on %A, %d %B %Y at %I:%M %p")
+- title resource.question
+%p= resource.when.strftime("A meeting held on %A, %d %B %Y at %I:%M %p")
 - if editor?
   %p.actions
-    = link_to t('.edit'), edit_meeting_path(@meeting)
+    = link_to t('.edit'), edit_meeting_path(resource)
 
 %section#packlet
   %header
     %h2 Submissions
   %ol.packlets
-    - for packlet in @meeting.packlets
+    - for packlet in resource.packlets
       = render :partial => 'packlets/show', :locals => { :packlet => packlet }
   - if the_coeditor?
     %p= link_to "Enter scores for everyone", scores_for_meeting_path(resource)
@@ -17,15 +17,10 @@
   %header
     %h2 Attendance
   %ul.attendees
-    - for attendee in @meeting.attendees
+    - for attendee in resource.attendees
       = render :partial => 'attendees/show', :locals => { :attendee => attendee }
 
   - if editor?
-    = simple_form_for [@meeting, Attendee.new] do |f|
-      = render :partial => 'error_messages'
-
-      = f.input :person, :as => :string, :label => "Attendee"
-      = f.input :answer, :label => "<span class='name'></span> Answer"
-      = f.button :submit
+    = render :partial => "attendees/form", :locals => { :attendee => [resource, Attendee.new] }
 
 - javascript 'meetings'

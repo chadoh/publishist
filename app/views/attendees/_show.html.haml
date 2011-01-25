@@ -3,7 +3,18 @@
     - if editor? && attendee.person
       = mail_to attendee.person.email, email_image(attendee.name)
     = link_to_if attendee.person, attendee.name, attendee.person
-  %span.answer= attendee.answer
+  -if attendee.person == current_person
+    %span.answer{ :contenteditable => true, :data => { :path => update_answer_for_meeting_attendee_path(attendee.meeting, attendee), :model => "attendee" } }
+      = attendee.answer
+  - else
+    %span.answer
+      = attendee.answer
   -if editor?
     %span.actions
-      = button_to "Remove", meeting_attendee_path(@meeting, attendee), :method => :delete, :class => 'link'
+      = link_to "Edit", edit_meeting_attendee_path(resource, attendee), :class => 'edit'
+      |
+      = button_to "Remove", meeting_attendee_path(@meeting, attendee),
+                  :remote => true,
+                  :method => :delete,
+                  :confirm => "This will remove any scores #{attendee.first_name} has entered! (Or that have been entered for #{attendee.first_name}!)",
+                  :class => 'link destroy'

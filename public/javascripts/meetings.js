@@ -5,13 +5,15 @@ $(function(){
     $(this).parents('li:regex(class,(submission|packlet))').toggleClass('collapsed');
   });
 
-  $("#attendee_person").autocomplete("/people/auto_complete_for_person_first_name_middle_name_last_name_email")
-    .live('blur', function() {
+  $("#attendee_person").live('focus blur', function(event){
+    if (event.type == 'focusin') {
+      $(this).autocomplete("/people/auto_complete_for_person_first_name_middle_name_last_name_email"); }
+    else {
       if($(this).val() == '')
         $('span.name').html($(this).val().split(' ')[0].replace(/"/g, ''));
       else
         $('span.name').html($(this).val().split(' ')[0].replace(/"/g, '') + "'s");
-    });
+    }});
 
   $('ol.packlets').sortable({
     axis: 'y',
@@ -35,5 +37,18 @@ $(function(){
     if (orig != current) {
       $(this).parents('form').submit();
     }
+  });
+
+  $('form#new_attendee[data-remote]').live('ajax:before', function(){
+    attendee_email = $(this).find("input#attendee_person").val().split(',')[1].replace(' ', '');
+    if ($(this).attr('data-viewer') == attendee_email) {
+      $(this).submit(); }
+  });
+
+  $('span.actions a.edit').live('click', function(e){
+    e.preventDefault();
+    $.ajax({
+      url: $(this).attr('href')
+    });
   });
 });
