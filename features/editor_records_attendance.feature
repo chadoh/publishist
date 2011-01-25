@@ -36,6 +36,7 @@ Feature: an editor records attendee
     And I press "Add"
     Then I should see "Cookie Monster" under "Attendance"
 
+  @wip
   @editor
   Scenario: I edit an attendance record with javascript turned off
     Given someone named "O. J. Simpson" attended the first meeting

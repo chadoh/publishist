@@ -584,6 +584,15 @@ span[contenteditable]:focus {
   box-shadow: silver 0 0 3px inset;
 }
 
+/* line 350, ../../../app/stylesheets/_defaults.sass */
+.grayed-out {
+  color: silver;
+}
+/* line 347, ../../../app/stylesheets/_defaults.sass */
+.grayed-out a, .grayed-out input.link, .grayed-out input {
+  color: silver;
+}
+
 /* Print Defaults -------------------------------------------------------------- */
 /* line 13, ../../../app/stylesheets/print.sass */
 #page > nav, #page > header, body > footer {

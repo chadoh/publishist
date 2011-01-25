@@ -340,3 +340,12 @@ span[contenteditable]
     +linear-gradient(color-stops(lighten($lorange, 10%), $lorange))
     cursor: text
     +box-shadow($lgray, 0, 0, 3px, inset)
+
+=grayed-out($completely: false)
+  color: $lgray
+  @if $completely
+    a, input.link, input
+      color: $lgray
+
+.grayed-out
+  +grayed-out(true)

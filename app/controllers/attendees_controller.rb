@@ -1,7 +1,9 @@
 class AttendeesController < InheritedResources::Base
   actions :create, :edit, :update, :destroy
   belongs_to :meeting
-  respond_to :html, :js
+  respond_to :html, :except => :update_answer
+  respond_to :js
+  before_filter :resource, :except => :create
 
   def create
     params[:attendee] = set_person_param_from_string params[:attendee]
@@ -15,20 +17,31 @@ class AttendeesController < InheritedResources::Base
     end
   end
 
-  def update
-    @meeting = Meeting.find params[:meeting_id]
-    @attendee = @meeting.attendees.find params[:id]
-
-    params[:attendee] = set_person_param_from_string params[:attendee] if params[:attendee][:person]
-
+  def edit
     respond_to do |wants|
-      if @attendee.update_attributes(params[:attendee])
-        wants.js { head :accepted }
-        wants.html { redirect_to parent_url }
-      else
-        wants.js { head :not_acceptable }
-        wants.html { render :edit }
-      end
+      wants.js
+      wants.html
+    end
+  end
+
+  def update
+    if params[:attendee]
+      params[:attendee] = set_person_param_from_string params[:attendee] if params[:attendee][:person]
+    end
+
+    update! do |success, failure|
+      success.html { redirect_to parent_url }
+      failure.html { render :edit }
+
+      success.js
+      failure.js { render :nothing => true }
+    end
+  end
+
+  def update_answer
+    update! do |success, failure|
+      success.js { head :accepted }
+      failure.js { head :not_acceptable }
     end
   end
 

@@ -584,6 +584,15 @@ span[contenteditable]:focus {
   box-shadow: silver 0 0 3px inset;
 }
 
+/* line 350, ../../../app/stylesheets/_defaults.sass */
+.grayed-out {
+  color: silver;
+}
+/* line 347, ../../../app/stylesheets/_defaults.sass */
+.grayed-out a, .grayed-out input.link, .grayed-out input {
+  color: silver;
+}
+
 @import url(compass/utilities/text/ellipses.css);
 /* Layout -------------------------------------------------------------- */
 /* line 29, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-susy-plugin-0.8.1/sass/susy/_vertical_rhythm.scss */

@@ -1,0 +1,11 @@
+$("li#attendee_<%= resource.id %>").replaceWith("<%= 
+  escape_javascript(
+    render(:partial => "show", :locals => { :resource => resource.meeting, :attendee => resource })
+  )
+%>");
+
+$("form.attendee").replaceWith("<%=
+  escape_javascript(
+    render(:partial => "form", :locals => { :attendee => [resource.meeting, Attendee.new] })
+  )
+%>");

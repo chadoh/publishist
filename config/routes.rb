@@ -11,10 +11,10 @@ Pc::Application.routes.draw do
   resources :scores
 
   resources :meetings do
-    resources :attendees
-    member do
-      get  'scores' => :scores, :as => 'scores_for'
+    resources :attendees do
+      member { put 'update_answer' => :update_answer, :as => 'update_answer_for' }
     end
+    member { get  'scores' => :scores, :as => 'scores_for' }
   end
 
   resources :packlets do
