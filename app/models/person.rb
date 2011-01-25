@@ -142,7 +142,7 @@ class Person < ActiveRecord::Base
     end
     def find_or_create formatted_name_and_email
       if formatted_name_and_email =~ /^.+, .+$/
-        email = formatted_name_and_email.scan(/, .+$/).first.delete ", "
+        email = formatted_name_and_email[/, (.*)/, 1]
         person = Person.find_by_email email
         # unless person
         #   names = formatted_name_and_email.scan(/.+</).first.gsub(/["<>[:cntrl:]]/, '').split(' ')

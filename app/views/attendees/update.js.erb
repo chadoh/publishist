@@ -1,6 +1,6 @@
 $("li#attendee_<%= resource.id %>").replaceWith("<%= 
   escape_javascript(
-    render(:partial => "show", :locals => { :resource => resource.meeting, :attendee => resource })
+    render(:partial => "show", :locals => { :attendee => resource })
   )
 %>");
 
