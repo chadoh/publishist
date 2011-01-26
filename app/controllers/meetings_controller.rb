@@ -2,9 +2,9 @@ class MeetingsController < InheritedResources::Base
   before_filter :authenticate_person!, :only => [:index, :show]
   before_filter :editors_only, :except => [:index, :show]
   before_filter :coeditor_only, :only => :scores
-  before_filter :resource, :only => :scores
+  before_filter :resource, :only => [ :scores, :show]
 
-  actions :index, :show, :new, :create, :update, :destroy, :scores
+  custom_actions :resource => :search
 
   def show
     @show_score = current_person.can_enter_scores_for? resource
@@ -19,7 +19,7 @@ class MeetingsController < InheritedResources::Base
 
 protected
 
-  def resource
+  def meeting_with_attendees
     @meeting = Meeting.includes(:attendees).find(params[:id])
   end
 end

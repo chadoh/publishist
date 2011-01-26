@@ -1,13 +1,8 @@
 - javascript "anytime.min"
 - stylesheet "anytime.min"
 
-= simple_form_for(@meeting) do |f|
-  - if @meeting.errors.any?
-    #errorExplanation
-      %h3= "There #{pluralize_phrase(@meeting.errors.count, 'was an error', 'were some errors')}!"
-      %ul
-      - @meeting.errors.full_messages.each do |msg|
-        %li= msg
+= simple_form_for(resource) do |f|
+  = render :partial => 'error_messages'
 
   = f.input :when, :as => :string, :input_html => { :value => (@meeting.when ? @meeting.when.strftime("%Y-%m-%d %I:%M %p") : nil) }
   = f.input :question

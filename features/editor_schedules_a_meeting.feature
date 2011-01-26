@@ -22,6 +22,15 @@ Feature: Editor schedules a meetings
     And I press "Create Meeting"
     Then I should see "Does he love you?"
 
+  @editor
+  Scenario: Editor changes a meeting's question
+    Given there is a meeting scheduled
+    And I am on the meetings page
+    When I follow "Edit"
+    And I fill in "Question" with "What is the energy of your color?"
+    And I press "Update Meeting"
+    Then I should see "What is the energy of your color?"
+
   @webmember
   Scenario: Non-editors shouldn't have the link to schedule meetings
     Given I am on the meetings page

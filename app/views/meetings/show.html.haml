@@ -1,26 +1,26 @@
-- title resource.question
-%p= resource.when.strftime("A meeting held on %A, %d %B %Y at %I:%M %p")
+- title @meeting.question
+%p= @meeting.when.strftime("A meeting held on %A, %d %B %Y at %I:%M %p")
 - if editor?
   %p.actions
-    = link_to t('.edit'), edit_meeting_path(resource)
+    = link_to t('.edit'), edit_meeting_path(@meeting)
 
 %section#packlet
   %header
     %h2 Submissions
   %ol.packlets
-    - for packlet in resource.packlets
+    - for packlet in @meeting.packlets
       = render :partial => 'packlets/show', :locals => { :packlet => packlet }
   - if the_coeditor?
-    %p= link_to "Enter scores for everyone", scores_for_meeting_path(resource)
+    %p= link_to "Enter scores for everyone", scores_for_meeting_path(@meeting)
 
 %section#attendance
   %header
     %h2 Attendance
   %ul.attendees
-    - for attendee in resource.attendees
+    - for attendee in @meeting.attendees
       = render :partial => 'attendees/show', :locals => { :attendee => attendee }
 
   - if editor?
-    = render :partial => "attendees/form", :locals => { :attendee => [resource, Attendee.new] }
+    = render :partial => "attendees/form", :locals => { :attendee => [@meeting, Attendee.new] }
 
 - javascript 'meetings'
