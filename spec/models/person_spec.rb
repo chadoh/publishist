@@ -21,6 +21,24 @@ describe Person do
     end
   end
 
+  context "has methods that return submissions in the method-name state:" do
+    let(:sub1) { Factory.create :submission }
+    let(:person) { sub1.author(true) }
+    let(:sub2) { Submission.create(:title => "<", :body => "3", :author_id => person.id) }
+
+    before(:each) do
+      sub2.has_been :submitted
+    end
+
+    it "#drafts" do
+      person.drafts.first.should == sub1
+    end
+
+    it "#submitted" do
+      person.submitted.first.should == sub2
+    end
+  end
+
   describe "#can_enter_scores_for?(meeting)" do
     let(:person)  { Factory.create :person }
     let(:meeting) { Factory.create :meeting }

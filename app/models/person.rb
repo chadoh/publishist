@@ -123,6 +123,16 @@ class Person < ActiveRecord::Base
     "#{full_name}, #{email}"
   end
 
+  def method_missing id, *args
+    if %w{drafts submitted queued reviewed scored published rejected}.include? id.to_s
+      return Submission.find_all_by_author_id_and_state(
+        self.id, Submission.state(id.to_s.singularize.to_sym),
+        :order => "created_at DESC"
+      )
+    end
+    super id, *args
+  end
+
   class << self
     def editors
       ranks = Rank.where(:rank_type => 2..3, :rank_end => nil)

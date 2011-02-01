@@ -8,6 +8,8 @@ class Submission < ActiveRecord::Base
   validate :author_email_exists_if_user_not_signed_in
   validate :if_associated_to_Person_dont_allow_name_or_email_also
 
+  acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
+
   validates_attachment_content_type :photo, 
     :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
     :if => Proc.new { |submission| submission.photo.file? },
@@ -42,6 +44,10 @@ class Submission < ActiveRecord::Base
     else
       read_attribute(:author_email)
     end
+  end
+
+  def has_been moved_to_state
+    update_attribute :state, moved_to_state
   end
 
 protected

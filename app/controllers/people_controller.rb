@@ -9,9 +9,9 @@ class PeopleController < InheritedResources::Base
   end
 
   def show
-    @person = Person.find(params[:id])
     if person_signed_in? && (current_person.the_editor? || current_person == @person)
-      @submissions = @person.submissions.order("created_at DESC")
+      @drafts    = resource.drafts
+      @submitted = resource.submitted
     end
     show!
   end

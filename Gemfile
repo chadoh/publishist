@@ -21,7 +21,6 @@ gem 'inherited_resources'
 
 # Models
 gem 'devise'
-gem 'foreigner'
 gem 'acts_as_list'
 
 group :development do

@@ -8,7 +8,16 @@ describe Submission do
   it {
     should have_many(:packlets).dependent(:destroy)
     should have_many(:meetings).through(:packlets)
+    should belong_to(:author)
   }
+
+  describe "#has_been" do
+    it "moves the sumbission into the specified state" do
+      sub = Factory.build :submission
+      sub.has_been :submitted
+      sub.state.should == :submitted
+    end
+  end
 
   describe "#author" do
     context "when there is an associated author" do
