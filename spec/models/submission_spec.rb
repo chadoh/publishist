@@ -19,6 +19,20 @@ describe Submission do
     end
   end
 
+  context "has methods to check if in a certain state:" do
+    before :each do
+      @sub = Factory.build :submission
+    end
+
+    it "has a #draft? method" do
+      (@sub.draft?).should be_true
+    end
+
+    it "has a #submitted? method" do
+      (@sub.submitted?).should be_false
+    end
+  end
+
   describe "#author" do
     context "when there is an associated author" do
       before(:each) do

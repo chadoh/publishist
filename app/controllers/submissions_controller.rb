@@ -1,6 +1,6 @@
 class SubmissionsController < InheritedResources::Base
   before_filter :editors_only, :only => [:index]
-  before_filter :editor_only, :only => [:edit, :destroy]
+  before_filter :editor_only, :only => [:destroy]
 
   def index
     @meetings = Meeting.all.sort_by(&:when).reverse
@@ -21,9 +21,9 @@ class SubmissionsController < InheritedResources::Base
 
   def new
     if person_signed_in?
-      @submission = Submission.new(:author_id => current_person.id)
+      @submission = Submission.new :author_id => current_person.id
     else
-      @submission = Submission.new
+      @submission = Submission.new :state => :submitted
     end
 
     respond_to do |format|
@@ -34,6 +34,10 @@ class SubmissionsController < InheritedResources::Base
 
   def edit
     @submission = Submission.find(params[:id])
+    unless person_signed_in? and (current_person.the_editor? or @submission.author(true) == current_person)
+      flash[:notice] = "You're not allowed to edit that."
+      redirect_to request.referer
+    end
   end
 
   def create

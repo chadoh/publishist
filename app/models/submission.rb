@@ -50,6 +50,13 @@ class Submission < ActiveRecord::Base
     update_attribute :state, moved_to_state
   end
 
+  def method_missing method_call, *args
+    if %w{draft? submitted? queued? reviewed? scored? published? rejected?}.include? method_call.to_s
+      return self.state.to_s == method_call.to_s.chop
+    end
+    super method_call, *args
+  end
+
 protected
 
   def remove_ms_word_kruft

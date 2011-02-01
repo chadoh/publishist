@@ -5,20 +5,18 @@
   - content_for :sidebar do
     = render :partial => 'about', :locals => { :person => @person }
 
-  - if @person == current_person and @drafts.present?
-    %section#drafts
-      %header
-        %h3 Drafts
-        %p These need some final touches before submission.
-      %ul.submissions
-        - for draft in @drafts
-          = render :partial => 'submissions/show', :locals => { :submission => draft, :collapsed => false }
+- if @drafts.present?
+  %section#drafts
+    %header
+      %h3{ :title => "These need some final touches before submission" } Drafts
+    %ul.submissions
+      - for draft in @drafts
+        = render :partial => 'submissions/show', :locals => { :submission => draft, :collapsed => false }
 
-  - if @submitted.present?
-    %section#submitted
-      %header
-        %h3 Submitted
-        %p These have been submitted but not yet scheduled for a meeting
-      %ul.submissions
-        - for submission in @submitted
-          = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
+- if @submitted.present?
+  %section#submitted
+    %header
+      %h3{ :title => "These have been submitted but not yet scheduled for a meeting" } Submitted
+    %ul.submissions
+      - for submission in @submitted
+        = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
