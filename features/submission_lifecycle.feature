@@ -12,19 +12,25 @@ Feature: A poet's work goes from draft to published/rejected
     And I press "Submit!"
     Then "Each raindrop" should be submitted, not draft
 
-  @wip
   @webmember
-  Scenario: I write a poem and then submit it later
+  Scenario: I write a poem and then submit it later with edits
     Given I am on the new submission page
     When I fill in the following:
       | Title | Each raindrop   |
       | Body  | started as dust |
-    And press "Save"
+    And press "Save and Preview"
     Then I should be on my profile page
     And I should see "Drafts"
 
     When I follow "Edit" under "Each raindrop"
-    And I check "Submit"
-    And I press "Save"
+    And I press "Submit!"
     Then I should be on my profile page
     And I should not see "Drafts"
+
+  @wip
+  @webmember
+  Scenario: I write a poem and then submit it later with edits
+    Given I have drafted a poem called "Teh waistland"
+    When I am on my profile page
+    And I press "Submit"
+    Then I should see "Submitted"

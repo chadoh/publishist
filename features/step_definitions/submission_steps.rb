@@ -6,3 +6,7 @@ end
 Then /^"([^"]*)" should be submitted, not draft$/ do |title|
   Submission.find_by_title(title).state.should == :submitted
 end
+
+Given /^I have drafted a poem called "([^"]*)"$/ do |title|
+  @user.submissions.create :title => title, :body => "Yes, I said it. #{title}!"
+end

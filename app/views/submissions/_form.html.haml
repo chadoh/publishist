@@ -18,10 +18,9 @@
       = f.input :author_email, :input_html => { :value => "" }, :label => "...and their email address here"
     - else
       = f.input :author_id, :as => :hidden
-  - if person_signed_in?
-    = f.button :submit, "Save"
-  - else
-    = f.button :submit, "Submit!"
+  = f.button :submit, "Submit!"
+  or
+  = f.button :submit, "Save and Preview", :class => "link"
 
 :javascript
   $(function(){

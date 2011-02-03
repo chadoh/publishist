@@ -21,7 +21,7 @@ class SubmissionsController < InheritedResources::Base
 
   def new
     if person_signed_in?
-      @submission = Submission.new :author_id => current_person.id
+      @submission = Submission.new :author_id => current_person.id, :state => :draft
     else
       @submission = Submission.new :state => :submitted
     end
@@ -42,19 +42,18 @@ class SubmissionsController < InheritedResources::Base
 
   def create
     params[:submission][:author] = Person.find_or_create(params[:submission][:author])
+    params[:submission][:state]  = params[:commit] == "Submit!" ? :submitted : :draft
     @submission = Submission.new(params[:submission])
 
     respond_to do |format|
       if @submission.save
         Notifications.new_submission(@submission).deliver
         format.html {
-          flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-          if person_signed_in? and current_person.the_editor?
-            redirect_to submissions_url
-          elsif person_signed_in?
+          if person_signed_in?
             redirect_to person_url(current_person)
           else
-            redirect_to(root_url)
+            flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
+            redirect_to root_url
           end
         }
         format.xml  { render :xml => @submission, :status => :created, :location => @submission }
@@ -67,17 +66,10 @@ class SubmissionsController < InheritedResources::Base
 
   def update
     params[:submission][:author] = Person.find_or_create(params[:submission][:author])
+    params[:submission][:state]  = params[:commit] == "Submit!" ? :submitted : :draft
     @submission = Submission.find(params[:id])
 
-    respond_to do |format|
-      if @submission.update_attributes(params[:submission])
-        format.html { redirect_to(@submission, :notice => 'Success!') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @submission.errors, :status => :unprocessable_entity }
-      end
-    end
+    update! { person_url resource.author(true) }
   end
 
   def destroy

@@ -22,15 +22,9 @@ en:
     edit:
       title: "Edit"
 
-  sessions:
-    new:
-      title: "Sign In"
-
   people:
     index:
       title: "People"
-    new:
-      title: "Sign Up"
     edit:
       title: "Edit Account"
 
@@ -46,6 +40,9 @@ en:
       edit: "Edit Meeting"
 
   flash:
+    submissions:
+      update:
+        notice: ""
     people:
       update:
         notice: "Your account has been updated"
