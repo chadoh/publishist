@@ -1,5 +1,5 @@
 - title @meeting.question
-%p= @meeting.when.strftime("A meeting held on %A, %d %B %Y at %I:%M %p")
+%p= @meeting.datetime.strftime("A meeting held on %A, %d %B %Y at %I:%M %p")
 - if editor?
   %p.actions
     = link_to t('.edit'), edit_meeting_path(@meeting)

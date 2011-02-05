@@ -3,8 +3,8 @@ class SubmissionsController < InheritedResources::Base
   before_filter :editor_only, :only => [:destroy]
 
   def index
-    @meetings = Meeting.all.sort_by(&:when).reverse
-    @meetings_to_come = @meetings.select {|m| Time.now - m.when < 0}
+    @meetings = Meeting.all.sort_by(&:datetime).reverse
+    @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
     @submissions = Submission.order("created_at DESC") - Packlet.all.collect(&:submission)
     index!
