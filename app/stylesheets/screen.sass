@@ -36,6 +36,7 @@ $use-mozilla-ellipsis-binding: true
       width: 100%
       & > li
         +inline-block-list-item
+        display: block
         +adjust-font-size-to(20px, 2)
         +box-flex(1)
         text-align: center
@@ -329,6 +330,12 @@ ul#people
       +columns(2.5)
       +omega
 
+/*
+ *   Odds & Ends
+ ********************************/
+
 #your_name_looks_like
   display: none
 
+ul.actions
+  +delimited-list(" | ")

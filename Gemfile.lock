@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/chadoh/compass.git
+  revision: b36952cf30a9c1abb2bd8acaae7a4a0b7feff8e9
+  branch: delimiting
+  specs:
+    compass (0.10.6)
+      haml (>= 3.0.4)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -52,8 +60,6 @@ GEM
     celerity (0.8.7)
     childprocess (0.1.6)
       ffi (~> 0.6.3)
-    compass (0.10.6)
-      haml (>= 3.0.4)
     compass-susy-plugin (0.8.1)
       compass (>= 0.10.0)
     configuration (1.2.0)
@@ -186,7 +192,7 @@ DEPENDENCIES
   aws-s3
   capybara
   capybara-envjs
-  compass
+  compass!
   compass-susy-plugin
   cucumber-rails
   database_cleaner

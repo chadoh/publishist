@@ -6,7 +6,7 @@ gem 'redgreen'
 
 # Views
 gem 'haml'
-gem 'compass'
+gem 'compass', :git => "git://github.com/chadoh/compass.git", :branch => "delimiting"
 gem 'compass-susy-plugin'
 gem 'simple_form'
 gem 'rdiscount'

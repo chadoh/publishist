@@ -8,5 +8,17 @@ Then /^"([^"]*)" should be submitted, not draft$/ do |title|
 end
 
 Given /^I have drafted a poem called "([^"]*)"$/ do |title|
-  @user.submissions.create :title => title, :body => "Yes, I said it. #{title}!"
+  @user.submissions.create :title => title,
+                           :body => "Yes, I said it. #{title}!"
+end
+
+Given /^I have submitted a poem called "([^"]*)"$/ do |title|
+  @user.submissions.create :title => title,
+                           :body => "Yes, I said it. #{title}!",
+                           :state => :submitted
+end
+
+When /^I schedule "([^"]*)" for a meeting a week from now$/ do |title|
+  meeting = Factory.create :meeting
+  meeting.submissions << Submission.find_by_title(title)
 end

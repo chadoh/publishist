@@ -50,11 +50,19 @@ class Submission < ActiveRecord::Base
     update_attribute :state, moved_to_state
   end
 
-  def method_missing method_call, *args
-    if %w{draft? submitted? queued? reviewed? scored? published? rejected?}.include? method_call.to_s
-      return self.state.to_s == method_call.to_s.chop
+  def draft?
+    state == :draft
+  end
+
+  def submitted?
+    state == :submitted
+  end
+
+  def method_missing method, *args, &block
+    if %w{draft? submitted? queued? reviewed? scored? published? rejected?}.include? method.to_s
+      return state.to_s == method.to_s.chop
     end
-    super method_call, *args
+    super method, *args
   end
 
 protected

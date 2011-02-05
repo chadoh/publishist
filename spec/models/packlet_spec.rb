@@ -55,4 +55,13 @@ describe Packlet do
       @p1.scores_not_entered_by_coeditor.length.should == 1
     end
   end
+
+  describe "#submission#draft?" do
+    it "returns false, since a submission can only be scheduled after it's submitted" do
+      s = Factory.create :submission
+      m = Factory.create :meeting
+      p = m.packlets.create :submission => s
+      p.submission.draft?.should be_false
+    end
+  end
 end

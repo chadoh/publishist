@@ -22,20 +22,19 @@ describe Person do
   end
 
   context "has methods that return submissions in the method-name state:" do
-    let(:sub1) { Factory.create :submission }
-    let(:person) { sub1.author(true) }
-    let(:sub2) { Submission.create(:title => "<", :body => "3", :author_id => person.id) }
-
     before(:each) do
-      sub2.has_been :submitted
+      @person = Factory.create :person
+      @sub1 = @person.submissions.create(:title => "=", :body => "D")
+      @sub2 = @person.submissions.create(:title => "<", :body => "3")
+      @sub2.has_been :submitted
     end
 
     it "#drafts" do
-      person.drafts.first.should == sub1
+      @person.drafts.first.should == @sub1
     end
 
     it "#submitted" do
-      person.submitted.first.should == sub2
+      @person.submitted.first.should == @sub2
     end
   end
 

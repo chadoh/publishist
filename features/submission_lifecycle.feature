@@ -27,10 +27,17 @@ Feature: A poet's work goes from draft to published/rejected
     Then I should be on my profile page
     And I should not see "Drafts"
 
-  @wip
   @webmember
-  Scenario: I write a poem and then submit it later with edits
+  Scenario: I write a poem and then submit it later without edits
     Given I have drafted a poem called "Teh waistland"
     When I am on my profile page
     And I press "Submit"
     Then I should see "Submitted"
+
+  @wip
+  @editor
+  Scenario: I schedule a submission that I wrote
+    Given I have submitted a poem called "Los Colores"
+    When I schedule "Los Colores" for a meeting a week from now
+    And I am on my profile page
+    Then I should see "Queued"

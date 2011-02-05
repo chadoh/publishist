@@ -21,7 +21,9 @@ describe Submission do
 
   context "has methods to check if in a certain state:" do
     before :each do
-      @sub = Factory.build :submission
+      @sub = Submission.create :title => "Cheese",
+                               :body => "Whiz",
+                               :author => Factory.create(:person)
     end
 
     it "has a #draft? method" do

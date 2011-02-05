@@ -65,8 +65,12 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def update
-    params[:submission][:author] = Person.find_or_create(params[:submission][:author])
-    params[:submission][:state]  = params[:commit] == "Submit!" ? :submitted : :draft
+    if !!params[:submission][:author]
+      params[:submission][:author] = Person.find_or_create(params[:submission][:author])
+    end
+    if request.referer == new_submission_url or request.referer == edit_submission_url(resource)
+      params[:submission][:state] = :submitted if params[:commit] == "Submit!"
+    end
     @submission = Submission.find(params[:id])
 
     update! { person_url resource.author(true) }
