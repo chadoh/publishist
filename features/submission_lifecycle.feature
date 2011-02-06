@@ -41,3 +41,9 @@ Feature: A poet's work goes from draft to published/rejected
     When I schedule "Los Colores" for a meeting a week from now
     And I am on my profile page
     Then I should see "Queued"
+    And I should see "Edit"
+    And I should see "Scheduled to be reviewed in"
+
+    Given the "Los Colores" meeting is two hours away
+    When I am on my profile page
+    Then I should not see "Edit"

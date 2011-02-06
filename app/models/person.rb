@@ -123,14 +123,13 @@ class Person < ActiveRecord::Base
     "#{full_name}, #{email}"
   end
 
-  def method_missing method, *args
-    if %w{drafts submitted queued reviewed scored published rejected}.include? method.to_s
-      return Submission.find_all_by_author_id_and_state(
-        id, Submission.state(method.to_s.singularize.to_sym),
+  [:drafts, :submitted, :queued, :reviewed, :scored, :published, :rejected].each do |state|
+    define_method "#{state}" do
+      Submission.find_all_by_author_id_and_state(
+        id, Submission.state(state.to_s.singularize.to_sym),
         :order => "created_at DESC"
       )
     end
-    super method, *args
   end
 
   class << self

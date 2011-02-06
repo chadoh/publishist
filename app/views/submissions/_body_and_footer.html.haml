@@ -6,7 +6,10 @@
 %footer.submission-details
   - if @show_score
     = render :partial => 'scores/form', :locals => { :score => Score.with(@attendee, packlet) }
-  - show_author = show_author.nil? ? true : show_author
+  - if submission.queued? and !current_page?(submissions_url) and !current_page?(:controller => 'meetings', :action => 'show')
+    %span.scheduled-for
+      Scheduled to be reviewed
+      =link_to "in #{distance_of_time_in_words(Time.now, submission.meetings.first.datetime)}", meeting_path(submission.meetings.first)
   - if (@show_author.nil? or @show_author) and (the_editor? or current_person.email == submission.email)
     %p.author
       - if the_editor?

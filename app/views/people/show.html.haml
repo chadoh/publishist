@@ -20,3 +20,11 @@
     %ul.submissions
       - for submission in @submitted
         = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
+
+- if @queued.present?
+  %section#queued
+    %header
+      %h3{ :title => "An editor has scheduled these to be reviewed at an upcoming meeting" } Queued
+    %ul.submissions
+      - for submission in @queued
+        = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }

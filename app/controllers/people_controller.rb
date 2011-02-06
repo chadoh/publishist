@@ -13,6 +13,7 @@ class PeopleController < InheritedResources::Base
     if person_signed_in? && (current_person.the_editor? || current_person == @person)
       @drafts    = @person.drafts if current_person == @person
       @submitted = @person.submitted
+      @queued    = @person.queued
     end
   end
 

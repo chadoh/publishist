@@ -50,19 +50,10 @@ class Submission < ActiveRecord::Base
     update_attribute :state, moved_to_state
   end
 
-  def draft?
-    state == :draft
-  end
-
-  def submitted?
-    state == :submitted
-  end
-
-  def method_missing method, *args, &block
-    if %w{draft? submitted? queued? reviewed? scored? published? rejected?}.include? method.to_s
-      return state.to_s == method.to_s.chop
+  [:draft, :submitted, :queued, :reviewed, :scored, :published, :rejected].each do |state|
+    define_method "#{state}?" do
+      self.state == state
     end
-    super method, *args
   end
 
 protected

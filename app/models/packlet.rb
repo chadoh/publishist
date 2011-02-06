@@ -11,6 +11,15 @@ class Packlet < ActiveRecord::Base
 
   validate :review_a_submission_only_once_per_meeting
 
+  def create *args
+    if self.meeting.datetime > Time.now
+      self.submission.has_been :queued
+    else
+      self.submission.has_been :reviewed
+    end
+    super *args
+  end
+
   def review_a_submission_only_once_per_meeting
     packlets = Packlet.all
     for packlet in packlets
