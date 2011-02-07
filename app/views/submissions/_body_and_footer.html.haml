@@ -7,9 +7,16 @@
   - if @show_score
     = render :partial => 'scores/form', :locals => { :score => Score.with(@attendee, packlet) }
   - if submission.queued? and !current_page?(submissions_url) and !current_page?(:controller => 'meetings', :action => 'show')
-    %span.scheduled-for
+    %span.queued
       Scheduled to be reviewed
       =link_to "in #{distance_of_time_in_words(Time.now, submission.meetings.first.datetime)}", meeting_path(submission.meetings.first)
+  - if submission.reviewed? and !current_page?(submissions_url) and !current_page?(:controller => 'meetings', :action => 'show')
+    %span.reviewed
+      Reviewed
+      - if (time = submission.meetings.first.datetime) > Time.now
+        =link_to "in #{distance_of_time_in_words(Time.now, time)}", meeting_path(submission.meetings.first)
+      - else
+        =link_to "#{distance_of_time_in_words(Time.now, time)} ago", meeting_path(submission.meetings.first)
   - if (@show_author.nil? or @show_author) and (the_editor? or current_person.email == submission.email)
     %p.author
       - if the_editor?
@@ -18,7 +25,7 @@
         = link_to_unless_current submission.author, person_path(submission.author_id)
       - else
         = submission.author
-  - if the_editor? or submission.author(true) == current_person
+  - if the_editor? or (submission.author(true) == current_person and [:draft, :submitted, :queued].include? submission.state)
     %ul.actions
       %li= link_to "Edit", edit_submission_url(submission)
       - if submission.draft?

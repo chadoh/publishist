@@ -18,7 +18,27 @@ Given /^I have submitted a poem called "([^"]*)"$/ do |title|
                            :state => :submitted
 end
 
-When /^I schedule "([^"]*)" for a meeting a week from now$/ do |title|
+When /^"([^"]*)" is scheduled for a meeting a week from now$/ do |title|
   meeting = Factory.create :meeting
   meeting.submissions << Submission.find_by_title(title)
+end
+
+Given /^the "([^"]*)" meeting is two hours away$/ do |submission_title|
+  submission = Submission.find_by_title(submission_title)
+  meeting = submission.packlets.first.meeting
+  meeting.update_attribute(
+    :datetime, 2.hours.from_now
+  )
+end
+
+Then /^(?:|I )should see "([^"]*)" (\d+)(?:x|X| times?)?$/ do |phrase, count|
+  (page.find("body").text.split(phrase).length - 1).should == count.to_i
+end
+
+Given /^I have gone to the meeting and scored "([^"]*)"$/ do |title|
+  submission = Submission.find_by_title title
+  meeting = Factory.create :meeting
+  meeting.submissions << submission
+  meeting.people << @user
+  submission.packlets.first.scores.create :amount => 6, :attendee => meeting.attendees.first
 end

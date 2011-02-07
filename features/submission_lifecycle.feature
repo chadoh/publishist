@@ -34,16 +34,25 @@ Feature: A poet's work goes from draft to published/rejected
     And I press "Submit"
     Then I should see "Submitted"
 
-  @wip
-  @editor
-  Scenario: I schedule a submission that I wrote
+  @webmember
+  Scenario: A poem I write is scheduled for a meeting
     Given I have submitted a poem called "Los Colores"
-    When I schedule "Los Colores" for a meeting a week from now
-    And I am on my profile page
+    And "Los Colores" is scheduled for a meeting a week from now
+    When I am on my profile page
     Then I should see "Queued"
-    And I should see "Edit"
+    And I should see "Edit" under "Los Colores"
     And I should see "Scheduled to be reviewed in"
 
     Given the "Los Colores" meeting is two hours away
     When I am on my profile page
-    Then I should not see "Edit"
+    Then I should not see "Edit" under "Los Colores"
+    And I should see "Reviewed" 2 times
+
+  @wip
+  @webmember
+  Scenario: A poem I write has been scored
+    Given I have submitted a poem called "Melki's a deck"
+    And I have gone to the meeting and scored "Melki's a deck"
+    When I am on my profile page
+    Then I should see "Scored"
+    And I should see "Average Score" under "Melki's a deck"

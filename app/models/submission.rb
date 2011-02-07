@@ -8,6 +8,8 @@ class Submission < ActiveRecord::Base
   validate :author_email_exists_if_user_not_signed_in
   validate :if_associated_to_Person_dont_allow_name_or_email_also
 
+  after_find :reviewed_if_meeting_has_occurred
+
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
 
   validates_attachment_content_type :photo, 
@@ -84,4 +86,13 @@ protected
       errors.add(:author_name, "... Now, it's confusing to have both this and to add a full-fledged, account-holding individual. To avoid confusion, please only fill in one.")
     end
   end
+
+  def reviewed_if_meeting_has_occurred
+    if queued?
+      if meetings.select {|m| m.datetime < Time.now + 3.hours }.present?
+        update_attribute :state, Submission.state(:reviewed)
+      end
+    end
+  end
+
 end

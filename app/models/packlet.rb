@@ -11,14 +11,7 @@ class Packlet < ActiveRecord::Base
 
   validate :review_a_submission_only_once_per_meeting
 
-  def create *args
-    if self.meeting.datetime > Time.now
-      self.submission.has_been :queued
-    else
-      self.submission.has_been :reviewed
-    end
-    super *args
-  end
+  before_create :submission_reviewed_or_queued
 
   def review_a_submission_only_once_per_meeting
     packlets = Packlet.all
@@ -31,5 +24,14 @@ class Packlet < ActiveRecord::Base
 
   def scores_not_entered_by_coeditor
     scores.select{ |s| s.entered_by_coeditor == false }.flatten
+  end
+protected
+
+  def submission_reviewed_or_queued
+    if self.meeting.datetime < Time.now + 3.hours
+      self.submission.has_been :reviewed
+    else
+      self.submission.has_been :queued
+    end
   end
 end

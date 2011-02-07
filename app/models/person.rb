@@ -123,15 +123,6 @@ class Person < ActiveRecord::Base
     "#{full_name}, #{email}"
   end
 
-  [:drafts, :submitted, :queued, :reviewed, :scored, :published, :rejected].each do |state|
-    define_method "#{state}" do
-      Submission.find_all_by_author_id_and_state(
-        id, Submission.state(state.to_s.singularize.to_sym),
-        :order => "created_at DESC"
-      )
-    end
-  end
-
   class << self
     def editors
       ranks = Rank.where(:rank_type => 2..3, :rank_end => nil)

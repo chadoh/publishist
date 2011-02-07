@@ -75,10 +75,11 @@ describe Packlet do
     end
 
     it "sets the packlet's submission to :reviewed if the meeting is in the past" do
-      meeting = Meeting.create :datetime => 1.week.ago,
+      meeting = Meeting.create :datetime => 2.hours.from_now,
                                :question => "Jim?"
       packlet = meeting.packlets.create :submission => @submission
-      @packlet.submission.should be_reviewed
+      puts "state = #{packlet.submission.state}", "packlet.submission.reviewed? == #{packlet.submission.reviewed?}"
+      packlet.submission.should be_reviewed
     end
   end
 end

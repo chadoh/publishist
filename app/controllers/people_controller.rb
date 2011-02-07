@@ -11,9 +11,11 @@ class PeopleController < InheritedResources::Base
   def show
     @person = Person.find params[:id]
     if person_signed_in? && (current_person.the_editor? || current_person == @person)
-      @drafts    = @person.drafts if current_person == @person
-      @submitted = @person.submitted
-      @queued    = @person.queued
+      @submissions = @person.submissions
+      @drafts    = @submissions.where(:state => Submission.state(:draft)) if current_person == @person
+      @submitted = @submissions.where :state => Submission.state(:submitted)
+      @queued    = @submissions.where :state => Submission.state(:queued)
+      @reviewed  = @submissions.where :state => Submission.state(:reviewed)
     end
   end
 

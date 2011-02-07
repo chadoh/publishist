@@ -21,29 +21,6 @@ describe Person do
     end
   end
 
-  context "has methods that return submissions in the method-name state:" do
-    before(:each) do
-      @person = Factory.create :person
-      @sub1 = @person.submissions.create(:title => "=", :body => "D")
-      @sub2 = @person.submissions.create(:title => "<", :body => "3")
-      @sub3 = @person.submissions.create(:title => ":", :body => "]")
-      @sub2.has_been :submitted
-      @sub3.has_been :queued
-    end
-
-    it "has a #drafts method" do
-      @person.drafts.first.should    == @sub1
-    end
-
-    it "has a #submitted method" do
-      @person.submitted.first.should == @sub2
-    end
-
-    it "has a #queued method" do
-      @person.queued.first.should    == @sub3
-    end
-  end
-
   describe "#can_enter_scores_for?(meeting)" do
     let(:person)  { Factory.create :person }
     let(:meeting) { Factory.create :meeting }

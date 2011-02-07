@@ -11,6 +11,17 @@ describe Submission do
     should belong_to(:author)
   }
 
+  it "sets queued submissions to reviewed if their meeting is less than three hours in the future" do
+    meeting = Factory.create :meeting
+    submission = Factory.create :submission
+    meeting.submissions << submission
+    meeting.update_attribute :datetime, 2.hours.from_now
+    submission.reload.should be_reviewed
+    submission.update_attribute :state, Submission.state(:queued)
+    submission.should be_queued
+    submission.reload.should be_reviewed
+  end
+
   describe "#has_been" do
     it "moves the sumbission into the specified state" do
       sub = Factory.build :submission
