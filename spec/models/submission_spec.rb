@@ -8,6 +8,7 @@ describe Submission do
   it {
     should have_many(:packlets).dependent(:destroy)
     should have_many(:meetings).through(:packlets)
+    should have_many(:scores).through(:packlets)
     should belong_to(:author)
   }
 
@@ -80,5 +81,22 @@ describe Submission do
         @sub.author(true).should == nil
       end
     end
+  end
+
+  describe "#average_score(magazine = 'next')" do
+    before do
+      @submission = Factory.create :submission
+      @meeting = Factory.create :meeting
+      2.times { @meeting.people << Factory.create(:person) }
+      @packlet = @meeting.packlets.create :submission => @submission
+      @packlet.scores.create :attendee => @meeting.attendees.first, :amount => 4
+      @packlet.scores.create :attendee => @meeting.attendees.last , :amount => 6
+    end
+
+    it "returns the average score for the submission" do
+      @submission.average_score.should == 5
+    end
+
+    it "returns the average score for the submission for a given magazine"
   end
 end

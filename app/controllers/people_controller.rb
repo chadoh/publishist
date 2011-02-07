@@ -16,6 +16,7 @@ class PeopleController < InheritedResources::Base
       @submitted = @submissions.where :state => Submission.state(:submitted)
       @queued    = @submissions.where :state => Submission.state(:queued)
       @reviewed  = @submissions.where :state => Submission.state(:reviewed)
+      @scored    = @submissions.where :state => Submission.state(:scored)
     end
   end
 

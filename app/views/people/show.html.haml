@@ -36,3 +36,11 @@
     %ul.submissions
       - for submission in @reviewed
         = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
+
+- if @scored.present?
+  %section#scored
+    %header
+      %h3{ :title => "These have been scored. You'll get an email when any are published or rejected." } Scored
+    %ul.submissions
+      - for submission in @scored
+        = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }

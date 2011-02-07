@@ -2,6 +2,7 @@ class Submission < ActiveRecord::Base
   belongs_to :author, :class_name => "Person"
   has_many :packlets, :dependent => :destroy
   has_many :meetings, :through => :packlets
+  has_many :scores, :through => :packlets
 
   before_validation :remove_ms_word_kruft
 
@@ -56,6 +57,11 @@ class Submission < ActiveRecord::Base
     define_method "#{state}?" do
       self.state == state
     end
+  end
+
+  def average_score
+    packlet_ids = self.packlets.collect &:id
+    Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
   end
 
 protected

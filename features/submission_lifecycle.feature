@@ -55,4 +55,4 @@ Feature: A poet's work goes from draft to published/rejected
     And I have gone to the meeting and scored "Melki's a deck"
     When I am on my profile page
     Then I should see "Scored"
-    And I should see "Average Score" under "Melki's a deck"
+    And I should see "Score:" under "Melki's a deck"

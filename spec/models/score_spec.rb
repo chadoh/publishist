@@ -62,4 +62,9 @@ describe Score do
     end
   end
 
+  it "should set its submission to scored" do
+    @s = @packlet.scores.create :amount => 6, :attendee => @attendee
+    @submission.reload.should be_scored
+  end
+
 end
