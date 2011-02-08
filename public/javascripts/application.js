@@ -26,6 +26,9 @@ $(function(){
     $(this).find('span.arrow').toggleClass("rotated");
     $(this).next().slideToggle();
   });
+  setTimeout(function(){
+    $('dt').first().click()
+  }, 1000)
 
   $("li.attendee form[data-remote]").live("ajax:success", function(){
     $(this).closest('li').fadeOut();
