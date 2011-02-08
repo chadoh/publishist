@@ -78,7 +78,6 @@ describe Packlet do
       meeting = Meeting.create :datetime => 2.hours.from_now,
                                :question => "Jim?"
       packlet = meeting.packlets.create :submission => @submission
-      puts "state = #{packlet.submission.state}", "packlet.submission.reviewed? == #{packlet.submission.reviewed?}"
       packlet.submission.should be_reviewed
     end
   end

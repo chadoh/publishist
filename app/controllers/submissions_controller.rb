@@ -6,7 +6,7 @@ class SubmissionsController < InheritedResources::Base
     @meetings = Meeting.all.sort_by(&:datetime).reverse
     @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
-    @submissions = Submission.order("created_at DESC") - Packlet.all.collect(&:submission)
+    @submissions = Submission.where :state => Submission.state(:submitted)
     index!
   end
 

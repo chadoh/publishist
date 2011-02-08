@@ -331,21 +331,32 @@ dt {
 }
 /* line 205, ../../../app/stylesheets/_defaults.sass */
 dt p {
-  display: inline;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  max-width: 80%;
+  margin-bottom: 0em;
 }
-/* line 207, ../../../app/stylesheets/_defaults.sass */
+/* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/bundler/gems/compass-b36952cf30a9/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+dt p {
+  *display: inline;
+}
+/* line 209, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  vertical-align: top;
 }
 /* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/bundler/gems/compass-b36952cf30a9/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
 dt span.arrow {
   *display: inline;
 }
-/* line 209, ../../../app/stylesheets/_defaults.sass */
+/* line 211, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow.rotated {
   -moz-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -353,14 +364,14 @@ dt span.arrow.rotated {
   transform: rotate(90deg);
 }
 
-/* line 212, ../../../app/stylesheets/_defaults.sass */
+/* line 215, ../../../app/stylesheets/_defaults.sass */
 dd {
   padding-left: 1.5em;
 }
 
 /* Tables -------------------------------------------------------------- */
 /* tables still need 'cellspacing="0"' in the markup */
-/* line 218, ../../../app/stylesheets/_defaults.sass */
+/* line 221, ../../../app/stylesheets/_defaults.sass */
 table {
   margin-bottom: 1.5em;
   width: 100%;
@@ -368,38 +379,38 @@ table {
   border-spacing: 0;
 }
 
-/* line 224, ../../../app/stylesheets/_defaults.sass */
+/* line 227, ../../../app/stylesheets/_defaults.sass */
 table, td, th {
   vertical-align: top;
 }
 
-/* line 227, ../../../app/stylesheets/_defaults.sass */
+/* line 230, ../../../app/stylesheets/_defaults.sass */
 th, thead th {
   font-weight: bold;
 }
 
-/* line 230, ../../../app/stylesheets/_defaults.sass */
+/* line 233, ../../../app/stylesheets/_defaults.sass */
 th, td, caption {
   padding: 0.75em;
   text-align: left;
   font-weight: normal;
 }
 
-/* line 235, ../../../app/stylesheets/_defaults.sass */
+/* line 238, ../../../app/stylesheets/_defaults.sass */
 table, th {
   border-bottom-style: solid;
   border-bottom-width: 0.063em;
   padding-bottom: 0.688em;
 }
 
-/* line 238, ../../../app/stylesheets/_defaults.sass */
+/* line 241, ../../../app/stylesheets/_defaults.sass */
 tfoot {
   font-size: 0.875em;
   line-height: 1.714em;
 }
 
 /* Forms -------------------------------------------------------------- */
-/* line 246, ../../../app/stylesheets/_defaults.sass */
+/* line 249, ../../../app/stylesheets/_defaults.sass */
 fieldset {
   margin-bottom: 1.5em;
   border-style: solid;
@@ -407,37 +418,37 @@ fieldset {
   padding: 1.438em;
 }
 
-/* line 250, ../../../app/stylesheets/_defaults.sass */
+/* line 253, ../../../app/stylesheets/_defaults.sass */
 legend {
   font-size: 1.125em;
   line-height: 1.333em;
   font-weight: bold;
 }
 
-/* line 254, ../../../app/stylesheets/_defaults.sass */
+/* line 257, ../../../app/stylesheets/_defaults.sass */
 input[type="radio"], input[type="checkbox"] {
   vertical-align: baseline;
 }
 
-/* line 257, ../../../app/stylesheets/_defaults.sass */
+/* line 260, ../../../app/stylesheets/_defaults.sass */
 label.boolean {
   display: inline-block;
   width: 80%;
 }
 
-/* line 261, ../../../app/stylesheets/_defaults.sass */
+/* line 264, ../../../app/stylesheets/_defaults.sass */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 264, ../../../app/stylesheets/_defaults.sass */
+/* line 267, ../../../app/stylesheets/_defaults.sass */
 label {
   margin-top: 1.5em;
   display: block;
   font-weight: bold;
 }
 
-/* line 271, ../../../app/stylesheets/_defaults.sass */
+/* line 274, ../../../app/stylesheets/_defaults.sass */
 .textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
   font-family: Cambria, Georgia, serif;
   font-size: 1em;
@@ -461,28 +472,28 @@ label {
   height: 2.571em;
 }
 
-/* line 284, ../../../app/stylesheets/_defaults.sass */
+/* line 287, ../../../app/stylesheets/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 295, ../../../app/stylesheets/_defaults.sass */
+/* line 298, ../../../app/stylesheets/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 297, ../../../app/stylesheets/_defaults.sass */
+/* line 300, ../../../app/stylesheets/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 300, ../../../app/stylesheets/_defaults.sass */
+/* line 303, ../../../app/stylesheets/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 304, ../../../app/stylesheets/_defaults.sass */
+/* line 307, ../../../app/stylesheets/_defaults.sass */
 input[type=submit], button {
   font-size: 1em;
   line-height: 1.5em;
@@ -501,21 +512,21 @@ input[type=submit], button {
   -o-box-shadow: #4a4a4a 1px 1px 2px false;
   box-shadow: #4a4a4a 1px 1px 2px false;
 }
-/* line 315, ../../../app/stylesheets/_defaults.sass */
+/* line 318, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
   -moz-box-shadow: #4a4a4a 0 0 2px false;
   -webkit-box-shadow: #4a4a4a 0 0 2px false;
   -o-box-shadow: #4a4a4a 0 0 2px false;
   box-shadow: #4a4a4a 0 0 2px false;
 }
-/* line 317, ../../../app/stylesheets/_defaults.sass */
+/* line 320, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -o-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
 }
-/* line 319, ../../../app/stylesheets/_defaults.sass */
+/* line 322, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: black 0 0 0 false;
@@ -554,16 +565,16 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 328, ../../../app/stylesheets/_defaults.sass */
+/* line 331, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 330, ../../../app/stylesheets/_defaults.sass */
+/* line 333, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
 
-/* line 334, ../../../app/stylesheets/_defaults.sass */
+/* line 337, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:hover {
   background-color: #e0ca44;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e7d770), color-stop(100%, #e0ca44));
@@ -571,7 +582,7 @@ span[contenteditable]:hover {
   background-image: linear-gradient(top, #e7d770 0%, #e0ca44 100%);
   cursor: pointer;
 }
-/* line 338, ../../../app/stylesheets/_defaults.sass */
+/* line 341, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:focus {
   background-color: #e7a863;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #eec18f), color-stop(100%, #e7a863));
@@ -584,11 +595,11 @@ span[contenteditable]:focus {
   box-shadow: silver 0 0 3px inset;
 }
 
-/* line 350, ../../../app/stylesheets/_defaults.sass */
+/* line 353, ../../../app/stylesheets/_defaults.sass */
 .grayed-out {
   color: silver;
 }
-/* line 347, ../../../app/stylesheets/_defaults.sass */
+/* line 350, ../../../app/stylesheets/_defaults.sass */
 .grayed-out a, .grayed-out input.link, .grayed-out input {
   color: silver;
 }

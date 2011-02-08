@@ -19,13 +19,28 @@
     - else
       = f.input :author_id, :as => :hidden
   = f.button :submit, "Submit!"
-  or
-  = f.button :submit, "Save and Preview", :class => "link"
+  %span#save_for_later
+    - if person_signed_in?
+      or
+      = f.button :submit, "Save and Preview", :class => "link"
+
+- if the_editor?
+  :javascript
+    $(function(){
+      $("#submission_author")
+        .autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}")
+        .blur(function(){
+          var email = $(this).val().split(' ').pop(),
+              span  = $('span#save_for_later');
+          if (email != "#{current_person.email}") {
+            span.hide(); }
+          else {
+            span.show() }
+        });
+    });
 
 :javascript
   $(function(){
-    $("#submission_author").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}");
-
     cloptions = {
       width: '99%',
       height: 500,
@@ -57,7 +72,8 @@
         %dt
           %span.arrow &raquo;
           :markdown
-            You should probably [sign in](#{sign_in_path})! (Or maybe [sign up](#{sign_up_path})?) Why, you ask?
+            You should probably [sign in](#{sign_in_path})!  
+            (Or maybe [sign up](#{sign_up_path})?)
         %dd
           :markdown
             Here's why submitting when signed in is a good idea:

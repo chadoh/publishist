@@ -23,7 +23,7 @@ end
 Then /^I should not see "([^"]*)" under the (.*) meeting$/ do |text, heading|
   section = if heading == "first" then "meeting_#{Meeting.first.id}"
     else "meeting_#{Meeting.last.id}" end
-  find("section##{section}").should_not have_content(text)
+  find("section##{section}").should have_no_content(text)
 end
 
 When /^I drag "([^"]*)" from the (.*) meeting to "([^"]*)"$/ do |submission_name, first_or_second, destination|

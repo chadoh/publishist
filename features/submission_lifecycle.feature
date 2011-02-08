@@ -48,7 +48,6 @@ Feature: A poet's work goes from draft to published/rejected
     Then I should not see "Edit" under "Los Colores"
     And I should see "Reviewed" 2 times
 
-  @wip
   @webmember
   Scenario: A poem I write has been scored
     Given I have submitted a poem called "Melki's a deck"

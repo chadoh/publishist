@@ -203,11 +203,14 @@ dl
 dt
   cursor: pointer
   p
-    display: inline
+    +inline-block
+    max-width: 80%
+    +trailer(0)
   span.arrow
     +inline-block
     &.rotated
       +rotate(90deg)
+    vertical-align: top
 
 dd
   padding-left: $base-rhythm-unit
