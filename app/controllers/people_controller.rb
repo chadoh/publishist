@@ -12,6 +12,7 @@ class PeopleController < InheritedResources::Base
     @person = Person.find params[:id]
     if person_signed_in? && (current_person.the_editor? || current_person == @person)
       @submissions = @person.submissions
+      @submissions.reload # fixes weird queued-to-reviewed bug
       @drafts    = @submissions.where(:state => Submission.state(:draft)) if current_person == @person
       @submitted = @submissions.where :state => Submission.state(:submitted)
       @queued    = @submissions.where :state => Submission.state(:queued)

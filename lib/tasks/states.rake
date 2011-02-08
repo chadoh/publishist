@@ -6,7 +6,7 @@ namespace :db do
       if sub.packlets.empty?
         sub.update_attribute :state, :submitted
       elsif sub.packlets.select {|p| p.scores.empty?}.present?
-        if sub.packlets.select {|p| p.meeting.when < Time.now}.empty?
+        if sub.packlets.select {|p| p.meeting.datetime < Time.now + 3.hours}.empty?
           sub.update_attribute :state, :queued
         else
           sub.update_attribute :state, :reviewed
