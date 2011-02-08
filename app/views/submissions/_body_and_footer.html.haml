@@ -10,23 +10,23 @@
 
   -# TODO: show all meetings that a submission has been scheduled for
   - if submission.queued? and page_appropriate?
-    %span.queued
+    %p.queued
       Scheduled to be reviewed
       =link_to "in #{distance_of_time_in_words(Time.now, submission.meetings.first.datetime)}", meeting_path(submission.meetings.first)
 
   - if submission.reviewed? and page_appropriate?
-    %span.reviewed
+    %p.reviewed
       Reviewed
       - if (time = submission.meetings.first.datetime) > Time.now
         =link_to "in #{distance_of_time_in_words(Time.now, time)}", meeting_path(submission.meetings.first)
       - else
         =link_to "#{distance_of_time_in_words(Time.now, time)} ago", meeting_path(submission.meetings.first)
 
-  - if submission.scored? and coeditor_or_author?(submission) and page_appropriate?
-    %span.scored
+  - if submission.scored? and coeditor_or_author?(submission)
+    %p.scored
       Score:
       %meter{ :min => 0, :max => 10,
-              :value => score = submission.average_score,
+              :value => score = (submission.average_score * 100).round.to_f / 100,
               :title => "#{score} out of 10" }
         = score
 
@@ -40,14 +40,15 @@
         = submission.author
 
   - if the_editor? or (submission.author(true) == current_person and [:draft, :submitted, :queued].include? submission.state)
-    %ul.actions
-      %li= link_to "Edit", edit_submission_url(submission)
+    %nav.actions
+      %ul
+        %li= link_to "Edit", edit_submission_url(submission)
 
-      - if submission.draft?
-        %li
-          = form_for submission, :html => { :class => "button_to" } do |f|
-            = f.hidden_field :state, :value => Submission.state(:submitted)
+        - if submission.draft?
+          %li
+            = form_for submission, :html => { :class => "button_to" } do |f|
+              = f.hidden_field :state, :value => Submission.state(:submitted)
 
-            = f.submit "Submit", :class => "link"
-      - if the_editor?
-        %li= link_to "Delete", submission_url(submission), :method => :delete, :confirm => "Are you sure you want to delete this submission? If you just want to unschedule it, you can do that by dragging it to the \"Unscheduled\" section on the \"Submissions\" page."
+              = f.submit "Submit", :class => "link"
+        - if the_editor?
+          %li= link_to "Delete", submission_url(submission), :method => :delete, :confirm => "Are you sure you want to delete this submission? If you just want to unschedule it, you can do that by dragging it to the \"Unscheduled\" section on the \"Submissions\" page."

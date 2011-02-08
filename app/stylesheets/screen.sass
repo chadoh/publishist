@@ -19,6 +19,9 @@ $use-mozilla-ellipsis-binding: true
 
 +sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'body > footer')
 
+nav.actions > ul
+  +delimited-list(" | ")
+
 #page
   +container
   //+show-grid('grid.png')
@@ -214,7 +217,7 @@ ol.packlets, ul.submissions
           +alpha
           +columns(5)
         & > span.score
-          +columns(9)
+          +columns(5)
           & > form.score
             display: inline
         & > p.submitted
@@ -230,12 +233,6 @@ span.score
       vertical-align: top
   form.score
     display: inline
-    input[type=submit]
-      display: inline
-      +trailer(0)
-      +leader(0)
-      height: $base-line-height / 16px * 0.8em
-      line-height: $base-line-height / 16px * 0.7em
     div
       display: inline
       label
@@ -246,12 +243,10 @@ span.score
       input[type=number]
         +trailer(0)
         text-align: center
-        width: 2.5em
-        display: inline
+        width: 2.7em
         height: $base-line-height / 16px * 1em
-        +adjust-font-size-to(13px)
-        +rhythm-borders(1px, 0.05, 14px)
-        line-height: $base-line-height / 16px * 0.7em
+        font-size: 13px
+        +rhythm-borders(1px, 0.05, 13px)
 
 section#scores
   +full
@@ -336,6 +331,3 @@ ul#people
 
 #your_name_looks_like
   display: none
-
-ul.actions
-  +delimited-list(" | ")

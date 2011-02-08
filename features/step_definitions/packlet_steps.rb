@@ -1,7 +1,9 @@
-Given /^there are several submissions$/ do
-  3.times { Factory.create :submission }
+Given /^there is a submission called "([^"]*)"$/ do |title|
+  Submission.create(
+    :title => title,
+    :body => "Yes, I said it. #{title}.",
+    :author_email => "chad@chadoh.com")
 end
-
 Given /^there are several meetings$/ do
   2.times { Factory.create :meeting }
 end

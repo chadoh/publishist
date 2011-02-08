@@ -529,10 +529,10 @@ input[type=submit]:active, button:active {
 /* line 322, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
-  -moz-box-shadow: black 0 0 0 false;
-  -webkit-box-shadow: black 0 0 0 false;
-  -o-box-shadow: black 0 0 0 false;
-  box-shadow: black 0 0 0 false;
+  -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
+  -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
+  -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
+  box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
   margin-top: 0em;
   padding-top: 0em;
   padding-bottom: 0em;
@@ -541,6 +541,20 @@ input[type=submit].link, button.link {
   padding: 0;
   display: inline;
   color: #db8322;
+}
+/* line 325, ../../../app/stylesheets/_defaults.sass */
+input[type=submit].link:hover, button.link:hover {
+  -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
+  -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
+  -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
+  box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
+}
+/* line 327, ../../../app/stylesheets/_defaults.sass */
+input[type=submit].link:active, button.link:active {
+  -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
+  -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
+  -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
+  box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
 }
 /* line 79, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:link, input[type=submit].link:visited, button.link:link, button.link:visited {
@@ -565,16 +579,16 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 331, ../../../app/stylesheets/_defaults.sass */
+/* line 335, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 333, ../../../app/stylesheets/_defaults.sass */
+/* line 337, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
 
-/* line 337, ../../../app/stylesheets/_defaults.sass */
+/* line 341, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:hover {
   background-color: #e0ca44;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e7d770), color-stop(100%, #e0ca44));
@@ -582,7 +596,7 @@ span[contenteditable]:hover {
   background-image: linear-gradient(top, #e7d770 0%, #e0ca44 100%);
   cursor: pointer;
 }
-/* line 341, ../../../app/stylesheets/_defaults.sass */
+/* line 345, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:focus {
   background-color: #e7a863;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #eec18f), color-stop(100%, #e7a863));
@@ -595,11 +609,11 @@ span[contenteditable]:focus {
   box-shadow: silver 0 0 3px inset;
 }
 
-/* line 353, ../../../app/stylesheets/_defaults.sass */
+/* line 357, ../../../app/stylesheets/_defaults.sass */
 .grayed-out {
   color: silver;
 }
-/* line 350, ../../../app/stylesheets/_defaults.sass */
+/* line 354, ../../../app/stylesheets/_defaults.sass */
 .grayed-out a, .grayed-out input.link, .grayed-out input {
   color: silver;
 }
