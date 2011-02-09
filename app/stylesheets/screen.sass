@@ -7,15 +7,8 @@
 @import compass/layout/sticky-footer
 @import compass/utilities/lists/inline-list
 @import compass/utilities/text/ellipses
-$use-mozilla-ellipsis-binding: true
-
-/* Layout --------------------------------------------------------------
 
 +susy
-
-/* Styles --------------------------------------------------------------
-
-/* Layout -----------------------------------------
 
 +sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'body > footer')
 
@@ -164,9 +157,6 @@ footer.submission-details
     a:first-child
       display: inline
 
-span.drag-handle-wrap
-  display: none
-
 article#submissions, article.meetings
   section
     & > header > h2
@@ -196,10 +186,9 @@ ol.packlets, ul.submissions
       & > div.body
         display: none
       & > span.drag-handle-wrap
-        width: 3em
+        width: 1em
         display: inline-block
-        float: left
-        margin:
+        //margin:
           top: -1px
           left: -1.5em
         cursor: move
@@ -247,6 +236,9 @@ span.score
         height: $base-line-height / 16px * 1em
         font-size: 13px
         +rhythm-borders(1px, 0.05, 13px)
+
+html.no-number-input span.score form.score input[type=number]
+  width: 1.7em
 
 section#scores
   +full

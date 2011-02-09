@@ -49,4 +49,6 @@ $(function(){
     });
   });
 
+  if(!Modernizr.inputtypes.number){ $('html').addClass('no-number-input'); }
+
 });

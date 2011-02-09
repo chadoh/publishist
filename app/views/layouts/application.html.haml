@@ -10,7 +10,7 @@
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
     - jquery    = ENV['JQUERY']    || 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'
     - jquery_ui = ENV['JQUERY_UI'] || 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js'
-    = javascript_include_tag jquery, jquery_ui, 'jquery.autocomplete', 'rails', 'application'
+    = javascript_include_tag jquery, jquery_ui, 'jquery.autocomplete', 'rails', 'application', 'modernizr-1.6.min'
     = csrf_meta_tag
     = yield :head
   %body
