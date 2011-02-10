@@ -1,8 +1,10 @@
 Given /^there is a submission called "([^"]*)"$/ do |title|
-  Submission.create(
+  sub = Submission.create(
     :title => title,
     :body => "Yes, I said it. #{title}.",
-    :author_email => "chad@chadoh.com")
+    :author_email => "chad@chadoh.com",
+    :state => Submission.state(:submitted))
+  puts sub
 end
 Given /^there are several meetings$/ do
   2.times { Factory.create :meeting }
