@@ -1,3 +1,3 @@
 Given /^there is a meeting scheduled$/ do
-  Meeting.create :when => 7.days.from_now, :question => "orly?"
+  Meeting.create :datetime => 7.days.from_now, :question => "orly?"
 end

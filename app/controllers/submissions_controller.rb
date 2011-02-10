@@ -1,12 +1,12 @@
 class SubmissionsController < InheritedResources::Base
   before_filter :editors_only, :only => [:index]
-  before_filter :editor_only, :only => [:edit, :destroy]
+  before_filter :editor_only, :only => [:destroy]
 
   def index
-    @meetings = Meeting.all.sort_by(&:when).reverse
-    @meetings_to_come = @meetings.select {|m| Time.now - m.when < 0}
+    @meetings = Meeting.all.sort_by(&:datetime).reverse
+    @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
-    @submissions = Submission.order("created_at DESC") - Packlet.all.collect(&:submission)
+    @submissions = Submission.where :state => Submission.state(:submitted)
     index!
   end
 
@@ -21,9 +21,9 @@ class SubmissionsController < InheritedResources::Base
 
   def new
     if person_signed_in?
-      @submission = Submission.new(:author_id => current_person.id)
+      @submission = Submission.new :author_id => current_person.id, :state => :draft
     else
-      @submission = Submission.new
+      @submission = Submission.new :state => :submitted
     end
 
     respond_to do |format|
@@ -34,23 +34,26 @@ class SubmissionsController < InheritedResources::Base
 
   def edit
     @submission = Submission.find(params[:id])
+    unless person_signed_in? and (current_person.the_editor? or @submission.author(true) == current_person)
+      flash[:notice] = "You're not allowed to edit that."
+      redirect_to request.referer
+    end
   end
 
   def create
     params[:submission][:author] = Person.find_or_create(params[:submission][:author])
+    params[:submission][:state]  = params[:commit] == "Submit!" ? :submitted : :draft
     @submission = Submission.new(params[:submission])
 
     respond_to do |format|
       if @submission.save
         Notifications.new_submission(@submission).deliver
         format.html {
-          flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-          if person_signed_in? and current_person.the_editor?
-            redirect_to submissions_url
-          elsif person_signed_in?
+          if person_signed_in?
             redirect_to person_url(current_person)
           else
-            redirect_to(root_url)
+            flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
+            redirect_to root_url
           end
         }
         format.xml  { render :xml => @submission, :status => :created, :location => @submission }
@@ -62,18 +65,15 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def update
-    params[:submission][:author] = Person.find_or_create(params[:submission][:author])
+    if !!params[:submission][:author]
+      params[:submission][:author] = Person.find_or_create(params[:submission][:author])
+    end
+    if request.referer == new_submission_url or request.referer == edit_submission_url(resource)
+      params[:submission][:state] = :submitted if params[:commit] == "Submit!"
+    end
     @submission = Submission.find(params[:id])
 
-    respond_to do |format|
-      if @submission.update_attributes(params[:submission])
-        format.html { redirect_to(@submission, :notice => 'Success!') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @submission.errors, :status => :unprocessable_entity }
-      end
-    end
+    update! { person_url resource.author(true) }
   end
 
   def destroy

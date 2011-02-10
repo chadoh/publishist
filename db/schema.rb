@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110116143419) do
+ActiveRecord::Schema.define(:version => 20110205225346) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20110116143419) do
   end
 
   create_table "meetings", :force => true do |t|
-    t.datetime "when"
+    t.datetime "datetime"
     t.string   "question"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20110116143419) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "state",              :limit => 8, :default => 0
   end
 
 end

@@ -7,17 +7,13 @@
 @import compass/layout/sticky-footer
 @import compass/utilities/lists/inline-list
 @import compass/utilities/text/ellipses
-$use-mozilla-ellipsis-binding: true
-
-/* Layout --------------------------------------------------------------
 
 +susy
 
-/* Styles --------------------------------------------------------------
-
-/* Layout -----------------------------------------
-
 +sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'body > footer')
+
+nav.actions > ul
+  +delimited-list(" | ")
 
 #page
   +container
@@ -36,6 +32,7 @@ $use-mozilla-ellipsis-binding: true
       width: 100%
       & > li
         +inline-block-list-item
+        display: block
         +adjust-font-size-to(20px, 2)
         +box-flex(1)
         text-align: center
@@ -160,9 +157,6 @@ footer.submission-details
     a:first-child
       display: inline
 
-span.drag-handle-wrap
-  display: none
-
 article#submissions, article.meetings
   section
     & > header > h2
@@ -192,10 +186,9 @@ ol.packlets, ul.submissions
       & > div.body
         display: none
       & > span.drag-handle-wrap
-        width: 3em
+        width: 1em
         display: inline-block
-        float: left
-        margin:
+        //margin:
           top: -1px
           left: -1.5em
         cursor: move
@@ -213,7 +206,7 @@ ol.packlets, ul.submissions
           +alpha
           +columns(5)
         & > span.score
-          +columns(9)
+          +columns(5)
           & > form.score
             display: inline
         & > p.submitted
@@ -229,12 +222,6 @@ span.score
       vertical-align: top
   form.score
     display: inline
-    input[type=submit]
-      display: inline
-      +trailer(0)
-      +leader(0)
-      height: $base-line-height / 16px * 0.8em
-      line-height: $base-line-height / 16px * 0.7em
     div
       display: inline
       label
@@ -245,12 +232,13 @@ span.score
       input[type=number]
         +trailer(0)
         text-align: center
-        width: 2.5em
-        display: inline
+        width: 2.7em
         height: $base-line-height / 16px * 1em
-        +adjust-font-size-to(13px)
-        +rhythm-borders(1px, 0.05, 14px)
-        line-height: $base-line-height / 16px * 0.7em
+        font-size: 13px
+        +rhythm-borders(1px, 0.05, 13px)
+
+html.no-number-input span.score form.score input[type=number]
+  width: 1.7em
 
 section#scores
   +full
@@ -301,7 +289,7 @@ ul.meetings
   li.meeting
     +full
     +clearfix
-    span.when
+    span.datetime
       +columns(floor($total-cols * (1/5)))
       +alpha
     span.question
@@ -329,6 +317,9 @@ ul#people
       +columns(2.5)
       +omega
 
+/*
+ *   Odds & Ends
+ ********************************/
+
 #your_name_looks_like
   display: none
-

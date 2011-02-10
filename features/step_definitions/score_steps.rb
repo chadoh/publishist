@@ -18,6 +18,14 @@ Given /^I and (\d) more people attend the first meeting$/ do |number|
   end
 end
 
+Given /^scores have been entered for a meeting$/ do
+  meeting = Factory.create :meeting
+  submiss = Factory.create :submission
+  packlet = meeting.packlets.create :submission => submiss
+  attende = meeting.attendees.create :person => @user
+  packlet.scores.create :amount => 6, :attendee => attende
+end
+
 Given /^there is a submission called "([^"]*)" scheduled for the first meeting$/ do |title|
   submission = Submission.create(
     :title => title,
@@ -31,12 +39,12 @@ end
 
 When /^I score "([^"]*)"$/ do |title|
   fill_in "score_amount", :with => 6
-  click_button "Save"
+  click_button "+"
 end
 
 Then /^I should be able to score "([^"]*)"$/ do |title|
   fill_in "score_amount", :with => 6
-  click_button "Save"
+  click_button "+"
 end
 
 Then /^I should not be able to score "([^"]*)"$/ do |title|

@@ -1,6 +1,6 @@
 %li[meeting]
   %a{ :href => meeting_url(meeting), :title => 'view meeting' }
-    %span.when= pretty_date meeting.when
+    %span.datetime= pretty_date meeting.datetime
     %span.question= meeting.question
   - if editor?
     %span.actions

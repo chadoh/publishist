@@ -1,20 +1,46 @@
 - title @person.full_name
-- if @person == current_person || the_editor?
+- unless @person == current_person || the_editor?
+  = render :partial => 'about', :locals => { :person => @person }
+- else
   - content_for :sidebar do
     = render :partial => 'about', :locals => { :person => @person }
-  - if @person == current_person
-    %p
-      What you've submitted:
-      - if @submissions.empty?
-        nothing, yet.
-        = link_to "Get to it!", new_submission_path
-  - else
-    %p
-      What #{@person.first_name} has submitted:
-      - if @submissions.empty?
-        nothing yet.
-  %ul.submissions
-    - @submissions.each do |submission|
-      = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
-- else
-  = render :partial => 'about', :locals => { :person => @person }
+
+- if @drafts.present?
+  %section#drafts
+    %header
+      %h3{ :title => "These need some final touches before submission" } Drafts
+    %ul.submissions
+      - for draft in @drafts
+        = render :partial => 'submissions/show', :locals => { :submission => draft, :collapsed => false }
+
+- if @submitted.present?
+  %section#submitted
+    %header
+      %h3{ :title => "These have been submitted but not yet scheduled for a meeting" } Submitted
+    %ul.submissions
+      - for submission in @submitted
+        = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
+
+- if @queued.present?
+  %section#queued
+    %header
+      %h3{ :title => "An editor has scheduled these to be reviewed at an upcoming meeting" } Queued
+    %ul.submissions
+      - for submission in @queued
+        = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
+
+- if @reviewed.present?
+  %section#reviewed
+    %header
+      %h3{ :title => "These have been reviewed at a meeting but no one has scored them yet" } Reviewed
+    %ul.submissions
+      - for submission in @reviewed
+        = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
+
+- if @scored.present?
+  %section#scored
+    %header
+      %h3{ :title => "These have been scored. You'll get an email when any are published or rejected." } Scored
+    %ul.submissions
+      - for submission in @scored
+        = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }

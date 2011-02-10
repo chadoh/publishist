@@ -10,6 +10,7 @@
   = f.input :title, :label => 'Title'
   = f.input :body, :label => "Body", :required => false
   = f.input :photo, :label => "Or, submit an image:"
+  = f.input :state, :as => :hidden
   - if person_signed_in?
     - if the_editor?
       = f.input :author, :as => :string, :label => "Author (you can submit for anyone with an account here)", :input_html => { :value => "#{resource.author(true).name_and_email if @submission.author(true)}" }
@@ -17,12 +18,29 @@
       = f.input :author_email, :input_html => { :value => "" }, :label => "...and their email address here"
     - else
       = f.input :author_id, :as => :hidden
-  = f.button :submit
+  = f.button :submit, "Submit!"
+  %span#save_for_later
+    - if person_signed_in?
+      or
+      = f.button :submit, "Save and Preview", :class => "link"
+
+- if the_editor?
+  :javascript
+    $(function(){
+      $("#submission_author")
+        .autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}")
+        .blur(function(){
+          var email = $(this).val().split(' ').pop(),
+              span  = $('span#save_for_later');
+          if (email != "#{current_person.email}") {
+            span.hide(); }
+          else {
+            span.show() }
+        });
+    });
 
 :javascript
   $(function(){
-    $("#submission_author").autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}");
-
     cloptions = {
       width: '99%',
       height: 500,
@@ -44,3 +62,73 @@
     $("#submission_title").cleditor(cloptions);
 
   });
+
+- content_for :sidebar do
+  %section#tips
+    %header
+      %h2 Tips
+    %dl
+      - unless person_signed_in?
+        %dt
+          %span.arrow &raquo;
+          :markdown
+            You should probably [sign in](#{sign_in_path})!  
+            (Or maybe [sign up](#{sign_up_path})?)
+        %dd
+          :markdown
+            Here's why submitting when signed in is a good idea:
+
+            * You can keep something in draft for a while, if you're not quite ready to submit it
+            * You get to see how your submissions are scored
+            * You'll have a profile page, where you can see everything you've submitted and where other people can see everything you've had published
+            
+            And trust us, there are other great reasons we can't think of right now.
+
+            Please consider!
+      %dt
+        %span.arrow &raquo;
+        :markdown
+          Use the *Paste as Text* option in the toolbar when pasting from Word
+      %dd
+        :markdown
+          Your submission will be badly mangled if you don't. It won't look like it now, but just you wait until it's submitted!
+
+  %section#answers
+    %header
+      %h2 Answers
+    %dl
+      %dt
+        %span.arrow &raquo;
+        How will you review my submission?
+      %dd
+        :markdown
+          Your name will be removed when this is reviewed; 
+          only the editor #{"([#{Person.editor.name}](#{person_path(Person.editor)}))" if Person.editor} will know you wrote this. 
+          And only the coeditor #{"([#{Person.coeditor.name}](#{person_path(Person.coeditor)}))" if Person.coeditor }
+          will know how people score it.
+          Everyone else has the privilege of judging it objectively.
+
+          "Everyone else" means anyone who wanders into the weekly meeting
+          at which your submission is reviewed (you can go, too! It's a good
+          way to get very honest feedback). For more info on meetings, visit the [about page](#{root_path}).
+      %dt
+        %span.arrow &raquo;
+        What can I submit?
+      %dd
+        :markdown
+          * Art: We accept photographs & scanned art.
+          * Poetry: There are no hard and fast rules for the poetry we accept. Insider’s tip – we strongly dislike centered poetry. Of course, that could change if it’s centered for a brilliant reason.
+          * Prose: We ask that you keep your prose to 1,000 words at most, though we’ve published pieces that are wonderful & a bit over the limit.
+      %dt
+        %span.arrow &raquo;
+        What gets in?
+      %dd
+        :markdown
+          We pride ourselves on considering each submission at length, discussing lines we love, potential deeper meanings, or where the piece falls just short of our expectations. We also like to hold a poem on its side to see if it makes a groovy shape. Each staff member gives each submission a number from 1 – 10, and at the end of the semester we average all the scores for all the pieces. The top 50 (give or take) make it in!
+      %dt
+        %span.arrow &raquo;
+        How do I know if I made it?
+      %dd
+        :markdown
+          If you have an account on this website, you'll automatically get an email telling you which of your submissions we've published. If you don't... We'll try to remember to email you! Either way, these emails will come around the end of the academic semester (December in the fall, May in the spring).
+    

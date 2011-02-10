@@ -203,11 +203,14 @@ dl
 dt
   cursor: pointer
   p
-    display: inline
+    +inline-block
+    max-width: 80%
+    +trailer(0)
   span.arrow
     +inline-block
     &.rotated
       +rotate(90deg)
+    vertical-align: top
 
 dd
   padding-left: $base-rhythm-unit
@@ -318,7 +321,11 @@ input[type=submit], button
     +box-shadow($dgray, 1px, 1px, 1px, 0, inset)
   &.link
     background: transparent
-    +box-shadow(#000, 0, 0, 0)
+    +box-shadow(rgba(255, 255, 255, 0), 0, 0, 0)
+    &:hover
+      +box-shadow(rgba(255, 255, 255, 0), 0, 0, 0)
+    &:active
+      +box-shadow(rgba(255, 255, 255, 0), 0, 0, 0, 0, false)
     +rhythm
     cursor: pointer
     padding: 0

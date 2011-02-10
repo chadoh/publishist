@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Packlet do
+  before do
+    @meeting = Factory.create :meeting
+    @submission = Factory.create :submission
+    @packlet = @meeting.packlets.create :submission => @submission
+  end
+
+
   it {
     should belong_to :meeting
     should belong_to :submission
@@ -53,6 +60,25 @@ describe Packlet do
       s = Score.first; s.entered_by_coeditor = true; s.save
       s = Score.last; s.entered_by_coeditor = true; s.save
       @p1.scores_not_entered_by_coeditor.length.should == 1
+    end
+  end
+
+  describe "#submission#draft?" do
+    it "returns false, since a submission can only be scheduled after it's submitted" do
+      @packlet.submission.draft?.should be_false
+    end
+  end
+
+  describe "#create" do
+    it "sets the packlet's submission to :queued if the meeting is in the future" do
+      @packlet.submission.should be_queued
+    end
+
+    it "sets the packlet's submission to :reviewed if the meeting is in the past" do
+      meeting = Meeting.create :datetime => 2.hours.from_now,
+                               :question => "Jim?"
+      packlet = meeting.packlets.create :submission => @submission
+      packlet.submission.should be_reviewed
     end
   end
 end

@@ -2,11 +2,16 @@ class Submission < ActiveRecord::Base
   belongs_to :author, :class_name => "Person"
   has_many :packlets, :dependent => :destroy
   has_many :meetings, :through => :packlets
+  has_many :scores, :through => :packlets
 
   before_validation :remove_ms_word_kruft
 
   validate :author_email_exists_if_user_not_signed_in
   validate :if_associated_to_Person_dont_allow_name_or_email_also
+
+  after_find :reviewed_if_meeting_has_occurred
+
+  acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
 
   validates_attachment_content_type :photo, 
     :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
@@ -44,6 +49,21 @@ class Submission < ActiveRecord::Base
     end
   end
 
+  def has_been moved_to_state
+    update_attribute :state, moved_to_state
+  end
+
+  [:draft, :submitted, :queued, :reviewed, :scored, :published, :rejected].each do |state|
+    define_method "#{state}?" do
+      self.state == state
+    end
+  end
+
+  def average_score
+    packlet_ids = self.packlets.collect &:id
+    Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
+  end
+
 protected
 
   def remove_ms_word_kruft
@@ -72,4 +92,13 @@ protected
       errors.add(:author_name, "... Now, it's confusing to have both this and to add a full-fledged, account-holding individual. To avoid confusion, please only fill in one.")
     end
   end
+
+  def reviewed_if_meeting_has_occurred
+    if queued?
+      if meetings.select {|m| m.datetime < Time.now + 3.hours }.present?
+        update_attribute :state, Submission.state(:reviewed)
+      end
+    end
+  end
+
 end

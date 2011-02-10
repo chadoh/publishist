@@ -9,27 +9,32 @@ class PeopleController < InheritedResources::Base
   end
 
   def show
-    @person = Person.find(params[:id])
+    @person = Person.find params[:id]
     if person_signed_in? && (current_person.the_editor? || current_person == @person)
-      @submissions = @person.submissions.order("created_at DESC")
+      @submissions = @person.submissions
+      @submissions.reload # fixes weird queued-to-reviewed bug
+      @drafts    = @submissions.where(:state => Submission.state(:draft)) if current_person == @person
+      @submitted = @submissions.where :state => Submission.state(:submitted)
+      @queued    = @submissions.where :state => Submission.state(:queued)
+      @reviewed  = @submissions.where :state => Submission.state(:reviewed)
+      @scored    = @submissions.where :state => Submission.state(:scored)
     end
-    show!
   end
 
-  def create
-    @person = Person.new(params[:person])
-    if @person.save
-      if !session[:id]
-        flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
-        redirect_to root_url
-      else
-        flash[:notice] = "#{@person.first_name} will get a welcome email soon."
-        redirect_to people_url
-      end
-    else
-      render :action => 'new'
-    end
-  end
+  #def create
+    #@person = Person.new(params[:person])
+    #if @person.save
+      #if !session[:id]
+        #flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
+        #redirect_to root_url
+      #else
+        #flash[:notice] = "#{@person.first_name} will get a welcome email soon."
+        #redirect_to people_url
+      #end
+    #else
+      #render :action => 'new'
+    #end
+  #end
 
   def update
     update! do |success, failure|
@@ -37,18 +42,18 @@ class PeopleController < InheritedResources::Base
     end
   end
 
-  def recover
-    person = Person.find_by_email(params[:recover_password][:email])
-    if person
-      Notifications.forgot_password(Crypto.encrypt("#{person.id}:#{person.salt}"), person.email).deliver
-      person.update_attributes(:verified => false)
-      flash[:notice] = "Please check your email."
-      redirect_to root_url
-    else
-      flash[:notice] = "Your account couldn't be found. Perhaps you entered the wrong email address?"
-      redirect_to help_people_path
-    end
-  end
+  #def recover
+    #person = Person.find_by_email(params[:recover_password][:email])
+    #if person
+      #Notifications.forgot_password(Crypto.encrypt("#{person.id}:#{person.salt}"), person.email).deliver
+      #person.update_attributes(:verified => false)
+      #flash[:notice] = "Please check your email."
+      #redirect_to root_url
+    #else
+      #flash[:notice] = "Your account couldn't be found. Perhaps you entered the wrong email address?"
+      #redirect_to help_people_path
+    #end
+  #end
 
   def make_staff
     promote(@person, 1)

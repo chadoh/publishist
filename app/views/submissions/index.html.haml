@@ -7,7 +7,7 @@
 - for meeting in @meetings_to_come
   %section.future[meeting]
     %header
-      %h2 To be reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
+      %h2 To be reviewed on #{link_to pretty_date(meeting.datetime), meeting_url(meeting)}
     %ol.packlets
       - for packlet in meeting.packlets
         = render :partial => 'packlets/show', :locals => { :packlet => packlet, :show_author => true }
@@ -22,7 +22,7 @@
 - for meeting in @meetings_gone_by
   %section.past[meeting]
     %header
-      %h2 Reviewed on #{link_to pretty_date(meeting.when), meeting_url(meeting)}
+      %h2 Reviewed on #{link_to pretty_date(meeting.datetime), meeting_url(meeting)}
     %ol.packlets
       - for packlet in meeting.packlets
         = render :partial => 'packlets/show', :locals => { :packlet => packlet, :show_author => true }

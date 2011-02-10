@@ -1,7 +1,11 @@
-Given /^there are several submissions$/ do
-  3.times { Factory.create :submission }
+Given /^there is a submission called "([^"]*)"$/ do |title|
+  sub = Submission.create(
+    :title => title,
+    :body => "Yes, I said it. #{title}.",
+    :author_email => "chad@chadoh.com",
+    :state => Submission.state(:submitted))
+  puts sub
 end
-
 Given /^there are several meetings$/ do
   2.times { Factory.create :meeting }
 end
@@ -23,7 +27,7 @@ end
 Then /^I should not see "([^"]*)" under the (.*) meeting$/ do |text, heading|
   section = if heading == "first" then "meeting_#{Meeting.first.id}"
     else "meeting_#{Meeting.last.id}" end
-  find("section##{section}").should_not have_content(text)
+  find("section##{section}").should have_no_content(text)
 end
 
 When /^I drag "([^"]*)" from the (.*) meeting to "([^"]*)"$/ do |submission_name, first_or_second, destination|

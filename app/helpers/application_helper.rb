@@ -35,8 +35,15 @@ module ApplicationHelper
     person_signed_in?
   end
 
-  def the_editor_or_the_owner?(compo)
-    person_signed_in? && (current_person.the_editor? || current_person.name == compo.author)
+  def editor_or_author? submission
+    person_signed_in? && (the_editor? || current_person == submission.author(true))
   end
 
+  def coeditor_or_author? submission
+    person_signed_in? && (the_coeditor? || current_person == submission.author(true))
+  end
+
+  def page_appropriate?
+    !current_page?(:controller => "submissions", :action => "index") and !current_page?(:controller => "meetings", :action => "show")
+  end
 end

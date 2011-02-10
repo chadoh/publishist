@@ -4,13 +4,13 @@
 = simple_form_for(resource) do |f|
   = render :partial => 'error_messages'
 
-  = f.input :when, :as => :string, :input_html => { :value => (@meeting.when ? @meeting.when.strftime("%Y-%m-%d %I:%M %p") : nil) }
+  = f.input :datetime, :label => "When", :as => :string, :input_html => { :value => (@meeting.datetime ? @meeting.datetime.strftime("%Y-%m-%d %I:%M %p") : nil) }
   = f.input :question
   = f.button :submit
 
 :javascript
   $(function(){
-    $("#meeting_when").AnyTime_picker({
+    $("#meeting_datetime").AnyTime_picker({
       format: "%Y-%m-%d %h:%i %p",
       placement: "inline"
     });

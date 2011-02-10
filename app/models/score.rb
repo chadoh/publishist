@@ -9,6 +9,8 @@ class Score < ActiveRecord::Base
   validates_inclusion_of :amount, :in => 1..10
   #validate :one_per_attendee_and_packlet_combo
 
+  after_save "packlet.submission.has_been :scored"
+
   class << self
     def with(attendee, packlet, options = {})
       Score.where(

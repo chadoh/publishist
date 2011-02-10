@@ -6,7 +6,7 @@ gem 'redgreen'
 
 # Views
 gem 'haml'
-gem 'compass'
+gem 'compass', :git => "git://github.com/chadoh/compass.git", :branch => "delimiting"
 gem 'compass-susy-plugin'
 gem 'simple_form'
 gem 'rdiscount'
@@ -21,7 +21,6 @@ gem 'inherited_resources'
 
 # Models
 gem 'devise'
-gem 'foreigner'
 gem 'acts_as_list'
 
 group :development do
