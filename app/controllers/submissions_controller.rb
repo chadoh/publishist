@@ -47,7 +47,6 @@ class SubmissionsController < InheritedResources::Base
 
     respond_to do |format|
       if @submission.save
-        Notifications.new_submission(@submission).deliver
         format.html {
           if person_signed_in?
             redirect_to person_url(current_person)

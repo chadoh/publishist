@@ -14,7 +14,7 @@ class MeetingsController < InheritedResources::Base
   end
 
   def scores
-    @attendees = resource.attendees_who_have_not_entered_scores_themselves
+    @attendees = resource.attendees
   end
 
 protected

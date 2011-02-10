@@ -10,6 +10,7 @@ class Submission < ActiveRecord::Base
   validate :if_associated_to_Person_dont_allow_name_or_email_also
 
   after_find :reviewed_if_meeting_has_occurred
+  after_update :send_notification_email_if_submitted
 
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
 
@@ -99,6 +100,10 @@ protected
         update_attribute :state, Submission.state(:reviewed)
       end
     end
+  end
+
+  def send_notification_email_if_submitted
+    Notifications.new_submission(self).deliver if submitted?
   end
 
 end

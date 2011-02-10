@@ -2,9 +2,9 @@
 
 - title "Scores for \"#{resource.question}\""
 :markdown
-  Here you can enter scores for those who attended this meeting
-  #{distance_of_time_in_words(Time.now, resource.datetime)} ago
-  but didn't enter any scores online themselves.  
+  Here you can enter scores for the meeting
+  #{distance_of_time_in_words(Time.now, resource.datetime)} ago.
+  (Some people may have entered scores themselves.)  
   #{link_to "Back to meeting", meeting_path(resource)}
 
 %section#scores

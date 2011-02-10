@@ -8,10 +8,6 @@ class Meeting < ActiveRecord::Base
 
   after_save :submissions_have_been_reviewed_or_queued
 
-  def attendees_who_have_not_entered_scores_themselves
-    attendees_who_entered_scores = packlets.collect(&:scores_not_entered_by_coeditor).flatten.collect(&:attendee).uniq
-    attendees - attendees_who_entered_scores
-  end
 protected
 
   def submissions_have_been_reviewed_or_queued

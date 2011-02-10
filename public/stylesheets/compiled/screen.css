@@ -1025,7 +1025,12 @@ footer.submission-details p.author a:first-child {
   display: inline;
 }
 
-/* line 161, ../../../app/stylesheets/screen.sass */
+/* line 160, ../../../app/stylesheets/screen.sass */
+span.drag-handle-wrap {
+  display: none;
+}
+
+/* line 164, ../../../app/stylesheets/screen.sass */
 article#submissions section, article.meetings section {
   clear: both;
   margin-right: 0.885%;
@@ -1034,11 +1039,11 @@ article#submissions section, article.meetings section {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 162, ../../../app/stylesheets/screen.sass */
+/* line 165, ../../../app/stylesheets/screen.sass */
 article#submissions section > header > h2, article.meetings section > header > h2 {
   margin-bottom: 0em;
 }
-/* line 167, ../../../app/stylesheets/screen.sass */
+/* line 170, ../../../app/stylesheets/screen.sass */
 article#submissions section.drop-here, article.meetings section.drop-here {
   border-style: dashed;
   border-width: 0.063em;
@@ -1046,15 +1051,15 @@ article#submissions section.drop-here, article.meetings section.drop-here {
   border-color: #dddddd;
 }
 
-/* line 173, ../../../app/stylesheets/screen.sass */
+/* line 176, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.packlet, ul.submissions li.collapsed.packlet {
   list-style-type: decimal;
 }
-/* line 175, ../../../app/stylesheets/screen.sass */
+/* line 178, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission, ul.submissions li.collapsed.submission {
   list-style-type: disc;
 }
-/* line 177, ../../../app/stylesheets/screen.sass */
+/* line 180, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission, ol.packlets li.collapsed.packlet, ul.submissions li.collapsed.submission, ul.submissions li.collapsed.packlet {
   border-style: solid;
   border-width: 0em;
@@ -1062,7 +1067,7 @@ ol.packlets li.collapsed.submission, ol.packlets li.collapsed.packlet, ul.submis
   margin-top: 0em;
   margin-bottom: 0em;
 }
-/* line 181, ../../../app/stylesheets/screen.sass */
+/* line 184, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packlet > header {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1075,21 +1080,21 @@ ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet >
 ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packlet > header {
   *display: inline;
 }
-/* line 184, ../../../app/stylesheets/screen.sass */
+/* line 187, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > header h2, ol.packlets li.collapsed.packlet > header h2, ul.submissions li.collapsed.submission > header h2, ul.submissions li.collapsed.packlet > header h2 {
   margin-bottom: 0em;
 }
-/* line 186, ../../../app/stylesheets/screen.sass */
+/* line 189, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > div.body, ol.packlets li.collapsed.packlet > div.body, ul.submissions li.collapsed.submission > div.body, ul.submissions li.collapsed.packlet > div.body {
   display: none;
 }
-/* line 188, ../../../app/stylesheets/screen.sass */
+/* line 191, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > span.drag-handle-wrap, ol.packlets li.collapsed.packlet > span.drag-handle-wrap, ul.submissions li.collapsed.submission > span.drag-handle-wrap, ul.submissions li.collapsed.packlet > span.drag-handle-wrap {
   width: 1em;
   display: inline-block;
   cursor: move;
 }
-/* line 195, ../../../app/stylesheets/screen.sass */
+/* line 198, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packlets li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1107,7 +1112,7 @@ ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, 
 ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packlets li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle {
   *display: inline;
 }
-/* line 200, ../../../app/stylesheets/screen.sass */
+/* line 203, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packlet > footer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1122,7 +1127,7 @@ ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet >
 ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packlet > footer {
   *display: inline;
 }
-/* line 205, ../../../app/stylesheets/screen.sass */
+/* line 208, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > p.author, ol.packlets li.collapsed.packlet > footer > p.author, ul.submissions li.collapsed.submission > footer > p.author, ul.submissions li.collapsed.packlet > footer > p.author {
   margin-left: 0.885%;
   display: inline;
@@ -1130,22 +1135,22 @@ ol.packlets li.collapsed.submission > footer > p.author, ol.packlets li.collapse
   width: 30.088%;
   margin-right: 0.885%;
 }
-/* line 208, ../../../app/stylesheets/screen.sass */
+/* line 211, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > span.score, ol.packlets li.collapsed.packlet > footer > span.score, ul.submissions li.collapsed.submission > footer > span.score, ul.submissions li.collapsed.packlet > footer > span.score {
   display: inline;
   float: left;
   width: 30.088%;
   margin-right: 0.885%;
 }
-/* line 210, ../../../app/stylesheets/screen.sass */
+/* line 213, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > span.score > form.score, ol.packlets li.collapsed.packlet > footer > span.score > form.score, ul.submissions li.collapsed.submission > footer > span.score > form.score, ul.submissions li.collapsed.packlet > footer > span.score > form.score {
   display: inline;
 }
-/* line 212, ../../../app/stylesheets/screen.sass */
+/* line 215, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > p.submitted, ol.packlets li.collapsed.packlet > footer > p.submitted, ul.submissions li.collapsed.submission > footer > p.submitted, ul.submissions li.collapsed.packlet > footer > p.submitted {
   display: none;
 }
-/* line 214, ../../../app/stylesheets/screen.sass */
+/* line 217, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > p.actions, ol.packlets li.collapsed.packlet > footer > p.actions, ul.submissions li.collapsed.submission > footer > p.actions, ul.submissions li.collapsed.packlet > footer > p.actions {
   display: inline;
   float: left;
@@ -1153,34 +1158,34 @@ ol.packlets li.collapsed.submission > footer > p.actions, ol.packlets li.collaps
   margin-right: 0.885%;
 }
 
-/* line 218, ../../../app/stylesheets/screen.sass */
+/* line 221, ../../../app/stylesheets/screen.sass */
 span.score form.button_to {
   font-size: 0.563em;
   line-height: 2.667em;
   line-height: 1em;
 }
-/* line 221, ../../../app/stylesheets/screen.sass */
+/* line 224, ../../../app/stylesheets/screen.sass */
 span.score form.button_to input[type=submit] {
   vertical-align: top;
 }
-/* line 223, ../../../app/stylesheets/screen.sass */
+/* line 226, ../../../app/stylesheets/screen.sass */
 span.score form.score {
   display: inline;
 }
-/* line 225, ../../../app/stylesheets/screen.sass */
+/* line 228, ../../../app/stylesheets/screen.sass */
 span.score form.score div {
   display: inline;
 }
-/* line 227, ../../../app/stylesheets/screen.sass */
+/* line 230, ../../../app/stylesheets/screen.sass */
 span.score form.score div label {
   font-weight: normal;
   display: inline;
 }
-/* line 228, ../../../app/stylesheets/screen.sass */
+/* line 231, ../../../app/stylesheets/screen.sass */
 span.score form.score div label:after {
   content: ": ";
 }
-/* line 232, ../../../app/stylesheets/screen.sass */
+/* line 235, ../../../app/stylesheets/screen.sass */
 span.score form.score div input[type=number] {
   margin-bottom: 0em;
   text-align: center;
@@ -1192,19 +1197,19 @@ span.score form.score div input[type=number] {
   padding: 0.015em;
 }
 
-/* line 240, ../../../app/stylesheets/screen.sass */
+/* line 243, ../../../app/stylesheets/screen.sass */
 html.no-number-input span.score form.score input[type=number] {
   width: 1.7em;
 }
 
-/* line 243, ../../../app/stylesheets/screen.sass */
+/* line 246, ../../../app/stylesheets/screen.sass */
 section#scores {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
   margin-top: 1.5em;
 }
-/* line 246, ../../../app/stylesheets/screen.sass */
+/* line 249, ../../../app/stylesheets/screen.sass */
 section#scores #packlet_titles {
   margin-left: 0.885%;
   display: inline;
@@ -1213,7 +1218,7 @@ section#scores #packlet_titles {
   margin-right: 0.885%;
   margin-bottom: 1.5em;
 }
-/* line 250, ../../../app/stylesheets/screen.sass */
+/* line 253, ../../../app/stylesheets/screen.sass */
 section#scores #packlet_titles .title {
   text-align: right;
   white-space: nowrap;
@@ -1222,7 +1227,7 @@ section#scores #packlet_titles .title {
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-/* line 253, ../../../app/stylesheets/screen.sass */
+/* line 256, ../../../app/stylesheets/screen.sass */
 section#scores .scores {
   display: inline;
   float: left;
@@ -1230,7 +1235,7 @@ section#scores .scores {
   margin-right: 0.885%;
   margin-bottom: 1.5em;
 }
-/* line 256, ../../../app/stylesheets/screen.sass */
+/* line 259, ../../../app/stylesheets/screen.sass */
 section#scores .scores:last {
   display: inline;
   float: right;
@@ -1238,13 +1243,13 @@ section#scores .scores:last {
   #margin-left: -0.5em;
 }
 
-/* line 260, ../../../app/stylesheets/screen.sass */
+/* line 263, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 262, ../../../app/stylesheets/screen.sass */
+/* line 265, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1256,11 +1261,11 @@ ul.attendees li.attendee span {
 ul.attendees li.attendee span {
   *display: inline;
 }
-/* line 264, ../../../app/stylesheets/screen.sass */
+/* line 267, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.person {
   width: 15em;
 }
-/* line 266, ../../../app/stylesheets/screen.sass */
+/* line 269, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.answer {
   width: 27em;
   padding-left: 0.5em;
@@ -1272,13 +1277,13 @@ ul.attendees li.attendee span.answer {
   border-radius: 5px;
   min-height: 24px;
 }
-/* line 271, ../../../app/stylesheets/screen.sass */
+/* line 274, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.actions {
   width: 8em;
   text-align: right;
 }
 
-/* line 274, ../../../app/stylesheets/screen.sass */
+/* line 277, ../../../app/stylesheets/screen.sass */
 form.attendee {
   clear: both;
   margin-right: 0.885%;
@@ -1286,20 +1291,20 @@ form.attendee {
   margin-top: 1.5em;
 }
 
-/* line 279, ../../../app/stylesheets/screen.sass */
+/* line 282, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_body {
   height: 30.857em;
 }
-/* line 281, ../../../app/stylesheets/screen.sass */
+/* line 284, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_title {
   height: 2.571em;
 }
-/* line 283, ../../../app/stylesheets/screen.sass */
+/* line 286, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 286, ../../../app/stylesheets/screen.sass */
+/* line 289, ../../../app/stylesheets/screen.sass */
 ul.meetings {
   list-style: none;
   margin-left: 0;
@@ -1310,7 +1315,7 @@ ul.meetings li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 289, ../../../app/stylesheets/screen.sass */
+/* line 292, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting {
   clear: both;
   margin-right: 0.885%;
@@ -1318,7 +1323,7 @@ ul.meetings li.meeting {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 292, ../../../app/stylesheets/screen.sass */
+/* line 295, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.datetime {
   display: inline;
   float: left;
@@ -1326,14 +1331,14 @@ ul.meetings li.meeting span.datetime {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 295, ../../../app/stylesheets/screen.sass */
+/* line 298, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.question {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 297, ../../../app/stylesheets/screen.sass */
+/* line 300, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.actions {
   display: inline;
   float: left;
@@ -1345,7 +1350,7 @@ ul.meetings li.meeting span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 301, ../../../app/stylesheets/screen.sass */
+/* line 304, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1356,13 +1361,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 304, ../../../app/stylesheets/screen.sass */
+/* line 307, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 306, ../../../app/stylesheets/screen.sass */
+/* line 309, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1370,7 +1375,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 309, ../../../app/stylesheets/screen.sass */
+/* line 312, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1378,14 +1383,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 312, ../../../app/stylesheets/screen.sass */
+/* line 315, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 314, ../../../app/stylesheets/screen.sass */
+/* line 317, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1407,7 +1412,7 @@ ul#people li.person span.promote-to > ul li:last-child:after {
 ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 316, ../../../app/stylesheets/screen.sass */
+/* line 319, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1421,7 +1426,7 @@ ul#people li.person span.actions {
 
 /*   Odds & Ends
  ******************************* */
-/* line 324, ../../../app/stylesheets/screen.sass */
+/* line 327, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

@@ -10,7 +10,7 @@ Feature: The coeditor enters scores in bulk
     When I go to the first meeting page
     And I score "The Wasteland"
     And I follow "Enter scores for everyone"
-    Then I should see 2 score fields
+    Then I should see 3 score fields
 
   @coeditor
   Scenario: The coeditor checks scores

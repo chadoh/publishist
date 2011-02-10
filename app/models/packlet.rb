@@ -22,9 +22,6 @@ class Packlet < ActiveRecord::Base
     end
   end
 
-  def scores_not_entered_by_coeditor
-    scores.select{ |s| s.entered_by_coeditor == false }.flatten
-  end
 protected
 
   def submission_reviewed_or_queued
