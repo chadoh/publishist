@@ -21,40 +21,6 @@ class PeopleController < InheritedResources::Base
     end
   end
 
-  #def create
-    #@person = Person.new(params[:person])
-    #if @person.save
-      #if !session[:id]
-        #flash[:notice] = "Welcome, #{@person.name}; you need to check your email to finish signing up."
-        #redirect_to root_url
-      #else
-        #flash[:notice] = "#{@person.first_name} will get a welcome email soon."
-        #redirect_to people_url
-      #end
-    #else
-      #render :action => 'new'
-    #end
-  #end
-
-  def update
-    update! do |success, failure|
-      failure.html { render :action => 'edit' }
-    end
-  end
-
-  #def recover
-    #person = Person.find_by_email(params[:recover_password][:email])
-    #if person
-      #Notifications.forgot_password(Crypto.encrypt("#{person.id}:#{person.salt}"), person.email).deliver
-      #person.update_attributes(:verified => false)
-      #flash[:notice] = "Please check your email."
-      #redirect_to root_url
-    #else
-      #flash[:notice] = "Your account couldn't be found. Perhaps you entered the wrong email address?"
-      #redirect_to help_people_path
-    #end
-  #end
-
   def make_staff
     promote(@person, 1)
   end
