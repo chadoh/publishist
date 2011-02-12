@@ -1,3 +1,24 @@
+var score_timers = [];
+
+function submitScoreWithDelay(score_form_element) {
+  var span = $(score_form_element).closest('span');
+  var score_id = span.attr('data-attendee') + span.attr('data-packlet');
+
+  /* check to see if there's already a timer running for this score */
+  if (score_timers[score_id]) {
+    /* if so, let's clear it, so we can start with a fresh interval */
+    clearInterval(score_timers[score_id]);
+  }
+
+  score_timers[score_id] = setTimeout(function() {
+    submitScore(score_form_element);
+  }, 500);
+}
+
+function submitScore(score_form_element) {
+  score_form_element.submit();
+}
+
 $(function(){
 
   $('li:regex(class,(submission|packlet)) header h2').live('click', function(e){
@@ -35,7 +56,7 @@ $(function(){
     var orig    = $(this).attr('data-original'),
         current = $(this).val();
     if (orig != current) {
-      $(this).parents('form').submit();
+      submitScoreWithDelay($(this));
     }
   });
 

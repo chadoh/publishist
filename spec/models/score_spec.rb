@@ -4,12 +4,11 @@ describe Score do
   it {
     should belong_to :packlet
     should belong_to :attendee
+    should have_one(:meeting).through(:packlet)
 
     should validate_presence_of :packlet
     should validate_presence_of :attendee
     should validate_presence_of :amount
-    should validate_numericality_of :amount
-    should ensure_inclusion_of(:amount).in_range(1..10)
   }
 
   before(:each) do
@@ -24,10 +23,28 @@ describe Score do
       :person     => @person)
   end
 
-  pending "validates that only one score is created for a particular attendee and packlet" do
+  it "validates that only one score is created for a particular attendee and packlet" do
     @s = Score.create(:amount => 1, :packlet => @packlet, :attendee => @attendee)
     @s2 = Score.new(:amount => 1, :packlet => @packlet, :attendee => @attendee)
     @s2.should_not be_valid
+  end
+
+  it "sets amount to 1 if submitted as less than 1" do
+    @s = @packlet.scores.create :attendee => @attendee, :amount => 0
+    @s.should be_valid
+    @s.amount.should == 1
+  end
+
+  it "sets amount to 10 if submitted as more than 10" do
+    @s = @packlet.scores.create :attendee => @attendee, :amount => 11
+    @s.should be_valid
+    @s.amount.should == 10
+  end
+
+  it "sets amount to 1 if non-numeric characters are submitted" do
+    @s = @packlet.scores.create :attendee => @attendee, :amount => "a"
+    @s.should be_valid
+    @s.amount.should == 1
   end
 
   it "should destroy the score if updated with a blank amount" do
@@ -54,6 +71,14 @@ describe Score do
       @s.amount.should be_nil
       @s.attendee.should == @attendee
       @s.packlet.should == @packlet
+    end
+
+    it "should return a *new* score even if a similar one was just deleted" do
+      @s = Score.create(:amount => 1, :attendee => @attendee, :packlet => @packlet)
+      @s.destroy
+      @s2 = Score.with(@attendee, @packlet)
+      @s2.id.should be_nil
+      @s2.amount.should be_nil
     end
 
     it "should set 'entered_by_coeditor' to true told to do so" do

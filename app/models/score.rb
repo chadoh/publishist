@@ -1,21 +1,28 @@
 class Score < ActiveRecord::Base
   belongs_to :packlet
   belongs_to :attendee
+  has_one :meeting, :through => :packlet
 
   validates_presence_of :packlet
   validates_presence_of :attendee
   validates_presence_of :amount
-  validates_numericality_of :amount
-  validates_inclusion_of :amount, :in => 1..10
-  #validate :one_per_attendee_and_packlet_combo
+  validate :one_per_attendee_and_packlet_combo
 
   after_save "packlet.submission.has_been :scored"
 
+  def amount=(number)
+    if number.present?
+      number = number.to_i
+      number = 1 if number < 1
+      number = 10 if number > 10
+      write_attribute :amount, number
+    end
+  end
+
   class << self
     def with(attendee, packlet, options = {})
-      Score.where(
-        :attendee_id => attendee.id,
-        :packlet_id => packlet.id).first ||
+      score = Score.where( :attendee_id => attendee.id, :packlet_id => packlet.id).first
+      return score if score.present?
       Score.new(
         :attendee => attendee,
         :packlet => packlet,

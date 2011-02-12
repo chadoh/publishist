@@ -1,5 +1,6 @@
 class ScoresController < InheritedResources::Base
   actions :create, :update, :destroy
+  respond_to :js, :html
 
   def create
     create! do |wants|
