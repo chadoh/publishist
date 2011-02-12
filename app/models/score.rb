@@ -9,6 +9,7 @@ class Score < ActiveRecord::Base
   validate :one_per_attendee_and_packlet_combo
 
   after_save "packlet.submission.has_been :scored"
+  after_destroy "packlet.submission.has_been :reviewed if packlet.submission.scores.empty?"
 
   def amount=(number)
     if number.present?

@@ -2,7 +2,7 @@
   = simple_form_for score, :remote => true do |f|
     = render :partial => 'error_messages'
     = f.input :amount, :required => false,
-              :label => score.entered_by_coeditor? || current_page?(scores_for_meeting_path(score.meeting)) ? false : "Your score",
+              :label => score.entered_by_coeditor? || current_page?(scores_for_meeting_url(score.meeting)) || (request.referer == scores_for_meeting_url(score.packlet.meeting) && request.xhr?) ? false : "Your score",
               :input_html => { :min => 1, :max => 10, 'data-original' => "#{score.amount || ''}" }
     = f.input :attendee_id, :as => :hidden
     = f.input :packlet_id, :as => :hidden
