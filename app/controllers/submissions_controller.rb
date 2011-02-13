@@ -1,6 +1,5 @@
 class SubmissionsController < InheritedResources::Base
   before_filter :editors_only, :only => [:index]
-  before_filter :editor_only, :only => [:destroy]
 
   def index
     @meetings = Meeting.all.sort_by(&:datetime).reverse
@@ -76,29 +75,12 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def destroy
-    @submission = Submission.find(params[:id])
-    @submission.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(submissions_url) }
-      format.xml  { head :ok }
-    end
-  end
-
-protected
-  
-  def editor_and_owner_only
-    @submission = Submission.find(params[:id])
-    unless person_signed_in? and (current_person.the_editor? || current_person == @submission.author)
+    unless person_signed_in? and (current_person.the_editor? || current_person == resource.author(true))
       flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
-      redirect_to root_url
+      redirect_to(root_url) and return
+    else
+      destroy!(:notice => "It is gone.") { request.referer }
     end
   end
-  def editors_and_owner_only
-    @submission = Submission.find(params[:id])
-    unless person_signed_in? and (current_person.editor? || current_person.name == @submission.author)
-      flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
-      redirect_to root_url
-    end
-  end
+
 end

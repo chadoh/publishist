@@ -18,7 +18,7 @@ Feature: A poet's work goes from draft to published/rejected
     When I fill in the following:
       | Title | Each raindrop   |
       | Body  | started as dust |
-    And press "Save and Preview"
+    And press "Preview"
     Then I should be on my profile page
     And I should see "Drafts"
 

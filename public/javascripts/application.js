@@ -30,8 +30,8 @@ $(function(){
     $('dt').first().click()
   }, 1000);
 
-  $("li.attendee form[data-remote]").live("ajax:success", function(){
-    $(this).closest('li').fadeOut();
+  $("li.attendee nav.actions form[data-remote]").live("ajax:success", function(){
+    $(this).closest('nav').closest('li').fadeOut();
   });
 
   $("span[contenteditable]").live('blur', function(){

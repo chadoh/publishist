@@ -50,5 +50,9 @@
               = f.hidden_field :state, :value => Submission.state(:submitted)
 
               = f.submit "Submit", :class => "link"
-        - if the_editor?
-          %li= link_to "Delete", submission_url(submission), :method => :delete, :confirm => "Are you sure you want to delete this submission? If you just want to unschedule it, you can do that by dragging it to the \"Unscheduled\" section on the \"Submissions\" page."
+        - if the_editor? or submission.state != :published
+          %li
+            = button_to "Delete", submission_url(submission),
+                         :method => :delete,
+                         :confirm => "Are you really sure you want to totally destroy all record of this submission?#{"If you just want to unschedule it, you can do that by dragging it to the \"Unscheduled\" section on the \"Submissions\" page." if the_editor?}",
+                         :class => "link destroy"

@@ -92,19 +92,21 @@ describe Score do
     @submission.reload.should be_scored
   end
 
-  it "sets its submission to :reviewed when deleted (if last one)" do
-    @s = @packlet.scores.create :amount => 6, :attendee => @attendee
-    @s.destroy
-    @submission.reload.should be_reviewed
-  end
+  context "when deleted" do
+    it "sets its submission to :reviewed (if last one)" do
+      @s = @packlet.scores.create :amount => 6, :attendee => @attendee
+      @s.destroy
+      @submission.reload.should be_reviewed
+    end
 
-  it "doesn't set its submission to :reviewed when deleted if not the last one" do
-    person = Factory.create :person
-    attendee2 = Attendee.create :meeting => @meeting, :person => person
-    @s = @packlet.scores.create :amount => 6, :attendee => @attendee
-    @s2 = @packlet.scores.create :amount => 6, :attendee => attendee2
-    @s.destroy
-    @submission.reload.should be_scored
+    it "doesn't set its submission to :reviewed (if not the last one)" do
+      person = Factory.create :person
+      attendee2 = Attendee.create :meeting => @meeting, :person => person
+      @s = @packlet.scores.create :amount => 6, :attendee => @attendee
+      @s2 = @packlet.scores.create :amount => 6, :attendee => attendee2
+      @s.destroy
+      @submission.reload.should be_scored
+    end
   end
 
 end
