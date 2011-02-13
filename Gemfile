@@ -3,11 +3,10 @@ source 'http://rubygems.org'
 gem 'rails'
 gem 'pg', '~> 0.9.0'
 gem 'redgreen'
+gem 'heroku_backup_task'
 
 # Views
 gem 'haml'
-gem 'compass', :git => "git://github.com/chadoh/compass.git", :branch => "delimiting"
-gem 'compass-susy-plugin'
 gem 'simple_form'
 gem 'rdiscount'
 gem 'RedCloth'
@@ -26,6 +25,8 @@ gem 'acts_as_list'
 group :development do
   gem 'rails3-generators'
   gem 'heroku_san'
+  gem 'compass', :git => "git://github.com/chadoh/compass.git", :branch => "delimiting"
+  gem 'compass-susy-plugin'
 end
 
 group :development, :test do
