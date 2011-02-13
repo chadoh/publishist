@@ -11,6 +11,8 @@ gem 'simple_form'
 gem 'rdiscount'
 gem 'RedCloth'
 gem 'inherited_resources_views'
+gem 'compass', :git => "git://github.com/chadoh/compass.git", :branch => "delimiting"
+gem 'compass-susy-plugin'
 
 # Controllers
 gem 'aws-s3'
@@ -25,8 +27,6 @@ gem 'acts_as_list'
 group :development do
   gem 'rails3-generators'
   gem 'heroku_san'
-  gem 'compass', :git => "git://github.com/chadoh/compass.git", :branch => "delimiting"
-  gem 'compass-susy-plugin'
 end
 
 group :development, :test do
