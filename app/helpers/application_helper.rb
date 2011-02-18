@@ -36,11 +36,11 @@ module ApplicationHelper
   end
 
   def editor_or_author? submission
-    person_signed_in? && (the_editor? || current_person == submission.author(true))
+    person_signed_in? && (the_editor? || current_person == submission.author)
   end
 
   def coeditor_or_author? submission
-    person_signed_in? && (the_coeditor? || current_person == submission.author(true))
+    person_signed_in? && (the_coeditor? || current_person == submission.author)
   end
 
   def page_appropriate?

@@ -10,7 +10,7 @@ Feature: people of various ranks submit something
       | Title | Old King Scole |
       | Body  | Chewed Tobaccy |
     And I press "Submit!"
-    Then I should be on my profile page
+    Then I should be on the submissions page
 
   @webmember
   Scenario: Some other signed-in person submits something

@@ -33,7 +33,7 @@ class SubmissionsController < InheritedResources::Base
 
   def edit
     @submission = Submission.find(params[:id])
-    unless person_signed_in? and (current_person.the_editor? or @submission.author(true) == current_person)
+    unless person_signed_in? and (current_person.the_editor? or @submission.author == current_person)
       flash[:notice] = "You're not allowed to edit that."
       redirect_to request.referer
     end
@@ -48,6 +48,7 @@ class SubmissionsController < InheritedResources::Base
       if @submission.save
         format.html {
           if person_signed_in?
+            redirect_to submissions_url and return if current_person.the_editor?
             redirect_to person_url(current_person)
           else
             flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
@@ -71,11 +72,11 @@ class SubmissionsController < InheritedResources::Base
     end
     @submission = Submission.find(params[:id])
 
-    update! { person_url resource.author(true) }
+    update! { person_url resource.author }
   end
 
   def destroy
-    unless person_signed_in? and (current_person.the_editor? || current_person == resource.author(true))
+    unless person_signed_in? and (current_person.the_editor? || current_person == resource.author)
       flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
       redirect_to(root_url) and return
     else

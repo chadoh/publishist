@@ -55,4 +55,20 @@ describe Packlet do
       packlet.submission.should be_reviewed
     end
   end
+
+  describe "#destroy" do
+    it "sets the packlet's submission to :submitted if this was its last packlet" do
+      sub = @packlet.submission
+      @packlet.destroy
+      sub.should be_submitted
+    end
+
+    it "doesn't set the packlet's submission to :submitted if it _wasn't_ its last packlet" do
+      sub = @packlet.submission
+      meeting2 = Factory.create :meeting
+      packlet2 = Packlet.create :meeting => meeting2, :submission => sub
+      packlet2.destroy
+      sub.should be_queued
+    end
+  end
 end

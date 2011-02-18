@@ -13,6 +13,10 @@ class Packlet < ActiveRecord::Base
 
   before_create :submission_reviewed_or_queued
 
+  after_destroy "self.submission.has_been(:submitted) if self.submission.packlets.empty?"
+
+protected
+
   def review_a_submission_only_once_per_meeting
     packlets = Packlet.all
     for packlet in packlets
@@ -21,8 +25,6 @@ class Packlet < ActiveRecord::Base
       end
     end
   end
-
-protected
 
   def submission_reviewed_or_queued
     if self.meeting.datetime < Time.now + 3.hours

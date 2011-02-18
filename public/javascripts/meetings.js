@@ -66,7 +66,7 @@ $(function(){
       $(this).submit(); }
   });
 
-  $('span.actions a.edit').live('click', function(e){
+  $('nav.actions a.edit').live('click', function(e){
     e.preventDefault();
     $.ajax({
       url: $(this).attr('href')

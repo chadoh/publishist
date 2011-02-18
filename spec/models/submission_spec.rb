@@ -47,39 +47,24 @@ describe Submission do
     end
   end
 
-  describe "#author" do
-    context "when there is an associated author" do
-      before(:each) do
-        @sub = Submission.create(
-          :title  => ';-)',
-          :body   => 'he winks and smiles <br><br> both',
-          :author => @person)
-      end
-
-      it "returns the associated author's name" do
-        @sub.author.should == @person.name
-      end
-
-      it "returns a person object if passed 'true'" do
-        @sub.author(true).should == @person
-      end
+  describe "#author_name" do
+    it "returns the author_name field if there is no associated author" do
+      @sub = Submission.create(
+        :title => ';-)',
+        :body => 'he winks and smiles <br><br> both',
+        :author_email => 'me@you.com',
+        :author_name => "Smeagul Rabbit"
+      )
+      @sub.author_name.should == "Smeagul Rabbit"
     end
 
-    context "when there is no associated author" do
-      before(:each) do
-        @sub = Submission.create :title => ';-)',
-          :body => 'he winks and smiles <br><br> both',
-          :author_email => 'me@you.com',
-          :author_name => @person
-      end
-
-      it "returns the author_name field" do
-        @sub.author.should == @person
-      end
-
-      it "returns nil if passed 'true'" do
-        @sub.author(true).should == nil
-      end
+    it "returns the associated author's name if there is an associated author" do
+      @sub = Submission.create(
+        :title  => ';-)',
+        :body   => 'he winks and smiles <br><br> both',
+        :author => @person
+      )
+      @sub.author_name.should == @person.name
     end
   end
 

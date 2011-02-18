@@ -1280,9 +1280,10 @@ ul.attendees li.attendee span.answer {
 /* line 274, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee nav.actions {
   display: inline;
+  float: right;
 }
 
-/* line 276, ../../../app/stylesheets/screen.sass */
+/* line 277, ../../../app/stylesheets/screen.sass */
 form.attendee {
   clear: both;
   margin-right: 0.885%;
@@ -1290,20 +1291,20 @@ form.attendee {
   margin-top: 1.5em;
 }
 
-/* line 281, ../../../app/stylesheets/screen.sass */
+/* line 282, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_body {
   height: 30.857em;
 }
-/* line 283, ../../../app/stylesheets/screen.sass */
+/* line 284, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_title {
   height: 2.571em;
 }
-/* line 285, ../../../app/stylesheets/screen.sass */
+/* line 286, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 288, ../../../app/stylesheets/screen.sass */
+/* line 289, ../../../app/stylesheets/screen.sass */
 ul.meetings {
   list-style: none;
   margin-left: 0;
@@ -1314,7 +1315,7 @@ ul.meetings li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 291, ../../../app/stylesheets/screen.sass */
+/* line 292, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting {
   clear: both;
   margin-right: 0.885%;
@@ -1322,7 +1323,7 @@ ul.meetings li.meeting {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 294, ../../../app/stylesheets/screen.sass */
+/* line 295, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.datetime {
   display: inline;
   float: left;
@@ -1330,14 +1331,14 @@ ul.meetings li.meeting span.datetime {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 297, ../../../app/stylesheets/screen.sass */
+/* line 298, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.question {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
 }
-/* line 299, ../../../app/stylesheets/screen.sass */
+/* line 300, ../../../app/stylesheets/screen.sass */
 ul.meetings li.meeting span.actions {
   display: inline;
   float: left;
@@ -1349,7 +1350,7 @@ ul.meetings li.meeting span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 303, ../../../app/stylesheets/screen.sass */
+/* line 304, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1360,13 +1361,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 306, ../../../app/stylesheets/screen.sass */
+/* line 307, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 308, ../../../app/stylesheets/screen.sass */
+/* line 309, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1374,7 +1375,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 311, ../../../app/stylesheets/screen.sass */
+/* line 312, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1382,14 +1383,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 314, ../../../app/stylesheets/screen.sass */
+/* line 315, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 316, ../../../app/stylesheets/screen.sass */
+/* line 317, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1411,7 +1412,7 @@ ul#people li.person span.promote-to > ul li:last-child:after {
 ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 318, ../../../app/stylesheets/screen.sass */
+/* line 319, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1425,7 +1426,7 @@ ul#people li.person span.actions {
 
 /*   Odds & Ends
  ******************************* */
-/* line 326, ../../../app/stylesheets/screen.sass */
+/* line 327, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

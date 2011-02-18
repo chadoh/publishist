@@ -33,13 +33,13 @@
   - if (@show_author.nil? or @show_author) and editor_or_author?(submission)
     %p.author
       - if the_editor?
-        = mail_to submission.email, email_image(submission.author)
-      - if submission.author_id
-        = link_to_unless_current submission.author, person_path(submission.author_id)
+        = mail_to submission.email, email_image(submission.author_name)
+      - if !!submission.author
+        = link_to_unless_current submission.author_name, person_path(submission.author)
       - else
-        = submission.author
+        = submission.author_name
 
-  - if the_editor? or (submission.author(true) == current_person and [:draft, :submitted, :queued].include? submission.state)
+  - if the_editor? or (submission.author == current_person and [:draft, :submitted, :queued].include? submission.state)
     %nav.actions
       %ul
         %li= link_to "Edit", edit_submission_url(submission)

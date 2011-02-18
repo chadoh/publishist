@@ -13,7 +13,7 @@ class Notifications < ActionMailer::Base
     @submission = submission
     @title = submission.title
     @submission_body = submission.body # using @body causes problems
-    @author = submission.author
+    @author = submission.author_name
     @url = submission_url(submission)
 
     mail(

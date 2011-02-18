@@ -7,7 +7,7 @@ class Submission < ActiveRecord::Base
   before_validation :remove_ms_word_kruft
 
   validate :author_email_exists_if_user_not_signed_in
-  validate :if_associated_to_Person_dont_allow_name_or_email_also
+  #validate :if_associated_to_Person_dont_allow_name_or_email_also
 
   after_find :reviewed_if_meeting_has_occurred
   after_update :send_notification_email_if_submitted
@@ -25,12 +25,11 @@ class Submission < ActiveRecord::Base
     :path => "/:style/:filename",
     :styles => { :medium => "510x510>" }
 
-  def author(picky = false)
-    if read_attribute(:author_id)
-      person = Person.find(read_attribute(:author_id))
-      picky ? person : person.name
+  def author_name
+    if read_attribute :author_id
+      Person.find(read_attribute(:author_id)).name
     else
-      picky ? nil : author_name
+      read_attribute :author_name
     end
   end
 
@@ -83,13 +82,15 @@ protected
   end
 
   def author_anonymous_if_blank
-    self.author_name = "Anonymous" if self.author.blank?
+    unless !!self.author
+      self.author_name = "Anonymous" if self.author_name.blank?
+    end
   end
 
   def if_associated_to_Person_dont_allow_name_or_email_also
     if author_email.present? && author_id.present?
       errors.add(:author_email, "... Now, it's confusing to have both this and to add a full-fledged, account-holding individual. To avoid confusion, please only fill in one.")
-    elsif author_name.present? && author_id.present?
+    elsif !!read_attribute(:author_name) && !!author
       errors.add(:author_name, "... Now, it's confusing to have both this and to add a full-fledged, account-holding individual. To avoid confusion, please only fill in one.")
     end
   end

@@ -1,5 +1,6 @@
-class PackletsController < InheritedResources::Base
-  actions :create, :destroy
+class PackletsController < ApplicationController
+  before_filter :editors_only
+  skip_before_filter :verify_authenticity_token
 
   def create
     @old_packlet = params[:packlet] || false
@@ -9,7 +10,7 @@ class PackletsController < InheritedResources::Base
     if @packlet.valid?
       @packlet.save
     else
-      render :nothing => true
+      render :nothing => true and return
     end
   end
 

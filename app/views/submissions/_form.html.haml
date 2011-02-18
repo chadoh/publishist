@@ -27,11 +27,14 @@
 - if the_editor?
   :javascript
     $(function(){
+      var email = $("#submission_author").val().split(' ').pop(),
+          span  = $("span#save_for_later");
+      if (email != "#{current_person.email}") {
+        span.hide(); }
       $("#submission_author")
         .autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}")
         .blur(function(){
-          var email = $(this).val().split(' ').pop(),
-              span  = $('span#save_for_later');
+          var email = $(this).val().split(' ').pop();
           if (email != "#{current_person.email}") {
             span.hide(); }
           else {
