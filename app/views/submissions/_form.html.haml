@@ -2,7 +2,7 @@
 - stylesheet 'cleditor'
 
 = simple_form_for @submission, :html => { :multipart => true } do |f|
-  = render :partial => 'error_messages'
+  = error_messages
   
   - unless person_signed_in?
     = f.input :author_name, :label => "Your Name"

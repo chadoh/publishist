@@ -47,6 +47,35 @@ describe Submission do
     end
   end
 
+  it "sets the author_name field to 'anonymous' if there is no associated author" do
+    sub = Submission.create :title => "some ugly cat", :author_email => "non@one.me"
+    sub.author_name.should == "Anonymous"
+  end
+
+  it "verifies that there is either an associated author or an author_email" do
+    sub = Submission.new :title => "Marvin eats an ice cream cone"
+    sub.should_not be_valid
+
+    sub.author_email = "marvin@gmail.mars"
+    sub.should be_valid
+
+    sub.author_email = nil
+    sub.author = Factory.create :person
+    sub.should be_valid
+  end
+
+  it "verifies that there is either a title or a body" do
+    sub = Submission.new :author_email => "samwell@gamgee.net"
+    sub.should_not be_valid
+
+    sub.title = "Who, me?"
+    sub.should be_valid
+
+    sub.title = nil
+    sub.body = "But of course!"
+    sub.should be_valid
+  end
+
   describe "#author_name" do
     it "returns the author_name field if there is no associated author" do
       @sub = Submission.create(

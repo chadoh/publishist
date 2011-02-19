@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110205225346) do
+ActiveRecord::Schema.define(:version => 20110218234832) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -80,15 +80,6 @@ ActiveRecord::Schema.define(:version => 20110205225346) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "simple_captcha_data", :force => true do |t|
-    t.string   "key",        :limit => 40
-    t.string   "value",      :limit => 6
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "simple_captcha_data", ["key"], :name => "idx_key"
 
   create_table "submissions", :force => true do |t|
     t.text     "title"

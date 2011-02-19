@@ -10,7 +10,6 @@ gem 'haml'
 gem 'simple_form'
 gem 'rdiscount'
 gem 'RedCloth'
-gem 'inherited_resources_views'
 gem 'compass', :git => "git://github.com/chadoh/compass.git", :branch => "delimiting"
 gem 'compass-susy-plugin'
 

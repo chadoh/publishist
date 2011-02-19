@@ -105,8 +105,6 @@ GEM
     inherited_resources (1.2.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6.0)
-    inherited_resources_views (0.4.1)
-      inherited_resources (>= 1.0)
     johnson (2.0.0.pre3)
       stackdeck (~> 0.2)
     json (1.4.6)
@@ -205,7 +203,6 @@ DEPENDENCIES
   heroku_backup_task
   heroku_san
   inherited_resources
-  inherited_resources_views
   launchy
   paperclip
   pg (~> 0.9.0)

@@ -15,6 +15,25 @@ module ApplicationHelper
     end
   end
 
+  def error_messages
+    if resource.errors.any?
+      capture_haml do
+        haml_tag "#errorExplanation" do
+          haml_tag :h3 do
+            haml_concat "There #{pluralize_phrase(resource.errors.count, "was an error", "were some errors")}!"
+          end
+          haml_tag :ul do
+            resource.errors.full_messages.each do |msg|
+              haml_tag :li do
+                haml_concat msg
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
   def editor?
     person_signed_in? && current_person.editor?
   end

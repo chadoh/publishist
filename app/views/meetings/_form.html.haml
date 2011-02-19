@@ -2,7 +2,7 @@
 - stylesheet "anytime.min"
 
 = simple_form_for(resource) do |f|
-  = render :partial => 'error_messages'
+  = error_messages
 
   = f.input :datetime, :label => "When", :as => :string, :input_html => { :value => (@meeting.datetime ? @meeting.datetime.strftime("%Y-%m-%d %I:%M %p") : nil) }
   = f.input :question

@@ -1,13 +1,15 @@
 class Submission < ActiveRecord::Base
   belongs_to :author, :class_name => "Person"
-  has_many :packlets, :dependent => :destroy
-  has_many :meetings, :through => :packlets
-  has_many :scores, :through => :packlets
+  has_many :packlets, :dependent  => :destroy
+  has_many :meetings, :through    => :packlets
+  has_many :scores,   :through    => :packlets
 
-  before_validation :remove_ms_word_kruft
-
-  validate :author_email_exists_if_user_not_signed_in
-  #validate :if_associated_to_Person_dont_allow_name_or_email_also
+  validate "errors.add :author_email, 'must be filled in. Or you can sign in.'",
+    :if => Proc.new {|s| s.author_id.blank? && s.author_email.blank? }
+  validate "self.author_name = 'Anonymous'",
+    :if => Proc.new {|s| s.author_id.blank? && s.author_name .blank? }
+  validate "errors.add :body, 'cannot be blank.'",
+    :if => Proc.new {|s| s.body.blank? && s.title.blank? }
 
   after_find :reviewed_if_meeting_has_occurred
   after_update :send_notification_email_if_submitted
@@ -65,35 +67,6 @@ class Submission < ActiveRecord::Base
   end
 
 protected
-
-  def remove_ms_word_kruft
-    self.body = self.body.gsub(/<!--\[if (g|l)te? mso [0-9]+\]>.+?<!\[endif\]-->/, '')
-  end
-
-  def author_email_exists_if_user_not_signed_in
-    unless read_attribute(:author_id)
-      author_anonymous_if_blank
-      verify_author_email_exists
-    end
-  end
-
-  def verify_author_email_exists
-    errors.add(:author_email, "must be filled in (unless you sign in!). We need to be able to contact someone with questions, you see.") unless author_email.present?
-  end
-
-  def author_anonymous_if_blank
-    unless !!self.author
-      self.author_name = "Anonymous" if self.author_name.blank?
-    end
-  end
-
-  def if_associated_to_Person_dont_allow_name_or_email_also
-    if author_email.present? && author_id.present?
-      errors.add(:author_email, "... Now, it's confusing to have both this and to add a full-fledged, account-holding individual. To avoid confusion, please only fill in one.")
-    elsif !!read_attribute(:author_name) && !!author
-      errors.add(:author_name, "... Now, it's confusing to have both this and to add a full-fledged, account-holding individual. To avoid confusion, please only fill in one.")
-    end
-  end
 
   def reviewed_if_meeting_has_occurred
     if queued?
