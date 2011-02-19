@@ -37,4 +37,5 @@ group :development, :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'capybara-envjs', :require => 'capybara/envjs'
+  gem 'railroady'
 end
