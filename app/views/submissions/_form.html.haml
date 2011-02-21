@@ -15,14 +15,14 @@
     - if the_editor?
       = f.input :author, :as => :string, :label => "Author (you can submit for anyone with an account here)", :input_html => { :value => "#{resource.author(true).name_and_email if @submission.author(true)}" }
       = f.input :author_name, :label => "To submit for someone without an account, put their name here"
-      = f.input :author_email, :input_html => { :value => "" }, :label => "...and their email address here"
+      = f.input :author_email, :label => "...and their email address here"
     - else
       = f.input :author_id, :as => :hidden
-  = f.button :submit, "Submit!"
+  = f.button :submit, current_page?(new_submission_path) || resource.draft? ? t('submit!') : t('save')
   %span#save_for_later
-    - if person_signed_in?
+    - if person_signed_in? && !resource.submitted?
       or
-      = f.button :submit, "Preview", :class => "link"
+      = f.button :submit, t("preview"), :class => "link"
 
 - if the_editor?
   :javascript

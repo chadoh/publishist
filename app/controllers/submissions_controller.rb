@@ -48,7 +48,7 @@ class SubmissionsController < InheritedResources::Base
       if @submission.save
         format.html {
           if person_signed_in?
-            redirect_to submissions_url and return if current_person.the_editor?
+            redirect_to submissions_url and return if current_person.the_editor? && params[:commit] != t('preview')
             redirect_to person_url(current_person)
           else
             flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
@@ -70,9 +70,14 @@ class SubmissionsController < InheritedResources::Base
     if request.referer == new_submission_url or request.referer == edit_submission_url(resource)
       params[:submission][:state] = :submitted if params[:commit] == "Submit!"
     end
-    @submission = Submission.find(params[:id])
 
-    update! { person_url resource.author }
+    update! do
+      if current_person.the_editor? && params[:commit] != t('preview')
+        submissions_url
+      else
+        person_url(resource.author)
+      end
+    end
   end
 
   def destroy

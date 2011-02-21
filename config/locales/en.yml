@@ -9,6 +9,9 @@ en:
   destroy: 'Delete'
   are_you_sure: 'Are you sure?'
   submit: 'Submit'
+  submit!: 'Submit!'
+  save: 'Save'
+  preview: "Preview"
   back: "Back"
   cancel: "Cancel"
   search: "Search!"
@@ -52,7 +55,7 @@ en:
       create: "Create %{model}!"
       submission:
         create: "Submit!"
-        update: "Update"
+        update: "Save"
       person:
         create: "Sign Up!"
         update: "Save Changes"
