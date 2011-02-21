@@ -297,10 +297,26 @@ ul.meetings
       +alpha
     span.question
       +columns(ceil( $total-cols * (3/5)))
-    span.actions
+    nav.actions
       +columns(floor($total-cols * (1/5)))
       +omega
 
+ul.magazines
+  +no-bullets
+  margin-left: 0
+  li.magazine
+    +full
+    +clearfix
+    span.nickname
+      +alpha
+      +columns(floor($total-cols * (1/5)))
+    span.title
+      +columns(ceil( $total-cols * (2/5)))
+    span.timeframe
+      +columns(floor($total-cols * (1/5)))
+    nav.actions
+      +omega
+      +columns(floor($total-cols * (1/5)))
 ul#people
   +no-bullets
   margin-left: 0

@@ -4,7 +4,6 @@ Feature: An editor specs a magazine
   and what it will be called,
   so that incoming submissions can be associated with it.
 
-  @wip
   @editor
   Scenario: I set up a magazine
     Given I am on the home page
@@ -13,7 +12,16 @@ Feature: An editor specs a magazine
 
     When I follow "Set up a new magazine"
     And I press "Save"
-    Then I be on the first magazine page
-    And the first magazine should not have a title
-    And the first magazine should have an abbreviated name "next"
-    And the first magazine should accept submissions from today until six months from now
+    Then I should be on the magazines page
+
+  @wip
+  @editor
+  Scenario: I edit a magazine
+    Given there is a magazine
+    When I am on the magazines page
+    And I follow "Edit"
+    And I fill in the following:
+      | Accepts submissions from  | 2009-02-20 |
+      | Accepts submissions until | 2009-08-20 |
+    And I press "Save"
+    Then I should see "2009"

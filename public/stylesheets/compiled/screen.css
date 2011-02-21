@@ -1339,7 +1339,7 @@ ul.meetings li.meeting span.question {
   margin-right: 0.885%;
 }
 /* line 300, ../../../app/stylesheets/screen.sass */
-ul.meetings li.meeting span.actions {
+ul.meetings li.meeting nav.actions {
   display: inline;
   float: left;
   width: 17.699%;
@@ -1351,6 +1351,59 @@ ul.meetings li.meeting span.actions {
 }
 
 /* line 304, ../../../app/stylesheets/screen.sass */
+ul.magazines {
+  list-style: none;
+  margin-left: 0;
+}
+/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/bundler/gems/compass-b36952cf30a9/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+ul.magazines li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+}
+/* line 307, ../../../app/stylesheets/screen.sass */
+ul.magazines li.magazine {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 310, ../../../app/stylesheets/screen.sass */
+ul.magazines li.magazine span.nickname {
+  margin-left: 0.885%;
+  display: inline;
+  float: left;
+  width: 17.699%;
+  margin-right: 0.885%;
+}
+/* line 313, ../../../app/stylesheets/screen.sass */
+ul.magazines li.magazine span.title {
+  display: inline;
+  float: left;
+  width: 42.478%;
+  margin-right: 0.885%;
+}
+/* line 315, ../../../app/stylesheets/screen.sass */
+ul.magazines li.magazine span.timeframe {
+  display: inline;
+  float: left;
+  width: 17.699%;
+  margin-right: 0.885%;
+}
+/* line 317, ../../../app/stylesheets/screen.sass */
+ul.magazines li.magazine nav.actions {
+  display: inline;
+  float: right;
+  margin-right: 0.885%;
+  #margin-left: -0.5em;
+  display: inline;
+  float: left;
+  width: 17.699%;
+  margin-right: 0.885%;
+}
+
+/* line 320, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1361,13 +1414,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 307, ../../../app/stylesheets/screen.sass */
+/* line 323, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 309, ../../../app/stylesheets/screen.sass */
+/* line 325, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1375,7 +1428,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 312, ../../../app/stylesheets/screen.sass */
+/* line 328, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1383,14 +1436,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 315, ../../../app/stylesheets/screen.sass */
+/* line 331, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 317, ../../../app/stylesheets/screen.sass */
+/* line 333, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1412,7 +1465,7 @@ ul#people li.person span.promote-to > ul li:last-child:after {
 ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 319, ../../../app/stylesheets/screen.sass */
+/* line 335, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1426,7 +1479,7 @@ ul#people li.person span.actions {
 
 /*   Odds & Ends
  ******************************* */
-/* line 327, ../../../app/stylesheets/screen.sass */
+/* line 343, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

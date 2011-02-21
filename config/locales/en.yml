@@ -42,6 +42,17 @@ en:
     show:
       edit: "Edit Meeting"
 
+  magazines:
+    index:
+      title: "Magazines"
+      new_magazine: "Set up a new magazine"
+    new:
+      title: "New Magazine"
+    edit:
+      title: "Edit Magazine"
+    show:
+      edit: "Edit Magazine"
+
   flash:
     submissions:
       update:
@@ -64,5 +75,8 @@ en:
       attendee:
         create: "Add"
       score:
+        create: "Save"
+        update: "Save"
+      magazine:
         create: "Save"
         update: "Save"
