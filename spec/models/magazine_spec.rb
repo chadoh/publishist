@@ -28,6 +28,20 @@ describe Magazine do
       mag2 = Magazine.new :accepts_submissions_until => Date.today + 6.months
       mag.accepts_submissions_until.should == mag2.accepts_submissions_until
     end
+
+    it "must be > self.accepts_submissions_from" do
+      mag = Magazine.new(
+        :accepts_submissions_from  => Date.today,
+        :accepts_submissions_until => Date.yesterday
+      )
+      mag.should_not be_valid
+    end
+  end
+
+  describe "with the default settings" do
+    it "should be valid" do
+      Magazine.new.should be_valid
+    end
   end
 
 end

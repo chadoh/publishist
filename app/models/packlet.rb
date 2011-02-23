@@ -18,11 +18,9 @@ class Packlet < ActiveRecord::Base
 protected
 
   def review_a_submission_only_once_per_meeting
-    packlets = Packlet.all
-    for packlet in packlets
-      if packlet.submission == self.submission && packlet.meeting == self.meeting
-        errors.add(:submission, "can only be review once per meeting")
-      end
+    packlets = Packlet.find_all_by_submission_id_and_meeting_id(self.submission_id, self.meeting_id)
+    if packlets.present? and (packlets.length > 1 or packlets.first != self)
+      errors.add(:submission, "can only be review once per meeting")
     end
   end
 

@@ -14,7 +14,6 @@ Feature: An editor specs a magazine
     And I press "Save"
     Then I should be on the magazines page
 
-  @wip
   @editor
   Scenario: I edit a magazine
     Given there is a magazine
