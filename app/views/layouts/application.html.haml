@@ -24,9 +24,9 @@
             %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current "Submissions", submissions_path
           - if staff? || editor?
             %li{ :class => params[:controller] == 'people' && 'current' }= link_to_unless_current "People", people_path
-          - if member?
+          -#- if member?
             %li{ :class => params[:controller] == 'meetings' && 'current' }= link_to_unless_current "Meetings", meetings_path
-          - if editor?
+          - if member?
             %li{ :class => params[:controller] == 'magazines' && 'current' }= link_to_unless_current "Magazines", magazines_path
           %li
             %ul#account

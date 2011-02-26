@@ -4,7 +4,7 @@ class Meeting < ActiveRecord::Base
   has_many :packlets, :dependent => :destroy, :order => 'position'
   has_many :submissions, :through => :packlets
 
-  default_scope order("created_at DESC")
+  default_scope order("created_at ASC")
 
   after_save :submissions_have_been_reviewed_or_queued
 

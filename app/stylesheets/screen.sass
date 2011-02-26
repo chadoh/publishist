@@ -286,37 +286,51 @@ article#submit-something
   .trigger
     height: 5px
 
-ul.meetings
-  +no-bullets
+ol.magazines
+  +full
   margin-left: 0
+  & > li.magazine
+    +full
+    +clearfix
+    +trailer
+    margin-left: 0
+    list-style-image: none
+    list-style-type: none
+    header
+      +full
+      +clearfix
+      h2
+        +alpha
+        +columns(10)
+        +trailer(0)
+      span.timeframe
+        +columns(4)
+      nav.actions
+        +columns(2)
+        +omega
+    dl#meetings
+      +full
+      margin-left: 1em
+      +trailer(0)
+      dd
+        padding-left: 0
+ol.meetings
+  +full
+  list-style-position: inside
   li.meeting
-    +full
-    +clearfix
-    span.datetime
-      +columns(floor($total-cols * (1/5)))
-      +alpha
     span.question
-      +columns(ceil( $total-cols * (3/5)))
+      display: inline-block
+      padding-left: 0.5em
+      width: 70%
+    span.datetime
+      display: inline-block
+      width: 13%
     nav.actions
-      +columns(floor($total-cols * (1/5)))
-      +omega
+      display: inline-block
+      width: 11%
+      float: right
+      margin-right: .885%
 
-ul.magazines
-  +no-bullets
-  margin-left: 0
-  li.magazine
-    +full
-    +clearfix
-    span.nickname
-      +alpha
-      +columns(3)
-    span.title
-      +columns(7)
-    span.timeframe
-      +columns(4)
-    nav.actions
-      +omega
-      +columns(2)
 ul#people
   +no-bullets
   margin-left: 0

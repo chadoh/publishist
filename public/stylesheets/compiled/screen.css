@@ -1305,105 +1305,99 @@ article#submit-something .trigger {
 }
 
 /* line 289, ../../../app/stylesheets/screen.sass */
-ul.meetings {
-  list-style: none;
+ol.magazines {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
   margin-left: 0;
 }
-/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/bundler/gems/compass-b36952cf30a9/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
-ul.meetings li {
+/* line 292, ../../../app/stylesheets/screen.sass */
+ol.magazines > li.magazine {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+  overflow: hidden;
+  *zoom: 1;
+  margin-bottom: 1.5em;
+  margin-left: 0;
   list-style-image: none;
   list-style-type: none;
-  margin-left: 0px;
 }
-/* line 292, ../../../app/stylesheets/screen.sass */
-ul.meetings li.meeting {
+/* line 299, ../../../app/stylesheets/screen.sass */
+ol.magazines > li.magazine header {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 295, ../../../app/stylesheets/screen.sass */
-ul.meetings li.meeting span.datetime {
-  display: inline;
-  float: left;
-  width: 17.699%;
-  margin-right: 0.885%;
+/* line 302, ../../../app/stylesheets/screen.sass */
+ol.magazines > li.magazine header h2 {
   margin-left: 0.885%;
-}
-/* line 298, ../../../app/stylesheets/screen.sass */
-ul.meetings li.meeting span.question {
   display: inline;
   float: left;
   width: 61.062%;
   margin-right: 0.885%;
+  margin-bottom: 0em;
 }
-/* line 300, ../../../app/stylesheets/screen.sass */
-ul.meetings li.meeting nav.actions {
-  display: inline;
-  float: left;
-  width: 17.699%;
-  margin-right: 0.885%;
-  display: inline;
-  float: right;
-  margin-right: 0.885%;
-  #margin-left: -0.5em;
-}
-
-/* line 304, ../../../app/stylesheets/screen.sass */
-ul.magazines {
-  list-style: none;
-  margin-left: 0;
-}
-/* line 11, ../../../../../../../../Library/Ruby/Gems/1.8/bundler/gems/compass-b36952cf30a9/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
-ul.magazines li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0px;
-}
-/* line 307, ../../../app/stylesheets/screen.sass */
-ul.magazines li.magazine {
-  clear: both;
-  margin-right: 0.885%;
-  margin-left: 0.885%;
-  overflow: hidden;
-  *zoom: 1;
-}
-/* line 310, ../../../app/stylesheets/screen.sass */
-ul.magazines li.magazine span.nickname {
-  margin-left: 0.885%;
-  display: inline;
-  float: left;
-  width: 17.699%;
-  margin-right: 0.885%;
-}
-/* line 313, ../../../app/stylesheets/screen.sass */
-ul.magazines li.magazine span.title {
-  display: inline;
-  float: left;
-  width: 42.478%;
-  margin-right: 0.885%;
-}
-/* line 315, ../../../app/stylesheets/screen.sass */
-ul.magazines li.magazine span.timeframe {
+/* line 306, ../../../app/stylesheets/screen.sass */
+ol.magazines > li.magazine header span.timeframe {
   display: inline;
   float: left;
   width: 23.894%;
   margin-right: 0.885%;
 }
-/* line 317, ../../../app/stylesheets/screen.sass */
-ul.magazines li.magazine nav.actions {
-  display: inline;
-  float: right;
-  margin-right: 0.885%;
-  #margin-left: -0.5em;
+/* line 308, ../../../app/stylesheets/screen.sass */
+ol.magazines > li.magazine header nav.actions {
   display: inline;
   float: left;
   width: 11.504%;
   margin-right: 0.885%;
+  display: inline;
+  float: right;
+  margin-right: 0.885%;
+  #margin-left: -0.5em;
+}
+/* line 311, ../../../app/stylesheets/screen.sass */
+ol.magazines > li.magazine dl#meetings {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+  margin-left: 1em;
+  margin-bottom: 0em;
+}
+/* line 315, ../../../app/stylesheets/screen.sass */
+ol.magazines > li.magazine dl#meetings dd {
+  padding-left: 0;
 }
 
-/* line 320, ../../../app/stylesheets/screen.sass */
+/* line 317, ../../../app/stylesheets/screen.sass */
+ol.meetings {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+  list-style-position: inside;
+}
+/* line 321, ../../../app/stylesheets/screen.sass */
+ol.meetings li.meeting span.question {
+  display: inline-block;
+  padding-left: 0.5em;
+  width: 70%;
+}
+/* line 325, ../../../app/stylesheets/screen.sass */
+ol.meetings li.meeting span.datetime {
+  display: inline-block;
+  width: 13%;
+}
+/* line 328, ../../../app/stylesheets/screen.sass */
+ol.meetings li.meeting nav.actions {
+  display: inline-block;
+  width: 11%;
+  float: right;
+  margin-right: 0.885%;
+}
+
+/* line 334, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1414,13 +1408,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 323, ../../../app/stylesheets/screen.sass */
+/* line 337, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 325, ../../../app/stylesheets/screen.sass */
+/* line 339, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1428,7 +1422,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 328, ../../../app/stylesheets/screen.sass */
+/* line 342, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1436,14 +1430,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 331, ../../../app/stylesheets/screen.sass */
+/* line 345, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 333, ../../../app/stylesheets/screen.sass */
+/* line 347, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1465,7 +1459,7 @@ ul#people li.person span.promote-to > ul li:last-child:after {
 ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 335, ../../../app/stylesheets/screen.sass */
+/* line 349, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1479,7 +1473,7 @@ ul#people li.person span.actions {
 
 /*   Odds & Ends
  ******************************* */
-/* line 343, ../../../app/stylesheets/screen.sass */
+/* line 357, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }

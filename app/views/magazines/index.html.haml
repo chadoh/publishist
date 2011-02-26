@@ -2,6 +2,6 @@
 - if editor?
   %p= link_to t('.new_magazine'), new_magazine_path
 
-%ul.magazines
+%ol.magazines
   - for magazine in collection
     = render :partial => 'show', :locals => { :magazine => magazine }

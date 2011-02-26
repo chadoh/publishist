@@ -71,4 +71,13 @@ describe Magazine do
     end
   end
 
+  describe "#meetings" do
+    it "returns all meetings that happen within the magazine's timeframe" do
+      mag = Magazine.create
+      meeting = Meeting.create :datetime => Date.tomorrow, :question => "orly?"
+      meeting2 = Meeting.create :datetime => Date.yesterday, :question => "orly?"
+      mag.meetings.should == [meeting]
+    end
+  end
+
 end
