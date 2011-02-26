@@ -11,9 +11,7 @@ class Magazine < ActiveRecord::Base
 
   default_scope order("accepts_submissions_until DESC")
 
-  def meetings
-    Meeting.where :datetime > self.accepts_submissions_from, :datetime < (self.accepts_submissions_until + 1.week)
-  end
+  has_many :meetings, :dependent => :nullify
 
 protected
 

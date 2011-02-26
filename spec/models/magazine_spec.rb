@@ -5,6 +5,7 @@ describe Magazine do
     should validate_presence_of :nickname
     should validate_presence_of :accepts_submissions_from
     should validate_presence_of :accepts_submissions_until
+    should have_many(:meetings).dependent(:nullify)
   }
 
   describe "#nickname" do
@@ -68,15 +69,6 @@ describe Magazine do
   describe "with the default settings" do
     it "should be valid" do
       Magazine.new.should be_valid
-    end
-  end
-
-  describe "#meetings" do
-    it "returns all meetings that happen within the magazine's timeframe" do
-      mag = Magazine.create
-      meeting = Meeting.create :datetime => Date.tomorrow, :question => "orly?"
-      meeting2 = Meeting.create :datetime => Date.yesterday, :question => "orly?"
-      mag.meetings.should == [meeting]
     end
   end
 
