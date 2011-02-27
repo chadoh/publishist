@@ -46,6 +46,7 @@ en:
     index:
       title: "Magazines"
       new_magazine: "Set up a new magazine"
+      new_meeting: "Schedule a new meeting"
     new:
       title: "New Magazine"
     edit:

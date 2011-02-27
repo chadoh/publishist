@@ -30,8 +30,8 @@ $(function(){
             type: 'POST',
             url: '/packlets',
             data: {
-              submission: li.attr('id').split('_')[1],
-              meeting:     section.attr('id').split('_')[1] }
+              submission: li.attr('id').split('_').pop(),
+              meeting:     section.attr('id').split('_').pop() }
           }); }
         else {
           $.ajax({

@@ -2,9 +2,11 @@
   %header
     %h2= magazine.title.presence || magazine.nickname
     %span.timeframe
-      = pretty_date(magazine.accepts_submissions_from)
-      \-
-      = pretty_date(magazine.accepts_submissions_until)
+      %time{ :datetime => magazine.accepts_submissions_from  }
+        = pretty_date(magazine.accepts_submissions_from)
+      –
+      %time{ :datetime => magazine.accepts_submissions_until }
+        = pretty_date(magazine.accepts_submissions_until)
     - if editor?
       %nav.actions
         %ul
@@ -15,7 +17,7 @@
                         :confirm => "You're saying this magazine never actually happened. All of its meetings will be unassociated with any magazine. If this magazine has been published, all of the submissions submitted for it will be simply \"Scored\" again.",
                         :class => 'link destroy'
   - if magazine.meetings.present?
-    %dl#meetings
+    %dl.meetings
       %dt
         %span.arrow &raquo;
         %p Meetings

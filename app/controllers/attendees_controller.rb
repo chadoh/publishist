@@ -1,9 +1,13 @@
 class AttendeesController < InheritedResources::Base
   actions :create, :edit, :update, :destroy
   belongs_to :meeting
+
   respond_to :html, :except => :update_answer
   respond_to :js
+
   before_filter :resource, :except => :create
+
+  skip_before_filter :verify_authenticity_token, :only => :update_answer
 
   def create
     params[:attendee] = set_person_param_from_string params[:attendee]

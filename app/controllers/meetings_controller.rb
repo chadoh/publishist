@@ -4,7 +4,14 @@ class MeetingsController < InheritedResources::Base
 
   before_filter :resource, :only => [ :scores, :show]
 
+  skip_before_filter :verify_authenticity_token, :only => :update
+
   custom_actions :resource => :search
+
+  actions :all
+
+  respond_to :html
+  respond_to :js, :only => :update
 
   def show
     @show_score = current_person.can_enter_scores_for? resource
@@ -17,9 +24,4 @@ class MeetingsController < InheritedResources::Base
     @attendees = resource.attendees
   end
 
-protected
-
-  def meeting_with_attendees
-    @meeting = Meeting.includes(:attendees).find(params[:id])
-  end
 end

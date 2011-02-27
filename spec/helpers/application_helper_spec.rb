@@ -24,4 +24,19 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe "#pretty_date" do
+    context "when the date happens in another year" do
+      it "shows the year" do
+        date = 1.year.ago
+        helper.pretty_date(date).should match(/#{1.year.ago.year}/)
+      end
+    end
+    context "when the date occurs in this calendar year" do
+      it "doesn't show the year" do
+        date = Date.today
+        helper.pretty_date(date).should_not match(/#{1.year.ago.year}/)
+      end
+    end
+  end
 end

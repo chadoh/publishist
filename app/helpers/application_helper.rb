@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def pretty_date(date)
-    if date < Time.now.years_ago(1)
+    if date.year != Date.today.year
       date.strftime("%d %b %Y")
     else
       date.strftime("%d %b")

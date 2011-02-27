@@ -63,6 +63,9 @@ describe Magazine do
         :accepts_submissions_from => Date.yesterday
       )
       mag.should_not be_valid
+
+      orig.accepts_submissions_until = orig.accepts_submissions_until - 1.day
+      orig.should be_valid
     end
   end
 

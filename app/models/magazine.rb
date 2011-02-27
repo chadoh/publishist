@@ -38,16 +38,18 @@ protected
   end
 
   def magazine_ranges_dont_conflict
-    if Magazine.where(
+    mags = Magazine.where(
       :accepts_submissions_from  < self.accepts_submissions_from,
       :accepts_submissions_until > self.accepts_submissions_from
-    ).present?
+    )
+    if mags.present? && (mags.length > 1 || mags.first != self)
       then errors.add :accepts_submissions_from,  "can't occurr during another magazine"
     end
-    if Magazine.where(
+    mags = Magazine.where(
       :accepts_submissions_from  < self.accepts_submissions_until,
       :accepts_submissions_until > self.accepts_submissions_until
-    ).present?
+    )
+    if mags.present? && (mags.length > 1 || mags.first != self)
       then errors.add :accepts_submissions_until, "can't occurr during another magazine"
     end
   end
