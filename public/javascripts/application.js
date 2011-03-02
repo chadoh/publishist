@@ -1,5 +1,3 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
 
 jQuery.expr[':'].regex = function(elem, index, match) {
     var matchParams = match[3].split(','),
@@ -15,6 +13,10 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 }
 
 $(function(){
+
+  Modernizr.addTest('meter', function(){
+    return 'value' in document.createElement('meter');
+  });
 
   $('a.toggle_next').next().hide().end().live('click', function(e){
     e.preventDefault();
@@ -51,4 +53,11 @@ $(function(){
 
   if(!Modernizr.inputtypes.number){ $('html').addClass('no-number-input'); }
 
+  if(Modernizr.meter){
+    $('meter[data-average]').after(function(){
+        return '<span class="average-score" style="margin-left: -' +
+                (1 - $(this).attr('data-average')/10) * $(this).width() +
+                'px"></span>';
+    });
+  }
 });

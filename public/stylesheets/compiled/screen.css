@@ -1533,3 +1533,21 @@ ul#people li.person span.actions {
 #your_name_looks_like {
   display: none;
 }
+
+/* line 359, ../../../app/stylesheets/screen.sass */
+span.average-score {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  width: 1px;
+  height: 16px;
+  border-left: 1px solid silver;
+  margin-left: -50px;
+  vertical-align: -0.2em;
+}
+/* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/bundler/gems/compass-b36952cf30a9/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+span.average-score {
+  *display: inline;
+}

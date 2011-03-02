@@ -34,7 +34,7 @@
   - if submission.scored? and coeditor_or_author?(submission)
     %p.scored
       Score:
-      %meter{ :min => 0, :max => 10,
+      %meter{ :min => 0, :max => 10, :data => { :average => 5 },
               :value => score = (submission.average_score * 100).round.to_f / 100,
               :title => "#{score} out of 10" }
         = score
