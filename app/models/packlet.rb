@@ -10,6 +10,7 @@ class Packlet < ActiveRecord::Base
   validates_presence_of :submission_id
 
   validate :review_a_submission_only_once_per_meeting
+  validate :only_reviewed_in_one_magazine
 
   before_create :submission_reviewed_or_queued
 
@@ -17,12 +18,18 @@ class Packlet < ActiveRecord::Base
 
 protected
 
-  def review_a_submission_only_once_per_meeting
-    packlets = Packlet.all
-    for packlet in packlets
-      if packlet.submission == self.submission && packlet.meeting == self.meeting
-        errors.add(:submission, "can only be review once per meeting")
+  def only_reviewed_in_one_magazine
+    if !!self.meeting && !!self.meeting.magazine
+      if (self.submission.meetings.collect(&:magazine) - [self.meeting.try(:magazine)]).present?
+        errors.add(:submission, "can only be reviewed in one magazine")
       end
+    end
+  end
+
+  def review_a_submission_only_once_per_meeting
+    packlets = Packlet.find_all_by_submission_id_and_meeting_id(self.submission_id, self.meeting_id)
+    if packlets.present? and (packlets.length > 1 or packlets.first != self)
+      errors.add(:submission, "can only be reviewed once per meeting")
     end
   end
 

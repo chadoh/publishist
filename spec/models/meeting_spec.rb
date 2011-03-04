@@ -6,6 +6,7 @@ describe Meeting do
     should have_many(:people).through(:attendees)
     should have_many(:packlets).dependent(:destroy)
     should have_many(:submissions).through(:packlets)
+    should belong_to(:magazine)
   }
 
   it "sets all of its submissions to :reviewed if it is rescheduled to the past" do
@@ -23,5 +24,22 @@ describe Meeting do
     submission.reload.should be_reviewed
     meeting.update_attribute :datetime, 1.week.from_now
     submission.reload.should be_queued
+  end
+
+  describe "#create" do
+    it "will automatically be associated with the magazine in whose range it falls" do
+      mag = Magazine.create
+      meeting = Meeting.create :question => "would you believe it?", :datetime => Date.tomorrow
+      meeting.magazine.should == mag
+    end
+
+    it "allows changing to a different magazine" do
+      mag = Magazine.create
+      mag2 = Magazine.create
+      meeting = Meeting.create :question => "would you believe it?", :datetime => Date.tomorrow
+      meeting.magazine.should == mag
+      meeting.update_attributes :magazine => mag2
+      meeting.magazine.should == mag2
+    end
   end
 end

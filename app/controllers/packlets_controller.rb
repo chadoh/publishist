@@ -2,6 +2,8 @@ class PackletsController < ApplicationController
   before_filter :editors_only
   skip_before_filter :verify_authenticity_token
 
+  respond_to :js
+
   def create
     @old_packlet = params[:packlet] || false
     @submission = @old_packlet ? Packlet.find(@old_packlet).submission : Submission.find(params[:submission])

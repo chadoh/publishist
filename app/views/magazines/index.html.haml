@@ -1,0 +1,11 @@
+- title t('.title')
+- if editor?
+  :markdown
+    #{link_to t('.new_magazine'), new_magazine_path}  
+    #{link_to t('.new_meeting'), new_meeting_path}
+
+%ol.magazines
+  - for magazine in collection
+    = render :partial => 'show', :locals => { :magazine => magazine }
+
+- javascript 'magazines'

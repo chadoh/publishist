@@ -4,11 +4,25 @@ class Meeting < ActiveRecord::Base
   has_many :packlets, :dependent => :destroy, :order => 'position'
   has_many :submissions, :through => :packlets
 
-  default_scope order("created_at DESC")
+  belongs_to :magazine
+
+  default_scope order("created_at ASC")
 
   after_save :submissions_have_been_reviewed_or_queued
 
+  before_create :belongs_to_a_magazine
+
 protected
+
+  def belongs_to_a_magazine
+    unless self.magazine.present?
+      mag = Magazine.where(
+        :accepts_submissions_from  < self.datetime,
+        :accepts_submissions_until > self.datetime
+      ).first
+      self.magazine = mag.presence || Magazine.order("accepts_submissions_until DESC").first
+    end
+  end
 
   def submissions_have_been_reviewed_or_queued
     if datetime < Time.now + 3.hours

@@ -22,6 +22,7 @@ gem 'inherited_resources'
 # Models
 gem 'devise'
 gem 'acts_as_list'
+gem 'meta_where'
 
 group :development do
   gem 'rails3-generators'

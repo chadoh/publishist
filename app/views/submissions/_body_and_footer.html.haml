@@ -5,6 +5,15 @@
     = sanitize submission.body
 %footer.submission-details
 
+  - if (@show_author.nil? or @show_author) and editor_or_author?(submission)
+    %p.author
+      - if the_editor?
+        = mail_to submission.email, email_image(submission.author_name)
+      - if !!submission.author
+        = link_to_unless_current submission.author_name, person_path(submission.author)
+      - else
+        = submission.author_name
+
   - if @show_score
     = render :partial => 'scores/form', :locals => { :score => Score.with(@attendee, packlet) }
 
@@ -26,18 +35,10 @@
     %p.scored
       Score:
       %meter{ :min => 0, :max => 10,
+              :data => { :average => average = submission.magazine.present? ? (submission.magazine.try(:average_score) * 100).round.to_f / 100 : nil },
               :value => score = (submission.average_score * 100).round.to_f / 100,
-              :title => "#{score} out of 10" }
-        = score
-
-  - if (@show_author.nil? or @show_author) and editor_or_author?(submission)
-    %p.author
-      - if the_editor?
-        = mail_to submission.email, email_image(submission.author_name)
-      - if !!submission.author
-        = link_to_unless_current submission.author_name, person_path(submission.author)
-      - else
-        = submission.author_name
+              :title => "#{score} out of 10#{"(average: #{average})" if average.present?}" }
+        #{score}#{ "(average: #{average})" if average.present?}
 
   - if the_editor? or (submission.author == current_person and [:draft, :submitted, :queued].include? submission.state)
     %nav.actions

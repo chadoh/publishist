@@ -48,6 +48,13 @@ $black: $base
 =monospace-family
   font-family: "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, Courier, monospace, sans-serif
 
-// OTHER MIXINS --------------------------------------------------------------
-// Mixins set here will be available in defaults, screen, print and IE
-// Or anywhere you import either base.sass or defaults.sass
+// OTHER MIXINS --------------------------------------------------------
+=drag-handle
+  width: 1em
+  +inline-block
+  cursor: move
+  & > span.drag-handle
+    +inline-block
+    color: $lgray
+    +rotate(90deg)
+    letter-spacing: -1px

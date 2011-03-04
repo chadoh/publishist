@@ -1,5 +1,8 @@
 - title @meeting.question
-%p= @meeting.datetime.strftime("A meeting held on %A, %d %B %Y at %I:%M %p")
+%p
+  A meeting held on
+  %time{ :datetime => @meeting.datetime }
+    = @meeting.datetime.strftime("%A, %d %B %Y at %I:%M %p")
 - if editor?
   %p.actions
     = link_to t('.edit'), edit_meeting_path(@meeting)
@@ -23,4 +26,4 @@
   - if editor?
     = render :partial => "attendees/form", :locals => { :attendee => [@meeting, Attendee.new] }
 
-- javascript 'meetings'
+- javascript 'meeting'
