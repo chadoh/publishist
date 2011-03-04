@@ -34,10 +34,11 @@
   - if submission.scored? and coeditor_or_author?(submission)
     %p.scored
       Score:
-      %meter{ :min => 0, :max => 10, :data => { :average => 5 },
+      %meter{ :min => 0, :max => 10,
+              :data => { :average => average = submission.magazine.present? ? (submission.magazine.try(:average_score) * 100).round.to_f / 100 : nil },
               :value => score = (submission.average_score * 100).round.to_f / 100,
-              :title => "#{score} out of 10" }
-        = score
+              :title => "#{score} out of 10#{"(average: #{average})" if average.present?}" }
+        #{score}#{ "(average: #{average})" if average.present?}
 
   - if the_editor? or (submission.author == current_person and [:draft, :submitted, :queued].include? submission.state)
     %nav.actions

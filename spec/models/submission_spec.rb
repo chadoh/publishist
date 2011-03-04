@@ -26,8 +26,8 @@ describe Submission do
   describe "#has_been" do
     it "moves the sumbission into the specified state" do
       sub = Factory.build :submission
-      sub.has_been :submitted
-      sub.state.should == :submitted
+      sub.has_been :reviewed
+      sub.state.should == :reviewed
     end
   end
 
@@ -97,7 +97,7 @@ describe Submission do
     end
   end
 
-  describe "#average_score(magazine = 'next')" do
+  describe "#average_score" do
     before do
       @submission = Factory.create :submission
       @meeting = Factory.create :meeting
@@ -110,7 +110,16 @@ describe Submission do
     it "returns the average score for the submission" do
       @submission.average_score.should == 5
     end
+  end
 
-    it "returns the average score for the submission for a given magazine"
+  describe "#magazine" do
+    it "returns the submission's magazine, as told by its first meeting" do
+      mag = Factory.create :magazine
+      meeting = Factory.create :meeting
+      meeting.update_attributes :magazine => mag
+      sub = Factory.create :submission
+      meeting.submissions << sub
+      sub.magazine.should == mag
+    end
   end
 end

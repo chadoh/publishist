@@ -10,16 +10,18 @@ class Meeting < ActiveRecord::Base
 
   after_save :submissions_have_been_reviewed_or_queued
 
-  after_create :belongs_to_a_magazine
+  before_create :belongs_to_a_magazine
 
 protected
 
   def belongs_to_a_magazine
-    mag = Magazine.where(
-      :accepts_submissions_from  < self.datetime,
-      :accepts_submissions_until > self.datetime
-    ).first
-    self.magazine = mag.presence || Magazine.order("accepts_submissions_until DESC").first
+    unless self.magazine.present?
+      mag = Magazine.where(
+        :accepts_submissions_from  < self.datetime,
+        :accepts_submissions_until > self.datetime
+      ).first
+      self.magazine = mag.presence || Magazine.order("accepts_submissions_until DESC").first
+    end
   end
 
   def submissions_have_been_reviewed_or_queued

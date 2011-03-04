@@ -37,6 +37,22 @@ describe Packlet do
     @p3.should be_valid
   end
 
+  it "does not allow a submission to be reviewed in multiple magazines" do
+    magazine  = Factory.create :magazine
+    magazine2 = Factory.create :magazine
+    meeting   = Factory.create :meeting
+    meeting2  = Factory.create :meeting
+    meeting .update_attributes :magazine => magazine
+    meeting2.update_attributes :magazine => magazine2
+    submission = Factory.create :submission
+    meeting.submissions << submission
+    packlet = Packlet.create(
+      :meeting => meeting2,
+      :submission => submission
+    )
+    packlet.should_not be_valid
+  end
+
   describe "#submission#draft?" do
     it "returns false, since a submission can only be scheduled after it's submitted" do
       @packlet.submission.draft?.should be_false

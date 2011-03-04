@@ -32,5 +32,14 @@ describe Meeting do
       meeting = Meeting.create :question => "would you believe it?", :datetime => Date.tomorrow
       meeting.magazine.should == mag
     end
+
+    it "allows changing to a different magazine" do
+      mag = Magazine.create
+      mag2 = Magazine.create
+      meeting = Meeting.create :question => "would you believe it?", :datetime => Date.tomorrow
+      meeting.magazine.should == mag
+      meeting.update_attributes :magazine => mag2
+      meeting.magazine.should == mag2
+    end
   end
 end

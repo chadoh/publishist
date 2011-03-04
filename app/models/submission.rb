@@ -66,6 +66,10 @@ class Submission < ActiveRecord::Base
     Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
   end
 
+  def magazine
+    self.meetings.first.magazine
+  end
+
 protected
 
   def reviewed_if_meeting_has_occurred

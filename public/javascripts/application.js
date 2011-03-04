@@ -53,7 +53,7 @@ $(function(){
 
   if(!Modernizr.inputtypes.number){ $('html').addClass('no-number-input'); }
 
-  if(Modernizr.meter){
+  if(Modernizr.meter && $('meter[data-average]').length > 0){
     $('meter[data-average]').after(function(){
         return '<span class="average-score" style="margin-left: -' +
                 (1 - $(this).attr('data-average')/10) * $(this).width() +

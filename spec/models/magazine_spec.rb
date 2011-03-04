@@ -6,6 +6,7 @@ describe Magazine do
     should validate_presence_of :accepts_submissions_from
     should validate_presence_of :accepts_submissions_until
     should have_many(:meetings).dependent(:nullify)
+    should have_many(:submissions).through(:meetings)
   }
 
   describe "#nickname" do
@@ -72,6 +73,28 @@ describe Magazine do
   describe "with the default settings" do
     it "should be valid" do
       Magazine.new.should be_valid
+    end
+  end
+
+  describe "#average_score" do
+    it "returns the average score for the submissions in this magazine" do
+      mag      = Factory.create :magazine
+      mag2     = Factory.create :magazine
+      meeting  = Meeting.create(:datetime => Date.tomorrow) # in mag
+      meeting2 = Meeting.create(:datetime => Date.tomorrow + 6.months) # in mag2
+      sub      = Factory.create :submission
+      sub2     = Factory.create :submission
+      p        = Factory.create :person
+      p2       = Factory.create :person
+      a        = Attendee.create :meeting => meeting, :person => p
+      a2       = Attendee.create :meeting => meeting, :person => p2
+      a3       = Attendee.create :meeting => meeting2, :person => p
+      a4       = Attendee.create :meeting => meeting2, :person => p2
+      packlet  = Packlet.create  :meeting => meeting, :submission => sub
+      packlet2 = Packlet.create  :meeting => meeting2, :submission => sub2
+      packlet.scores << [Score.create(:amount => 6, :attendee => a), Score.create(:amount => 4, :attendee => a2)]
+      packlet2.scores << [Score.create(:amount => 10, :attendee => a3), Score.create(:amount => 10, :attendee => a4)]
+      mag.average_score.should == 5
     end
   end
 
