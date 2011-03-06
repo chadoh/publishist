@@ -1,8 +1,26 @@
 - title(t('.title'))
 
+- content_for :sidebar do
+  %section#magazines
+    %header
+      %h2
+        Magazines
+    %ul.magazines
+      - for mag in @magazines
+        = link_to(submissions_path(:m => mag.id), :class => mag == @magazine && 'selected') do
+          %li
+            %header
+              - if mag == @magazine
+                %h3= mag.title.presence || mag.nickname
+              - else
+                %p= mag.title.presence || mag.nickname
+            = pluralize mag.meetings.count, 'meeting'
+            %br
+            = timeframe mag.accepts_submissions_from, mag.accepts_submissions_until
+
 :markdown
   #{link_to "Submit something", new_submission_path}  
-  #{link_to "Schedule a new meeting", new_meeting_path}  
+  #{link_to "Schedule a new meeting", new_meeting_path}
 
 - for meeting in @meetings_to_come
   %section.future[meeting]
@@ -10,14 +28,14 @@
       %h2 To be reviewed on #{link_to pretty_date(meeting.datetime), meeting_url(meeting)}
     %ol.packlets
       - for packlet in meeting.packlets
-        = render :partial => 'packlets/show', :locals => { :packlet => packlet, :show_author => true }
+        = render :partial => 'packlets/show', :locals => { :packlet => packlet }
 
 %section#unscheduled.unscheduled
   %header
     %h2 Unscheduled
   %ul.submissions
-    - for submission in @submissions
-      = render :partial => 'show', :locals => { :submission => submission, :show_author => true }
+    - for submission in @unscheduled_submissions
+      = render :partial => 'show', :locals => { :submission => submission }
 
 - for meeting in @meetings_gone_by
   %section.past[meeting]
@@ -25,6 +43,6 @@
       %h2 Reviewed on #{link_to pretty_date(meeting.datetime), meeting_url(meeting)}
     %ol.packlets
       - for packlet in meeting.packlets
-        = render :partial => 'packlets/show', :locals => { :packlet => packlet, :show_author => true }
+        = render :partial => 'packlets/show', :locals => { :packlet => packlet }
 
 - javascript 'submissions'

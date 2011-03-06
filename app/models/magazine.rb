@@ -19,6 +19,13 @@ class Magazine < ActiveRecord::Base
     Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})" unless packlet_ids.blank?
   end
 
+  class << self
+    def current
+      where(:accepts_submissions_from  < Date.today,
+            :accepts_submissions_until > Date.today).first
+    end
+  end
+
 protected
 
   def accepts_from_after_latest_or_perhaps_today

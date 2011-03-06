@@ -465,10 +465,10 @@ label {
   max-width: 38.5em;
   margin-top: 0;
   border-color: silver;
-  -moz-box-shadow: #8bc7c7 0 0 3px false;
-  -webkit-box-shadow: #8bc7c7 0 0 3px false;
-  -o-box-shadow: #8bc7c7 0 0 3px false;
-  box-shadow: #8bc7c7 0 0 3px false;
+  -moz-box-shadow: #8bc7c7 0 0 3px 0;
+  -webkit-box-shadow: #8bc7c7 0 0 3px 0;
+  -o-box-shadow: #8bc7c7 0 0 3px 0;
+  box-shadow: #8bc7c7 0 0 3px 0;
   height: 2.571em;
 }
 
@@ -507,17 +507,17 @@ input[type=submit], button {
   margin-top: 1.5em;
   padding-left: 2.212%;
   padding-right: 2.212%;
-  -moz-box-shadow: #4a4a4a 1px 1px 2px false;
-  -webkit-box-shadow: #4a4a4a 1px 1px 2px false;
-  -o-box-shadow: #4a4a4a 1px 1px 2px false;
-  box-shadow: #4a4a4a 1px 1px 2px false;
+  -moz-box-shadow: #4a4a4a 1px 1px 2px 0;
+  -webkit-box-shadow: #4a4a4a 1px 1px 2px 0;
+  -o-box-shadow: #4a4a4a 1px 1px 2px 0;
+  box-shadow: #4a4a4a 1px 1px 2px 0;
 }
 /* line 318, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
-  -moz-box-shadow: #4a4a4a 0 0 2px false;
-  -webkit-box-shadow: #4a4a4a 0 0 2px false;
-  -o-box-shadow: #4a4a4a 0 0 2px false;
-  box-shadow: #4a4a4a 0 0 2px false;
+  -moz-box-shadow: #4a4a4a 0 0 2px 0;
+  -webkit-box-shadow: #4a4a4a 0 0 2px 0;
+  -o-box-shadow: #4a4a4a 0 0 2px 0;
+  box-shadow: #4a4a4a 0 0 2px 0;
 }
 /* line 320, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
@@ -529,10 +529,10 @@ input[type=submit]:active, button:active {
 /* line 322, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
-  -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
-  -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
-  -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
-  box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
+  -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
+  -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
+  -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
+  box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   margin-top: 0em;
   padding-top: 0em;
   padding-bottom: 0em;
@@ -544,10 +544,10 @@ input[type=submit].link, button.link {
 }
 /* line 325, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:hover, button.link:hover {
-  -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
-  -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
-  -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
-  box-shadow: rgba(255, 255, 255, 0) 0 0 0 false;
+  -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
+  -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
+  -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
+  box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
 }
 /* line 327, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:active, button.link:active {
