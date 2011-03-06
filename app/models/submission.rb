@@ -14,6 +14,10 @@ class Submission < ActiveRecord::Base
   after_find :reviewed_if_meeting_has_occurred
   after_update :send_notification_email_if_submitted
 
+  def magazine
+    self.reload.meetings.first.magazine
+  end
+
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
 
   validates_attachment_content_type :photo, 
@@ -64,10 +68,6 @@ class Submission < ActiveRecord::Base
   def average_score
     packlet_ids = self.packlets.collect &:id
     Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
-  end
-
-  def magazine
-    self.meetings.first.magazine
   end
 
 protected

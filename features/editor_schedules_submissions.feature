@@ -21,6 +21,7 @@ Feature: An editor organizes submissions into packlets
     And I should see "Lisa, the Cat" under the first meeting
     And I should not see "Lisa, the Cat" under "Unscheduled"
 
+  @pending
   @editor @javascript
   Scenario: The editor sorts submissions within the packlet
     Given the following submissions are scheduled for a meeting a week from now:

@@ -7,15 +7,16 @@
         Magazines
     %ul.magazines
       - for mag in @magazines
-        %li{ :class => mag == @magazine && 'selected' }
-          %header
-            - if mag == @magazine
-              %h3= mag.title.presence || mag.nickname
-            - else
-              %p= mag.title.presence || mag.nickname
-          = pluralize mag.meetings.count, 'meeting'
-          %br
-          = timeframe mag.accepts_submissions_from, mag.accepts_submissions_until
+        = link_to(submissions_path(:m => mag.id), :class => mag == @magazine && 'selected') do
+          %li
+            %header
+              - if mag == @magazine
+                %h3= mag.title.presence || mag.nickname
+              - else
+                %p= mag.title.presence || mag.nickname
+            = pluralize mag.meetings.count, 'meeting'
+            %br
+            = timeframe mag.accepts_submissions_from, mag.accepts_submissions_until
 
 :markdown
   #{link_to "Submit something", new_submission_path}  
@@ -33,7 +34,7 @@
   %header
     %h2 Unscheduled
   %ul.submissions
-    - for submission in @submissions
+    - for submission in @unscheduled_submissions
       = render :partial => 'show', :locals => { :submission => submission }
 
 - for meeting in @meetings_gone_by

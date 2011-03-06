@@ -31,13 +31,13 @@
       - else
         =link_to "#{distance_of_time_in_words(Time.now, time)} ago", meeting_path(submission.meetings.first)
 
-  - if submission.scored? and coeditor_or_author?(submission) and !current_page?(submissions_path)
+  - if submission.scored? and coeditor_or_author?(submission) and !(the_editor? && current_page?(submissions_path))
     %p.scored
       Score:
       %meter{ :min => 0, :max => 10,
               :data => { :average => average = submission.magazine.present? ? (submission.magazine.try(:average_score) * 100).round.to_f / 100 : nil },
               :value => score = (submission.average_score * 100).round.to_f / 100,
-              :title => "#{score} out of 10#{"(average: #{average})" if average.present?}" }
+              :title => "#{score} out of 10 #{"(average: #{average})" if average.present?}" }
         #{score}#{ "(average: #{average})" if average.present?}
 
   - if the_editor? or (submission.author == current_person and [:draft, :submitted, :queued].include? submission.state)

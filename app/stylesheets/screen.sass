@@ -207,7 +207,7 @@ section#magazines
     margin: 0
     li
       background-color: $yellow
-      +linear-gradient(color-stops(lighten($yellow, 15%), $yellow))
+      +linear-gradient(color-stops(lighten($lyellow, 15%), $lyellow))
       +rhythm-borders
       padding:
         top: 0
@@ -220,7 +220,18 @@ section#magazines
         p
           border-bottom: 1px dashed $lgray
           +trailer(0)
-      &.selected
+      &:hover
+        color: $base
+        border-color: $base
+      &:active
+        color: $base
+        border-color: $base
+        +box-shadow($dgray, 0, 0, 5px, inset)
+        p
+          border-color: $orange
+    a.selected
+      cursor: default
+      li
         border-color: $base
         color: $base
         header

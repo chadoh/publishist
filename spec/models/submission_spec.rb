@@ -1,8 +1,19 @@
 require 'spec_helper'
 
 describe Submission do
-  before(:each) do
+  before :each do
+    @magazine = Factory.create :magazine
+    @meeting = Factory.create :meeting
+    @submission = Factory.create :submission
     @person = Factory.create :person
+    @person2 = Factory.create :person
+
+    @meeting.people = [@person, @person2]
+    @meeting.update_attributes :magazine => @magazine
+    @packlet = @meeting.packlets.create :submission => @submission
+
+    @packlet.scores.create :attendee => @meeting.attendees.first, :amount => 4
+    @packlet.scores.create :attendee => @meeting.attendees.last , :amount => 6
   end
 
   it {
@@ -98,15 +109,6 @@ describe Submission do
   end
 
   describe "#average_score" do
-    before do
-      @submission = Factory.create :submission
-      @meeting = Factory.create :meeting
-      2.times { @meeting.people << Factory.create(:person) }
-      @packlet = @meeting.packlets.create :submission => @submission
-      @packlet.scores.create :attendee => @meeting.attendees.first, :amount => 4
-      @packlet.scores.create :attendee => @meeting.attendees.last , :amount => 6
-    end
-
     it "returns the average score for the submission" do
       @submission.average_score.should == 5
     end
@@ -114,12 +116,7 @@ describe Submission do
 
   describe "#magazine" do
     it "returns the submission's magazine, as told by its first meeting" do
-      mag = Factory.create :magazine
-      meeting = Factory.create :meeting
-      meeting.update_attributes :magazine => mag
-      sub = Factory.create :submission
-      meeting.submissions << sub
-      sub.magazine.should == mag
+      @submission.reload.magazine.should == @magazine
     end
   end
 end

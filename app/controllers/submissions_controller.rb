@@ -7,7 +7,8 @@ class SubmissionsController < InheritedResources::Base
     @meetings = @magazine.present? ? @magazine.meetings : Meeting.all
     @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
-    @submissions = Submission.where :state => Submission.state(:submitted), :meeting_id => @meetings.collect(&:id)
+    @unscheduled_submissions = Submission.where :state => Submission.state(:submitted)
+    @show_author = false if current_person.the_coeditor?
     index!
   end
 

@@ -9,6 +9,18 @@ describe Magazine do
     should have_many(:submissions).through(:meetings)
   }
 
+  describe "#submissions" do
+    it "returns submissions through the hm:t relationship" do
+      pending "https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/1152" do
+        mag = Magazine.create
+        meeting = Meeting.create :datetime => Date.tomorrow
+        sub = Factory.create :submission
+        meeting.submissions << sub
+        mag.submissions.should == [sub]
+      end
+    end
+  end
+
   describe "#nickname" do
     it "defaults to 'next'" do
       mag = Magazine.new
