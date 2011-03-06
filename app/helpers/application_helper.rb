@@ -15,6 +15,20 @@ module ApplicationHelper
     end
   end
 
+  def timeframe start, finish
+    capture_haml do
+      haml_tag 'span.timeframe' do
+        haml_tag :time, :datetime => start do
+          haml_concat pretty_date start
+        end
+        haml_concat " – "
+        haml_tag :time, :datetime => finish do
+          haml_concat pretty_date finish
+        end
+      end
+    end
+  end
+
   def error_messages
     if resource.errors.any?
       capture_haml do

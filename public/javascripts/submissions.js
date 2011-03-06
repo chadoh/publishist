@@ -10,10 +10,12 @@ $(function(){
     axis: 'y',
     stack: 'article',
     zIndex: 1,
-    helper: 'clone'
+    helper: function(){
+      return $(this).clone().css('width', this.offsetWidth)[0];
+    }
   });
 
-  $('section').droppable({
+  $('article section').droppable({
     hoverClass: 'drop-here',
     drop: function( event, ui ) {
       li = ui.draggable;

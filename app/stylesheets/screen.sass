@@ -183,7 +183,7 @@ ol.packlets, ul.submissions
       +trailer(0)
       & > header
         +inline-block
-        width: 8 * $col-width
+        width: 60%
         h2
           +trailer(0)
       & > div.body
@@ -192,21 +192,42 @@ ol.packlets, ul.submissions
         +drag-handle
       & > footer
         +inline-block
-        width: 8 * $col-width
+        width: 35%
         +trailer(0)
         +leader(0)
-        & > p.author
-          +alpha
-          +columns(7)
         & > span.score
-          +alpha
-          +columns(7)
           & > form.score
             display: inline
         & > nav.actions
-          +columns(5)
-          +omega
-          text-align: right
+          display: none
+
+section#magazines
+  ul.magazines
+    +no-bullets
+    margin: 0
+    li
+      background-color: $yellow
+      +linear-gradient(color-stops(lighten($yellow, 15%), $yellow))
+      +rhythm-borders
+      padding:
+        top: 0
+        bottom: 0
+      +border-radius(20px)
+      +trailer
+      border-color: $lgray
+      color: $mgray
+      header
+        p
+          border-bottom: 1px dashed $lgray
+          +trailer(0)
+      &.selected
+        border-color: $base
+        color: $base
+        header
+          h3
+            border-bottom: 1px solid $orange
+            +trailer(0)
+        +box-shadow($lgray, 0, 0, 10px, 0)
 
 span.score
   form.button_to

@@ -6,7 +6,7 @@ class Meeting < ActiveRecord::Base
 
   belongs_to :magazine
 
-  default_scope order("created_at ASC")
+  default_scope order("datetime ASC")
 
   after_save :submissions_have_been_reviewed_or_queued
 

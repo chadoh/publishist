@@ -98,4 +98,13 @@ describe Magazine do
     end
   end
 
+  describe ".current" do
+    it "returns the magazine that accepts submissions at the current date" do
+      mag  = Magazine.create :accepts_submissions_from => Date.yesterday,
+                            :accepts_submissions_until => Date.tomorrow
+      mag2 = Magazine.create
+      Magazine.current.should == mag
+    end
+  end
+
 end

@@ -1,12 +1,7 @@
 %li[magazine]
   %header
     %h2= magazine.title.presence || magazine.nickname
-    %span.timeframe
-      %time{ :datetime => magazine.accepts_submissions_from  }
-        = pretty_date(magazine.accepts_submissions_from)
-      –
-      %time{ :datetime => magazine.accepts_submissions_until }
-        = pretty_date(magazine.accepts_submissions_until)
+    = timeframe(magazine.accepts_submissions_from, magazine.accepts_submissions_until)
     - if editor?
       %nav.actions
         %ul
