@@ -1384,7 +1384,7 @@ ol.magazines > li.magazine {
   list-style-type: none;
 }
 /* line 321, ../../../app/stylesheets/screen.sass */
-ol.magazines > li.magazine header {
+ol.magazines > li.magazine > header {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
@@ -1392,7 +1392,7 @@ ol.magazines > li.magazine header {
   *zoom: 1;
 }
 /* line 324, ../../../app/stylesheets/screen.sass */
-ol.magazines > li.magazine header h2 {
+ol.magazines > li.magazine > header h2 {
   margin-left: 0.885%;
   display: inline;
   float: left;
@@ -1401,7 +1401,7 @@ ol.magazines > li.magazine header h2 {
   margin-bottom: 0em;
 }
 /* line 328, ../../../app/stylesheets/screen.sass */
-ol.magazines > li.magazine header span.timeframe {
+ol.magazines > li.magazine > header span.timeframe {
   display: inline;
   float: left;
   width: 23.894%;
@@ -1409,7 +1409,7 @@ ol.magazines > li.magazine header span.timeframe {
   text-align: right;
 }
 /* line 331, ../../../app/stylesheets/screen.sass */
-ol.magazines > li.magazine header nav.actions {
+ol.magazines > li.magazine > header nav.actions {
   display: inline;
   float: left;
   width: 11.504%;
@@ -1420,7 +1420,7 @@ ol.magazines > li.magazine header nav.actions {
   #margin-left: -0.5em;
 }
 /* line 334, ../../../app/stylesheets/screen.sass */
-ol.magazines > li.magazine dl.meetings {
+ol.magazines > li.magazine > dl.meetings {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
@@ -1428,24 +1428,32 @@ ol.magazines > li.magazine dl.meetings {
   margin-bottom: 0em;
 }
 /* line 338, ../../../app/stylesheets/screen.sass */
-ol.magazines > li.magazine dl.meetings dd {
+ol.magazines > li.magazine > dl.meetings dd {
   padding-left: 0;
 }
-
 /* line 340, ../../../app/stylesheets/screen.sass */
+ol.magazines > li.magazine > a {
+  clear: both;
+  margin-right: 0.885%;
+  margin-left: 0.885%;
+  margin-left: 1em;
+  display: block;
+}
+
+/* line 344, ../../../app/stylesheets/screen.sass */
 ol.meetings {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
   list-style-position: inside;
 }
-/* line 343, ../../../app/stylesheets/screen.sass */
+/* line 347, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 345, ../../../app/stylesheets/screen.sass */
+/* line 349, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting header {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1459,7 +1467,7 @@ ol.meetings li.meeting header {
 ol.meetings li.meeting header {
   *display: inline;
 }
-/* line 351, ../../../app/stylesheets/screen.sass */
+/* line 355, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting footer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1474,7 +1482,7 @@ ol.meetings li.meeting footer {
 ol.meetings li.meeting footer {
   *display: inline;
 }
-/* line 356, ../../../app/stylesheets/screen.sass */
+/* line 360, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting footer time {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1489,7 +1497,7 @@ ol.meetings li.meeting footer time {
 ol.meetings li.meeting footer time {
   *display: inline;
 }
-/* line 361, ../../../app/stylesheets/screen.sass */
+/* line 365, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting footer nav.actions {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1503,7 +1511,7 @@ ol.meetings li.meeting footer nav.actions {
   *display: inline;
 }
 
-/* line 365, ../../../app/stylesheets/screen.sass */
+/* line 369, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1514,13 +1522,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 368, ../../../app/stylesheets/screen.sass */
+/* line 372, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 370, ../../../app/stylesheets/screen.sass */
+/* line 374, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1528,7 +1536,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 373, ../../../app/stylesheets/screen.sass */
+/* line 377, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1536,14 +1544,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 376, ../../../app/stylesheets/screen.sass */
+/* line 380, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 378, ../../../app/stylesheets/screen.sass */
+/* line 382, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1565,7 +1573,7 @@ ul#people li.person span.promote-to > ul li:last-child:after {
 ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 380, ../../../app/stylesheets/screen.sass */
+/* line 384, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1579,12 +1587,12 @@ ul#people li.person span.actions {
 
 /*   Odds & Ends
  ******************************* */
-/* line 388, ../../../app/stylesheets/screen.sass */
+/* line 392, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }
 
-/* line 391, ../../../app/stylesheets/screen.sass */
+/* line 395, ../../../app/stylesheets/screen.sass */
 span.average-score {
   display: -moz-inline-box;
   -moz-box-orient: vertical;

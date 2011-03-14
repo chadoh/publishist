@@ -10,4 +10,8 @@ class MagazinesController < InheritedResources::Base
     update!(:notice => nil)   { magazines_path }
   end
 
+  def highest_scores
+    @submissions = resource.highest_scores(params[:top].presence || 50)
+  end
+
 end

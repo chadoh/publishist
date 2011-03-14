@@ -119,4 +119,25 @@ describe Magazine do
     end
   end
 
+  describe "#highest_scores(how_many)" do
+    it "returns the highest-scoring submissions for the magazine" do
+      mag      = Factory.create :magazine
+      meeting  = Meeting.create(:datetime => Date.tomorrow) # in mag
+      meeting2 = Meeting.create(:datetime => 1.week.from_now) # in mag2
+      sub      = Factory.create :submission
+      sub2     = Factory.create :submission
+      p        = Factory.create :person
+      p2       = Factory.create :person
+      a        = Attendee.create :meeting => meeting, :person => p
+      a2       = Attendee.create :meeting => meeting, :person => p2
+      a3       = Attendee.create :meeting => meeting2, :person => p
+      a4       = Attendee.create :meeting => meeting2, :person => p2
+      packlet  = Packlet.create  :meeting => meeting, :submission => sub
+      packlet2 = Packlet.create  :meeting => meeting2, :submission => sub2
+      packlet.scores << [Score.create(:amount => 6, :attendee => a), Score.create(:amount => 4, :attendee => a2)]
+      packlet2.scores << [Score.create(:amount => 10, :attendee => a3), Score.create(:amount => 10, :attendee => a4)]
+      mag.highest_scores(1).should == [sub2]
+    end
+  end
+
 end

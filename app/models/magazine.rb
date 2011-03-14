@@ -19,6 +19,10 @@ class Magazine < ActiveRecord::Base
     Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})" unless packlet_ids.blank?
   end
 
+  def highest_scores how_many = 50
+    self.meetings.collect(&:submissions).flatten.uniq.sort {|a,b| b.average_score <=> a.average_score }.shift(how_many)
+  end
+
   class << self
     def current
       where(:accepts_submissions_from  < Date.today,

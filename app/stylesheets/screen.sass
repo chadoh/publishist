@@ -318,7 +318,7 @@ ol.magazines
     margin-left: 0
     list-style-image: none
     list-style-type: none
-    header
+    & > header
       +full
       +clearfix
       h2
@@ -331,12 +331,16 @@ ol.magazines
       nav.actions
         +columns(2)
         +omega
-    dl.meetings
+    & > dl.meetings
       +full
       margin-left: 1em
       +trailer(0)
       dd
         padding-left: 0
+    & > a
+      +full
+      margin-left: 1em
+      display: block
 ol.meetings
   +full
   list-style-position: inside
