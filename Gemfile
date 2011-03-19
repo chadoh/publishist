@@ -2,7 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails'
 gem 'pg', '~> 0.9.0'
-gem 'redgreen'
 gem 'heroku_backup_task'
 
 # Views
@@ -27,6 +26,7 @@ gem 'meta_where'
 group :development do
   gem 'rails3-generators'
   gem 'heroku_san'
+  gem 'redgreen'
 end
 
 group :development, :test do
