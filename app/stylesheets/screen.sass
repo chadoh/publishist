@@ -171,7 +171,7 @@ article#submissions, article.meetings
   +rhythm-borders(1px, 0, $base-font-size, dashed)
   border-color: $noticeable
 
-ol.packlets, ul.submissions
+ol.packlets, ul.submissions, ol.submissions
   li.collapsed
     &.packlet
       list-style-type: decimal
@@ -200,6 +200,13 @@ ol.packlets, ul.submissions
             display: inline
         & > nav.actions
           display: none
+        & > p.scored
+          display: inline
+article.magazines ol.submissions li.collapsed.submission
+  list-style-type: decimal
+  & > footer
+    p.scored
+      display: none
 
 section#magazines
   ul.magazines
@@ -255,15 +262,16 @@ span.score
           content: ": "
         font-weight: normal
         display: inline
-      input[type=number]
-        +trailer(0)
-        text-align: center
-        width: 2.7em
-        height: $base-line-height / 16px * 1em
-        font-size: 13px
-        +rhythm-borders(1px, 0.05, 13px)
 
-html.no-number-input span.score form.score input[type=number]
+input[type=number]
+  +trailer(0)
+  text-align: center
+  width: 2.7em
+  height: $base-line-height / 16px * 1em
+  font-size: 13px
+  +rhythm-borders(1px, 0.05, 13px)
+
+html.no-number-input input[type=number]
   width: 1.7em
 
 section#scores
@@ -354,17 +362,17 @@ ol.meetings
       +drag-handle
     footer
       +inline-block
-      width: 23%
+      width: 25%
       float: right
       padding-left: .885%
       time
         +inline-block
-        width: 46.5%
+        width: 51.5%
         text-align: right
-        margin-right: 4.085%
+        margin-right: 0.3em
       nav.actions
         +inline-block
-        width: 48%
+        width: 44%
 
 ul#people
   +no-bullets
@@ -384,6 +392,11 @@ ul#people
     span.actions
       +columns(2.5)
       +omega
+
+form#highest
+  display: inline-block
+  padding-left: 0.3em
+  +trailer
 
 /*
  *   Odds & Ends
