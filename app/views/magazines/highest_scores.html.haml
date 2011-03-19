@@ -1,0 +1,22 @@
+- title "Highest-Scored Submissions for the #{@magazine.nickname} Magazine"
+
+%p= link_to "Back to magazine", magazines_path
+%div
+  View the highest
+  = form_tag highest_scored_for_magazine_path(@magazine), :method => :get, :id => "highest" do
+    = number_field_tag :highest, @highest, :in => 1..@max
+    = submit_tag "&rarr;".html_safe, :name => nil, :class => "link"
+
+%ol.submissions
+  - for submission in @submissions
+    = render :partial => 'submissions/show', :locals => { :submission => submission }
+
+:javascript
+  $(function(){
+
+    $('li.submission header h2').live('click', function(e){
+      e.preventDefault();
+      $(this).parents('li.submission').toggleClass('collapsed');
+    });
+
+  });

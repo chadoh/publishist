@@ -8,7 +8,13 @@ Pc::Application.routes.draw do
 
   get "welcome/index"
 
-  resources :scores, :magazines
+  resources :scores
+
+  resources :magazines do
+    member do
+      get 'highest_scores', :as => 'highest_scored_for'
+    end
+  end
 
   resources :meetings do
     resources :attendees do

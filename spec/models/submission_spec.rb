@@ -112,6 +112,17 @@ describe Submission do
     it "returns the average score for the submission" do
       @submission.average_score.should == 5
     end
+
+    it "returns the average score even if the submission was reviewed at multiple meetings" do
+      meeting = Factory.create :meeting
+      meeting.people = [@person, @person2]
+      meeting.update_attributes :magazine => @magazine
+      @packlet = meeting.packlets.create :submission => @submission
+
+      @packlet.scores.create :attendee => meeting.attendees.first, :amount => 8
+      @packlet.scores.create :attendee => meeting.attendees.last , :amount => 6
+      @submission.average_score.should == 6
+    end
   end
 
   describe "#magazine" do
