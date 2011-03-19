@@ -21,7 +21,7 @@ Given /^10 meetings have occured in it$/ do
   10.times { mag.meetings << Factory.create(:meeting) }
 end
 
-Given /^(\d)+ submissions have been reviewed at these meetings$/ do |total_submissions|
+Given /^(\d+) submissions have been reviewed at these meetings$/ do |total_submissions|
   for meeting in Magazine.first.meetings
     (total_submissions.to_i/10).times { meeting.submissions << Factory.create(:submission) }
   end
@@ -51,12 +51,7 @@ Then /^I should see "([^"]*)" in the "([^"]*)" field$/ do |text, field|
   page.has_field? field, :with => text
 end
 
-Then /^I should see all the submissions$/ do
-  count = Submission.count
-  count.should == page.find("body").text.split("Submission").length - 1
-end
-
-Then /^I should see half the submissions$/ do
-  count = Submission.count / 2
-  count.should == page.find("body").text.split("Submission").length - 1
+Then /^I should see (\d+) submissions$/ do |how_many|
+  on_page = page.find("body").text.split("Submission").length - 3
+  on_page.should == how_many.to_i
 end

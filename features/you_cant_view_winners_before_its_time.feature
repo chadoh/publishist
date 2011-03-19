@@ -4,14 +4,12 @@ Feature: You can't view the winners before it's time! (Or if you're not an edito
   editors should only be able to view the scores once a magazine's submission-timeframe is over.
   And no one else should be able to view them at all.
 
-  @wip
   @editor
   Scenario: The magazine hasn't stopped accepting submissions
     Given a magazine's timeframe is *nearly* over
     When I am on the magazines page
     Then I should not see "highest-scored"
 
-  @wip
   @webmember
   Scenario: The magazine has stopped accepting submissions
     Given a magazine's timeframe is freshly over
