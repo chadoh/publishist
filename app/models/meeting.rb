@@ -26,9 +26,13 @@ protected
 
   def submissions_have_been_reviewed_or_queued
     if datetime < Time.now + 3.hours
-      self.submissions.each {|s| s.has_been :reviewed }
+      self.submissions.each do |s|
+        s.has_been :reviewed if s.queued?
+      end
     else
-      self.submissions.each {|s| s.has_been :queued }
+      self.submissions.each do |s|
+        s.has_been :queued if s.reviewed?
+      end
     end
   end
 end

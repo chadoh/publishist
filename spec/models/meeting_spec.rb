@@ -9,21 +9,40 @@ describe Meeting do
     should belong_to(:magazine)
   }
 
-  it "sets all of its submissions to :reviewed if it is rescheduled to the past" do
-    meeting = Factory.create :meeting
-    submission = Factory.create :submission
-    meeting.submissions << submission
-    meeting.update_attribute :datetime, 2.hours.from_now
-    submission.reload.should be_reviewed
-  end
+  context "when saving" do
+    before do
+      @meeting = Factory.create :meeting
+      @submission = Factory.create :submission
+      @meeting.submissions << @submission
+    end
 
-  it "sets all of its submissions to :queued if it is rescheduled to the future" do
-    meeting = Meeting.create :datetime => 1.week.ago, :question => "orly?"
-    submission = Factory.create :submission
-    meeting.submissions << submission
-    submission.reload.should be_reviewed
-    meeting.update_attribute :datetime, 1.week.from_now
-    submission.reload.should be_queued
+    it "sets all of its submissions to :reviewed if it is rescheduled to the past" do
+      @meeting.update_attribute :datetime, 2.hours.from_now
+      @submission.reload.should be_reviewed
+    end
+
+    it "sets all of its submissions to :queued if it is rescheduled to the future" do
+      @meeting.update_attribute :datetime, 1.week.from_now
+      @submission.reload.should be_queued
+    end
+
+    it "doesn't touch the state of submissions if they are :scored" do
+      @submission.has_been :scored
+      @meeting.update_attributes :question => "orly?"
+      @submission.reload.should be_scored
+    end
+
+    it "doesn't touch the state of submissions if they are :published" do
+      @submission.has_been :published
+      @meeting.update_attributes :question => "orly?"
+      @submission.reload.should be_published
+    end
+
+    it "doesn't touch the state of submissions if they are :rejected" do
+      @submission.has_been :rejected
+      @meeting.update_attributes :question => "orly?"
+      @submission.reload.should be_rejected
+    end
   end
 
   describe "#create" do

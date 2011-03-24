@@ -95,9 +95,9 @@ GEM
     heroku (1.17.17)
       json (~> 1.4.6)
       launchy (~> 0.3.2)
-      rest-client (>= 1.4.0, < 1.7.0)
+      rest-client (< 1.7.0, >= 1.4.0)
     heroku_backup_task (0.0.4)
-      heroku (>= 1.13.7, < 2.0)
+      heroku (< 2.0, >= 1.13.7)
       rake
     heroku_san (1.0.8)
       heroku
