@@ -119,24 +119,64 @@ describe Magazine do
     end
   end
 
+  def a_magazine_has_just_finished
+    @mag      = Magazine.create(
+      :nickname => "Diner",
+      :title    => "A Problematic Late-Night Diner",
+      :accepts_submissions_until => Date.yesterday,
+      :accepts_submissions_from  => 6.months.ago
+    )
+    meeting  = Meeting.create(:datetime => Date.yesterday) # in mag
+    @sub      = Factory.create :submission
+    @sub2     = Factory.create :submission
+    p        = Factory.create :person
+    p2       = Factory.create :person
+    a        = Attendee.create :meeting => meeting, :person => p
+    a2       = Attendee.create :meeting => meeting, :person => p2
+    packlet  = Packlet.create  :meeting => meeting, :submission => @sub
+    packlet2 = Packlet.create  :meeting => meeting, :submission => @sub2
+    packlet.scores << [Score.create(:amount => 6, :attendee => a), Score.create(:amount => 4, :attendee => a2)]
+    packlet2.scores << [Score.create(:amount => 10, :attendee => a), Score.create(:amount => 10, :attendee => a2)]
+  end
+
   describe "#highest_scores(how_many)" do
     it "returns the highest-scoring submissions for the magazine" do
-      mag      = Factory.create :magazine
-      meeting  = Meeting.create(:datetime => Date.tomorrow) # in mag
-      meeting2 = Meeting.create(:datetime => 1.week.from_now) # in mag2
-      sub      = Factory.create :submission
-      sub2     = Factory.create :submission
-      p        = Factory.create :person
-      p2       = Factory.create :person
-      a        = Attendee.create :meeting => meeting, :person => p
-      a2       = Attendee.create :meeting => meeting, :person => p2
-      a3       = Attendee.create :meeting => meeting2, :person => p
-      a4       = Attendee.create :meeting => meeting2, :person => p2
-      packlet  = Packlet.create  :meeting => meeting, :submission => sub
-      packlet2 = Packlet.create  :meeting => meeting2, :submission => sub2
-      packlet.scores << [Score.create(:amount => 6, :attendee => a), Score.create(:amount => 4, :attendee => a2)]
-      packlet2.scores << [Score.create(:amount => 10, :attendee => a3), Score.create(:amount => 10, :attendee => a4)]
-      mag.highest_scores(1).should == [sub2]
+      a_magazine_has_just_finished
+      @mag.highest_scores(1).should == [@sub2]
+    end
+  end
+
+  describe "#present_name" do
+    let(:mag) { Factory.create :magazine }
+
+    it "returns just the magazine title, if it's set" do
+      mag.present_name.should == mag.title
+    end
+
+    it "returns 'the <nickname> magazine' if the title isn't set" do
+      mag.title = nil
+      mag.present_name.should == "the #{mag.nickname} magazine"
+    end
+  end
+
+  describe "#publish(array_of_winners)" do
+    let(:mag) { Factory.create :magazine }
+
+    it "returns an error if the magazine's end-date for submissions has not yet passed" do
+      expect { mag.publish [] }.to raise_error
+    end
+
+    it "sets the published_on date for the magazine to the current date" do
+      a_magazine_has_just_finished
+      @mag.publish [@sub2]
+      @mag.published_on.to_date.should == Date.today
+    end
+
+    it "sets checked magazines to published and the rest to rejected" do
+      a_magazine_has_just_finished
+      @mag.publish [@sub2]
+      @sub.reload.should be_rejected
+      @sub2.reload.should be_published
     end
   end
 

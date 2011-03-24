@@ -56,7 +56,7 @@ class Submission < ActiveRecord::Base
   end
 
   def has_been moved_to_state
-    update_attribute :state, moved_to_state
+    update_attributes :state => moved_to_state
   end
 
   [:draft, :submitted, :queued, :reviewed, :scored, :published, :rejected].each do |state|

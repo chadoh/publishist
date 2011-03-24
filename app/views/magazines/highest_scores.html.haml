@@ -7,9 +7,11 @@
     = number_field_tag :highest, @highest, :in => 1..@max
     = submit_tag "&rarr;".html_safe, :name => nil, :class => "link"
 
-%ol.submissions
-  - for submission in @submissions
-    = render :partial => 'submissions/show', :locals => { :submission => submission }
+= form_tag publish_magazine_path(@magazine), :id => "publish" do
+  %ol.submissions
+    - for submission in @submissions
+      = render :partial => 'submissions/show', :locals => { :submission => submission }
+  = submit_tag "Publish checked submissions as #{@magazine.present_name}!", :confirm => "This will email everyone to let them know if they made it or not! This will make the published magazines visible to anonymous website visitors!"
 
 :javascript
   $(function(){
