@@ -21,7 +21,9 @@ class MagazinesController < InheritedResources::Base
   end
 
   def publish
-    resource.publish!
+    winners = Submission.where(:id + params[:submission_ids])
+    resource.publish winners
+    redirect_to magazines_path
   end
 
 end
