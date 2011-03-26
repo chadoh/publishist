@@ -159,6 +159,8 @@ footer.submission-details
 
 span.drag-handle-wrap
   display: none
+li.submission > input[type=checkbox]
+  display: none
 
 article#submissions, article.meetings
   section
@@ -190,6 +192,8 @@ ol.packlets, ul.submissions, ol.submissions
         display: none
       & > span.drag-handle-wrap
         +drag-handle
+      & > input[type=checkbox]
+        +inline-block
       & > footer
         +inline-block
         width: 35%
@@ -397,6 +401,8 @@ form#highest
   display: inline-block
   padding-left: 0.3em
   +trailer
+form#publish ol
+  +trailer(0)
 
 /*
  *   Odds & Ends

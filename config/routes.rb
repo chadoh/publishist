@@ -13,6 +13,7 @@ Pc::Application.routes.draw do
   resources :magazines do
     member do
       get 'highest_scores', :as => 'highest_scored_for'
+      post :publish
     end
   end
 

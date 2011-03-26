@@ -2,7 +2,7 @@ class MagazinesController < InheritedResources::Base
   before_filter :authenticate_person!
   before_filter :editors_only, :except => [:index]
 
-  custom_actions :resource => :highest_scores
+  custom_actions :resource => [:highest_scores, :publish]
 
   def create
     create!(:notice => nil) { magazines_path }
@@ -18,6 +18,12 @@ class MagazinesController < InheritedResources::Base
     @default = [@max * 3 / 4, 50].min
     @highest = params[:highest].presence || (@max * 3 / 4)
     @submissions = resource.highest_scores @highest.to_i
+  end
+
+  def publish
+    winners = Submission.where(:id + params[:submission_ids])
+    resource.publish winners
+    redirect_to magazines_path
   end
 
 end

@@ -23,6 +23,26 @@ class Magazine < ActiveRecord::Base
     self.meetings.collect(&:submissions).flatten.uniq.sort {|a,b| b.average_score <=> a.average_score }.shift(how_many)
   end
 
+  def present_name
+    title.presence || "the #{nickname} magazine"
+  end
+
+  def publish array_of_winners
+    if self.accepts_submissions_until > Time.now
+      raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
+    else
+      self.update_attributes :published_on => Date.today
+      for sub in array_of_winners
+        sub.has_been :published
+      end
+      mag_subs = self.meetings.collect(&:submissions).flatten.uniq
+      rejected = mag_subs - array_of_winners
+      for sub in rejected
+        sub.has_been :rejected
+      end
+    end
+  end
+
   class << self
     def current
       where(:accepts_submissions_from  < Date.today,
