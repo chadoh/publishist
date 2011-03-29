@@ -144,6 +144,12 @@ describe Magazine do
       a_magazine_has_just_finished
       @mag.highest_scores(1).should == [@sub2]
     end
+
+    it "does not barf when a submission's scores are nil" do
+      a_magazine_has_just_finished
+      Score.delete_all; Submission.update_all :state => Submission.state(:reviewed)
+      @mag.reload.highest_scores.should be_empty
+    end
   end
 
   describe "#present_name" do

@@ -20,7 +20,10 @@ class Magazine < ActiveRecord::Base
   end
 
   def highest_scores how_many = 50
-    self.meetings.collect(&:submissions).flatten.uniq.sort {|a,b| b.average_score <=> a.average_score }.shift(how_many)
+    self.meetings.collect(&:submissions).flatten.uniq \
+      .reject {|s| !s.scored? } \
+      .sort {|a,b| b.average_score <=> a.average_score } \
+      .shift(how_many)
   end
 
   def present_name

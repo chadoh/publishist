@@ -10,6 +10,15 @@ Feature: You can't view the winners before it's time! (Or if you're not an edito
     When I am on the magazines page
     Then I should not see "highest-scored"
 
+  @editor
+  Scenario: The magazine has stopped accepting submissions, but no scores have been entered for the submissions
+    Given a magazine's timeframe is freshly over
+    And 10 meetings have occured in it
+    And 10 submissions have been reviewed at these meetings
+    When I am on the magazines page
+    And I follow "highest-scored"
+    Then I should see "never entered any scores"
+
   @webmember
   Scenario: The magazine has stopped accepting submissions
     Given a magazine's timeframe is freshly over
