@@ -8,7 +8,6 @@ gem 'heroku_backup_task'
 gem 'haml'
 gem 'simple_form'
 gem 'rdiscount'
-gem 'RedCloth'
 gem 'compass', :git => "git://github.com/chadoh/compass.git", :branch => "delimiting"
 gem 'compass-susy-plugin'
 
@@ -26,7 +25,6 @@ gem 'meta_where'
 group :development do
   gem 'rails3-generators'
   gem 'heroku_san'
-  gem 'redgreen'
 end
 
 group :development, :test do
@@ -37,6 +35,5 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'database_cleaner'
-  gem 'capybara-envjs', :require => 'capybara/envjs'
   gem 'railroady'
 end

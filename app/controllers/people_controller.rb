@@ -1,5 +1,3 @@
-require 'lib/crypto'
-
 class PeopleController < InheritedResources::Base
   before_filter :resource, :only => [:make_staff, :make_editor, :make_coeditor]
   before_filter :staff_only, :only => [:index]

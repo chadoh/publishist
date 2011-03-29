@@ -21,7 +21,7 @@ module ApplicationHelper
         haml_tag :time, :datetime => start do
           haml_concat pretty_date start
         end
-        haml_concat " – "
+        haml_concat " &ndash; ".html_safe
         haml_tag :time, :datetime => finish do
           haml_concat pretty_date finish
         end

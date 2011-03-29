@@ -48,7 +48,7 @@ describe ApplicationHelper do
     it "returns a semanticly marked-up timeframe from the given dates" do
       result = helper.timeframe(1.year.ago, Date.today)
       result.should match "<span class='timeframe'>\n  <time datetime="
-      result.should match "</time>\n   – \n  <time datetime="
+      result.should match "</time>\n   &ndash; \n  <time datetime="
     end
   end
 end
