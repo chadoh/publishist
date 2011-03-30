@@ -1,7 +1,7 @@
 class Meeting < ActiveRecord::Base
   has_many :attendees, :dependent => :destroy
   has_many :people, :through => :attendees
-  has_many :packlets, :dependent => :destroy, :order => 'position'
+  has_many :packlets, :dependent => :destroy, :order => 'position', :include => :submission
   has_many :submissions, :through => :packlets
 
   belongs_to :magazine

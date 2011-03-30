@@ -1,6 +1,6 @@
 class Packlet < ActiveRecord::Base
   belongs_to :meeting
-  belongs_to :submission
+  belongs_to :submission, :include => :author
 
   has_many :scores
 

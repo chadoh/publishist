@@ -32,24 +32,27 @@ class Submission < ActiveRecord::Base
     :styles => { :medium => "510x510>" }
 
   def author_name
-    if read_attribute :author_id
-      Person.find(read_attribute(:author_id)).name
+    @author_name ||= if read_attribute :author_id
+      @author ||= Person.find(read_attribute(:author_id))
+      @author.name
     else
       read_attribute :author_name
     end
   end
 
   def author_first
-    if read_attribute(:author_id)
-      Person.find(read_attribute(:author_id)).first_name
+    @author_first ||= if read_attribute(:author_id)
+      @author ||= Person.find(read_attribute(:author_id))
+      @author.first_name
     else
       author_name.split(' ').first
     end
   end
 
   def email
-    if read_attribute(:author_id)
-      Person.find(read_attribute(:author_id)).email
+    @email ||= if read_attribute(:author_id)
+      @author ||= Person.find(read_attribute(:author_id))
+      @author.email
     else
       read_attribute(:author_email)
     end

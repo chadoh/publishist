@@ -49,34 +49,34 @@ module ApplicationHelper
   end
 
   def editor?
-    person_signed_in? && current_person.editor?
+    @editor ||= person_signed_in? && current_person.editor?
   end
 
   def the_editor?
-    person_signed_in? && current_person.the_editor?
+    @the_editor ||= person_signed_in? && current_person.the_editor?
   end
 
   def the_coeditor?
-    person_signed_in? && current_person.the_coeditor?
+    @coeditor ||= person_signed_in? && current_person.the_coeditor?
   end
 
   def staff?
-    person_signed_in? && current_person.is_staff?
+    @staff ||= person_signed_in? && current_person.is_staff?
   end
-  
+
   def member?
-    person_signed_in?
+    @member ||= person_signed_in?
   end
 
   def editor_or_author? submission
-    person_signed_in? && (the_editor? || current_person == submission.author)
+    @editor_or_author ||= person_signed_in? && (the_editor? || current_person == submission.author)
   end
 
   def coeditor_or_author? submission
-    person_signed_in? && (the_coeditor? || current_person == submission.author)
+    @coeditor_or_author ||= person_signed_in? && (the_coeditor? || current_person == submission.author)
   end
 
   def page_appropriate?
-    !current_page?(:controller => "submissions", :action => "index") and !current_page?(:controller => "meetings", :action => "show")
+    @page_appropriate ||= !current_page?(:controller => "submissions", :action => "index") and !current_page?(:controller => "meetings", :action => "show")
   end
 end
