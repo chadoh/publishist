@@ -4,7 +4,7 @@ class SubmissionsController < InheritedResources::Base
   def index
     @magazines = Magazine.all
     @magazine = params[:m].present? ? Magazine.find(params[:m]) : Magazine.current.presence || Magazine.first
-    @meetings = @magazine.present? ? @magazine.meetings : Meeting.all
+    @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : Meeting.all
     @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
     @unscheduled_submissions = Submission.where :state => Submission.state(:submitted)

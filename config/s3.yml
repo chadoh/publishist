@@ -1,5 +1,5 @@
 development: &DEFAULTS
-  bucket: pcmag_dev
+  bucket: pcmag
   access_key_id: <%= ENV['S3_KEY'] %>
   secret_access_key: <%= ENV['S3_SECRET'] %>
 
