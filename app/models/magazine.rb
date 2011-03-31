@@ -1,4 +1,6 @@
 class Magazine < ActiveRecord::Base
+  extend ActiveSupport::Memoizable
+
   validates_presence_of :nickname
   validates_presence_of :accepts_submissions_from
   validates_presence_of :accepts_submissions_until
@@ -11,12 +13,14 @@ class Magazine < ActiveRecord::Base
 
   default_scope order("accepts_submissions_until DESC")
 
-  has_many :meetings, :dependent => :nullify
+  has_many :meetings, :dependent => :nullify, :include => :submissions
   has_many :submissions, :through => :meetings
 
   def average_score
-    packlet_ids = self.meetings.collect(&:packlets).flatten.collect &:id
-    Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})" unless packlet_ids.blank?
+    @average_score ||= begin
+      packlet_ids = self.meetings.collect(&:packlets).flatten.collect &:id
+      Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})" unless packlet_ids.blank?
+    end
   end
 
   def highest_scores how_many = 50

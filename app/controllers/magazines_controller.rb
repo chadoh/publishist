@@ -1,5 +1,5 @@
 class MagazinesController < InheritedResources::Base
-  before_filter :authenticate_person!
+  before_filter :authenticate_person!, :only => :index
   before_filter :editors_only, :except => [:index]
 
   custom_actions :resource => [:highest_scores, :publish]
@@ -17,7 +17,7 @@ class MagazinesController < InheritedResources::Base
     @max = resource.meetings.collect(&:submissions).flatten.uniq.reject {|s| !s.scored? }.count
     if @max.present?
       @default = [@max * 3 / 4, 50].min
-      @highest = params[:highest].presence || (@max * 3 / 4)
+      @highest = params[:highest].presence || @default
       @submissions = resource.highest_scores @highest.to_i
     end
   end

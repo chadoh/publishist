@@ -1,7 +1,7 @@
-- title "Highest-Scored Submissions for the #{@magazine.nickname} Magazine"
+- title "Highest-Scored Submissions for the #{resource.nickname} Magazine"
 
 %p= link_to "Back to magazine", magazines_path
-- unless @submissions.empty?
+- unless @submissions.blank?
   %div
     View the highest
     = form_tag highest_scored_for_magazine_path(@magazine), :method => :get, :id => "highest" do

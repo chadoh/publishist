@@ -124,6 +124,8 @@ class Person < ActiveRecord::Base
   end
 
   class << self
+    extend ActiveSupport::Memoizable
+
     def editors
       ranks = Rank.where(:rank_type => 2..3, :rank_end => nil)
       ranks = ranks.sort_by {|a| a.rank_type }
@@ -161,5 +163,7 @@ class Person < ActiveRecord::Base
       end 
       person
     end
+
+    memoize :editors, :editor, :coeditor, :find_or_create
   end
 end

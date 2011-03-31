@@ -69,8 +69,10 @@ class Submission < ActiveRecord::Base
   end
 
   def average_score
-    packlet_ids = self.packlets.collect &:id
-    Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
+    @average_score ||= begin
+      packlet_ids = self.packlets.collect &:id
+      Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
+    end
   end
 
 protected
