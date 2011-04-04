@@ -14,18 +14,19 @@ class Magazine < ActiveRecord::Base
   default_scope order("accepts_submissions_until DESC")
 
   has_many :meetings, :dependent => :nullify, :include => :submissions
-  has_many :submissions, :through => :meetings
+
+  # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
+  def submissions
+    submission_ids = self.meetings.collect(&:packlets).flatten.collect &:submission_id
+    Submission.where :id + submission_ids
+  end
 
   def average_score
-    @average_score ||= begin
-      packlet_ids = self.meetings.collect(&:packlets).flatten.collect &:id
-      Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})" unless packlet_ids.blank?
-    end
+    if count_of_scores == 0 then nil else sum_of_scores.to_f / count_of_scores end
   end
 
   def highest_scores how_many = 50
-    self.meetings.collect(&:submissions).flatten.uniq \
-      .reject {|s| !s.scored? } \
+    self.submissions.where(:state >> Submission.state(:scored)) \
       .sort {|a,b| b.average_score <=> a.average_score } \
       .shift(how_many)
   end
@@ -56,6 +57,8 @@ class Magazine < ActiveRecord::Base
             :accepts_submissions_until > Date.today).first
     end
   end
+
+  memoize :submissions, :average_score
 
 protected
 

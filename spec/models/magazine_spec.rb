@@ -6,20 +6,7 @@ describe Magazine do
     should validate_presence_of :accepts_submissions_from
     should validate_presence_of :accepts_submissions_until
     should have_many(:meetings).dependent(:nullify)
-    should have_many(:submissions).through(:meetings)
   }
-
-  describe "#submissions" do
-    it "returns submissions through the hm:t relationship" do
-      pending "https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/1152" do
-        mag = Magazine.create
-        meeting = Meeting.create :datetime => Date.tomorrow
-        sub = Factory.create :submission
-        meeting.submissions << sub
-        mag.submissions.should == [sub]
-      end
-    end
-  end
 
   describe "#nickname" do
     it "defaults to 'next'" do
@@ -104,9 +91,9 @@ describe Magazine do
       a4       = Attendee.create :meeting => meeting2, :person => p2
       packlet  = Packlet.create  :meeting => meeting, :submission => sub
       packlet2 = Packlet.create  :meeting => meeting2, :submission => sub2
-      packlet.scores << [Score.create(:amount => 6, :attendee => a), Score.create(:amount => 4, :attendee => a2)]
-      packlet2.scores << [Score.create(:amount => 10, :attendee => a3), Score.create(:amount => 10, :attendee => a4)]
-      mag.average_score.should == 5
+      packlet.scores << [Score.create('amount' => 5, :attendee => a), Score.create('amount' => 4, :attendee => a2)]
+      packlet2.scores << [Score.create('amount' => 10, :attendee => a3), Score.create('amount' => 10, :attendee => a4)]
+      mag.reload.average_score.should == 4.5
     end
   end
 
@@ -126,27 +113,29 @@ describe Magazine do
       :accepts_submissions_until => Date.yesterday,
       :accepts_submissions_from  => 6.months.ago
     )
-    meeting  = Meeting.create(:datetime => Date.yesterday) # in mag
+    @meeting  = Meeting.create(:datetime => Date.yesterday) # in mag
     @sub      = Factory.create :submission
     @sub2     = Factory.create :submission
     p        = Factory.create :person
     p2       = Factory.create :person
-    a        = Attendee.create :meeting => meeting, :person => p
-    a2       = Attendee.create :meeting => meeting, :person => p2
-    packlet  = Packlet.create  :meeting => meeting, :submission => @sub
-    packlet2 = Packlet.create  :meeting => meeting, :submission => @sub2
+    a        = Attendee.create :meeting => @meeting, :person => p
+    a2       = Attendee.create :meeting => @meeting, :person => p2
+    packlet  = Packlet.create  :meeting => @meeting, :submission => @sub
+    packlet2 = Packlet.create  :meeting => @meeting, :submission => @sub2
     packlet.scores << [Score.create(:amount => 6, :attendee => a), Score.create(:amount => 4, :attendee => a2)]
     packlet2.scores << [Score.create(:amount => 10, :attendee => a), Score.create(:amount => 10, :attendee => a2)]
   end
 
   describe "#highest_scores(how_many)" do
-    it "returns the highest-scoring submissions for the magazine" do
+    before do
       a_magazine_has_just_finished
+    end
+
+    it "returns the highest-scoring submissions for the magazine" do
       @mag.highest_scores(1).should == [@sub2]
     end
 
     it "does not barf when a submission's scores are nil" do
-      a_magazine_has_just_finished
       Score.delete_all; Submission.update_all :state => Submission.state(:reviewed)
       @mag.reload.highest_scores.should be_empty
     end
@@ -183,6 +172,33 @@ describe Magazine do
       @mag.publish [@sub2]
       @sub.reload.should be_rejected
       @sub2.reload.should be_published
+    end
+  end
+
+  describe "#submissions" do
+    before do
+      a_magazine_has_just_finished
+    end
+
+    it "returns a scope, not an array" do
+      @mag.submissions.class.should == ActiveRecord::Relation
+    end
+
+    it "returns submissions for the specified magazine, not some other magazine" do
+      mag2 = Magazine.create(:nickname => "Poopty poopty pants")
+      meeting = Meeting.create(:datetime => 1.week.from_now)
+      sub = Factory.create :submission
+      meeting.submissions << sub
+      mag2.submissions.should == [sub]
+      @mag.submissions.should_not include(sub)
+    end
+
+    it "memoizes the result" do
+      @mag.submissions # this result should now be memoized
+
+      sub3 = Factory.create :submission
+      @meeting.submissions << sub3
+      @mag.reload.submissions.should_not include(sub3)
     end
   end
 

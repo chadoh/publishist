@@ -47,13 +47,13 @@ describe Score do
     @s.amount.should == 1
   end
 
-  it "should destroy the score if updated with a blank amount" do
+  it "destroys the score if updated with a blank amount" do
     @s = Score.create(:amount => 1, :packlet => @packlet, :attendee => @attendee)
     @s.update_attributes('amount' => '')
     Score.all.should be_empty
   end
 
-  it "should not destroy the score if updated with a present amount" do
+  it "does not destroy the score if updated with a present amount" do
     @s = Score.create(:amount => 1, :packlet => @packlet, :attendee => @attendee)
     @s.update_attributes('amount' => '6')
     Score.all.length.should == 1
@@ -92,6 +92,48 @@ describe Score do
     @submission.reload.should be_scored
   end
 
+  def a_magazine_is_in_process
+    @mag = Magazine.create(:nickname => "Wholly Mammoth",
+      :accepts_submissions_from  => 3.months.ago,
+      :accepts_submissions_until => 3.months.from_now
+    )
+    @meeting = Meeting.create(:datetime => Date.yesterday) # in mag
+    @sub     = Factory.create :submission
+    @sub2    = Factory.create :submission
+    @p        = Factory.create :person
+    @p2       = Factory.create :person
+    @a        = Attendee.create :meeting => @meeting, :person => @p
+    @a2       = Attendee.create :meeting => @meeting, :person => @p2
+    @packlet  = Packlet.create  :meeting => @meeting, :submission => @sub
+    @packlet2 = Packlet.create  :meeting => @meeting, :submission => @sub2
+  end
+
+  context "when created" do
+    before do
+      a_magazine_is_in_process
+      Score.create :packlet => @packlet, :attendee => @a, :amount => '5'
+    end
+
+    it "increments its submission's magazine count_of_scores by 1" do
+      @mag.reload.count_of_scores.should == 1
+    end
+
+    it "increments its submission's magazine sum_of_scores by its :amount" do
+      @mag.reload  .sum_of_scores.should == 5
+    end
+  end
+
+  context "when updated" do
+    it "changes its submission's magazine sum_of_scores by its :amount delta" do
+      a_magazine_is_in_process
+      score = Score.create :packlet => @packlet, :attendee => @a, :amount => '5'
+      score.update_attributes 'amount' => 8
+      @mag.reload.count_of_scores.should == 1
+      @mag.reload.sum_of_scores.should == 8
+    end
+  end
+
+
   context "when deleted" do
     it "sets its submission to :reviewed (if last one)" do
       @s = @packlet.scores.create :amount => 6, :attendee => @attendee
@@ -106,6 +148,23 @@ describe Score do
       @s2 = @packlet.scores.create :amount => 6, :attendee => attendee2
       @s.destroy
       @submission.reload.should be_scored
+    end
+
+    describe "self.packlet.magazine" do
+      before do
+        a_magazine_is_in_process
+        score = Score.create :packlet => @packlet, :attendee => @a, :amount => '5'
+        score.destroy
+        @mag = score.packlet.meeting.magazine
+      end
+
+      it "reduces :count_of_scores by 1" do
+        @mag.count_of_scores.should == 0
+      end
+
+      it "reduces :sum_of_scores by its :amount" do
+        @mag.sum_of_scores.should == 0
+      end
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110226181941) do
+ActiveRecord::Schema.define(:version => 20110403132404) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 20110226181941) do
     t.datetime "published_on"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "count_of_scores",           :default => 0
+    t.integer  "sum_of_scores",             :default => 0
   end
 
   create_table "meetings", :force => true do |t|
