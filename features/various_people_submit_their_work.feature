@@ -35,6 +35,7 @@ Feature: people of various ranks submit something
     And I press "Save"
     Then I should be on the submissions page
 
+  @pending
   @webmember
   Scenario: Some other signed-in person submits something
     Given I am on the new submission page

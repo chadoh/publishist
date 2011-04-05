@@ -3,7 +3,7 @@
 
 = simple_form_for @submission, :html => { :multipart => true } do |f|
   = error_messages
-  
+
   - unless person_signed_in?
     = f.input :author_name, :label => "Your Name"
     = f.input :author_email, :label => "Your Email Address"
