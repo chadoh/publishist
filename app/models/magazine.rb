@@ -22,7 +22,9 @@ class Magazine < ActiveRecord::Base
   end
 
   def average_score
-    if count_of_scores == 0 then nil else sum_of_scores.to_f / count_of_scores end
+    if count_of_scores == 0 then nil else
+      (sum_of_scores.to_f / count_of_scores * 100).round.to_f / 100
+    end
   end
 
   def highest_scores how_many = 50

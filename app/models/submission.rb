@@ -15,7 +15,7 @@ class Submission < ActiveRecord::Base
   after_update :send_notification_email_if_submitted
 
   def magazine
-    self.reload.meetings.first.magazine
+    self.reload.meetings.first.try(:magazine)
   end
 
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
@@ -71,7 +71,8 @@ class Submission < ActiveRecord::Base
   def average_score
     @average_score ||= begin
       packlet_ids = self.packlets.collect &:id
-      Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
+      score = Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
+      (score * 100).round.to_f / 100
     end
   end
 

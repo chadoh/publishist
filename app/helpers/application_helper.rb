@@ -49,19 +49,24 @@ module ApplicationHelper
   end
 
   def editor?
-    @editor ||= person_signed_in? && current_person.editor?
+    @editor ||= person_signed_in? \
+      && (current_person.current_ranks.include?("Editor") \
+      ||  current_person.current_ranks.include?("Coeditor"))
   end
 
   def the_editor?
-    @the_editor ||= person_signed_in? && current_person.the_editor?
+    @the_editor ||= person_signed_in? \
+      && current_person.current_ranks.include?("Editor")
   end
 
   def the_coeditor?
-    @coeditor ||= person_signed_in? && current_person.the_coeditor?
+    @coeditor ||= person_signed_in? \
+      && current_person.current_ranks.include?("Coeditor")
   end
 
   def staff?
-    @staff ||= person_signed_in? && current_person.is_staff?
+    @staff ||= person_signed_in? \
+      && current_person.current_ranks.include?("Staff")
   end
 
   def member?
@@ -69,11 +74,13 @@ module ApplicationHelper
   end
 
   def editor_or_author? submission
-    @editor_or_author ||= person_signed_in? && (the_editor? || current_person == submission.author)
+    @editor_or_author ||= person_signed_in? \
+      && (the_editor? || current_person == submission.author)
   end
 
   def coeditor_or_author? submission
-    @coeditor_or_author ||= person_signed_in? && (the_coeditor? || current_person == submission.author)
+    @coeditor_or_author ||= person_signed_in? \
+      && (the_coeditor? || current_person == submission.author)
   end
 
   def page_appropriate?

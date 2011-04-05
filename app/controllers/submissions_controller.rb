@@ -4,6 +4,7 @@ class SubmissionsController < InheritedResources::Base
   def index
     @magazines = Magazine.all
     @magazine = params[:m].present? ? Magazine.find(params[:m]) : Magazine.current.presence || Magazine.first
+    @average = @magazine.try(:average_score)
     @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : Meeting.all
     @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
@@ -14,6 +15,7 @@ class SubmissionsController < InheritedResources::Base
 
   def show
     @submission = Submission.find(params[:id])
+    @average = @submission.magazine.try(:average_score).presence
 
     respond_to do |format|
       format.html # show.html.erb

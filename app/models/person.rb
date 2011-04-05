@@ -1,6 +1,8 @@
 require 'digest/sha2'
 
 class Person < ActiveRecord::Base
+  extend ActiveSupport::Memoizable
+
   devise :database_authenticatable, :omniauthable, :confirmable,
          :recoverable, :registerable, :rememberable, :trackable,
          :validatable
@@ -21,6 +23,8 @@ class Person < ActiveRecord::Base
   has_many :meetings, :through => :attendees
 
   validates_presence_of :first_name
+
+  default_scope includes(:ranks)
 
   include Gravtastic
   gravtastic :size => 200, :default => "http://problemchildmag.com/images/children.png", :rating => 'R'
@@ -166,4 +170,6 @@ class Person < ActiveRecord::Base
 
     memoize :editors, :editor, :coeditor, :find_or_create
   end
+
+  memoize :full_name, :name_and_email, :name, :editor?, :the_editor?, :the_coeditor?, :is_staff?, :current_ranks, :can_enter_scores_for?, :staffships, :coeditorships, :editorships, :highest_rank
 end

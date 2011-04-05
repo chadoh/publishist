@@ -35,8 +35,8 @@
     %p.scored
       Score:
       %meter{ :min => 0, :max => 10,
-              :data => { :average => average = submission.magazine.try(:average_score).present? ? (submission.magazine.average_score * 100).round.to_f / 100 : nil },
-              :value => score = (submission.average_score * 100).round.to_f / 100,
+              :data => { :average => average = @average.presence || submission.magazine.try(:average_score).presence },
+              :value => score = submission.average_score,
               :title => "#{score} out of 10#{" (average: #{average})" if average.present?}" }
         #{score}#{ " (average: #{average})" if average.present?}
 

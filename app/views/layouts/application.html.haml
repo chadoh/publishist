@@ -24,9 +24,7 @@
             %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current "Submissions", submissions_path
           - if staff? || editor?
             %li{ :class => params[:controller] == 'people' && 'current' }= link_to_unless_current "People", people_path
-          -#- if member?
-            %li{ :class => params[:controller] == 'meetings' && 'current' }= link_to_unless_current "Meetings", meetings_path
-          - if member?
+          - if person_signed_in?
             %li{ :class => params[:controller] == 'magazines' && 'current' }= link_to_unless_current "Magazines", magazines_path
           %li
             %ul#account
@@ -61,4 +59,4 @@
       #footer
         .gradient
           :markdown
-            This website is in early hobbyist development; you may experience turbulence. Please let #{Person.chad ? "[someone](#{person_path(Person.chad)})" : "someone"} know if something is broken.
+            This website is in early hobbyist development; you may experience turbulence. Please let [someone](#{person_path(2)}) know if something is broken.
