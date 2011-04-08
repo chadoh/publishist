@@ -1,13 +1,15 @@
 - title "Highest-Scored Submissions for the #{resource.nickname} Magazine"
 
-%p= link_to "Back to magazine", magazines_path
-- unless @submissions.blank?
-  %div
-    View the highest
-    = form_tag highest_scored_for_magazine_path(@magazine), :method => :get, :id => "highest" do
-      = number_field_tag :highest, @highest, :in => 1..@max
-      = submit_tag "&rarr;".html_safe, :name => nil, :class => "link"
+= content_for :header do
+  %p= link_to "Back to magazine", magazines_path
+  - unless @submissions.blank?
+    %div
+      View the highest
+      = form_tag highest_scored_for_magazine_path(@magazine), :method => :get, :id => "highest" do
+        = number_field_tag :highest, @highest, :in => 1..@max
+        = submit_tag "&rarr;".html_safe, :name => nil, :class => "link"
 
+- unless @submissions.blank?
   = form_tag publish_magazine_path(@magazine), :id => "publish" do
     %ol.submissions
       - for submission in @submissions

@@ -50,6 +50,9 @@
         %header
           %h1{ :class => params[:controller] == 'submissions' && params[:action] == 'show' && 'nocaps' }<
             = @content_for_page_heading if show_title?
+          - if content_for? :header
+            %div
+              = yield :header
         = yield
       - if content_for? :sidebar
         %section.sidebar{ :id => "#{@article_id}-sidebar" }

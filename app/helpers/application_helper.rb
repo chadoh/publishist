@@ -1,4 +1,6 @@
 module ApplicationHelper
+  extend ActiveSupport::Memoizable
+
   def pluralize_phrase(number, singular_phrase, plural_phrase)
     return singular_phrase if number == 1
     return plural_phrase if number > 1
@@ -74,16 +76,20 @@ module ApplicationHelper
   end
 
   def editor_or_author? submission
-    @editor_or_author ||= person_signed_in? \
-      && (the_editor? || current_person == submission.author)
+    person_signed_in? && (the_editor? || current_person == submission.author)
   end
 
   def coeditor_or_author? submission
-    @coeditor_or_author ||= person_signed_in? \
-      && (the_coeditor? || current_person == submission.author)
+    person_signed_in? && (the_coeditor? || current_person == submission.author)
   end
 
   def page_appropriate?
     @page_appropriate ||= !current_page?(:controller => "submissions", :action => "index") and !current_page?(:controller => "meetings", :action => "show")
   end
+
+  def current_person_can_see_score_for? submission
+    coeditor_or_author?(submission)
+  end
+
+  memoize :editor_or_author?, :coeditor_or_author?, :current_person_can_see_score_for?
 end

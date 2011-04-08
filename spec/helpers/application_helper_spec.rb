@@ -51,4 +51,46 @@ describe ApplicationHelper do
       result.should match "</time>\n   &ndash; \n  <time datetime="
     end
   end
+
+  describe "#current_person_can_see_score_for? submission" do
+    before do
+      @sub = Factory.create :submission
+    end
+
+    context "the editor" do
+      before do
+        helper.stub(:the_editor?).and_return(true)
+        helper.stub(:coeditor_or_author?).and_return(false)
+      end
+
+      it "returns false when viewing meetings#show" do
+        helper.stub(:current_page?).and_return(false)
+        helper.current_person_can_see_score_for?(@sub).should be_false
+      end
+
+      it "returns true when viewing magazine#highest_scores" do
+        parameters = {:controller => 'magazines', :action => 'highest_scores'}
+        helper.stub(:params).and_return(parameters)
+        helper.current_person_can_see_score_for?(@sub).should be_true
+      end
+    end
+
+    context "the coeditor" do
+      before do
+        helper.stub(:the_editor?).and_return false
+        helper.stub(:coeditor_or_author?).and_return true
+      end
+
+      it "returns true when viewing meetings#show" do
+        helper.stub(:current_page?).and_return(false)
+        helper.current_person_can_see_score_for?(@sub).should be_true
+      end
+
+      it "returns true when viewing magazine#highest_scores" do
+        parameters = {:controller => 'magazines', :action => 'highest_scores'}
+        helper.stub(:params).and_return(parameters)
+        helper.current_person_can_see_score_for?(@sub).should be_true
+      end
+    end
+  end
 end

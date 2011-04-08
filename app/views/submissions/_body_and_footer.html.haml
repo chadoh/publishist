@@ -31,7 +31,7 @@
       - else
         =link_to "#{distance_of_time_in_words(Time.now, time)} ago", meeting_path(submission.meetings.first)
 
-  - if submission.scored? and (coeditor_or_author?(submission) or params[:controller] == 'magazines') and !(the_editor? && current_page?(submissions_path))
+  - if submission.scored? and current_person_can_see_score_for?(submission)
     %p.scored
       Score:
       %meter{ :min => 0, :max => 10,
