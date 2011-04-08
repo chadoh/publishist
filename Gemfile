@@ -22,6 +22,8 @@ gem 'devise'
 gem 'acts_as_list'
 gem 'meta_where'
 
+gem 'hoptoad_notifier'
+
 group :development do
   gem 'rails3-generators'
   gem 'heroku_san'
