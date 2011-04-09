@@ -11,7 +11,7 @@
     = hoptoad_javascript_notifier
     - jquery    = ENV['JQUERY']    || 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'
     - jquery_ui = ENV['JQUERY_UI'] || 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js'
-    = javascript_include_tag jquery, jquery_ui, 'jquery.autocomplete', 'rails', 'application', 'modernizr-1.6.min'
+    = javascript_include_tag jquery, jquery_ui
     = csrf_meta_tag
     = yield :head
   %body
@@ -64,3 +64,5 @@
         .gradient
           :markdown
             This website is in early hobbyist development; you may experience turbulence. Please let [someone](#{person_path(2)}) know if something is broken.
+    = javascript_include_tag 'jquery.autocomplete', 'modernizr-1.6.min', 'rails', 'application'
+    = yield :javascript

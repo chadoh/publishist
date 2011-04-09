@@ -19,7 +19,7 @@ module LayoutHelper
   end
 
   def javascript(*args)
-    content_for(:head) { javascript_include_tag(*args) }
+    content_for(:javascript) { javascript_include_tag(*args) }
   end
 
   # Helper function to add class="selected" to the active tab
