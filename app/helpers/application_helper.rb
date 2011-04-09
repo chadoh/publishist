@@ -88,7 +88,13 @@ module ApplicationHelper
   end
 
   def current_person_can_see_score_for? submission
-    coeditor_or_author?(submission)
+    submission.scored? && \
+    (
+      coeditor_or_author?(submission) || \
+      (
+        params[:controller] == 'magazines' && \
+        params[:action]     == 'highest_scores')) \
+    unless the_editor? && current_page?(submissions_path)
   end
 
   memoize :editor_or_author?, :coeditor_or_author?, :current_person_can_see_score_for?

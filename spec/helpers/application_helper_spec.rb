@@ -54,10 +54,11 @@ describe ApplicationHelper do
 
   describe "#current_person_can_see_score_for? submission" do
     before do
-      @sub = Factory.create :submission
+      @sub = stub('Submission', :scored? => true)
+      helper.stub(:submission).and_return(@sub)
     end
 
-    context "the editor" do
+    context "(when the editor is viewing)" do
       before do
         helper.stub(:the_editor?).and_return(true)
         helper.stub(:coeditor_or_author?).and_return(false)
@@ -75,7 +76,7 @@ describe ApplicationHelper do
       end
     end
 
-    context "the coeditor" do
+    context "(when the coeditor is viewing)" do
       before do
         helper.stub(:the_editor?).and_return false
         helper.stub(:coeditor_or_author?).and_return true

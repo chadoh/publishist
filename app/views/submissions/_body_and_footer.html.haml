@@ -31,7 +31,7 @@
       - else
         =link_to "#{distance_of_time_in_words(Time.now, time)} ago", meeting_path(submission.meetings.first)
 
-  - if submission.scored? and current_person_can_see_score_for?(submission)
+  - if current_person_can_see_score_for?(submission)
     %p.scored
       Score:
       %meter{ :min => 0, :max => 10,
