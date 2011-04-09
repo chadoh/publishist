@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110403132404) do
+ActiveRecord::Schema.define(:version => 20110409171018) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(:version => 20110403132404) do
     t.string   "middle_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "password_salt"
     t.string   "encrypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -70,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20110403132404) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "password_salt"
   end
 
   add_index "people", ["confirmation_token"], :name => "index_people_on_confirmation_token", :unique => true

@@ -1,4 +1,4 @@
-require 'digest/sha2'
+#require 'digest/sha2'
 
 class Person < ActiveRecord::Base
   extend ActiveSupport::Memoizable
@@ -9,13 +9,13 @@ class Person < ActiveRecord::Base
 
   attr_reader :password
 
-  ENCRYPT = Digest::SHA256
-  def self.find_by_email_and_password(email, password)
-    person = self.find_by_email(email)
-    if person and person.encrypted_password == ENCRYPT.hexdigest(password + "chrouiNt" + person.password_salt)
-      return person
-    end
-  end
+  #ENCRYPT = Digest::SHA256
+  #def self.find_by_email_and_password(email, password)
+    #person = self.find_by_email(email)
+    #if person and person.encrypted_password == ENCRYPT.hexdigest(password + "chrouiNt" + person.password_salt)
+      #return person
+    #end
+  #end
 
   has_many :ranks, :dependent => :destroy
   has_many :submissions, :foreign_key => 'author_id'

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails'
+gem 'rails', '~> 3.0'
 gem 'pg', '~> 0.9.0'
 gem 'heroku_backup_task'
 
@@ -19,6 +19,7 @@ gem 'inherited_resources'
 
 # Models
 gem 'devise'
+gem 'oa-core'
 gem 'acts_as_list'
 gem 'meta_where'
 

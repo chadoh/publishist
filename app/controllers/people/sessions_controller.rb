@@ -1,3 +1,6 @@
+
+## devise is not set up to route to this! For legacy reference only. ##
+
 class People::SessionsController < Devise::SessionsController
 
   def create
