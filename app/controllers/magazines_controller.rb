@@ -13,11 +13,11 @@ class MagazinesController < InheritedResources::Base
   end
 
   def highest_scores
-    # TODO: chance this to `resource.submissions.count` when nested hm:t support is added
-    @max = resource.meetings.collect(&:submissions).flatten.uniq.reject {|s| !s.scored? }.count
-    if @max.present?
-      @default = [@max * 3 / 4, 50].min
-      @highest = params[:highest].presence || @default
+    @max = resource.submissions.count
+    if @above = params[:above].blank? ? nil : params[:above].to_f
+      @submissions = resource.all_scores_above @above
+    else
+      @highest = params[:highest].presence || [@max * 3 / 4, 50].min
       @submissions = resource.highest_scores @highest.to_i
     end
   end

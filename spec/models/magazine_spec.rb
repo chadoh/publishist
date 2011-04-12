@@ -141,6 +141,16 @@ describe Magazine do
     end
   end
 
+  describe "#all_scores_above(this_score)" do
+    before do
+      a_magazine_has_just_finished
+    end
+
+    it "returns all submissions scored above the given score" do
+      @mag.all_scores_above(6).should == [@sub2]
+    end
+  end
+
   describe "#present_name" do
     let(:mag) { Factory.create :magazine }
 

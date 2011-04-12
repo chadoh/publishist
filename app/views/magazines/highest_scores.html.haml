@@ -3,11 +3,13 @@
 = content_for :header do
   %p= link_to "Back to magazine", magazines_path
   - unless @submissions.blank?
-    %div
-      View the highest
-      = form_tag highest_scored_for_magazine_path(@magazine), :method => :get, :id => "highest" do
-        = number_field_tag :highest, @highest, :in => 1..@max
-        = submit_tag "&rarr;".html_safe, :name => nil, :class => "link"
+    = form_tag highest_scored_for_magazine_path(@magazine), :method => :get, :id => "highest" do
+      = label_tag :highest, "View the highest"
+      = number_field_tag :highest, @highest.presence, :in => 1..@max
+
+      = label_tag :above, "or everything scored above"
+      = number_field_tag :above, @above.presence, :in => 1..10, :step => 0.1
+      = submit_tag "&rarr;".html_safe, :name => nil, :class => "link"
 
 - unless @submissions.blank?
   = form_tag publish_magazine_path(@magazine), :id => "publish" do
@@ -16,15 +18,7 @@
         = render :partial => 'submissions/show', :locals => { :submission => submission }
     = submit_tag "Publish checked submissions as #{@magazine.present_name}!", :confirm => "This will email everyone to let them know if they made it or not! This will make the published magazines visible to anonymous website visitors!"
 
-  :javascript
-    $(function(){
-
-      $('li.submission header h2').live('click', function(e){
-        e.preventDefault();
-        $(this).parents('li.submission').toggleClass('collapsed');
-      });
-
-    });
+  - javascript 'highest_scores'
 
 - else
   %p Uh oh! You never entered any scores for this magazine!!

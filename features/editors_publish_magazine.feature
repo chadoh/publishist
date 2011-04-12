@@ -20,3 +20,7 @@ Feature: an editor views the winners for a magazine
     When I fill in "highest" with "5"
     And  I press "→"
     Then I should see 5 submissions
+
+    When I fill in "above" with "6"
+    And  I press "→"
+    Then I should see 4 submissions

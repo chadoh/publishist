@@ -33,6 +33,12 @@ class Magazine < ActiveRecord::Base
       .shift(how_many)
   end
 
+  def all_scores_above this_score
+    self.submissions.where(:state >> Submission.state(:scored)) \
+      .reject {|s| s.average_score < this_score } \
+      .sort {|a,b| b.average_score <=> a.average_score }
+  end
+
   def present_name
     title.presence || "the #{nickname} magazine"
   end
