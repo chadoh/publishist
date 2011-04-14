@@ -12,7 +12,7 @@
   -if editor?
     %nav.actions
       %ul
-        %li= link_to "Edit", edit_meeting_attendee_path(resource, attendee), :class => 'edit'
+        %li= link_to "Edit", edit_meeting_attendee_path(attendee.meeting, attendee), :class => 'edit'
         %li
           = button_to "Remove", meeting_attendee_path(@meeting, attendee),
                       :remote => true,

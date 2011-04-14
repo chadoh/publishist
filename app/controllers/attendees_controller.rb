@@ -7,8 +7,6 @@ class AttendeesController < InheritedResources::Base
 
   before_filter :resource, :except => :create
 
-  skip_before_filter :verify_authenticity_token, :only => :update_answer
-
   def create
     params[:attendee] = set_person_param_from_string params[:attendee]
 

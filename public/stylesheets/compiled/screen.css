@@ -1497,6 +1497,38 @@ ol.meetings li.meeting header {
 ol.meetings li.meeting header {
   *display: inline;
 }
+/* line 365, ../../../app/stylesheets/screen.sass */
+ol.meetings li.meeting header > .drag-handle-wrap {
+  width: 1em;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  cursor: move;
+}
+/* line 7, ../../../../../../.rvm/gems/ruby-1.9.2-p180/bundler/gems/compass-b36952cf30a9/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+ol.meetings li.meeting header > .drag-handle-wrap {
+  *display: inline;
+}
+/* line 57, ../../../app/stylesheets/_base.sass */
+ol.meetings li.meeting header > .drag-handle-wrap > span.drag-handle {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  color: silver;
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  letter-spacing: -1px;
+}
+/* line 7, ../../../../../../.rvm/gems/ruby-1.9.2-p180/bundler/gems/compass-b36952cf30a9/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+ol.meetings li.meeting header > .drag-handle-wrap > span.drag-handle {
+  *display: inline;
+}
 /* line 367, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting footer {
   display: -moz-inline-box;

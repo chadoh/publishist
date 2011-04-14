@@ -1,6 +1,7 @@
-class PackletsController < ApplicationController
+class PackletsController < InheritedResources::Base
   before_filter :editors_only
-  skip_before_filter :verify_authenticity_token
+
+  actions :create, :destroy
 
   respond_to :js
 
@@ -20,11 +21,6 @@ class PackletsController < ApplicationController
     @packlet = Packlet.find params[:id]
     @packlet.insert_at params[:position]
     render :nothing => true
-  end
-
-  def destroy
-    @packlet = Packlet.find params[:id]
-    @packlet.destroy
   end
 
 end

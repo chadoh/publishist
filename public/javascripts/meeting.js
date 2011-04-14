@@ -45,6 +45,7 @@ $(function(){
       packlet_id = li.attr('id').split('_')[1];
       $.ajax({
         type: 'PUT',
+        dataType: 'script',
         url: '/packlets/' + packlet_id + '/update_position',
         data: { position: li.prevAll().length }
       });
@@ -69,7 +70,8 @@ $(function(){
   $('nav.actions a.edit').live('click', function(e){
     e.preventDefault();
     $.ajax({
-      url: $(this).attr('href')
+      url: $(this).attr('href'),
+      dataType: 'script'
     });
   });
 });

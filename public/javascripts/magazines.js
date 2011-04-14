@@ -16,6 +16,7 @@ $(function(){
       $.ajax({
         type: 'PUT',
         url:  '/meetings/' + meeting_id,
+        dataType: 'script',
         data: {
           meeting: {
             magazine_id: magazine_id
