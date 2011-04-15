@@ -22,4 +22,26 @@ class MeetingsController < InheritedResources::Base
     @attendees = resource.attendees
   end
 
+  def new
+    session[:return_to] = request.referer
+    new!
+  end
+
+  def create
+    create!{ session[:return_to].presence || resource_url }
+  end
+
+  def edit
+    session[:return_to] = request.referer
+    edit!
+  end
+
+  def update
+    update!{ session[:return_to].presence || magazines_url }
+  end
+
+  def destroy
+    destroy!{ magazines_url }
+  end
+
 end

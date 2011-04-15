@@ -1,5 +1,6 @@
+app/stylesheets
 design
-test
-spec
 features
+spec
+test
 tmp/capybara

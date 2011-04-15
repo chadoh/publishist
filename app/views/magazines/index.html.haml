@@ -4,6 +4,14 @@
     #{link_to t('.new_magazine'), new_magazine_path}  
     #{link_to t('.new_meeting'), new_meeting_path}
 
+- if orphaned_meetings = Meeting.where(:magazine_id => nil).presence
+  %section
+    %header
+      %h2 Orphaned Meetings
+    %ul.meetings
+      - for meeting in orphaned_meetings
+        = render :partial => 'meetings/show', :locals => { :meeting => meeting }
+
 %ol.magazines
   - for magazine in collection
     = render :partial => 'show', :locals => { :magazine => magazine }
