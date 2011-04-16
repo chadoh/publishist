@@ -21,16 +21,16 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = false
-end
 
-config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-end
+  config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+  end
 
-config.before(:each) do
-    DatabaseCleaner.start
-end
+  config.before(:each) do
+      DatabaseCleaner.start
+  end
 
-config.after(:each) do
-    DatabaseCleaner.clean
+  config.after(:each) do
+      DatabaseCleaner.clean
+  end
 end

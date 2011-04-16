@@ -20,6 +20,7 @@ Feature: Editor schedules a meetings
       | When     | 2010-10-27 07:30 PM |
       | Question | Does he love you?   |
     And I press "Create Meeting"
+    And I am on the magazines page
     Then I should see "Does he love you?"
 
   @editor

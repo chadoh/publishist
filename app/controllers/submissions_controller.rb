@@ -10,7 +10,6 @@ class SubmissionsController < InheritedResources::Base
     @meetings_gone_by = @meetings - @meetings_to_come
     @show_author = false if current_person.the_coeditor?
     @unscheduled_submissions = Submission.where(:state => Submission.state(:submitted))
-    index!
   end
 
   def show

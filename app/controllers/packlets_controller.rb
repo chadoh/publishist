@@ -23,4 +23,8 @@ class PackletsController < InheritedResources::Base
     render :nothing => true
   end
 
+  def destroy
+    resource.destroy :current_person => current_person
+  end
+
 end

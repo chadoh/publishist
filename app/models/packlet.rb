@@ -14,7 +14,12 @@ class Packlet < ActiveRecord::Base
 
   before_create :submission_reviewed_or_queued
 
-  after_destroy "self.submission.has_been(:submitted) if self.submission.packlets.empty?"
+  def destroy options = {}
+    super()
+    if self.submission.packlets.empty? && !(options[:current_person] == Person.editor)
+      self.submission.has_been(:submitted)
+    end
+  end
 
 protected
 

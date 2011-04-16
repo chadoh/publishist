@@ -74,6 +74,7 @@ describe Packlet do
 
   describe "#destroy" do
     it "sets the packlet's submission to :submitted if this was its last packlet" do
+      Person.should_receive(:editor).and_return("nope")
       sub = @packlet.submission
       @packlet.destroy
       sub.should be_submitted
@@ -85,6 +86,12 @@ describe Packlet do
       packlet2 = Packlet.create :meeting => meeting2, :submission => sub
       packlet2.destroy
       sub.should be_queued
+    end
+
+    it "accepts a {:current_person => blah} parameter without complaining" do
+      person = Factory.build :person
+      Person.should_receive(:editor).and_return("nope")
+      @packlet.destroy :current_person => person
     end
   end
 end
