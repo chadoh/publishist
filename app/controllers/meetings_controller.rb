@@ -12,9 +12,11 @@ class MeetingsController < InheritedResources::Base
   respond_to :html
 
   def show
-    @show_score = current_person.can_enter_scores_for? resource
     @show_author = false
-    @attendee = Attendee.find_by_person_id_and_meeting_id(current_person.id, resource.id)
+    unless !current_person
+      @show_score = current_person.can_enter_scores_for? resource
+      @attendee = Attendee.find_by_person_id_and_meeting_id(current_person.id, resource.id)
+    end
     show!
   end
 
