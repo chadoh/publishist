@@ -44,7 +44,7 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def create
-    params[:submission][:author] = Person.find_or_create(params[:submission][:author])
+    params[:submission][:author] = Person.find_or_create(params[:submission][:author]) if !!params[:submission][:author]
     params[:submission][:state]  = params[:commit] == "Submit!" ? :submitted : :draft
     @submission = Submission.new(params[:submission])
 
