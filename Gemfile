@@ -23,6 +23,9 @@ gem 'oa-core'
 gem 'acts_as_list'
 gem 'meta_where'
 
+# Mailers
+gem 'handlers', :git => "git://github.com/chadoh/handlers.git"
+
 gem 'hoptoad_notifier'
 gem 'mixpanel'
 

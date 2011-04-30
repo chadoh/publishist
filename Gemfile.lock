@@ -6,6 +6,13 @@ GIT
     compass (0.10.6)
       haml (>= 3.0.4)
 
+GIT
+  remote: git://github.com/chadoh/handlers.git
+  revision: 906d3f695e3d03238660bc5956390b5ba7e61bd2
+  specs:
+    handlers (0.0.3)
+      redcarpet (~> 1.12.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -157,6 +164,7 @@ GEM
       thor (~> 0.14.4)
     rake (0.8.7)
     rdiscount (1.6.8)
+    redcarpet (1.12.0)
     responders (0.6.2)
     rest-client (1.6.1)
       mime-types (>= 1.16)
@@ -207,6 +215,7 @@ DEPENDENCIES
   factory_girl_rails
   gravtastic
   haml
+  handlers!
   heroku_backup_task
   heroku_san
   hoptoad_notifier
