@@ -12,7 +12,6 @@ class Submission < ActiveRecord::Base
     :if => Proc.new {|s| s.body.blank? && s.title.blank? }
 
   after_find :reviewed_if_meeting_has_occurred
-  after_update :send_notification_email_if_submitted
 
   def magazine
     self.reload.meetings.first.try(:magazine)
@@ -58,7 +57,10 @@ class Submission < ActiveRecord::Base
     end
   end
 
-  def has_been moved_to_state
+  def has_been moved_to_state, options = {}
+    if moved_to_state == :submitted
+      Notifications.new_submission(self).try(:deliver) if (options[:by].blank? or options[:by] != Person.editor)
+    end
     update_attributes :state => moved_to_state
   end
 
@@ -84,10 +86,6 @@ protected
         update_attribute :state, Submission.state(:reviewed)
       end
     end
-  end
-
-  def send_notification_email_if_submitted
-    Notifications.new_submission(self).deliver if submitted?
   end
 
 end

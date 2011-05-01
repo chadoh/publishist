@@ -12,7 +12,6 @@ Feature: A poet's work goes from draft to published/rejected
     And I press "Submit!"
     Then "Each raindrop" should be submitted, not draft
 
-  @pending
   @webmember
   Scenario: I write a poem and then submit it later with edits
     Given I am on the new submission page

@@ -39,9 +39,12 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'email_spec'
   gem 'shoulda'
+  gem 'railroady'
+end
+
+group :test do
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'launchy'
   gem 'database_cleaner'
-  gem 'railroady'
 end

@@ -21,6 +21,10 @@ Feature: An editor organizes submissions into packlets
     And I should see "Lisa, the Cat" under the first meeting
     And I should not see "Lisa, the Cat" under "Unscheduled"
 
+    When I drag "Lisa, the Cat" from the first meeting to "Unscheduled"
+    Then I refresh the page
+    Then I should see "Lisa, the Cat" under "Unscheduled"
+
   @pending
   @editor @javascript
   Scenario: The editor sorts submissions within the packlet

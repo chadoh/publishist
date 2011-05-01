@@ -41,6 +41,21 @@ describe Submission do
       sub.state.should == :reviewed
     end
 
+    context "when submitting" do
+      it "sends an email to the editor, by default" do
+        sub = Factory.create :submission
+        Notifications.should_receive(:new_submission).with(sub)
+        sub.has_been :submitted
+      end
+
+      it "sends no email, if it was submitted by the editor" do
+        sub = Factory.create :submission
+        Person.should_receive(:editor).and_return("Blimey, Tim!")
+        Notifications.should_not_receive(:new_submission)
+        sub.has_been :submitted, :by => "Blimey, Tim!"
+      end
+    end
+
     it "emails the author if the submission has been published"
 
     it "emails the author if the submission has been rejected"

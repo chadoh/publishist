@@ -74,7 +74,6 @@ describe Packlet do
 
   describe "#destroy" do
     it "sets the packlet's submission to :submitted if this was its last packlet" do
-      Person.should_receive(:editor).and_return("nope")
       sub = @packlet.submission
       @packlet.destroy
       sub.should be_submitted

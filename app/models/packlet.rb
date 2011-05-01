@@ -16,8 +16,8 @@ class Packlet < ActiveRecord::Base
 
   def destroy options = {}
     super()
-    if self.submission.packlets.empty? && !(options[:current_person] == Person.editor)
-      self.submission.has_been(:submitted)
+    if self.submission.packlets.empty?
+      self.submission.has_been :submitted, :by => options[:current_person]
     end
   end
 
