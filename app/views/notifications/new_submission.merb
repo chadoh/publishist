@@ -1,0 +1,10 @@
+<%= title = sanitize @title %>
+<%= "=" * title.length %>
+
+<%= sanitize @submission_body %>
+
+by <%= @author %>
+
+<%= " *" * ("by #{@author}".length / 2) %>
+
+You can [view this on the website](<%= @url %>)

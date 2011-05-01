@@ -19,8 +19,11 @@ class Notifications < ActionMailer::Base
     mail(
       :to => ENV['EDITOR_EMAIL'],
       :from => submission.email,
-      :subject => "Submission: \"#{@title}\" by #{@author}"
-    )
+      :subject => "Submission: \"#{@title.gsub(%r{</?[^>]+?>}, '')}\" by #{@author}"
+    ) do |format|
+      format.html
+      format.text
+    end
   end
 
 end

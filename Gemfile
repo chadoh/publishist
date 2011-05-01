@@ -37,6 +37,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'email_spec'
   gem 'shoulda'
   gem 'cucumber-rails'
   gem 'capybara'

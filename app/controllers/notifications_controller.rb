@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
     @title = @submission.title
     @submission_body = @submission.body
     @author = @submission.author_name
-    @url = "#"
+    @url = submission_url(@submission)
 
     @heading_image = "http://pcmag.heroku.com/images/mail/heading1.jpg"
     @green = "#8daf25"
