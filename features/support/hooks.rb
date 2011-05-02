@@ -19,7 +19,7 @@ Before('@coeditor') do
   click_button 'Sign in'
 end
 
-#Around('@user', '@user') do |block|
+#Around('@editor', '@coeditor') do |block|
   #@user = Factory.create(:current_editor).person
   #visit '/sign_in'
   #fill_in 'Email', :with => @user.email

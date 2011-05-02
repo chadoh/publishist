@@ -17,9 +17,10 @@ class Notifications < ActionMailer::Base
     @url = submission_url(submission)
 
     mail(
-      :to => ENV['EDITOR_EMAIL'],
-      :from => submission.email,
-      :subject => "Submission: \"#{@title.gsub(%r{</?[^>]+?>}, '')}\" by #{@author}"
+      :to       => ENV['EDITOR_EMAIL'] || Person.editor.email,
+      :from     => "#{submission.author_name} <#{ENV['ADMIN_EMAIL'] || "admin@problemchildmag.com"}>",
+      :reply_to => submission.email,
+      :subject  => "Submission: \"#{@title.gsub(%r{</?[^>]+?>}, '')}\" by #{@author}"
     ) do |format|
       format.html
       format.text

@@ -45,7 +45,6 @@ class SubmissionsController < InheritedResources::Base
 
   def create
     params[:submission][:author] = Person.find_or_create(params[:submission][:author]) if !!params[:submission][:author]
-    params[:submission][:state]  = params[:commit] == "Submit!" ? :submitted : :draft
     @submission = Submission.new(params[:submission])
 
     respond_to do |format|
@@ -65,14 +64,13 @@ class SubmissionsController < InheritedResources::Base
         format.xml  { render :xml => @submission.errors, :status => :unprocessable_entity }
       end
     end
+
+    if params[:commit] == "Submit!" then @submission.has_been(:submitted, :by => current_person) end
   end
 
   def update
     if !!params[:submission][:author]
       params[:submission][:author] = Person.find_or_create(params[:submission][:author])
-    end
-    if request.referer == new_submission_url or request.referer == edit_submission_url(resource)
-      params[:submission][:state] = :submitted if params[:commit] == "Submit!"
     end
 
     update! do
@@ -81,6 +79,10 @@ class SubmissionsController < InheritedResources::Base
       else
         person_url(resource.author)
       end
+    end
+
+    if request.referer == new_submission_url or request.referer == edit_submission_url(resource)
+      if params[:commit] == "Submit!" then @submission.has_been(:submitted, :by => current_person) end
     end
   end
 
