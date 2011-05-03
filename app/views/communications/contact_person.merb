@@ -1,0 +1,11 @@
+<%= @topic %>
+<%= "=" * @topic.length %>
+
+<%= @message %>
+
+<%= " *" * 30 %>
+
+[<%= @fromm.name %>][1] used the contact form on [your profile page][2] to send this to you.
+
+  [1]: <%= person_url(@fromm) %>
+  [2]: <%= person_url(@to) %>

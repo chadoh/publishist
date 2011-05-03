@@ -19,10 +19,7 @@ describe "Notifications mailer" do
     it {
       should have_body_text(@submission.title)
       should have_subject(/mehrrrow ROAR!/)
+      should be_multipart
     }
-
-    it "should be a multipart email" do
-      @email.parts.length.should == 2
-    end
   end
 end

@@ -22,8 +22,8 @@ class Notifications < ActionMailer::Base
       :reply_to => submission.email,
       :subject  => "Submission: \"#{@title.gsub(%r{</?[^>]+?>}, '')}\" by #{@author}"
     ) do |format|
-      format.html
       format.text
+      format.html
     end
   end
 

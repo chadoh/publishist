@@ -48,9 +48,13 @@ class Communications < ActionMailer::Base
     @fromm = from
     @to = to
     mail(
-      :from => @fromm.email,
-      :to => @to.email,
-      :subject => "#{@fromm.name} sent you a message from your profile on Problem Child"
-    )
+      :from     => "#{@fromm.name} <admin@problemchildmag.com>",
+      :reply_to => @fromm.email,
+      :to       => @to.email,
+      :subject  => "#{@fromm.name} sent you a message from your profile on Problem Child"
+    ) do |format|
+      format.text
+      format.html
+    end
   end
 end
