@@ -6,9 +6,10 @@ gem 'heroku_backup_task'
 
 # Views
 gem 'haml'
+gem 'sass'
 gem 'simple_form'
 gem 'rdiscount'
-gem 'compass', :git => "git://github.com/chadoh/compass.git", :branch => "delimiting"
+gem 'compass'
 gem 'compass-susy-plugin'
 
 # Controllers
@@ -45,6 +46,6 @@ end
 group :test do
   gem 'cucumber-rails'
   gem 'capybara'
-  gem 'launchy'
+  # gem 'launchy'
   gem 'database_cleaner'
 end

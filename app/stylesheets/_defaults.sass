@@ -8,7 +8,10 @@
 // Imports --------------------------------------------------------------
 
 @import base
-@import susy/reset
+@import compass/css3
+@import compass/reset
+@import compass/typography/vertical_rhythm
++establish_baseline
 
 /* Typography --------------------------------------------------------------
 /* The following classes are for use with @extend.
@@ -281,7 +284,7 @@ label
   max-width: $article * $col-width + $article * $gutter-width
   margin-top: 0
   border-color: $lgray
-  +box-shadow($blue, 0, 0, 3px, 0)
+  +box-shadow($blue 0 0 3px 0)
   height: $base-line-height / 14px * 1.5em
 
 textarea
@@ -308,24 +311,24 @@ input[type=submit], button
   @extend .serif
   +adjust-font-size-to(16px)
   background: $orange
-  +linear-gradient(color-stops($orange + #333, $orange - #111))
+  +background(linear-gradient($orange + #333, $orange - #111))
   border: none
   text-decoration: none
   +trailer
   +leader
   +pad(0.25, 0.25)
-  +box-shadow($dgray, 1px, 1px, 2px, 0)
+  +box-shadow($dgray 1px 1px 2px 0)
   &:hover
-    +box-shadow($dgray, 0, 0, 2px, 0)
+    +box-shadow($dgray 0 0 2px 0)
   &:active
-    +box-shadow($dgray, 1px, 1px, 1px, 0, inset)
+    +box-shadow($dgray 1px 1px 1px 0 inset)
   &.link
     background: transparent
-    +box-shadow(rgba(255, 255, 255, 0), 0, 0, 0, 0)
+    +box-shadow(rgba(255, 255, 255, 0) 0 0 0 0)
     &:hover
-      +box-shadow(rgba(255, 255, 255, 0), 0, 0, 0, 0)
+      +box-shadow(rgba(255, 255, 255, 0) 0 0 0 0)
     &:active
-      +box-shadow(rgba(255, 255, 255, 0), 0, 0, 0, 0, false)
+      +box-shadow(rgba(255, 255, 255, 0) 0 0 0 0 false)
     +rhythm
     cursor: pointer
     padding: 0
@@ -340,13 +343,13 @@ form.button_to
 span[contenteditable]
   &:hover
     background-color: $lyellow
-    +linear-gradient(color-stops(lighten($lyellow, 10%), $lyellow))
+    +background(linear-gradient(lighten($lyellow, 10%), $lyellow))
     cursor: pointer
   &:focus
     background-color: $lorange
-    +linear-gradient(color-stops(lighten($lorange, 10%), $lorange))
+    +background(linear-gradient(lighten($lorange, 10%), $lorange))
     cursor: text
-    +box-shadow($lgray, 0, 0, 3px, inset)
+    +box-shadow($lgray 0 0 3px inset)
 
 =grayed-out($completely: false)
   color: $lgray

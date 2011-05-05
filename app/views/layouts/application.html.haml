@@ -40,9 +40,8 @@
                 %li
                   = link_to_unless_current "Sign Up!", sign_up_path
       %header{ :role => 'banner' }
-        .gradient
-          %h1 Problem Child
-          %p= t 'subtitle'
+        %h1 Problem Child
+        %p= t 'subtitle'
       - if flash[:notice]
         #notice= flash[:notice]
       - if flash[:alert]
@@ -61,9 +60,8 @@
       #page-footer &nbsp;
     %footer{ :role => 'contentinfo' }
       #footer
-        .gradient
-          :markdown
-            This website is in early hobbyist development; you may experience turbulence. Please let [someone](#{person_path(2)}) know if something is broken.
+        :markdown
+          This website is in early hobbyist development; you may experience turbulence. Please let [someone](#{person_path(2)}) know if something is broken.
     = javascript_include_tag 'jquery.autocomplete', 'modernizr-1.6.min', 'rails', 'application'
     - if protect_against_forgery?
       :javascript

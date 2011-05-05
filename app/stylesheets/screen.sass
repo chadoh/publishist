@@ -3,14 +3,10 @@
 // Imports --------------------------------------------------------------
 
 @import defaults
-@import compass/css3
 @import compass/layout/sticky-footer
-@import compass/utilities/lists/inline-list
-@import compass/utilities/text/ellipses
-
-+susy
-
-+sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'body > footer')
+@import compass/typography/lists/inline-list
+@import compass/typography/lists/inline-block-list
+@import compass/typography/text/ellipsis
 
 nav.actions > ul
   +delimited-list(" | ")
@@ -58,22 +54,19 @@ nav.actions > ul
           +adjust-font-size-to(13px, 0.7)
 
   & > header
-    background-image: url('/images/clouds.png')
+    background-color: $blue
+    +background(linear-gradient(rgba(lighten($blue, 15%), 0.9), rgba($blue, 0.9)), image-url('/images/clouds.png'))
     +full
-
+    +box-shadow($lgray 0 0 3px inset)
+    width: 100%
+    background-color: $blue
+    text-align: center
+    +opacity(0.9)
+    +border-radius(20px 0)
     h1
       +adjust-font-size-to(31px)
       +trailer(0, 21px)
 
-    .gradient
-      +box-shadow($lgray, 0, 0, 3px, inset)
-      width: 100%
-      background-color: $blue
-      text-align: center
-      +linear-gradient(color-stops(lighten($blue, 15%), $blue))
-      +opacity(0.9)
-    &, .gradient
-      +border-radius(20px 0)
 
   & > #notice
     +full
@@ -97,20 +90,18 @@ nav.actions > ul
 body > footer
   +container
   & > #footer
-    background-image: url('/images/grass.jpg')
+    background-color: $green
+    +background(linear-gradient(rgba(lighten($green, 5%), 0.9), rgba(darken($green, 10%), 0.9)), image-url('/images/grass.jpg'))
     +full
-    .gradient
-      width: 100%
-      background-color: $green
-      +linear-gradient(color-stops(lighten($green, 5%), darken($green, 10%)))
-      +box-shadow($lgray, 0, 0, 3px, inset)
-      +opacity(0.92)
-      +adjust-font-size-to(14px, 3)
-      text-align: center
-      a
-        +links(yellow)
-    &, .gradient
-      +border-radius(0 20px)
+    +box-shadow($lgray 0 0 3px inset)
+    +opacity(0.92)
+    +adjust-font-size-to(14px, 3)
+    +border-radius(0 20px)
+    text-align: center
+    a
+      +links(yellow)
+
++sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'body > footer')
 
 @media screen and (max-width: 600px)
   #page
@@ -218,7 +209,7 @@ section#magazines
     margin: 0
     li
       background-color: $yellow
-      +linear-gradient(color-stops(lighten($lyellow, 15%), $lyellow))
+      +background(linear-gradient(lighten($lyellow, 15%), $lyellow))
       +rhythm-borders
       padding:
         top: 0
@@ -237,7 +228,7 @@ section#magazines
       &:active
         color: $base
         border-color: $base
-        +box-shadow($dgray, 0, 0, 5px, inset)
+        +box-shadow($dgray 0 0 5px inset)
         p
           border-color: $orange
     a.selected
@@ -249,7 +240,7 @@ section#magazines
           h3
             border-bottom: 1px solid $orange
             +trailer(0)
-        +box-shadow($lgray, 0, 0, 10px, 0)
+        +box-shadow($lgray 0 0 10px 0)
 
 span.score
   form.button_to
@@ -395,7 +386,7 @@ ul#people
     span.promote-to
       +columns(6.5)
       & > ul
-        +comma-delimited-list
+        +delimited-list
     span.actions
       +columns(2.5)
       +omega
