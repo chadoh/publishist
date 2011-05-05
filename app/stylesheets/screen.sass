@@ -275,13 +275,20 @@ html.no-number-input input[type=number]
 section#scores
   +full
   +leader
-  #packlet_titles
+  ol#packlet_titles
     +alpha
     +columns(2)
     +trailer
-    .title
-      text-align: right
-      +ellipsis
+    list-style-position: inside
+    li.title
+      max-height: $base-line-height
+      a
+        +inline-block
+        vertical-align: inherit
+        min-height: $base-font-size
+        width: 70%
+        +ellipsis
+
   .scores
     +columns(1)
     +trailer

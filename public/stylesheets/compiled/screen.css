@@ -1296,24 +1296,40 @@ section#scores {
   margin-top: 1.5em;
 }
 /* line 278, ../../../app/stylesheets/screen.sass */
-section#scores #packlet_titles {
+section#scores ol#packlet_titles {
   margin-left: 0.885%;
   display: inline;
   float: left;
   width: 11.504%;
   margin-right: 0.885%;
   margin-bottom: 1.5em;
+  list-style-position: inside;
 }
-/* line 282, ../../../app/stylesheets/screen.sass */
-section#scores #packlet_titles .title {
-  text-align: right;
+/* line 283, ../../../app/stylesheets/screen.sass */
+section#scores ol#packlet_titles li.title {
+  max-height: 24px;
+}
+/* line 285, ../../../app/stylesheets/screen.sass */
+section#scores ol#packlet_titles li.title a {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  vertical-align: inherit;
+  min-height: 16px;
+  width: 70%;
   white-space: nowrap;
   overflow: hidden;
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-/* line 285, ../../../app/stylesheets/screen.sass */
+/* line 7, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+section#scores ol#packlet_titles li.title a {
+  *display: inline;
+}
+/* line 292, ../../../app/stylesheets/screen.sass */
 section#scores .scores {
   display: inline;
   float: left;
@@ -1321,7 +1337,7 @@ section#scores .scores {
   margin-right: 0.885%;
   margin-bottom: 1.5em;
 }
-/* line 288, ../../../app/stylesheets/screen.sass */
+/* line 295, ../../../app/stylesheets/screen.sass */
 section#scores .scores:last {
   display: inline;
   float: right;
@@ -1329,13 +1345,13 @@ section#scores .scores:last {
   #margin-left: -0.5em;
 }
 
-/* line 292, ../../../app/stylesheets/screen.sass */
+/* line 299, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 294, ../../../app/stylesheets/screen.sass */
+/* line 301, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1347,11 +1363,11 @@ ul.attendees li.attendee span {
 ul.attendees li.attendee span {
   *display: inline;
 }
-/* line 296, ../../../app/stylesheets/screen.sass */
+/* line 303, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.person {
   width: 15em;
 }
-/* line 298, ../../../app/stylesheets/screen.sass */
+/* line 305, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.answer {
   width: 27em;
   padding-left: 0.5em;
@@ -1363,12 +1379,12 @@ ul.attendees li.attendee span.answer {
   border-radius: 5px;
   min-height: 24px;
 }
-/* line 303, ../../../app/stylesheets/screen.sass */
+/* line 310, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee nav.actions {
   display: inline;
 }
 
-/* line 305, ../../../app/stylesheets/screen.sass */
+/* line 312, ../../../app/stylesheets/screen.sass */
 form.attendee {
   clear: both;
   margin-left: 0.885%;
@@ -1376,27 +1392,27 @@ form.attendee {
   margin-top: 1.5em;
 }
 
-/* line 310, ../../../app/stylesheets/screen.sass */
+/* line 317, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_body {
   height: 30.857em;
 }
-/* line 312, ../../../app/stylesheets/screen.sass */
+/* line 319, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_title {
   height: 2.571em;
 }
-/* line 314, ../../../app/stylesheets/screen.sass */
+/* line 321, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 317, ../../../app/stylesheets/screen.sass */
+/* line 324, ../../../app/stylesheets/screen.sass */
 ol.magazines {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
   margin-left: 0;
 }
-/* line 320, ../../../app/stylesheets/screen.sass */
+/* line 327, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine {
   clear: both;
   margin-left: 0.885%;
@@ -1408,7 +1424,7 @@ ol.magazines > li.magazine {
   list-style-image: none;
   list-style-type: none;
 }
-/* line 327, ../../../app/stylesheets/screen.sass */
+/* line 334, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine > header {
   clear: both;
   margin-left: 0.885%;
@@ -1416,7 +1432,7 @@ ol.magazines > li.magazine > header {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 330, ../../../app/stylesheets/screen.sass */
+/* line 337, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine > header h2 {
   margin-left: 0.885%;
   display: inline;
@@ -1425,7 +1441,7 @@ ol.magazines > li.magazine > header h2 {
   margin-right: 0.885%;
   margin-bottom: 0em;
 }
-/* line 334, ../../../app/stylesheets/screen.sass */
+/* line 341, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine > header span.timeframe {
   display: inline;
   float: left;
@@ -1433,7 +1449,7 @@ ol.magazines > li.magazine > header span.timeframe {
   margin-right: 0.885%;
   text-align: right;
 }
-/* line 337, ../../../app/stylesheets/screen.sass */
+/* line 344, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine > header nav.actions {
   display: inline;
   float: left;
@@ -1444,7 +1460,7 @@ ol.magazines > li.magazine > header nav.actions {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 340, ../../../app/stylesheets/screen.sass */
+/* line 347, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine > dl.meetings {
   clear: both;
   margin-left: 0.885%;
@@ -1452,11 +1468,11 @@ ol.magazines > li.magazine > dl.meetings {
   margin-left: 1em;
   margin-bottom: 0em;
 }
-/* line 344, ../../../app/stylesheets/screen.sass */
+/* line 351, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine > dl.meetings dd {
   padding-left: 0;
 }
-/* line 346, ../../../app/stylesheets/screen.sass */
+/* line 353, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine > a {
   clear: both;
   margin-left: 0.885%;
@@ -1465,20 +1481,20 @@ ol.magazines > li.magazine > a {
   display: block;
 }
 
-/* line 350, ../../../app/stylesheets/screen.sass */
+/* line 357, ../../../app/stylesheets/screen.sass */
 ol.meetings, ul.meetings {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
   list-style-position: inside;
 }
-/* line 353, ../../../app/stylesheets/screen.sass */
+/* line 360, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting, ul.meetings li.meeting {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 355, ../../../app/stylesheets/screen.sass */
+/* line 362, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting header, ul.meetings li.meeting header {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1492,7 +1508,7 @@ ol.meetings li.meeting header, ul.meetings li.meeting header {
 ol.meetings li.meeting header, ul.meetings li.meeting header {
   *display: inline;
 }
-/* line 359, ../../../app/stylesheets/screen.sass */
+/* line 366, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting header > .drag-handle-wrap, ul.meetings li.meeting header > .drag-handle-wrap {
   width: 1em;
   display: -moz-inline-box;
@@ -1525,7 +1541,7 @@ ol.meetings li.meeting header > .drag-handle-wrap > span.drag-handle, ul.meeting
 ol.meetings li.meeting header > .drag-handle-wrap > span.drag-handle, ul.meetings li.meeting header > .drag-handle-wrap > span.drag-handle {
   *display: inline;
 }
-/* line 361, ../../../app/stylesheets/screen.sass */
+/* line 368, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting footer, ul.meetings li.meeting footer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1540,7 +1556,7 @@ ol.meetings li.meeting footer, ul.meetings li.meeting footer {
 ol.meetings li.meeting footer, ul.meetings li.meeting footer {
   *display: inline;
 }
-/* line 366, ../../../app/stylesheets/screen.sass */
+/* line 373, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting footer time, ul.meetings li.meeting footer time {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1555,7 +1571,7 @@ ol.meetings li.meeting footer time, ul.meetings li.meeting footer time {
 ol.meetings li.meeting footer time, ul.meetings li.meeting footer time {
   *display: inline;
 }
-/* line 371, ../../../app/stylesheets/screen.sass */
+/* line 378, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting footer nav.actions, ul.meetings li.meeting footer nav.actions {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1569,7 +1585,7 @@ ol.meetings li.meeting footer nav.actions, ul.meetings li.meeting footer nav.act
   *display: inline;
 }
 
-/* line 375, ../../../app/stylesheets/screen.sass */
+/* line 382, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1580,13 +1596,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 378, ../../../app/stylesheets/screen.sass */
+/* line 385, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 380, ../../../app/stylesheets/screen.sass */
+/* line 387, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1594,7 +1610,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 383, ../../../app/stylesheets/screen.sass */
+/* line 390, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1602,14 +1618,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 386, ../../../app/stylesheets/screen.sass */
+/* line 393, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 388, ../../../app/stylesheets/screen.sass */
+/* line 395, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1631,7 +1647,7 @@ ul#people li.person span.promote-to > ul li:last-child:after {
 ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 390, ../../../app/stylesheets/screen.sass */
+/* line 397, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1643,11 +1659,11 @@ ul#people li.person span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 394, ../../../app/stylesheets/screen.sass */
+/* line 401, ../../../app/stylesheets/screen.sass */
 form#highest {
   margin-bottom: 1.5em;
 }
-/* line 395, ../../../app/stylesheets/screen.sass */
+/* line 402, ../../../app/stylesheets/screen.sass */
 form#highest * {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1661,25 +1677,25 @@ form#highest * {
 form#highest * {
   *display: inline;
 }
-/* line 399, ../../../app/stylesheets/screen.sass */
+/* line 406, ../../../app/stylesheets/screen.sass */
 form#highest input[type=number] {
   margin-left: 0.3em;
   width: 4em;
 }
 
-/* line 403, ../../../app/stylesheets/screen.sass */
+/* line 410, ../../../app/stylesheets/screen.sass */
 form#publish ol {
   margin-bottom: 0em;
 }
 
 /*   Odds & Ends
  ******************************* */
-/* line 410, ../../../app/stylesheets/screen.sass */
+/* line 417, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }
 
-/* line 413, ../../../app/stylesheets/screen.sass */
+/* line 420, ../../../app/stylesheets/screen.sass */
 span.average-score {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
