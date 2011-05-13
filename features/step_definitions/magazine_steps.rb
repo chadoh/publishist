@@ -55,3 +55,9 @@ Then /^I should see (\d+) submissions$/ do |how_many|
   on_page = page.find("body").text.split("Submission").length - 3
   on_page.should == how_many.to_i
 end
+
+Then /^each author should receive an email$/ do
+  Submission.all.each do |sub|
+    unread_emails_for(sub.email).size.should == 1
+  end
+end

@@ -17,7 +17,7 @@ class Magazine < ActiveRecord::Base
 
   # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
   def submissions
-    submission_ids = self.meetings.collect(&:packlets).flatten.collect &:submission_id
+    submission_ids = self.meetings.collect(&:packlets).flatten.collect(&:submission_id).uniq
     Submission.where :id + submission_ids
   end
 
@@ -44,18 +44,20 @@ class Magazine < ActiveRecord::Base
   end
 
   def publish array_of_winners
-    if self.accepts_submissions_until > Time.now
-      raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
-    else
+    if self.accepts_submissions_until <= Time.now
+      all_submissions = self.submissions
+      published = array_of_winners
+      rejected = all_submissions - published
+
       self.update_attributes :published_on => Date.today
-      for sub in array_of_winners
-        sub.has_been :published
+      for sub in published do sub.has_been(:published) end
+      for sub in rejected  do sub.has_been(:rejected)  end
+      all_submissions.group_by(&:email).each do |author_email, her_submissions|
+        Notifications.we_published_a_magazine(author_email, self, her_submissions).try(:deliver)
+        # TODO: figure out why the tests fails if we boldly deliver, instead of merely trying
       end
-      mag_subs = self.meetings.collect(&:submissions).flatten.uniq
-      rejected = mag_subs - array_of_winners
-      for sub in rejected
-        sub.has_been :rejected
-      end
+    else
+      raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
     end
   end
 

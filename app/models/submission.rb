@@ -59,7 +59,7 @@ class Submission < ActiveRecord::Base
 
   def has_been moved_to_state, options = {}
     if moved_to_state == :submitted
-      Notifications.new_submission(self).try(:deliver) if (options[:by].blank? or options[:by] != Person.editor)
+      Notifications.new_submission(self).try(:deliver) if (options[:by].blank? or Person.editor.presence != options[:by])
     end
     update_attributes :state => moved_to_state
   end

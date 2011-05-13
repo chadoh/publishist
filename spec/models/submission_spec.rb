@@ -55,10 +55,6 @@ describe Submission do
         sub.has_been :submitted, :by => "Blimey, Tim!"
       end
     end
-
-    it "emails the author if the submission has been published"
-
-    it "emails the author if the submission has been rejected"
   end
 
   context "has methods to check if in a certain state:" do

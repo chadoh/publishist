@@ -1,0 +1,31 @@
+*<%= title = @magazine.present_name %>* has been published!
+=<%= "=" * title.length             %>=====================
+
+Check it out! http://problemchildmag.com/people/2
+
+<% if @published.present? %>
+Congratulations! You've been published!
+---------------------------------------
+
+<% for sub in @published %>
+* sub
+<% end %>
+
+made it into this magazine!
+<% end %>
+
+<% if @rejected.present? %>
+Unfortunately, we can't publish everything.
+-------------------------------------------
+
+<% for sub in @rejected %>
+* sub
+<% end %>
+
+didn't make into this magazine. You can try editing and
+resubmitting. If you're close to State College, you
+should stop by a meeting or two to get a feel for what
+the Problem Child staff are into. Try stopping by when
+your submissions are being reviewed for some great, honest
+(blunt) feedback!
+<% end %>

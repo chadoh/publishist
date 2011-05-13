@@ -44,7 +44,6 @@ Pc::Application.routes.draw do
   end
 
   #aliases, kind of
-  #get "me" => "people#show#1"
   get "sign_up" => "people#new", :as => :new_person
   get "submit" => "submissions#new", :as => :new_submission
 

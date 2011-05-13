@@ -3,6 +3,7 @@ class Notifications < ActionMailer::Base
   default_url_options[:host] = "problemchildmag.com"
 
   helper :application
+  include ActionView::Helpers::SanitizeHelper
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -20,7 +21,24 @@ class Notifications < ActionMailer::Base
       :to       => ENV['EDITOR_EMAIL'] || Person.editor.email,
       :from     => "#{submission.author_name} <#{ENV['ADMIN_EMAIL'] || "admin@problemchildmag.com"}>",
       :reply_to => submission.email,
-      :subject  => "Submission: \"#{@title.gsub(%r{</?[^>]+?>}, '')}\" by #{@author}"
+      :subject  => "Submission: \"#{strip_tags(@title)}\" by #{@author}"
+    ) do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def we_published_a_magazine(interested_individuals_email, magazine, array_of_her_submissions = [])
+    @email = interested_individuals_email
+    @magazine = magazine
+    @published = array_of_her_submissions.collect{|s| s.state == Submission.state(:published) }
+    @rejected  = array_of_her_submissions.collect{|s| s.state == Submission.state(:rejected) }
+    editor = Person.editor
+
+    mail(
+      :to => @email,
+      :from => "#{editor.try(:name) || "The Editor"} <#{editor.try(:email) || "editor@problemchildmag.com"}>",
+      :subject => "Problem Child published a magazine!"
     ) do |format|
       format.text
       format.html

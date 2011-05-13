@@ -24,3 +24,7 @@ Feature: an editor views the winners for a magazine
     When I fill in "above" with "6"
     And  I press "→"
     Then I should see 4 submissions
+
+    Given no emails have been sent
+    When I press "Publish checked submissions"
+    Then each author should receive an email

@@ -183,6 +183,14 @@ describe Magazine do
       @sub.reload.should be_rejected
       @sub2.reload.should be_published
     end
+
+    it "emails all of the authors who submitted for this magazine to let them know which (if any) of their submissions made it" do
+      a_magazine_has_just_finished
+      [@sub, @sub2].each do |sub|
+        Notifications.should_receive(:we_published_a_magazine).with(sub.email, @mag, [sub])
+      end
+      @mag.publish [@sub2]
+    end
   end
 
   describe "#submissions" do

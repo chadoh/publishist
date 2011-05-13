@@ -23,6 +23,9 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = false
 
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
+
   config.before(:suite) do
       DatabaseCleaner.strategy = :truncation
   end
