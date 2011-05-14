@@ -1,4 +1,4 @@
-/* line 17, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,57 +20,57 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 20, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 20, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 body {
   line-height: 1;
 }
 
-/* line 22, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 24, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 26, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 28, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 101, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 101, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 30, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 115, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 115, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-/* line 26, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 26, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
 body {
   font-size: 100%;
   line-height: 1.5em;
 }
 
-/* line 30, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 30, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
 html > body {
   font-size: 16px;
 }
@@ -344,7 +344,7 @@ dt p {
   max-width: 80%;
   margin-bottom: 0em;
 }
-/* line 7, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+/* line 7, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
 dt p {
   *display: inline;
 }
@@ -357,7 +357,7 @@ dt span.arrow {
   *vertical-align: auto;
   vertical-align: top;
 }
-/* line 7, ../../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+/* line 7, /Users/chad/.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
 dt span.arrow {
   *display: inline;
 }
@@ -750,11 +750,11 @@ nav.actions > ul li.last:after {
 /* line 56, ../../../app/stylesheets/screen.sass */
 #page > header {
   background-color: #8bc7c7;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(191, 224, 224, 0.9)), color-stop(100%, rgba(139, 199, 199, 0.9))), url('/images/clouds.png?1296622237');
-  background: -webkit-linear-gradient(rgba(191, 224, 224, 0.9), rgba(139, 199, 199, 0.9)), url('/images/clouds.png?1296622237');
-  background: -moz-linear-gradient(rgba(191, 224, 224, 0.9), rgba(139, 199, 199, 0.9)), url('/images/clouds.png?1296622237');
-  background: -o-linear-gradient(rgba(191, 224, 224, 0.9), rgba(139, 199, 199, 0.9)), url('/images/clouds.png?1296622237');
-  background: linear-gradient(rgba(191, 224, 224, 0.9), rgba(139, 199, 199, 0.9)), url('/images/clouds.png?1296622237');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(191, 224, 224, 0.9)), color-stop(100%, rgba(139, 199, 199, 0.9))), url(http://s3.amazonaws.com/pcmag/clouds.png);
+  background: -webkit-linear-gradient(rgba(191, 224, 224, 0.9), rgba(139, 199, 199, 0.9)), url(http://s3.amazonaws.com/pcmag/clouds.png);
+  background: -moz-linear-gradient(rgba(191, 224, 224, 0.9), rgba(139, 199, 199, 0.9)), url(http://s3.amazonaws.com/pcmag/clouds.png);
+  background: -o-linear-gradient(rgba(191, 224, 224, 0.9), rgba(139, 199, 199, 0.9)), url(http://s3.amazonaws.com/pcmag/clouds.png);
+  background: linear-gradient(rgba(191, 224, 224, 0.9), rgba(139, 199, 199, 0.9)), url(http://s3.amazonaws.com/pcmag/clouds.png);
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
@@ -847,11 +847,11 @@ body > footer:after {
 /* line 92, ../../../app/stylesheets/screen.sass */
 body > footer > #footer {
   background-color: #8daf25;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(158, 196, 41, 0.9)), color-stop(100%, rgba(107, 133, 28, 0.9))), url('/images/grass.jpg?1296622237');
-  background: -webkit-linear-gradient(rgba(158, 196, 41, 0.9), rgba(107, 133, 28, 0.9)), url('/images/grass.jpg?1296622237');
-  background: -moz-linear-gradient(rgba(158, 196, 41, 0.9), rgba(107, 133, 28, 0.9)), url('/images/grass.jpg?1296622237');
-  background: -o-linear-gradient(rgba(158, 196, 41, 0.9), rgba(107, 133, 28, 0.9)), url('/images/grass.jpg?1296622237');
-  background: linear-gradient(rgba(158, 196, 41, 0.9), rgba(107, 133, 28, 0.9)), url('/images/grass.jpg?1296622237');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(158, 196, 41, 0.9)), color-stop(100%, rgba(107, 133, 28, 0.9))), url(http://s3.amazonaws.com/pcmag/grass.jpg);
+  background: -webkit-linear-gradient(rgba(158, 196, 41, 0.9), rgba(107, 133, 28, 0.9)), url(http://s3.amazonaws.com/pcmag/grass.jpg);
+  background: -moz-linear-gradient(rgba(158, 196, 41, 0.9), rgba(107, 133, 28, 0.9)), url(http://s3.amazonaws.com/pcmag/grass.jpg);
+  background: -o-linear-gradient(rgba(158, 196, 41, 0.9), rgba(107, 133, 28, 0.9)), url(http://s3.amazonaws.com/pcmag/grass.jpg);
+  background: linear-gradient(rgba(158, 196, 41, 0.9), rgba(107, 133, 28, 0.9)), url(http://s3.amazonaws.com/pcmag/grass.jpg);
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
@@ -1099,7 +1099,7 @@ ol.packlets li.collapsed.submission > span.drag-handle-wrap, ol.packlets li.coll
 ol.packlets li.collapsed.submission > span.drag-handle-wrap, ol.packlets li.collapsed.packlet > span.drag-handle-wrap, ul.submissions li.collapsed.submission > span.drag-handle-wrap, ul.submissions li.collapsed.packlet > span.drag-handle-wrap, ol.submissions li.collapsed.submission > span.drag-handle-wrap, ol.submissions li.collapsed.packlet > span.drag-handle-wrap {
   *display: inline;
 }
-/* line 57, ../../../app/stylesheets/_base.sass */
+/* line 57, /Users/chad/Dropbox/Code/pc/app/stylesheets/_base.sass */
 ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packlets li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ol.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1527,7 +1527,7 @@ ol.meetings li.meeting header > .drag-handle-wrap, ul.meetings li.meeting header
 ol.meetings li.meeting header > .drag-handle-wrap, ul.meetings li.meeting header > .drag-handle-wrap {
   *display: inline;
 }
-/* line 57, ../../../app/stylesheets/_base.sass */
+/* line 57, /Users/chad/Dropbox/Code/pc/app/stylesheets/_base.sass */
 ol.meetings li.meeting header > .drag-handle-wrap > span.drag-handle, ul.meetings li.meeting header > .drag-handle-wrap > span.drag-handle {
   display: -moz-inline-box;
   -moz-box-orient: vertical;

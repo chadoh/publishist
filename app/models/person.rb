@@ -27,7 +27,7 @@ class Person < ActiveRecord::Base
   default_scope includes(:ranks)
 
   include Gravtastic
-  gravtastic :size => 200, :default => "http://problemchildmag.com/images/children.png", :rating => 'R'
+  gravtastic :size => 200, :default => "http://s3.amazonaws.com/pcmag/children.png", :rating => 'R'
 
   def name
     "#{first_name}#{" #{last_name}" if last_name}"
