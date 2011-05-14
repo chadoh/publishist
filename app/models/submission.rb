@@ -59,7 +59,7 @@ class Submission < ActiveRecord::Base
 
   def has_been moved_to_state, options = {}
     if moved_to_state == :submitted
-      Notifications.new_submission(self).try(:deliver) if (options[:by].blank? or Person.editor.presence != options[:by])
+      Notifications.new_submission(self).deliver if (options[:by].blank? or Person.editor.presence != options[:by])
     end
     update_attributes :state => moved_to_state
   end
@@ -76,6 +76,10 @@ class Submission < ActiveRecord::Base
       score = Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
       (score * 100).round.to_f / 100
     end
+  end
+
+  def to_s
+    @to_s ||= self.title || self.body.lines.first
   end
 
 protected

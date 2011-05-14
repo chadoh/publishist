@@ -54,7 +54,6 @@ class Magazine < ActiveRecord::Base
       for sub in rejected  do sub.has_been(:rejected)  end
       all_submissions.group_by(&:email).each do |author_email, her_submissions|
         Notifications.delay.we_published_a_magazine(author_email, self, her_submissions)
-        # TODO: figure out why the tests fails if we boldly deliver, instead of merely trying
       end
     else
       raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"

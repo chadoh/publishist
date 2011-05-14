@@ -1,25 +1,25 @@
 *<%= title = @magazine.present_name %>* has been published!
 =<%= "=" * title.length             %>=====================
 
-Check it out! http://problemchildmag.com/people/2
+Check it out! <%= magazine_url(@magazine) %>
 
 <% if @published.present? %>
-Congratulations! You've been published!
----------------------------------------
+Congratulations! You've been published in it!
+---------------------------------------------
 
 <% for sub in @published %>
-* sub
+* [<%= sanitize sub.to_s %>](<%= submission_url(sub) %>)
 <% end %>
 
 made it into this magazine!
 <% end %>
 
 <% if @rejected.present? %>
-Unfortunately, we can't publish everything.
--------------------------------------------
+Unfortunately, we can't publish everything, though.
+---------------------------------------------------
 
 <% for sub in @rejected %>
-* sub
+* [<%= sanitize sub.to_s %>](<%= submission_url(sub) %>)
 <% end %>
 
 didn't make into this magazine. You can try editing and

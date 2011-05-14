@@ -44,7 +44,9 @@ describe Submission do
     context "when submitting" do
       it "sends an email to the editor, by default" do
         sub = Factory.create :submission
-        Notifications.should_receive(:new_submission).with(sub)
+        mock_mail = mock(:mail)
+        mock_mail.stub(:deliver)
+        Notifications.should_receive(:new_submission).with(sub).and_return(mock_mail)
         sub.has_been :submitted
       end
 
