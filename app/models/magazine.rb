@@ -53,7 +53,7 @@ class Magazine < ActiveRecord::Base
       for sub in published do sub.has_been(:published) end
       for sub in rejected  do sub.has_been(:rejected)  end
       all_submissions.group_by(&:email).each do |author_email, her_submissions|
-        Notifications.we_published_a_magazine(author_email, self, her_submissions).try(:deliver)
+        Notifications.delay.we_published_a_magazine(author_email, self, her_submissions)
         # TODO: figure out why the tests fails if we boldly deliver, instead of merely trying
       end
     else

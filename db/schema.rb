@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110409171018) do
+ActiveRecord::Schema.define(:version => 20110514123152) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -20,6 +20,21 @@ ActiveRecord::Schema.define(:version => 20110409171018) do
     t.datetime "updated_at"
     t.string   "person_name"
   end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "magazines", :force => true do |t|
     t.string   "title"
