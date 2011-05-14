@@ -31,13 +31,14 @@ class Notifications < ActionMailer::Base
   def we_published_a_magazine(interested_individuals_email, magazine, array_of_her_submissions = [])
     @email = interested_individuals_email
     @magazine = magazine
-    @published = array_of_her_submissions.collect{|s| s.state == Submission.state(:published) }
-    @rejected  = array_of_her_submissions.collect{|s| s.state == Submission.state(:rejected) }
+    @published = array_of_her_submissions.select{|s| s.state == :published }
+    @rejected  = array_of_her_submissions.select{|s| s.state == :rejected }
     editor = Person.editor
 
     mail(
       :to => @email,
-      :from => "#{editor.try(:name) || "The Editor"} <#{editor.try(:email) || "editor@problemchildmag.com"}>",
+      :from => "#{editor.try(:name) || "The Editor"} <admin@problemchildmag.com>",
+      :reply_to => editor.try(:email) || "editor@problemchildmag.com",
       :subject => "Problem Child published a magazine!"
     ) do |format|
       format.text

@@ -186,8 +186,10 @@ describe Magazine do
 
     it "emails all of the authors who submitted for this magazine to let them know which (if any) of their submissions made it" do
       a_magazine_has_just_finished
+      mock_mail = mock(:mail)
+      mock_mail.stub(:deliver)
       [@sub, @sub2].each do |sub|
-        Notifications.should_receive(:we_published_a_magazine).with(sub.email, @mag, [sub])
+        Notifications.should_receive(:we_published_a_magazine).with(sub.email, @mag, [sub]).and_return(mock_mail)
       end
       @mag.publish [@sub2]
     end

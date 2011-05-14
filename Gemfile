@@ -23,6 +23,8 @@ gem 'devise'
 gem 'oa-core'
 gem 'acts_as_list'
 gem 'meta_where'
+gem 'delayed_job'
+gem 'workless' # automatically start & stop workers (on Heroku or locally) for DJ
 
 # Mailers
 gem 'handlers', :git => "git://github.com/chadoh/handlers.git"

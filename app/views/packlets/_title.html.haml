@@ -1,3 +1,3 @@
-%li.title= link_to strip_tags(packlet.submission.title),
+%li.title= link_to strip_tags(packlet.submission.to_s),
         submission_path(packlet.submission),
-        :title => strip_tags(packlet.submission.title)
+        :title => strip_tags(packlet.submission.to_s)
