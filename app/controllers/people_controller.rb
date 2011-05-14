@@ -8,14 +8,16 @@ class PeopleController < InheritedResources::Base
 
   def show
     @person = Person.find params[:id]
+    submissions = @person.submissions
+    submissions.reload # fixes weird queued-to-reviewed bug
+    @published = submissions.where :state => Submission.state(:published)
     if person_signed_in? && (current_person.the_editor? || current_person == @person)
-      @submissions = @person.submissions
-      @submissions.reload # fixes weird queued-to-reviewed bug
-      @drafts    = @submissions.where(:state => Submission.state(:draft)) if current_person == @person
-      @submitted = @submissions.where :state => Submission.state(:submitted)
-      @queued    = @submissions.where :state => Submission.state(:queued)
-      @reviewed  = @submissions.where :state => Submission.state(:reviewed)
-      @scored    = @submissions.where :state => Submission.state(:scored)
+      @drafts    = submissions.where(:state => Submission.state(:draft)) if current_person == @person
+      @submitted = submissions.where :state => Submission.state(:submitted)
+      @queued    = submissions.where :state => Submission.state(:queued)
+      @reviewed  = submissions.where :state => Submission.state(:reviewed)
+      @scored    = submissions.where :state => Submission.state(:scored)
+      @rejected  = submissions.where :state => Submission.state(:rejected)
     end
   end
 

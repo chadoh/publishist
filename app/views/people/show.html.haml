@@ -1,5 +1,5 @@
 - title @person.full_name
-- unless @person == current_person || the_editor?
+- unless (@person == current_person || the_editor?) || @published.present?
   = render :partial => 'about', :locals => { :person => @person }
 - else
   - content_for :sidebar do
@@ -43,4 +43,21 @@
       %h3{ :title => "These have been scored. You'll get an email when any are published or rejected." } Scored
     %ul.submissions
       - for submission in @scored
+        = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
+
+- if @published.present?
+  %section#published
+    - if @person == current_person || the_editor?
+      %header
+        %h3{ :title => "These have been published! Congratulations!" } Published
+    %ul.submissions
+      - for submission in @published
+        = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
+
+- if @rejected.present?
+  %section#rejected
+    %header
+      %h3{ :title => "These didn't quite make it. :-(" } Not Published
+    %ul.submissions
+      - for submission in @rejected
         = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }

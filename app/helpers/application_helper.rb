@@ -84,7 +84,7 @@ module ApplicationHelper
   end
 
   def page_appropriate?
-    @page_appropriate ||= !current_page?(:controller => "submissions", :action => "index") and !current_page?(:controller => "meetings", :action => "show")
+    @page_appropriate ||= !current_page?(:controller => "submissions", :action => "index") and !(params['controller'] == "meetings" && params['action'] == 'show')
   end
 
   def current_person_can_see_score_for? submission
