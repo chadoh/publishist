@@ -4,6 +4,10 @@ class MagazinesController < InheritedResources::Base
 
   custom_actions :resource => [:highest_scores, :publish]
 
+  def show
+    @magazine = Magazine.find(params[:id])
+    @submissions = @magazine.submissions.page(params[:page]).per(5)
+  end
   def create
     create!(:notice => nil) { magazines_path }
   end
@@ -25,7 +29,7 @@ class MagazinesController < InheritedResources::Base
   def publish
     winners = Submission.where(:id + params[:submission_ids])
     resource.publish winners
-    redirect_to magazines_path
+    redirect_to magazine_path(resource)
   end
 
 end

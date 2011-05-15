@@ -120,6 +120,8 @@ GEM
       responders (~> 0.6.0)
     json (1.5.1)
     json_pure (1.5.1)
+    kaminari (0.12.4)
+      rails (>= 3.0.0)
     launchy (0.3.7)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
@@ -243,6 +245,7 @@ DEPENDENCIES
   heroku_san
   hoptoad_notifier
   inherited_resources
+  kaminari
   meta_where
   mixpanel
   oa-core

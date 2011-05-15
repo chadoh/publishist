@@ -195,6 +195,19 @@ describe Magazine do
     end
   end
 
+  describe "#published?" do
+    let (:mag) { Factory.create :magazine }
+
+    it "returns false if the magazine has no published_on value" do
+      mag.should_not be_published
+    end
+
+    it "returns true if the magazine has a published_on value" do
+      mag.update_attribute :published_on, Date.today
+      mag.should be_published
+    end
+  end
+
   describe "#submissions" do
     before do
       a_magazine_has_just_finished
@@ -219,6 +232,15 @@ describe Magazine do
       sub3 = Factory.create :submission
       @meeting.submissions << sub3
       @mag.reload.submissions.should_not include(sub3)
+    end
+
+    context "when the magazine has been published" do
+      it "only returns published submissions" do
+        @mag.update_attribute :published_on, Date.today
+        @mag.submissions.should be_blank
+        @sub.has_been(:published)
+        @mag.reload.submissions.should include(@sub)
+      end
     end
   end
 

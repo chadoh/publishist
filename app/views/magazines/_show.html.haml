@@ -1,6 +1,10 @@
 %li[magazine]
   %header
-    %h2= magazine.title.presence || magazine.nickname
+    %h2
+      - if magazine.published?
+        = link_to magazine, magazine_path(magazine)
+      - else
+        = magazine
     = timeframe(magazine.accepts_submissions_from, magazine.accepts_submissions_until)
     - if editor?
       %nav.actions

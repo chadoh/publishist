@@ -28,3 +28,4 @@ Feature: an editor views the winners for a magazine
     Given no emails have been sent
     When I press "Publish checked submissions"
     Then each author should receive an email
+    And I should be on the first magazine page

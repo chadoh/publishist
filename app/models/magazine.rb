@@ -18,7 +18,11 @@ class Magazine < ActiveRecord::Base
   # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
   def submissions
     submission_ids = self.meetings.collect(&:packlets).flatten.collect(&:submission_id).uniq
-    Submission.where :id + submission_ids
+    if self.published?
+      Submission.where :id + submission_ids, :state => Submission.state(:published)
+    else
+      Submission.where :id + submission_ids
+    end
   end
 
   def average_score
@@ -67,7 +71,15 @@ class Magazine < ActiveRecord::Base
     end
   end
 
-  memoize :submissions, :average_score
+  def to_s
+    title.presence || nickname
+  end
+
+  def published?
+    published_on.present?
+  end
+
+  memoize :submissions, :average_score, :to_s
 
 protected
 
