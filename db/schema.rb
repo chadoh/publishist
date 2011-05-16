@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110514123152) do
+ActiveRecord::Schema.define(:version => 20110515122152) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -46,7 +46,10 @@ ActiveRecord::Schema.define(:version => 20110514123152) do
     t.datetime "updated_at"
     t.integer  "count_of_scores",           :default => 0
     t.integer  "sum_of_scores",             :default => 0
+    t.string   "cached_slug"
   end
+
+  add_index "magazines", ["cached_slug"], :name => "index_magazines_on_cached_slug", :unique => true
 
   create_table "meetings", :force => true do |t|
     t.datetime "datetime"
@@ -85,8 +88,10 @@ ActiveRecord::Schema.define(:version => 20110514123152) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "password_salt"
+    t.string   "cached_slug"
   end
 
+  add_index "people", ["cached_slug"], :name => "index_people_on_cached_slug", :unique => true
   add_index "people", ["confirmation_token"], :name => "index_people_on_confirmation_token", :unique => true
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
   add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
@@ -109,6 +114,18 @@ ActiveRecord::Schema.define(:version => 20110514123152) do
     t.datetime "updated_at"
   end
 
+  create_table "slugs", :force => true do |t|
+    t.string   "name"
+    t.integer  "sluggable_id"
+    t.integer  "sequence",                     :default => 1, :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
+  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
+
   create_table "submissions", :force => true do |t|
     t.text     "title"
     t.text     "body"
@@ -122,6 +139,9 @@ ActiveRecord::Schema.define(:version => 20110514123152) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "state",              :limit => 8, :default => 0
+    t.string   "cached_slug"
   end
+
+  add_index "submissions", ["cached_slug"], :name => "index_submissions_on_cached_slug", :unique => true
 
 end

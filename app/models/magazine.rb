@@ -15,6 +15,8 @@ class Magazine < ActiveRecord::Base
 
   has_many :meetings, :dependent => :nullify, :include => :submissions
 
+  has_friendly_id :nickname, :use_slug => true
+
   # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
   def submissions
     submission_ids = self.meetings.collect(&:packlets).flatten.collect(&:submission_id).uniq

@@ -18,15 +18,14 @@
     #page
       %nav.site-nav{ :role => 'navigation' }
         %ul
-          %li{ :class => params[:controller] == 'welcome' && 'current' }= link_to_unless_current "About", root_path
+          %li{ :class => params[:controller] == 'welcome'     && 'current' }= link_to_unless_current "About", root_path
           - unless editor?
-            %li{ :class => current_page?(new_submission_path) && 'current' }= link_to_unless_current "Submit", new_submission_path
+            %li{ :class => current_page?(new_submission_path)   && 'current' }= link_to_unless_current "Submit", new_submission_path
           - if editor?
             %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current "Submissions", submissions_path
           - if staff? || editor?
-            %li{ :class => params[:controller] == 'people' && 'current' }= link_to_unless_current "People", people_path
-          - if person_signed_in?
-            %li{ :class => params[:controller] == 'magazines' && 'current' }= link_to_unless_current "Magazines", magazines_path
+            %li{ :class => params[:controller] == 'people'      && 'current' }= link_to_unless_current "People", people_path
+          %li{ :class => params[:controller] == 'magazines'   && 'current' }= link_to_unless_current "Magazines", magazines_path
           %li
             %ul#account
               - if person_signed_in?
@@ -61,7 +60,7 @@
     %footer{ :role => 'contentinfo' }
       #footer
         :markdown
-          This website is in early hobbyist development; you may experience turbulence. Please let [someone](#{person_path(2)}) know if something is broken.
+          This website is in early hobbyist development; you may experience turbulence. Please let [someone](#{person_path('chad-ostrowski')}) know if something is broken.
     = javascript_include_tag 'jquery.autocomplete', 'modernizr-1.6.min', 'rails', 'application'
     - if protect_against_forgery?
       :javascript

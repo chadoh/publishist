@@ -4,5 +4,6 @@
       %span.drag-handle &lt;&gt;
   %header
     %a{ :href => submission_url(packlet.submission) }
-      %h2.nocaps= sanitize(packlet.submission.title)
+      %h2.nocaps= sanitize packlet.submission.title
+  - Rails.logger.debug packlet.submission
   = render :partial => 'submissions/body_and_footer', :locals => { :submission => packlet.submission, :packlet => packlet }

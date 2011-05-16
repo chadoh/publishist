@@ -43,10 +43,10 @@ nav.actions > ul
           &:hover
             text-decoration: underline overline line-through
         &.current
-          +text-shadow
           color: $orange
           text-decoration: underline overline
           & > a
+            +text-shadow
             color: $orange
 
         & > ul#account
@@ -63,6 +63,9 @@ nav.actions > ul
     text-align: center
     +opacity(0.9)
     +border-radius(20px 0)
+    margin:
+      left: 0
+      right: 0
     h1
       +adjust-font-size-to(31px)
       +trailer(0, 21px)
@@ -98,6 +101,9 @@ body > footer
     +adjust-font-size-to(14px, 3)
     +border-radius(0 20px)
     text-align: center
+    margin:
+      left: 0
+      right: 0
     a
       +links(yellow)
 
@@ -427,3 +433,16 @@ span.average-score
   border-left: 1px solid $lgray
   margin-left: -50px
   vertical-align: -0.2em
+
+/*
+ * Pagination
+ ********************************/
+
+nav.pagination
+  float: right
+  &:first-child
+    position: relative
+    top: -2 * $base-line-height
+    height: 0
+  span.page.current
+    +adjust-font-size-to(24px, 1)

@@ -4,16 +4,17 @@
     #{link_to t('.new_magazine'), new_magazine_path}  
     #{link_to t('.new_meeting'), new_meeting_path}
 
-- if orphaned_meetings = Meeting.where(:magazine_id => nil).presence
+- if person_signed_in? and @orphaned_meetings.present?
   %section
     %header
       %h2 Orphaned Meetings
     %ul.meetings
-      - for meeting in orphaned_meetings
+      - for meeting in @orphaned_meetings
         = render :partial => 'meetings/show', :locals => { :meeting => meeting }
 
 %ol.magazines
-  - for magazine in collection
+  - for magazine in @magazines
     = render :partial => 'show', :locals => { :magazine => magazine }
 
-- javascript 'magazines'
+- if person_signed_in?
+  - javascript 'magazines'

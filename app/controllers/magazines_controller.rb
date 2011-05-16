@@ -1,13 +1,19 @@
 class MagazinesController < InheritedResources::Base
-  before_filter :authenticate_person!, :only => :index
-  before_filter :editors_only, :except => [:index]
+  before_filter :editors_only, :except => [:index, :show]
+  before_filter :ensure_current_url, :only => :show
 
   custom_actions :resource => [:highest_scores, :publish]
+
+  def index
+    @orphaned_meetings = Meeting.where(:magazine_id => nil)
+    @magazines = person_signed_in? ? Magazine.all : Magazine.where(:published_on ^ nil)
+  end
 
   def show
     @magazine = Magazine.find(params[:id])
     @submissions = @magazine.submissions.page(params[:page]).per(5)
   end
+
   def create
     create!(:notice => nil) { magazines_path }
   end
@@ -30,6 +36,12 @@ class MagazinesController < InheritedResources::Base
     winners = Submission.where(:id + params[:submission_ids])
     resource.publish winners
     redirect_to magazine_path(resource)
+  end
+
+protected
+
+  def ensure_current_url
+    redirect_to resource, :status => :moved_permanently unless resource.friendly_id_status.best?
   end
 
 end

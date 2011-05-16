@@ -1,7 +1,8 @@
 - title @magazine.to_s
 
-= paginate @submissions
-%ol.submissions
-  - for submission in @submissions
-    = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
-= paginate @submissions
+.content
+  = paginate @submissions, :window => 50
+  %ol.submissions
+    - for submission in @submissions
+      = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
+  = paginate @submissions, :window => 50

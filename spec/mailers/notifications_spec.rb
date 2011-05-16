@@ -39,7 +39,7 @@ describe "Notifications mailer" do
     subject { @email }
     it {
       should be_multipart
-      should have_body_text "mehrrrow <strong>ROAR!</strong>"
+      should have_body_text "mehrrrow ROAR!"
       should have_body_text "problemchildmag.com#{submission_path(@submission)}"
     }
   end

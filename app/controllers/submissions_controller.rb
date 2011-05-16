@@ -1,5 +1,6 @@
 class SubmissionsController < InheritedResources::Base
   before_filter :editors_only, :only => [:index]
+  before_filter :ensure_current_url, :only => :show
 
   def index
     @magazines = Magazine.all
@@ -93,6 +94,12 @@ class SubmissionsController < InheritedResources::Base
     else
       destroy!(:notice => "It is gone.") { request.referer }
     end
+  end
+
+protected
+
+  def ensure_current_url
+    redirect_to resource, :status => :moved_permanently unless resource.friendly_id_status.best?
   end
 
 end

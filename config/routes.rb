@@ -10,13 +10,6 @@ Pc::Application.routes.draw do
 
   resources :scores
 
-  resources :magazines do
-    member do
-      get 'highest_scores', :as => 'highest_scored_for'
-      post :publish
-    end
-  end
-
   resources :meetings do
     resources :attendees do
       member { put 'update_answer' => :update_answer, :as => 'update_answer_for' }
@@ -29,7 +22,6 @@ Pc::Application.routes.draw do
       put 'update_position'
     end
   end
-  resources :submissions, :path_names => { :new => "/submit" }
   resources :people, :shallow => true do
     resources :ranks
     member do
@@ -43,12 +35,22 @@ Pc::Application.routes.draw do
     end
   end
 
+  resources :magazines do
+    member do
+      get 'highest_scores', :as => 'highest_scored_for'
+      post :publish
+    end
+  end
+
   #aliases, kind of
   get "sign_up" => "people#new", :as => :new_person
   get "submit" => "submissions#new", :as => :new_submission
 
   #testing emails
   get "notifications/new_submission"
+
+  resources :submissions, :path => 'submissions', :only => [:index, :create]
+  resources :submissions, :path => '', :except => [:index, :create], :path_names => { :new => "/submit" }
 
   root :to => "welcome#index"
 end

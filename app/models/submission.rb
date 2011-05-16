@@ -1,8 +1,11 @@
 class Submission < ActiveRecord::Base
+  include ActionView::Helpers::SanitizeHelper
   belongs_to :author, :class_name => "Person"
   has_many :packlets, :dependent  => :destroy
   has_many :meetings, :through    => :packlets
   has_many :scores,   :through    => :packlets
+
+  has_friendly_id :to_slug, :use_slug => true
 
   validate "errors.add :author_email, 'must be filled in. Or you can sign in.'",
     :if => Proc.new {|s| s.author_id.blank? && s.author_email.blank? }
@@ -79,7 +82,11 @@ class Submission < ActiveRecord::Base
   end
 
   def to_s
-    @to_s ||= self.title || self.body.lines.first
+    @to_s ||= strip_tags(self.title).presence || strip_tags(self.body.lines.first)
+  end
+
+  def to_slug
+    strip_tags(self.title).gsub(/[^0-9A-Z\s]/i, '').presence || strip_tags(self.body.lines.first)
   end
 
 protected

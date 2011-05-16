@@ -5,7 +5,12 @@
         = link_to magazine, magazine_path(magazine)
       - else
         = magazine
-    = timeframe(magazine.accepts_submissions_from, magazine.accepts_submissions_until)
+    - if magazine.published?
+      %span.timeframe
+        Published on
+        %time{ :datetime => magazine.published_on }= pretty_date(magazine.published_on)
+    - else
+      = timeframe(magazine.accepts_submissions_from, magazine.accepts_submissions_until)
     - if editor?
       %nav.actions
         %ul
@@ -15,9 +20,9 @@
                         :method => :delete,
                         :confirm => "You're saying this magazine never actually happened. All of its meetings will be unassociated with any magazine. If this magazine has been published, all of the submissions submitted for it will be simply \"Scored\" again.",
                         :class => 'link destroy'
-  - if magazine.accepts_submissions_until < Time.now && magazine.published_on == nil and editor?
+  - if editor? and magazine.accepts_submissions_until < Time.now && magazine.published_on == nil
     = link_to "View the highest-scored submissions", highest_scored_for_magazine_path(magazine)
-  - if magazine.meetings.present?
+  - if person_signed_in? and magazine.meetings.present?
     %dl.meetings
       %dt
         %span.arrow &raquo;

@@ -18,12 +18,16 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
 
     when /my profile page/i
-      "/people/#{@user.id}"
+      "/people/#{@user.friendly_id}"
 
     when /the first (.*) page/i
       model = $1.titleize.constantize
-      instance = if model.count > 0 then model.first else Factory.create(model.to_s.underscore.to_sym) end
-      "/#{model.base_class.to_s.pluralize.underscore}/#{instance.id}"
+      instance = if model.count > 0
+                   model.first
+                 else
+                   Factory.create(model.to_s.underscore.to_sym)
+                 end
+      eval "#{model.base_class.to_s.underscore}_path('#{instance.to_param}')"
 
     else
       begin

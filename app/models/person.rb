@@ -26,6 +26,8 @@ class Person < ActiveRecord::Base
 
   default_scope includes(:ranks)
 
+  has_friendly_id :name, :use_slug => true
+
   include Gravtastic
   gravtastic :size => 200, :default => "http://s3.amazonaws.com/pcmag/children.png", :rating => 'R'
 

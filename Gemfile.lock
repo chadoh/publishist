@@ -41,6 +41,7 @@ GEM
       builder
       mime-types
       xml-simple
+    babosa (0.3.4)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
     capybara (0.4.1.2)
@@ -96,6 +97,8 @@ GEM
     fattr (2.2.0)
     ffi (1.0.7)
       rake (>= 0.8.7)
+    friendly_id (3.2.1.1)
+      babosa (~> 0.3.0)
     fssm (0.2.7)
     gherkin (2.3.7)
       json (>= 1.4.6)
@@ -238,6 +241,7 @@ DEPENDENCIES
   devise
   email_spec
   factory_girl_rails
+  friendly_id
   gravtastic
   haml
   handlers!

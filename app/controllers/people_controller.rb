@@ -2,6 +2,7 @@ class PeopleController < InheritedResources::Base
   before_filter :resource, :only => [:make_staff, :make_editor, :make_coeditor]
   before_filter :staff_only, :only => [:index]
   before_filter :editors_only, :only => [:destroy]
+  before_filter :ensure_current_url, :only => :show
   auto_complete_for :person, [:first_name, :middle_name, :last_name, :email], :limit => 15 do |people|
     people.map {|person| "#{person.full_name}, #{person.email}" }.join "\n"
   end
@@ -55,6 +56,10 @@ class PeopleController < InheritedResources::Base
   end
 
 protected
+
+  def ensure_current_url
+    redirect_to resource, :status => :moved_permanently unless resource.friendly_id_status.best?
+  end
 
   def collection
     @people ||= end_of_association_chain.includes(:ranks).order('created_at')

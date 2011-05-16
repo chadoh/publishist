@@ -15,6 +15,7 @@ gem 'compass-susy-plugin'
 # Controllers
 gem 'aws-s3'
 gem 'gravtastic'
+gem 'friendly_id'
 gem 'inherited_resources'
 gem 'kaminari'
 gem 'paperclip'

@@ -8,5 +8,5 @@
     = check_box_tag "submission_ids[]", submission.id, true
   %header
     %a{ :href => submission_url(submission) }
-      %h2.nocaps= sanitize(submission.title)
+      %h2.nocaps= sanitize submission.title
   = render :partial => 'submissions/body_and_footer', :locals => { :submission => submission, :show_author => show_author }
