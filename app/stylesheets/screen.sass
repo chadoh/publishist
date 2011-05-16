@@ -159,6 +159,28 @@ span.drag-handle-wrap
 li.submission > input[type=checkbox]
   display: none
 
+article.magazines ol.submissions li.submission
+  position: relative
+  span.drag-handle-wrap
+    display: block
+    position: absolute
+    top: 0
+    right: 2px
+    height: 100%
+    width: 21em
+    border: dashed $lgray
+    border-width: 0 1px 0 0
+    +border-radius(50px)
+    span.drag-handle
+      display: block
+      text-indent: -1000em
+      height: 100%
+      position: absolute
+      top: 0
+      right: -2px
+      width: 1.5em
+      cursor: move
+
 article#submissions, article.meetings
   section
     & > header > h2

@@ -2,7 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.0'
 gem 'pg', '~> 0.9.0'
-gem 'heroku_backup_task'
 
 # Views
 gem 'haml'
