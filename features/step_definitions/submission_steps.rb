@@ -31,10 +31,6 @@ Given /^the "([^"]*)" meeting is two hours away$/ do |submission_title|
   )
 end
 
-Then /^(?:|I )should see "([^"]*)" (\d+)(?:x|X| times?)?$/ do |phrase, count|
-  (page.find("body").text.split(phrase).length - 1).should == count.to_i
-end
-
 Given /^I have gone to the meeting and scored "([^"]*)"$/ do |title|
   submission = Submission.find_by_title title
   meeting = Factory.create :meeting

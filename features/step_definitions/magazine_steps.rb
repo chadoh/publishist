@@ -16,6 +16,20 @@ Given /^a magazine's timeframe is freshly over$/ do
   )
 end
 
+Given /^a magazine titled "([^"]*)" has been published$/ do |title|
+  mag = Magazine.create(
+    :nickname                  => title,
+    :accepts_submissions_from  => 6.months.ago,
+    :accepts_submissions_until => Date.yesterday
+  )
+  meet = Meeting.create(
+    :question => "orly?",
+    :datetime => 3.weeks.ago
+  )
+  meet.submissions = Submission.all
+  mag.publish(Submission.all)
+end
+
 Given /^10 meetings have occured in it$/ do
   mag = Magazine.first
   10.times { mag.meetings << Factory.create(:meeting) }

@@ -27,3 +27,7 @@ Given /^(?:there is )a person named "([^"]*)" with email address "([^"]*)"$/ do 
     :password   => 'secret',
     :password_confirmation => 'secret')
 end
+
+Then /^(?:|I )should see "([^"]*)" (\d+)(?:x|X| times?)?$/ do |phrase, count|
+  (page.find("body").text.split(phrase).length - 1).should == count.to_i
+end

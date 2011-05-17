@@ -29,6 +29,11 @@ module NavigationHelpers
                  end
       eval "#{model.base_class.to_s.underscore}_path('#{instance.to_param}')"
 
+    when /the "([^"]*)" magazine page/i
+      param = $1.parameterize
+      puts param
+      eval "magazine_path('#{$1.parameterize}')"
+
     else
       begin
         page_name =~ /the (.*) page/
