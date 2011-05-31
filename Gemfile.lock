@@ -36,6 +36,7 @@ GEM
       activesupport (= 3.0.7)
     activesupport (3.0.7)
     acts_as_list (0.1.2)
+    annotate-models (1.0.4)
     arel (2.0.9)
     aws-s3 (0.6.2)
       builder
@@ -229,6 +230,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  annotate-models
   aws-s3
   capybara
   compass

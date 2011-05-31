@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 20110516234654
+#
+# Table name: ranks
+#
+#  id         :integer         not null, primary key
+#  person_id  :integer
+#  rank_type  :integer
+#  rank_start :datetime
+#  rank_end   :datetime
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Rank < ActiveRecord::Base
   belongs_to :person, :touch => true, :autosave => true
 

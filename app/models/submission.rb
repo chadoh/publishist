@@ -1,6 +1,29 @@
+# == Schema Information
+# Schema version: 20110516234654
+#
+# Table name: submissions
+#
+#  id                 :integer         not null, primary key
+#  title              :text
+#  body               :text
+#  author_name        :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  author_id          :integer
+#  author_email       :string(255)
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
+#  state              :integer(8)      default(0)
+#  cached_slug        :string(255)
+#  page_id            :integer
+#
+
 class Submission < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   belongs_to :author, :class_name => "Person"
+  belongs_to :page
   has_many :packlets, :dependent  => :destroy
   has_many :meetings, :through    => :packlets
   has_many :scores,   :through    => :packlets

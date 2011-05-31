@@ -1,3 +1,21 @@
+# == Schema Information
+# Schema version: 20110516234654
+#
+# Table name: magazines
+#
+#  id                        :integer         not null, primary key
+#  title                     :string(255)
+#  nickname                  :string(255)
+#  accepts_submissions_from  :datetime
+#  accepts_submissions_until :datetime
+#  published_on              :datetime
+#  created_at                :datetime
+#  updated_at                :datetime
+#  count_of_scores           :integer         default(0)
+#  sum_of_scores             :integer         default(0)
+#  cached_slug               :string(255)
+#
+
 class Magazine < ActiveRecord::Base
   extend ActiveSupport::Memoizable
 
@@ -14,6 +32,7 @@ class Magazine < ActiveRecord::Base
   default_scope order("accepts_submissions_until DESC")
 
   has_many :meetings, :dependent => :nullify, :include => :submissions
+  has_many :pages,    :dependent => :destroy, :order   => :position
 
   has_friendly_id :nickname, :use_slug => true
 
@@ -61,8 +80,29 @@ class Magazine < ActiveRecord::Base
       all_submissions.group_by(&:email).each do |author_email, her_submissions|
         Notifications.delay.we_published_a_magazine(author_email, self, her_submissions)
       end
+
+      self.pages = [
+        Page.create(:title => 'Cover'),
+        Page.create(:title => 'Notes'),
+        Page.create(:title => 'Staff'),
+        Page.create(:title => 'ToC'),
+      ]
+
+      published.each_slice(5) do |five_submissions|
+        self.pages.create.submissions << five_submissions
+      end
     else
       raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
+    end
+  end
+
+  def page page_title
+    if page_title.present?
+      Page.find_by_magazine_id_and_title(self.id, page_title).presence || \
+      Page.find_by_magazine_id_and_position(self.id, page_title.to_i + 4).presence || \
+      self.pages.first
+    else
+      self.pages.first
     end
   end
 

@@ -6,6 +6,7 @@ describe Magazine do
     should validate_presence_of :accepts_submissions_from
     should validate_presence_of :accepts_submissions_until
     should have_many(:meetings).dependent(:nullify)
+    should have_many(:pages).dependent(:destroy)
   }
 
   describe "#nickname" do
@@ -184,6 +185,12 @@ describe Magazine do
       @sub2.reload.should be_published
     end
 
+    it "creates 5 pages at minimum: 1 for cover, 1 for Notes, 1 for Staff, 1 for ToC, and 1 per 5 submissions after that" do
+      a_magazine_has_just_finished
+      @mag.publish [@sub2]
+      @mag.pages.length.should == 5
+    end
+
     it "emails all of the authors who submitted for this magazine to let them know which (if any) of their submissions made it" do
       a_magazine_has_just_finished
       mock_mail = mock(:mail)
@@ -205,6 +212,22 @@ describe Magazine do
     it "returns true if the magazine has a published_on value" do
       mag.update_attribute :published_on, Date.today
       mag.should be_published
+    end
+  end
+
+  describe "#page" do
+    before :all do
+      a_magazine_has_just_finished
+      @mag.publish [@sub2]
+    end
+
+    it "queries a mag's pages by the pages' titles (or pseudo titles)" do
+      @mag.page('Cover').position.should == 1
+      page = @mag.page('1').submissions.should == [@sub2]
+    end
+
+    it "if the provided page is nil, it provides the first page" do
+      @mag.page(nil).position.should == 1
     end
   end
 

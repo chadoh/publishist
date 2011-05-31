@@ -21,6 +21,7 @@ describe Submission do
     should have_many(:meetings).through(:packlets)
     should have_many(:scores).through(:packlets)
     should belong_to(:author)
+    should belong_to :page
   }
 
   it "sets queued submissions to reviewed if their meeting is less than three hours in the future" do

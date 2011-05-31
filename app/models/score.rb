@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 20110516234654
+#
+# Table name: scores
+#
+#  id                  :integer         not null, primary key
+#  amount              :integer
+#  attendee_id         :integer
+#  packlet_id          :integer
+#  entered_by_coeditor :boolean
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+
 class Score < ActiveRecord::Base
   belongs_to :packlet
   belongs_to :attendee

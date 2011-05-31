@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20110516234654
+#
+# Table name: packlets
+#
+#  id            :integer         not null, primary key
+#  meeting_id    :integer
+#  submission_id :integer
+#  position      :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class Packlet < ActiveRecord::Base
   belongs_to :meeting
   belongs_to :submission, :include => :author

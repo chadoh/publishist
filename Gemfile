@@ -20,13 +20,13 @@ gem 'kaminari'
 gem 'paperclip'
 
 # Models
-gem 'devise'
-gem 'oa-core'
 gem 'acts_as_list'
-gem 'meta_where'
 gem 'delayed_job'
-gem 'workless' # automatically start & stop workers (on Heroku or locally) for DJ
+gem 'devise'
 gem 'foreigner'
+gem 'meta_where'
+gem 'oa-core'
+gem 'workless' # automatically start & stop workers (on Heroku or locally) for DJ
 
 # Mailers
 gem 'handlers', :git => "git://github.com/chadoh/handlers.git"
@@ -35,8 +35,9 @@ gem 'hoptoad_notifier'
 gem 'mixpanel'
 
 group :development do
-  gem 'rails3-generators'
+  gem 'annotate-models'
   gem 'heroku_san'
+  gem 'rails3-generators'
 end
 
 group :development, :test do

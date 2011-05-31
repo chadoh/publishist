@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20110516234654
+#
+# Table name: meetings
+#
+#  id          :integer         not null, primary key
+#  datetime    :datetime
+#  question    :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  magazine_id :integer
+#
+
 class Meeting < ActiveRecord::Base
   has_many :attendees, :dependent => :destroy
   has_many :people, :through => :attendees

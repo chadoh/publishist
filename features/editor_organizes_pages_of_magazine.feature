@@ -20,14 +20,13 @@ Feature: An editor organizes submissions onto pages of a magazine
 		When I press "+"
 		Then I should see "+ C 1 2 +" for the page numbers
 
-	@pending
-	@javascript
-	Scenario: I can reorder pages
-		When I follow "1"
-		Then I should see "Everyone Dies, Anyway"
-		When I drag "1" to the right of "2"
-		Then I should be on page 2
-		And I should see "Everyone Dies, Anyway"
+  @pending
+  @javascript
+  Scenario: I can rename pages
+    When I click on "3"
+    And I type "Last" and hit Return
+    And I refresh the page
+    Then I should see "Last"
 
 	@pending
 	@javascript
