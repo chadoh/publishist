@@ -105,6 +105,11 @@ GEM
     gherkin (2.3.7)
       json (>= 1.4.6)
     gravtastic (3.1.0)
+    growl (1.0.3)
+    guard (0.4.0)
+      thor (~> 0.14.6)
+    guard-rspec (0.4.0)
+      guard (>= 0.4.0)
     haml (3.1.1)
     has_scope (0.5.0)
     heroku (1.20.1)
@@ -122,8 +127,6 @@ GEM
       responders (~> 0.6.0)
     json (1.5.1)
     json_pure (1.5.1)
-    kaminari (0.12.4)
-      rails (>= 3.0.0)
     launchy (0.3.7)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
@@ -171,6 +174,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
+    rb-fsevent (0.4.0)
     rdiscount (1.6.8)
     redcarpet (1.12.2)
     responders (0.6.2)
@@ -244,12 +248,13 @@ DEPENDENCIES
   foreigner
   friendly_id
   gravtastic
+  growl
+  guard-rspec
   haml
   handlers!
   heroku_san
   hoptoad_notifier
   inherited_resources
-  kaminari
   meta_where
   mixpanel
   oa-core
@@ -258,6 +263,7 @@ DEPENDENCIES
   railroady
   rails (~> 3.0)
   rails3-generators
+  rb-fsevent
   rdiscount
   rspec-rails
   sass

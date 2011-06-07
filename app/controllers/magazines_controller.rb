@@ -11,7 +11,11 @@ class MagazinesController < InheritedResources::Base
 
   def show
     @magazine = Magazine.find(params[:id])
-    @submissions = @magazine.submissions.page(params[:page]).per(5)
+    if @magazine.published?
+      @page = @magazine.page(params[:page])
+    else
+      redirect_to action: :index
+    end
   end
 
   def create

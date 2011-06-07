@@ -12,7 +12,7 @@ Feature: An editor organizes submissions onto pages of a magazine
 
 	@wip
 	Scenario: I see that the vanilla published magazine has sensible defaults
-		Then I should see "+ C 1 +" for the page numbers
+		Then I should see "+ Cover Notes Staff ToC 1 +" for the page numbers
 		And I should see "Fruit Blots" 2 times
 
 	@wip

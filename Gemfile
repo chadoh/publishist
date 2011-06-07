@@ -16,7 +16,6 @@ gem 'aws-s3'
 gem 'gravtastic'
 gem 'friendly_id'
 gem 'inherited_resources'
-gem 'kaminari'
 gem 'paperclip'
 
 # Models
@@ -46,6 +45,9 @@ group :development, :test do
   gem 'email_spec'
   gem 'shoulda'
   gem 'railroady'
+  gem 'guard-rspec'
+  gem 'rb-fsevent'
+  gem 'growl'
 end
 
 group :test do
