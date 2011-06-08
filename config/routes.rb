@@ -35,6 +35,7 @@ Pc::Application.routes.draw do
     end
   end
 
+  resources :pages
   resources :magazines do
     member do
       get 'highest_scores', :as => 'highest_scored_for'

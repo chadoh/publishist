@@ -59,8 +59,8 @@
           %li
             = form_for submission, :html => { :class => "button_to" } do |f|
               = f.hidden_field :state, :value => Submission.state(:submitted)
-
               = f.submit "Submit", :class => "link"
+
         - if (the_editor? or submission.state != :published) and !(params[:controller] == "magazines" && params[:action] == "highest_scores")
           %li
             = button_to "Delete", submission_url(submission),

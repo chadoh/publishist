@@ -7,9 +7,32 @@ describe PaginationHelper do
     helper.send :init_haml_helpers
   end
 
-  describe "#pages_for(magazine)" do
-    it "wraps the whole thing in nav.pagination" do
-      helper.pages_for(@magazine).should match(%r{^<nav class="pagination">})
+  describe "#pages_for(magazine, current_page)" do
+    before :all do
+      @magazine = Magazine.create(
+        accepts_submissions_from:  6.months.ago,
+        accepts_submissions_until: Date.yesterday,
+        nickname: 								 'Fruit Blots'
+      )
+      @magazine.publish []
+    end
+		before :each do
+      helper.stub(:the_editor?).and_return(true)
+      @pagination = helper.pages_for @magazine, @magazine.pages.first
+		end
+
+		subject { @pagination }
+    it { should match %r{^<nav class=('|")pagination\1>} }
+		it { should match %r{<ol class=('|")pages\1>} }
+		it { should match %r{<li class=('|")page current\1 id=\1page_\d\1>Cover</li>} }
+		it { should match %r{<li class=('|")page\1 id=\1page_\d\1><a href="/magazines/fruit-blots\?page=\d">ToC</a></li>} }
+
+    context "when an editor is viewing" do
+      it "displays '+' signs so that new pages can be added at the beginning or end" do
+        @pagination.should match %r{<form}
+      end
+
+      it "makes the current_page's title contenteditable=true"
     end
   end
 

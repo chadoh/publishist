@@ -25,46 +25,48 @@
       = f.button :submit, t("preview"), :class => "link"
 
 - if the_editor?
+  = content_for :javascript do
+    :javascript
+      $(function(){
+        var email = $("#submission_author").val().split(' ').pop(),
+            span  = $("span#save_for_later");
+        if (email != "#{current_person.email}") {
+          span.hide(); }
+        $("#submission_author")
+          .autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}")
+          .blur(function(){
+            var email = $(this).val().split(' ').pop();
+            if (email != "#{current_person.email}") {
+              span.hide(); }
+            else {
+              span.show() }
+          });
+      });
+
+= content_for :javascript do
   :javascript
     $(function(){
-      var email = $("#submission_author").val().split(' ').pop(),
-          span  = $("span#save_for_later");
-      if (email != "#{current_person.email}") {
-        span.hide(); }
-      $("#submission_author")
-        .autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}")
-        .blur(function(){
-          var email = $(this).val().split(' ').pop();
-          if (email != "#{current_person.email}") {
-            span.hide(); }
-          else {
-            span.show() }
-        });
+      cloptions = {
+        width: '99%',
+        height: 500,
+        useCSS: false,
+        docType: '<!DOCTYPE html>',
+        bodyStyle: 'font-family: Cambria, Georgia, serif;',
+        controls:     // controls to add to the toolbar
+          "bold italic underline strikethrough subscript superscript | " +
+          "color highlight removeformat | bullets numbering | outdent " +
+          "indent | alignleft center alignright justify | " +
+          "rule image link unlink | pastetext source"
+      }
+
+      $("#submission_body").cleditor(cloptions);
+
+      cloptions.height = 62;
+      cloptions.controls = "bold italic underline strikethrough subscript superscript | " +
+          "pastetext source"
+      $("#submission_title").cleditor(cloptions);
+
     });
-
-:javascript
-  $(function(){
-    cloptions = {
-      width: '99%',
-      height: 500,
-      useCSS: false,
-      docType: '<!DOCTYPE html>',
-      bodyStyle: 'font-family: Cambria, Georgia, serif;',
-      controls:     // controls to add to the toolbar
-        "bold italic underline strikethrough subscript superscript | " +
-        "color highlight removeformat | bullets numbering | outdent " +
-        "indent | alignleft center alignright justify | " +
-        "rule image link unlink | pastetext source"
-    }
-
-    $("#submission_body").cleditor(cloptions);
-
-    cloptions.height = 62;
-    cloptions.controls = "bold italic underline strikethrough subscript superscript | " +
-        "pastetext source"
-    $("#submission_title").cleditor(cloptions);
-
-  });
 
 - content_for :sidebar do
   %section#tips
@@ -143,4 +145,3 @@
       %dd
         :markdown
           If you have an account on this website, you'll automatically get an email telling you which of your submissions we've published. If you don't... We'll try to remember to email you! Either way, these emails will come around the end of the academic semester (December in the fall, May in the spring).
-    

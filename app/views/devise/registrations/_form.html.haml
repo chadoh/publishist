@@ -1,6 +1,6 @@
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = error_messages
-  = f.input :email
+  = f.input :email, autofocus: true
   = f.input :first_name
   = f.input :middle_name
   = f.input :last_name

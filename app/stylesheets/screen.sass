@@ -462,9 +462,11 @@ span.average-score
 
 nav.pagination
   float: right
+  ol.pages
+    +inline-list
+    li.page.current
+      +adjust-font-size-to(24px, 1)
   &:first-child
     position: relative
     top: -2 * $base-line-height
     height: 0
-  span.page.current
-    +adjust-font-size-to(24px, 1)
