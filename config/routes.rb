@@ -35,20 +35,21 @@ Pc::Application.routes.draw do
     end
   end
 
-  resources :pages
-  resources :magazines do
-    member do
-      get 'highest_scores', :as => 'highest_scored_for'
-      post :publish
-    end
-  end
-
   #aliases, kind of
   get "sign_up" => "people#new", :as => :new_person
   get "submit" => "submissions#new", :as => :new_submission
 
   #testing emails
   get "notifications/new_submission"
+
+  resources :magazines do
+    resources :pages, path: 'pages', only: [:create]
+    resources :pages, path: '', except: [:index, :new, :create, :edit]
+    member do
+      get 'highest_scores', :as => 'highest_scored_for'
+      post :publish
+    end
+  end
 
   resources :submissions, :path => 'submissions', :only => [:index, :create]
   resources :submissions, :path => '', :except => [:index, :create], :path_names => { :new => "/submit" }

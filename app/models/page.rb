@@ -15,13 +15,17 @@ class Page < ActiveRecord::Base
   extend ActiveSupport::Memoizable
 
   belongs_to :magazine
-  has_many   :submissions, :dependent => :nullify
+  has_many   :submissions, dependent: :nullify
   validates_presence_of :magazine_id
 
-  acts_as_list :scope => :magazine
+  acts_as_list scope: :magazine
 
   def title
     read_attribute(:title).presence || (self.position - 4).to_s
+  end
+
+  def to_param
+    self.title.downcase
   end
 
   memoize :title

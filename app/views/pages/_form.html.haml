@@ -1,4 +1,4 @@
 %li
-  = form_for Page.new, html: { class: "button_to" } do |f|
+  = form_for [@magazine, Page.new], html: { class: "button_to" } do |f|
     = f.hidden_field :position, value: if position == :beginning then 5 elsif position.is_a?(Numeric) then position end
     = f.submit "Submit", class: "link"

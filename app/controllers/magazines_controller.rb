@@ -12,7 +12,7 @@ class MagazinesController < InheritedResources::Base
   def show
     @magazine = Magazine.find(params[:id])
     if @magazine.published?
-      @page = @magazine.page(params[:page])
+      redirect_to magazine_page_url @magazine, @magazine.pages.first
     else
       redirect_to action: :index
     end

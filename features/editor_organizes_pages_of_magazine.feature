@@ -18,7 +18,7 @@ Feature: An editor organizes submissions onto pages of a magazine
 	@wip
 	Scenario: I can add pages to the magazine
 		When I press "+"
-		Then I should see "+ C 1 2 +" for the page numbers
+		Then I should see "+ Cover Notes Staff ToC 1 2 +" for the page numbers
 
   @pending
   @javascript
