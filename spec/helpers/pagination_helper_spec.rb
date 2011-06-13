@@ -24,7 +24,7 @@ describe PaginationHelper do
 		subject { @pagination }
     it { should match %r{^<nav class=('|")pagination\1>} }
 		it { should match %r{<ol class=('|")pages\1>} }
-		it { should match %r{<li class=('|")page\1 id=\1page_\d\1><a href="/magazines/fruit-blots/toc">ToC</a></li>} }
+		it { should match %r{<li class=('|")page\1 id=\1page_\d\1><a href="/magazines/fruit-blots/t">T</a></li>} }
 
     context "when an editor is viewing" do
       it "displays '+' signs so that new pages can be added at the beginning or end" do
@@ -32,7 +32,7 @@ describe PaginationHelper do
       end
 
       it "makes the current_page's title contenteditable=true" do
-        @pagination.should match %r{<li class=('|")current page\1 contenteditable=\1true\1 id=\1page_\d\1>Cover</li>}
+        @pagination.should match %r{<li class=('|")page\1 contenteditable=\1true\1 data-attribute=\1title\1 data-model=\1page\1 data-path=\1.*\1 id=\1page_\d\1>C</li>}
       end
     end
   end

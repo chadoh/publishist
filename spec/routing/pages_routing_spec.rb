@@ -10,9 +10,9 @@ describe PagesController do
     @mag.publish []
   end
   describe "routing" do
-    it "routes a magazine's cover to /magazines/mag-slug/cover" do
+    it "routes a magazine's cover to /magazines/mag-slug/c" do
       path = magazine_page_path(@mag, @mag.pages.first)
-      path.should == '/magazines/fruit-blots/cover'
+      path.should == '/magazines/fruit-blots/c'
       # { get: path }.should route_to(
       #   controller: 'pages',
       #   action:     'show',

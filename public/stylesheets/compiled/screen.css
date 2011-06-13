@@ -1026,11 +1026,11 @@ li.submission > input[type=checkbox] {
 }
 
 /* line 162, ../../../app/stylesheets/screen.sass */
-article.magazines ol.submissions li.submission {
+article.pages ol.submissions li.submission {
   position: relative;
 }
 /* line 164, ../../../app/stylesheets/screen.sass */
-article.magazines ol.submissions li.submission span.drag-handle-wrap {
+article.pages ol.submissions li.submission span.drag-handle-wrap {
   display: block;
   position: absolute;
   top: 0;
@@ -1047,7 +1047,7 @@ article.magazines ol.submissions li.submission span.drag-handle-wrap {
   border-radius: 50px;
 }
 /* line 174, ../../../app/stylesheets/screen.sass */
-article.magazines ol.submissions li.submission span.drag-handle-wrap span.drag-handle {
+article.pages ol.submissions li.submission span.drag-handle-wrap span.drag-handle {
   display: block;
   text-indent: -1000em;
   height: 100%;
@@ -1772,11 +1772,16 @@ nav.pagination ol.pages, nav.pagination ol.pages li {
   display: inline;
 }
 /* line 467, ../../../app/stylesheets/screen.sass */
-nav.pagination ol.pages li.page.current {
+nav.pagination ol.pages li.page {
   font-size: 1.5em;
   line-height: 1em;
 }
 /* line 469, ../../../app/stylesheets/screen.sass */
+nav.pagination ol.pages li.page > a {
+  font-size: 0.625em;
+  line-height: 2.4em;
+}
+/* line 471, ../../../app/stylesheets/screen.sass */
 nav.pagination:first-child {
   position: relative;
   top: -48px;

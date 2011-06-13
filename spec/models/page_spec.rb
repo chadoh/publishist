@@ -39,8 +39,9 @@ describe Page do
         page.position.should == 6
         page.title.should == '2'
         page = @magazine.pages.select{|p| p.position == 5}.first
-        page.title.should == "ToC"
+        page.title.should == "T"
       end
     end
   end
+
 end

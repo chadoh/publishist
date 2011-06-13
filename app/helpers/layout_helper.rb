@@ -3,17 +3,12 @@
 # to do so you may need to add this line to your ApplicationController
 #   helper :layout
 module LayoutHelper
-  def title(page_title, show_title = true)
-    @content_for_title = strip_tags(page_title.to_s)
-    @content_for_title += ": #{params['page']}" if params['page']
+  def title(page_heading, append_to_page_title = "")
+    @content_for_title = strip_tags(page_heading.to_s)
+    @content_for_title += append_to_page_title
     @content_for_title += " | Problem Child"
-    @content_for_page_heading = page_title.to_s
-    @article_id = page_title.parameterize
-    @show_title = show_title
-  end
-
-  def show_title?
-    @show_title
+    @content_for_page_heading = page_heading.to_s
+    @article_id = page_heading.parameterize
   end
 
   def stylesheet(*args)

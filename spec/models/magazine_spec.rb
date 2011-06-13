@@ -107,47 +107,44 @@ describe Magazine do
     end
   end
 
-  def a_magazine_has_just_finished
+  def a_magazine_has_just_finished options = {}
     @mag      = Magazine.create(
       :nickname => "Diner",
       :title    => "A Problematic Late-Night Diner",
       :accepts_submissions_until => Date.yesterday,
       :accepts_submissions_from  => 6.months.ago
     )
+    @sub      = Factory.create :anonymous_submission
+    @sub2     = Factory.create :anonymous_submission
     @meeting  = Meeting.create(:datetime => Date.yesterday) # in mag
-    @sub      = Factory.create :submission
-    @sub2     = Factory.create :submission
-    p        = Factory.create :person
-    p2       = Factory.create :person
-    a        = Attendee.create :meeting => @meeting, :person => p
-    a2       = Attendee.create :meeting => @meeting, :person => p2
     packlet  = Packlet.create  :meeting => @meeting, :submission => @sub
     packlet2 = Packlet.create  :meeting => @meeting, :submission => @sub2
-    packlet.scores << [Score.create(:amount => 6, :attendee => a), Score.create(:amount => 4, :attendee => a2)]
-    packlet2.scores << [Score.create(:amount => 10, :attendee => a), Score.create(:amount => 10, :attendee => a2)]
+    if options[:include_scores].present?
+      p        = Factory.create :person
+      p2       = Factory.create :person
+      a        = Attendee.create :meeting => @meeting, :person => p
+      a2       = Attendee.create :meeting => @meeting, :person => p2
+      packlet.scores << [Score.create(:amount => 6, :attendee => a), Score.create(:amount => 4, :attendee => a2)]
+      packlet2.scores << [Score.create(:amount => 10, :attendee => a), Score.create(:amount => 10, :attendee => a2)]
+    end
   end
 
   describe "#highest_scores(how_many)" do
-    before do
-      a_magazine_has_just_finished
-    end
-
     it "returns the highest-scoring submissions for the magazine" do
+      a_magazine_has_just_finished include_scores: true
       @mag.highest_scores(1).should == [@sub2]
     end
 
     it "does not barf when a submission's scores are nil" do
+      a_magazine_has_just_finished
       Score.delete_all; Submission.update_all :state => Submission.state(:reviewed)
       @mag.reload.highest_scores.should be_empty
     end
   end
 
   describe "#all_scores_above(this_score)" do
-    before do
-      a_magazine_has_just_finished
-    end
-
     it "returns all submissions scored above the given score" do
+      a_magazine_has_just_finished include_scores: true
       @mag.all_scores_above(6).should == [@sub2]
     end
   end
@@ -166,29 +163,29 @@ describe Magazine do
   end
 
   describe "#publish(array_of_winners)" do
-    let(:mag) { Factory.create :magazine }
-
     it "returns an error if the magazine's end-date for submissions has not yet passed" do
+      mag = Factory.create :magazine
       expect { mag.publish [] }.to raise_error
     end
 
-    it "sets the published_on date for the magazine to the current date" do
-      a_magazine_has_just_finished
-      @mag.publish [@sub2]
-      @mag.published_on.to_date.should == Date.today
-    end
+    context "when called correctly" do
+      before do
+        a_magazine_has_just_finished
+        @mag.publish [@sub2]
+      end
 
-    it "sets checked magazines to published and the rest to rejected" do
-      a_magazine_has_just_finished
-      @mag.publish [@sub2]
-      @sub.reload.should be_rejected
-      @sub2.reload.should be_published
-    end
+      it "sets the published_on date for the magazine to the current date" do
+        @mag.published_on.to_date.should == Date.today
+      end
 
-    it "creates 5 pages at minimum: 1 for cover, 1 for Notes, 1 for Staff, 1 for ToC, and 1 per 5 submissions after that" do
-      a_magazine_has_just_finished
-      @mag.publish [@sub2]
-      @mag.pages.length.should == 5
+      it "sets checked magazines to published and the rest to rejected" do
+        @sub.reload.should be_rejected
+        @sub2.reload.should be_published
+      end
+
+      it "creates 5 pages at minimum: 1 for cover, 1 for Notes, 1 for Staff, 1 for ToC, and 1 per 5 submissions after that" do
+        @mag.pages.length.should == 5
+      end
     end
 
     it "emails all of the authors who submitted for this magazine to let them know which (if any) of their submissions made it" do
@@ -215,19 +212,33 @@ describe Magazine do
     end
   end
 
-  describe "#page" do
-    before :all do
+  describe "a published magazine" do
+    before do
       a_magazine_has_just_finished
       @mag.publish [@sub2]
     end
 
-    it "queries a mag's pages by the pages' titles (or pseudo titles)" do
-      @mag.page('Cover').position.should == 1
-      page = @mag.page('1').submissions.should == [@sub2]
+    describe "#page" do
+      it "queries a mag's pages by the pages' titles (or pseudo titles)" do
+        @mag.page('C').position.should == 1
+        page = @mag.page('1').submissions.should == [@sub2]
+      end
+
+      it "if the provided page is nil, it provides the first page" do
+        @mag.page(nil).position.should == 1
+      end
     end
 
-    it "if the provided page is nil, it provides the first page" do
-      @mag.page(nil).position.should == 1
+    describe "#create_page_at" do
+      it "creates a page and inserts it at the supplied position, returning the page" do
+        page = @mag.create_page_at(3)
+        page.position.should == 3
+      end
+
+      it "creates a page but doesn't insert it anywhere if the supplied value is blank" do
+        page = @mag.create_page_at("")
+        page[:title].should be_blank
+      end
     end
   end
 

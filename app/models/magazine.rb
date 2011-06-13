@@ -82,13 +82,13 @@ class Magazine < ActiveRecord::Base
       end
 
       self.pages = [
-        Page.create(:title => 'Cover'),
-        Page.create(:title => 'Notes'),
-        Page.create(:title => 'Staff'),
-        Page.create(:title => 'ToC'),
+        Page.create(:title => 'C'),
+        Page.create(:title => 'N'),
+        Page.create(:title => 'S'),
+        Page.create(:title => 'T'),
       ]
 
-      published.each_slice(5) do |five_submissions|
+      published.each_slice(3) do |five_submissions|
         self.pages.create.submissions << five_submissions
       end
     else
@@ -104,6 +104,12 @@ class Magazine < ActiveRecord::Base
     else
       self.pages.first
     end
+  end
+
+  def create_page_at position
+    page = self.pages.create
+    page.insert_at position if position.present?
+    page
   end
 
   class << self

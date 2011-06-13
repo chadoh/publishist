@@ -159,7 +159,7 @@ span.drag-handle-wrap
 li.submission > input[type=checkbox]
   display: none
 
-article.magazines ol.submissions li.submission
+article.pages ol.submissions li.submission
   position: relative
   span.drag-handle-wrap
     display: block
@@ -464,8 +464,10 @@ nav.pagination
   float: right
   ol.pages
     +inline-list
-    li.page.current
+    li.page
       +adjust-font-size-to(24px, 1)
+      & > a
+        +adjust-font-size-to(10px)
   &:first-child
     position: relative
     top: -2 * $base-line-height

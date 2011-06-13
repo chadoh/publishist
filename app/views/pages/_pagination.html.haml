@@ -1,0 +1,13 @@
+%nav.pagination<
+  %ol.pages<
+    - if editor?
+      = render partial: "pages/form", locals: { position: :beginning }
+    - for page in magazine.pages
+      - if page == current_page && editor?
+        %li[page]{ contenteditable: 'true', data: { model: "page", attribute: "title", path: magazine_page_path(magazine, page) } }<
+          = link_to_unless page == current_page, page.title, magazine_page_path(magazine, page)
+      - else
+        %li[page]<
+          = link_to_unless page == current_page, page.title, magazine_page_path(magazine, page)
+    - if editor?
+      = render partial: "pages/form", locals: { position: :end }

@@ -1,8 +1,0 @@
-- title @magazine.to_s
-
-.content
-  = pages_for @magazine, @page
-  %ol.submissions
-    - for submission in @submissions
-      = render :partial => 'submissions/show', :locals => { :submission => submission, :collapsed => false }
-  = pages_for @magazine, @page

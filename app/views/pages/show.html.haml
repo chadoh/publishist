@@ -1,0 +1,8 @@
+- title @magazine.to_s, ": #{@page.title}"
+
+.content
+  = render partial: "pagination", locals: { magazine: @magazine, current_page: @page }
+  %ol.submissions
+    - for submission in @page.submissions
+      = render partial: 'submissions/show', locals: { submission: submission, collapsed: false }
+  = render partial: "pagination", locals: { magazine: @magazine, current_page: @page }

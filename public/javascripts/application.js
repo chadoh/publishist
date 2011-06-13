@@ -36,9 +36,9 @@ $(function(){
     $(this).closest('nav').closest('li').fadeOut();
   });
 
-  $("span[contenteditable]").live('blur', function(){
+  $("*[contenteditable]").live('blur', function(){
     var model     = $(this).attr("data-model"),
-        attribute = $(this).attr("class"),
+        attribute = $(this).attr("data-attribute") || attr("class"),
         value     = $(this).text(),
         path      = $(this).attr("data-path"),
         updateData = {};
