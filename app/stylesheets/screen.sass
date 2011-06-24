@@ -273,6 +273,12 @@ section#magazines
             +trailer(0)
         +box-shadow($lgray 0 0 10px 0)
 
+li.page form.button_to
+  +adjust-font-size-to(6px)
+  line-height: 1em
+  input[type=submit]
+    vertical-align: top
+
 span.score
   form.button_to
     +adjust-font-size-to(9px)
@@ -466,6 +472,7 @@ nav.pagination
     +inline-list
     li.page
       +adjust-font-size-to(24px, 1)
+      display: inline-block
       & > a
         +adjust-font-size-to(10px)
   &:first-child

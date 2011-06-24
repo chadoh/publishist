@@ -31,7 +31,6 @@ module NavigationHelpers
 
     when /the "([^"]*)" magazine page/i
       param = $1.parameterize
-      puts param
       eval "magazine_path('#{$1.parameterize}')"
 
     else

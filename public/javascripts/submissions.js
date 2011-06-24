@@ -11,7 +11,7 @@ $(function(){
     stack: 'article',
     zIndex: 1,
     helper: function(){
-      return $(this).clone().css('width', this.offsetWidth)[0];
+      return $(this).clone().css('width', this.offsetWidth).first();
     }
   });
 

@@ -33,5 +33,5 @@ Given /^I am signed in as an editor named "([^"]*)"$/ do |name|
     :rank_start => Time.now,
     :person_id  => p.id
   )
-  Given "I sign in as \"#{name}/secret\""
+  Given "I sign in as \"#{p.email}/secret\""
 end

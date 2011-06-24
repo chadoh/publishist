@@ -82,10 +82,10 @@ class Magazine < ActiveRecord::Base
       end
 
       self.pages = [
-        Page.create(:title => 'C'),
-        Page.create(:title => 'N'),
-        Page.create(:title => 'S'),
-        Page.create(:title => 'T'),
+        Page.create(:title => 'Cover'),
+        Page.create(:title => 'Notes'),
+        Page.create(:title => 'Staff'),
+        Page.create(:title => 'ToC'),
       ]
 
       published.each_slice(3) do |five_submissions|

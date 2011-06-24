@@ -220,7 +220,7 @@ describe Magazine do
 
     describe "#page" do
       it "queries a mag's pages by the pages' titles (or pseudo titles)" do
-        @mag.page('C').position.should == 1
+        @mag.page('Cover').position.should == 1
         page = @mag.page('1').submissions.should == [@sub2]
       end
 

@@ -36,20 +36,32 @@ $(function(){
     $(this).closest('nav').closest('li').fadeOut();
   });
 
-  $("*[contenteditable]").live('blur', function(){
-    var model     = $(this).attr("data-model"),
-        attribute = $(this).attr("data-attribute") || attr("class"),
-        value     = $(this).text(),
-        path      = $(this).attr("data-path"),
-        updateData = {};
-    updateData[model] = {};
-    updateData[model][attribute] = value;
-    $.ajax({
-      type: 'PUT',
-      dataType: 'script',
-      url:  path,
-      data: updateData
-    });
+  $("*[contenteditable]").live({
+    blur: function(e, triggered_by_keypress){
+      if (!triggered_by_keypress) {
+        var model     = $(this).attr("data-model"),
+            attribute = $(this).attr("data-attribute") || $(this).attr("class"),
+            value     = $(this).text().trim(),
+            path      = $(this).attr("data-path"),
+            original  = $(this).attr("data-original"),
+            updateData = {};
+        console.info("original: '" + original + "',", "value: '" + value + "'");
+        if (original != value) {
+          updateData[model] = {};
+          updateData[model][attribute] = value;
+          $.ajax({
+            type: 'PUT',
+            dataType: 'script',
+            url:  path,
+            data: updateData
+          });
+        }
+      }
+    },
+    keydown: function(e){
+      if (e.keyCode == 13)
+        $(this).trigger('blur', [true]);
+    }
   });
 
   if(!Modernizr.inputtypes.number){ $('html').addClass('no-number-input'); }

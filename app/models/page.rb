@@ -12,8 +12,6 @@
 #
 
 class Page < ActiveRecord::Base
-  extend ActiveSupport::Memoizable
-
   belongs_to :magazine
   has_many   :submissions, dependent: :nullify
   validates_presence_of :magazine_id
@@ -27,6 +25,4 @@ class Page < ActiveRecord::Base
   def to_param
     self.title.downcase
   end
-
-  memoize :title
 end

@@ -1,9 +1,9 @@
 class PagesController < InheritedResources::Base
-  include Haml::Helpers
   actions :show, :create, :update, :destroy
   belongs_to :magazine
 
-  respond_to :html, :js
+  respond_to :html
+  respond_to :js, only: :update
 
   def create
     coming_from_page = request.referer.split('/').last
@@ -16,7 +16,6 @@ class PagesController < InheritedResources::Base
   end
 
   def update
-    init_haml_helpers
     @magazine = Magazine.find_by_cached_slug params[:magazine_id]
     @page = Page.where("lower(title) = ?", params[:id]).first || \
             Page.where("position = ?", params[:id].to_i + 4).first
@@ -24,6 +23,20 @@ class PagesController < InheritedResources::Base
     @page.update_attributes params[:page]
 
     respond_with [@magazine, @page.reload]
+  end
+
+  def destroy
+    @magazine = Magazine.find_by_cached_slug params[:magazine_id]
+    @page = Page.where("lower(title) = ?", params[:id]).first || \
+            Page.where("position = ?", params[:id].to_i + 4).first
+
+    new_page = Page.where("position = ?", @page.position + 1).first || \
+               Page.where("position = ?", @page.position - 1).first
+
+    new_page.submissions << @page.submissions
+    @page.destroy
+
+    respond_with [@magazine, @page = new_page.reload]
   end
 
 protected
