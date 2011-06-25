@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110516234654
+# Schema version: 20110625142017
 #
 # Table name: submissions
 #
@@ -18,17 +18,19 @@
 #  state              :integer(8)      default(0)
 #  cached_slug        :string(255)
 #  page_id            :integer
+#  position           :integer
 #
 
 class Submission < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   belongs_to :author, :class_name => "Person"
   belongs_to :page
-  has_many :packlets, :dependent  => :destroy
-  has_many :meetings, :through    => :packlets
-  has_many :scores,   :through    => :packlets
+  has_many :packlets, dependent: :destroy
+  has_many :meetings, through: :packlets
+  has_many :scores,   through: :packlets
 
-  has_friendly_id :to_slug, :use_slug => true
+  has_friendly_id :to_slug, use_slug: true
+  acts_as_list scope: :page
 
   validate "errors.add :author_email, 'must be filled in. Or you can sign in.'",
     :if => Proc.new {|s| s.author_id.blank? && s.author_email.blank? }

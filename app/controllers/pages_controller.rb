@@ -32,6 +32,7 @@ class PagesController < InheritedResources::Base
     submission = Submission.find params[:submission_id]
 
     page.submissions << submission
+    submission.move_to_top
 
     if submission.page == page
       head :accepted

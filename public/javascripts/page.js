@@ -29,8 +29,8 @@ $(function(){
       var submission = ui.draggable,
           submission_id = submission.attr('id').split('_').pop(),
           to_page    = $(this).text(),
-          to_path    = window.location.pathname.split('/');
-      to_path.splice(3,1,to_page)
+          to_path    = window.location.pathname.split('/'),
+          from_page  = to_path.splice(3,1,to_page);
       to_path = to_path.join('/');
 
       console.info("Moving submission " + submission_id + " to " + to_path);
@@ -46,7 +46,11 @@ $(function(){
           submission.css('border-style', 'dotted');
         },
         success: function(data, textStatus, jqXHR){
-          submission.hide();
+          if (to_page == from_page) {
+            submission.css('border-style', 'dashed').parents('ol').prepend(submission);
+          } else {
+            submission.hide();
+          }
         },
         error: function(data, textStatus, jqXHR){
           submission.addClass('error').removeAttr('style');

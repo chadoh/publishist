@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110516234654) do
+ActiveRecord::Schema.define(:version => 20110625142017) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20110516234654) do
     t.integer  "state",              :limit => 8, :default => 0
     t.string   "cached_slug"
     t.integer  "page_id"
+    t.integer  "position"
   end
 
   add_index "submissions", ["cached_slug"], :name => "index_submissions_on_cached_slug", :unique => true
