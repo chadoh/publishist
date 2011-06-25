@@ -48,7 +48,11 @@ Pc::Application.routes.draw do
       post :publish
     end
     resources :pages, path: 'pages', only: [:create]
-    resources :pages, path: '', except: [:index, :new, :create, :edit]
+    resources :pages, path: '', except: [:index, :new, :create, :edit] do
+      member do
+        put :add_submission
+      end
+    end
   end
 
   resources :submissions, :path => 'submissions', :only => [:index, :create]
