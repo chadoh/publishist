@@ -11,8 +11,8 @@ describe PagesController do
   end
   describe "routing" do
     it "routes a magazine's cover to /magazines/mag-slug/c" do
-      path = magazine_page_path(@mag, @mag.pages.first)
-      path.should == '/magazines/fruit-blots/c'
+      path = magazine_page_path(@mag, page = @mag.pages.first)
+      path.should == "/magazines/fruit-blots/#{page.title.downcase}"
       # { get: path }.should route_to(
       #   controller: 'pages',
       #   action:     'show',

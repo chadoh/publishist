@@ -9,6 +9,7 @@ Pc::Application.routes.draw do
   get "welcome/index"
 
   resources :scores
+  resources :cover_arts, only: [:update]
 
   resources :meetings do
     resources :attendees do
@@ -47,6 +48,8 @@ Pc::Application.routes.draw do
       get 'highest_scores', :as => 'highest_scored_for'
       post :publish
     end
+  end
+  resources :magazines, only: [] do
     resources :pages, path: 'pages', only: [:create]
     resources :pages, path: '', except: [:index, :new, :create, :edit] do
       member do

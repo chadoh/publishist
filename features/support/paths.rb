@@ -20,6 +20,9 @@ module NavigationHelpers
     when /my profile page/i
       "/people/#{@user.friendly_id}"
 
+    when /the magazine's cover page/i
+      "/magazines/#{Magazine.first}/#{Page.where(position: 1).first.to_param}"
+
     when /the first (.*) page/i
       model = $1.titleize.constantize
       instance = if model.count > 0

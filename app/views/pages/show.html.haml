@@ -2,6 +2,15 @@
 
 .content
   = render partial: "pagination", locals: { magazine: @magazine, current_page: @page }
+  - if cover_art = @page.cover_art
+    - if cover_art.image?
+      = image_tag cover_art.image.url, alt: "Cover Art"
+    - if editor?
+      = simple_form_for cover_art, html: { multipart: true } do |f|
+        = error_messages
+        = f.input :page_id, as: :hidden
+        = f.input :image, as: :file, label: "Upload #{ "different " if cover_art.image? }cover art:"
+        = f.button :submit, "Save"
   %ol.submissions
     - for submission in @page.submissions
       = render partial: 'submissions/show', locals: { submission: submission, collapsed: false }

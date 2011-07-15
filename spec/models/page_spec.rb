@@ -16,6 +16,7 @@ describe Page do
   it {
     should belong_to :magazine
     should have_many(:submissions).dependent(:nullify)
+    should have_one(:cover_art).dependent(:destroy)
 
     should validate_presence_of :magazine_id
   }
@@ -32,14 +33,15 @@ describe Page do
 
     context "when the position changes" do
       it "doesn't mess with the titles" do
+        toc_original_title = @magazine.pages.select{|p| p.position == 4}.first.title
+        toc_original_title.should == "ToC"
         page = @magazine.pages.create
         page.insert_at(4)
         page.position.should == 4
         page = @magazine.pages.reload.last
         page.position.should == 6
         page.title.should == '2'
-        page = @magazine.pages.select{|p| p.position == 5}.first
-        page.title.should == "T"
+        toc_original_title.should == @magazine.pages.select{|p| p.position == 5}.first.title
       end
     end
   end

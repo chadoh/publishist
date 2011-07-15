@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110625142017) do
+ActiveRecord::Schema.define(:version => 20110712105532) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20110625142017) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "person_name"
+  end
+
+  create_table "cover_arts", :force => true do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -153,6 +163,8 @@ ActiveRecord::Schema.define(:version => 20110625142017) do
   end
 
   add_index "submissions", ["cached_slug"], :name => "index_submissions_on_cached_slug", :unique => true
+
+  add_foreign_key "cover_arts", "pages", :name => "cover_arts_page_id_fk"
 
   add_foreign_key "pages", "magazines", :name => "pages_magazine_id_fk", :dependent => :delete
 

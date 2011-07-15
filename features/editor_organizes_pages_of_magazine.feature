@@ -10,10 +10,10 @@ Feature: An editor organizes submissions onto pages of a magazine
 		And a magazine titled "Fruit Blots" has been published
 		And I am on the "Fruit Blots" magazine page
 
-	@wip
 	Scenario: I see that the vanilla published magazine has sensible defaults
 		Then I should see "Cover Notes Staff ToC 1" for the page numbers
-		And I should see "Fruit Blots" 2 times
+		And I should see "Fruit Blots"
+		And I should see "Upload cover art"
 
 	Scenario: I can add pages to the magazine
 		When I press "+"
@@ -23,7 +23,7 @@ Feature: An editor organizes submissions onto pages of a magazine
     When I press "x"
     Then I should see "Notes Staff ToC 0" for the page numbers
 
-  @wip
+  @pending
   @javascript
   Scenario: I can rename pages
     When I follow "1"
@@ -32,7 +32,7 @@ Feature: An editor organizes submissions onto pages of a magazine
     And I refresh the page
     Then I should see "Last"
 
-	@wip
+	@pending
 	@javascript
 	Scenario: I can drag submissions onto other pages
     When I follow "1"

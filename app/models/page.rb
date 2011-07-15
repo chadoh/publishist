@@ -14,6 +14,7 @@
 class Page < ActiveRecord::Base
   belongs_to :magazine
   has_many   :submissions, dependent: :nullify, order: :position
+  has_one    :cover_art, dependent: :destroy
   validates_presence_of :magazine_id
 
   acts_as_list scope: :magazine

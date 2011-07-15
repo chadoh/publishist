@@ -53,10 +53,10 @@ class Submission < ActiveRecord::Base
     :message => "must be an image"
 
   has_attached_file :photo,
-    :storage => :s3,
+    :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
-    :path => "/:style/:filename",
-    :styles => { :medium => "510x510>" }
+    :path           => "/:style/:filename",
+    :styles         => { medium: "510x510>" }
 
   def author_name
     @author_name ||= if read_attribute :author_id

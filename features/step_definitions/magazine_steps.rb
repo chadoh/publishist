@@ -41,13 +41,10 @@ Given /^(\d+) submissions have been reviewed at these meetings$/ do |total_submi
   end
 end
 
-Given /^10 people have attended each of these meetings$/ do
+Given /^1 person has attended each of these meetings$/ do
   # the viewer (the editor) already counts as 1
-  9.times { Factory.create(:person) }
   for meeting in Magazine.first.meetings
-    for person in Person.all
-      Attendee.create :meeting => meeting, :person => person
-    end
+    Attendee.create :meeting => meeting, :person => @user
   end
 end
 
@@ -58,6 +55,18 @@ Given /^submissions at meeting 1 have all been scored 1, scored 2 at meeting 2, 
         Score.create :packlet => packlet, :attendee => attendee, :amount => i
       end
     end
+  end
+end
+
+Given /^10 submissions have been scored 1-10$/ do
+  meeting = Factory.create :meeting
+  Magazine.first.meetings << meeting
+  10.times {
+    meeting.submissions << Factory.create(:anonymous_submission)
+  }
+  attendee = Attendee.create meeting: meeting, person: @user
+  meeting.packlets.each_with_index do |packlet, i|
+    Score.create packlet: packlet, attendee: attendee, amount: i
   end
 end
 

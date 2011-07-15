@@ -33,6 +33,7 @@ class Magazine < ActiveRecord::Base
 
   has_many :meetings, :dependent => :nullify, :include => :submissions
   has_many :pages,    :dependent => :destroy, :order   => :position
+  has_many :cover_arts, through: :pages
 
   has_friendly_id :nickname, :use_slug => true
 
@@ -50,6 +51,10 @@ class Magazine < ActiveRecord::Base
     if count_of_scores == 0 then nil else
       (sum_of_scores.to_f / count_of_scores * 100).round.to_f / 100
     end
+  end
+
+  def cover_art
+    cover_arts.first
   end
 
   def highest_scores how_many = 50
@@ -82,11 +87,12 @@ class Magazine < ActiveRecord::Base
       end
 
       self.pages = [
-        Page.create(:title => 'Cover'),
-        Page.create(:title => 'Notes'),
-        Page.create(:title => 'Staff'),
-        Page.create(:title => 'ToC'),
+        cover = Page.create(:title => 'Cover'),
+        notes = Page.create(:title => 'Notes'),
+        staff = Page.create(:title => 'Staff'),
+        toc   = Page.create(:title => 'ToC'),
       ]
+      cover.cover_art = CoverArt.create
 
       published.each_slice(3) do |five_submissions|
         self.pages.create.submissions << five_submissions

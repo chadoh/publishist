@@ -5,10 +5,7 @@ Feature: an editor views the winners for a magazine
 
   Background: a semester has passed
     Given a magazine's timeframe is freshly over
-    And 10 meetings have occured in it
-    And 10 submissions have been reviewed at these meetings
-    And 10 people have attended each of these meetings
-    And submissions at meeting 1 have all been scored 1, scored 2 at meeting 2, etc
+    And 10 submissions have been scored 1-10
 
   @editor
   Scenario: I view the winners
@@ -28,4 +25,4 @@ Feature: an editor views the winners for a magazine
     Given no emails have been sent
     When I press "Publish checked submissions"
     Then each author should receive an email
-    And I should be on the first magazine page
+    And I should be on the magazine's cover page
