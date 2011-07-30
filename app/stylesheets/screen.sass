@@ -236,6 +236,57 @@ article.magazines ol.submissions li.collapsed.submission
     p.scored
       display: none
 
+ol.editors_notes
+  +no-bullets
+  li
+    +trailer(2)
+
+header.add-stuff-trigger
+  margin-left: -3em
+  height: 0
+  +inline-block
+  +trailer(0)
+  h2
+    +adjust-font-size-to(40px)
+    +adjust-leading-to(0)
+    +trailer(0)
+    cursor: pointer
+    +transition-property(all)
+    +transition-duration(0.5s)
+    &.tilt-45
+      +rotate(45deg)
+section.add-stuff
+  width: 100%
+  +adjust-leading-to(3)
+  display: inline-block
+  ul
+    height: 100%
+    +inline-block
+    +inline-list
+    li
+      background-color: $yellow
+      height: 100%
+      margin-left: 1em
+      +background(linear-gradient(lighten($lyellow, 15%), $lyellow))
+      +rhythm-borders
+      +border-radius(20px)
+      +box-shadow($lgray 0 0 10px 0)
+      +transition-property(all)
+      +transition-duration(0.2s)
+      &:before
+        content: "+"
+      border-color: $lgray
+      color: $base
+      &:hover
+        color: $base
+        border-color: $base
+      &:active
+        color: $base
+        border-color: $base
+        +box-shadow($dgray 0 0 5px inset)
+        p
+          border-color: $orange
+
 section#magazines
   ul.magazines
     +no-bullets
@@ -244,6 +295,8 @@ section#magazines
       background-color: $yellow
       +background(linear-gradient(lighten($lyellow, 15%), $lyellow))
       +rhythm-borders
+      +transition-property(all)
+      +transition-duration(0.2s)
       padding:
         top: 0
         bottom: 0

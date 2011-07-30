@@ -1,0 +1,5 @@
+= simple_form_for @editors_note do |f|
+  = f.input :page_id, as: :hidden, value: @page.id
+  = f.input :title
+  = f.input :body
+  = f.submit

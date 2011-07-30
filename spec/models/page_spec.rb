@@ -17,6 +17,7 @@ describe Page do
     should belong_to :magazine
     should have_many(:submissions).dependent(:nullify)
     should have_one(:cover_art).dependent(:destroy)
+    should have_many(:editors_notes).dependent(:destroy)
 
     should validate_presence_of :magazine_id
   }

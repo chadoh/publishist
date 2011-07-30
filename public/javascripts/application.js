@@ -36,6 +36,11 @@ $(function(){
     $(this).closest('nav').closest('li').fadeOut();
   });
 
+  $("header.add-stuff-trigger > h2").click(function(){
+    $(this).toggleClass('tilt-45');
+    $("section.add-stuff").slideToggle();
+  }).click();
+
   $("*[contenteditable]").live({
     blur: function(e, triggered_by_keypress){
       if (!triggered_by_keypress) {
