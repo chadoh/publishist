@@ -44,7 +44,7 @@ module Pc
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    config.action_view.sanitized_allowed_tags = 'font', 's', 'u'
-    config.action_view.sanitized_allowed_attributes = 'color', 'style'
+    config.action_view.sanitized_allowed_tags = 'font', 's', 'u', 'audio', 'video'
+    config.action_view.sanitized_allowed_attributes = 'color', 'style', 'controls'
   end
 end
