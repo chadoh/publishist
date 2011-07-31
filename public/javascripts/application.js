@@ -38,7 +38,7 @@ $(function(){
 
   $("header.add-stuff-trigger > h2").click(function(){
     $(this).toggleClass('tilt-45');
-    $("section.add-stuff").slideToggle();
+    $("section.add-stuff").toggleClass('hidden');
   }).click();
 
   $("*[contenteditable]").live({

@@ -241,6 +241,12 @@ ol.editors_notes
   li
     +trailer(2)
 
+table.table-of-contents
+  th
+    cursor: pointer
+  tr > *:last-child
+    min-width: 3.5em
+
 header.add-stuff-trigger
   margin-left: -3em
   height: 0
@@ -257,8 +263,13 @@ header.add-stuff-trigger
       +rotate(45deg)
 section.add-stuff
   width: 100%
-  +adjust-leading-to(3)
   display: inline-block
+  overflow: hidden
+  +adjust-leading-to(3)
+  +transition-property(line-height)
+  +transition-duration(0.5s)
+  &.hidden
+    +adjust-leading-to(0)
   ul
     height: 100%
     +inline-block

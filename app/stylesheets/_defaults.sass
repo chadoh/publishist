@@ -235,11 +235,17 @@ th, thead th
 
 th, td, caption
   padding: $base-rhythm-unit * 0.5
+    bottom: 0
   text-align: left
   font-weight: normal
 
-table, th
-  +trailing-border(1px, 0.5)
+th
+  +trailing-border(1px, 0, $border-style: dotted)
+  width: 70%
+  &.headerSortDown:after
+    content: " ˇ"
+  &.headerSortUp:after
+    content: " ˆ"
 
 tfoot
   +adjust-font-size-to(14px)

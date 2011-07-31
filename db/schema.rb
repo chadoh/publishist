@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110715123315) do
+ActiveRecord::Schema.define(:version => 20110730162923) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -172,6 +172,12 @@ ActiveRecord::Schema.define(:version => 20110715123315) do
 
   add_index "submissions", ["cached_slug"], :name => "index_submissions_on_cached_slug", :unique => true
 
+  create_table "table_of_contents", :force => true do |t|
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   add_foreign_key "cover_arts", "pages", :name => "cover_arts_page_id_fk"
 
   add_foreign_key "editors_notes", "pages", :name => "editors_notes_page_id_fk"
@@ -179,5 +185,7 @@ ActiveRecord::Schema.define(:version => 20110715123315) do
   add_foreign_key "pages", "magazines", :name => "pages_magazine_id_fk", :dependent => :delete
 
   add_foreign_key "submissions", "pages", :name => "submissions_page_id_fk", :dependent => :nullify
+
+  add_foreign_key "table_of_contents", "pages", :name => "table_of_contents_page_id_fk"
 
 end

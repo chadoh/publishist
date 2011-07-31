@@ -1,0 +1,20 @@
+%table.table-of-contents
+  %thead
+    %tr
+      %th{ title: "Sort by Title" } Title
+      %th{ title: "Sort by Author" } Author
+      %th.headerSortDown{ title: "Sort by Page Number" } Page
+  %tbody
+    - table_of_contents.each do |submission, props|
+      %tr
+        %td= link_to strip_tags(submission.to_s), submission_path(submission)
+        %td= link_to_unless props[:author].is_a?(String), props[:author], person_path(props[:author])
+        %td= link_to props[:page].title, [props[:page].magazine, props[:page]]
+
+
+- javascript "jquery.tablesorter.min"
+
+:javascript
+  $(function(){
+    $('table.table-of-contents').tablesorter( {sortList: [[2,0]]} );
+  });

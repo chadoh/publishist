@@ -201,5 +201,9 @@ class Person < ActiveRecord::Base
     memoize :editors, :editor, :coeditor, :find_or_create
   end
 
+  def to_s
+    name
+  end
+
   memoize :full_name, :name_and_email, :name, :editor?, :the_editor?, :the_coeditor?, :is_staff?, :current_ranks, :can_enter_scores_for?, :staffships, :coeditorships, :editorships, :highest_rank
 end

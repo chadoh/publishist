@@ -93,6 +93,7 @@ class Magazine < ActiveRecord::Base
         toc   = Page.create(:title => 'ToC'),
       ]
       cover.cover_art = CoverArt.create
+      toc.table_of_contents = TableOfContents.create
 
       published.each_slice(3) do |five_submissions|
         self.pages.create.submissions << five_submissions
