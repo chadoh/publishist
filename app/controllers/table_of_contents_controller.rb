@@ -9,4 +9,11 @@ class TableOfContentsController < ActionController::Base
     end
   end
 
+  def destroy
+    @table_of_contents = TableOfContents.find params[:id]
+    @table_of_contents.destroy
+    respond_with(@table_of_contents) do |wants|
+      wants.html { redirect_to [@table_of_contents.page.magazine, @table_of_contents.page] }
+    end
+  end
 end

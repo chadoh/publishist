@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110730162923) do
+ActiveRecord::Schema.define(:version => 20110731181227) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -152,6 +152,12 @@ ActiveRecord::Schema.define(:version => 20110730162923) do
   add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
+  create_table "staff_lists", :force => true do |t|
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "submissions", :force => true do |t|
     t.text     "title"
     t.text     "body"
@@ -183,6 +189,8 @@ ActiveRecord::Schema.define(:version => 20110730162923) do
   add_foreign_key "editors_notes", "pages", :name => "editors_notes_page_id_fk"
 
   add_foreign_key "pages", "magazines", :name => "pages_magazine_id_fk", :dependent => :delete
+
+  add_foreign_key "staff_lists", "pages", :name => "staff_lists_page_id_fk"
 
   add_foreign_key "submissions", "pages", :name => "submissions_page_id_fk", :dependent => :nullify
 

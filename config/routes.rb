@@ -11,7 +11,8 @@ Pc::Application.routes.draw do
   resources :scores
   resources :cover_arts,        only: [:update]
   resources :editors_notes,     only: [:new, :create, :update]
-  resources :table_of_contents, only: [:create]
+  resources :table_of_contents, only: [:create, :destroy]
+  resources :staff_lists,       only: [:create, :destroy]
 
   resources :meetings do
     resources :attendees do

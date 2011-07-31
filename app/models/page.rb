@@ -13,10 +13,11 @@
 
 class Page < ActiveRecord::Base
   belongs_to :magazine
-  has_many   :submissions, dependent: :nullify, order: :position
-  has_one    :cover_art, dependent: :destroy
+  has_many   :submissions,       dependent: :nullify, order: :position
+  has_one    :cover_art,         dependent: :destroy
   has_one    :table_of_contents, dependent: :destroy
-  has_many   :editors_notes, dependent: :destroy
+  has_one    :staff_list,        dependent: :destroy
+  has_many   :editors_notes,     dependent: :destroy
   validates_presence_of :magazine_id
 
   acts_as_list scope: :magazine

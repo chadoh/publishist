@@ -8,4 +8,5 @@
       %li Editor's Note
     = link_to table_of_contents_path(page_id: @page.id), method: :post do
       %li Table of Contents
-    %li Staff List
+    = link_to staff_lists_path(page_id: @page.id), method: :post do
+      %li Staff List

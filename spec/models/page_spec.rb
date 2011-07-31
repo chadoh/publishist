@@ -19,6 +19,7 @@ describe Page do
     should have_one(:cover_art).dependent(:destroy)
     should have_many(:editors_notes).dependent(:destroy)
     should have_one(:table_of_contents).dependent(:destroy)
+    should have_one(:staff_list).dependent(:destroy)
 
     should validate_presence_of :magazine_id
   }

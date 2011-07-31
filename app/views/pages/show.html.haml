@@ -16,7 +16,9 @@
       - for note in @page.editors_notes
         = render partial: "editors_notes/show", locals: { note: note }
   - if toc = @page.table_of_contents
-    = render partial: "table_of_contents/show", locals: { table_of_contents: toc.hash }
+    = render partial: "table_of_contents/show", locals: { table_of_contents: toc }
+  - if staff_list = @page.staff_list
+    = render partial: "staff_lists/show", locals: { staff_list: staff_list }
   %ol.submissions
     - for submission in @page.submissions
       = render partial: 'submissions/show', locals: { submission: submission, collapsed: false }

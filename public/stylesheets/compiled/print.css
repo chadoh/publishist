@@ -388,7 +388,7 @@ table {
 
 /* line 230, ../../../app/stylesheets/_defaults.sass */
 table, td, th {
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 /* line 233, ../../../app/stylesheets/_defaults.sass */
