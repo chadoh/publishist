@@ -1,5 +1,14 @@
 = simple_form_for @editors_note do |f|
-  = f.input :page_id, as: :hidden, value: @page.id
+  = f.input :page_id, as: :hidden, value: @editors_note.page.id
   = f.input :title
   = f.input :body
   = f.submit
+  = link_to "Cancel", request.referer, class: "cancel"
+
+:javascript
+  $(function(){
+    $("a.cancel").click(function(e){
+      e.preventDefault();
+      $(this).closest('form').hide();
+    });
+  });

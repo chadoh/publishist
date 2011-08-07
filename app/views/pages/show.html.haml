@@ -2,28 +2,24 @@
 
 .content
   = render partial: "pagination", locals: { magazine: @magazine, current_page: @page }
+  - collapse_resources = false
   - if cover_art = @page.cover_art
-    - if cover_art.image?
-      = image_tag cover_art.image.url, alt: "Cover Art"
-    - if editor?
-      = simple_form_for cover_art, html: { multipart: true } do |f|
-        = error_messages
-        = f.input :page_id, as: :hidden
-        = f.input :image, as: :file, label: "Upload #{ "different " if cover_art.image? }cover art:"
-        = f.button :submit, "Save"
-  - if not @page.editors_notes.empty?
-    %ol.editors_notes
-      - for note in @page.editors_notes
-        = render partial: "editors_notes/show", locals: { note: note }
+    = render partial: "cover_arts/show", locals: { cover_art: cover_art }
+    - collapse_resources = true
+  - if not (notes = @page.editors_notes).empty?
+    = render partial: "editors_notes/index", locals: { editors_notes: notes }
+    - collapse_resources = true
   - if toc = @page.table_of_contents
     = render partial: "table_of_contents/show", locals: { table_of_contents: toc }
+    - collapse_resources = true
   - if staff_list = @page.staff_list
     = render partial: "staff_lists/show", locals: { staff_list: staff_list }
-  %ol.submissions
-    - for submission in @page.submissions
-      = render partial: 'submissions/show', locals: { submission: submission, collapsed: false }
+    - collapse_resources = true
+  - if submissions = @page.submissions
+    = render partial: "submissions/index", locals: { submissions: submissions }
+    - collapse_resources = true unless submissions.empty?
   - if editor?
-    = render partial: "add_resources"
+    = render partial: "add_resources", locals: { collapse: collapse_resources }
   = render partial: "pagination", locals: { magazine: @magazine, current_page: @page }
 
 - javascript 'page'

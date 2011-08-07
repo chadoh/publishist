@@ -39,7 +39,7 @@ $(function(){
   $("header.add-stuff-trigger > h2").click(function(){
     $(this).toggleClass('tilt-45');
     $("section.add-stuff").toggleClass('hidden');
-  }).click();
+  });
 
   $("*[contenteditable]").live({
     blur: function(e, triggered_by_keypress){

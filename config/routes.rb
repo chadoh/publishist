@@ -9,8 +9,8 @@ Pc::Application.routes.draw do
   get "welcome/index"
 
   resources :scores
-  resources :cover_arts,        only: [:update]
-  resources :editors_notes,     only: [:new, :create, :update]
+  resources :cover_arts,        except: :index
+  resources :editors_notes,     except: :index
   resources :table_of_contents, only: [:create, :destroy]
   resources :staff_lists,       only: [:create, :destroy]
 

@@ -1,6 +1,6 @@
 class EditorsNotesController < InheritedResources::Base
   actions :create, :update
-  respond_to :html, except: :new
+  respond_to :html, except: [:new, :edit]
   respond_to :js, only: :new
 
   def new
@@ -14,8 +14,22 @@ class EditorsNotesController < InheritedResources::Base
     end
   end
 
+  def edit
+    @editors_note = EditorsNote.find params[:id]
+    respond_with(@editors_note) do |wants|
+      wants.js
+    end
+  end
   def update
     update! do |wants|
+      wants.html { redirect_to [@editors_note.page.magazine, @editors_note.page] }
+    end
+  end
+
+  def destroy
+    @editors_note = EditorsNote.find params[:id]
+    @editors_note.destroy
+    respond_with(@editors_note) do |wants|
       wants.html { redirect_to [@editors_note.page.magazine, @editors_note.page] }
     end
   end

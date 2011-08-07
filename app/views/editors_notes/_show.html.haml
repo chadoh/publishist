@@ -1,4 +1,9 @@
-%li
+%li[note]
   %header
     %h2= note.title
   %div= note.body
+  - if editor?
+    %nav.actions
+      %ul
+        %li= link_to "Edit", edit_editors_note_path(note), remote: true
+        %li= link_to "Delete", [note], method: :delete

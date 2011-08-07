@@ -1,0 +1,3 @@
+%ol.submissions
+  - for submission in submissions
+    = render partial: 'submissions/show', locals: { submission: submission, collapsed: false }

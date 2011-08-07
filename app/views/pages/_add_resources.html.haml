@@ -1,9 +1,10 @@
 %header.add-stuff-trigger
-  %h2.tilt-45{ title: "Add stuff" }
+  %h2{ title: "Add stuff" }
     +
-%section.add-stuff
+%section.add-stuff{ class: collapse && 'hidden' }
   %ul
-    %li Cover Art
+    = link_to new_cover_art_path(page_id: @page.id), remote: true do
+      %li Cover Art
     = link_to new_editors_note_path(page_id: @page.id), remote: true do
       %li Editor's Note
     = link_to table_of_contents_path(page_id: @page.id), method: :post do
