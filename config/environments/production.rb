@@ -1,8 +1,6 @@
 Pc::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
-  config.middleware.use "MixpanelMiddleware", "a74ffdcff8f485143b89e03835339d2a", :async => true
-
   config.active_support.deprecation = :notify
 
   # The production environment is meant for finished, "live" apps.

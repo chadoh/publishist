@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
-  before_filter :initialize_mixpanel
 
   def initialize_mixpanel
      @mixpanel = Mixpanel.new("a74ffdcff8f485143b89e03835339d2a", request.env, true)

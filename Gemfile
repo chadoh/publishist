@@ -32,7 +32,6 @@ gem 'workless' # automatically start & stop workers (on Heroku or locally) for D
 gem 'handlers', :git => "git://github.com/chadoh/handlers.git"
 
 gem 'hoptoad_notifier'
-gem 'mixpanel'
 
 group :development do
   gem 'annotate-models'
