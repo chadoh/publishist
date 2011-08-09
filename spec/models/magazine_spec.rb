@@ -28,6 +28,13 @@ describe Magazine do
     end
   end
 
+  describe "#notification_sent" do
+    it "defaults to 'false'" do
+      mag = Magazine.new
+      mag.notification_sent?.should be_false
+    end
+  end
+
   describe "#accepts_submissions_from" do
     context "when this is the first magazine" do
       it "defaults to today" do
@@ -199,15 +206,19 @@ describe Magazine do
         @mag.pages.length.should == 5
       end
     end
+  end
 
-    it "emails all of the authors who submitted for this magazine to let them know which (if any) of their submissions made it" do
+  describe "#notify_authors_of_published_magazine" do
+    it "emails all of the authors who submitted for this magazine to let them know which (if any) of their submissions made it, and sets notification_sent to true for the magazine" do
       a_magazine_has_just_finished
       mock_mail = mock(:mail)
       mock_mail.stub(:deliver)
+      @mag.publish [@sub2]
       [@sub, @sub2].each do |sub|
         Notifications.should_receive(:we_published_a_magazine).with(sub.email, @mag, [sub]).and_return(mock_mail)
       end
-      @mag.publish [@sub2]
+      @mag.notify_authors_of_published_magazine
+      @mag.notification_sent?.should be_true
     end
   end
 

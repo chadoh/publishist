@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110731181227) do
+ActiveRecord::Schema.define(:version => 20110809180502) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20110731181227) do
     t.integer  "count_of_scores",           :default => 0
     t.integer  "sum_of_scores",             :default => 0
     t.string   "cached_slug"
+    t.boolean  "notification_sent",         :default => false
   end
 
   add_index "magazines", ["cached_slug"], :name => "index_magazines_on_cached_slug", :unique => true

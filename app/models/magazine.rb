@@ -82,9 +82,6 @@ class Magazine < ActiveRecord::Base
       self.update_attributes :published_on => Date.today
       for sub in published do sub.has_been(:published) end
       for sub in rejected  do sub.has_been(:rejected)  end
-      all_submissions.group_by(&:email).each do |author_email, her_submissions|
-        Notifications.delay.we_published_a_magazine(author_email, self, her_submissions)
-      end
 
       self.pages = [
         cover = Page.create(:title => 'Cover'),
@@ -92,7 +89,6 @@ class Magazine < ActiveRecord::Base
         staff = Page.create(:title => 'Staff'),
         toc   = Page.create(:title => 'ToC'),
       ]
-      cover.cover_art = CoverArt.create
       toc.table_of_contents = TableOfContents.create
       staff.staff_list = StaffList.create
 
@@ -102,6 +98,17 @@ class Magazine < ActiveRecord::Base
     else
       raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
     end
+  end
+
+  def notification_sent?
+    self.notification_sent
+  end
+
+  def notify_authors_of_published_magazine
+    self.submissions.group_by(&:email).each do |author_email, her_submissions|
+      Notifications.delay.we_published_a_magazine(author_email, self, her_submissions)
+    end
+    self.update_attributes notification_sent: true
   end
 
   def page page_title

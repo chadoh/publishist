@@ -39,7 +39,20 @@ class MagazinesController < InheritedResources::Base
   def publish
     winners = Submission.where(:id + params[:submission_ids])
     resource.publish winners
-    redirect_to magazine_path(resource)
+    flash[:notice] = "Now make it look pretty! You can add cover art & such to a page with the "
+    flash[:notice] += "big X near the bottom left of each page, you can drag submissions to different "
+    flash[:notice] += "pages using their right edge, you can add new pages by clicking the pluses in "
+    flash[:notice] += "the page list, remove the current page by using the little 'x', and "
+    flash[:notice] += "rename the current page by simply clicking on its name. "
+    flash[:notice] += "When it's looking really nice, you can send a notification to everyone who "
+    flash[:notice] += "submitted by using the button at the bottom of the page."
+    redirect_to magazine_page_url @magazine, @magazine.pages.first
+  end
+
+  def notify_authors_of_published_magazine
+    @magazine = Magazine.find params[:id]
+    @magazine.notify_authors_of_published_magazine
+    redirect_to request.referer, notice: "Everyone who submitted was notified that they can now view the magazine online"
   end
 
 protected

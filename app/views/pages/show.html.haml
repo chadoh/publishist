@@ -21,5 +21,11 @@
   - if editor?
     = render partial: "add_resources", locals: { collapse: collapse_resources }
   = render partial: "pagination", locals: { magazine: @magazine, current_page: @page }
+  - if editor? and not @magazine.notification_sent?
+    .notify_authors_button
+      Looking good?
+      = button_to "Let everyone who submitted know it's been published!",
+        notify_authors_of_published_magazine_path(@magazine),
+        class: 'inline', confirm: "This will email everyone who submitted to let them know which of their submissions made it and which didn't. It will also link them to the magazine on the website, so you should be confident that it's looking nice & spiffy!"
 
 - javascript 'page'
