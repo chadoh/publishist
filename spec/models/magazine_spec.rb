@@ -263,12 +263,6 @@ describe Magazine do
         page[:title].should be_blank
       end
     end
-
-    describe "cover art" do
-      it "has linked CoverArt" do
-        @mag.pages.where(title: 'Cover').first.cover_art.should_not be_nil
-      end
-    end
   end
 
   describe "#submissions" do

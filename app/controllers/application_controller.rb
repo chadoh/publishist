@@ -2,11 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
 
-  def initialize_mixpanel
-     @mixpanel = Mixpanel.new("a74ffdcff8f485143b89e03835339d2a", request.env, true)
-     @mixpanel.append_api("identify", "#{"#{current_person.full_name} from " if !!current_person}#{request.remote_ip}")
-  end
-
   def staff_only
     unless person_signed_in? and current_person.ranks.present?
       flash[:notice] = "Only staff can see that page."

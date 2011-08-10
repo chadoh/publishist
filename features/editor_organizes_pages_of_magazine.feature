@@ -13,7 +13,7 @@ Feature: An editor organizes submissions onto pages of a magazine
 	Scenario: I see that the vanilla published magazine has sensible defaults
 		Then I should see "Cover Notes Staff ToC 1" for the page numbers
 		And I should see "Fruit Blots"
-		And I should see "Upload cover art"
+		And I should see "Cover Art"
 
 	Scenario: I can add pages to the magazine
 		When I press "+"
