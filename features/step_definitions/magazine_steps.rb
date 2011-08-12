@@ -81,6 +81,6 @@ end
 
 Then /^each author should receive an email$/ do
   Submission.all.each do |sub|
-    unread_emails_for(sub.email).size.should == 1
+    Then "\"#{sub.email}\" should receive an email"
   end
 end

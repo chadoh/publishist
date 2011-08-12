@@ -41,10 +41,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'factory_girl_rails'
-  gem 'rspec-rails'
-  gem 'email_spec'
-  gem 'shoulda'
   gem 'railroady'
   gem 'guard-rspec'
   gem 'rb-fsevent'
@@ -54,6 +50,10 @@ end
 group :test do
   gem 'cucumber-rails'
   gem 'capybara'
+  gem 'email_spec'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'shoulda'
   # gem 'launchy'
   gem 'database_cleaner'
 end
