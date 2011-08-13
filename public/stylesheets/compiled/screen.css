@@ -460,7 +460,7 @@ label, input[type=button], input[type=submit], button {
 /* line 276, ../../../app/stylesheets/_defaults.sass */
 label {
   margin-top: 1.5em;
-  display: block;
+  display: inline-block;
   font-weight: bold;
 }
 
