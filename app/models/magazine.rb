@@ -38,9 +38,11 @@ class Magazine < ActiveRecord::Base
   has_friendly_id :nickname, :use_slug => true
 
   # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
-  def submissions
+  def submissions options = {}
+    options = options.is_a?(Hash) ? options : { options => true }
+
     submission_ids = self.meetings.collect(&:packlets).flatten.collect(&:submission_id).uniq
-    if self.published?
+    if self.published? && options[:all] != true
       Submission.where :id + submission_ids, :state => Submission.state(:published)
     else
       Submission.where :id + submission_ids
@@ -105,7 +107,7 @@ class Magazine < ActiveRecord::Base
   end
 
   def notify_authors_of_published_magazine
-    self.submissions.group_by(&:email).each do |author_email, her_submissions|
+    self.submissions(:all).group_by(&:email).each do |author_email, her_submissions|
       Notifications.delay.we_published_a_magazine(author_email, self, her_submissions)
     end
     self.update_attributes notification_sent: true

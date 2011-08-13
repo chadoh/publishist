@@ -35,8 +35,12 @@ development: &DEFAULTS
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
-  <<: *DEFAULTS
+  adapter: postgresql
+  encoding: unicode
   database: pc_test
+  pool: 5
+  username: chad
+  password:
   min_messages: warning
 
 production:

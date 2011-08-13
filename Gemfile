@@ -43,6 +43,7 @@ end
 group :development, :test do
   gem 'railroady'
   gem 'guard-rspec'
+  gem 'rspec-rails'
   gem 'rb-fsevent'
   gem 'growl'
 end
@@ -52,7 +53,6 @@ group :test do
   gem 'capybara'
   gem 'email_spec'
   gem 'factory_girl_rails'
-  gem 'rspec-rails'
   gem 'shoulda'
   # gem 'launchy'
   gem 'database_cleaner'

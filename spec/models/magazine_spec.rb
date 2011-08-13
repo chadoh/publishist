@@ -214,6 +214,7 @@ describe Magazine do
       mock_mail = mock(:mail)
       mock_mail.stub(:deliver)
       @mag.publish [@sub2]
+      @mag.submissions(:reload)
       [@sub, @sub2].each do |sub|
         Notifications.should_receive(:we_published_a_magazine).with(sub.email, @mag, [sub]).and_return(mock_mail)
       end
