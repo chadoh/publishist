@@ -6,46 +6,97 @@
       %h2
         this site
     :markdown
-      Our apologies, this website is a bit dull, isn't it? For now, you can find more interesting stuff from the current editors over at [the Problem Child blog](http://problemchildren.wordpress.com). This site is currently being built, [rail by rail](http://en.wikipedia.org/wiki/Ruby_on_Rails), by #{Person.chad ? "[Chad Ostrowski](#{person_path Person.chad})" : "Chad Ostrowski"}, who was an editor for this magazine and is now working as a code author for [the Man](http://en.wikipedia.org/wiki/Comcast "A very benevolant Man who is gifting Chad with the equivalent of a degree in Computer Science. Hooray!").
+      Hey hey! Check out [the Problem Child
+      blog](http://problemchildren.wordpress.com)! There's a lot of news and
+      such there that has no home on this site yet. Someday it might, but this
+      site is being built, [rail by
+      rail](http://en.wikipedia.org/wiki/Ruby_on_Rails), by [Chad
+      Ostrowski][1], who was an editor for this magazine and is now working as
+      a code author for [the Man](http://en.wikipedia.org/wiki/Comcast "A very
+      benevolant Man who is gifting Chad with the equivalent of a degree in
+      Computer Science.  Hooray!").
 
-      The primary purpose of this site is to help the editors with all the tedious parts of their jobs so they can focus on more important things, like social engineering and navigating the Penn State bureaucracy. It will also be where all of the published works can be found online!
+        [1]: /people/chad-ostrowski
 
-      After that's taken care of, there are other fun things planned for this website:
+      The primary purpose of this site is to help the editors with all the
+      tedious parts of their jobs so they can focus on more important things,
+      like social engineering and navigating the Penn State bureaucracy. It
+      will also be where *all* of the published works can be found online!
+
+      After that's taken care of, there are other fun things planned for this
+      website:
 
       * Let the staff run [their blog](http://problemchildren.wordpress.com/)
-      * Show a timeline of the magazine's history (including publications and editors)
+      * Show a timeline of the magazine's history (including publications and
+      editors)
       * Reconsider what a (literary) magazine should be in a paperless world
           + Allow video submissions
           + Grow by multiplication rather than expansion
-          + Focus on fostering communities of artists and encouraging personal growth as much as we focus on inspiring admiration of the work of others
+          + Focus on fostering communities of artists and encouraging personal
+          growth as much as we focus on inspiring admiration of the work of
+          others
 
-      Chad will keep working as quickly as he can, but this is a hobby project, so apologies if things take longer than you'd like. If you have suggestions, bug reports, or encouragement, feel free to contact Chad from the "Send Chad an email" link on #{Person.chad ? "[his profile](#{person_path Person.chad})" : "his profile"} (you'll need to sign in).
+      Chad will keep working as quickly as he can, but this is a hobby project,
+      so apologies if things take longer than you'd like. If you have
+      suggestions, bug reports, or encouragement, feel free to contact Chad
+      from the "Send Chad an email" link on [his profile][1] (you'll need to
+      sign in).
 
 :markdown
-    Problem Child offers an alternative medium for publication of poetry, prose, artwork, essays, and other creative media by semi-annually publishing the Problem Child Literary Magazine.  Problem Child aims to publish and promote individual original thought by creating and hosting a creative community.
+    Problem Child offers an alternative medium for publication of poetry,
+    prose, artwork, essays, and other creative media by semi-annually
+    publishing the Problem Child Literary Magazine.  Problem Child aims to
+    publish and promote individual original thought by creating and hosting a
+    creative community.
 
   ### Beginnings
 
-  Problem Child was started as an undergraduate Penn State Honors College thesis project by Nomi Eve and Sven Bilen back in 1987. Back then it was a humble packlet of 8.5×11 xeroxed sheets stapled together. Entries were collected by knocking dorm-door to dorm-door.
+  Problem Child was started as an undergraduate Penn State Honors College
+  thesis project by Nomi Eve and Sven Bilen back in 1987. Back then it was a
+  humble packlet of 8.5×11 xeroxed sheets stapled together. Entries were
+  collected by knocking dorm-door to dorm-door.
 
   ### Publications
 
-  If all goes well, we publish an issue once a semester. Due to technical difficulties, we’re a bit behind from last year, but keep looking! We’ll have magazines out soon.
+  If all goes well, we publish an issue once a semester. Due to technical
+  difficulties, we’re a bit behind from last year, but keep looking! We’ll have
+  magazines out soon.
 
 %section#membership
   %header
     %h2 Membership
 
   :markdown
-    Interested in becoming a staff member? We don’t blame you. It’s pretty awesome.
+    Interested in becoming a staff member? We don’t blame you. It’s pretty
+    awesome.
 
     ### What happens at a meeting?
 
-    #{Person.editor ? "[#{Person.editor.first_name}](#{person_path Person.editor}), our" : "Our"} current editor, starts off the meetings with a poem to get us all in the right frame of mind. Then #{Person.coeditor ? "[#{Person.coeditor.first_name}](#{person_path Person.coeditor})" : "the coeditor"} will pass around an attendee sheet that always includes an awesome question to answer. These get read aloud, and we enjoy the answers immensely. #{Person.editor ? "#{Person.editor.first_name}" : "The editor"} will also bring packlets of submissions to the meeting. The packlets range between 4 and 34 submissions, but generally have around 8. Each poem is read out loud and discussed. Sometimes we talk about them technically — *they used that em-dash all wrong!* — and sometimes we talk about them informally — *this line is way cool!* Then each member rates the poem on his or her own, according to that particular member’s tastes.
+    #{Person.editor ? "[#{Person.editor.first_name}][2], our" : "Our"} current
+    editor, starts off the meetings with a poem to get us all in the right
+    frame of mind. Then #{Person.coeditor ?
+    "[#{Person.coeditor.first_name}][3]" : "the coeditor"} will pass around an
+    attendee sheet that always includes an awesome question to answer. These
+    get read aloud, and we enjoy the answers immensely. #{Person.editor ?
+    "#{Person.editor.first_name}" : "The editor"} will also bring packlets of
+    submissions to the meeting. The packlets range between 4 and 34
+    submissions, but generally have around 8. Each poem is read out loud and
+    discussed. Sometimes we talk about them technically — *they used that
+    em-dash all wrong!* — and sometimes we talk about them informally — *this
+    line is way cool!* Then each member rates the poem on his or her own,
+    according to that particular member’s tastes.
+
+      [2]: #{begin person_path(Person.editor)   rescue "/people" end}
+      [3]: #{begin person_path(Person.coeditor) rescue "/people" end}
 
     ### How do I join?
 
-    Just show up! Currently, we meet on Wednesdays at 7:30 on the 3rd floor of the HUB. If you see a group of cheery people sitting by the big windows facing the HUB lawn,  that’s us! To be officially considered a staff member, you have to come to at least six meetings throughout the semester. After that, your level of involvement is totally up to you. We’re a close knit group, and we’d love to get to know you.
+    Just show up! Currently, we meet on Wednesdays at 7:30 on the 3rd floor of
+    the HUB. If you see a group of cheery people sitting by the big windows
+    facing the HUB lawn,  that’s us! To be officially considered a staff
+    member, you have to come to at least six meetings throughout the semester.
+    After that, your level of involvement is totally up to you. We’re a close
+    knit group, and we’d love to get to know you.
 
 %section#more-info
   %header
@@ -54,6 +105,11 @@
   :markdown
     Need more information than we have on this site?
 
-    If you’re looking for information about the magazine in general, try contacting #{Person.editor ? "[#{Person.editor.name}](#{person_path(Person.editor)})" : "Swati Prasad"}.
+    If you’re looking for information about the magazine in general, try
+    contacting [#{Person.editor.try(:name)}][1].
 
-    If you have any questions, complaints, or suggestions about the website, direct them to #{Person.chad ? "[Chad Ostrowski](#{person_path(Person.chad)})" : "Chad Ostrowski"}.
+    If you have any questions, complaints, or suggestions about the website,
+    direct them to [Chad Ostrowski][2].
+
+      [1]: #{begin person_path(Person.editor) rescue "/people" end}
+      [2]: /people/chad-ostrowski
