@@ -1,5 +1,3 @@
-
-
 class People::SessionsController < Devise::SessionsController
 
   ## For legacy reference only.
