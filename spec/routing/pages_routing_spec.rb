@@ -5,7 +5,7 @@ describe PagesController do
     @mag = Magazine.create(
       accepts_submissions_from:  6.months.ago,
       accepts_submissions_until: Date.yesterday,
-      nickname: 								 'Fruit Blots'
+      nickname:                  'Fruit Blots'
     )
     @mag.publish []
   end

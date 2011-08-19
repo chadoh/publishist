@@ -19,6 +19,17 @@ Given /^I sign in as "([^"]*)"$/ do |email_and_password|
   click_button 'Sign in'
 end
 
+Given /^I, ([^,]+), have an account but am not signed in$/ do |name|
+  f, l = name.split(' ')
+  Person.create(
+    :first_name            => f,
+    :last_name             => l,
+    :email                 => "#{name.parameterize}@example.com",
+    :password              => 'secret',
+    :password_confirmation => 'secret'
+  )
+end
+
 Given /^I am signed in as an editor named "([^"]*)"$/ do |name|
   f, l = name.split(' ')
   p = Person.create(

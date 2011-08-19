@@ -1,10 +1,11 @@
 Pc::Application.routes.draw do
 
 
-  devise_for :people do
-    get "sign_in", :to => "people/sessions#new"
-    get "sign_up", :to => "devise/registrations#new"
+  devise_for :people, controllers: { sessions: 'people/sessions' } do
+    get "sign_in", to: "people/sessions#new", as: "sign_in"
+    get "sign_up", to: "devise/registrations#new"
   end
+  get "submit" => "submissions#new", :as => :new_submission
 
   get "welcome/index"
 
@@ -26,7 +27,7 @@ Pc::Application.routes.draw do
       put 'update_position'
     end
   end
-  resources :people, :shallow => true do
+  resources :people, shallow: true do
     resources :ranks
     member do
       post 'make_staff'
@@ -38,10 +39,6 @@ Pc::Application.routes.draw do
       get 'auto_complete_for_person_first_name_middle_name_last_name_email'
     end
   end
-
-  #aliases, kind of
-  get "sign_up" => "people#new", :as => :new_person
-  get "submit" => "submissions#new", :as => :new_submission
 
   #testing emails
   get "notifications/new_submission"
