@@ -2,8 +2,8 @@
   %header
     %h2
       - if magazine.published?
-        - thumb = image_tag magazine.cover_art.image.url(:thumb), alt: "" if magazine.cover_art.image?
-        = link_to "#{thumb} #{magazine}".html_safe, magazine_path(magazine)
+        - thumb = image_tag magazine.cover_art.image.url(:thumb), alt: "" if magazine.cover_art.try(:image?)
+        = link_to "#{thumb.presence} #{magazine}".html_safe, magazine_path(magazine)
       - else
         = magazine
     - if magazine.published?

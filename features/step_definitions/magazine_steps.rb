@@ -2,6 +2,10 @@ Given /^there is a magazine$/ do
   Magazine.create
 end
 
+Then /^I should see a link to the magazine$/ do
+  find('a', text: Magazine.first)
+end
+
 Given /^a magazine's timeframe is \*nearly\* over$/ do
   Magazine.create(
     :accepts_submissions_from => 6.months.ago,

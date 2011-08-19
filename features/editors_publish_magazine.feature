@@ -31,3 +31,6 @@ Feature: an editor views the winners for a magazine and publish the magazine
     And I press "Let everyone who submitted know"
     Then each author should receive an email
     And I should be on the magazine's cover page
+
+    When I am on the magazines page
+    Then I should see a link to the magazine

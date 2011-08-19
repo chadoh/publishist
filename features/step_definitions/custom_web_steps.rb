@@ -14,6 +14,10 @@ Then /^(?:|I )should see "([^"]*)" under "([^"]*)"/ do |text, heading|
   end
 end
 
+Then /^(?:|I )should see a "([^"]*)" link$/ do |text|
+  find("a", :text => text)
+end
+
 Then /^(?:|I )should see a "([^"]*)" link under "([^"]*)"/ do |text, heading|
   find("section##{heading.parameterize('_')}").find("a", :text => text)
 end
