@@ -64,8 +64,15 @@ Feature: people of various ranks submit something
       | Body               | of both Johnny and Sufjan |
       | Your Name          | I'll never tell!          |
       | Your Email Address | someone@cool.com          |
+    And I fail the CAPTCHA
+    And I press "Submit!"
+    Then I should see "You might be a bot!"
+    And my submission should still be filled in
+
+    When I pass the CAPTCHA
     And I press "Submit!"
     Then I should be on the home page
+
     When "editor@problemchildmag.com" opens the email
     Then they should see "I'll never tell! <admin@problemchildmag.com>" in the email "From" header
     And they should see "someone@cool.com" in the email "Reply-To" header

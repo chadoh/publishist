@@ -3,7 +3,7 @@ Given /^there is a magazine$/ do
 end
 
 Then /^I should see a link to the magazine$/ do
-  find('a', text: Magazine.first)
+  find('a', text: Magazine.first.to_s)
 end
 
 Given /^a magazine's timeframe is \*nearly\* over$/ do

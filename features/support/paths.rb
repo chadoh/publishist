@@ -20,6 +20,9 @@ module NavigationHelpers
     when /my profile page/i
       "/people/#{@user.friendly_id}"
 
+    when /the submit page/i
+      "/submit"
+
     when /the magazine's cover page/i
       "/magazines/#{Magazine.first}/#{Page.where(position: 1).first.to_param}"
 

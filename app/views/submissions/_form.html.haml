@@ -7,6 +7,9 @@
   - unless person_signed_in?
     = f.input :author_name, :label => "Your Name"
     = f.input :author_email, :label => "Your Email Address"
+    .input.captcha
+      %label{ for: "recaptcha_response_field" } Not a bot?
+      = raw recaptcha_tag(:challenge, display: { theme: 'white' })
   = f.input :title, :label => 'Title'
   = f.input :body, :label => "Body", :required => false
   = f.input :photo, :label => "Or, submit an image:"
@@ -18,7 +21,7 @@
       = f.input :author_email, :label => "...and their email address here"
     - else
       = f.input :author_id, :as => :hidden
-  = f.button :submit, current_page?(new_submission_path) || resource.draft? ? t('submit!') : t('save')
+  = f.button :submit, current_page?('/submit') || current_page?('/submissions') || resource.draft? ? t('submit!') : t('save')
   %span#save_for_later
     - if person_signed_in? && !resource.submitted?
       or

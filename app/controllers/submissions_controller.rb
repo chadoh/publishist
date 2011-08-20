@@ -48,25 +48,30 @@ class SubmissionsController < InheritedResources::Base
     params[:submission][:author] = Person.find_or_create(params[:submission][:author]) if !!params[:submission][:author]
     @submission = Submission.new(params[:submission])
 
-    respond_to do |format|
-      if @submission.save
+    respond_with(@submission) do |format|
+      if @submission.valid?
         format.html {
           if person_signed_in?
+            @submission.save
             redirect_to submissions_url and return if current_person.the_editor? && params[:commit] != t('preview')
             redirect_to person_url(current_person)
+            @submission.has_been(:submitted, :by => current_person) if params[:commit] == "Submit!"
           else
-            flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-            redirect_to root_url
+            if recaptcha_valid?
+              @submission.save
+              flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
+              redirect_to root_url
+              @submission.has_been(:submitted, :by => current_person) if params[:commit] == "Submit!"
+            else
+              flash[:notice] = "You might be a bot! If you're fairly certain you're not, please try again. Elsewise, <i>go away</i>.".html_safe
+              render action: 'new'
+            end
           end
         }
-        format.xml  { render :xml => @submission, :status => :created, :location => @submission }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @submission.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
       end
     end
-
-    if params[:commit] == "Submit!" then @submission.has_been(:submitted, :by => current_person) end
   end
 
   def update
