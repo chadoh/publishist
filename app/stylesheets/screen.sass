@@ -161,28 +161,6 @@ span.drag-handle-wrap
 li.submission > input[type=checkbox]
   display: none
 
-article.pages ol.submissions li.submission
-  position: relative
-  span.drag-handle-wrap
-    display: block
-    position: absolute
-    top: 0
-    right: 2px
-    height: 100%
-    width: 21em
-    border: dashed $lgray
-    border-width: 0 1px 0 0
-    +border-radius(50px)
-    span.drag-handle
-      display: block
-      text-indent: -1000em
-      height: 100%
-      position: absolute
-      top: 0
-      right: -2px
-      width: 1.5em
-      cursor: move
-
 article#submissions, article.meetings
   section
     & > header > h2
@@ -198,7 +176,13 @@ article.people ul.submissions
   margin-left: 0
 
 ol.packlets, ul.submissions, ol.submissions
+  li
+    // not collapsed
+    position: relative
+    span.drag-handle-wrap
+      +drag-handle-expanded
   li.collapsed
+    position: static
     &.packlet
       list-style-type: decimal
     &.submission
@@ -215,7 +199,7 @@ ol.packlets, ul.submissions, ol.submissions
       & > div.body
         display: none
       & > span.drag-handle-wrap
-        +drag-handle
+        +drag-handle-collapsed
       & > input[type=checkbox]
         +inline-block
       & > footer
@@ -467,7 +451,7 @@ ol.meetings, ul.meetings
       width: 68%
       padding-left: 0.1em
       & > .drag-handle-wrap
-        +drag-handle
+        +drag-handle-collapsed
     footer
       +inline-block
       width: 25%

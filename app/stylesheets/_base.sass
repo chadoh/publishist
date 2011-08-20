@@ -50,12 +50,36 @@ $black: $base
   font-family: "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, Courier, monospace, sans-serif
 
 // OTHER MIXINS --------------------------------------------------------
-=drag-handle
+=drag-handle-expanded
+  display: block
+  position: absolute
+  top: 0
+  right: 2px
+  height: 100%
+  width: 21em
+  border: dashed $lgray
+  border-width: 0 1px 0 0
+  +border-radius(50px)
+  span.drag-handle
+    display: block
+    text-indent: -1000em
+    height: 100%
+    position: absolute
+    top: 0
+    right: -2px
+    width: 1.5em
+    cursor: move
+
+=drag-handle-collapsed
   width: 1em
   +inline-block
   cursor: move
+  position: static
+  border: none
   & > span.drag-handle
     +inline-block
     color: $lgray
     +rotate(90deg)
     letter-spacing: -1px
+    text-indent: 0
+    position: static
