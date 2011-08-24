@@ -10,4 +10,8 @@ class People::RegistrationsController < Devise::RegistrationsController
       render 'devise/registrations/new'
     end
   end
+
+  def edit
+    render 'devise/registrations/edit'
+  end
 end

@@ -23,3 +23,9 @@ Feature: a person signs up for the website
     And I press "Sign Up!"
     Then I should see "You have signed up successfully."
     And I should be on the home page
+
+  @webmember
+  Scenario: I edit my profile
+    Given I am on my profile page
+    When I follow "Edit account details"
+    Then I should see "Edit Account"
