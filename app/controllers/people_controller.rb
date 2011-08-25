@@ -13,12 +13,14 @@ class PeopleController < InheritedResources::Base
     submissions.reload # fixes weird queued-to-reviewed bug
     @published = submissions.where :state => Submission.state(:published)
     if person_signed_in? && (current_person.the_editor? || current_person == @person)
-      @drafts    = submissions.where(:state => Submission.state(:draft)) if current_person == @person
       @submitted = submissions.where :state => Submission.state(:submitted)
       @queued    = submissions.where :state => Submission.state(:queued)
       @reviewed  = submissions.where :state => Submission.state(:reviewed)
       @scored    = submissions.where :state => Submission.state(:scored)
-      @rejected  = submissions.where :state => Submission.state(:rejected)
+      if current_person == @person
+        @drafts    = submissions.where :state => Submission.state(:draft)
+        @rejected  = submissions.where :state => Submission.state(:rejected)
+      end
     end
   end
 
