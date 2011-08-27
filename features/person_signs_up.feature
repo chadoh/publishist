@@ -29,3 +29,8 @@ Feature: a person signs up for the website
     Given I am on my profile page
     When I follow "Edit account details"
     Then I should see "Edit Account"
+
+    When I fill in "First name" with "Ghengis"
+    And I fill in "Current password" with "secret"
+    And press "Save Changes"
+    Then I should see "Ghengis"

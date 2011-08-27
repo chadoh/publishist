@@ -13,7 +13,7 @@
   - else
     = f.input :password, :label => 'New password', :required => false
     = f.input :password_confirmation, :label => 'New password again'
-    = f.input :current_password, :label => "Current password (if you're changing it)"
+    = f.input :current_password, required: true
   = f.button :submit
 
 :javascript

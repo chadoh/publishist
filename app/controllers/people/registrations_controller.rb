@@ -7,11 +7,8 @@ class People::RegistrationsController < Devise::RegistrationsController
       build_resource
       clean_up_passwords(resource)
       flash[:notice] = "You might not be a human. Please try this new captcha below."
-      render 'devise/registrations/new'
+      render_with_scope :new
     end
   end
 
-  def edit
-    render 'devise/registrations/edit'
-  end
 end

@@ -9,6 +9,7 @@ Feature: A poet's work goes from draft to published/rejected
       | Your Email Address | sm@tt.er |
       | Title | Each raindrop   |
       | Body  | started as dust |
+    And I pass the CAPTCHA
     And I press "Submit!"
     Then "Each raindrop" should be submitted, not draft
 
