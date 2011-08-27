@@ -1,7 +1,8 @@
 = simple_form_for @editors_note do |f|
   = f.input :page_id, as: :hidden, value: @editors_note.page.id
   = f.input :title
-  = f.input :body
+  = f.input :body,
+    hint: "<br>Your text will be processed with #{link_to "markdown", "http://www.simpleeditions.com/59001/markdown-an-introduction", 'data-target' => 'new'}.".html_safe
   = f.submit
   = link_to "Cancel", request.referer, class: "cancel"
 

@@ -14,6 +14,10 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 
 $(function(){
 
+  $('a[data-target=new]').live('click', function(e){
+    e.preventDefault();
+    window.open($(this).attr('href'));
+  });
   Modernizr.addTest('meter', function(){
     return 'value' in document.createElement('meter');
   });

@@ -1,7 +1,8 @@
 %li[note]
   %header
     %h2= note.title
-  %div= note.body
+  :markdown
+    #{note.body}
   - if editor?
     %nav.actions
       %ul
