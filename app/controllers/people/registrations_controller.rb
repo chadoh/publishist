@@ -11,4 +11,8 @@ class People::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def after_sign_in_path_for(resource)
+    session[:return_to] || person_url(resource)
+  end
+
 end

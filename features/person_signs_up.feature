@@ -33,4 +33,4 @@ Feature: a person signs up for the website
     When I fill in "First name" with "Ghengis"
     And I fill in "Current password" with "secret"
     And press "Save Changes"
-    Then I should see "Ghengis"
+    Then I should see "Ghengis" 2 times
