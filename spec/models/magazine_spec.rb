@@ -202,7 +202,11 @@ describe Magazine do
         @sub2.reload.should be_published
       end
 
-      it "creates 5 pages at minimum: 1 for cover, 1 for Notes, 1 for Staff, 1 for ToC, and 1 per 5 submissions after that" do
+      it "sets the position of the published submissions" do
+        @sub2.reload.position.should_not be_nil
+      end
+
+      it "creates 5 pages at minimum: 1 for cover, 1 for Notes, 1 for Staff, 1 for ToC, and 1 per 3 submissions after that" do
         @mag.pages.length.should == 5
       end
     end

@@ -94,8 +94,13 @@ class Magazine < ActiveRecord::Base
       toc.table_of_contents = TableOfContents.create
       staff.staff_list = StaffList.create
 
-      published.each_slice(3) do |five_submissions|
-        self.pages.create.submissions << five_submissions
+      published.each_slice(3) do |three_submissions|
+        self.pages.create.submissions << three_submissions
+      end
+      self.pages.each do |page|
+        page.submissions.each_with_index do |sub, i|
+          sub.update_attribute :position, i + 1
+        end
       end
     else
       raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"

@@ -40,6 +40,7 @@ class Submission < ActiveRecord::Base
     :if => Proc.new {|s| s.body.blank? && s.title.blank? }
 
   after_find :reviewed_if_meeting_has_occurred
+  before_create :set_position_to_nil
 
   def magazine
     self.reload.meetings.first.try(:magazine)
@@ -122,6 +123,10 @@ protected
         update_attribute :state, Submission.state(:reviewed)
       end
     end
+  end
+
+  def set_position_to_nil
+    self.position = nil
   end
 
 end

@@ -60,6 +60,13 @@ describe Submission do
     end
   end
 
+  describe "#position" do
+    it "defaults to 0" do
+      sub = Submission.create title: 'boring', body: 'poem', author_email: "no@example.com"
+      sub.reload.position.should be_nil
+    end
+  end
+
   context "has methods to check if in a certain state:" do
     before :each do
       @sub = Submission.create :title => "Cheese",
