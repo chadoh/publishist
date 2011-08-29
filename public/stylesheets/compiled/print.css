@@ -123,22 +123,42 @@ html {
   color: #db4522;
 }
 
+/* line 53, ../../../app/stylesheets/_defaults.sass */
+.right {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  float: right;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+.right {
+  *display: inline;
+}
+
+/* line 57, ../../../app/stylesheets/_defaults.sass */
+.small {
+  font-size: 0.75em;
+  line-height: 2em;
+}
+
 /* Body -------------------------------------------------------------- */
-/* line 55, ../../../app/stylesheets/_defaults.sass */
+/* line 62, ../../../app/stylesheets/_defaults.sass */
 body {
   color: #4c4c4c;
 }
 
 /* Selected Text -------------------------------------------------------------- */
 /* -moz- must be declared separately */
-/* line 68, ../../../app/stylesheets/_defaults.sass */
+/* line 75, ../../../app/stylesheets/_defaults.sass */
 ::-moz-selection {
   color: #4c4c4c;
   background: #bfe0e0;
   text-shadow: none;
 }
 
-/* line 73, ../../../app/stylesheets/_defaults.sass */
+/* line 80, ../../../app/stylesheets/_defaults.sass */
 ::selection {
   color: #4c4c4c;
   background: #bfe0e0;
@@ -146,138 +166,138 @@ body {
 }
 
 /* Links -------------------------------------------------------------- */
-/* line 95, ../../../app/stylesheets/_defaults.sass */
+/* line 102, ../../../app/stylesheets/_defaults.sass */
 a {
   color: #db8322;
 }
-/* line 82, ../../../app/stylesheets/_defaults.sass */
+/* line 89, ../../../app/stylesheets/_defaults.sass */
 a:link, a:visited {
   color: #db8322;
   text-decoration: none;
 }
-/* line 85, ../../../app/stylesheets/_defaults.sass */
+/* line 92, ../../../app/stylesheets/_defaults.sass */
 a:link, a:visited, a:hover, a:active {
   outline: none;
 }
-/* line 87, ../../../app/stylesheets/_defaults.sass */
+/* line 94, ../../../app/stylesheets/_defaults.sass */
 a:focus, a:hover {
   color: #8bc7c7;
   text-decoration: none;
 }
-/* line 90, ../../../app/stylesheets/_defaults.sass */
+/* line 97, ../../../app/stylesheets/_defaults.sass */
 a:active {
   color: #c78b8b;
 }
-/* line 92, ../../../app/stylesheets/_defaults.sass */
+/* line 99, ../../../app/stylesheets/_defaults.sass */
 a:focus {
   outline: thin dotted;
 }
 
 /* Headings -------------------------------------------------------------- */
-/* line 100, ../../../app/stylesheets/_defaults.sass */
+/* line 107, ../../../app/stylesheets/_defaults.sass */
 h2, h3, h4, h5, h6 {
   margin-bottom: 1.5em;
 }
 
-/* line 103, ../../../app/stylesheets/_defaults.sass */
+/* line 110, ../../../app/stylesheets/_defaults.sass */
 h1 {
   font-size: 1.313em;
   line-height: 2.286em;
   margin-bottom: 1.143em;
 }
 
-/* line 107, ../../../app/stylesheets/_defaults.sass */
+/* line 114, ../../../app/stylesheets/_defaults.sass */
 h1, h2 {
   text-shadow: silver 0px 0px 2px;
 }
 
-/* line 111, ../../../app/stylesheets/_defaults.sass */
+/* line 118, ../../../app/stylesheets/_defaults.sass */
 h3 {
   font-weight: bold;
 }
 
-/* line 114, ../../../app/stylesheets/_defaults.sass */
+/* line 121, ../../../app/stylesheets/_defaults.sass */
 h4 {
   text-transform: lowercase;
 }
 
-/* line 118, ../../../app/stylesheets/_defaults.sass */
+/* line 125, ../../../app/stylesheets/_defaults.sass */
 h5, h6 {
   font-style: italic;
 }
 
 /* Inline -------------------------------------------------------------- */
-/* line 123, ../../../app/stylesheets/_defaults.sass */
+/* line 130, ../../../app/stylesheets/_defaults.sass */
 cite, em, dfn, address, i {
   font-style: italic;
 }
 
-/* line 126, ../../../app/stylesheets/_defaults.sass */
+/* line 133, ../../../app/stylesheets/_defaults.sass */
 strong, dfn, b {
   font-weight: bold;
 }
 
-/* line 129, ../../../app/stylesheets/_defaults.sass */
+/* line 136, ../../../app/stylesheets/_defaults.sass */
 sup, sub {
   font-size: smaller;
   line-height: 0;
 }
 
-/* line 133, ../../../app/stylesheets/_defaults.sass */
+/* line 140, ../../../app/stylesheets/_defaults.sass */
 sup {
   vertical-align: super;
 }
 
-/* line 136, ../../../app/stylesheets/_defaults.sass */
+/* line 143, ../../../app/stylesheets/_defaults.sass */
 sub {
   vertical-align: sub;
 }
 
-/* line 139, ../../../app/stylesheets/_defaults.sass */
+/* line 146, ../../../app/stylesheets/_defaults.sass */
 abbr, acronym {
   border-bottom: 1px dotted;
   cursor: help;
 }
 
-/* line 143, ../../../app/stylesheets/_defaults.sass */
+/* line 150, ../../../app/stylesheets/_defaults.sass */
 ins {
   text-decoration: underline;
 }
 
-/* line 146, ../../../app/stylesheets/_defaults.sass */
+/* line 153, ../../../app/stylesheets/_defaults.sass */
 del {
   text-decoration: line-through;
 }
 
-/* line 149, ../../../app/stylesheets/_defaults.sass */
+/* line 156, ../../../app/stylesheets/_defaults.sass */
 mark {
   background: #ffff99;
   background-color: rgba(255, 255, 0, 0.5);
   text-shadow: none;
 }
 
-/* line 154, ../../../app/stylesheets/_defaults.sass */
+/* line 161, ../../../app/stylesheets/_defaults.sass */
 small {
   font-size: 0.75em;
   line-height: 2em;
 }
 
-/* line 157, ../../../app/stylesheets/_defaults.sass */
+/* line 164, ../../../app/stylesheets/_defaults.sass */
 q {
   font-style: italic;
 }
-/* line 159, ../../../app/stylesheets/_defaults.sass */
+/* line 166, ../../../app/stylesheets/_defaults.sass */
 q em {
   font-style: normal;
 }
 
 /* Block -------------------------------------------------------------- */
-/* line 167, ../../../app/stylesheets/_defaults.sass */
+/* line 174, ../../../app/stylesheets/_defaults.sass */
 p {
   margin-bottom: 1.5em;
 }
 
-/* line 170, ../../../app/stylesheets/_defaults.sass */
+/* line 177, ../../../app/stylesheets/_defaults.sass */
 pre {
   margin: 1.5em;
   white-space: pre;
@@ -286,13 +306,13 @@ pre {
   word-wrap: break-word;
 }
 
-/* line 177, ../../../app/stylesheets/_defaults.sass */
+/* line 184, ../../../app/stylesheets/_defaults.sass */
 blockquote {
   margin: 1.5em;
 }
 
 /* Replaced -------------------------------------------------------------- */
-/* line 182, ../../../app/stylesheets/_defaults.sass */
+/* line 189, ../../../app/stylesheets/_defaults.sass */
 img {
   vertical-align: text-middle;
   max-width: 100%;
@@ -300,41 +320,41 @@ img {
 }
 
 /* Lists -------------------------------------------------------------- */
-/* line 189, ../../../app/stylesheets/_defaults.sass */
+/* line 196, ../../../app/stylesheets/_defaults.sass */
 ol, ul {
   margin-bottom: 1.5em;
   margin-left: 1.5em;
 }
-/* line 192, ../../../app/stylesheets/_defaults.sass */
+/* line 199, ../../../app/stylesheets/_defaults.sass */
 ol ol, ol ul, ul ol, ul ul {
   margin-bottom: 0em;
 }
 
-/* line 195, ../../../app/stylesheets/_defaults.sass */
+/* line 202, ../../../app/stylesheets/_defaults.sass */
 ol {
   list-style: decimal;
 }
 
-/* line 198, ../../../app/stylesheets/_defaults.sass */
+/* line 205, ../../../app/stylesheets/_defaults.sass */
 ul {
   list-style: disc;
 }
-/* line 200, ../../../app/stylesheets/_defaults.sass */
+/* line 207, ../../../app/stylesheets/_defaults.sass */
 li ul {
   list-style-type: circle;
 }
 
-/* line 203, ../../../app/stylesheets/_defaults.sass */
+/* line 210, ../../../app/stylesheets/_defaults.sass */
 dl {
   margin-bottom: 1.5em;
   margin-top: 0em;
 }
 
-/* line 206, ../../../app/stylesheets/_defaults.sass */
+/* line 213, ../../../app/stylesheets/_defaults.sass */
 dt {
   cursor: pointer;
 }
-/* line 208, ../../../app/stylesheets/_defaults.sass */
+/* line 215, ../../../app/stylesheets/_defaults.sass */
 dt p {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -348,7 +368,7 @@ dt p {
 dt p {
   *display: inline;
 }
-/* line 212, ../../../app/stylesheets/_defaults.sass */
+/* line 219, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -361,7 +381,7 @@ dt span.arrow {
 dt span.arrow {
   *display: inline;
 }
-/* line 214, ../../../app/stylesheets/_defaults.sass */
+/* line 221, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow.rotated {
   -moz-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -370,14 +390,14 @@ dt span.arrow.rotated {
   transform: rotate(90deg);
 }
 
-/* line 218, ../../../app/stylesheets/_defaults.sass */
+/* line 225, ../../../app/stylesheets/_defaults.sass */
 dd {
   padding-left: 1.5em;
 }
 
 /* Tables -------------------------------------------------------------- */
 /* tables still need 'cellspacing="0"' in the markup */
-/* line 224, ../../../app/stylesheets/_defaults.sass */
+/* line 231, ../../../app/stylesheets/_defaults.sass */
 table {
   margin-bottom: 1.5em;
   width: 100%;
@@ -385,17 +405,17 @@ table {
   border-spacing: 0;
 }
 
-/* line 230, ../../../app/stylesheets/_defaults.sass */
+/* line 237, ../../../app/stylesheets/_defaults.sass */
 table, td, th {
   vertical-align: middle;
 }
 
-/* line 233, ../../../app/stylesheets/_defaults.sass */
+/* line 240, ../../../app/stylesheets/_defaults.sass */
 th, thead th {
   font-weight: bold;
 }
 
-/* line 236, ../../../app/stylesheets/_defaults.sass */
+/* line 243, ../../../app/stylesheets/_defaults.sass */
 th, td, caption {
   padding: 0.75em;
   padding-bottom: 0;
@@ -403,30 +423,30 @@ th, td, caption {
   font-weight: normal;
 }
 
-/* line 242, ../../../app/stylesheets/_defaults.sass */
+/* line 249, ../../../app/stylesheets/_defaults.sass */
 th {
   border-bottom-style: dotted;
   border-bottom-width: 0.063em;
   padding-bottom: -0.063em;
   width: 70%;
 }
-/* line 245, ../../../app/stylesheets/_defaults.sass */
+/* line 252, ../../../app/stylesheets/_defaults.sass */
 th.headerSortDown:after {
   content: " ˇ";
 }
-/* line 247, ../../../app/stylesheets/_defaults.sass */
+/* line 254, ../../../app/stylesheets/_defaults.sass */
 th.headerSortUp:after {
   content: " ˆ";
 }
 
-/* line 250, ../../../app/stylesheets/_defaults.sass */
+/* line 257, ../../../app/stylesheets/_defaults.sass */
 tfoot {
   font-size: 0.875em;
   line-height: 1.714em;
 }
 
 /* Forms -------------------------------------------------------------- */
-/* line 258, ../../../app/stylesheets/_defaults.sass */
+/* line 265, ../../../app/stylesheets/_defaults.sass */
 fieldset {
   margin-bottom: 1.5em;
   border-style: solid;
@@ -434,37 +454,37 @@ fieldset {
   padding: 1.438em;
 }
 
-/* line 262, ../../../app/stylesheets/_defaults.sass */
+/* line 269, ../../../app/stylesheets/_defaults.sass */
 legend {
   font-size: 1.125em;
   line-height: 1.333em;
   font-weight: bold;
 }
 
-/* line 266, ../../../app/stylesheets/_defaults.sass */
+/* line 273, ../../../app/stylesheets/_defaults.sass */
 input[type="radio"], input[type="checkbox"] {
   vertical-align: baseline;
 }
 
-/* line 269, ../../../app/stylesheets/_defaults.sass */
+/* line 276, ../../../app/stylesheets/_defaults.sass */
 label.boolean {
   display: inline-block;
   width: 80%;
 }
 
-/* line 273, ../../../app/stylesheets/_defaults.sass */
+/* line 280, ../../../app/stylesheets/_defaults.sass */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 276, ../../../app/stylesheets/_defaults.sass */
+/* line 283, ../../../app/stylesheets/_defaults.sass */
 label {
   margin-top: 1.5em;
   display: block;
   font-weight: bold;
 }
 
-/* line 283, ../../../app/stylesheets/_defaults.sass */
+/* line 290, ../../../app/stylesheets/_defaults.sass */
 .textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
   font-family: Cambria, Georgia, serif;
   font-size: 1em;
@@ -488,28 +508,28 @@ label {
   height: 2.571em;
 }
 
-/* line 296, ../../../app/stylesheets/_defaults.sass */
+/* line 303, ../../../app/stylesheets/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 307, ../../../app/stylesheets/_defaults.sass */
+/* line 314, ../../../app/stylesheets/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 309, ../../../app/stylesheets/_defaults.sass */
+/* line 316, ../../../app/stylesheets/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 312, ../../../app/stylesheets/_defaults.sass */
+/* line 319, ../../../app/stylesheets/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 316, ../../../app/stylesheets/_defaults.sass */
+/* line 323, ../../../app/stylesheets/_defaults.sass */
 input[type=submit], button {
   font-size: 1em;
   line-height: 1.5em;
@@ -531,21 +551,21 @@ input[type=submit], button {
   -o-box-shadow: #4a4a4a 1px 1px 2px 0;
   box-shadow: #4a4a4a 1px 1px 2px 0;
 }
-/* line 327, ../../../app/stylesheets/_defaults.sass */
+/* line 334, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
   -moz-box-shadow: #4a4a4a 0 0 2px 0;
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
   -o-box-shadow: #4a4a4a 0 0 2px 0;
   box-shadow: #4a4a4a 0 0 2px 0;
 }
-/* line 329, ../../../app/stylesheets/_defaults.sass */
+/* line 336, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -o-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
 }
-/* line 331, ../../../app/stylesheets/_defaults.sass */
+/* line 338, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
@@ -561,53 +581,53 @@ input[type=submit].link, button.link {
   display: inline;
   color: #db8322;
 }
-/* line 334, ../../../app/stylesheets/_defaults.sass */
+/* line 341, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:hover, button.link:hover {
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
 }
-/* line 336, ../../../app/stylesheets/_defaults.sass */
+/* line 343, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:active, button.link:active {
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
   -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
   -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
   box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
 }
-/* line 82, ../../../app/stylesheets/_defaults.sass */
+/* line 89, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:link, input[type=submit].link:visited, button.link:link, button.link:visited {
   color: #db8322;
   text-decoration: none;
 }
-/* line 85, ../../../app/stylesheets/_defaults.sass */
+/* line 92, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:link, input[type=submit].link:visited, input[type=submit].link:hover, input[type=submit].link:active, button.link:link, button.link:visited, button.link:hover, button.link:active {
   outline: none;
 }
-/* line 87, ../../../app/stylesheets/_defaults.sass */
+/* line 94, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:focus, input[type=submit].link:hover, button.link:focus, button.link:hover {
   color: #8bc7c7;
   text-decoration: none;
 }
-/* line 90, ../../../app/stylesheets/_defaults.sass */
+/* line 97, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:active, button.link:active {
   color: #c78b8b;
 }
-/* line 92, ../../../app/stylesheets/_defaults.sass */
+/* line 99, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 344, ../../../app/stylesheets/_defaults.sass */
+/* line 351, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 346, ../../../app/stylesheets/_defaults.sass */
+/* line 353, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
 
-/* line 350, ../../../app/stylesheets/_defaults.sass */
+/* line 357, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:hover {
   background-color: #e0ca44;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e7d770), color-stop(100%, #e0ca44));
@@ -618,7 +638,7 @@ span[contenteditable]:hover {
   background: linear-gradient(#e7d770, #e0ca44);
   cursor: pointer;
 }
-/* line 354, ../../../app/stylesheets/_defaults.sass */
+/* line 361, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:focus {
   background-color: #e7a863;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eec18f), color-stop(100%, #e7a863));
@@ -634,11 +654,11 @@ span[contenteditable]:focus {
   box-shadow: silver 0 0 3px inset;
 }
 
-/* line 366, ../../../app/stylesheets/_defaults.sass */
+/* line 373, ../../../app/stylesheets/_defaults.sass */
 .grayed-out {
   color: silver;
 }
-/* line 363, ../../../app/stylesheets/_defaults.sass */
+/* line 370, ../../../app/stylesheets/_defaults.sass */
 .grayed-out a, .grayed-out input.link, .grayed-out input {
   color: silver;
 }

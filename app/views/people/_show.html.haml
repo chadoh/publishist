@@ -1,7 +1,7 @@
 %li[person]
   %span.name<
     - if editor?
-      = mail_to person.email, email_image(person.name)
+      = mail_to person.email, '', class: 'mailto'
     = link_to person.name, person
   %span.rank<
     = person.current_ranks.blank? ? "&nbsp;".html_safe : person.current_ranks.join(', ')

@@ -8,6 +8,8 @@ describe Magazine do
     should have_many(:meetings).dependent(:nullify)
     should have_many(:pages).dependent(:destroy)
     should have_many(:cover_arts).through(:pages)
+    should have_many(:positions).dependent(:destroy)
+    should have_many(:roles).through(:positions)
   }
 
   describe "#cover_art" do
@@ -168,16 +170,18 @@ describe Magazine do
     end
   end
 
-  describe "#present_name" do
+  describe "#to_s (and deprecated #present_name)" do
     let(:mag) { Factory.create :magazine }
 
     it "returns just the magazine title, if it's set" do
       mag.present_name.should == mag.title
+      mag.to_s.should == mag.title
     end
 
     it "returns 'the <nickname> magazine' if the title isn't set" do
       mag.title = nil
       mag.present_name.should == "the #{mag.nickname} magazine"
+      mag.to_s.should == "the #{mag.nickname} magazine"
     end
   end
 

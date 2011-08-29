@@ -1,0 +1,11 @@
+%li[role]
+  - person = role.person
+  - if editor?
+    = mail_to person.email, '', class: 'mailto'
+  = link_to person.name, person
+  - if editor?
+    = button_to "X", role_path(role),
+                     method: :delete,
+                     class: "link",
+                     remote: true,
+                     title:  "Remove #{person.first_name} from being #{role.position.name} for #{role.position.magazine}"

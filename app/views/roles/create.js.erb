@@ -1,0 +1,6 @@
+$('footer#<%= @role.position_id %> input.string').val('').focus();
+$('li#<%= @role.position.name.parameterize('_') %> ul.roles').append('<%=
+  escape_javascript(
+    render partial: 'roles/show', locals: { role: @role }
+  )
+%>');

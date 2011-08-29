@@ -1,5 +1,10 @@
-%h2 Staff for #{staff_list.magazine.present_name}
-%p Check back soon&hellip;
+- if positions = staff_list.magazine.positions
+  %ul.positions
+    - for position in positions
+      = render partial: 'positions/position', locals: { position: position }
 
 - if editor?
-  = link_to "Remove the staff list from this page", [staff_list], method: :delete
+  :markdown
+    #{link_to "Add a new position", new_position_path(magazine_id: staff_list.magazine.id)}  
+    #{link_to "Remove the staff list from this page", [staff_list], method: :delete}
+  - javascript 'staff_list.js'

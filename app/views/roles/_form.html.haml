@@ -1,0 +1,5 @@
+= simple_form_for role, remote: true do |f|
+  = f.input :position_id, as: :hidden
+  = f.input :person,   as: :string, autofocus: 'true'
+  = f.button :submit, "Save"
+  = link_to "Cancel", request.referer, class: 'toggle-adding-role'

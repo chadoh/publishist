@@ -8,6 +8,7 @@ describe Person do
     should have_many(:attendees)
     should have_many(:meetings).through(:attendees)
     should validate_presence_of(:first_name)
+    should have_many(:roles).dependent(:nullify)
   }
 
   describe "#name_and_email" do
@@ -66,6 +67,11 @@ describe Person do
     it "finds a person when formatted as '(anything), persons@email.address" do
       @person = Factory.create :person
       Person.find_or_create(":-D, #{@person.email}").should == @person
+    end
+
+    it "finds a person even if formatted with a person's email address only" do
+      @person = Factory.create :person
+      Person.find_or_create("#{@person.email}").should == @person
     end
 
     it "returns nil if no email address is given" do

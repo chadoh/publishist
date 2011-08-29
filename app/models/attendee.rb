@@ -48,7 +48,7 @@ class Attendee < ActiveRecord::Base
   end
 
 protected
-  
+
   def presence_of_person
     if self.person.blank? and self.person_name.blank?
       errors.add :person, "can't be blank"

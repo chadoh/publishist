@@ -1,6 +1,5 @@
 Pc::Application.routes.draw do
 
-
   devise_for :people, controllers: { sessions: 'people/sessions', registrations: 'people/registrations' } do
     get "sign_in", to: "people/sessions#new", as: "sign_in"
     get "sign_up", to: "devise/registrations#new"
@@ -9,11 +8,9 @@ Pc::Application.routes.draw do
 
   get "welcome/index"
 
-  resources :scores
-  resources :cover_arts,        except: :index
-  resources :editors_notes,     except: :index
-  resources :table_of_contents, only: [:create, :destroy]
-  resources :staff_lists,       only: [:create, :destroy]
+  resources :roles, only: [:new, :create, :destroy]
+  resources :positions, :scores, :cover_arts, :editors_notes, except: :index
+  resources :table_of_contents, :staff_lists, only: [:create, :destroy]
 
   resources :meetings do
     resources :attendees do

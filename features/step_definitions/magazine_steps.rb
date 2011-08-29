@@ -20,6 +20,15 @@ Given /^a magazine's timeframe is freshly over$/ do
   )
 end
 
+Given /^a magazine has been published and I am viewing its cover$/ do
+  mag = Magazine.create(
+    :accepts_submissions_from  => 6.months.ago,
+    :accepts_submissions_until => Date.yesterday
+  )
+  mag.publish []
+  Given "I am on the first magazine page"
+end
+
 Given /^a magazine titled "([^"]*)" has been published$/ do |title|
   mag = Magazine.create(
     :nickname                  => title,

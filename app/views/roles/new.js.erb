@@ -1,0 +1,6 @@
+$('footer#<%= params[:position_id] %> a').hide();
+$('footer#<%= params[:position_id] %>').append('<%=
+  escape_javascript(
+    render partial: 'roles/form', locals: { role: @role }
+  )
+%>');

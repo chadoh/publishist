@@ -31,9 +31,11 @@ class Magazine < ActiveRecord::Base
 
   default_scope order("accepts_submissions_until DESC")
 
-  has_many :meetings, :dependent => :nullify, :include => :submissions
-  has_many :pages,    :dependent => :destroy, :order   => :position
-  has_many :cover_arts, through: :pages
+  has_many :meetings,   dependent: :nullify, include: :submissions
+  has_many :pages,      dependent: :destroy, order:   :position
+  has_many :positions,  dependent: :destroy
+  has_many :cover_arts, through:   :pages
+  has_many :roles,      through:   :positions
 
   has_friendly_id :nickname, :use_slug => true
 
@@ -72,6 +74,10 @@ class Magazine < ActiveRecord::Base
   end
 
   def present_name
+    self.to_s
+  end
+
+  def to_s
     title.presence || "the #{nickname} magazine"
   end
 
@@ -139,10 +145,6 @@ class Magazine < ActiveRecord::Base
       where(:accepts_submissions_from  < Date.today,
             :accepts_submissions_until > Date.today).first
     end
-  end
-
-  def to_s
-    title.presence || nickname
   end
 
   def published?

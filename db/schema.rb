@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110809180502) do
+ActiveRecord::Schema.define(:version => 20110820031937) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -123,11 +123,25 @@ ActiveRecord::Schema.define(:version => 20110809180502) do
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
   add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
 
+  create_table "positions", :force => true do |t|
+    t.integer  "magazine_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ranks", :force => true do |t|
     t.integer  "person_id"
     t.integer  "rank_type"
     t.datetime "rank_start"
     t.datetime "rank_end"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "position_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -190,6 +204,11 @@ ActiveRecord::Schema.define(:version => 20110809180502) do
   add_foreign_key "editors_notes", "pages", :name => "editors_notes_page_id_fk"
 
   add_foreign_key "pages", "magazines", :name => "pages_magazine_id_fk", :dependent => :delete
+
+  add_foreign_key "positions", "magazines", :name => "positions_magazine_id_fk"
+
+  add_foreign_key "roles", "people", :name => "roles_person_id_fk"
+  add_foreign_key "roles", "positions", :name => "roles_position_id_fk"
 
   add_foreign_key "staff_lists", "pages", :name => "staff_lists_page_id_fk"
 

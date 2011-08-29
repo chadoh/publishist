@@ -1,0 +1,5 @@
+= simple_form_for @position do |f|
+  = error_messages
+  = f.input :magazine_id, as: :hidden
+  = f.input :name, autofocus: 'true'
+  = f.button :submit, "Save"

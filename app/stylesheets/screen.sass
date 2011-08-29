@@ -11,6 +11,12 @@
 nav.actions > ul
   +delimited-list(" | ")
 
+a.mailto
+  background-image: url('https://s3.amazonaws.com/pcmag/email.png')
+  height: 11px
+  width: 16px
+  display: inline-block
+
 #page
   +container
   //+show-grid('grid.png')
@@ -55,7 +61,7 @@ nav.actions > ul
 
   & > header
     background-color: $blue
-    +background(linear-gradient(rgba(lighten($blue, 15%), 0.9), rgba($blue, 0.9)), image-url('http://s3.amazonaws.com/pcmag/clouds.png'))
+    +background(linear-gradient(rgba(lighten($blue, 15%), 0.9), rgba($blue, 0.9)), image-url('https://s3.amazonaws.com/pcmag/clouds.png'))
     +full
     +box-shadow($lgray 0 0 3px inset)
     width: 100%
@@ -94,7 +100,7 @@ body > footer
   +container
   & > #footer
     background-color: $green
-    +background(linear-gradient(rgba(lighten($green, 5%), 0.9), rgba(darken($green, 10%), 0.9)), image-url('http://s3.amazonaws.com/pcmag/grass.jpg'))
+    +background(linear-gradient(rgba(lighten($green, 5%), 0.9), rgba(darken($green, 10%), 0.9)), image-url('https://s3.amazonaws.com/pcmag/grass.jpg'))
     +full
     +box-shadow($lgray 0 0 3px inset)
     +opacity(0.92)
@@ -323,11 +329,12 @@ section#magazines
             +trailer(0)
         +box-shadow($lgray 0 0 10px 0)
 
-li.page form.button_to
-  +adjust-font-size-to(6px)
-  line-height: 1em
-  input[type=submit]
-    vertical-align: top
+li.page, li.role
+  form.button_to
+    +adjust-font-size-to(6px)
+    line-height: 1em
+    input[type=submit]
+      vertical-align: top
 
 span.score
   form.button_to
@@ -496,6 +503,34 @@ form#highest
   +trailer
 form#publish ol
   +trailer(0)
+
+ul.positions
+  +no-bullets
+  margin-left: 0
+  > li.position
+    h3
+      border-bottom: 1px dashed $lgray
+    +inline-block
+    vertical-align: top
+    width: 41%
+    +box-shadow(-1px -1px 4px $lgray)
+    +rhythm-borders(0px, 1, $base-font-size, dashed)
+    +border-radius(1em 0 0)
+    padding-bottom: 0
+    margin: 0 1.5em 1.5em 0
+    ul.people
+      margin-left: 0
+      +trailer
+    footer
+      > nav
+        display: block
+      > form
+        display: none
+      &.add-role
+        > nav
+          display: none
+        > form
+          display: block
 
 /*
  *   Odds & Ends

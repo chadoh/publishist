@@ -46,10 +46,11 @@ class Person < ActiveRecord::Base
     #end
   #end
 
-  has_many :ranks, :dependent => :destroy
-  has_many :submissions, :foreign_key => 'author_id'
-  has_many :attendees, :dependent => :destroy
-  has_many :meetings, :through => :attendees
+  has_many :ranks,       dependent:   :destroy
+  has_many :submissions, foreign_key: 'author_id'
+  has_many :attendees,   dependent:   :destroy
+  has_many :meetings,    through:     :attendees
+  has_many :roles,       dependent:   :nullify
 
   validates_presence_of :first_name
 
@@ -177,25 +178,8 @@ class Person < ActiveRecord::Base
       chad = Person.find_by_email "chad.ostrowski@gmail.com"
     end
     def find_or_create formatted_name_and_email
-      if formatted_name_and_email =~ /^.+, .+$/
-        email = formatted_name_and_email[/, (.*)/, 1]
-        person = Person.find_by_email email
-        # unless person
-        #   names = formatted_name_and_email.scan(/.+</).first.gsub(/["<>[:cntrl:]]/, '').split(' ')
-        #   first = names.delete_at(0)
-        #   last = names.delete_at(names.length - 1) unless names.empty?
-        #   middles = names.join(' ') unless names.empty?
-        #   person = Person.create(
-        #     :first_name => first, 
-        #     :middle_name => middles, 
-        #     :last_name => last, 
-        #     :email => email
-        #   )
-        # end
-      else
-        person = nil
-      end 
-      person
+      email = formatted_name_and_email.split(' ').last
+      person = Person.find_by_email email
     end
 
     memoize :editors, :editor, :coeditor, :find_or_create
