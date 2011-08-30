@@ -12,6 +12,8 @@
 #
 
 class Page < ActiveRecord::Base
+  extend ActiveSupport::Memoizable
+
   belongs_to :magazine
   has_many   :submissions,       dependent: :nullify, order: :position
   has_one    :cover_art,         dependent: :destroy
@@ -29,4 +31,14 @@ class Page < ActiveRecord::Base
   def to_param
     self.title.downcase
   end
+
+  def has_content?
+    submissions.present?       || \
+    cover_art.present?         || \
+    editors_notes.present?     || \
+    table_of_contents.present? || \
+    staff_list.present?
+  end
+
+  memoize :has_content?, :title
 end

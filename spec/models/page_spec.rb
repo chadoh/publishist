@@ -1,18 +1,6 @@
 require 'spec_helper'
 
 describe Page do
-  before :each do
-    @magazine = Magazine.create(
-      :accepts_submissions_from  => 6.months.ago,
-      :accepts_submissions_until => 1.week.ago,
-      :nickname                  => "Fruit Blots"
-    )
-    @submission = Factory.create(:submission)
-    @magazine.submissions << @submission
-    @magazine.publish [@submission]
-    @page = @magazine.pages.first
-  end
-
   it {
     should belong_to :magazine
     should have_many(:submissions).dependent(:nullify)
@@ -25,6 +13,18 @@ describe Page do
   }
 
   describe '#title' do
+    before :each do
+      @magazine = Magazine.create(
+        :accepts_submissions_from  => 6.months.ago,
+        :accepts_submissions_until => 1.week.ago,
+        :nickname                  => "Fruit Blots"
+      )
+      @submission = Factory.create(:anonymous_submission)
+      @magazine.submissions << @submission
+      @magazine.publish [@submission]
+      @page = @magazine.pages.first
+    end
+
     it "has a virtual attribute set to 'position - 4' if nil" do
       @magazine.pages.reload.select{|p| p.position == 5}.first.title.should == '1'
     end
@@ -46,6 +46,39 @@ describe Page do
         page.title.should == '2'
         toc_original_title.should == @magazine.pages.select{|p| p.position == 5}.first.title
       end
+    end
+  end
+
+  describe "#has_content?" do
+    let(:page) { Page.new }
+
+    it "returns false if the page has no submissions, cover art, notes, ToC, or Staff List" do
+      page.should_not have_content
+    end
+
+    it "returns true if it has submissions" do
+      page.stub(:submissions).and_return(1)
+      page.should have_content
+    end
+
+    it "returns true if it has cover art" do
+      page.stub(:cover_art).and_return(1)
+      page.should have_content
+    end
+
+    it "returns true if it has editors notes" do
+      page.stub(:editors_notes).and_return(1)
+      page.should have_content
+    end
+
+    it "returns true if it has a table of contents" do
+      page.stub(:table_of_contents).and_return(1)
+      page.should have_content
+    end
+
+    it "returns true if it has a staff list" do
+      page.stub(:staff_list).and_return(1)
+      page.should have_content
     end
   end
 

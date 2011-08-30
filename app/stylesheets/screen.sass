@@ -256,10 +256,11 @@ section.add-stuff
   display: inline-block
   overflow: hidden
   +adjust-leading-to(3)
-  +transition-property(line-height)
+  +transition-property(line-height opacity)
   +transition-duration(0.5s)
   &.hidden
     +adjust-leading-to(0)
+    +opacity(0)
   ul
     height: 100%
     +inline-block
@@ -425,53 +426,29 @@ ol.magazines
     margin-left: 0
     list-style-image: none
     list-style-type: none
-    & > header
-      +full
-      +clearfix
-      h2
-        +alpha
-        +columns(10)
-        +trailer(0)
-      span.timeframe
-        +columns(4)
-        text-align: right
-      nav.actions
-        +columns(2)
-        +omega
-    & > dl.meetings
-      +full
-      margin-left: 1em
+    > *
+      +inline-block
+    h2
+      +columns(10)
       +trailer(0)
-      dd
-        padding-left: 0
-    & > a
-      +full
-      margin-left: 1em
-      display: block
+    span.timeframe
+      +columns(4)
+      text-align: right
 ol.meetings, ul.meetings
   +full
   list-style-position: inside
   li.meeting
     +full
-    header
+    .drag-handle-wrap
+      +drag-handle-collapsed
+    > *
       +inline-block
-      width: 68%
+    span.question
+      width: 72%
       padding-left: 0.1em
-      & > .drag-handle-wrap
-        +drag-handle-collapsed
-    footer
-      +inline-block
-      width: 25%
-      float: right
-      padding-left: .885%
-      time
-        +inline-block
-        width: 51.5%
-        text-align: right
-        margin-right: 0.3em
-      nav.actions
-        +inline-block
-        width: 44%
+    time
+      width: 16%
+      text-align: right
 
 ul#people
   +no-bullets

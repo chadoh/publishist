@@ -1,17 +1,14 @@
 %li[meeting]
-  %header
-    - if editor?
-      %span.drag-handle-wrap
-        %span.drag-handle &lt;&gt;
-    %span.question= link_to meeting.question, meeting
-  %footer
-    %time{ :datetime => meeting.datetime }= pretty_date meeting.datetime
-    - if editor?
-      %nav.actions
-        %ul
-          %li= link_to "Edit", edit_meeting_url(meeting)
-          %li
-            = button_to "Delete", meeting_url(meeting),
-                        :method => :delete,
-                        :confirm => "You're saying this meeting never actually happened, and never will. You're ok with removing any attendance records for this meeting. Any scores that have been entered will disappear.",
-                        :class => 'link destroy'
+  - if editor?
+    %span.drag-handle-wrap
+      %span.drag-handle &lt;&gt;
+  %span.question= link_to meeting.question, meeting
+  %time{ :datetime => meeting.datetime }= pretty_date meeting.datetime
+  - if editor?
+    .small.sans
+      = link_to "/", edit_meeting_url(meeting), title: "Edit"
+      = button_to "x", meeting_url(meeting),
+                  :method => :delete,
+                  :confirm => "You're saying this meeting never actually happened, and never will. You're ok with removing any attendance records for this meeting. Any scores that have been entered will disappear.",
+                  :class => 'link destroy',
+                  :title   => 'Delete'

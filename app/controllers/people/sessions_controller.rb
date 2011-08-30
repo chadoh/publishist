@@ -16,8 +16,17 @@ class People::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def new
+    session[:return_to] = request.referer
+    super
+  end
+
   def after_sign_in_path_for(resource)
     session[:return_to] || root_url
+  end
+
+  def after_sign_out_path_for(resource)
+    request.referer || root_url
   end
 
 end

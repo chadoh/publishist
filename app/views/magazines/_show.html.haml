@@ -1,34 +1,22 @@
 %li[magazine]
-  %header
-    %h2
-      - if magazine.published?
-        - thumb = image_tag magazine.cover_art.image.url(:thumb), alt: "" if magazine.cover_art.try(:image?)
-        = link_to "#{thumb.presence} #{magazine}".html_safe, magazine_path(magazine)
-      - else
-        = magazine
+  %h2
     - if magazine.published?
-      %span.timeframe
-        Published on
-        %time{ :datetime => magazine.published_on }= pretty_date(magazine.published_on)
+      - thumb = image_tag magazine.cover_art.image.url(:thumb), alt: "" if magazine.cover_art.try(:image?)
+      = link_to "#{thumb.presence} #{magazine}".html_safe, magazine_path(magazine)
     - else
-      = timeframe(magazine.accepts_submissions_from, magazine.accepts_submissions_until)
-    - if editor?
-      %nav.actions
-        %ul
-          %li= link_to "Edit", edit_magazine_url(magazine)
-          %li
-            = button_to "Delete", magazine_url(magazine),
-                        :method => :delete,
-                        :confirm => "You're saying this magazine never actually happened. All of its meetings will be unassociated with any magazine. If this magazine has been published, all of the submissions submitted for it will be simply \"Scored\" again.",
-                        :class => 'link destroy'
-  - if editor? and magazine.accepts_submissions_until < Time.now && magazine.published_on == nil
-    = link_to "View the highest-scored submissions", highest_scored_for_magazine_path(magazine)
-  - if person_signed_in? and magazine.meetings.present?
-    %dl.meetings
-      %dt
-        %span.arrow &raquo;
-        %p Meetings
-      %dd
-        %ol.meetings
-          - for meeting in magazine.meetings
-            = render :partial => 'meetings/show', :locals => { :meeting => meeting }
+      = magazine
+  - if magazine.published?
+    %span.timeframe
+      Published on
+      %time{ :datetime => magazine.published_on }= pretty_date(magazine.published_on)
+  - else
+    = timeframe(magazine.accepts_submissions_from, magazine.accepts_submissions_until)
+  - if editor?
+    .small.sans.right
+      = link_to "/", edit_magazine_url(magazine)
+      = button_to "x", magazine_url(magazine),
+                  :method => :delete,
+                  :confirm => "You're saying this magazine never actually happened. All of its meetings will be unassociated with any magazine. If this magazine has been published, all of the submissions submitted for it will be simply \"Scored\" again.",
+                  :class => 'link destroy'
+    - if magazine.accepts_submissions_until < Time.now && magazine.published_on == nil
+      %div= link_to "View the highest-scored submissions", highest_scored_for_magazine_path(magazine)

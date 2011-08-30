@@ -1,22 +1,7 @@
 - title t('.title')
 
 - content_for :sidebar do
-  %section#magazines
-    %header
-      %h2
-        Magazines
-    %ul.magazines
-      - for mag in @magazines
-        = link_to(submissions_path(:m => mag.id), :class => mag == @magazine && 'selected') do
-          %li
-            %header
-              - if mag == @magazine
-                %h3= mag.title.presence || mag.nickname
-              - else
-                %p= mag.title.presence || mag.nickname
-            = pluralize mag.meetings.count, 'meeting'
-            %br
-            = timeframe mag.accepts_submissions_from, mag.accepts_submissions_until
+  = render partial: 'magazines/sidebar'
 
 :markdown
   #{link_to "Submit something", new_submission_path}  

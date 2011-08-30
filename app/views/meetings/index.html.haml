@@ -1,4 +1,8 @@
 - title t('.title')
+
+- content_for :sidebar do
+  = render partial: 'magazines/sidebar'
+
 - if editor?
   %p= link_to t('.new_meeting'), new_meeting_path
 

@@ -1,0 +1,16 @@
+%section#magazines
+  %header
+    %h2
+      Magazines
+  %ul.magazines
+    - for mag in @magazines
+      = link_to(url_for(:m => mag.to_param), :class => mag == @magazine && 'selected') do
+        %li
+          %header
+            - if mag == @magazine
+              %h3= mag.title.presence || mag.nickname
+            - else
+              %p= mag.title.presence || mag.nickname
+          = pluralize mag.meetings.count, 'meeting'
+          %br
+          = timeframe mag.accepts_submissions_from, mag.accepts_submissions_until
