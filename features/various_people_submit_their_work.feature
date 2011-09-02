@@ -14,7 +14,7 @@ Feature: people of various ranks submit something
 
     When I follow "Edit"
     And press "Submit!"
-    Then I should be on the submissions page
+    Then I should be on my profile page
     And I should receive no email
 
     When I follow "Edit"
@@ -23,10 +23,10 @@ Feature: people of various ranks submit something
   @editor
   Scenario: The editor edits an anonymous submission
     Given there is a submission called "The King's Teeth"
-    When I am on the first submission page
-    And I follow "Edit"
+    And I am on the first submission page
+    When I follow "Edit"
     And I press "Save"
-    Then I should be on the submissions page
+    Then I should be on the first submission page
     And I should receive no email
 
   @editor
@@ -35,7 +35,7 @@ Feature: people of various ranks submit something
     And I am on the first submission page
     When I follow "Edit"
     And I press "Save"
-    Then I should be on the submissions page
+    Then I should be on the first submission page
 
   Scenario: Some other signed-in person submits something
     Given the following user exists:

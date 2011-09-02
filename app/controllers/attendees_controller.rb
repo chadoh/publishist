@@ -36,7 +36,7 @@ class AttendeesController < InheritedResources::Base
       failure.html { render :edit }
 
       success.js
-      failure.js { render :nothing => true }
+      failure.js { head :not_acceptable }
     end
   end
 

@@ -5,18 +5,13 @@ function submitScoreWithDelay(score_form_element) {
   var score_id = span.attr('data-attendee') + span.attr('data-packlet');
 
   /* check to see if there's already a timer running for this score */
-  if (score_timers[score_id]) {
-    /* if so, let's clear it, so we can start with a fresh interval */
-    clearInterval(score_timers[score_id]);
+  if (!score_timers[score_id]) {
+    /* if not, go ahead and submit this one with a delay */
+    score_timers[score_id] = setTimeout(function() {
+      score_form_element.submit();
+    }, 500);
   }
 
-  score_timers[score_id] = setTimeout(function() {
-    submitScore(score_form_element);
-  }, 500);
-}
-
-function submitScore(score_form_element) {
-  score_form_element.submit();
 }
 
 $(function(){

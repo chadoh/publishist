@@ -18,7 +18,7 @@ Feature: An editor specs a magazine
   Scenario: I edit a magazine
     Given there is a magazine
     When I am on the magazines page
-    And I follow "Edit"
+    And I follow "/"
     And I fill in the following:
       | Accepts submissions from  | 2009-02-20 |
       | Accepts submissions until | 2009-08-20 |

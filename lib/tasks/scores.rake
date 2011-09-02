@@ -10,7 +10,22 @@ namespace :db do
         duplicates << s
       end
     end
-    puts "\n#{duplicates.count} duplicate scores have been deleted.\n"
+    initial_magazine_score_values = Magazine.all.collect do |m|
+      { m.to_s => {
+        count_of_scores: m.count_of_scores,
+        sum_of_scores: m.sum_of_scores
+      }}
+    end
     duplicates.each(&:destroy)
+    final_magazine_score_values = Magazine.all.collect do |m|
+      { m.to_s => {
+        count_of_scores: m.count_of_scores,
+        sum_of_scores: m.sum_of_scores
+      }}
+    end
+    puts "\n#{duplicates.count} duplicate scores have been deleted.\n"
+    puts "\nComparison of magazine score values, before & after:\n"
+    puts "*Before:* #{p initial_magazine_score_values}\n\n"
+    puts "*After:* #{p final_magazine_score_values}\n\n"
   end
 end

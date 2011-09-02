@@ -4,14 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
 
-  def sign_in_or_up
-    unless person_signed_in?
-      session[:return_to] = request.url
-      flash[:notice]      = "You need to sign in or up to see that."
-      redirect_to sign_in_path
-    end
-  end
-
   def staff_only
     unless person_signed_in? and current_person.ranks.present?
       flash[:notice] = "Only staff can see that page."

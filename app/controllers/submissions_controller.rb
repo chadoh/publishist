@@ -24,6 +24,7 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def new
+    session[:return_to] = request.referer
     if person_signed_in?
       @submission = Submission.new :author_id => current_person.id, :state => :draft
     else
@@ -37,6 +38,7 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def edit
+    session[:return_to] = request.referer
     @submission = Submission.find(params[:id])
     unless person_signed_in? and (current_person.the_editor? or @submission.author == current_person)
       flash[:notice] = "You're not allowed to edit that."
@@ -60,7 +62,7 @@ class SubmissionsController < InheritedResources::Base
             if recaptcha_valid?
               @submission.save
               flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-              redirect_to root_url
+              redirect_to session[:return_to] || root_url
               @submission.has_been(:submitted, :by => current_person) if params[:commit] == "Submit!"
             else
               flash[:notice] = "You might be a bot! If you're fairly certain you're not, please try again. Elsewise, <i>go away</i>.".html_safe
@@ -79,13 +81,13 @@ class SubmissionsController < InheritedResources::Base
       params[:submission][:author] = Person.find_or_create(params[:submission][:author])
     end
 
-    update! do
+    update! {
       if current_person.the_editor? && params[:commit] != t('preview')
-        submissions_url
+        session[:return_to] || submissions_url
       else
         person_url(resource.author)
       end
-    end
+    }
 
     if request.referer == new_submission_url or request.referer == edit_submission_url(resource)
       if params[:commit] == "Submit!" then @submission.has_been(:submitted, :by => current_person) end

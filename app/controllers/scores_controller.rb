@@ -3,16 +3,22 @@ class ScoresController < InheritedResources::Base
   respond_to :js, :html
 
   def create
-    create! do |wants|
-      wants.html { redirect_to meeting_path(resource.packlet.meeting) }
-      wants.js
+    create! do |success, failure|
+      success.html { redirect_to meeting_path(resource.packlet.meeting) }
+      success.js
+
+      failure.html { redirect_to meeting_path(resource.packlet.meeting) }
+      failure.js   { head :not_acceptable }
     end
   end
 
   def update
-    update! do |wants|
-      wants.html { redirect_to meeting_path(resource.packlet.meeting) }
-      wants.js { render :create }
+    update! do |success, failure|
+      success.html { redirect_to meeting_path(resource.packlet.meeting) }
+      success.js
+
+      failure.html { redirect_to meeting_path(resource.packlet.meeting) }
+      failure.js   { head :not_acceptable }
     end
   end
 

@@ -24,7 +24,7 @@ module NavigationHelpers
       "/submit"
 
     when /the magazine's cover page/i
-      "/magazines/#{Magazine.first}/#{Page.where(position: 1).first.to_param}"
+      "/magazines/#{Magazine.first.to_param}/#{Page.where(position: 1).first.to_param}"
 
     when /the first (.*) page/i
       model = $1.titleize.constantize
