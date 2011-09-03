@@ -3,7 +3,7 @@
   = f.input :title
   = f.input :body,
     hint: "<br>Your text will be processed with #{link_to "markdown", "http://www.simpleeditions.com/59001/markdown-an-introduction", 'data-target' => 'new'}.".html_safe
-  = f.submit
+  = f.button :submit, "Save"
   = link_to "Cancel", request.referer, class: "cancel"
 
 :javascript

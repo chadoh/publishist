@@ -7,6 +7,7 @@
 @import compass/typography/lists/inline-list
 @import compass/typography/lists/inline-block-list
 @import compass/typography/text/ellipsis
+@import compass/typography/text/nowrap
 
 nav.actions > ul
   +delimited-list(" | ")
@@ -253,7 +254,7 @@ header.add-stuff-trigger
       +rotate(45deg)
 section.add-stuff
   width: 100%
-  display: inline-block
+  +inline-block
   overflow: hidden
   +adjust-leading-to(3)
   +transition-property(line-height opacity)
@@ -268,10 +269,17 @@ section.add-stuff
     li
       background-color: $yellow
       height: 100%
+      +inline-block
+      +nowrap
+      width: 15%
       margin-left: 1em
       +background(linear-gradient(lighten($lyellow, 15%), $lyellow))
       +rhythm-borders
-      +border-radius(20px)
+      padding:
+        top: 0
+        bottom: 0
+        left: 4%
+      +border-radius(1.5em)
       +box-shadow($lgray 0 0 10px 0)
       +transition-property(all)
       +transition-duration(0.2s)

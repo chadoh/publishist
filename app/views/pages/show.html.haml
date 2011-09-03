@@ -3,11 +3,11 @@
 .content
   = render partial: "pagination", locals: { magazine: @magazine, current_page: @page }
   - collapse_resources = false
-  - if cover_art = @page.cover_art
-    = render partial: "cover_arts/show", locals: { cover_art: cover_art }
-    - collapse_resources = true
   - if not (notes = @page.editors_notes).empty?
     = render partial: "editors_notes/index", locals: { editors_notes: notes }
+    - collapse_resources = true
+  - if cover_art = @page.cover_art
+    = render partial: "cover_arts/show", locals: { cover_art: cover_art }
     - collapse_resources = true
   - if toc = @page.table_of_contents
     = render partial: "table_of_contents/show", locals: { table_of_contents: toc }

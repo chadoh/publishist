@@ -663,7 +663,7 @@ span[contenteditable]:focus {
   color: silver;
 }
 
-/* line 11, ../../../app/stylesheets/screen.sass */
+/* line 12, ../../../app/stylesheets/screen.sass */
 nav.actions > ul {
   list-style-type: none;
 }
@@ -686,7 +686,7 @@ nav.actions > ul li.last:after {
   content: "";
 }
 
-/* line 14, ../../../app/stylesheets/screen.sass */
+/* line 15, ../../../app/stylesheets/screen.sass */
 a.mailto {
   background-image: url("https://s3.amazonaws.com/pcmag/email.png");
   height: 11px;
@@ -694,7 +694,7 @@ a.mailto {
   display: inline-block;
 }
 
-/* line 20, ../../../app/stylesheets/screen.sass */
+/* line 21, ../../../app/stylesheets/screen.sass */
 #page {
   *zoom: 1;
   margin: auto;
@@ -707,13 +707,13 @@ a.mailto {
   display: table;
   clear: both;
 }
-/* line 28, ../../../app/stylesheets/screen.sass */
+/* line 29, ../../../app/stylesheets/screen.sass */
 #page > nav {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 30, ../../../app/stylesheets/screen.sass */
+/* line 31, ../../../app/stylesheets/screen.sass */
 #page > nav > ul {
   margin: 0;
   padding: 0;
@@ -730,7 +730,7 @@ a.mailto {
   box-lines: multiple;
   width: 100%;
 }
-/* line 35, ../../../app/stylesheets/screen.sass */
+/* line 36, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li {
   list-style-image: none;
   list-style-type: none;
@@ -754,7 +754,7 @@ a.mailto {
 #page > nav > ul > li {
   *display: inline;
 }
-/* line 43, ../../../app/stylesheets/screen.sass */
+/* line 44, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > a {
   color: #cfb309;
   display: block;
@@ -762,21 +762,21 @@ a.mailto {
   width: 100%;
   text-decoration: underline overline;
 }
-/* line 49, ../../../app/stylesheets/screen.sass */
+/* line 50, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > a:hover {
   text-decoration: underline overline line-through;
 }
-/* line 51, ../../../app/stylesheets/screen.sass */
+/* line 52, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li.current {
   color: #db8322;
   text-decoration: underline overline;
 }
-/* line 54, ../../../app/stylesheets/screen.sass */
+/* line 55, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li.current > a {
   text-shadow: silver 0px 0px 2px;
   color: #db8322;
 }
-/* line 58, ../../../app/stylesheets/screen.sass */
+/* line 59, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > ul#account {
   list-style: none;
   font-size: 0.813em;
@@ -788,7 +788,7 @@ a.mailto {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 62, ../../../app/stylesheets/screen.sass */
+/* line 63, ../../../app/stylesheets/screen.sass */
 #page > header {
   background-color: #8bc7c7;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(191, 224, 224, 0.9)), color-stop(100%, rgba(139, 199, 199, 0.9))), url(https://s3.amazonaws.com/pcmag/clouds.png);
@@ -818,13 +818,13 @@ a.mailto {
   margin-left: 0;
   margin-right: 0;
 }
-/* line 75, ../../../app/stylesheets/screen.sass */
+/* line 76, ../../../app/stylesheets/screen.sass */
 #page > header h1 {
   font-size: 1.938em;
   line-height: 1.548em;
   margin-bottom: 0em;
 }
-/* line 80, ../../../app/stylesheets/screen.sass */
+/* line 81, ../../../app/stylesheets/screen.sass */
 #page > #notice {
   clear: both;
   margin-left: 0.885%;
@@ -838,7 +838,7 @@ a.mailto {
   border-bottom-width: 0.063em;
   padding-bottom: -0.063em;
 }
-/* line 86, ../../../app/stylesheets/screen.sass */
+/* line 87, ../../../app/stylesheets/screen.sass */
 #page > article {
   display: inline;
   float: left;
@@ -846,14 +846,14 @@ a.mailto {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 89, ../../../app/stylesheets/screen.sass */
+/* line 90, ../../../app/stylesheets/screen.sass */
 #page > article.full-width {
   display: inline;
   float: left;
   width: 98.23%;
   margin-right: 0.885%;
 }
-/* line 92, ../../../app/stylesheets/screen.sass */
+/* line 93, ../../../app/stylesheets/screen.sass */
 #page > section.sidebar {
   display: inline;
   float: left;
@@ -864,14 +864,14 @@ a.mailto {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 96, ../../../app/stylesheets/screen.sass */
+/* line 97, ../../../app/stylesheets/screen.sass */
 #page > #page-footer {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
 
-/* line 99, ../../../app/stylesheets/screen.sass */
+/* line 100, ../../../app/stylesheets/screen.sass */
 body > footer {
   *zoom: 1;
   margin: auto;
@@ -884,7 +884,7 @@ body > footer:after {
   display: table;
   clear: both;
 }
-/* line 101, ../../../app/stylesheets/screen.sass */
+/* line 102, ../../../app/stylesheets/screen.sass */
 body > footer > #footer {
   background-color: #8daf25;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(158, 196, 41, 0.9)), color-stop(100%, rgba(107, 133, 28, 0.9))), url(https://s3.amazonaws.com/pcmag/grass.jpg);
@@ -914,7 +914,7 @@ body > footer > #footer {
   margin-left: 0;
   margin-right: 0;
 }
-/* line 113, ../../../app/stylesheets/screen.sass */
+/* line 114, ../../../app/stylesheets/screen.sass */
 body > footer > #footer a {
   color: yellow;
 }
@@ -967,7 +967,7 @@ body > footer {
 }
 
 @media screen and (max-width: 600px) {
-  /* line 120, ../../../app/stylesheets/screen.sass */
+  /* line 121, ../../../app/stylesheets/screen.sass */
   #page > article, #page > section.sidebar {
     clear: both;
     margin-left: 0.885%;
@@ -976,11 +976,11 @@ body > footer {
   }
 }
 /* Individual pages --------------------------------- */
-/* line 127, ../../../app/stylesheets/screen.sass */
+/* line 128, ../../../app/stylesheets/screen.sass */
 section.user-profile h2 {
   margin-bottom: 0em;
 }
-/* line 129, ../../../app/stylesheets/screen.sass */
+/* line 130, ../../../app/stylesheets/screen.sass */
 section.user-profile ul {
   list-style: none;
   margin-left: 0;
@@ -992,7 +992,7 @@ section.user-profile ul li {
   margin-left: 0px;
 }
 
-/* line 133, ../../../app/stylesheets/screen.sass */
+/* line 134, ../../../app/stylesheets/screen.sass */
 li.submission, li.packlet, section.submission {
   list-style-image: none;
   list-style-type: none;
@@ -1008,38 +1008,38 @@ li.submission, li.packlet, section.submission {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-/* line 141, ../../../app/stylesheets/screen.sass */
+/* line 142, ../../../app/stylesheets/screen.sass */
 li.submission ul, li.packlet ul, section.submission ul {
   list-style-type: disc;
 }
-/* line 143, ../../../app/stylesheets/screen.sass */
+/* line 144, ../../../app/stylesheets/screen.sass */
 li.submission ul, li.submission ol, li.packlet ul, li.packlet ol, section.submission ul, section.submission ol {
   margin-bottom: 1.5em;
 }
-/* line 145, ../../../app/stylesheets/screen.sass */
+/* line 146, ../../../app/stylesheets/screen.sass */
 li.submission ul ul, li.submission ul ol, li.submission ol ul, li.submission ol ol, li.packlet ul ul, li.packlet ul ol, li.packlet ol ul, li.packlet ol ol, section.submission ul ul, section.submission ul ol, section.submission ol ul, section.submission ol ol {
   margin-bottom: 0em;
 }
-/* line 147, ../../../app/stylesheets/screen.sass */
+/* line 148, ../../../app/stylesheets/screen.sass */
 li.submission > header h2, li.packlet > header h2, section.submission > header h2 {
   min-height: 24px;
 }
-/* line 149, ../../../app/stylesheets/screen.sass */
+/* line 150, ../../../app/stylesheets/screen.sass */
 li.submission.error, li.packlet.error, section.submission.error {
   border-color: #db4522;
 }
 
-/* line 152, ../../../app/stylesheets/screen.sass */
+/* line 153, ../../../app/stylesheets/screen.sass */
 footer.submission-details {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-/* line 155, ../../../app/stylesheets/screen.sass */
+/* line 156, ../../../app/stylesheets/screen.sass */
 footer.submission-details p, footer.submission-details span {
   margin-bottom: 0em;
   color: silver;
 }
-/* line 159, ../../../app/stylesheets/screen.sass */
+/* line 160, ../../../app/stylesheets/screen.sass */
 footer.submission-details p.author a:last-child {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1052,22 +1052,22 @@ footer.submission-details p.author a:last-child {
 footer.submission-details p.author a:last-child {
   *display: inline;
 }
-/* line 162, ../../../app/stylesheets/screen.sass */
+/* line 163, ../../../app/stylesheets/screen.sass */
 footer.submission-details p.author a:first-child {
   display: inline;
 }
 
-/* line 165, ../../../app/stylesheets/screen.sass */
+/* line 166, ../../../app/stylesheets/screen.sass */
 span.drag-handle-wrap {
   display: none;
 }
 
-/* line 167, ../../../app/stylesheets/screen.sass */
+/* line 168, ../../../app/stylesheets/screen.sass */
 li.submission > input[type=checkbox] {
   display: none;
 }
 
-/* line 171, ../../../app/stylesheets/screen.sass */
+/* line 172, ../../../app/stylesheets/screen.sass */
 article#submissions section, article.meetings section {
   clear: both;
   margin-left: 0.885%;
@@ -1076,12 +1076,12 @@ article#submissions section, article.meetings section {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 172, ../../../app/stylesheets/screen.sass */
+/* line 173, ../../../app/stylesheets/screen.sass */
 article#submissions section > header > h2, article.meetings section > header > h2 {
   margin-bottom: 0em;
 }
 
-/* line 177, ../../../app/stylesheets/screen.sass */
+/* line 178, ../../../app/stylesheets/screen.sass */
 .drop-here {
   border-style: dashed;
   border-width: 0.063em;
@@ -1089,16 +1089,16 @@ article#submissions section > header > h2, article.meetings section > header > h
   border-color: #dddddd;
 }
 
-/* line 181, ../../../app/stylesheets/screen.sass */
+/* line 182, ../../../app/stylesheets/screen.sass */
 article.people ul.submissions {
   margin-left: 0;
 }
 
-/* line 185, ../../../app/stylesheets/screen.sass */
+/* line 186, ../../../app/stylesheets/screen.sass */
 ol.packlets li, ul.submissions li, ol.submissions li {
   position: relative;
 }
-/* line 188, ../../../app/stylesheets/screen.sass */
+/* line 189, ../../../app/stylesheets/screen.sass */
 ol.packlets li span.drag-handle-wrap, ul.submissions li span.drag-handle-wrap, ol.submissions li span.drag-handle-wrap {
   display: block;
   position: absolute;
@@ -1126,19 +1126,19 @@ ol.packlets li span.drag-handle-wrap span.drag-handle, ul.submissions li span.dr
   width: 1.5em;
   cursor: move;
 }
-/* line 190, ../../../app/stylesheets/screen.sass */
+/* line 191, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed, ul.submissions li.collapsed, ol.submissions li.collapsed {
   position: static;
 }
-/* line 192, ../../../app/stylesheets/screen.sass */
+/* line 193, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.packlet, ul.submissions li.collapsed.packlet, ol.submissions li.collapsed.packlet {
   list-style-type: decimal;
 }
-/* line 194, ../../../app/stylesheets/screen.sass */
+/* line 195, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission, ul.submissions li.collapsed.submission, ol.submissions li.collapsed.submission {
   list-style-type: disc;
 }
-/* line 196, ../../../app/stylesheets/screen.sass */
+/* line 197, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission, ol.packlets li.collapsed.packlet, ul.submissions li.collapsed.submission, ul.submissions li.collapsed.packlet, ol.submissions li.collapsed.submission, ol.submissions li.collapsed.packlet {
   border-style: solid;
   border-width: 0em;
@@ -1146,7 +1146,7 @@ ol.packlets li.collapsed.submission, ol.packlets li.collapsed.packlet, ul.submis
   margin-top: 0em;
   margin-bottom: 0em;
 }
-/* line 200, ../../../app/stylesheets/screen.sass */
+/* line 201, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packlet > header, ol.submissions li.collapsed.submission > header, ol.submissions li.collapsed.packlet > header {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1159,15 +1159,15 @@ ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet >
 ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packlet > header, ol.submissions li.collapsed.submission > header, ol.submissions li.collapsed.packlet > header {
   *display: inline;
 }
-/* line 203, ../../../app/stylesheets/screen.sass */
+/* line 204, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > header h2, ol.packlets li.collapsed.packlet > header h2, ul.submissions li.collapsed.submission > header h2, ul.submissions li.collapsed.packlet > header h2, ol.submissions li.collapsed.submission > header h2, ol.submissions li.collapsed.packlet > header h2 {
   margin-bottom: 0em;
 }
-/* line 205, ../../../app/stylesheets/screen.sass */
+/* line 206, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > div.body, ol.packlets li.collapsed.packlet > div.body, ul.submissions li.collapsed.submission > div.body, ul.submissions li.collapsed.packlet > div.body, ol.submissions li.collapsed.submission > div.body, ol.submissions li.collapsed.packlet > div.body {
   display: none;
 }
-/* line 207, ../../../app/stylesheets/screen.sass */
+/* line 208, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > span.drag-handle-wrap, ol.packlets li.collapsed.packlet > span.drag-handle-wrap, ul.submissions li.collapsed.submission > span.drag-handle-wrap, ul.submissions li.collapsed.packlet > span.drag-handle-wrap, ol.submissions li.collapsed.submission > span.drag-handle-wrap, ol.submissions li.collapsed.packlet > span.drag-handle-wrap {
   width: 1em;
   display: -moz-inline-box;
@@ -1204,7 +1204,7 @@ ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, 
 ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packlets li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ol.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle {
   *display: inline;
 }
-/* line 209, ../../../app/stylesheets/screen.sass */
+/* line 210, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > input[type=checkbox], ol.packlets li.collapsed.packlet > input[type=checkbox], ul.submissions li.collapsed.submission > input[type=checkbox], ul.submissions li.collapsed.packlet > input[type=checkbox], ol.submissions li.collapsed.submission > input[type=checkbox], ol.submissions li.collapsed.packlet > input[type=checkbox] {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1216,7 +1216,7 @@ ol.packlets li.collapsed.submission > input[type=checkbox], ol.packlets li.colla
 ol.packlets li.collapsed.submission > input[type=checkbox], ol.packlets li.collapsed.packlet > input[type=checkbox], ul.submissions li.collapsed.submission > input[type=checkbox], ul.submissions li.collapsed.packlet > input[type=checkbox], ol.submissions li.collapsed.submission > input[type=checkbox], ol.submissions li.collapsed.packlet > input[type=checkbox] {
   *display: inline;
 }
-/* line 211, ../../../app/stylesheets/screen.sass */
+/* line 212, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packlet > footer, ol.submissions li.collapsed.submission > footer, ol.submissions li.collapsed.packlet > footer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1231,29 +1231,29 @@ ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet >
 ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packlet > footer, ol.submissions li.collapsed.submission > footer, ol.submissions li.collapsed.packlet > footer {
   *display: inline;
 }
-/* line 217, ../../../app/stylesheets/screen.sass */
+/* line 218, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > span.score > form.score, ol.packlets li.collapsed.packlet > footer > span.score > form.score, ul.submissions li.collapsed.submission > footer > span.score > form.score, ul.submissions li.collapsed.packlet > footer > span.score > form.score, ol.submissions li.collapsed.submission > footer > span.score > form.score, ol.submissions li.collapsed.packlet > footer > span.score > form.score {
   display: inline;
 }
-/* line 219, ../../../app/stylesheets/screen.sass */
+/* line 220, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > nav.actions, ol.packlets li.collapsed.packlet > footer > nav.actions, ul.submissions li.collapsed.submission > footer > nav.actions, ul.submissions li.collapsed.packlet > footer > nav.actions, ol.submissions li.collapsed.submission > footer > nav.actions, ol.submissions li.collapsed.packlet > footer > nav.actions {
   display: none;
 }
-/* line 221, ../../../app/stylesheets/screen.sass */
+/* line 222, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > p.scored, ol.packlets li.collapsed.packlet > footer > p.scored, ul.submissions li.collapsed.submission > footer > p.scored, ul.submissions li.collapsed.packlet > footer > p.scored, ol.submissions li.collapsed.submission > footer > p.scored, ol.submissions li.collapsed.packlet > footer > p.scored {
   display: inline;
 }
 
-/* line 223, ../../../app/stylesheets/screen.sass */
+/* line 224, ../../../app/stylesheets/screen.sass */
 article.magazines ol.submissions li.collapsed.submission {
   list-style-type: decimal;
 }
-/* line 226, ../../../app/stylesheets/screen.sass */
+/* line 227, ../../../app/stylesheets/screen.sass */
 article.magazines ol.submissions li.collapsed.submission > footer p.scored {
   display: none;
 }
 
-/* line 229, ../../../app/stylesheets/screen.sass */
+/* line 230, ../../../app/stylesheets/screen.sass */
 ol.editors_notes {
   list-style: none;
 }
@@ -1263,21 +1263,21 @@ ol.editors_notes li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 231, ../../../app/stylesheets/screen.sass */
+/* line 232, ../../../app/stylesheets/screen.sass */
 ol.editors_notes li {
   margin-bottom: 3em;
 }
 
-/* line 235, ../../../app/stylesheets/screen.sass */
+/* line 236, ../../../app/stylesheets/screen.sass */
 table.table-of-contents th {
   cursor: pointer;
 }
-/* line 237, ../../../app/stylesheets/screen.sass */
+/* line 238, ../../../app/stylesheets/screen.sass */
 table.table-of-contents tr > *:last-child {
   min-width: 3.5em;
 }
 
-/* line 240, ../../../app/stylesheets/screen.sass */
+/* line 241, ../../../app/stylesheets/screen.sass */
 header.add-stuff-trigger {
   margin-left: -3em;
   height: 0;
@@ -1292,7 +1292,7 @@ header.add-stuff-trigger {
 header.add-stuff-trigger {
   *display: inline;
 }
-/* line 245, ../../../app/stylesheets/screen.sass */
+/* line 246, ../../../app/stylesheets/screen.sass */
 header.add-stuff-trigger h2 {
   font-size: 2.5em;
   line-height: 1.2em;
@@ -1308,7 +1308,7 @@ header.add-stuff-trigger h2 {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-/* line 252, ../../../app/stylesheets/screen.sass */
+/* line 253, ../../../app/stylesheets/screen.sass */
 header.add-stuff-trigger h2.tilt-45 {
   -moz-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
@@ -1317,10 +1317,14 @@ header.add-stuff-trigger h2.tilt-45 {
   transform: rotate(45deg);
 }
 
-/* line 254, ../../../app/stylesheets/screen.sass */
+/* line 255, ../../../app/stylesheets/screen.sass */
 section.add-stuff {
   width: 100%;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
   display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   overflow: hidden;
   line-height: 4.5em;
   -moz-transition-property: line-height opacity;
@@ -1332,13 +1336,17 @@ section.add-stuff {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-/* line 261, ../../../app/stylesheets/screen.sass */
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+section.add-stuff {
+  *display: inline;
+}
+/* line 262, ../../../app/stylesheets/screen.sass */
 section.add-stuff.hidden {
   line-height: 0em;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 264, ../../../app/stylesheets/screen.sass */
+/* line 265, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul {
   height: 100%;
   display: -moz-inline-box;
@@ -1358,10 +1366,17 @@ section.add-stuff ul, section.add-stuff ul li {
   padding: 0px;
   display: inline;
 }
-/* line 268, ../../../app/stylesheets/screen.sass */
+/* line 269, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li {
   background-color: #cfb309;
   height: 100%;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  white-space: nowrap;
+  width: 15%;
   margin-left: 1em;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ebdd86), color-stop(100%, #e0ca44));
   background: -webkit-linear-gradient(#ebdd86, #e0ca44);
@@ -1372,12 +1387,15 @@ section.add-stuff ul li {
   border-style: solid;
   border-width: 0.063em;
   padding: 1.438em;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -o-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -khtml-border-radius: 20px;
-  border-radius: 20px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4%;
+  -moz-border-radius: 1.5em;
+  -webkit-border-radius: 1.5em;
+  -o-border-radius: 1.5em;
+  -ms-border-radius: 1.5em;
+  -khtml-border-radius: 1.5em;
+  border-radius: 1.5em;
   -moz-box-shadow: silver 0 0 10px 0;
   -webkit-box-shadow: silver 0 0 10px 0;
   -o-box-shadow: silver 0 0 10px 0;
@@ -1393,16 +1411,20 @@ section.add-stuff ul li {
   border-color: silver;
   color: #4c4c4c;
 }
-/* line 278, ../../../app/stylesheets/screen.sass */
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+section.add-stuff ul li {
+  *display: inline;
+}
+/* line 286, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li:before {
   content: "+";
 }
-/* line 282, ../../../app/stylesheets/screen.sass */
+/* line 290, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li:hover {
   color: #4c4c4c;
   border-color: #4c4c4c;
 }
-/* line 285, ../../../app/stylesheets/screen.sass */
+/* line 293, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li:active {
   color: #4c4c4c;
   border-color: #4c4c4c;
@@ -1411,12 +1433,12 @@ section.add-stuff ul li:active {
   -o-box-shadow: #4a4a4a 0 0 5px inset;
   box-shadow: #4a4a4a 0 0 5px inset;
 }
-/* line 289, ../../../app/stylesheets/screen.sass */
+/* line 297, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li:active p {
   border-color: #db8322;
 }
 
-/* line 293, ../../../app/stylesheets/screen.sass */
+/* line 301, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines {
   list-style: none;
   margin: 0;
@@ -1427,7 +1449,7 @@ section#magazines ul.magazines li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 296, ../../../app/stylesheets/screen.sass */
+/* line 304, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li {
   background-color: #cfb309;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ebdd86), color-stop(100%, #e0ca44));
@@ -1459,17 +1481,17 @@ section#magazines ul.magazines li {
   border-color: silver;
   color: #707070;
 }
-/* line 310, ../../../app/stylesheets/screen.sass */
+/* line 318, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li header p {
   border-bottom: 1px dashed silver;
   margin-bottom: 0em;
 }
-/* line 313, ../../../app/stylesheets/screen.sass */
+/* line 321, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li:hover {
   color: #4c4c4c;
   border-color: #4c4c4c;
 }
-/* line 316, ../../../app/stylesheets/screen.sass */
+/* line 324, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li:active {
   color: #4c4c4c;
   border-color: #4c4c4c;
@@ -1478,15 +1500,15 @@ section#magazines ul.magazines li:active {
   -o-box-shadow: #4a4a4a 0 0 5px inset;
   box-shadow: #4a4a4a 0 0 5px inset;
 }
-/* line 320, ../../../app/stylesheets/screen.sass */
+/* line 328, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li:active p {
   border-color: #db8322;
 }
-/* line 322, ../../../app/stylesheets/screen.sass */
+/* line 330, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines a.selected {
   cursor: default;
 }
-/* line 324, ../../../app/stylesheets/screen.sass */
+/* line 332, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines a.selected li {
   border-color: #4c4c4c;
   color: #4c4c4c;
@@ -1495,52 +1517,52 @@ section#magazines ul.magazines a.selected li {
   -o-box-shadow: silver 0 0 10px 0;
   box-shadow: silver 0 0 10px 0;
 }
-/* line 328, ../../../app/stylesheets/screen.sass */
+/* line 336, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines a.selected li header h3 {
   border-bottom: 1px solid #db8322;
   margin-bottom: 0em;
 }
 
-/* line 334, ../../../app/stylesheets/screen.sass */
+/* line 342, ../../../app/stylesheets/screen.sass */
 li.page form.button_to, li.role form.button_to {
   font-size: 0.375em;
   line-height: 4em;
   line-height: 1em;
 }
-/* line 337, ../../../app/stylesheets/screen.sass */
+/* line 345, ../../../app/stylesheets/screen.sass */
 li.page form.button_to input[type=submit], li.role form.button_to input[type=submit] {
   vertical-align: top;
 }
 
-/* line 341, ../../../app/stylesheets/screen.sass */
+/* line 349, ../../../app/stylesheets/screen.sass */
 span.score form.button_to {
   font-size: 0.563em;
   line-height: 2.667em;
   line-height: 1em;
 }
-/* line 344, ../../../app/stylesheets/screen.sass */
+/* line 352, ../../../app/stylesheets/screen.sass */
 span.score form.button_to input[type=submit] {
   vertical-align: top;
 }
-/* line 346, ../../../app/stylesheets/screen.sass */
+/* line 354, ../../../app/stylesheets/screen.sass */
 span.score form.score {
   display: inline;
 }
-/* line 348, ../../../app/stylesheets/screen.sass */
+/* line 356, ../../../app/stylesheets/screen.sass */
 span.score form.score div {
   display: inline;
 }
-/* line 350, ../../../app/stylesheets/screen.sass */
+/* line 358, ../../../app/stylesheets/screen.sass */
 span.score form.score div label {
   font-weight: normal;
   display: inline;
 }
-/* line 351, ../../../app/stylesheets/screen.sass */
+/* line 359, ../../../app/stylesheets/screen.sass */
 span.score form.score div label:after {
   content: ": ";
 }
 
-/* line 356, ../../../app/stylesheets/screen.sass */
+/* line 364, ../../../app/stylesheets/screen.sass */
 input[type=number] {
   margin-bottom: 0em;
   text-align: center;
@@ -1552,24 +1574,24 @@ input[type=number] {
   padding: 0.015em;
 }
 
-/* line 364, ../../../app/stylesheets/screen.sass */
+/* line 372, ../../../app/stylesheets/screen.sass */
 html.no-number-input input[type=number] {
   width: 1.7em;
 }
-/* line 366, ../../../app/stylesheets/screen.sass */
+/* line 374, ../../../app/stylesheets/screen.sass */
 html.no-number-input input[type=number]::-webkit-outer-spin-button, html.no-number-input input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* line 370, ../../../app/stylesheets/screen.sass */
+/* line 378, ../../../app/stylesheets/screen.sass */
 section#scores {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
   margin-top: 1.5em;
 }
-/* line 373, ../../../app/stylesheets/screen.sass */
+/* line 381, ../../../app/stylesheets/screen.sass */
 section#scores ol#packlet_titles {
   margin-left: 0.885%;
   display: inline;
@@ -1579,11 +1601,11 @@ section#scores ol#packlet_titles {
   margin-bottom: 1.5em;
   list-style-position: inside;
 }
-/* line 378, ../../../app/stylesheets/screen.sass */
+/* line 386, ../../../app/stylesheets/screen.sass */
 section#scores ol#packlet_titles li.title {
   max-height: 24px;
 }
-/* line 380, ../../../app/stylesheets/screen.sass */
+/* line 388, ../../../app/stylesheets/screen.sass */
 section#scores ol#packlet_titles li.title a {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1603,7 +1625,7 @@ section#scores ol#packlet_titles li.title a {
 section#scores ol#packlet_titles li.title a {
   *display: inline;
 }
-/* line 387, ../../../app/stylesheets/screen.sass */
+/* line 395, ../../../app/stylesheets/screen.sass */
 section#scores .scores {
   display: inline;
   float: left;
@@ -1611,7 +1633,7 @@ section#scores .scores {
   margin-right: 0.885%;
   margin-bottom: 1.5em;
 }
-/* line 390, ../../../app/stylesheets/screen.sass */
+/* line 398, ../../../app/stylesheets/screen.sass */
 section#scores .scores:last {
   display: inline;
   float: right;
@@ -1619,13 +1641,13 @@ section#scores .scores:last {
   #margin-left: -0.5em;
 }
 
-/* line 394, ../../../app/stylesheets/screen.sass */
+/* line 402, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 396, ../../../app/stylesheets/screen.sass */
+/* line 404, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1637,11 +1659,11 @@ ul.attendees li.attendee span {
 ul.attendees li.attendee span {
   *display: inline;
 }
-/* line 398, ../../../app/stylesheets/screen.sass */
+/* line 406, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.person {
   width: 15em;
 }
-/* line 400, ../../../app/stylesheets/screen.sass */
+/* line 408, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.answer {
   width: 27em;
   padding-left: 0.5em;
@@ -1653,12 +1675,12 @@ ul.attendees li.attendee span.answer {
   border-radius: 5px;
   min-height: 24px;
 }
-/* line 405, ../../../app/stylesheets/screen.sass */
+/* line 413, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee nav.actions {
   display: inline;
 }
 
-/* line 407, ../../../app/stylesheets/screen.sass */
+/* line 415, ../../../app/stylesheets/screen.sass */
 form.attendee {
   clear: both;
   margin-left: 0.885%;
@@ -1666,27 +1688,27 @@ form.attendee {
   margin-top: 1.5em;
 }
 
-/* line 412, ../../../app/stylesheets/screen.sass */
+/* line 420, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_body {
   height: 30.857em;
 }
-/* line 414, ../../../app/stylesheets/screen.sass */
+/* line 422, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_title {
   height: 2.571em;
 }
-/* line 416, ../../../app/stylesheets/screen.sass */
+/* line 424, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 419, ../../../app/stylesheets/screen.sass */
+/* line 427, ../../../app/stylesheets/screen.sass */
 ol.magazines {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
   margin-left: 0;
 }
-/* line 422, ../../../app/stylesheets/screen.sass */
+/* line 430, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine {
   clear: both;
   margin-left: 0.885%;
@@ -1698,7 +1720,7 @@ ol.magazines > li.magazine {
   list-style-image: none;
   list-style-type: none;
 }
-/* line 429, ../../../app/stylesheets/screen.sass */
+/* line 437, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine > * {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1710,7 +1732,7 @@ ol.magazines > li.magazine > * {
 ol.magazines > li.magazine > * {
   *display: inline;
 }
-/* line 431, ../../../app/stylesheets/screen.sass */
+/* line 439, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine h2 {
   display: inline;
   float: left;
@@ -1718,7 +1740,7 @@ ol.magazines > li.magazine h2 {
   margin-right: 0.885%;
   margin-bottom: 0em;
 }
-/* line 434, ../../../app/stylesheets/screen.sass */
+/* line 442, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine span.timeframe {
   display: inline;
   float: left;
@@ -1727,20 +1749,20 @@ ol.magazines > li.magazine span.timeframe {
   text-align: right;
 }
 
-/* line 437, ../../../app/stylesheets/screen.sass */
+/* line 445, ../../../app/stylesheets/screen.sass */
 ol.meetings, ul.meetings {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
   list-style-position: inside;
 }
-/* line 440, ../../../app/stylesheets/screen.sass */
+/* line 448, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting, ul.meetings li.meeting {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 442, ../../../app/stylesheets/screen.sass */
+/* line 450, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting .drag-handle-wrap, ul.meetings li.meeting .drag-handle-wrap {
   width: 1em;
   display: -moz-inline-box;
@@ -1777,7 +1799,7 @@ ol.meetings li.meeting .drag-handle-wrap > span.drag-handle, ul.meetings li.meet
 ol.meetings li.meeting .drag-handle-wrap > span.drag-handle, ul.meetings li.meeting .drag-handle-wrap > span.drag-handle {
   *display: inline;
 }
-/* line 444, ../../../app/stylesheets/screen.sass */
+/* line 452, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting > *, ul.meetings li.meeting > * {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1789,18 +1811,18 @@ ol.meetings li.meeting > *, ul.meetings li.meeting > * {
 ol.meetings li.meeting > *, ul.meetings li.meeting > * {
   *display: inline;
 }
-/* line 446, ../../../app/stylesheets/screen.sass */
+/* line 454, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting span.question, ul.meetings li.meeting span.question {
   width: 72%;
   padding-left: 0.1em;
 }
-/* line 449, ../../../app/stylesheets/screen.sass */
+/* line 457, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting time, ul.meetings li.meeting time {
   width: 16%;
   text-align: right;
 }
 
-/* line 453, ../../../app/stylesheets/screen.sass */
+/* line 461, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1811,13 +1833,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 456, ../../../app/stylesheets/screen.sass */
+/* line 464, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 458, ../../../app/stylesheets/screen.sass */
+/* line 466, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1825,7 +1847,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 461, ../../../app/stylesheets/screen.sass */
+/* line 469, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1833,14 +1855,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 464, ../../../app/stylesheets/screen.sass */
+/* line 472, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 466, ../../../app/stylesheets/screen.sass */
+/* line 474, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1862,7 +1884,7 @@ ul#people li.person span.promote-to > ul li:last-child:after {
 ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 468, ../../../app/stylesheets/screen.sass */
+/* line 476, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1874,11 +1896,11 @@ ul#people li.person span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 472, ../../../app/stylesheets/screen.sass */
+/* line 480, ../../../app/stylesheets/screen.sass */
 form#highest {
   margin-bottom: 1.5em;
 }
-/* line 473, ../../../app/stylesheets/screen.sass */
+/* line 481, ../../../app/stylesheets/screen.sass */
 form#highest * {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1892,18 +1914,18 @@ form#highest * {
 form#highest * {
   *display: inline;
 }
-/* line 477, ../../../app/stylesheets/screen.sass */
+/* line 485, ../../../app/stylesheets/screen.sass */
 form#highest input[type=number] {
   margin-left: 0.3em;
   width: 4em;
 }
 
-/* line 481, ../../../app/stylesheets/screen.sass */
+/* line 489, ../../../app/stylesheets/screen.sass */
 form#publish ol {
   margin-bottom: 0em;
 }
 
-/* line 484, ../../../app/stylesheets/screen.sass */
+/* line 492, ../../../app/stylesheets/screen.sass */
 ul.positions {
   list-style: none;
   margin-left: 0;
@@ -1914,7 +1936,7 @@ ul.positions li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 487, ../../../app/stylesheets/screen.sass */
+/* line 495, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1939,7 +1961,7 @@ ul.positions > li.position {
   padding-bottom: 0;
   margin: 0 1.5em 1.5em 0;
 }
-/* line 488, ../../../app/stylesheets/screen.sass */
+/* line 496, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position h3 {
   border-bottom: 1px dashed silver;
 }
@@ -1947,36 +1969,36 @@ ul.positions > li.position h3 {
 ul.positions > li.position {
   *display: inline;
 }
-/* line 498, ../../../app/stylesheets/screen.sass */
+/* line 506, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position ul.people {
   margin-left: 0;
   margin-bottom: 1.5em;
 }
-/* line 502, ../../../app/stylesheets/screen.sass */
+/* line 510, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position footer > nav {
   display: block;
 }
-/* line 504, ../../../app/stylesheets/screen.sass */
+/* line 512, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position footer > form {
   display: none;
 }
-/* line 507, ../../../app/stylesheets/screen.sass */
+/* line 515, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position footer.add-role > nav {
   display: none;
 }
-/* line 509, ../../../app/stylesheets/screen.sass */
+/* line 517, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position footer.add-role > form {
   display: block;
 }
 
 /*   Odds & Ends
  ******************************* */
-/* line 516, ../../../app/stylesheets/screen.sass */
+/* line 524, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }
 
-/* line 519, ../../../app/stylesheets/screen.sass */
+/* line 527, ../../../app/stylesheets/screen.sass */
 span.average-score {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1994,7 +2016,7 @@ span.average-score {
   *display: inline;
 }
 
-/* line 527, ../../../app/stylesheets/screen.sass */
+/* line 535, ../../../app/stylesheets/screen.sass */
 .notify_authors_button {
   margin-top: 4.5em;
   border-top-style: solid;
@@ -2003,18 +2025,18 @@ span.average-score {
   text-align: center;
 }
 
-/* line 532, ../../../app/stylesheets/screen.sass */
+/* line 540, ../../../app/stylesheets/screen.sass */
 input#recaptcha_response_field {
   height: auto;
 }
 
 /* Pagination
  ******************************* */
-/* line 539, ../../../app/stylesheets/screen.sass */
+/* line 547, ../../../app/stylesheets/screen.sass */
 nav.pagination {
   float: right;
 }
-/* line 541, ../../../app/stylesheets/screen.sass */
+/* line 549, ../../../app/stylesheets/screen.sass */
 nav.pagination ol.pages {
   list-style-type: none;
 }
@@ -2024,18 +2046,18 @@ nav.pagination ol.pages, nav.pagination ol.pages li {
   padding: 0px;
   display: inline;
 }
-/* line 543, ../../../app/stylesheets/screen.sass */
+/* line 551, ../../../app/stylesheets/screen.sass */
 nav.pagination ol.pages li.page {
   font-size: 1.5em;
   line-height: 1em;
   display: inline-block;
 }
-/* line 546, ../../../app/stylesheets/screen.sass */
+/* line 554, ../../../app/stylesheets/screen.sass */
 nav.pagination ol.pages li.page > a {
   font-size: 0.625em;
   line-height: 2.4em;
 }
-/* line 548, ../../../app/stylesheets/screen.sass */
+/* line 556, ../../../app/stylesheets/screen.sass */
 nav.pagination:first-child {
   position: relative;
   top: -48px;

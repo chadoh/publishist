@@ -2,7 +2,7 @@
   = error_messages
   = f.input :page_id, as: :hidden
   = f.input :image, as: :file, label: "Upload #{ "different " if @cover_art.image? }cover art:"
-  = f.button :submit
+  = f.button :submit, "Save"
   = link_to "Cancel", request.referer, class: "cancel"
 
 :javascript
