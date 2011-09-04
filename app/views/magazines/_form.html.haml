@@ -1,18 +1,24 @@
 - javascript "anytime.min"
 - stylesheet "anytime.min"
 
-= simple_form_for(resource) do |f|
+= simple_form_for @magazine, html: { multipart: true } do |f|
   = error_messages
 
   = f.input :title, :input_html => { :placeholder => "You can leave this blank for now" }
   = f.input :nickname
-  = f.input :accepts_submissions_from,  :as => :string, :input_html => { :value => resource.accepts_submissions_from .strftime("%Y-%m-%d") }
-  = f.input :accepts_submissions_until, :as => :string, :input_html => { :value => resource.accepts_submissions_until.strftime("%Y-%m-%d") }
+  = f.input :accepts_submissions_from,  as: :string, input_html: { value: resource.accepts_submissions_from .strftime("%Y-%m-%d") }
+  = f.input :accepts_submissions_until, as: :string, input_html: { value: resource.accepts_submissions_until.strftime("%Y-%m-%d") }
+  - if @magazine.published?
+    = f.input :published_on,            as: :string, input_html: { value: resource.published_on             .strftime("%Y-%m-%d") }
+  = f.input :pdf, label: "Upload a #{'different ' if @magazine.pdf?}pdf of the magazine",
+    hint: "#{"<br>#{link_to 'View the current pdf', @magazine.pdf.url, 'data-target' => 'new'}" if @magazine.pdf? }".html_safe
+  = f.input :cover_art, label: "Upload #{'different ' if @magazine.cover_art?}cover art for the magazine",
+    hint: "#{"<br>#{image_tag @magazine.cover_art.url(:thumb)}" if @magazine.cover_art?}".html_safe
   = f.button :submit
 
 :javascript
   $(function(){
-    $("input:regex(id,magazine_accepts_submissions_(from|until))").AnyTime_picker({
+    $("input:regex(id,magazine_accepts_submissions_(from|until)|published_on)").AnyTime_picker({
       format: "%Y-%m-%d",
       placement: "inline"
     });

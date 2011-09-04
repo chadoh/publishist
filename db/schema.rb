@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110820031937) do
+ActiveRecord::Schema.define(:version => 20110904221228) do
 
   create_table "attendees", :force => true do |t|
     t.integer  "meeting_id"
@@ -22,10 +22,6 @@ ActiveRecord::Schema.define(:version => 20110820031937) do
   end
 
   create_table "cover_arts", :force => true do |t|
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
     t.integer  "page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -66,6 +62,14 @@ ActiveRecord::Schema.define(:version => 20110820031937) do
     t.integer  "sum_of_scores",             :default => 0
     t.string   "cached_slug"
     t.boolean  "notification_sent",         :default => false
+    t.string   "pdf_file_name"
+    t.string   "pdf_content_type"
+    t.integer  "pdf_file_size"
+    t.datetime "pdf_updated_at"
+    t.string   "cover_art_file_name"
+    t.string   "cover_art_content_type"
+    t.integer  "cover_art_file_size"
+    t.datetime "cover_art_updated_at"
   end
 
   add_index "magazines", ["cached_slug"], :name => "index_magazines_on_cached_slug", :unique => true

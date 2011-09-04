@@ -1,7 +1,8 @@
-- if cover_art.image?
-  = image_tag cover_art.image.url, alt: "Cover Art"
+- if magazine.cover_art?
+  = image_tag magazine.cover_art.url, alt: "Cover Art"
+- elsif editor?
+  %p
+    You haven't added any cover art to this magazine!
+    = link_to("Add cover art", edit_magazine_path(magazine)) + '.'
 - if editor?
-  %nav.actions
-    %ul
-      %li= link_to "Edit", edit_cover_art_path(cover_art), remote: true
-      %li= link_to "Delete", [cover_art], method: :delete
+  %p= link_to "Remove cover art from this page", [cover_art], method: :delete

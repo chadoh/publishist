@@ -15,6 +15,3 @@
 %ol.magazines
   - for magazine in @magazines
     = render :partial => 'show', :locals => { :magazine => magazine }
-
-- if person_signed_in?
-  - javascript 'magazines'

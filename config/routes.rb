@@ -9,8 +9,8 @@ Pc::Application.routes.draw do
   get "welcome/index"
 
   resources :roles, only: [:new, :create, :destroy]
-  resources :positions, :scores, :cover_arts, :editors_notes, except: :index
-  resources :table_of_contents, :staff_lists, only: [:create, :destroy]
+  resources :positions, :scores, :editors_notes, except: :index
+  resources :cover_arts, :table_of_contents, :staff_lists, only: [:create, :destroy]
 
   resources :meetings do
     resources :attendees do

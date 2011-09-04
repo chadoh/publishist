@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110516234654
+# Schema version: 20110903191625
 #
 # Table name: magazines
 #
@@ -14,6 +14,11 @@
 #  count_of_scores           :integer         default(0)
 #  sum_of_scores             :integer         default(0)
 #  cached_slug               :string(255)
+#  notification_sent         :boolean
+#  pdf_file_name             :string(255)
+#  pdf_content_type          :string(255)
+#  pdf_file_size             :integer
+#  pdf_updated_at            :datetime
 #
 
 class Magazine < ActiveRecord::Base
@@ -25,6 +30,27 @@ class Magazine < ActiveRecord::Base
   validate :from_happens_before_until
   validate :magazine_ranges_dont_conflict
 
+  validates_attachment_content_type :pdf,
+    :content_type => [ 'application/pdf' ],
+    :if           => Proc.new { |submission| submission.pdf.file? },
+    :message      => "has to be a valid pdf"
+
+  has_attached_file :pdf,
+    :storage        => :s3,
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :path           => "/magazines/:filename"
+
+  validates_attachment_content_type :cover_art,
+    :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
+    :if           => Proc.new { |magazine| magazine.cover_art.file? },
+    :message      => "must be an image"
+
+  has_attached_file :cover_art,
+    :storage        => :s3,
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :path           => "/cover_art/:style/:filename",
+    :styles         => { thumb: "300x300>" }
+
   after_initialize "self.nickname = 'next' if self.nickname.blank?"
   after_initialize :accepts_from_after_latest_or_perhaps_today
   after_initialize :accepts_until_six_months_later
@@ -34,7 +60,6 @@ class Magazine < ActiveRecord::Base
   has_many :meetings,   dependent: :nullify, include: :submissions
   has_many :pages,      dependent: :destroy, order:   :position
   has_many :positions,  dependent: :destroy
-  has_many :cover_arts, through:   :pages
   has_many :roles,      through:   :positions
 
   has_friendly_id :nickname, :use_slug => true
@@ -55,10 +80,6 @@ class Magazine < ActiveRecord::Base
     if count_of_scores == 0 then nil else
       (sum_of_scores.to_f / count_of_scores * 100).round.to_f / 100
     end
-  end
-
-  def cover_art
-    cover_arts.first
   end
 
   def highest_scores how_many = 50

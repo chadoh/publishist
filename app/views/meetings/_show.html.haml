@@ -1,7 +1,4 @@
 %li[meeting]
-  - if editor?
-    %span.drag-handle-wrap
-      %span.drag-handle &lt;&gt;
   %span.question= link_to meeting.question, meeting
   %time{ :datetime => meeting.datetime }= pretty_date meeting.datetime
   - if editor?

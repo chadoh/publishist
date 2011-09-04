@@ -1,8 +1,18 @@
+# == Schema Information
+# Schema version: 20110903191625
+#
+# Table name: cover_arts
+#
+#  id                 :integer         not null, primary key
+#  image_file_name    :string(255)
+#  image_content_type :string(255)
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  page_id            :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
 class CoverArt < ActiveRecord::Base
   belongs_to :page
-  has_attached_file :image,
-    :storage        => :s3,
-    :s3_credentials => "#{Rails.root}/config/s3.yml",
-    :path           => "/cover_art/:style/:filename",
-    :styles         => { thumb: "48x48" }
 end

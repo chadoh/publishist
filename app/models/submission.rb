@@ -48,10 +48,10 @@ class Submission < ActiveRecord::Base
 
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
 
-  validates_attachment_content_type :photo, 
+  validates_attachment_content_type :photo,
     :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
-    :if => Proc.new { |submission| submission.photo.file? },
-    :message => "must be an image"
+    :if           => Proc.new { |submission| submission.photo.file? },
+    :message      => "must be an image"
 
   has_attached_file :photo,
     :storage        => :s3,

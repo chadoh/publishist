@@ -5,7 +5,7 @@
   %ul.magazines
     - for mag in @magazines
       = link_to(url_for(:m => mag.to_param), :class => mag == @magazine && 'selected') do
-        %li
+        %li[mag]
           %header
             - if mag == @magazine
               %h3= mag.title.presence || mag.nickname

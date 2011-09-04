@@ -3,7 +3,7 @@
     +
 %section.add-stuff{ class: collapse && 'hidden' }
   %ul
-    = link_to new_cover_art_path(page_id: @page.id), remote: true do
+    = link_to cover_arts_path(page_id: @page.id), method: :post do
       %li Cover Art
     = link_to new_editors_note_path(page_id: @page.id), remote: true do
       %li Note

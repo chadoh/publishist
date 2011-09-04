@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20110903191625
+#
+# Table name: roles
+#
+#  id          :integer         not null, primary key
+#  person_id   :integer
+#  position_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Role < ActiveRecord::Base
   belongs_to :person
   belongs_to :position
