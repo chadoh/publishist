@@ -484,6 +484,11 @@ ol.meetings, ul.meetings
     span.question
       width: 78%
       padding-left: 0.1em
+      &, > a
+        min-height: $base-line-height
+      a
+        +inline-block
+        width: 100%
     time
       width: 16%
       text-align: right
