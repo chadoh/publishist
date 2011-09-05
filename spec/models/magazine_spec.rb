@@ -7,21 +7,9 @@ describe Magazine do
     should validate_presence_of :accepts_submissions_until
     should have_many(:meetings).dependent(:nullify)
     should have_many(:pages).dependent(:destroy)
-    should have_many(:cover_arts).through(:pages)
     should have_many(:positions).dependent(:destroy)
     should have_many(:roles).through(:positions)
   }
-
-  describe "#cover_art" do
-    it "returns the first cover art (which should be the only one...)" do
-      mag = Magazine.create(
-        accepts_submissions_from:  5.months.ago,
-        accepts_submissions_until: Date.yesterday
-      )
-      mag.publish []
-      mag.cover_art.should == CoverArt.first
-    end
-  end
 
   describe "#nickname" do
     it "defaults to 'next'" do
