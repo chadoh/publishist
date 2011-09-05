@@ -8,9 +8,9 @@
         %li[mag]
           %header
             - if mag == @magazine
-              %h3= mag.title.presence || mag.nickname
+              %h3= mag
             - else
-              %p= mag.title.presence || mag.nickname
+              %p= mag
           = pluralize mag.meetings.count, 'meeting'
           %br
           = timeframe mag.accepts_submissions_from, mag.accepts_submissions_until

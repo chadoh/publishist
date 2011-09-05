@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110903191625
+# Schema version: 20110904221228
 #
 # Table name: magazines
 #
@@ -19,6 +19,10 @@
 #  pdf_content_type          :string(255)
 #  pdf_file_size             :integer
 #  pdf_updated_at            :datetime
+#  cover_art_file_name       :string(255)
+#  cover_art_content_type    :string(255)
+#  cover_art_file_size       :integer
+#  cover_art_updated_at      :datetime
 #
 
 class Magazine < ActiveRecord::Base
