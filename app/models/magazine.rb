@@ -66,7 +66,7 @@ class Magazine < ActiveRecord::Base
   has_many :positions,  dependent: :destroy
   has_many :roles,      through:   :positions
 
-  has_friendly_id :nickname, :use_slug => true
+  has_friendly_id :to_s, :use_slug => true
 
   # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
   def submissions options = {}
