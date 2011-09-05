@@ -36,8 +36,8 @@ module NavigationHelpers
       eval "#{model.base_class.to_s.underscore}_path('#{instance.to_param}')"
 
     when /the "([^"]*)" magazine page/i
-      param = $1.parameterize
-      eval "magazine_path('#{$1.parameterize}')"
+      m = Magazine.find_by_nickname $1
+      eval "magazine_path('#{m.id}')"
 
     else
       begin

@@ -53,8 +53,5 @@ protected
     if self.person.blank? and self.person_name.blank?
       errors.add :person, "can't be blank"
     end
-    if self.person and self.person_name
-      errors.add :person, "... you've included a person and an unregistered person's name... I'm not sure how that's possible, but there it is."
-    end
   end
 end

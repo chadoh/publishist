@@ -14,7 +14,7 @@ Feature: an editor records attendee
     And I press "Add"
     Then I should see a "Peas Cold" link under "Attendance"
 
-    When I press "Remove"
+    When I press "x"
     Then I should not see "Peas Cold"
 
   @pending
@@ -40,7 +40,7 @@ Feature: an editor records attendee
   Scenario: I edit an attendance record with javascript turned off
     Given someone named "O. J. Simpson" attended the first meeting
     And I am on the first meeting page
-    When I follow "Edit"
+    When I follow "/"
     And I fill in the following:
       | attendee_person | Cookie Monster |
       | attendee_answer | No more moon!  |

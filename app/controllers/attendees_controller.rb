@@ -36,7 +36,7 @@ class AttendeesController < InheritedResources::Base
       failure.html { render :edit }
 
       success.js
-      failure.js { head :not_acceptable }
+      failure.js { render :edit }
     end
   end
 
@@ -59,7 +59,7 @@ class AttendeesController < InheritedResources::Base
   def destroy
     destroy! do |wants|
       wants.html { redirect_to parent_url }
-      wants.js { render :nothing => true }
+      wants.js
     end
   end
 end

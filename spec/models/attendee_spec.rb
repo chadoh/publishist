@@ -26,12 +26,6 @@ describe Attendee do
     @a.should be_valid
   end
 
-  it "gives errors if both person_id and person_name are set" do
-    @a.person = @p
-    @a.person_name = "Krisped Rice"
-    @a.should_not be_valid
-  end
-
   describe "#name_and_email" do
     it "returns the attendee's name & email as 'first last, email@ddress' if associated with a person" do
       @a.person = @p

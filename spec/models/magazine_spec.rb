@@ -11,6 +11,20 @@ describe Magazine do
     should have_many(:roles).through(:positions)
   }
 
+  describe "#count_of_scores" do
+    it "initializes to 0" do
+      m = Magazine.create(count_of_scores: nil)
+      m.count_of_scores.should == 0
+    end
+  end
+
+  describe "#sum_of_scores" do
+    it "initializes to 0" do
+      m = Magazine.new(sum_of_scores: nil)
+      m.sum_of_scores.should == 0
+    end
+  end
+
   describe "#nickname" do
     it "defaults to 'next'" do
       mag = Magazine.new
@@ -167,9 +181,9 @@ describe Magazine do
     end
 
     it "returns 'the <nickname> magazine' if the title isn't set" do
-      mag.title = nil
-      mag.present_name.should == "the #{mag.nickname} magazine"
-      mag.to_s.should == "the #{mag.nickname} magazine"
+      mag.update_attributes title: nil
+      mag.to_s(:reload).should == "the #{mag.nickname} magazine"
+      mag.present_name.should  == "the #{mag.nickname} magazine"
     end
   end
 

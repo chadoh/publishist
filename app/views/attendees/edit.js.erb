@@ -2,15 +2,15 @@ $('li.attendee').removeClass('grayed-out');
 
 $('form.attendee').replaceWith("<%=
   escape_javascript(
-    render :partial => 'form', :locals => { :attendee => [resource.meeting, resource] }
+    render :partial => 'form', :locals => { :attendee => [@attendee.meeting, @attendee] }
   )
 %>");
 $('input#attendee_answer').focus();
 
-$('li#attendee_<%= resource.id %>').addClass('grayed-out')
-  .find('a.edit').replaceWith("<%=
+$('li#attendee_<%= @attendee.id %>').addClass('grayed-out')
+  .find('nav').html("<%=
     escape_javascript(
-      button_to "Cancel", meeting_attendee_path(resource.meeting, resource),
+      button_to "Cancel", meeting_attendee_path(@attendee.meeting, @attendee),
                 :method => :put,
                 :class => 'link',
                 :remote => true

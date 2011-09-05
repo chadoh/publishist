@@ -3,7 +3,6 @@ Feature: People check out a meeting
   Folks want to view them.
   But they gots to be signed in.
 
-  @wip
   Scenario: I am not signed in. And I visit a meeting.
     Given I, Waldo Emerson, have an account but am not signed in
     And I am on the first meeting page

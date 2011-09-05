@@ -12,7 +12,7 @@ describe PagesController do
   describe "routing" do
     it "routes a magazine's cover to /magazines/mag-slug/c" do
       path = magazine_page_path(@mag, page = @mag.pages.first)
-      path.should == "/magazines/fruit-blots/#{page.title.downcase}"
+      path.should == "/magazines/the-fruit-blots-magazine/#{page.title.downcase}"
       # { get: path }.should route_to(
       #   controller: 'pages',
       #   action:     'show',
@@ -22,7 +22,7 @@ describe PagesController do
 
     it "routes page creation to /magazines/mag-slug/pages" do
       path = magazine_pages_path(@mag)
-      path.should == '/magazines/fruit-blots/pages'
+      path.should == '/magazines/the-fruit-blots-magazine/pages'
       # { post: path }.should route_to(
       #   controller: 'pages',
       #   action:     'create'

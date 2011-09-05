@@ -58,6 +58,7 @@ class Magazine < ActiveRecord::Base
   after_initialize "self.nickname = 'next' if self.nickname.blank?"
   after_initialize :accepts_from_after_latest_or_perhaps_today
   after_initialize :accepts_until_six_months_later
+  after_initialize :score_counters_cannot_be_nil
 
   default_scope order("accepts_submissions_until DESC")
 
@@ -216,6 +217,13 @@ protected
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
       then errors.add :accepts_submissions_until, "can't occurr during another magazine"
+    end
+  end
+
+  def score_counters_cannot_be_nil
+    if new_record?
+      self.sum_of_scores   = 0
+      self.count_of_scores = 0
     end
   end
 end

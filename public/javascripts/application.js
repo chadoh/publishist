@@ -56,6 +56,7 @@ $(function(){
             updateData = {};
         console.info("original: '" + original + "',", "value: '" + value + "'");
         if (original != value) {
+          $(this).attr("data-original", value);
           updateData[model] = {};
           updateData[model][attribute] = value;
           $.ajax({

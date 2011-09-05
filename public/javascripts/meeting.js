@@ -62,11 +62,4 @@ $(function(){
       $(this).submit(); }
   });
 
-  $('nav.actions a.edit').live('click', function(e){
-    e.preventDefault();
-    $.ajax({
-      url: $(this).attr('href'),
-      dataType: 'script'
-    });
-  });
 });
