@@ -6,7 +6,7 @@ class AddCountOfScoresAndSumOfScoresToMagazines < ActiveRecord::Migration
     end
     Magazine.all.each do |m|
       packlet_ids = m.meetings.collect(&:packlets).flatten.collect &:id
-      count = Score.where(:packlet_id + packlet_ids).length
+      count = Score.where(packlet_id: packlet_ids).length
       sum = Score.sum('amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})") unless packlet_ids.blank?
       m.update_attributes(
         :count_of_scores => count,

@@ -1088,7 +1088,7 @@ article#submissions section > header > h2, article.meetings section > header > h
   border-style: dashed;
   border-width: 0.063em;
   padding: -0.063em;
-  border-color: #f8f8f8;
+  border-color: silver;
 }
 
 /* line 183, ../../../app/stylesheets/screen.sass */

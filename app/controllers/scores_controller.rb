@@ -15,7 +15,7 @@ class ScoresController < InheritedResources::Base
   def update
     update! do |success, failure|
       success.html { redirect_to meeting_path(resource.packlet.meeting) }
-      success.js
+      success.js   { if @score.destroyed? then render :destroy else render :update end }
 
       failure.html { redirect_to meeting_path(resource.packlet.meeting) }
       failure.js   { head :not_acceptable }

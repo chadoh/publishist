@@ -6,7 +6,7 @@ class MagazinesController < InheritedResources::Base
 
   def index
     @orphaned_meetings = Meeting.where(:magazine_id => nil)
-    @magazines = person_signed_in? ? Magazine.all : Magazine.where(:published_on ^ nil)
+    @magazines = person_signed_in? ? Magazine.all : Magazine.where('published_on IS NOT ?', nil)
   end
 
   def show
@@ -37,7 +37,7 @@ class MagazinesController < InheritedResources::Base
   end
 
   def publish
-    winners = Submission.where(:id + params[:submission_ids])
+    winners = Submission.where(id: params[:submission_ids])
     resource.publish winners
     flash[:notice] = "Now make it look pretty! You can add cover art & such to a page with the "
     flash[:notice] += "big X near the bottom left of each page, you can drag submissions to different "

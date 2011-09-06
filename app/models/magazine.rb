@@ -75,9 +75,9 @@ class Magazine < ActiveRecord::Base
 
     submission_ids = self.meetings.collect(&:packlets).flatten.collect(&:submission_id).uniq
     if self.published? && options[:all] != true
-      Submission.where :id + submission_ids, :state => Submission.state(:published)
+      Submission.where(id: submission_ids).where(state: Submission.state(:published))
     else
-      Submission.where :id + submission_ids
+      Submission.where(id: submission_ids)
     end
   end
 
@@ -88,13 +88,13 @@ class Magazine < ActiveRecord::Base
   end
 
   def highest_scores how_many = 50
-    self.submissions.where(:state >> Submission.state(:scored)) \
+    self.submissions.where(state: Submission.state(:scored)) \
       .sort {|a,b| b.average_score <=> a.average_score } \
       .shift(how_many)
   end
 
   def all_scores_above this_score
-    self.submissions.where(:state >> Submission.state(:scored)) \
+    self.submissions.where(state: Submission.state(:scored)) \
       .reject {|s| s.average_score < this_score } \
       .sort {|a,b| b.average_score <=> a.average_score }
   end
@@ -168,8 +168,9 @@ class Magazine < ActiveRecord::Base
 
   class << self
     def current
-      where(:accepts_submissions_from  < Date.today,
-            :accepts_submissions_until > Date.today).first
+      where('accepts_submissions_from  < ? AND ' + \
+            'accepts_submissions_until > ?',
+            Date.today, Date.today).first
     end
   end
 
@@ -205,15 +206,19 @@ protected
 
   def magazine_ranges_dont_conflict
     mags = Magazine.where(
-      :accepts_submissions_from  < self.accepts_submissions_from,
-      :accepts_submissions_until > self.accepts_submissions_from
+      'accepts_submissions_from  < ? AND ' + \
+      'accepts_submissions_until > ?',
+      self.accepts_submissions_from,
+      self.accepts_submissions_from
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
       then errors.add :accepts_submissions_from,  "can't occurr during another magazine"
     end
     mags = Magazine.where(
-      :accepts_submissions_from  < self.accepts_submissions_until,
-      :accepts_submissions_until > self.accepts_submissions_until
+      'accepts_submissions_from  < ? AND ' + \
+      'accepts_submissions_until > ?',
+      self.accepts_submissions_until,
+      self.accepts_submissions_until
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
       then errors.add :accepts_submissions_until, "can't occurr during another magazine"

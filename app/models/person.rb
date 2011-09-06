@@ -168,7 +168,7 @@ class Person < ActiveRecord::Base
       ranks.collect {|r| r.person}
     end
     def editor
-      rank = Rank.where(:rank_type >> 3, :rank_end >> nil).first.try(:person)
+      rank = Rank.where(rank_type: 3, rank_end: nil).first.try(:person)
     end
     def coeditor
       rank = Rank.where(:rank_type => 2, :rank_end => nil).first

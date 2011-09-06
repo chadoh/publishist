@@ -30,8 +30,8 @@ protected
   def belongs_to_a_magazine
     unless self.magazine.present?
       mag = Magazine.where(
-        :accepts_submissions_from  < self.datetime,
-        :accepts_submissions_until > self.datetime
+        'accepts_submissions_from  < ? AND ' + \
+        'accepts_submissions_until > ?', self.datetime, self.datetime
       ).first
       self.magazine = mag.presence || Magazine.order("accepts_submissions_until DESC").first
     end

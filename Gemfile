@@ -25,7 +25,6 @@ gem 'delayed_job'
 gem 'devise'
 gem 'escape_utils'
 gem 'foreigner'
-gem 'meta_where'
 gem 'rack-recaptcha', require: 'rack/recaptcha'
 gem 'oa-core'
 gem 'workless' # automatically start & stop workers (on Heroku or locally) for DJ
