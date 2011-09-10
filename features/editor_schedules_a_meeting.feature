@@ -27,7 +27,7 @@ Feature: Editor schedules a meetings
   Scenario: Editor changes a meeting's question
     Given there is a meeting scheduled
     And I am on the meetings page
-    When I follow "/"
+    When I follow "⚙"
     And I fill in "Question" with "What is the energy of your color?"
     And I press "Update Meeting"
     Then I should see "What is the energy of your color?"

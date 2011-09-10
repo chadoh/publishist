@@ -27,7 +27,7 @@ Feature: the staff list shows staff for a magazine and allows the editor to spec
     When I press "X"
     Then I should not see my name under "Editor"
 
-    When I follow "/"
+    When I follow "⚙"
     And I fill in "Name" with "Coeditor"
     And I press "Save"
     Then I should see "Coeditor"

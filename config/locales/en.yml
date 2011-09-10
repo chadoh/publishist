@@ -5,7 +5,7 @@ en:
   subtitle: 'A Penn State Literary Magazine'
   actions: 'Actions'
   show: 'Show'
-  edit: 'Edit'
+  edit: '&#x2699;'
   destroy: 'Delete'
   are_you_sure: 'Are you sure?'
   submit: 'Submit'

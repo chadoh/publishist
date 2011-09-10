@@ -19,7 +19,7 @@
         Submit by #{pretty_date(magazine.accepts_submissions_until)}
     - if editor?
       .small.sans.right
-        = link_to "&nbsp;/".html_safe, edit_magazine_url(magazine), title: 'Edit'
+        = link_to t('edit').html_safe, edit_magazine_url(magazine), title: 'Edit'
         = button_to "x", magazine_url(magazine),
           method: :delete,
           confirm: "You're saying this magazine never actually happened. All of its meetings will be unassociated with any magazine. If this magazine has been published, all of the submissions submitted for it will be simply \"Scored\" again.",
