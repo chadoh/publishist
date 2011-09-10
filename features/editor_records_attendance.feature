@@ -14,7 +14,7 @@ Feature: an editor records attendee
     And I press "Add"
     Then I should see a "Peas Cold" link under "Attendance"
 
-    When I press "x"
+    When I press "×"
     Then I should not see "Peas Cold"
 
   @pending

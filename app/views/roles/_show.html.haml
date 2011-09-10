@@ -4,7 +4,7 @@
     = mail_to person.email, '', class: 'mailto'
   = link_to person.name, person
   - if editor?
-    = button_to "X", role_path(role),
+    = button_to 'X', role_path(role),
                      method: :delete,
                      class: "link",
                      remote: true,

@@ -9,9 +9,9 @@
     %footer{ id: position.id, class: position.roles.empty? && 'add-role' }
       %nav
         = link_to "+", new_role_path(position_id: position.id), class: 'toggle-adding-role', title: "Add someone as #{position.name}"
-        .right.small.sans
+        .right.small
           = link_to t('edit').html_safe, edit_position_path(position), title: "Edit the term \"#{position.name}\""
-          = button_to "x", position_path(position),
+          = button_to t('destroy').html_safe, position_path(position),
                            method: :delete,
                            class: "link",
                            remote: true,

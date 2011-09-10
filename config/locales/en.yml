@@ -6,7 +6,7 @@ en:
   actions: 'Actions'
   show: 'Show'
   edit: '&#x2699;'
-  destroy: 'Delete'
+  destroy: '&times;'
   are_you_sure: 'Are you sure?'
   submit: 'Submit'
   submit!: 'Submit!'

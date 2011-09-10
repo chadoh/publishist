@@ -32,5 +32,5 @@ Feature: the staff list shows staff for a magazine and allows the editor to spec
     And I press "Save"
     Then I should see "Coeditor"
 
-    When I press "x"
+    When I press "×"
     Then I should not see "Coeditor"
