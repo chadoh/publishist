@@ -38,14 +38,12 @@ describe Packlet do
   end
 
   it "does not allow a submission to be reviewed in multiple magazines" do
-    magazine  = Factory.create :magazine
-    magazine2 = Factory.create :magazine
-    meeting   = Factory.create :meeting
-    meeting2  = Factory.create :meeting
-    meeting .update_attributes :magazine => magazine
-    meeting2.update_attributes :magazine => magazine2
+    magazine1  = Factory.create :magazine
+    magazine2  = Factory.create :magazine
+    meeting1   = Factory.create :meeting, magazine: magazine1
+    meeting2   = Factory.create :meeting, magazine: magazine2
     submission = Factory.create :submission
-    meeting.submissions << submission
+    meeting1.submissions << submission
     packlet = Packlet.create(
       :meeting => meeting2,
       :submission => submission
