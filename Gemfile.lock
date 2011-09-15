@@ -137,6 +137,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     multi_json (1.0.3)
+    newrelic_rpm (3.1.2)
     nokogiri (1.5.0)
     oa-core (0.2.6)
     orm_adapter (0.0.5)
@@ -266,6 +267,7 @@ DEPENDENCIES
   heroku_san
   hoptoad_notifier
   inherited_resources
+  newrelic_rpm
   oa-core
   paperclip
   pg (~> 0.11)

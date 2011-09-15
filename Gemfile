@@ -57,3 +57,7 @@ group :test do
   # gem 'launchy'
   gem 'database_cleaner'
 end
+
+group :production do
+  gem 'newrelic_rpm'
+end
