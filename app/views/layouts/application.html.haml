@@ -8,10 +8,10 @@
     = stylesheet_link_tag 'compiled/print', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
-    = hoptoad_javascript_notifier
     - jquery    = ENV['JQUERY']    || 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
     - jquery_ui = ENV['JQUERY_UI'] || 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'
     = javascript_include_tag jquery, jquery_ui
+    = airbrake_javascript_notifier
     = csrf_meta_tag
     = yield :head
   %body

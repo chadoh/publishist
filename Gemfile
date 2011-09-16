@@ -32,7 +32,7 @@ gem 'workless' # automatically start & stop workers (on Heroku or locally) for D
 # Mailers
 gem 'handlers', :git => "git://github.com/chadoh/handlers.git"
 
-gem 'hoptoad_notifier'
+gem 'airbrake'
 
 group :development do
   gem 'annotate-models'
