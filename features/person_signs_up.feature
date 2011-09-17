@@ -3,24 +3,31 @@ Feature: a person signs up for the website
   and vote on shit.
   I need an account.
 
+  @wip
   Scenario: I sign up on the site
     Given I am on the sign up page
     When I fill in the following:
       | Email                 | ghengis.khan@example.com |
       | First name            | Ghengis                  |
       | Last name             | Khan                     |
-      | Password              | secret                   |
-      | Password confirmation | secret                   |
     And I fail the CAPTCHA
     And I press "Sign Up!"
     Then I should see "You might not be a human."
     And all my information should still be filled out in the form
 
-    When I fill in the following:
-      | Password confirmation | secret |
-      | Password              | secret |
-    And I pass the CAPTCHA
+    When I pass the CAPTCHA
     And I press "Sign Up!"
+    Then I should see "Almost there!"
+    And I should receive an email with subject "You're nearly signed up for Problem Child!"
+
+    When I open the email
+    And I follow "set your password" in the email
+    Then I should see "Almost there!"
+
+    When I fill in the following:
+      | Password              | secret |
+      | Password confirmation | secret |
+    And I press "Save"
     Then I should see "You have signed up successfully."
     And I should be on the home page
 
