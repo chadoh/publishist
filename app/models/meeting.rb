@@ -12,17 +12,16 @@
 #
 
 class Meeting < ActiveRecord::Base
+  belongs_to :magazine
+
   has_many :attendees, :dependent => :destroy
   has_many :people, :through => :attendees
   has_many :packlets, :dependent => :destroy, :order => 'position', :include => :submission
   has_many :submissions, :through => :packlets
 
-  belongs_to :magazine
-
   default_scope order("datetime ASC")
 
   after_save :submissions_have_been_reviewed_or_queued
-
   before_create :belongs_to_a_magazine
 
 protected

@@ -16,6 +16,7 @@ class Packlet < ActiveRecord::Base
   belongs_to :submission, :include => :author
 
   has_many :scores
+  has_one :magazine, through: :meeting
 
   acts_as_list :scope => :meeting
 
@@ -37,8 +38,8 @@ class Packlet < ActiveRecord::Base
 protected
 
   def only_reviewed_in_one_magazine
-    if !!self.meeting && !!self.meeting.magazine
-      if (self.submission.meetings.collect(&:magazine) - [self.meeting.try(:magazine)]).present?
+    if !!self.meeting && !!self.magazine
+      if (self.submission.reload.meetings.collect(&:magazine) - [self.magazine]).present?
         errors.add(:submission, "can only be reviewed in one magazine")
       end
     end
