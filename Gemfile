@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
 gem 'rake',  '0.8.7'
-gem 'rails', '3.0.7'
-gem 'pg', '~> 0.9.0'
+gem 'rails', '3.1.0'
+gem 'pg', '~> 0.11'
 
 # Views
 gem 'haml'
@@ -32,7 +32,7 @@ gem 'workless' # automatically start & stop workers (on Heroku or locally) for D
 # Mailers
 gem 'handlers', :git => "git://github.com/chadoh/handlers.git"
 
-gem 'hoptoad_notifier'
+gem 'airbrake'
 
 group :development do
   gem 'annotate-models'
@@ -56,4 +56,8 @@ group :test do
   gem 'shoulda'
   # gem 'launchy'
   gem 'database_cleaner'
+end
+
+group :production do
+  gem 'newrelic_rpm'
 end
