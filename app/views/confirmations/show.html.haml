@@ -1,0 +1,8 @@
+- title 'Almost there!'
+
+= simple_form_for resource do |f|
+  = devise_error_messages!
+  - if @requires_password
+    = f.input :password, required: true
+    = f.input :password_confirmation, required: true
+    = f.submit "Get going"

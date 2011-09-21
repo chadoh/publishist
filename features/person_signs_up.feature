@@ -7,9 +7,9 @@ Feature: a person signs up for the website
   Scenario: I sign up on the site
     Given I am on the sign up page
     When I fill in the following:
-      | Email                 | ghengis.khan@example.com |
-      | First name            | Ghengis                  |
-      | Last name             | Khan                     |
+      | Email                 | example@example.com |
+      | First name            | Ghengis             |
+      | Last name             | Khan                |
     And I fail the CAPTCHA
     And I press "Sign Up!"
     Then I should see "You might not be a human."
@@ -17,7 +17,7 @@ Feature: a person signs up for the website
 
     When I pass the CAPTCHA
     And I press "Sign Up!"
-    Then I should see "Almost there!"
+    Then I should see "Ok! Now go check your email to finish signing up."
     And I should receive an email with subject "You're nearly signed up for Problem Child!"
 
     When I open the email

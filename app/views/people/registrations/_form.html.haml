@@ -5,8 +5,6 @@
   = f.input :middle_name
   = f.input :last_name
   - if params[:action] == 'new' || params[:action] == 'create'
-    = f.input :password
-    = f.input :password_confirmation
     .input.captcha
       %label{ for: "recaptcha_response_field" } Prove you're a human
       = raw recaptcha_tag(:challenge, display: { theme: 'white' })

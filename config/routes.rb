@@ -1,11 +1,19 @@
 Pc::Application.routes.draw do
 
-  devise_for :people, controllers: { sessions: 'people/sessions', registrations: 'people/registrations' } do
+  as :person do
+    put '/person/confirmation' => 'confirmations#update', as: :update_user_confirmation
+  end
+
+  devise_for :people, controllers: {
+    sessions: 'people/sessions',
+    registrations: 'people/registrations',
+    confirmations: 'confirmations'
+  } do
     get "sign_in", to: "people/sessions#new", as: "sign_in"
     get "sign_up", to: "devise/registrations#new"
   end
-  get "submit" => "submissions#new", :as => :new_submission
 
+  get "submit" => "submissions#new", :as => :new_submission
   get "welcome/index"
 
   resources :roles, only: [:new, :create, :destroy]
