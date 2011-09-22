@@ -3,7 +3,6 @@ Feature: a person signs up for the website
   and vote on shit.
   I need an account.
 
-  @wip
   Scenario: I sign up on the site
     Given I am on the sign up page
     When I fill in the following:
@@ -22,13 +21,14 @@ Feature: a person signs up for the website
 
     When I open the email
     And I follow "set your password" in the email
-    Then I should see "Almost there!"
+    Then I should see "Almost there"
 
     When I fill in the following:
       | Password              | secret |
       | Password confirmation | secret |
-    And I press "Save"
-    Then I should see "You have signed up successfully."
+    And I press "Get going"
+    Then I should see "You're legit now."
+    And I should see "Ghengis Khan"
     And I should be on the home page
 
   @webmember

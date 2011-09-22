@@ -1,5 +1,5 @@
 class ConfirmationsController < Devise::PasswordsController
-  # PUT /resource/confirmation
+  # PUT /person/confirmation
   def update
     with_unconfirmed_confirmable do
       if @confirmable.has_no_password?
@@ -16,11 +16,12 @@ class ConfirmationsController < Devise::PasswordsController
     end
 
     if !@confirmable.errors.empty?
+      p @confirmable.errors
       render_with_scope :new
     end
   end
 
-  # GET /resource/confirmation?confirmation_token=abcdef
+  # GET /person/confirmation?confirmation_token=abcdef
   def show
     with_unconfirmed_confirmable do
       if @confirmable.has_no_password?
@@ -40,7 +41,7 @@ class ConfirmationsController < Devise::PasswordsController
 
 protected
   def with_unconfirmed_confirmable
-    @confirmable = Person.find_or_initialize_with_error_by(:confirmation_token, params[:confirmation_token])
+    @confirmable = Person.find_or_initialize_with_error_by(:confirmation_token, params[:confirmation_token].presence || params[:person][:confirmation_token])
     if !@confirmable.new_record?
       @confirmable.only_if_unconfirmed {yield}
     end

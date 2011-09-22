@@ -38,7 +38,6 @@ group :development do
   gem 'annotate-models'
   gem 'heroku_san'
   gem 'rails3-generators'
-  gem 'ruby-debug19'
 end
 
 group :development, :test do

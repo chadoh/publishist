@@ -43,7 +43,6 @@ GEM
       activesupport
       builder
     annotate-models (1.0.4)
-    archive-tar-minitar (0.5.2)
     arel (2.2.1)
     aws-s3 (0.6.2)
       builder
@@ -63,7 +62,6 @@ GEM
       ffi (~> 1.0.6)
     chunky_png (1.2.0)
     cocaine (0.1.0)
-    columnize (0.3.4)
     compass (0.11.5)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -133,8 +131,6 @@ GEM
       spruz (~> 0.2.8)
     launchy (2.0.5)
       addressable (~> 2.2.6)
-    linecache19 (0.5.12)
-      ruby_core_source (>= 0.1.4)
     mail (2.3.0)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -202,16 +198,6 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
-    ruby-debug-base19 (0.11.25)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby_core_source (>= 0.1.4)
-    ruby-debug19 (0.11.6)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby-debug-base19 (>= 0.11.19)
-    ruby_core_source (0.1.5)
-      archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.4)
     rush (0.6.7)
       session
@@ -293,7 +279,6 @@ DEPENDENCIES
   rb-fsevent
   rdiscount
   rspec-rails
-  ruby-debug19
   sass
   shoulda
   simple_form
