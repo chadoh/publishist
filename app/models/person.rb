@@ -53,13 +53,10 @@ class Person < ActiveRecord::Base
   include Gravtastic
   gravtastic :size => 200, :default => "http://s3.amazonaws.com/pcmag/children.png", :rating => 'R'
 
-  def name
-    "#{first_name}#{" #{last_name}" if last_name}"
-  end
-
   def full_name
     "#{first_name}#{" #{middle_name}" if middle_name}#{" #{last_name}" if last_name}"
   end
+  alias :name :full_name
 
   def editor?
     rank = self.highest_rank

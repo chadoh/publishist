@@ -1,9 +1,7 @@
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = error_messages
-  = f.input :email, autofocus: "true"
-  = f.input :first_name
-  = f.input :middle_name
-  = f.input :last_name
+  = f.input :name, required: true, autofocus: 'true'
+  = f.input :email, required: true, placeholder: "This is what you you'll use to sign in."
   - if params[:action] == 'new' || params[:action] == 'create'
     .input.captcha
       %label{ for: "recaptcha_response_field" } Prove you're a human
@@ -16,11 +14,8 @@
 
 :javascript
   $(function(){
-    $("#person_first_name, #person_last_name").keyup(function(){
-      $("span.name").html($("#person_first_name").val());
-      if ($("#person_last_name").val() != "") {
-        $("span.name").append(" " + $("#person_last_name").val());
-      }
+    $("#person_name").keyup(function(){
+      $("span.name").html($(this).val());
       $("#your_name_looks_like").fadeIn();
     });
 
