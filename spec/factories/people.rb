@@ -5,4 +5,5 @@ Factory.define :person do |f|
   f.sequence(:email) {|n| "chad#{n}@chadoh.com" }
   f.password "secret"
   f.password_confirmation "secret"
+  f.confirmed_at Time.now
 end
