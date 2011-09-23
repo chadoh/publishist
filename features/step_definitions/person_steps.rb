@@ -8,6 +8,7 @@ Given /^the following users? exists?:$/ do |table|
       :password              => "password",
       :password_confirmation => "password"
     )
+    @user.confirm!
   end
 end
 
@@ -21,13 +22,14 @@ end
 
 Given /^I, ([^,]+), have an account but am not signed in$/ do |name|
   f, l = name.split(' ')
-  Person.create(
+  p = Person.create(
     :first_name            => f,
     :last_name             => l,
     :email                 => "#{name.parameterize}@example.com",
     :password              => 'secret',
     :password_confirmation => 'secret'
   )
+  p.confirm!
 end
 
 Given /^I am signed in as an editor named "([^"]*)"$/ do |name|
@@ -39,6 +41,7 @@ Given /^I am signed in as an editor named "([^"]*)"$/ do |name|
     :password              => 'secret',
     :password_confirmation => 'secret'
   )
+  p.confirm!
   Rank.create(
     :rank_type  => 3,
     :rank_start => Time.now,

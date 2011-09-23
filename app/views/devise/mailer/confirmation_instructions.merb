@@ -1,0 +1,28 @@
+You almost have a full-fledged account, <%=  @resource.first_name  %>!
+===============================================
+
+Just [one click to set your password][1] and you can start enjoying the
+Problem Child website to the fullest!
+
+  [1]: <%= confirmation_url @resource, confirmation_token: @resource.confirmation_token %>
+
+You say you didn't sign up?
+===========================
+
+If you didn't make an account, then the editor probably signed you up. This
+is super cool because it will let the editor and you see everything you've
+submitted in one nice place, it will let the coeditor and you keep track of
+how everything you've submitted is scored, and when you have things published
+they will show up on your profile for everyone to see. Neat!
+
+So go ahead and give that link up there a click. It'll be swell.
+
+You've never submitted to Problem Child nor have you heard of it?
+=================================================================
+
+If you have no idea why you might be getting this email, someone probably
+signed up with your email address by accident. We encourage you to [check out
+our little literary magazine][2] anyhow. Don't worry, nothing malicious can be
+done with the account that this person made as you.
+
+  [2]: http://problemchildmag.com

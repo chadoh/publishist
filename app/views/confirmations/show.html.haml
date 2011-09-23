@@ -1,0 +1,11 @@
+- title "Almost there, #{resource.first_name}!"
+
+%p Just set your password.
+
+= simple_form_for resource, :url => update_user_confirmation_path, :html => {:method => 'put'}, :id => 'activation-form' do |f|
+  = devise_error_messages!
+  - if @requires_password
+    = f.input :password, required: true
+    = f.input :password_confirmation, required: true
+  = f.input :confirmation_token, as: :hidden, name: 'confirmation_token'
+  = f.submit "Get going"

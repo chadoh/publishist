@@ -38,14 +38,6 @@ class Person < ActiveRecord::Base
 
   attr_reader :password
 
-  #ENCRYPT = Digest::SHA256
-  #def self.find_by_email_and_password(email, password)
-    #person = self.find_by_email(email)
-    #if person and person.encrypted_password == ENCRYPT.hexdigest(password + "chrouiNt" + person.password_salt)
-      #return person
-    #end
-  #end
-
   has_many :ranks,       dependent:   :destroy
   has_many :submissions, foreign_key: 'author_id'
   has_many :attendees,   dependent:   :destroy
@@ -159,6 +151,36 @@ class Person < ActiveRecord::Base
     "#{full_name}, #{email}"
   end
 
+  def to_s
+    name
+  end
+
+  # function to set the password without knowing the current password used in our confirmation controller.
+  def attempt_set_password(params)
+    p = {}
+    p[:password] = params[:password]
+    p[:password_confirmation] = params[:password_confirmation]
+    update_attributes(p)
+  end
+  # function to return whether a password has been set
+  def has_no_password?
+    self.encrypted_password.blank?
+  end
+
+  # function to provide access to protected method unless_confirmed
+  def only_if_unconfirmed
+    unless_confirmed {yield}
+  end
+
+  def password_required?
+    # Password is required if it is being set, but not for new records
+    if !persisted?
+      false
+    else
+      !password.nil? || !password_confirmation.nil?
+    end
+  end
+
   class << self
     extend ActiveSupport::Memoizable
 
@@ -183,10 +205,6 @@ class Person < ActiveRecord::Base
     end
 
     memoize :editors, :editor, :coeditor, :find_or_create
-  end
-
-  def to_s
-    name
   end
 
   memoize :full_name, :name_and_email, :name, :editor?, :the_editor?, :the_coeditor?, :is_staff?, :current_ranks, :can_enter_scores_for?, :staffships, :coeditorships, :editorships, :highest_rank

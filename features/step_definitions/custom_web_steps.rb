@@ -32,12 +32,13 @@ end
 
 Given /^(?:there is )a person named "([^"]*)" with email address "([^"]*)"$/ do |name, email|
   name = name.split
-  Person.create(
+  p = Person.create(
     :first_name => name.first,
     :last_name  => name.last,
     :email      => email,
     :password   => 'secret',
     :password_confirmation => 'secret')
+  p.confirm!
 end
 
 Then /^(?:|I )should see "([^"]*)" (\d+)(?:x|X| times?)?$/ do |phrase, count|
