@@ -74,11 +74,11 @@ describe Person do
       Person.find_or_create("#{@person.email}").should == @person
     end
 
-    it "returns nil if no email address is given" do
-      bads = ['"Chad Ostrowski"', 'stephen']
+    it "returns false if no email address is given" do
+      bads = ['"Chad Ostrowski"', 'stephen', '']
       bads.each do |bad|
         person = Person.find_or_create bad
-        person.should be_nil
+        person.should be_false
       end
     end
 
@@ -91,24 +91,23 @@ describe Person do
     end
 
     it "creates a new person if formatted as '(\")some text(\"), email@ddress.com'" do
-      pending "need to fork Devise and make confirmable work by setting password after receiving email" do
-        news = [
-          ['"', 'Steven', ' ', ''                      , '' , 'Dunlop,' , '" stephen.dunlop@gmail.com'],
-          ['"', 'Marvin', ' ', 'the'                   , ' ', 'Martian,', '" marvin@yes.mars'],
-          ['"', 'Wendy' , ' ', 'with many middle names', ' ', 'Yoder,'  , '" walace.yoder@gmail.com'],
-          ['' , 'No'    , ' ', 'quotes'                , ' ', 'here!,'  , '  whatchagonedo@bout.it'],
-          ['' , 'Máça'  , ' ', ''                      , '' , 'Fascia,' , '  desli@yiis.net'],
-          ['' , 'Morgan', '' , ''                      , '' , ','       , '  morgan@yes.gov']
-        ]
-        news.each do |new|
-          person = Person.find_or_create new.join('')
+      news = [
+        ['"', 'Steven', ' ', ''                      , '' , 'Dunlop' , '," ', 'stephen.dunlop@gmail.com'],
+        ['"', 'Marvin', ' ', 'the'                   , ' ', 'Martian', '," ', 'marvin@yes.mars'],
+        ['"', 'Wendy' , ' ', 'with many middle names', ' ', 'Yoder'  , '," ', 'walace.yoder@gmail.com'],
+        ['' , 'No'    , ' ', 'quotes'                , ' ', 'here!'  , ',  ', 'whatchagonedo@bout.it'],
+        ['' , 'Máça'  , ' ', ''                      , '' , 'Fascia' , ',  ', 'desli@yiis.net'],
+        ['' , 'Morgan', '' , ''                      , '' , ''       , ',  ', 'morgan@yes.gov']
+      ]
+      news.each do |new|
+        person = Person.find_or_create new.join('')
 
-          person.should_not be_nil
-          person.should_not be_verified
-          person.first_name.should == new[1]
-          person.middle_name.to_s.should == new[3]
-          person.last_name.to_s.should == new[5]
-        end
+        person.should_not be_nil
+        person.should_not be_confirmed
+        person.first_name.should == new[1]
+        person.middle_name.to_s.should == new[3]
+        person.last_name.to_s.should == new[5]
+        person.email.to_s.should == new[7]
       end
     end
   end
