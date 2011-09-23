@@ -200,8 +200,23 @@ class Person < ActiveRecord::Base
       chad = Person.find_by_email "chad.ostrowski@gmail.com"
     end
     def find_or_create formatted_name_and_email
-      email = formatted_name_and_email.split(' ').last
+      return nil if formatted_name_and_email.blank?
+      name = formatted_name_and_email.gsub(',','').split
+      email = name.delete_at(name.length - 1).gsub(/[<>]/, '')
       person = Person.find_by_email email
+      unless person
+        f = name.delete_at(0).try(:gsub, /['"]/, '')
+        if f.present? && email.present?
+          person = Person.new(
+            first_name:  f,
+            last_name:   name.delete_at(name.length - 1).try(:gsub, /['"]/, ''),
+            middle_name: name.join(' '),
+            email:       email
+          )
+          person = person.save ? person : nil
+        end
+      end
+      person
     end
 
     memoize :editors, :editor, :coeditor, :find_or_create

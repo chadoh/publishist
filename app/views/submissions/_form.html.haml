@@ -16,7 +16,11 @@
   = f.input :state, :as => :hidden
   - if person_signed_in?
     - if the_editor?
-      = f.input :author, :as => :string, :label => "Author (you can submit for anyone with an account here)", :input_html => { :value => "#{resource.author(true).name_and_email if @submission.author(true)}" }
+      = f.input :author,
+        as:         :string,
+        label:      "Author (you can submit for anyone)",
+        input_html: { :value => "#{resource.author(true).name_and_email if @submission.author(true)}" },
+        hint:       "You can even make an account for someone by entering their name & email"
       = f.input :author_name, :label => "To submit for someone without an account, put their name here"
       = f.input :author_email, :label => "...and their email address here"
     - else
