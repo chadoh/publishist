@@ -30,7 +30,6 @@ Feature: a person signs up for the website
     And I should see "Ghengis Khan"
     And I should be on the home page
 
-  @wip
   @webmember
   Scenario: I edit my profile
     Given I am on my profile page
