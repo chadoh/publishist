@@ -53,12 +53,16 @@ class Person < ActiveRecord::Base
   include Gravtastic
   gravtastic :size => 200, :default => "http://s3.amazonaws.com/pcmag/children.png", :rating => 'R'
 
-  def name
-    "#{first_name}#{" #{last_name}" if last_name}"
-  end
-
   def full_name
     "#{first_name}#{" #{middle_name}" if middle_name}#{" #{last_name}" if last_name}"
+  end
+  alias :name :full_name
+
+  def name= name
+    name = name.split
+    self.first_name = name.delete_at(0).try(:gsub, /['"]/, '')
+    self.last_name = name.delete_at(name.length - 1).try(:gsub, /['"]/, '')
+    self.middle_name = name.join(' ')
   end
 
   def editor?
@@ -205,14 +209,9 @@ class Person < ActiveRecord::Base
       email = name.delete_at(name.length - 1).gsub(/[<>]/, '')
       person = Person.find_by_email email
       unless person
-        f = name.delete_at(0).try(:gsub, /['"]/, '')
-        if f.present? && email.present?
-          person = Person.new(
-            first_name:  f,
-            last_name:   name.delete_at(name.length - 1).try(:gsub, /['"]/, ''),
-            middle_name: name.join(' '),
-            email:       email
-          )
+        if name.present? && email.present?
+          person = Person.new(email: email)
+          person.name = name.join(' ')
           person = person.save ? person : nil
         end
       end

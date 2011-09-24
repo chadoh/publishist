@@ -24,6 +24,31 @@ describe Person do
     end
   end
 
+  describe "#name=" do
+    let(:person){ Person.new }
+    it "sets a first name, if only one word is provided" do
+      person.name = 'Wes'
+      person.first_name.should == 'Wes'
+    end
+    it "sets a first name and a last name, if two words are provided" do
+      person.name = "Wes Anderson"
+      person.first_name.should == 'Wes'
+      person.last_name.should == 'Anderson'
+    end
+    it "sets a first, middle, and last name if 3 words are provided" do
+      person.name = 'Wes Neo Anderson'
+      person.first_name.should == 'Wes'
+      person.middle_name.should == 'Neo'
+      person.last_name.should == 'Anderson'
+    end
+    it "sets the middle name to _all_ the middle names, if >3 words are provided" do
+      person.name = "Wes Thomas A. 'Neo' Anderson"
+      person.first_name.should == 'Wes'
+      person.middle_name.should == "Thomas A. 'Neo'"
+      person.last_name.should == 'Anderson'
+    end
+  end
+
   describe "#can_enter_scores_for?(meeting)" do
     let(:person)  { Factory.create :person }
     let(:meeting) { Factory.create :meeting }
