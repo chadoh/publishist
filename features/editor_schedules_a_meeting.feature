@@ -13,6 +13,7 @@ Feature: Editor schedules a meetings
     And I press "Create Meeting"
     Then I should see "Does he love you?"
 
+  @wip
   @coeditor
   Scenario: Coeditor creates a meeting
     Given I am on the new meeting page
@@ -20,7 +21,7 @@ Feature: Editor schedules a meetings
       | When     | 2010-10-27 07:30 PM |
       | Question | Does he love you?   |
     And I press "Create Meeting"
-    And I am on the magazines page
+    And I am on the meetings page
     Then I should see "Does he love you?"
 
   @editor
