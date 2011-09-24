@@ -13,7 +13,7 @@ Then /^my submission should still be filled in$/ do
 end
 
 Then /^all my information should still be filled out in the form$/ do
-  ['Email', 'First name', 'Last name'].each do |field|
+  ['Name', 'Email'].each do |field|
     find_field(field).value.should_not be_blank
   end
 end

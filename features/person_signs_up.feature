@@ -6,9 +6,8 @@ Feature: a person signs up for the website
   Scenario: I sign up on the site
     Given I am on the sign up page
     When I fill in the following:
-      | Email                 | example@example.com |
-      | First name            | Ghengis             |
-      | Last name             | Khan                |
+      | Name  | Ghengis Khan        |
+      | Email | example@example.com |
     And I fail the CAPTCHA
     And I press "Sign Up!"
     Then I should see "You might not be a human."
@@ -31,13 +30,14 @@ Feature: a person signs up for the website
     And I should see "Ghengis Khan"
     And I should be on the home page
 
+  @wip
   @webmember
   Scenario: I edit my profile
     Given I am on my profile page
     When I follow "Edit account details"
     Then I should see "Edit Account"
 
-    When I fill in "First name" with "Ghengis"
+    When I fill in "Name" with "Ghengis"
     And I fill in "Current password" with "secret"
     And press "Save Changes"
     Then I should see "Ghengis" 2 times

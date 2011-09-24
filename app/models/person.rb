@@ -58,6 +58,13 @@ class Person < ActiveRecord::Base
   end
   alias :name :full_name
 
+  def name= name
+    name = name.split
+    self.first_name = name.delete_at(0).try(:gsub, /['"]/, '')
+    self.last_name = name.delete_at(name.length - 1).try(:gsub, /['"]/, '')
+    self.middle_name = name.join(' ')
+  end
+
   def editor?
     rank = self.highest_rank
     rank = rank.rank_type if rank
@@ -202,14 +209,9 @@ class Person < ActiveRecord::Base
       email = name.delete_at(name.length - 1).gsub(/[<>]/, '')
       person = Person.find_by_email email
       unless person
-        f = name.delete_at(0).try(:gsub, /['"]/, '')
-        if f.present? && email.present?
-          person = Person.new(
-            first_name:  f,
-            last_name:   name.delete_at(name.length - 1).try(:gsub, /['"]/, ''),
-            middle_name: name.join(' '),
-            email:       email
-          )
+        if name.present? && email.present?
+          person = Person.new(email: email)
+          person.name = name.join(' ')
           person = person.save ? person : nil
         end
       end
