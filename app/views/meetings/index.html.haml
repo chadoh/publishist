@@ -6,6 +6,14 @@
 - if editor?
   %p= link_to t('.new_meeting'), new_meeting_path
 
+- if person_signed_in? and @orphaned_meetings.present?
+  %section
+    %header
+      %h2 Orphaned Meetings
+    %ul.meetings
+      - for meeting in @orphaned_meetings
+        = render :partial => 'meetings/show', :locals => { :meeting => meeting }
+
 %ol.meetings
   - for meeting in collection
     = render :partial => 'show', :locals => { :meeting => meeting }

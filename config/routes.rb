@@ -50,7 +50,8 @@ Pc::Application.routes.draw do
 
   resources :magazines do
     member do
-      get 'highest_scores', :as => 'highest_scored_for'
+      get 'highest_scores', as: 'highest_scored_for'
+      get 'whos_who_n_staff_n_such', as: 'staff_for'
       post :publish
       post :notify_authors_of_published_magazine, as: "notify_authors_of_published"
     end

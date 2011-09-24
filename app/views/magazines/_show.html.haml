@@ -6,9 +6,10 @@
     %header
       %h2
         = magazine.published? ? link_to(magazine, [magazine]) : magazine
-      = link_to "Browse online", [magazine] if magazine.published?
-      = link_to "Download pdf", magazine.pdf.url, 'data-target' => 'new' if magazine.pdf?
-      = link_to "View meetings", meetings_path(m: magazine.id) if staff? || editor?
+      = link_to "Browse online", [magazine]                               if magazine.published?
+      = link_to "Download pdf",  magazine.pdf.url, 'data-target' => 'new' if magazine.pdf?
+      = link_to "View meetings", meetings_path(m: magazine.id)            if staff? || editor?
+      = link_to "Staff list",    staff_for_magazine_path(magazine)        if editor?
     %span.timeframe
       - if magazine.published?
         Published on

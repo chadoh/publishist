@@ -11,7 +11,6 @@ Feature: the staff list shows staff for a magazine and allows the editor to spec
     And I follow "Add a new position"
     And I fill in "Name" with "Editor"
     And I press "Save"
-
     Then I should see "Person" under "Editor"
 
     When I fill in "Person" with my email address
@@ -34,3 +33,13 @@ Feature: the staff list shows staff for a magazine and allows the editor to spec
 
     When I press "×"
     Then I should not see "Coeditor"
+
+  @editor
+  Scenario: I set up a staff list for an unpublished magazine
+    Given there is a magazine
+    And I am on the magazines page
+    Then I should see "Staff list"
+
+    When I follow "Staff list"
+    Then I should see "Add a new position"
+    And I should see "Staff for the next magazine"

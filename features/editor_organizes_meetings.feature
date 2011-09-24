@@ -6,5 +6,5 @@ Feature: an editor organizes meetings into various magazines
   @editor
   Scenario: an orphaned meeting
     Given there is a meeting with the question "Orly?" that is somehow orphaned
-    When I am on the magazines page
+    When I am on the meetings page
     Then I should see "Orly?"
