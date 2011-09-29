@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926114929) do
+ActiveRecord::Schema.define(:version => 20110904221228) do
 
   create_table "abilities", :force => true do |t|
     t.string   "key"
@@ -220,8 +220,5 @@ ActiveRecord::Schema.define(:version => 20110926114929) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_foreign_key "position_abilities", "abilities", :name => "position_abilities_ability_id_fk"
-  add_foreign_key "position_abilities", "positions", :name => "position_abilities_position_id_fk"
 
 end
