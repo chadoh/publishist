@@ -46,6 +46,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rb-fsevent'
   gem 'growl'
+  gem 'spork', '>= 0.9.0.rc'
+  gem 'guard-spork'
 end
 
 group :test do

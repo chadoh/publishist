@@ -13,7 +13,6 @@ Feature: Editor schedules a meetings
     And I press "Create Meeting"
     Then I should see "Does he love you?"
 
-  @wip
   @coeditor
   Scenario: Coeditor creates a meeting
     Given I am on the new meeting page
