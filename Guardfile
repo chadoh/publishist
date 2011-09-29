@@ -1,14 +1,4 @@
-guard 'spork', bundler: false, cucumber: false, rspec_env: { 'RAILS_ENV' => 'test' } do
-  watch('config/application.rb')
-  watch('config/environment.rb')
-  watch(%r{^config/environments/.+\.rb$})
-  watch(%r{^config/initializers/.+\.rb$})
-  watch('spec/spec_helper.rb')
-  watch(%r{^spec/support/.+\.rb$})
-  watch(%r{^spec/factories/.+\.rb$})
-end
-
-guard 'rspec', cli: '--drb', all_after_pass: false, all_on_start: false, version: 2 do
+guard 'rspec', all_after_pass: false, all_on_start: false, version: 2 do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
