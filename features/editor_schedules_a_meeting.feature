@@ -13,7 +13,6 @@ Feature: Editor schedules a meetings
     And I press "Create Meeting"
     Then I should see "Does he love you?"
 
-
   Scenario: Editor changes a meeting's question
     Given I'm in a position for the current magazine with the "orchestrates" ability
     And there is a meeting scheduled

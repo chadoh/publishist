@@ -71,13 +71,28 @@ Feature: people of various ranks submit something
     Then I should be on my profile page
     And "editor@problemchildmag.com" should receive no email
 
-  Scenario: An anonymous visitor submits something
+  @wip
+  Scenario: Someone with an account submits something while not signed in
+    Given the following user exists:
+      | name         | email             |
+      | Roger Rabbit | roger@example.com |
+    And I am on the new submission page
+    When I fill in the following:
+      | Your Name          | Pickles           |
+      | Your Email Address | roger@example.com |
+      | Title              | Merry Wives       |
+      | Body               | of Pilates        |
+    And I press "Submit!"
+    Then "roger@example.com" should receive an email with subject "Someone (hopefully you!) submitted to Problem Child for you!"
+
+  @wip
+  Scenario: An anonymous visitor submits something & thus signs up
     Given I am on the new submission page
     When I fill in the following:
       | Title              | Jackson, a favorite       |
       | Body               | of both Johnny and Sufjan |
-      | Your Name          | I'll never tell!          |
-      | Your Email Address | someone@cool.com          |
+      | Your Name          | This Person               |
+      | Your Email Address | example@example.com       |
     And I fail the CAPTCHA
     And I press "Submit!"
     Then I should see "You might be a bot!"
@@ -86,6 +101,8 @@ Feature: people of various ranks submit something
     When I pass the CAPTCHA
     And I press "Submit!"
     Then I should be on the home page
+    And "editor@problemchildmag.com" should receive an email
+    And I should receive an email with subject "You're almost signed up for Problem Child!"
 
     When "editor@problemchildmag.com" opens the email
     Then they should see "I'll never tell! <admin@problemchildmag.com>" in the email "From" header
