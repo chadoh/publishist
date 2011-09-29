@@ -55,9 +55,9 @@ class SubmissionsController < InheritedResources::Base
         format.html {
           if person_signed_in?
             @submission.save
+            @submission.has_been(:submitted, :by => current_person) if params[:commit] == "Submit!"
             redirect_to submissions_url and return if current_person.the_editor? && params[:commit] != t('preview')
             redirect_to person_url(current_person)
-            @submission.has_been(:submitted, :by => current_person) if params[:commit] == "Submit!"
           else
             if recaptcha_valid?
               @submission.save

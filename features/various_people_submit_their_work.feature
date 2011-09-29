@@ -21,6 +21,18 @@ Feature: people of various ranks submit something
     Then I should not see "Submit!"
 
   @editor
+  Scenario: The editor submits for someone without making them an account
+    Given I am on the new submission page
+    When I fill in the following:
+      | Title               | Old King Scole      |
+      | Body                | Chewed Tobaccy      |
+      | Author              |                     |
+      | their name          | Someone             |
+      | their email address | someone@example.com |
+    And I press "Submit!"
+    Then the submission should be submitted, not draft
+
+  @editor
   Scenario: The editor edits an anonymous submission
     Given there is a submission called "The King's Teeth"
     And I am on the first submission page

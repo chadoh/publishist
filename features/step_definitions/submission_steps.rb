@@ -38,3 +38,7 @@ Given /^I have gone to the meeting and scored "([^"]*)"$/ do |title|
   meeting.people << @user
   submission.packlets.first.scores.create :amount => 6, :attendee => meeting.attendees.first
 end
+
+Then /^the submission should be submitted, not draft$/ do
+  Submission.first.state.should == :submitted
+end
