@@ -6,4 +6,10 @@ class Ability < ActiveRecord::Base
 
   validates_presence_of :key
   validates_presence_of :description
+
+  default_scope order(:id)
+
+  def to_s
+    key.humanize.downcase
+  end
 end

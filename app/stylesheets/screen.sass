@@ -528,8 +528,60 @@ ul.positions
   +no-bullets
   margin-left: 0
   > li.position
-    h3
+    header
       border-bottom: 1px dashed $lgray
+      +trailer
+      h3
+        +inline-block
+        +trailer(0)
+      ul.abilities
+        +inline-block
+        float: right
+        margin-left: 0
+        li
+          @extend .mono
+          font-size: 0.8em
+          font-weight: normal
+          +inline-block
+          +nowrap
+          width: .7em
+          overflow: hidden
+          border: 1px solid $lgray
+          +border-radius(2em)
+          margin-left: .7em
+          line-height: 0.6em
+          padding: 0.3em
+          letter-spacing: 0.2em
+          cursor: default
+          +box-shadow($lgray 0 0 3px, rgba($lgray, .6) 0 0 6px inset)
+          +transition-property
+          +transition-duration(0.7s)
+          +transition-delay(0.3s)
+          &:first-child
+            margin-left: 0
+          &:hover
+            width: 13em
+            letter-spacing: normal
+          &#ability_1
+            +box-shadow(rgba($blue, 0.8) 0 0 6px inset)
+            &:hover
+              width: 8em
+          &#ability_2
+            +box-shadow(rgba($green, 0.8) 0 0 6px inset)
+            &:hover
+              width: 4em
+          &#ability_3
+            +box-shadow(rgba($yellow, 0.8) 0 0 6px inset)
+            &:hover
+              width: 8em
+          &#ability_4
+            +box-shadow(rgba($orange, 0.8) 0 0 6px inset)
+            &:hover
+              width: 3.5em
+          &#ability_5
+            +box-shadow(rgba($lgray, 0.8) 0 0 6px inset)
+            &:hover
+              width: 6.5em
     +inline-block
     vertical-align: top
     width: 41%
@@ -538,10 +590,11 @@ ul.positions
     +border-radius(1em 0 0)
     padding-bottom: 0
     margin: 0 1.5em 1.5em 0
-    ul.people
+    ul.roles
       margin-left: 0
       +trailer
     footer
+      +leader(-1)
       > nav
         display: block
       > form

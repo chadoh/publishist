@@ -475,18 +475,52 @@ label.boolean {
 }
 
 /* line 282, ../../../app/stylesheets/_defaults.sass */
+label.collection_check_boxes {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  font-weight: normal;
+  margin: 0;
+  width: 98%;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+label.collection_check_boxes {
+  *display: inline;
+}
+
+/* line 287, ../../../app/stylesheets/_defaults.sass */
+input[type=checkbox] {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+input[type=checkbox] {
+  *display: inline;
+}
+
+/* line 289, ../../../app/stylesheets/_defaults.sass */
+div.check_boxes span {
+  display: block;
+}
+
+/* line 292, ../../../app/stylesheets/_defaults.sass */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 285, ../../../app/stylesheets/_defaults.sass */
+/* line 295, ../../../app/stylesheets/_defaults.sass */
 label {
   margin-top: 1.5em;
   display: block;
   font-weight: bold;
 }
 
-/* line 292, ../../../app/stylesheets/_defaults.sass */
+/* line 302, ../../../app/stylesheets/_defaults.sass */
 .textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
   font-family: Cambria, Georgia, serif;
   font-size: 1em;
@@ -510,28 +544,28 @@ label {
   height: 2.571em;
 }
 
-/* line 305, ../../../app/stylesheets/_defaults.sass */
+/* line 315, ../../../app/stylesheets/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 316, ../../../app/stylesheets/_defaults.sass */
+/* line 326, ../../../app/stylesheets/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 318, ../../../app/stylesheets/_defaults.sass */
+/* line 328, ../../../app/stylesheets/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 321, ../../../app/stylesheets/_defaults.sass */
+/* line 331, ../../../app/stylesheets/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 325, ../../../app/stylesheets/_defaults.sass */
+/* line 335, ../../../app/stylesheets/_defaults.sass */
 input[type=submit], button {
   font-size: 1em;
   line-height: 1.5em;
@@ -553,21 +587,21 @@ input[type=submit], button {
   -o-box-shadow: #4a4a4a 1px 1px 2px 0;
   box-shadow: #4a4a4a 1px 1px 2px 0;
 }
-/* line 336, ../../../app/stylesheets/_defaults.sass */
+/* line 346, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
   -moz-box-shadow: #4a4a4a 0 0 2px 0;
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
   -o-box-shadow: #4a4a4a 0 0 2px 0;
   box-shadow: #4a4a4a 0 0 2px 0;
 }
-/* line 338, ../../../app/stylesheets/_defaults.sass */
+/* line 348, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -o-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
 }
-/* line 340, ../../../app/stylesheets/_defaults.sass */
+/* line 350, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
@@ -583,14 +617,14 @@ input[type=submit].link, button.link {
   display: inline;
   color: #db8322;
 }
-/* line 343, ../../../app/stylesheets/_defaults.sass */
+/* line 353, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:hover, button.link:hover {
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
 }
-/* line 345, ../../../app/stylesheets/_defaults.sass */
+/* line 355, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:active, button.link:active {
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
   -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
@@ -620,16 +654,16 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 353, ../../../app/stylesheets/_defaults.sass */
+/* line 363, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 355, ../../../app/stylesheets/_defaults.sass */
+/* line 365, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
 
-/* line 359, ../../../app/stylesheets/_defaults.sass */
+/* line 369, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:hover {
   background-color: #e0ca44;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e7d770), color-stop(100%, #e0ca44));
@@ -640,7 +674,7 @@ span[contenteditable]:hover {
   background: linear-gradient(#e7d770, #e0ca44);
   cursor: pointer;
 }
-/* line 363, ../../../app/stylesheets/_defaults.sass */
+/* line 373, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:focus {
   background-color: #e7a863;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eec18f), color-stop(100%, #e7a863));
@@ -656,11 +690,11 @@ span[contenteditable]:focus {
   box-shadow: silver 0 0 3px inset;
 }
 
-/* line 375, ../../../app/stylesheets/_defaults.sass */
+/* line 385, ../../../app/stylesheets/_defaults.sass */
 .grayed-out {
   color: silver;
 }
-/* line 372, ../../../app/stylesheets/_defaults.sass */
+/* line 382, ../../../app/stylesheets/_defaults.sass */
 .grayed-out a, .grayed-out input.link, .grayed-out input {
   color: silver;
 }

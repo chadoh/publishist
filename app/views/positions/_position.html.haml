@@ -2,6 +2,10 @@
   %header
     %h3
       = position.name
+    - if editor? && abilities = position.abilities
+      %ul.abilities
+        - for ability in abilities
+          %li{ title: ability.description }[ability]= ability
   %ul.roles
     - for role in position.roles
       = render partial: 'roles/show', locals: { role: role }
