@@ -8,7 +8,8 @@ describe Person do
     should have_many(:attendees)
     should have_many(:meetings).through(:attendees)
     should validate_presence_of(:first_name)
-    should have_many(:roles).dependent(:nullify)
+    should have_many(:roles).dependent(:destroy)
+    should have_many(:positions).through(:roles)
   }
 
   describe "#name_and_email" do

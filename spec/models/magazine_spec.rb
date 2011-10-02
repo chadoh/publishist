@@ -11,34 +11,6 @@ describe Magazine do
     should have_many(:roles).through(:positions)
   }
 
-  describe "#count_of_scores" do
-    it "initializes to 0" do
-      m = Magazine.create(count_of_scores: nil)
-      m.count_of_scores.should == 0
-    end
-  end
-
-  describe "#sum_of_scores" do
-    it "initializes to 0" do
-      m = Magazine.new(sum_of_scores: nil)
-      m.sum_of_scores.should == 0
-    end
-  end
-
-  describe "#nickname" do
-    it "defaults to 'next'" do
-      mag = Magazine.new
-      mag.nickname.should == "next"
-    end
-  end
-
-  describe "#notification_sent" do
-    it "defaults to 'false'" do
-      mag = Magazine.new
-      mag.notification_sent?.should be_false
-    end
-  end
-
   describe "#accepts_submissions_from" do
     context "when this is the first magazine" do
       it "defaults to today" do
@@ -90,6 +62,54 @@ describe Magazine do
 
       orig.accepts_submissions_until = orig.accepts_submissions_until - 1.day
       orig.should be_valid
+    end
+  end
+
+  describe "#count_of_scores" do
+    it "initializes to 0" do
+      m = Magazine.create(count_of_scores: nil)
+      m.count_of_scores.should == 0
+    end
+  end
+
+  describe "#sum_of_scores" do
+    it "initializes to 0" do
+      m = Magazine.new(sum_of_scores: nil)
+      m.sum_of_scores.should == 0
+    end
+  end
+
+  describe "#nickname" do
+    it "defaults to 'next'" do
+      mag = Magazine.new
+      mag.nickname.should == "next"
+    end
+  end
+
+  describe "#notification_sent" do
+    it "defaults to 'false'" do
+      mag = Magazine.new
+      mag.notification_sent?.should be_false
+    end
+  end
+
+  describe "#positions:" do
+    it "a magazine has the same positions as the previous magazine, by default" do
+      a1 = Ability.create key: 'communicates', description: "Can see the names of submitters and communicate with them."
+      a2 = Ability.create key: 'scores',       description: "Can enter (and see) scores for all submissions."
+      mag1 = Magazine.create title: "the Bow Nur issue"
+      mag1.positions << [
+                          Position.create(name: "Admiral", abilities: [a1]),
+                          Position.create(name: "Chef",    abilities: [a2])
+                        ]
+      mag2 = Magazine.create title: "the salad issue"
+      p1 = mag2.positions.first
+      p2 = mag2.positions.last
+
+      p1.name.should == "Admiral"
+      p1.abilities.should == [a1]
+      p2.name.should == "Chef"
+      p2.abilities.should == [a2]
     end
   end
 
@@ -215,6 +235,14 @@ describe Magazine do
       it "creates 5 pages at minimum: 1 for cover, 1 for Notes, 1 for Staff, 1 for ToC, and 1 per 3 submissions after that" do
         @mag.pages.length.should == 5
       end
+    end
+
+    it "when called correctly destroys any positions that have the 'disappears' ability" do
+      a1 = Ability.create key: 'disappears', description: "This is a temporary position that will disappear once the magazine is published."
+      mag = Magazine.create title: "the cat issue", accepts_submissions_from: 3.months.ago, accepts_submissions_until: Date.yesterday
+      mag.positions << [Position.create(name: "Admiral", abilities: [a1])]
+      mag.publish []
+      mag.positions.reload.should be_empty
     end
   end
 

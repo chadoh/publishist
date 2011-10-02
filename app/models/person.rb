@@ -42,7 +42,8 @@ class Person < ActiveRecord::Base
   has_many :submissions, foreign_key: 'author_id'
   has_many :attendees,   dependent:   :destroy
   has_many :meetings,    through:     :attendees
-  has_many :roles,       dependent:   :nullify
+  has_many :roles,       dependent:   :destroy
+  has_many :positions,   through:     :roles
 
   validates_presence_of :first_name
 

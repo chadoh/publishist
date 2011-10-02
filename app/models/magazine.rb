@@ -59,6 +59,7 @@ class Magazine < ActiveRecord::Base
   after_initialize :accepts_from_after_latest_or_perhaps_today
   after_initialize :accepts_until_six_months_later
   after_initialize :score_counters_cannot_be_nil
+  after_create     :same_positions_as_previous_mag
 
   default_scope order("accepts_submissions_until DESC")
 
@@ -116,6 +117,11 @@ class Magazine < ActiveRecord::Base
       self.update_attributes :published_on => Date.today
       for sub in published do sub.has_been(:published) end
       for sub in rejected  do sub.has_been(:rejected)  end
+
+      # get rid of ALL positions marked with 'disappears' (even if they somehow ended up on other mags)
+      for position in Position.joins(:abilities).where(abilities: { key: 'disappears' })
+        position.destroy
+      end
 
       self.pages = [
         cover = Page.create(:title => 'Cover'),
@@ -229,6 +235,15 @@ protected
     if new_record?
       self.sum_of_scores   = 0
       self.count_of_scores = 0
+    end
+  end
+
+  def same_positions_as_previous_mag
+    previous_mag = Magazine.where("accepts_submissions_from < ?", self.accepts_submissions_from).first
+    if previous_mag
+      for position in previous_mag.positions
+        self.positions << Position.create(name: position.name, abilities: position.abilities)
+      end
     end
   end
 end

@@ -20,6 +20,6 @@ class CreateAbilities < ActiveRecord::Migration
     Ability.create key: 'scores',       description: "Can enter (and see) scores for all submissions."
     Ability.create key: 'orchestrates', description: "Can organize meetings, record attendance, publish magazines, and specify staff."
     Ability.create key: 'views',        description: "Can view meetings and attendees."
-    Ability.create key: 'disappears',   description: "This is a temporary position that will disappear once the magazine is published."
+    Ability.create key: 'disappears',   description: "Submitters & attendees are automatically added to this group. It will disappear once the magazine is published."
   end
 end

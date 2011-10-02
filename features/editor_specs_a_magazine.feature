@@ -12,7 +12,7 @@ Feature: An editor specs a magazine
 
     When I follow "Set up a new magazine"
     And I press "Save"
-    Then I should be on the magazines page
+    Then I should be on the magazine's staff page
 
   @editor
   Scenario: I edit a magazine

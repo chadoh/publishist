@@ -39,8 +39,9 @@ class Submission < ActiveRecord::Base
   validate "errors.add :body, 'cannot be blank.'",
     :if => Proc.new {|s| s.body.blank? && s.title.blank? }
 
-  after_find :reviewed_if_meeting_has_occurred
+  after_find    :reviewed_if_meeting_has_occurred
   before_create :set_position_to_nil
+  after_create  :author_has_positions_with_the_disappears_ability
 
   def magazine
     self.reload.meetings.first.try(:magazine)
@@ -127,6 +128,10 @@ protected
 
   def set_position_to_nil
     self.position = nil
+  end
+
+  def author_has_positions_with_the_disappears_ability
+    self.author.positions << Position.joins(:abilities).where(abilities: { key: 'disappears'}) if self.author
   end
 
 end

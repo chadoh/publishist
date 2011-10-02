@@ -35,6 +35,15 @@ describe Submission do
     submission.reload.should be_reviewed
   end
 
+  it "puts the submitter into all positions that have the 'disappears' ability upon creation" do
+    ab  = Ability.create key: 'disappears', description: "Submitters & attendees are automatically added to this group. It will disappear once the magazine is published."
+    pos = Magazine.create.positions.create name: "The Folks", abilities: [ab]
+    per = Person.create name: "Baxter", email: 'example@example.com'
+    sub = per.submissions.create title: "marblecake", body: "also, the game"
+    per.positions.should be_present
+    per.positions.first.should == pos
+  end
+
   describe "#has_been" do
     it "moves the sumbission into the specified state" do
       sub = Factory.build :submission

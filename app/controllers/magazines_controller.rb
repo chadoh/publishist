@@ -19,7 +19,7 @@ class MagazinesController < InheritedResources::Base
   end
 
   def create
-    create!(:notice => nil) { magazines_path }
+    create!(:notice => nil) { staff_for_magazine_path(@magazine) }
   end
 
   def update
