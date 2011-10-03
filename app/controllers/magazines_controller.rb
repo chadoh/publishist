@@ -55,7 +55,7 @@ class MagazinesController < InheritedResources::Base
     redirect_to request.referer, notice: "Everyone who submitted was notified that they can now view the magazine online"
   end
 
-  def whos_who_n_staff_n_such
+  def staff_list
     @magazine = Magazine.find params[:id]
   end
 
