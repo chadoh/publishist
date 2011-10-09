@@ -1,11 +1,11 @@
 %li[person]
   %span.name<
-    - if editor?
+    - if orchestrates? @magazine
       = mail_to person.email, '', class: 'mailto'
     = link_to person.name, person
   %span.rank<
     = person.current_ranks.blank? ? "&nbsp;".html_safe : person.current_ranks.join(', ')
-  - if editor?
+  - if orchestrates? @magazine
     %span.promote-to<
       Promote:
       %ul

@@ -2,14 +2,14 @@
   %header
     %h3
       = position.name
-    - if editor? && abilities = position.abilities
+    - if orchestrates? @magazine && abilities = position.abilities
       %ul.abilities
         - for ability in abilities
           %li{ title: ability.description }[ability]= ability
   %ul.roles
     - for role in position.roles
       = render partial: 'roles/show', locals: { role: role }
-  - if editor?
+  - if orchestrates? @magazine
     %footer{ id: position.id, class: position.roles.empty? && 'add-role' }
       %nav
         = link_to "+", new_role_path(position_id: position.id), class: 'toggle-adding-role', title: "Add someone as #{position.name}"

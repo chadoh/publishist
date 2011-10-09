@@ -10,6 +10,7 @@ describe Person do
     should validate_presence_of(:first_name)
     should have_many(:roles).dependent(:destroy)
     should have_many(:positions).through(:roles)
+    should have_many(:abilities).through(:positions)
   }
 
   describe "#name_and_email" do
@@ -134,6 +135,156 @@ describe Person do
         person.middle_name.to_s.should == new[3]
         person.last_name.to_s.should == new[5]
         person.email.to_s.should == new[7]
+      end
+    end
+  end
+
+  context "permissions" do
+    describe "#orchestrates?(resource)" do
+      before do
+        @ability  = Ability.create key: 'orchestrates', description: "Can organize meetings, record attendance, publish magazines, and specify staff."
+        @person   = Person.create name: "Francisco Ferdinand", email: 'example@example.com'
+      end
+      context "when passed a magazine" do
+        before do
+          @magazine = Magazine.create
+          @position = @magazine.positions.create name: 'Pirate'
+          @person.positions << @position
+        end
+        it "returns true if the person is in a position with the 'orchestrates' ability for the given magazine" do
+          @position.abilities << @ability
+          @person.orchestrates?(@magazine).should be_true
+        end
+        it "returns false if the person is in a position with the 'orchestrates' ability for a different magazine" do
+          mag2 = Magazine.create
+          position2 = mag2.positions.create name: 'Smithy'
+          @person.positions << position2
+          position2.abilities << @ability
+          @person.orchestrates?(@magazine).should be_false
+        end
+      end
+
+      context "when passed a meeting" do
+        before do
+          @magazine = Magazine.create
+          @meeting = @magazine.meetings.create question: 'Is this all there is?', datetime: Time.now
+          @position = @magazine.positions.create name: 'Pirate'
+          @person.positions << @position
+        end
+        it "returns true if the person is in a position with the 'orchestrates' ability for the given meeting's magazine" do
+          @position.abilities << @ability
+          @person.orchestrates?(@meeting).should be_true
+        end
+        it "returns false if the person is in a position with the 'orchestrates' ability for a different meeting's magazine" do
+          mag2      = Magazine.create
+          position2 = mag2.positions.create name: 'Smithy'
+          @person.positions   << position2
+          meeting2  = mag2.meetings.create question: 'Is this all there is?', datetime: Time.now
+          position2.abilities << @ability
+          @person.orchestrates?(@meeting).should be_false
+        end
+      end
+
+      context "when passed :currently or :now" do
+        before do
+          @magazine = Magazine.create(
+            accepts_submissions_from:  6.months.ago,
+            accepts_submissions_until: 1.month.ago,
+            title:                     'peaches'
+          )
+          @position = @magazine.positions.create name: 'Mage'
+          @position.abilities << @ability
+          @person.positions << @position
+        end
+
+        it "returns false if the person is in a position with the 'orchestrates' ability for a magazine that no longer accepts submissions" do
+          @person.orchestrates?(:currently).should be_false
+        end
+
+        it "returns true if the person is in a position with the 'orchestrates' ability for a magazine that still accepts submissions" do
+          mag2 = Magazine.create(accepts_submissions_until: 1.month.from_now)
+          pos2 = mag2.positions.create name: 'Sheepheard'
+          pos2.abilities << @ability
+          @person.positions << pos2
+          @person.orchestrates?(:currently).should be_true
+        end
+      end
+      context "when passed :any" do
+        before do
+          @magazine = Magazine.create(
+            accepts_submissions_from:  6.months.ago,
+            accepts_submissions_until: 1.month.ago,
+            title:                     'peaches'
+          )
+          @position = @magazine.positions.create name: 'Mage'
+          @position.abilities << @ability
+        end
+        it "returns true if the person is in a position with the 'orchestrates' ability for any magazine" do
+          @person.positions << @position
+          @person.orchestrates?(:any).should be_true
+        end
+        it "returns false if the person has no 'orchestrates' abilities whatsoever" do
+          @person.orchestrates?(:any).should be_false
+        end
+      end
+    end
+
+    describe "#scores?(resource)" do
+      before do
+        @ability  = Ability.create key: 'scores', description: "Scores stuff"
+        @person   = Person.create name: "Francisco Ferdinand", email: 'example@example.com'
+        @magazine = Magazine.create
+        @meeting = @magazine.meetings.create question: 'Is this all there is?', datetime: Time.now
+        @position = @magazine.positions.create name: 'Pirate'
+        @position.abilities << @ability
+        @person.positions << @position
+      end
+      it "returns true if the person is in a position with the 'orchestrates' ability for the given meeting's magazine" do
+        @person.scores?(@meeting).should be_true
+      end
+      it "returns false if the person has another ability (but not 'scores') for the meeting's magazine" do
+        @ability.update_attribute :key, 'edits'
+        @person.scores?(@meeting).should be_false
+      end
+    end
+
+    describe "#views?(resource)" do
+      context "when resource.is_a Magazine" do
+        it "returns true when the person has the 'orchestrates' or the 'views' ability for the given magazine" do
+          @ability   = Ability.create key: 'orchestrates', description: "Orchestrates stuff"
+          @ability2  = Ability.create key: 'views', description: "orchestrates stuff"
+          @person    = Person.create name: "Francisco Ferdinand", email: 'example@example.com'
+          @person2   = Person.create name: "Ferdinand Francisco", email: 'example2@example.com'
+          @magazine  = Magazine.create
+          @position  = @magazine.positions.create name: 'Corporal'
+          @position2 = @magazine.positions.create name: 'Mate'
+          @position.abilities << @ability
+          @position2.abilities << @ability2
+          @person.positions << @position
+          @person2.positions << @position2
+          @person.views?(@magazine).should be_true
+          @person2.views?(@magazine).should be_true
+        end
+      end
+      context "when resource == :any" do
+        it "returns true when the person has any associated positions with an 'orchestrates' ability" do
+          @ability  = Ability.create key: 'orchestrates', description: "Orchestrates stuff"
+          @person   = Person.create name: "Francisco Ferdinand", email: 'example@example.com'
+          @magazine = Magazine.create
+          @position = @magazine.positions.create name: 'Corporal'
+          @position.abilities << @ability
+          @person.positions << @position
+          @person.views?(:any).should be_true
+        end
+        it "returns true when the person has any associated positions with a 'views' ability" do
+          @ability  = Ability.create key: 'views', description: "Views stuff"
+          @person   = Person.create name: "Francisco Ferdinand", email: 'example@example.com'
+          @magazine = Magazine.create
+          @position = @magazine.positions.create name: 'Admiral'
+          @position.abilities << @ability
+          @person.positions << @position
+          @person.views?(:any).should be_true
+        end
       end
     end
   end

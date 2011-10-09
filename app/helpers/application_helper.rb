@@ -51,29 +51,21 @@ module ApplicationHelper
     end
   end
 
-  def editor?
-    @editor ||= person_signed_in? \
-      && (current_person.current_ranks.include?("Editor") \
-      ||  current_person.current_ranks.include?("Coeditor"))
-  end
-
   def the_editor?
     @the_editor ||= person_signed_in? \
       && current_person.current_ranks.include?("Editor")
   end
 
-  def the_coeditor?
-    @coeditor ||= person_signed_in? \
-      && current_person.current_ranks.include?("Coeditor")
+  def orchestrates? resource
+    person_signed_in? && current_person.orchestrates?(resource)
   end
 
-  def staff?
-    @staff ||= person_signed_in? \
-      && current_person.current_ranks.include?("Staff")
+  def scores? resource
+    person_signed_in? && current_person.scores?(resource)
   end
 
-  def member?
-    @member ||= person_signed_in?
+  def views? resource
+    person_signed_in? && current_person.views?(resource)
   end
 
   def editor_or_author? submission

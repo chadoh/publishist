@@ -3,7 +3,7 @@
   A meeting held on
   %time{ :datetime => @meeting.datetime }
     = @meeting.datetime.strftime("%A, %d %B %Y at %I:%M %p")
-- if editor?
+- if orchestrates? @meeting
   %p.actions
     = link_to t('.edit'), edit_meeting_path(@meeting)
 
@@ -13,7 +13,7 @@
   %ol.packlets
     - for packlet in @meeting.packlets
       = render :partial => 'packlets/show', :locals => { :packlet => packlet }
-  - if the_coeditor?
+  - if scores? @meeting
     %p= link_to "Enter scores for everyone", scores_for_meeting_path(@meeting)
 
 %section#attendance
@@ -23,7 +23,7 @@
     - for attendee in @meeting.attendees
       = render :partial => 'attendees/show', :locals => { :attendee => attendee }
 
-  - if editor?
+  - if orchestrates? @meeting
     = render :partial => "attendees/form", :locals => { :attendee => [@meeting, Attendee.new] }
 
 - javascript 'meeting'

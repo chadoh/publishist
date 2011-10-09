@@ -18,10 +18,10 @@
   - if submissions = @page.submissions
     = render "submissions/index", submissions: submissions
     - collapse_resources = true unless submissions.empty?
-  - if editor?
+  - if orchestrates? @magazine
     = render "add_resources", collapse: collapse_resources
   = render "pagination", magazine: @magazine, current_page: @page
-  - if editor? and not @magazine.notification_sent?
+  - if orchestrates? @magazine and not @magazine.notification_sent?
     .notify_authors_button
       Looking good?
       = button_to "Let everyone who submitted know it's been published!",

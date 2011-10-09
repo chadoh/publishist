@@ -70,8 +70,4 @@ protected
   def resource
     @person ||= Person.find(params[:id])
   end
-
-  def editor?
-    person_signed_in? && current_person.editor?
-  end
 end

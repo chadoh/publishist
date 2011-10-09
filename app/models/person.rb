@@ -38,12 +38,13 @@ class Person < ActiveRecord::Base
 
   attr_reader :password
 
-  has_many :ranks,       dependent:   :destroy
   has_many :submissions, foreign_key: 'author_id'
   has_many :attendees,   dependent:   :destroy
-  has_many :meetings,    through:     :attendees
+  has_many :ranks,       dependent:   :destroy
   has_many :roles,       dependent:   :destroy
+  has_many :meetings,    through:     :attendees
   has_many :positions,   through:     :roles
+  has_many :abilities,       through:     :positions
 
   validates_presence_of :first_name
 
@@ -186,6 +187,42 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def orchestrates? resource
+    if resource.is_a?(Symbol)
+      # currently only accepting ':now/:currently' and ':any'
+      if resource == :now or resource == :currently
+        mag_ids = Magazine.where("accepts_submissions_until > ?", 1.week.ago).collect(&:id)
+        positions = self.positions.select{|p| mag_ids.include? p.magazine_id }
+      elsif resource == :any
+        positions = self.positions
+      end
+    else
+      magazine = resource.is_a?(Magazine) ? resource : resource.magazine
+      positions = self.positions.select{|p| p.magazine == magazine}
+    end
+    positions.collect(&:abilities).flatten.select{|a| a.key == 'orchestrates' }.present?
+  end
+
+  def scores? resource
+    magazine = resource.is_a?(Magazine) ? resource : resource.magazine
+    self.positions.select{|p| p.magazine == magazine}\
+      .collect(&:abilities).flatten\
+      .select{|a| a.key == 'scores' }.present?
+  end
+
+  def views? resource
+    if resource.is_a?(Symbol)
+      # The only resource currently being passed is the symbol :any.
+      # Since we don't have to be aware of any others, let's accept any
+      positions = self.positions
+    else
+      magazine = resource.is_a?(Magazine) ? resource : resource.magazine
+      positions = self.positions.select{|p| p.magazine == magazine}
+    end
+    positions.collect(&:abilities).flatten\
+      .select{|a| a.key == 'views' || a.key == 'orchestrates' }.present?
+  end
+
   class << self
     extend ActiveSupport::Memoizable
 
@@ -200,9 +237,6 @@ class Person < ActiveRecord::Base
     def coeditor
       rank = Rank.where(:rank_type => 2, :rank_end => nil).first
       rank.person if rank
-    end
-    def chad
-      chad = Person.find_by_email "chad.ostrowski@gmail.com"
     end
     def find_or_create formatted_name_and_email
       return nil if formatted_name_and_email.blank?

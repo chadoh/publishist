@@ -8,8 +8,8 @@
         = magazine.published? ? link_to(magazine, [magazine]) : magazine
       = link_to "Browse online", [magazine]                               if magazine.published?
       = link_to "Download pdf",  magazine.pdf.url, 'data-target' => 'new' if magazine.pdf?
-      = link_to "View meetings", meetings_path(m: magazine.id)            if staff? || editor?
-      = link_to "Staff list",    staff_for_magazine_path(magazine)        if editor?
+      = link_to "View meetings", meetings_path(m: magazine.id)            if views? magazine
+      = link_to "Staff list",    staff_for_magazine_path(magazine)        if orchestrates? :any
     %span.timeframe
       - if magazine.published?
         Published on
@@ -18,7 +18,7 @@
         = timeframe(magazine.accepts_submissions_from, magazine.accepts_submissions_until)
       - else
         Submit by #{pretty_date(magazine.accepts_submissions_until)}
-    - if editor?
+    - if orchestrates? magazine
       .small.right
         = link_to t('edit').html_safe, edit_magazine_url(magazine), title: 'Edit magazine details; upload cover art & a pdf.'
         = button_to t('destroy').html_safe, magazine_url(magazine),
@@ -26,5 +26,5 @@
           confirm: "You're saying this magazine never actually happened. All of its meetings will be unassociated with any magazine. If this magazine has been published, all of the submissions submitted for it will be simply \"Scored\" again.",
           class: 'link destroy',
           title: "Destroy this magazine and everything associated with it."
-  - if editor? && (magazine.accepts_submissions_until < Time.now && magazine.published_on == nil)
+  - if orchestrates?(magazine) && (magazine.accepts_submissions_until < Time.now && magazine.published_on == nil)
     %div= link_to "View the highest-scored submissions", highest_scored_for_magazine_path(magazine)

@@ -3,7 +3,7 @@
     - for position in positions
       = render partial: 'positions/position', locals: { position: position }
 
-- if editor?
+- if orchestrates? @magazine
   :markdown
     #{link_to "Add a new position", new_position_path(magazine_id: @magazine.id)}  
     #{link_to "Remove the staff list from this page", [@page.staff_list], method: :delete if @page}

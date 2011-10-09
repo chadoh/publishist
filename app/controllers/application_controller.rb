@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   def editors_only
     unless person_signed_in? and current_person.editor?
-      flash[:notice] = "Only #{Person.editors.collect{|e| e.name }.join(" & ")} can see that."
+      flash[:notice] = "You're not allowed to see that."
       redirect_to root_url
     end
   end

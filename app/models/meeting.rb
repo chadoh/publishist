@@ -24,6 +24,8 @@ class Meeting < ActiveRecord::Base
   after_save :submissions_have_been_reviewed_or_queued
   before_create :belongs_to_a_magazine
 
+  validates_presence_of :datetime
+
 protected
 
   def belongs_to_a_magazine
