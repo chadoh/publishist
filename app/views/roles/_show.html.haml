@@ -1,9 +1,9 @@
 %li[role]
   - person = role.person
-  - if orchestrates? @magazine
+  - if orchestrates? role, :or_adjacent
     = mail_to person.email, '', class: 'mailto'
   = link_to person.name, person
-  - if orchestrates? @magazine
+  - if orchestrates? role, :or_adjacent
     = button_to 'X', role_path(role),
                      method: :delete,
                      class: "link",

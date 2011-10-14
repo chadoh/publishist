@@ -31,7 +31,8 @@ class Magazine < ActiveRecord::Base
   has_many :meetings,   dependent: :nullify, include: :submissions
   has_many :pages,      dependent: :destroy, order:   :position
   has_many :positions,  dependent: :destroy
-  has_many :roles,      through:   :positions
+  has_many :roles,      through:   :positions, dependent: :destroy
+  has_many :abilities,  through:   :positions, dependent: :destroy
   has_friendly_id :to_s, :use_slug => true
   has_attached_file :pdf,
     :storage        => :s3,

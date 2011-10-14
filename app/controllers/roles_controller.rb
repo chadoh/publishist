@@ -9,7 +9,8 @@ class RolesController < InheritedResources::Base
 
   def create
     params[:role][:person] = Person.find_or_create(params[:role][:person])
-    create! do |wants|
+    @role = Role.create params[:role]
+    respond_with(@role) do |wants|
       wants.html { redirect_to session[:return_to] }
       wants.js
     end

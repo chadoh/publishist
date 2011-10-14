@@ -5,6 +5,14 @@ GIT
     handlers (0.0.3)
       redcarpet (~> 1.12.0)
 
+GIT
+  remote: git://github.com/norman/friendly_id.git
+  revision: a093ff8725c88359dc47e7dbcc0ada6d8f686395
+  branch: 3.x
+  specs:
+    friendly_id (3.3.0.1)
+      babosa (~> 0.3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -101,8 +109,6 @@ GEM
     ffi (1.0.9)
     foreigner (1.1.0)
       activerecord (>= 3.0.0)
-    friendly_id (3.3.0.1)
-      babosa (~> 0.3.0)
     fssm (0.2.7)
     gherkin (2.4.18)
       json (>= 1.4.6)
@@ -259,7 +265,7 @@ DEPENDENCIES
   escape_utils
   factory_girl_rails
   foreigner
-  friendly_id
+  friendly_id!
   gravtastic (= 3.1.0)
   growl
   guard-rspec
