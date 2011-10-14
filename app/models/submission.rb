@@ -44,7 +44,7 @@ class Submission < ActiveRecord::Base
   after_create  :author_has_positions_with_the_disappears_ability
 
   def magazine
-    self.reload.meetings.first.try(:magazine)
+    self.reload.meetings.first.try(:magazine) || Magazine.first
   end
 
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]

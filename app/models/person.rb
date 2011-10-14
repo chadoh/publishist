@@ -187,7 +187,7 @@ class Person < ActiveRecord::Base
     end
   end
 
-  def orchestrates? resource
+  def communicates? resource
     if resource.is_a?(Symbol)
       # currently only accepting ':now/:currently' and ':any'
       if resource == :now or resource == :currently
@@ -200,7 +200,28 @@ class Person < ActiveRecord::Base
       magazine = resource.is_a?(Magazine) ? resource : resource.magazine
       positions = self.positions.select{|p| p.magazine == magazine}
     end
-    positions.collect(&:abilities).flatten.select{|a| a.key == 'orchestrates' }.present?
+    positions.collect(&:abilities).flatten.select{|a| a.key == 'communicates' }.present? if positions
+  end
+
+  def orchestrates? resource, *flags
+    if resource.is_a?(Symbol)
+      # currently only accepting ':now/:currently' and ':any'
+      if resource == :now or resource == :currently
+        mag_ids = Magazine.where("accepts_submissions_until > ?", 1.week.ago).collect(&:id)
+        positions = self.positions.select{|p| mag_ids.include? p.magazine_id }
+      elsif resource == :any
+        positions = self.positions
+      end
+    else
+      magazine = resource.is_a?(Magazine) ? resource : resource.magazine
+      mag_ids = [magazine.id]
+      if flags.first # only accepting :or_adjacent right now, so just accepting everything
+        if before = Magazine.before(magazine) then mag_ids << before.id end
+        if after  = Magazine.after(magazine)  then mag_ids << after.id  end
+      end
+      positions = self.positions.select{|p| mag_ids.include? p.magazine.id }
+    end
+    positions.collect(&:abilities).flatten.select{|a| a.key == 'orchestrates' }.present? if positions
   end
 
   def scores? resource
@@ -220,7 +241,7 @@ class Person < ActiveRecord::Base
       positions = self.positions.select{|p| p.magazine == magazine}
     end
     positions.collect(&:abilities).flatten\
-      .select{|a| a.key == 'views' || a.key == 'orchestrates' }.present?
+      .select{|a| a.key == 'views' || a.key == 'orchestrates' }.present? if positions
   end
 
   class << self

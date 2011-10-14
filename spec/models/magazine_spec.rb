@@ -340,4 +340,45 @@ describe Magazine do
     end
   end
 
+  describe "self.before" do
+    it "returns the magazine that was published before the one provided" do
+      @magazine2 = Magazine.create(
+        accepts_submissions_from:  5.months.ago,
+        accepts_submissions_until: 1.month.ago,
+        title:                     'second'
+      )
+      @magazine1 = Magazine.create(
+        accepts_submissions_from:  12.months.ago,
+        accepts_submissions_until: 6.month.ago,
+        title:                     'first'
+      )
+      @magazine3 = Magazine.create(
+        accepts_submissions_from:  Date.today,
+        accepts_submissions_until: 6.months.from_now,
+        title:                     'third'
+      )
+      Magazine.before(@magazine3).should == @magazine2
+    end
+  end
+  describe "self.after" do
+    it "returns the magazine that was published before the one provided" do
+      @magazine1 = Magazine.create(
+        accepts_submissions_from:  12.months.ago,
+        accepts_submissions_until: 6.month.ago,
+        title:                     'first'
+      )
+      @magazine2 = Magazine.create(
+        accepts_submissions_from:  5.months.ago,
+        accepts_submissions_until: 1.month.ago,
+        title:                     'second'
+      )
+      @magazine3 = Magazine.create(
+        accepts_submissions_from:  Date.today,
+        accepts_submissions_until: 6.months.from_now,
+        title:                     'third'
+      )
+      Magazine.after(@magazine1).should == @magazine2
+    end
+  end
+
 end

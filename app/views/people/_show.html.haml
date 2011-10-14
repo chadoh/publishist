@@ -1,6 +1,6 @@
 %li[person]
   %span.name<
-    - if orchestrates? @magazine
+    - if orchestrates? :any
       = mail_to person.email, '', class: 'mailto'
     = link_to person.name, person
   %span.rank<

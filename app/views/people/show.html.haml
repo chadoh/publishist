@@ -1,5 +1,5 @@
 - title @person.full_name
-- unless (@person == current_person || the_editor?) || @published.present?
+- unless @person == current_person || @published.present?
   = render :partial => 'about', :locals => { :person => @person }
 - else
   - content_for :sidebar do
@@ -47,7 +47,7 @@
 
 - if @published.present?
   %section#published
-    - if @person == current_person || the_editor?
+    - if @person == current_person
       %header
         %h3{ :title => "These have been published! Congratulations!" } Published
     %ul.submissions

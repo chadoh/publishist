@@ -140,27 +140,119 @@ describe Person do
   end
 
   context "permissions" do
+    describe "#communicates?(resource)" do
+      before do
+        @ability  = Ability.create key: 'communicates', description: 'Communicates with people'
+        @person   = Person.create name: "Francisco Ferdinand", email: 'example@example.com'
+        @magazine = Magazine.create(
+          accepts_submissions_from:  6.months.ago,
+          accepts_submissions_until: 1.month.ago,
+          title:                     'vast mental capabilities'
+        )
+        @position = @magazine.positions.create name: 'khaleesi'
+        @person.positions << @position
+      end
+      context "when resource == :any" do
+        it "returns true if the person has the 'communicates' ability for any magazine" do
+          @position.abilities << @ability
+          @person.communicates?(:any).should be_true
+        end
+        it "returns false if the person does not have the 'communicates' ability for any magazine whatsoever" do
+          @person.communicates?(:any).should be_false
+        end
+      end
+      context "when resource == :now" do
+        it "returns false if the person has the 'communicates' ability for the a magazine that's no longer accepting submissions" do
+          @position.abilities << @ability
+          @person.communicates?(:now).should be_false
+        end
+        it "returns true if the person has the 'communicates' ability for the a magazine that's still accepting submissions" do
+          @position.abilities << @ability
+          @magazine.update_attribute :accepts_submissions_until, Date.today
+          @person.communicates?(:now).should be_true
+        end
+      end
+      context "when resource.is_a Submission" do
+        before do
+          @position.abilities << @ability
+        end
+        it "returns false if the person does not have the 'communicates' ability for the given submission's magazine" do
+          magazine = Magazine.create
+          meeting  = magazine.meetings.create datetime: Time.now
+          sub      = meeting.submissions.create title: '=', body: 'D', author_email: 'example@example.com'
+          @person.communicates?(sub).should be_false
+        end
+
+        it "returns true if the person has the 'communicates' ability for the given submission's magazine" do
+          meeting  = @magazine.meetings.create datetime: Time.now
+          sub      = meeting.submissions.create title: '=', body: 'D', author_email: 'example@example.com'
+          @person.communicates?(sub).should be_true
+        end
+      end
+    end
     describe "#orchestrates?(resource)" do
       before do
         @ability  = Ability.create key: 'orchestrates', description: "Can organize meetings, record attendance, publish magazines, and specify staff."
         @person   = Person.create name: "Francisco Ferdinand", email: 'example@example.com'
       end
       context "when passed a magazine" do
-        before do
+        it "returns true if the person is in a position with the 'orchestrates' ability for the given magazine" do
           @magazine = Magazine.create
           @position = @magazine.positions.create name: 'Pirate'
           @person.positions << @position
-        end
-        it "returns true if the person is in a position with the 'orchestrates' ability for the given magazine" do
           @position.abilities << @ability
           @person.orchestrates?(@magazine).should be_true
         end
         it "returns false if the person is in a position with the 'orchestrates' ability for a different magazine" do
+          @magazine = Magazine.create
+          @position = @magazine.positions.create name: 'Pirate'
+          @person.positions << @position
           mag2 = Magazine.create
           position2 = mag2.positions.create name: 'Smithy'
           @person.positions << position2
           position2.abilities << @ability
           @person.orchestrates?(@magazine).should be_false
+        end
+
+        context "and also passed an :or_adjacent option" do
+          before do
+            @magazine2 = Magazine.create(
+              accepts_submissions_from:  5.months.ago,
+              accepts_submissions_until: 1.month.ago,
+              title:                     'second'
+            )
+            @position = @magazine2.positions.create name: 'smithy', abilities: [@ability]
+            @person.positions << @position
+          end
+          it "returns true if the person orchestrates the magazine right before the one given" do
+            @magazine3 = Magazine.create(
+              accepts_submissions_from:  Date.today,
+              accepts_submissions_until: 6.months.from_now,
+              title:                     'third'
+            )
+            @person.orchestrates?(@magazine3, :or_adjacent).should be_true
+          end
+          it "returns true if the person orchestrates the magazine right after the one given" do
+            @magazine1 = Magazine.create(
+              accepts_submissions_from:  12.months.ago,
+              accepts_submissions_until: 6.month.ago,
+              title:                     'first'
+            )
+            @person.orchestrates?(@magazine1, :or_adjacent).should be_true
+          end
+          it "returns true if the person orchestrates the magazine right after the one given" do
+            @magazine1 = Magazine.create(
+              accepts_submissions_from:  12.months.ago,
+              accepts_submissions_until: 6.month.ago,
+              title:                     'first'
+            )
+            @old_magazine = Magazine.create(
+              accepts_submissions_from:  18.months.ago,
+              accepts_submissions_until: 13.month.ago,
+              title:                     'really the first'
+            )
+            @person.orchestrates?(@old_magazine, :or_adjacent).should be_false
+          end
         end
       end
 

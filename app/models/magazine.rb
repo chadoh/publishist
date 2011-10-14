@@ -28,32 +28,34 @@
 class Magazine < ActiveRecord::Base
   extend ActiveSupport::Memoizable
 
-  validates_presence_of :nickname
-  validates_presence_of :accepts_submissions_from
-  validates_presence_of :accepts_submissions_until
-  validate :from_happens_before_until
-  validate :magazine_ranges_dont_conflict
-
-  validates_attachment_content_type :pdf,
-    :content_type => [ 'application/pdf' ],
-    :if           => Proc.new { |submission| submission.pdf.file? },
-    :message      => "has to be a valid pdf"
-
+  has_many :meetings,   dependent: :nullify, include: :submissions
+  has_many :pages,      dependent: :destroy, order:   :position
+  has_many :positions,  dependent: :destroy
+  has_many :roles,      through:   :positions
+  has_friendly_id :to_s, :use_slug => true
   has_attached_file :pdf,
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :path           => "/magazines/:filename"
-
-  validates_attachment_content_type :cover_art,
-    :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
-    :if           => Proc.new { |magazine| magazine.cover_art.file? },
-    :message      => "must be an image"
-
   has_attached_file :cover_art,
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :path           => "/cover_art/:style/:filename",
     :styles         => { thumb: "300x300>" }
+
+  validates_presence_of :nickname
+  validates_presence_of :accepts_submissions_from
+  validates_presence_of :accepts_submissions_until
+  validate :from_happens_before_until
+  validate :magazine_ranges_dont_conflict
+  validates_attachment_content_type :pdf,
+    :content_type => [ 'application/pdf' ],
+    :if           => Proc.new { |submission| submission.pdf.file? },
+    :message      => "has to be a valid pdf"
+  validates_attachment_content_type :cover_art,
+    :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
+    :if           => Proc.new { |magazine| magazine.cover_art.file? },
+    :message      => "must be an image"
 
   after_initialize "self.nickname = 'next' if self.nickname.blank?"
   after_initialize :accepts_from_after_latest_or_perhaps_today
@@ -62,13 +64,6 @@ class Magazine < ActiveRecord::Base
   after_create     :same_positions_as_previous_mag
 
   default_scope order("accepts_submissions_until DESC")
-
-  has_many :meetings,   dependent: :nullify, include: :submissions
-  has_many :pages,      dependent: :destroy, order:   :position
-  has_many :positions,  dependent: :destroy
-  has_many :roles,      through:   :positions
-
-  has_friendly_id :to_s, :use_slug => true
 
   # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
   def submissions options = {}
@@ -244,6 +239,15 @@ protected
       for position in previous_mag.positions
         self.positions << Position.create(name: position.name, abilities: position.abilities)
       end
+    end
+  end
+
+  class << self
+    def before mag
+      unscoped.where("accepts_submissions_until <= ?", mag.accepts_submissions_from).order("accepts_submissions_until DESC").first
+    end
+    def after mag
+      unscoped.where("accepts_submissions_from >= ?", mag.accepts_submissions_until).order("accepts_submissions_from ASC").first
     end
   end
 end

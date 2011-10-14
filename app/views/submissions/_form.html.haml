@@ -15,7 +15,7 @@
   = f.input :photo, :label => "Or, submit an image:"
   = f.input :state, :as => :hidden
   - if person_signed_in?
-    - if the_editor?
+    - if communicates? :any
       = f.input :author,
         as:         :string,
         label:      "Author (you can submit for anyone)",
@@ -31,7 +31,7 @@
       or
       = f.button :submit, t("preview"), :class => "link"
 
-- if the_editor?
+- if communicates? :any
   = content_for :javascript do
     :javascript
       $(function(){
@@ -41,7 +41,7 @@
           span.hide(); }
         $("#submission_author")
           .autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}")
-          .blur(function(){
+          .keyup(function(){
             var email = $(this).val().split(' ').pop();
             if (email != "#{current_person.email}") {
               span.hide(); }

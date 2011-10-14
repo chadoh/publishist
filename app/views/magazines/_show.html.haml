@@ -9,7 +9,7 @@
       = link_to "Browse online", [magazine]                               if magazine.published?
       = link_to "Download pdf",  magazine.pdf.url, 'data-target' => 'new' if magazine.pdf?
       = link_to "View meetings", meetings_path(m: magazine.id)            if views? magazine
-      = link_to "Staff list",    staff_for_magazine_path(magazine)        if orchestrates? :any
+      = link_to "Staff list",    staff_for_magazine_path(magazine)        if orchestrates? magazine, :or_adjacent
     %span.timeframe
       - if magazine.published?
         Published on

@@ -1,21 +1,6 @@
 require 'spec_helper'
 
 describe Submission do
-  before :each do
-    @magazine = Factory.create :magazine
-    @meeting = Factory.create :meeting
-    @submission = Factory.create :submission
-    @person = Factory.create :person
-    @person2 = Factory.create :person
-
-    @meeting.people = [@person, @person2]
-    @meeting.update_attributes :magazine => @magazine
-    @packlet = @meeting.packlets.create :submission => @submission
-
-    @packlet.scores.create :attendee => @meeting.attendees.first, :amount => 4
-    @packlet.scores.create :attendee => @meeting.attendees.last , :amount => 6
-  end
-
   it {
     should have_many(:packlets).dependent(:destroy)
     should have_many(:meetings).through(:packlets)
@@ -133,16 +118,32 @@ describe Submission do
     end
 
     it "returns the associated author's name if there is an associated author" do
+      person = Person.create name: 'Miriam Webster', email: 'example@example.com'
       @sub = Submission.create(
         :title  => ';-)',
         :body   => 'he winks and smiles <br><br> both',
-        :author => @person
+        :author => person
       )
-      @sub.author_name.should == @person.name
+      @sub.author_name.should == person.name
     end
   end
 
   describe "#average_score" do
+    before :each do
+      @magazine = Factory.create :magazine
+      @meeting = @magazine.meetings.create datetime: Time.now
+      @submission = Factory.create :submission
+      @person = Factory.create :person
+      @person2 = Factory.create :person
+
+      @meeting.people = [@person, @person2]
+      @meeting.update_attributes :magazine => @magazine
+      @packlet = @meeting.packlets.create :submission => @submission
+
+      @packlet.scores.create :attendee => @meeting.attendees.first, :amount => 4
+      @packlet.scores.create :attendee => @meeting.attendees.last , :amount => 6
+    end
+
     it "returns the average score for the submission" do
       @submission.average_score.should == 5
     end
@@ -161,7 +162,15 @@ describe Submission do
 
   describe "#magazine" do
     it "returns the submission's magazine, as told by its first meeting" do
-      @submission.reload.magazine.should == @magazine
+      magazine = Factory.create :magazine
+      meeting = magazine.meetings.create datetime: Time.now
+      submission = meeting.submissions.create(title: '=', body: 'D', author_email: 'exampleexample.com')
+      submission.reload.magazine.should == magazine
+    end
+    it "returns the current magazine, if the submission doesn't have one otherwise" do
+      magazine = Magazine.create title: 'the next magazine'
+      sub = Submission.create title: '=', body: 'D', author_email: 'example@example.com'
+      sub.reload.magazine.should == magazine
     end
   end
 end

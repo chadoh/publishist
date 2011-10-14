@@ -5,12 +5,12 @@
     = sanitize submission.body
 %footer.submission-details
 
-  - if submission.published? || ((@show_author.nil? or @show_author) and (editor_or_author?(submission) or params[:controller] == 'magazines'))
+  - if submission.published? || ((@show_author.nil? or @show_author) and (communicates_or_is_author?(submission) or params[:controller] == 'magazines'))
     %p.author
-      - if the_editor?
-        = mail_to submission.email, email_image(submission.author_name)
+      - if submission.magazine ? communicates?(submission) : communicates(:current)
+        = mail_to submission.email, submission.email, class: 'mailto'
       - if !!submission.author
-        = link_to_unless_current submission.author_name, person_path(submission.author)
+        = link_to_unless_current submission.author_name, person_path(submission.author), class: 'name'
       - else
         = submission.author_name
 
@@ -50,7 +50,7 @@
       - if submission.author == current_person
         Please #{link_to "try again", new_submission_path}.
 
-  - if the_editor? or (submission.author == current_person and [:draft, :submitted, :queued].include? submission.state)
+  - if communicates?(submission) or (submission.author == current_person and [:draft, :submitted, :queued].include? submission.state)
     %nav.actions
       %ul
         %li= link_to "Edit", edit_submission_url(submission)
@@ -61,9 +61,9 @@
               = f.hidden_field :state, :value => Submission.state(:submitted)
               = f.submit "Submit", :class => "link"
 
-        - if (the_editor? or submission.state != :published) and !(params[:controller] == "magazines" && params[:action] == "highest_scores")
+        - if (communicates?(submission) or submission.state != :published) and !(params[:controller] == "magazines" && params[:action] == "highest_scores")
           %li
             = button_to "Delete", submission_url(submission),
                          :method => :delete,
-                         :confirm => "Are you really sure you want to totally destroy all record of this submission?#{" If you just want to unschedule it, you can do that by dragging it to the \"Unscheduled\" section on the \"Submissions\" page." if the_editor?}",
+                         :confirm => "Are you really sure you want to totally destroy all record of this submission?#{' If you just want to unschedule it, you can do that by dragging it to the "Unscheduled" section on the "Submissions" page.' if communicates?(submission)}",
                          :class => "link destroy"

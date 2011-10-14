@@ -4,7 +4,7 @@ class PeopleController < InheritedResources::Base
   before_filter :editors_only, :only => [:destroy]
   before_filter :ensure_current_url, :only => :show
   auto_complete_for :person, [:first_name, :middle_name, :last_name, :email], :limit => 15 do |people|
-    people.map {|person| "#{person.full_name}, #{person.email}" }.join "\n"
+    people.map {|person| "#{person.name}, #{person.email}" }.join "\n"
   end
 
   def show
@@ -12,15 +12,13 @@ class PeopleController < InheritedResources::Base
     submissions = @person.submissions
     submissions.reload # fixes weird queued-to-reviewed bug
     @published = submissions.where :state => Submission.state(:published)
-    if person_signed_in? && (current_person.the_editor? || current_person == @person)
+    if person_signed_in? && current_person == @person
       @submitted = submissions.where :state => Submission.state(:submitted)
       @queued    = submissions.where :state => Submission.state(:queued)
       @reviewed  = submissions.where :state => Submission.state(:reviewed)
       @scored    = submissions.where :state => Submission.state(:scored)
-      if current_person == @person
-        @drafts    = submissions.where :state => Submission.state(:draft)
-        @rejected  = submissions.where :state => Submission.state(:rejected)
-      end
+      @drafts    = submissions.where :state => Submission.state(:draft)
+      @rejected  = submissions.where :state => Submission.state(:rejected)
     end
   end
 
