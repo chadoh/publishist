@@ -67,76 +67,6 @@ class Person < ActiveRecord::Base
     self.middle_name = name.join(' ')
   end
 
-  def editor?
-    rank = self.highest_rank
-    rank = rank.rank_type if rank
-    rank == 2 || rank == 3
-  end
-
-  def the_editor?
-    rank = self.highest_rank
-    rank = rank.rank_type if rank
-    rank == 3
-  end
-
-  def the_coeditor?
-    rank = self.highest_rank
-    rank = rank.rank_type if rank
-    rank == 2
-  end
-
-  def is_staff?
-    self.ranks.where(:rank_end => nil).collect {|r| r.rank_type }.include? 1
-  end
-
-  def highest_rank
-    self.ranks.where(:rank_end => nil).order("rank_type").last
-  end
-
-  def editorships
-    self.ranks.where(:rank_type => 3).collect do |r|
-      if r.rank_end
-        "from #{r.rank_start.strftime("%e %b %Y")} until #{r.rank_end.strftime("%e %b %Y")}"
-      else
-        "since #{r.rank_start.strftime("%e %b %Y")}"
-      end
-    end
-  end
-
-  def coeditorships
-    self.ranks.where(:rank_type => 2).collect do |r|
-      if r.rank_end
-        "from #{r.rank_start.strftime("%e %b %Y")} until #{r.rank_end.strftime("%e %b %Y")}"
-      else
-        "since #{r.rank_start.strftime("%e %b %Y")}"
-      end
-    end
-  end
-
-  def staffships
-    self.ranks.where(:rank_type => 1).collect do |r|
-      if r.rank_end
-        "from #{r.rank_start.strftime("%e %b %Y")} until #{r.rank_end.strftime("%e %b %Y")}"
-      else
-        "since #{r.rank_start.strftime("%e %b %Y")}"
-      end
-    end
-  end
-
-  def current_ranks
-    ranks = self.ranks.where(:rank_end => nil)
-    ranks.collect do |r|
-      rank = r.rank_type
-      if rank == 1
-        "Staff"
-      elsif rank == 2
-        "Coeditor"
-      else rank == 3
-        "Editor"
-      end
-    end
-  end
-
   def can_enter_scores_for? meeting
     unless attendee = Attendee.find_by_person_id_and_meeting_id(self.id, meeting.id)
       false
@@ -186,6 +116,10 @@ class Person < ActiveRecord::Base
       !password.nil? || !password_confirmation.nil?
     end
   end
+
+
+  # ABILITIES
+  #
 
   def communicates? resource
     if resource.is_a?(Symbol)
@@ -247,18 +181,6 @@ class Person < ActiveRecord::Base
   class << self
     extend ActiveSupport::Memoizable
 
-    def editors
-      ranks = Rank.where(:rank_type => 2..3, :rank_end => nil)
-      ranks = ranks.sort_by {|a| a.rank_type }
-      ranks.collect {|r| r.person}
-    end
-    def editor
-      rank = Rank.where(rank_type: 3, rank_end: nil).first.try(:person)
-    end
-    def coeditor
-      rank = Rank.where(:rank_type => 2, :rank_end => nil).first
-      rank.person if rank
-    end
     def find_or_create formatted_name_and_email
       return nil if formatted_name_and_email.blank?
       name = formatted_name_and_email.gsub(',','').split
@@ -274,8 +196,8 @@ class Person < ActiveRecord::Base
       person
     end
 
-    memoize :editors, :editor, :coeditor, :find_or_create
+    memoize :find_or_create
   end
 
-  memoize :full_name, :name_and_email, :name, :editor?, :the_editor?, :the_coeditor?, :is_staff?, :current_ranks, :can_enter_scores_for?, :staffships, :coeditorships, :editorships, :highest_rank
+  memoize :full_name, :name_and_email, :name, :can_enter_scores_for?
 end

@@ -1,6 +1,13 @@
 class MagazinesController < InheritedResources::Base
-  before_filter :must_orchestrate,     except: [:index, :show, :staff_list, :new, :create]
-  before_filter :must_orchestrate_any, only:   [:staff_list, :new, :create]
+  before_filter only: [:new, :create] do |c|
+    c.must_orchestrate :any
+  end
+  before_filter only: [:edit, :update, :destroy, :staff_list] do |c|
+    c.must_orchestrate resource, :or_adjacent
+  end
+  before_filter only: [:publish, :highest_scores, :notify_authors_of_published_magazine] do |c|
+    c.must_orchestrate resource
+  end
   before_filter :ensure_current_url,   only:   :show
 
   action [:create, :update, :destroy]
