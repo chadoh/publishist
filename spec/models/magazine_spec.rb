@@ -200,10 +200,10 @@ describe Magazine do
       mag.to_s.should == mag.title
     end
 
-    it "returns 'the <nickname> magazine' if the title isn't set" do
+    it "returns 'the <nickname> issue' if the title isn't set" do
       mag.update_attributes title: nil
-      mag.to_s(:reload).should == "the #{mag.nickname} magazine"
-      mag.present_name.should  == "the #{mag.nickname} magazine"
+      mag.to_s(:reload).should == "the #{mag.nickname} issue"
+      mag.present_name.should  == "the #{mag.nickname} issue"
     end
   end
 

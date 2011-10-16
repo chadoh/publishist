@@ -1,37 +1,25 @@
-- if person == current_person
-  %p
-    = link_to "Edit account details", edit_person_registration_path(person)
+- if @person == current_person
+  %p= link_to "Edit account details", edit_person_registration_path(person)
+
 %section.user-profile
-  %h2
-    - if person == current_person
-      Me
+  .avatar
+    - if @person == current_person
+      = link_to(image_tag(person.gravatar_url, :alt => "A picture of you"), "http://gravatar.com", :title => "You can change this on Gravatar.com")
     - else
-      = person.name
-  %ul
-    %li
-      - if person == current_person
-        = link_to(image_tag(person.gravatar_url, :alt => "A picture of you"), "http://gravatar.com", :title => "You can change this on Gravatar.com")
-      - else
-        = image_tag person.gravatar_url, :alt => "A picture of #{person.first_name}"
-    - unless person.editorships.blank?
+      = image_tag @person.gravatar_url, :alt => "A picture of #{person.first_name}"
+
+  %ul.positions-by-magazine
+    - @positions_by_magazine.each do |magazine, positions|
       %li
-        %strong Editor
-        = person.editorships.join(" & then again ")
-    - unless person.coeditorships.blank?
-      %li
-        %strong Coeditor
-        = person.coeditorships.join(" & then again ")
-    - unless person.staffships.blank?
-      %li
-        %strong Staff
-        = person.staffships.join(" & then again ")
-    %li Joined the website on #{person.created_at.strftime("%e %b %Y")}
-- if current_person && current_person != person
+        #{positions.to_sentence} for
+        = link_to_if magazine.published?, magazine, magazine
+
+- if current_person && current_person != @person
   %a.toggle_next{:href => "#"}
     Send #{person.first_name} an email
   = simple_form_for 'contact_person', :url => contact_person_path(person) do |f|
     = f.input :from, :as => :hidden, :input_html => { :value => current_person.id }
-    = f.input :to, :as => :hidden, :input_html => { :value => person.id }
+    = f.input :to, :as => :hidden, :input_html => { :value => @person.id }
     = f.input :subject, :as => :string, :required => false
     = f.input :message, :as => :text, :required => false
     = f.button :submit, "Send"

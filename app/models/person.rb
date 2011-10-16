@@ -44,7 +44,7 @@ class Person < ActiveRecord::Base
   has_many :roles,       dependent:   :destroy
   has_many :meetings,    through:     :attendees
   has_many :positions,   through:     :roles
-  has_many :abilities,       through:     :positions
+  has_many :abilities,   through:     :positions
 
   validates_presence_of :first_name
 
@@ -180,6 +180,18 @@ class Person < ActiveRecord::Base
 
   class << self
     extend ActiveSupport::Memoizable
+
+    def current_communicators
+      mag = Magazine.first
+      pos = mag.positions.joins(:abilities).where(abilities: { key: 'communicates' })
+      pos.collect(&:people).flatten.uniq
+    end
+
+    def current_scorers
+      mag = Magazine.first
+      pos = mag.positions.joins(:abilities).where(abilities: { key: 'scores' })
+      pos.collect(&:people).flatten.uniq
+    end
 
     def find_or_create formatted_name_and_email
       return nil if formatted_name_and_email.blank?

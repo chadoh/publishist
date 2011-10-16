@@ -127,11 +127,18 @@ body > footer
 /* Individual pages ---------------------------------
 
 section.user-profile
-  h2
+  h2, h3, h4
     +trailer(0)
-  ul
-    +no-bullets
-    margin-left: 0
+  .avatar
+    height: 200px
+    width: 200px
+    background-color: $noticeable
+    +trailer
+    +box-shadow($dgray 0 0 9px)
+    &, img
+      +border-radius
+  > ul > li > ul
+    list-style-type: disc
 
 li.submission, li.packlet, section.submission
   +no-bullet

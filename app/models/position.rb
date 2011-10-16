@@ -19,4 +19,8 @@ class Position < ActiveRecord::Base
 
   validates_presence_of :name
   validates_presence_of :magazine_id
+
+  def to_s
+    name
+  end
 end

@@ -101,7 +101,7 @@ class Magazine < ActiveRecord::Base
   end
 
   def to_s
-    title.presence || "the #{nickname} magazine"
+    title.presence || "the #{nickname} issue"
   end
 
   def publish array_of_winners

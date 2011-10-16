@@ -1,5 +1,7 @@
 class SubmissionsController < InheritedResources::Base
-  before_filter :editors_only, :only => [:index]
+  before_filter :only => [:index] do |c|
+    c.must_orchestrate :any
+  end
   before_filter :ensure_current_url, :only => :show
 
   def index
@@ -9,7 +11,7 @@ class SubmissionsController < InheritedResources::Base
     @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : Meeting.all
     @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
-    @show_author = false if current_person.the_coeditor?
+    @show_author = false unless current_person.communicates?(@magazine)
     @unscheduled_submissions = Submission.where(:state => Submission.state(:submitted))
   end
 
@@ -40,7 +42,7 @@ class SubmissionsController < InheritedResources::Base
   def edit
     session[:return_to] = request.referer
     @submission = Submission.find(params[:id])
-    unless person_signed_in? and (current_person.the_editor? or @submission.author == current_person)
+    unless person_signed_in? and (current_person.communicates?(@submission) or @submission.author == current_person)
       flash[:notice] = "You're not allowed to edit that."
       redirect_to request.referer
     end
@@ -56,7 +58,7 @@ class SubmissionsController < InheritedResources::Base
           if person_signed_in?
             @submission.save
             @submission.has_been(:submitted, :by => current_person) if params[:commit] == "Submit!"
-            redirect_to submissions_url and return if current_person.the_editor? && params[:commit] != t('preview')
+            redirect_to submissions_url and return if current_person.orchestrates?(:current) && params[:commit] != t('preview')
             redirect_to person_url(current_person)
           else
             if recaptcha_valid?
@@ -82,7 +84,7 @@ class SubmissionsController < InheritedResources::Base
     end
 
     update! {
-      if current_person.the_editor? && params[:commit] != t('preview')
+      if current_person.orchestrates?(:current) && params[:commit] != t('preview')
         session[:return_to] || submissions_url
       else
         person_url(resource.author)
@@ -95,7 +97,7 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def destroy
-    unless person_signed_in? and (current_person.the_editor? || current_person == resource.author)
+    unless person_signed_in? and (current_person.communicates?(resource) || current_person == resource.author)
       flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
       redirect_to(root_url) and return
     else

@@ -32,12 +32,9 @@ Pc::Application.routes.draw do
       put 'update_position'
     end
   end
-  resources :people, shallow: true do
+  resources :people, except: :index, shallow: true do
     resources :ranks
     member do
-      post 'make_staff'
-      post 'make_coeditor'
-      post 'make_editor'
       post 'contact'
     end
     collection do

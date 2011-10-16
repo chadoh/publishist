@@ -20,13 +20,22 @@ describe Submission do
     submission.reload.should be_reviewed
   end
 
-  it "puts the submitter into all positions that have the 'disappears' ability upon creation" do
-    ab  = Ability.create key: 'disappears', description: "Submitters & attendees are automatically added to this group. It will disappear once the magazine is published."
-    pos = Magazine.create.positions.create name: "The Folks", abilities: [ab]
-    per = Person.create name: "Baxter", email: 'example@example.com'
-    sub = per.submissions.create title: "marblecake", body: "also, the game"
-    per.positions.should be_present
-    per.positions.first.should == pos
+  describe "#author_has_positions_with_the_disappears_ability" do
+    before do
+      @ab  = Ability.create key: 'disappears', description: "Submitters & attendees are automatically added to this group. It will disappear once the magazine is published."
+      @pos = Magazine.create.positions.create name: "The Folks", abilities: [@ab]
+      @per = Person.create name: "Baxter", email: 'example@example.com'
+      @sub = @per.submissions.create title: "marblecake", body: "also, the game"
+    end
+    it "puts the submitter into all positions that have the 'disappears' ability upon creation" do
+      @per.positions.should be_present
+      @per.positions.first.should == @pos
+    end
+    it "just ignores the whole business on future submissions" do
+      @pos.reload
+      sub2 = @per.submissions.create title: "the game", body: "also, marblecake"
+      Submission.last.should == sub2.reload
+    end
   end
 
   describe "#has_been" do
@@ -47,7 +56,7 @@ describe Submission do
 
       it "sends no email, if it was submitted by the editor" do
         sub = Factory.create :submission
-        Person.should_receive(:editor).and_return("Blimey, Tim!")
+        Person.should_receive(:current_communicators).and_return(["Blimey, Tim!"])
         Notifications.should_not_receive(:new_submission)
         sub.has_been :submitted, :by => "Blimey, Tim!"
       end

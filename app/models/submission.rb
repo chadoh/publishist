@@ -89,7 +89,7 @@ class Submission < ActiveRecord::Base
 
   def has_been moved_to_state, options = {}
     if moved_to_state == :submitted
-      Notifications.new_submission(self).deliver if (options[:by].blank? or Person.editor.presence != options[:by])
+      Notifications.new_submission(self).deliver if (options[:by].blank? or Person.current_communicators.first.presence != options[:by])
     end
     update_attributes :state => moved_to_state
   end
@@ -131,7 +131,9 @@ protected
   end
 
   def author_has_positions_with_the_disappears_ability
-    self.author.positions << Position.joins(:abilities).where(abilities: { key: 'disappears'}) if self.author
+    if self.author && self.author.abilities.where(key: 'disappears').empty?
+      self.author.positions << Position.joins(:abilities).where(abilities: { key: 'disappears'})
+    end
   end
 
 end
