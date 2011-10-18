@@ -13,6 +13,40 @@ describe Person do
     should have_many(:abilities).through(:positions)
   }
 
+  describe "#magazines" do
+    it "returns magazines for which I have some ability, and not those for which I don't" do
+      ability = Ability.create key: 'scores', description: 'communicates things'
+      mag1 = Magazine.create title: 'first'
+      mag2 = Magazine.create title: 'second'
+      pos1 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag1
+      pos2 = Position.create name:  'Editor',   abilities: [ability], magazine: mag1
+      per1 = Person  .create name:  'sir roderick', email: 'roderick@example.com'
+      pos1.people << per1
+      pos2.people << per1
+      per1.magazines.should == [mag1]
+    end
+  end
+
+  describe "#magazines_with_meetings" do
+    it "returns magazines for which I have some ability, and not those for which I don't" do
+      ability = Ability.create key: 'scores', description: 'communicates things'
+      mag1 = Magazine.create title: 'first'
+      mag2 = Magazine.create title: 'second'
+      mag3 = Magazine.create title: 'third'
+      mag2.meetings.create datetime: Time.now
+      mag3.meetings.create datetime: Time.now
+      pos1 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag1
+      pos1 = Position.create name:  'Editor',   abilities: [ability], magazine: mag1
+      pos2 = Position.create name:  'Editor',   abilities: [ability], magazine: mag1
+      pos3 = Position.create name:  'Editor',   abilities: [ability], magazine: mag3
+      per1 = Person  .create name:  'sir roderick', email: 'roderick@example.com'
+      pos1.people << per1
+      pos2.people << per1
+      pos3.people << per1
+      per1.magazines_with_meetings.should == [mag3]
+    end
+  end
+
   describe "#name_and_email" do
     it "formats someone's name as 'first last, email@ddress'" do
       person = Person.create(
@@ -54,7 +88,7 @@ describe Person do
   describe "self.current_communicators" do
     it "returns all people with the 'communicates' ability for the most recent magazine" do
       ability = Ability.create key: 'communicates', description: 'communicates things'
-      mag1 = Magazine.create title: 'first'
+      mag1 = Magazine.create title: 'first', accepts_submissions_from: 1.week.ago
       mag2 = Magazine.create title: 'second'
       pos1 = Position.create name:  'Editor', abilities: [ability], magazine: mag1
       pos2 = Position.create name:  'Editor', abilities: [ability], magazine: mag2
@@ -62,14 +96,14 @@ describe Person do
       per2 = Person  .create name:  'ser roderick', email: 'serroderick@example.com'
       pos1.people << per1
       pos2.people << per2
-      Person.current_communicators.should == [per2]
+      Person.current_communicators.should == [per1]
     end
   end
 
-  describe "self.current_scorers", :focus do
+  describe "self.current_scorers" do
     it "returns all people with the 'scores' ability for the most recent magazine" do
       ability = Ability.create key: 'scores', description: 'communicates things'
-      mag1 = Magazine.create title: 'first'
+      mag1 = Magazine.create title: 'first', accepts_submissions_from: 1.week.ago
       mag2 = Magazine.create title: 'second'
       pos1 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag1
       pos2 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag2
@@ -77,7 +111,7 @@ describe Person do
       per2 = Person  .create name:  'ser roderick', email: 'serroderick@example.com'
       pos1.people << per1
       pos2.people << per2
-      Person.current_scorers.should == [per2]
+      Person.current_scorers.should == [per1]
     end
   end
 
@@ -370,7 +404,7 @@ describe Person do
       end
     end
 
-    describe "#views?(resource)" do
+    describe "#views?(resource, *flags)" do
       context "when resource.is_a Magazine" do
         it "returns true when the person has the 'orchestrates' or the 'views' ability for the given magazine" do
           @ability   = Ability.create key: 'orchestrates', description: "Orchestrates stuff"
@@ -389,23 +423,33 @@ describe Person do
         end
       end
       context "when resource == :any" do
-        it "returns true when the person has any associated positions with an 'orchestrates' ability" do
-          @ability  = Ability.create key: 'orchestrates', description: "Orchestrates stuff"
+        before do
           @person   = Person.create name: "Francisco Ferdinand", email: 'example@example.com'
           @magazine = Magazine.create
           @position = @magazine.positions.create name: 'Corporal'
-          @position.abilities << @ability
           @person.positions << @position
+        end
+
+        it "returns true when the person has any associated positions with an 'orchestrates' ability" do
+          @ability  = Ability.create key: 'orchestrates', description: "Orchestrates stuff"
+          @position.abilities << @ability
           @person.views?(:any).should be_true
         end
         it "returns true when the person has any associated positions with a 'views' ability" do
           @ability  = Ability.create key: 'views', description: "Views stuff"
-          @person   = Person.create name: "Francisco Ferdinand", email: 'example@example.com'
-          @magazine = Magazine.create
-          @position = @magazine.positions.create name: 'Admiral'
           @position.abilities << @ability
-          @person.positions << @position
           @person.views?(:any).should be_true
+        end
+      end
+      context "when resource == (:any, :with_meetings)" do
+        it "returns true when the person can view a magazine that has at least one meeting" do
+          @ability  = Ability.create key: 'views', description: "Views stuff"
+          @mag1 = Magazine.create title: 'first'
+          @mag2 = Magazine.create title: 'second'
+          @position = @mag1.positions.create name: 'Admiral', abilities: [@ability]
+          @person = Person.create name: 'Chez', email: 'chez@example.com'
+          @person.positions << @position
+          @person.views?(:any, :with_meetings).should be_false
         end
       end
     end

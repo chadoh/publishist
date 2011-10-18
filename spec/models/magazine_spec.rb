@@ -340,6 +340,42 @@ describe Magazine do
     end
   end
 
+  describe "self.viewable_by(@person)" do
+    it "returns only magazines that the given person has 'views' abilities for" do
+      ably = Ability.create key: 'views', description: 'Views stuff.'
+      mag1 = Magazine.create title: 'first'
+      mag2 = Magazine.create title: 'second'
+      posn = mag1.positions.create name: 'Staff', abilities: [ably]
+      pers = Person.create   name: 'E Lee', email: 'e.lee@example.com'
+      pers.positions << posn
+      Magazine.viewable_by(pers).should == [mag1]
+    end
+  end
+
+  describe "self.orchestratable_by(@person)" do
+    it "returns only magazines that the given person has 'orchestrates' abilities for" do
+      ably = Ability.create key: 'orchestrates', description: 'orchestrates stuff.'
+      mag1 = Magazine.create title: 'first'
+      mag2 = Magazine.create title: 'second'
+      posn = mag1.positions.create name: 'Staff', abilities: [ably]
+      pers = Person.create   name: 'E Lee', email: 'e.lee@example.com'
+      pers.positions << posn
+      Magazine.orchestratable_by(pers).should == [mag1]
+    end
+  end
+
+  describe "self.with_meetings" do
+    it "returns only magazines that have at least 1 meeting" do
+      mag1 = Magazine.create title: 'first'
+      mag2 = Magazine.create title: 'second'
+      mag3 = Magazine.create title: 'third'
+      meet = mag2.meetings.create(datetime: Time.now)
+      meet2 = mag2.meetings.create(datetime: Time.now)
+      meet3 = mag3.meetings.create(datetime: Time.now)
+      Magazine.with_meetings.should == [mag3, mag2]
+    end
+  end
+
   describe "self.before" do
     it "returns the magazine that was published before the one provided" do
       @magazine2 = Magazine.create(

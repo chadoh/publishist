@@ -1,7 +1,10 @@
 class PackletsController < InheritedResources::Base
-  before_filter :editors_only
+  before_filter do |c|
+    c.must_orchestrate :currently
+  end
 
-  actions :create, :destroy
+  actions :destroy
+  custom_actions resource: :update_position
 
   respond_to :js
 
@@ -13,7 +16,7 @@ class PackletsController < InheritedResources::Base
     if @packlet.valid?
       @packlet.save
     else
-      render :nothing => true and return
+      head :not_acceptable
     end
   end
 

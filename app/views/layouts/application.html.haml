@@ -22,7 +22,7 @@
             %li{ :class => current_page?(new_submission_path)   && 'current' }= link_to_unless_current "Submit", new_submission_path
           - if orchestrates? :currently
             %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current "Submissions", submissions_path
-          - if views? :any
+          - if views? :any, :with_meetings
             %li{ :class => params[:controller] == 'meetings'      && 'current' }= link_to_unless_current "Meetings", meetings_path
           %li{ :class => params[:controller] == 'magazines'   && 'current' }= link_to_unless_current "Magazines", magazines_path
           %li

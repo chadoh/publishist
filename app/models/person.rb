@@ -40,15 +40,12 @@ class Person < ActiveRecord::Base
 
   has_many :submissions, foreign_key: 'author_id'
   has_many :attendees,   dependent:   :destroy
-  has_many :ranks,       dependent:   :destroy
   has_many :roles,       dependent:   :destroy
   has_many :meetings,    through:     :attendees
   has_many :positions,   through:     :roles
   has_many :abilities,   through:     :positions
 
   validates_presence_of :first_name
-
-  default_scope includes(:ranks)
 
   has_friendly_id :name, :use_slug => true
 
@@ -91,6 +88,14 @@ class Person < ActiveRecord::Base
     name
   end
 
+  def magazines
+    self.abilities.collect(&:magazines).flatten.uniq
+  end
+
+  def magazines_with_meetings
+    self.abilities.collect(&:magazines).flatten.uniq.reject{|m| m.meetings.empty? }
+  end
+
   # function to set the password without knowing the current password used in our confirmation controller.
   def attempt_set_password(params)
     p = {}
@@ -124,7 +129,7 @@ class Person < ActiveRecord::Base
   def communicates? resource
     if resource.is_a?(Symbol)
       # currently only accepting ':now/:currently' and ':any'
-      if resource == :now or resource == :currently
+      if resource == :now or resource == :currently or resource == :current
         mag_ids = Magazine.where("accepts_submissions_until > ?", 1.week.ago).collect(&:id)
         positions = self.positions.select{|p| mag_ids.include? p.magazine_id }
       elsif resource == :any
@@ -140,7 +145,7 @@ class Person < ActiveRecord::Base
   def orchestrates? resource, *flags
     if resource.is_a?(Symbol)
       # currently only accepting ':now/:currently' and ':any'
-      if resource == :now or resource == :currently
+      if resource == :now or resource == :currently or resource == :current
         mag_ids = Magazine.where("accepts_submissions_until > ?", 1.week.ago).collect(&:id)
         positions = self.positions.select{|p| mag_ids.include? p.magazine_id }
       elsif resource == :any
@@ -165,11 +170,15 @@ class Person < ActiveRecord::Base
       .select{|a| a.key == 'scores' }.present?
   end
 
-  def views? resource
+  def views? resource, *flags
     if resource.is_a?(Symbol)
       # The only resource currently being passed is the symbol :any.
       # Since we don't have to be aware of any others, let's accept any
-      positions = self.positions
+      if flags.first # only accepting :with_meetings right now, so just accepting everything
+        positions = self.positions.reject {|p| p.magazine.meetings.empty? }
+      else
+        positions = self.positions
+      end
     else
       magazine = resource.is_a?(Magazine) ? resource : resource.magazine
       positions = self.positions.select{|p| p.magazine == magazine}
@@ -182,13 +191,13 @@ class Person < ActiveRecord::Base
     extend ActiveSupport::Memoizable
 
     def current_communicators
-      mag = Magazine.first
+      mag = Magazine.current || Magazine.first
       pos = mag.positions.joins(:abilities).where(abilities: { key: 'communicates' })
       pos.collect(&:people).flatten.uniq
     end
 
     def current_scorers
-      mag = Magazine.first
+      mag = Magazine.current || Magazine.first
       pos = mag.positions.joins(:abilities).where(abilities: { key: 'scores' })
       pos.collect(&:people).flatten.uniq
     end

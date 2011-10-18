@@ -5,7 +5,7 @@ class SubmissionsController < InheritedResources::Base
   before_filter :ensure_current_url, :only => :show
 
   def index
-    @magazines = Magazine.all
+    @magazines = current_person.magazines
     @magazine = params[:m].present? ? Magazine.find(params[:m]) : Magazine.current.presence || Magazine.first
     @average = @magazine.try(:average_score)
     @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : Meeting.all

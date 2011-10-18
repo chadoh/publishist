@@ -13,4 +13,18 @@ protected
     end
   end
 
+  def must_score *args
+    unless person_signed_in? and current_person.scores? *args
+      flash[:notice] = "You're not allowed to see that."
+      redirect_to root_url
+    end
+  end
+
+  def must_view *args
+    unless person_signed_in? and current_person.views? *args
+      flash[:notice] = "You're not allowed to see that."
+      redirect_to root_url
+    end
+  end
+
 end
