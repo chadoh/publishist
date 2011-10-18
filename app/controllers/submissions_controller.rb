@@ -98,7 +98,7 @@ class SubmissionsController < InheritedResources::Base
 
   def destroy
     unless person_signed_in? and (current_person.communicates?(resource) || current_person == resource.author)
-      flash[:notice] = "You didn't write that, and you're not the editor. Sorry!"
+      flash[:notice] = "You're not allowed to see that."
       redirect_to(root_url) and return
     else
       destroy!(:notice => "It is gone.") { request.referer }

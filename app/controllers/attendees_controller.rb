@@ -5,7 +5,12 @@ class AttendeesController < InheritedResources::Base
   respond_to :html, :except => :update_answer
   respond_to :js
 
-  before_filter :resource, :except => :create
+  before_filter only: :create do |c|
+    c.must_orchestrate :any
+  end
+  before_filter only: [:edit, :update, :destroy] do |c|
+    c.must_orchestrate resource
+  end
 
   def create
     params[:attendee] = set_person_param_from_string params[:attendee]

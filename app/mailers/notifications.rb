@@ -18,7 +18,7 @@ class Notifications < ActionMailer::Base
     @url = submission_url(submission)
 
     mail(
-      :to       => ENV['EDITOR_EMAIL'] || Person.editor.email,
+      :to       => ENV['EDITOR_EMAIL'] || Person.current_communicators.first.email,
       :from     => "#{submission.author_name} <#{ENV['ADMIN_EMAIL'] || "admin@problemchildmag.com"}>",
       :reply_to => submission.email,
       :subject  => "Submission: \"#{strip_tags(@title)}\" by #{@author}"
@@ -33,7 +33,7 @@ class Notifications < ActionMailer::Base
     @magazine = magazine
     @published = array_of_her_submissions.select{|s| s.state == :published }
     @rejected  = array_of_her_submissions.select{|s| s.state == :rejected }
-    editor = Person.editor
+    editor = Person.current_communicators.first
 
     mail(
       :to => @email,

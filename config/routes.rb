@@ -17,11 +17,12 @@ Pc::Application.routes.draw do
   get "welcome/index"
 
   resources :roles, only: [:new, :create, :destroy]
-  resources :positions, :scores, :editors_notes, except: :index
+  resources :scores, only: [:create, :update, :destroy]
+  resources :positions, :editors_notes, except: :index
   resources :cover_arts, :table_of_contents, :staff_lists, only: [:create, :destroy]
 
   resources :meetings do
-    resources :attendees do
+    resources :attendees, only: [:create, :edit, :update, :destroy] do
       member { put 'update_answer' => :update_answer, :as => 'update_answer_for' }
     end
     member { get  'scores' => :scores, :as => 'scores_for' }
