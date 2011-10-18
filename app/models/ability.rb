@@ -1,7 +1,6 @@
 class Ability < ActiveRecord::Base
   has_many :position_abilities
   has_many :positions, through: :position_abilities
-  has_many :magazines, through: :positions
   has_many :roles,     through: :positions
   has_many :people,    through: :roles
 

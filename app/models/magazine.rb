@@ -65,15 +65,6 @@ class Magazine < ActiveRecord::Base
   after_create     :same_positions_as_previous_mag
 
   default_scope order("accepts_submissions_until DESC")
-  scope :viewable_by, lambda { |person|
-    joins(:roles).joins(:abilities).where("roles.person_id = ? and abilities.key in (?)", person.id, %w{orchestrates views})
-  }
-  scope :orchestratable_by, lambda { |person|
-    joins(:roles).joins(:abilities).where("roles.person_id = ? and abilities.key = ?", person.id, 'orchestrates')
-  }
-  scope :with_meetings, lambda {
-    joins("left outer join (select magazine_id from meetings group by magazine_id) as meetings on meetings.magazine_id = magazines.id").where("meetings.magazine_id is not null")
-  }
 
   # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
   def submissions options = {}

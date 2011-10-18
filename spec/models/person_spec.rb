@@ -10,7 +10,8 @@ describe Person do
     should validate_presence_of(:first_name)
     should have_many(:roles).dependent(:destroy)
     should have_many(:positions).through(:roles)
-    should have_many(:abilities).through(:positions)
+    should have_many(:position_abilities).through(:positions)
+    should have_many(:abilities).through(:position_abilities)
   }
 
   describe "#magazines" do
@@ -20,6 +21,7 @@ describe Person do
       mag2 = Magazine.create title: 'second'
       pos1 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag1
       pos2 = Position.create name:  'Editor',   abilities: [ability], magazine: mag1
+      pos3 = Position.create name:  'Editor',   abilities: [ability], magazine: mag2
       per1 = Person  .create name:  'sir roderick', email: 'roderick@example.com'
       pos1.people << per1
       pos2.people << per1
@@ -28,7 +30,7 @@ describe Person do
   end
 
   describe "#magazines_with_meetings" do
-    it "returns magazines for which I have some ability, and not those for which I don't" do
+    it "returns magazines for which I have some ability, and not those for which I don't, but only those which have meetings" do
       ability = Ability.create key: 'scores', description: 'communicates things'
       mag1 = Magazine.create title: 'first'
       mag2 = Magazine.create title: 'second'

@@ -38,12 +38,13 @@ class Person < ActiveRecord::Base
 
   attr_reader :password
 
-  has_many :submissions, foreign_key: 'author_id'
-  has_many :attendees,   dependent:   :destroy
-  has_many :roles,       dependent:   :destroy
-  has_many :meetings,    through:     :attendees
-  has_many :positions,   through:     :roles
-  has_many :abilities,   through:     :positions
+  has_many :submissions,        foreign_key: 'author_id'
+  has_many :attendees,          dependent:   :destroy
+  has_many :roles,              dependent:   :destroy
+  has_many :meetings,           through:     :attendees
+  has_many :positions,          through:     :roles
+  has_many :position_abilities, through:     :positions
+  has_many :abilities,          through:     :position_abilities
 
   validates_presence_of :first_name
 
@@ -89,11 +90,11 @@ class Person < ActiveRecord::Base
   end
 
   def magazines
-    self.abilities.collect(&:magazines).flatten.uniq
+    self.position_abilities.collect(&:magazine).flatten.uniq
   end
 
   def magazines_with_meetings
-    self.abilities.collect(&:magazines).flatten.uniq.reject{|m| m.meetings.empty? }
+    magazines.reject{|m| m.meetings.empty? }
   end
 
   # function to set the password without knowing the current password used in our confirmation controller.
