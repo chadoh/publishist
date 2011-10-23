@@ -8,7 +8,7 @@ describe TableOfContents do
       :nickname                  => "Fruit Blots"
     )
     @submission  = Factory.create(:submission)
-    @submission2 = Factory.create(:submission)
+    @submission2 = Factory.create(:submission_with_signed_in_author)
     @meeting     = Meeting.create(datetime: 2.weeks.ago, question: "orly?")
     @meeting.submissions << [@submission, @submission2]
     @magazine.publish [@submission, @submission2]

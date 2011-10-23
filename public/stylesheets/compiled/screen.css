@@ -2327,3 +2327,25 @@ nav.pagination ol.pages li.page > a {
   font-size: 0.625em;
   line-height: 2.4em;
 }
+
+/* line 651, ../../../app/stylesheets/screen.sass */
+article.pages > header > h1 {
+  margin-bottom: 0em;
+}
+
+/* line 654, ../../../app/stylesheets/screen.sass */
+img.cover-art {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1.5em;
+  -moz-border-radius: 1.5em;
+  -webkit-border-radius: 1.5em;
+  -o-border-radius: 1.5em;
+  -ms-border-radius: 1.5em;
+  -khtml-border-radius: 1.5em;
+  border-radius: 1.5em;
+  -moz-box-shadow: 0 0 1.5em silver;
+  -webkit-box-shadow: 0 0 1.5em silver;
+  -o-box-shadow: 0 0 1.5em silver;
+  box-shadow: 0 0 1.5em silver;
+}

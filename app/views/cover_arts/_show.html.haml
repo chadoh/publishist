@@ -1,5 +1,5 @@
 - if magazine.cover_art?
-  = image_tag magazine.cover_art.url, alt: "Cover Art"
+  = image_tag magazine.cover_art.url, alt: "Cover Art", class: 'cover-art'
 - elsif orchestrates? @magazine
   %p
     You haven't added any cover art to this magazine!
