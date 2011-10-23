@@ -4,13 +4,8 @@
       Magazines
   %ul.magazines
     - for mag in @magazines
-      = link_to(url_for(:m => mag.to_param), :class => mag == @magazine && 'selected') do
-        %li[mag]
-          %header
-            - if mag == @magazine
-              %h3= mag
-            - else
-              %p= mag
-          = pluralize mag.meetings.count, 'meeting'
-          %br
-          = timeframe mag.accepts_submissions_from, mag.accepts_submissions_until
+      - if mag != @magazine
+        %a{ href: url_for(m: mag.to_param) }
+          = render 'magazines/for_sidebar', mag: mag
+      - else
+        = render 'magazines/for_sidebar', mag: mag
