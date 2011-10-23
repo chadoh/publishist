@@ -11,7 +11,7 @@
         %td= link_to_unless props[:author].is_a?(String), props[:author], person_path(props[:author])
         %td= link_to props[:page].title, [props[:page].magazine, props[:page]]
 
-- if editor?
+- if orchestrates? @magazine
   = link_to "Delete table of contents from this page", [table_of_contents], method: :delete
 
 - javascript "jquery.tablesorter.min"

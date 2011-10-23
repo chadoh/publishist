@@ -9,7 +9,7 @@
       Hey hey! Check out [the Problem Child
       blog](http://problemchildren.wordpress.com)! There's a lot of news and
       such there that has no home on this site yet. Someday it might, but this
-      site is being built, [rail by
+      site is still being built, [rail by
       rail](http://en.wikipedia.org/wiki/Ruby_on_Rails), by [Chad
       Ostrowski][1], who was an editor for this magazine and is now working as
       a code author for [the Man](http://en.wikipedia.org/wiki/Comcast "A very
@@ -27,8 +27,8 @@
       website:
 
       * Let the staff run [their blog](http://problemchildren.wordpress.com/)
-      * Show a timeline of the magazine's history (including publications and
-      editors)
+      * Give interested readers a simple way to request having magazines
+        shipped to them
       * Reconsider what a (literary) magazine should be in a paperless world
           + Allow video submissions
           + Grow by multiplication rather than expansion
@@ -72,22 +72,16 @@
 
     ### What happens at a meeting?
 
-    #{Person.editor ? "[#{Person.editor.first_name}][2], our" : "Our"} current
-    editor, starts off the meetings with a poem to get us all in the right
-    frame of mind. Then #{Person.coeditor ?
-    "[#{Person.coeditor.first_name}][3]" : "the coeditor"} will pass around an
+    Our current editor starts off the meetings with a poem to get us all in the right
+    frame of mind. Then the coeditor will pass around an
     attendee sheet that always includes an awesome question to answer. These
-    get read aloud, and we enjoy the answers immensely. #{Person.editor ?
-    "#{Person.editor.first_name}" : "The editor"} will also bring packlets of
+    get read aloud, and we enjoy the answers immensely. The editor will also bring packlets of
     submissions to the meeting. The packlets range between 4 and 34
     submissions, but generally have around 8. Each poem is read out loud and
     discussed. Sometimes we talk about them technically — *they used that
     em-dash all wrong!* — and sometimes we talk about them informally — *this
     line is way cool!* Then each member rates the poem on his or her own,
     according to that particular member’s tastes.
-
-      [2]: #{begin person_path(Person.editor)   rescue "/people" end}
-      [3]: #{begin person_path(Person.coeditor) rescue "/people" end}
 
     ### How do I join?
 
@@ -106,10 +100,10 @@
     Need more information than we have on this site?
 
     If you’re looking for information about the magazine in general, try
-    contacting [#{Person.editor.try(:name)}][1].
+    contacting [#{Person.current_communicators.collect(&:name).to_sentence}][1].
 
     If you have any questions, complaints, or suggestions about the website,
     direct them to [Chad Ostrowski][2].
 
-      [1]: #{begin person_path(Person.editor) rescue "/people" end}
+      [1]: #{begin person_path(Person.current_communicators.first) rescue "/people" end}
       [2]: /people/chad-ostrowski

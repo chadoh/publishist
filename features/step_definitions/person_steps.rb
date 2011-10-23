@@ -1,51 +1,41 @@
 Given /^the following users? exists?:$/ do |table|
   table.rows_hash.each do |name, email|
     first_name, last_name = name.split(' ')
-    @user = Person.create(
+    @person = Person.create(
       :first_name            => first_name,
       :last_name             => last_name,
       :email                 => email,
       :password              => "password",
       :password_confirmation => "password"
     )
-    @user.confirm!
+    @person.confirm!
   end
 end
 
-Given /^I sign in as "([^"]*)"$/ do |email_and_password|
-  email, password = email_and_password.split('/')
+Given /^I sign in$/ do
+  @person = Person.create(
+    first_name:            "example@example.com",
+    email:                 "example@example.com",
+    password:              "secret",
+    password_confirmation: "secret"
+  )
+  @person.confirm!
   visit '/sign_in'
-  fill_in 'Email',    :with => email
-  fill_in 'Password', :with => password
+  fill_in 'Email',    :with => "example@example.com"
+  fill_in 'Password', :with => "secret"
   click_button 'Sign in'
 end
 
-Given /^I, ([^,]+), have an account but am not signed in$/ do |name|
-  f, l = name.split(' ')
-  p = Person.create(
-    :first_name            => f,
-    :last_name             => l,
-    :email                 => "#{name.parameterize}@example.com",
-    :password              => 'secret',
-    :password_confirmation => 'secret'
-  )
-  p.confirm!
+Given /^I (?:am signed|sign) out$/ do
+  click_link "Sign out"
 end
 
-Given /^I am signed in as an editor named "([^"]*)"$/ do |name|
-  f, l = name.split(' ')
-  p = Person.create(
-    :first_name            => f,
-    :last_name             => l,
-    :email                 => "#{name.parameterize}@example.com",
-    :password              => 'secret',
-    :password_confirmation => 'secret'
+Given /^I have an account but am not signed in$/ do
+  person = Person.create(
+    first_name:            "example@example.com",
+    email:                 "example@example.com",
+    password:              "secret",
+    password_confirmation: "secret"
   )
-  p.confirm!
-  Rank.create(
-    :rank_type  => 3,
-    :rank_start => Time.now,
-    :person_id  => p.id
-  )
-  Given "I sign in as \"#{p.email}/secret\""
+  person.confirm!
 end

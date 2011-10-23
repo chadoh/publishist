@@ -1,7 +1,7 @@
 - title @magazine.to_s, ": #{@page.title}"
 
 .content
-  = render partial: "pagination", locals: { magazine: @magazine, current_page: @page }
+  = render "pagination"
   - collapse_resources = false
   - if not (notes = @page.editors_notes).empty?
     = render "editors_notes/index", editors_notes: notes
@@ -18,10 +18,10 @@
   - if submissions = @page.submissions
     = render "submissions/index", submissions: submissions
     - collapse_resources = true unless submissions.empty?
-  - if editor?
+  - if orchestrates? @magazine
     = render "add_resources", collapse: collapse_resources
-  = render "pagination", magazine: @magazine, current_page: @page
-  - if editor? and not @magazine.notification_sent?
+  = render "pagination"
+  - if orchestrates? @magazine and not @magazine.notification_sent?
     .notify_authors_button
       Looking good?
       = button_to "Let everyone who submitted know it's been published!",

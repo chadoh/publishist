@@ -40,7 +40,7 @@ When /^I drag "([^"]*)" from the (.*) meeting to "([^"]*)"$/ do |submission_name
 end
 
 Given /^the following submissions are scheduled for a meeting a week from now:$/ do |submissions_table|
-  meeting = Factory.create :meeting
+  meeting = first_meeting
   submissions_table.hashes.each do |attributes|
     submission = Submission.create(attributes)
     Packlet.create :meeting => meeting, :submission => submission

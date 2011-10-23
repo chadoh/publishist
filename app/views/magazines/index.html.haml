@@ -1,8 +1,6 @@
 - title t('.title')
-- if editor?
-  :markdown
-    #{link_to t('.new_magazine'), new_magazine_path}  
-    #{link_to t('.new_meeting'), new_meeting_path}
+- if orchestrates? :any
+  %p= link_to t('.new_magazine'), new_magazine_path
 
 %ol.magazines
   - for magazine in @magazines

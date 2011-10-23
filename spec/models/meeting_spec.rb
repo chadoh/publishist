@@ -7,6 +7,7 @@ describe Meeting do
     should have_many(:packlets).dependent(:destroy)
     should have_many(:submissions).through(:packlets)
     should belong_to(:magazine)
+    should validate_presence_of(:datetime)
   }
 
   context "when saving" do

@@ -39,11 +39,12 @@ class Submission < ActiveRecord::Base
   validate "errors.add :body, 'cannot be blank.'",
     :if => Proc.new {|s| s.body.blank? && s.title.blank? }
 
-  after_find :reviewed_if_meeting_has_occurred
+  after_find    :reviewed_if_meeting_has_occurred
   before_create :set_position_to_nil
+  after_create  :author_has_positions_with_the_disappears_ability
 
   def magazine
-    self.reload.meetings.first.try(:magazine)
+    self.reload.meetings.first.try(:magazine) || Magazine.first
   end
 
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
@@ -88,7 +89,7 @@ class Submission < ActiveRecord::Base
 
   def has_been moved_to_state, options = {}
     if moved_to_state == :submitted
-      Notifications.new_submission(self).deliver if (options[:by].blank? or Person.editor.presence != options[:by])
+      Notifications.new_submission(self).deliver if (options[:by].blank? or Person.current_communicators.first.presence != options[:by])
     end
     update_attributes :state => moved_to_state
   end
@@ -127,6 +128,12 @@ protected
 
   def set_position_to_nil
     self.position = nil
+  end
+
+  def author_has_positions_with_the_disappears_ability
+    if self.author && self.author.abilities.where(key: 'disappears').empty?
+      self.author.positions << Position.joins(:abilities).where(abilities: { key: 'disappears'})
+    end
   end
 
 end

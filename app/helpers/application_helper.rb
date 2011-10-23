@@ -51,37 +51,28 @@ module ApplicationHelper
     end
   end
 
-  def editor?
-    @editor ||= person_signed_in? \
-      && (current_person.current_ranks.include?("Editor") \
-      ||  current_person.current_ranks.include?("Coeditor"))
+  def communicates? *args
+    person_signed_in? && current_person.communicates?(*args)
   end
 
-  def the_editor?
-    @the_editor ||= person_signed_in? \
-      && current_person.current_ranks.include?("Editor")
+  def orchestrates? *args
+    person_signed_in? && current_person.orchestrates?(*args)
   end
 
-  def the_coeditor?
-    @coeditor ||= person_signed_in? \
-      && current_person.current_ranks.include?("Coeditor")
+  def scores? *args
+    person_signed_in? && current_person.scores?(*args)
   end
 
-  def staff?
-    @staff ||= person_signed_in? \
-      && current_person.current_ranks.include?("Staff")
+  def views? *args
+    person_signed_in? && current_person.views?(*args)
   end
 
-  def member?
-    @member ||= person_signed_in?
+  def communicates_or_is_author? submission
+    person_signed_in? && (communicates?(submission) || current_person == submission.author)
   end
 
-  def editor_or_author? submission
-    person_signed_in? && (the_editor? || current_person == submission.author)
-  end
-
-  def coeditor_or_author? submission
-    person_signed_in? && (the_coeditor? || current_person == submission.author)
+  def scores_or_is_author? submission
+    person_signed_in? && (scores?(submission) || current_person == submission.author)
   end
 
   def page_appropriate?
@@ -91,12 +82,11 @@ module ApplicationHelper
   def current_person_can_see_score_for? submission
     submission.scored? && \
     (
-      coeditor_or_author?(submission) || \
+      scores_or_is_author?(submission) || \
       (
         params[:controller] == 'magazines' && \
-        params[:action]     == 'highest_scores')) \
-    unless the_editor? && current_page?(submissions_path)
+        params[:action]     == 'highest_scores'))
   end
 
-  memoize :editor_or_author?, :coeditor_or_author?, :current_person_can_see_score_for?
+  memoize :communicates_or_is_author?, :scores_or_is_author?, :current_person_can_see_score_for?
 end

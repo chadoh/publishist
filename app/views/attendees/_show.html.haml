@@ -1,6 +1,6 @@
 %li[attendee]
   %span.person
-    - if editor? && attendee.person
+    - if orchestrates?(attendee.meeting) && attendee.person
       = mail_to attendee.person.email, '', class: 'mailto'
     = link_to_if attendee.person, attendee.name, attendee.person
   -if attendee.person == current_person
@@ -11,7 +11,7 @@
   - else
     %span.answer
       = attendee.answer
-  -if editor?
+  -if orchestrates? attendee.meeting
     %nav.small.right
       = link_to t('edit').html_safe, edit_meeting_attendee_path(attendee.meeting, attendee), remote: true, title: 'Edit'
       = button_to t('destroy').html_safe, meeting_attendee_path(@meeting, attendee),

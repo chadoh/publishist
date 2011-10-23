@@ -17,11 +17,12 @@ Pc::Application.routes.draw do
   get "welcome/index"
 
   resources :roles, only: [:new, :create, :destroy]
-  resources :positions, :scores, :editors_notes, except: :index
+  resources :scores, only: [:create, :update, :destroy]
+  resources :positions, :editors_notes, except: :index
   resources :cover_arts, :table_of_contents, :staff_lists, only: [:create, :destroy]
 
   resources :meetings do
-    resources :attendees do
+    resources :attendees, only: [:create, :edit, :update, :destroy] do
       member { put 'update_answer' => :update_answer, :as => 'update_answer_for' }
     end
     member { get  'scores' => :scores, :as => 'scores_for' }
@@ -32,12 +33,9 @@ Pc::Application.routes.draw do
       put 'update_position'
     end
   end
-  resources :people, shallow: true do
+  resources :people, except: :index, shallow: true do
     resources :ranks
     member do
-      post 'make_staff'
-      post 'make_coeditor'
-      post 'make_editor'
       post 'contact'
     end
     collection do
@@ -51,7 +49,7 @@ Pc::Application.routes.draw do
   resources :magazines do
     member do
       get 'highest_scores', as: 'highest_scored_for'
-      get 'whos_who_n_staff_n_such', as: 'staff_for'
+      get 'staff_list', as: 'staff_for'
       post :publish
       post :notify_authors_of_published_magazine, as: "notify_authors_of_published"
     end

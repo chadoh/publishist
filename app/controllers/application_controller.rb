@@ -4,30 +4,25 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
 
-  def staff_only
-    unless person_signed_in? and current_person.ranks.present?
-      flash[:notice] = "Only staff can see that page."
+protected
+
+  def must_orchestrate *args
+    unless person_signed_in? and current_person.orchestrates? *args
+      flash[:notice] = "You're not allowed to see that."
       redirect_to root_url
     end
   end
 
-  def editors_only
-    unless person_signed_in? and current_person.editor?
-      flash[:notice] = "Only #{Person.editors.collect{|e| e.name }.join(" & ")} can see that."
+  def must_score *args
+    unless person_signed_in? and current_person.scores? *args
+      flash[:notice] = "You're not allowed to see that."
       redirect_to root_url
     end
   end
 
-  def coeditor_only
-    unless person_signed_in? and current_person.the_coeditor?
-      flash[:notice] = "Only #{Person.coeditor.name} can see that."
-      redirect_to root_url
-    end
-  end
-
-  def editor_only
-    unless person_signed_in? and current_person.the_editor?
-      flash[:notice] = "Only #{Person.editor.name} can see that."
+  def must_view *args
+    unless person_signed_in? and current_person.views? *args
+      flash[:notice] = "You're not allowed to see that."
       redirect_to root_url
     end
   end

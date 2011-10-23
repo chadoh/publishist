@@ -18,11 +18,11 @@
       %nav.site-nav{ :role => 'navigation' }
         %ul
           %li{ :class => params[:controller] == 'welcome'     && 'current' }= link_to_unless_current "About", root_path
-          - unless editor?
+          - unless orchestrates? :currently
             %li{ :class => current_page?(new_submission_path)   && 'current' }= link_to_unless_current "Submit", new_submission_path
-          - if editor?
+          - if orchestrates? :currently
             %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current "Submissions", submissions_path
-          - if staff? || editor?
+          - if views? :any, :with_meetings
             %li{ :class => params[:controller] == 'meetings'      && 'current' }= link_to_unless_current "Meetings", meetings_path
           %li{ :class => params[:controller] == 'magazines'   && 'current' }= link_to_unless_current "Magazines", magazines_path
           %li

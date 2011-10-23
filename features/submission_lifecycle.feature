@@ -13,9 +13,9 @@ Feature: A poet's work goes from draft to published/rejected
     And I press "Submit!"
     Then "Each raindrop" should be submitted, not draft
 
-  @webmember
   Scenario: I write a poem and then submit it later with edits
-    Given I am on the new submission page
+    Given I sign in
+    And I am on the new submission page
     When I fill in the following:
       | Title | Each raindrop   |
       | Body  | started as dust |
@@ -28,16 +28,16 @@ Feature: A poet's work goes from draft to published/rejected
     Then I should be on my profile page
     And I should not see "Drafts"
 
-  @webmember
   Scenario: I write a poem and then submit it later without edits
-    Given I have drafted a poem called "Teh waistland"
+    Given I sign in
+    And I have drafted a poem called "Teh waistland"
     When I am on my profile page
     And I press "Submit"
     Then I should see "Submitted"
 
-  @webmember
   Scenario: A poem I write is scheduled for a meeting
-    Given I have submitted a poem called "Los Colores"
+    Given I sign in
+    And I have submitted a poem called "Los Colores"
     And "Los Colores" is scheduled for a meeting a week from now
     When I am on my profile page
     Then I should see "Queued"
@@ -49,9 +49,9 @@ Feature: A poet's work goes from draft to published/rejected
     Then I should not see "Edit" under "Los Colores"
     And I should see "Reviewed" 2 times
 
-  @webmember
   Scenario: A poem I write has been scored
-    Given I have submitted a poem called "Melki's a deck"
+    Given I sign in
+    And I have submitted a poem called "Melki's a deck"
     And I have gone to the meeting and scored "Melki's a deck"
     When I am on my profile page
     Then I should see "Scored"

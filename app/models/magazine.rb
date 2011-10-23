@@ -28,46 +28,43 @@
 class Magazine < ActiveRecord::Base
   extend ActiveSupport::Memoizable
 
-  validates_presence_of :nickname
-  validates_presence_of :accepts_submissions_from
-  validates_presence_of :accepts_submissions_until
-  validate :from_happens_before_until
-  validate :magazine_ranges_dont_conflict
-
-  validates_attachment_content_type :pdf,
-    :content_type => [ 'application/pdf' ],
-    :if           => Proc.new { |submission| submission.pdf.file? },
-    :message      => "has to be a valid pdf"
-
+  has_many :meetings,   dependent: :nullify, include: :submissions
+  has_many :pages,      dependent: :destroy, order:   :position
+  has_many :positions,  dependent: :destroy
+  has_many :roles,      through:   :positions, dependent: :destroy
+  has_many :abilities,  through:   :positions, dependent: :destroy
+  has_friendly_id :to_s, :use_slug => true
   has_attached_file :pdf,
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :path           => "/magazines/:filename"
-
-  validates_attachment_content_type :cover_art,
-    :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
-    :if           => Proc.new { |magazine| magazine.cover_art.file? },
-    :message      => "must be an image"
-
   has_attached_file :cover_art,
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :path           => "/cover_art/:style/:filename",
     :styles         => { thumb: "300x300>" }
 
+  validates_presence_of :nickname
+  validates_presence_of :accepts_submissions_from
+  validates_presence_of :accepts_submissions_until
+  validate :from_happens_before_until
+  validate :magazine_ranges_dont_conflict
+  validates_attachment_content_type :pdf,
+    :content_type => [ 'application/pdf' ],
+    :if           => Proc.new { |submission| submission.pdf.file? },
+    :message      => "has to be a valid pdf"
+  validates_attachment_content_type :cover_art,
+    :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
+    :if           => Proc.new { |magazine| magazine.cover_art.file? },
+    :message      => "must be an image"
+
   after_initialize "self.nickname = 'next' if self.nickname.blank?"
   after_initialize :accepts_from_after_latest_or_perhaps_today
   after_initialize :accepts_until_six_months_later
   after_initialize :score_counters_cannot_be_nil
+  after_create     :same_positions_as_previous_mag
 
   default_scope order("accepts_submissions_until DESC")
-
-  has_many :meetings,   dependent: :nullify, include: :submissions
-  has_many :pages,      dependent: :destroy, order:   :position
-  has_many :positions,  dependent: :destroy
-  has_many :roles,      through:   :positions
-
-  has_friendly_id :to_s, :use_slug => true
 
   # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
   def submissions options = {}
@@ -104,7 +101,7 @@ class Magazine < ActiveRecord::Base
   end
 
   def to_s
-    title.presence || "the #{nickname} magazine"
+    title.presence || "the #{nickname} issue"
   end
 
   def publish array_of_winners
@@ -116,6 +113,11 @@ class Magazine < ActiveRecord::Base
       self.update_attributes :published_on => Date.today
       for sub in published do sub.has_been(:published) end
       for sub in rejected  do sub.has_been(:rejected)  end
+
+      # get rid of ALL positions marked with 'disappears' (even if they somehow ended up on other mags)
+      for position in Position.joins(:abilities).where(abilities: { key: 'disappears' })
+        position.destroy
+      end
 
       self.pages = [
         cover = Page.create(:title => 'Cover'),
@@ -170,7 +172,15 @@ class Magazine < ActiveRecord::Base
     def current
       where('accepts_submissions_from  < ? AND ' + \
             'accepts_submissions_until > ?',
-            Date.today, Date.today).first
+            Date.today, Date.today).try(:first) || self.first
+    end
+
+    def before mag
+      all.select{|m| m.accepts_submissions_until <= mag.accepts_submissions_from }.sort_by(&:accepts_submissions_until).reverse.first
+    end
+
+    def after mag
+      all.select{|m| m.accepts_submissions_from >= mag.accepts_submissions_until }.sort_by(&:accepts_submissions_from).first
     end
   end
 
@@ -185,15 +195,17 @@ protected
   def accepts_from_after_latest_or_perhaps_today
     if self.accepts_submissions_from.blank?
       if Magazine.all.present?
-        self.accepts_submissions_from = Magazine.order("accepts_submissions_until DESC").first.accepts_submissions_until
+        self.accepts_submissions_from = Magazine.unscoped.order("accepts_submissions_until DESC").first.accepts_submissions_until + 1
       else
-        self.accepts_submissions_from = Date.today 
+        self.accepts_submissions_from = Date.today
       end
     end
+    self.accepts_submissions_from = self.accepts_submissions_from.beginning_of_day
   end
 
   def accepts_until_six_months_later
     self.accepts_submissions_until = self.accepts_submissions_from + 6.months if self.accepts_submissions_until.blank?
+    self.accepts_submissions_until = self.accepts_submissions_until.end_of_day
   end
 
   def from_happens_before_until
@@ -212,7 +224,7 @@ protected
       self.accepts_submissions_from
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
-      then errors.add :accepts_submissions_from,  "can't occurr during another magazine"
+      then errors.add :accepts_submissions_from,  "can't occurr during another magazine (#{mags.first} accepts submissions until #{mags.first.accepts_submissions_until})"
     end
     mags = Magazine.where(
       'accepts_submissions_from  < ? AND ' + \
@@ -221,7 +233,7 @@ protected
       self.accepts_submissions_until
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
-      then errors.add :accepts_submissions_until, "can't occurr during another magazine"
+      then errors.add :accepts_submissions_until, "can't occurr during another magazine (#{mags.first} accepts submissions from #{mags.first.accepts_submissions_from})"
     end
   end
 
@@ -229,6 +241,15 @@ protected
     if new_record?
       self.sum_of_scores   = 0
       self.count_of_scores = 0
+    end
+  end
+
+  def same_positions_as_previous_mag
+    previous_mag = Magazine.where("accepts_submissions_from < ?", self.accepts_submissions_from).first
+    if previous_mag
+      for position in previous_mag.positions
+        self.positions << Position.create(name: position.name, abilities: position.abilities)
+      end
     end
   end
 end

@@ -99,7 +99,7 @@ html {
 }
 
 /* line 35, ../../../app/stylesheets/_defaults.sass */
-.caps, .allcaps, h1, h2, caption, .smallcaps, h4, .nocaps {
+.caps, .allcaps, h1, h2, caption, .smallcaps, .nocaps {
   letter-spacing: 0.1em;
 }
 
@@ -109,7 +109,7 @@ html {
 }
 
 /* line 42, ../../../app/stylesheets/_defaults.sass */
-.smallcaps, h4 {
+.smallcaps {
   font-variant: small-caps;
 }
 
@@ -219,87 +219,82 @@ h3 {
 }
 
 /* line 123, ../../../app/stylesheets/_defaults.sass */
-h4 {
-  text-transform: lowercase;
-}
-
-/* line 127, ../../../app/stylesheets/_defaults.sass */
 h5, h6 {
   font-style: italic;
 }
 
 /* Inline -------------------------------------------------------------- */
-/* line 132, ../../../app/stylesheets/_defaults.sass */
+/* line 128, ../../../app/stylesheets/_defaults.sass */
 cite, em, dfn, address, i {
   font-style: italic;
 }
 
-/* line 135, ../../../app/stylesheets/_defaults.sass */
+/* line 131, ../../../app/stylesheets/_defaults.sass */
 strong, dfn, b {
   font-weight: bold;
 }
 
-/* line 138, ../../../app/stylesheets/_defaults.sass */
+/* line 134, ../../../app/stylesheets/_defaults.sass */
 sup, sub {
   font-size: smaller;
   line-height: 0;
 }
 
-/* line 142, ../../../app/stylesheets/_defaults.sass */
+/* line 138, ../../../app/stylesheets/_defaults.sass */
 sup {
   vertical-align: super;
 }
 
-/* line 145, ../../../app/stylesheets/_defaults.sass */
+/* line 141, ../../../app/stylesheets/_defaults.sass */
 sub {
   vertical-align: sub;
 }
 
-/* line 148, ../../../app/stylesheets/_defaults.sass */
+/* line 144, ../../../app/stylesheets/_defaults.sass */
 abbr, acronym {
   border-bottom: 1px dotted;
   cursor: help;
 }
 
-/* line 152, ../../../app/stylesheets/_defaults.sass */
+/* line 148, ../../../app/stylesheets/_defaults.sass */
 ins {
   text-decoration: underline;
 }
 
-/* line 155, ../../../app/stylesheets/_defaults.sass */
+/* line 151, ../../../app/stylesheets/_defaults.sass */
 del {
   text-decoration: line-through;
 }
 
-/* line 158, ../../../app/stylesheets/_defaults.sass */
+/* line 154, ../../../app/stylesheets/_defaults.sass */
 mark {
   background: #ffff99;
   background-color: rgba(255, 255, 0, 0.5);
   text-shadow: none;
 }
 
-/* line 163, ../../../app/stylesheets/_defaults.sass */
+/* line 159, ../../../app/stylesheets/_defaults.sass */
 small {
   font-size: 0.75em;
   line-height: 2em;
 }
 
-/* line 166, ../../../app/stylesheets/_defaults.sass */
+/* line 162, ../../../app/stylesheets/_defaults.sass */
 q {
   font-style: italic;
 }
-/* line 168, ../../../app/stylesheets/_defaults.sass */
+/* line 164, ../../../app/stylesheets/_defaults.sass */
 q em {
   font-style: normal;
 }
 
 /* Block -------------------------------------------------------------- */
-/* line 176, ../../../app/stylesheets/_defaults.sass */
+/* line 172, ../../../app/stylesheets/_defaults.sass */
 p {
   margin-bottom: 1.5em;
 }
 
-/* line 179, ../../../app/stylesheets/_defaults.sass */
+/* line 175, ../../../app/stylesheets/_defaults.sass */
 pre {
   margin: 1.5em;
   white-space: pre;
@@ -308,13 +303,13 @@ pre {
   word-wrap: break-word;
 }
 
-/* line 186, ../../../app/stylesheets/_defaults.sass */
+/* line 182, ../../../app/stylesheets/_defaults.sass */
 blockquote {
   margin: 1.5em;
 }
 
 /* Replaced -------------------------------------------------------------- */
-/* line 191, ../../../app/stylesheets/_defaults.sass */
+/* line 187, ../../../app/stylesheets/_defaults.sass */
 img {
   vertical-align: text-middle;
   max-width: 100%;
@@ -322,41 +317,41 @@ img {
 }
 
 /* Lists -------------------------------------------------------------- */
-/* line 198, ../../../app/stylesheets/_defaults.sass */
+/* line 194, ../../../app/stylesheets/_defaults.sass */
 ol, ul {
   margin-bottom: 1.5em;
   margin-left: 1.5em;
 }
-/* line 201, ../../../app/stylesheets/_defaults.sass */
+/* line 197, ../../../app/stylesheets/_defaults.sass */
 ol ol, ol ul, ul ol, ul ul {
   margin-bottom: 0em;
 }
 
-/* line 204, ../../../app/stylesheets/_defaults.sass */
+/* line 200, ../../../app/stylesheets/_defaults.sass */
 ol {
   list-style: decimal;
 }
 
-/* line 207, ../../../app/stylesheets/_defaults.sass */
+/* line 203, ../../../app/stylesheets/_defaults.sass */
 ul {
   list-style: disc;
 }
-/* line 209, ../../../app/stylesheets/_defaults.sass */
+/* line 205, ../../../app/stylesheets/_defaults.sass */
 li ul {
   list-style-type: circle;
 }
 
-/* line 212, ../../../app/stylesheets/_defaults.sass */
+/* line 208, ../../../app/stylesheets/_defaults.sass */
 dl {
   margin-bottom: 1.5em;
   margin-top: 0em;
 }
 
-/* line 215, ../../../app/stylesheets/_defaults.sass */
+/* line 211, ../../../app/stylesheets/_defaults.sass */
 dt {
   cursor: pointer;
 }
-/* line 217, ../../../app/stylesheets/_defaults.sass */
+/* line 213, ../../../app/stylesheets/_defaults.sass */
 dt p {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -370,20 +365,28 @@ dt p {
 dt p {
   *display: inline;
 }
-/* line 221, ../../../app/stylesheets/_defaults.sass */
+/* line 217, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  -moz-transition-property: all;
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  transition-duration: 0.4s;
   vertical-align: top;
 }
 /* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
 dt span.arrow {
   *display: inline;
 }
-/* line 223, ../../../app/stylesheets/_defaults.sass */
+/* line 221, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow.rotated {
   -moz-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -392,14 +395,14 @@ dt span.arrow.rotated {
   transform: rotate(90deg);
 }
 
-/* line 227, ../../../app/stylesheets/_defaults.sass */
+/* line 225, ../../../app/stylesheets/_defaults.sass */
 dd {
   padding-left: 1.5em;
 }
 
 /* Tables -------------------------------------------------------------- */
 /* tables still need 'cellspacing="0"' in the markup */
-/* line 233, ../../../app/stylesheets/_defaults.sass */
+/* line 231, ../../../app/stylesheets/_defaults.sass */
 table {
   margin-bottom: 1.5em;
   width: 100%;
@@ -407,17 +410,17 @@ table {
   border-spacing: 0;
 }
 
-/* line 239, ../../../app/stylesheets/_defaults.sass */
+/* line 237, ../../../app/stylesheets/_defaults.sass */
 table, td, th {
   vertical-align: middle;
 }
 
-/* line 242, ../../../app/stylesheets/_defaults.sass */
+/* line 240, ../../../app/stylesheets/_defaults.sass */
 th, thead th {
   font-weight: bold;
 }
 
-/* line 245, ../../../app/stylesheets/_defaults.sass */
+/* line 243, ../../../app/stylesheets/_defaults.sass */
 th, td, caption {
   padding: 0.75em;
   padding-bottom: 0;
@@ -425,30 +428,30 @@ th, td, caption {
   font-weight: normal;
 }
 
-/* line 251, ../../../app/stylesheets/_defaults.sass */
+/* line 249, ../../../app/stylesheets/_defaults.sass */
 th {
   border-bottom-style: dotted;
   border-bottom-width: 0.063em;
   padding-bottom: -0.063em;
   width: 70%;
 }
-/* line 254, ../../../app/stylesheets/_defaults.sass */
+/* line 252, ../../../app/stylesheets/_defaults.sass */
 th.headerSortDown:after {
   content: " ˇ";
 }
-/* line 256, ../../../app/stylesheets/_defaults.sass */
+/* line 254, ../../../app/stylesheets/_defaults.sass */
 th.headerSortUp:after {
   content: " ˆ";
 }
 
-/* line 259, ../../../app/stylesheets/_defaults.sass */
+/* line 257, ../../../app/stylesheets/_defaults.sass */
 tfoot {
   font-size: 0.875em;
   line-height: 1.714em;
 }
 
 /* Forms -------------------------------------------------------------- */
-/* line 267, ../../../app/stylesheets/_defaults.sass */
+/* line 265, ../../../app/stylesheets/_defaults.sass */
 fieldset {
   margin-bottom: 1.5em;
   border-style: solid;
@@ -456,37 +459,71 @@ fieldset {
   padding: 1.438em;
 }
 
-/* line 271, ../../../app/stylesheets/_defaults.sass */
+/* line 269, ../../../app/stylesheets/_defaults.sass */
 legend {
   font-size: 1.125em;
   line-height: 1.333em;
   font-weight: bold;
 }
 
-/* line 275, ../../../app/stylesheets/_defaults.sass */
+/* line 273, ../../../app/stylesheets/_defaults.sass */
 input[type="radio"], input[type="checkbox"] {
   vertical-align: baseline;
 }
 
-/* line 278, ../../../app/stylesheets/_defaults.sass */
+/* line 276, ../../../app/stylesheets/_defaults.sass */
 label.boolean {
   display: inline-block;
   width: 80%;
 }
 
-/* line 282, ../../../app/stylesheets/_defaults.sass */
+/* line 280, ../../../app/stylesheets/_defaults.sass */
+label.collection_check_boxes {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  font-weight: normal;
+  margin: 0;
+  width: 98%;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+label.collection_check_boxes {
+  *display: inline;
+}
+
+/* line 285, ../../../app/stylesheets/_defaults.sass */
+input[type=checkbox] {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+input[type=checkbox] {
+  *display: inline;
+}
+
+/* line 287, ../../../app/stylesheets/_defaults.sass */
+div.check_boxes span {
+  display: block;
+}
+
+/* line 290, ../../../app/stylesheets/_defaults.sass */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 285, ../../../app/stylesheets/_defaults.sass */
+/* line 293, ../../../app/stylesheets/_defaults.sass */
 label {
   margin-top: 1.5em;
   display: block;
   font-weight: bold;
 }
 
-/* line 292, ../../../app/stylesheets/_defaults.sass */
+/* line 300, ../../../app/stylesheets/_defaults.sass */
 .textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
   font-family: Cambria, Georgia, serif;
   font-size: 1em;
@@ -510,28 +547,28 @@ label {
   height: 2.571em;
 }
 
-/* line 305, ../../../app/stylesheets/_defaults.sass */
+/* line 313, ../../../app/stylesheets/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 316, ../../../app/stylesheets/_defaults.sass */
+/* line 324, ../../../app/stylesheets/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 318, ../../../app/stylesheets/_defaults.sass */
+/* line 326, ../../../app/stylesheets/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 321, ../../../app/stylesheets/_defaults.sass */
+/* line 329, ../../../app/stylesheets/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 325, ../../../app/stylesheets/_defaults.sass */
+/* line 333, ../../../app/stylesheets/_defaults.sass */
 input[type=submit], button {
   font-size: 1em;
   line-height: 1.5em;
@@ -553,21 +590,21 @@ input[type=submit], button {
   -o-box-shadow: #4a4a4a 1px 1px 2px 0;
   box-shadow: #4a4a4a 1px 1px 2px 0;
 }
-/* line 336, ../../../app/stylesheets/_defaults.sass */
+/* line 344, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
   -moz-box-shadow: #4a4a4a 0 0 2px 0;
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
   -o-box-shadow: #4a4a4a 0 0 2px 0;
   box-shadow: #4a4a4a 0 0 2px 0;
 }
-/* line 338, ../../../app/stylesheets/_defaults.sass */
+/* line 346, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -o-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
 }
-/* line 340, ../../../app/stylesheets/_defaults.sass */
+/* line 348, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
@@ -583,14 +620,14 @@ input[type=submit].link, button.link {
   display: inline;
   color: #db8322;
 }
-/* line 343, ../../../app/stylesheets/_defaults.sass */
+/* line 351, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:hover, button.link:hover {
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
 }
-/* line 345, ../../../app/stylesheets/_defaults.sass */
+/* line 353, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:active, button.link:active {
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
   -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
@@ -620,16 +657,16 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 353, ../../../app/stylesheets/_defaults.sass */
+/* line 361, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 355, ../../../app/stylesheets/_defaults.sass */
+/* line 363, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
 
-/* line 359, ../../../app/stylesheets/_defaults.sass */
+/* line 367, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:hover {
   background-color: #e0ca44;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e7d770), color-stop(100%, #e0ca44));
@@ -640,7 +677,7 @@ span[contenteditable]:hover {
   background: linear-gradient(#e7d770, #e0ca44);
   cursor: pointer;
 }
-/* line 363, ../../../app/stylesheets/_defaults.sass */
+/* line 371, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:focus {
   background-color: #e7a863;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eec18f), color-stop(100%, #e7a863));
@@ -656,11 +693,11 @@ span[contenteditable]:focus {
   box-shadow: silver 0 0 3px inset;
 }
 
-/* line 375, ../../../app/stylesheets/_defaults.sass */
+/* line 383, ../../../app/stylesheets/_defaults.sass */
 .grayed-out {
   color: silver;
 }
-/* line 372, ../../../app/stylesheets/_defaults.sass */
+/* line 380, ../../../app/stylesheets/_defaults.sass */
 .grayed-out a, .grayed-out input.link, .grayed-out input {
   color: silver;
 }

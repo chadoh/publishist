@@ -4,9 +4,9 @@ Feature: the staff list shows staff for a magazine and allows the editor to spec
   As an interested patron,
   I want to see who played a part.
 
-  @editor
   Scenario: I set up a staff list
-    Given a magazine has been published and I am viewing its cover
+    Given I'm in a position for the current magazine with the "orchestrates" ability
+    And a magazine has been published and I am viewing its cover
     When I follow "Staff"
     And I follow "Add a new position"
     And I fill in "Name" with "Editor"
@@ -34,12 +34,12 @@ Feature: the staff list shows staff for a magazine and allows the editor to spec
     When I press "×"
     Then I should not see "Coeditor"
 
-  @editor
   Scenario: I set up a staff list for an unpublished magazine
-    Given there is a magazine
+    Given I'm in a position for the current magazine with the "orchestrates" ability
+    And there is a magazine
     And I am on the magazines page
     Then I should see "Staff list"
 
     When I follow "Staff list"
     Then I should see "Add a new position"
-    And I should see "Staff for the next magazine"
+    And I should see "Staff for the next issue"

@@ -4,6 +4,10 @@ class PagesController < ApplicationController
   respond_to :html
   respond_to :js, only: [:update, :add_submission]
 
+  before_filter except: :show do |c|
+    c.must_orchestrate :any
+  end
+
   def show
     redirect_to magazines_url unless @page
   end

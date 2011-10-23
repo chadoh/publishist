@@ -1,16 +1,23 @@
 class MagazinesController < InheritedResources::Base
-  before_filter :editors_only, :except => [:index, :show]
-  before_filter :ensure_current_url, :only => :show
+  before_filter only: [:new, :create] do |c|
+    c.must_orchestrate :any
+  end
+  before_filter only: [:edit, :update, :destroy, :staff_list] do |c|
+    c.must_orchestrate resource, :or_adjacent
+  end
+  before_filter only: [:publish, :highest_scores, :notify_authors_of_published_magazine] do |c|
+    c.must_orchestrate resource
+  end
+  before_filter :ensure_current_url,   only:   :show
 
+  action [:create, :update, :destroy]
   custom_actions :resource => [:highest_scores, :publish]
 
   def index
-    @orphaned_meetings = Meeting.where(:magazine_id => nil)
     @magazines = person_signed_in? ? Magazine.all : Magazine.where('published_on IS NOT ?', nil)
   end
 
   def show
-    @magazine = Magazine.find(params[:id])
     if @magazine.published?
       redirect_to magazine_page_url @magazine, @magazine.pages.first
     else
@@ -19,7 +26,17 @@ class MagazinesController < InheritedResources::Base
   end
 
   def create
-    create!(:notice => nil) { magazines_path }
+    create! do |success, failure|
+      success.html do
+        flash.now[:notice] = nil
+        if current_person.orchestrates? @magazine, :or_adjacent
+          redirect_to staff_for_magazine_url(@magazine)
+        else
+          redirect_to magazines_url
+        end
+      end
+      failure.html { render :edit }
+    end
   end
 
   def update
@@ -50,12 +67,11 @@ class MagazinesController < InheritedResources::Base
   end
 
   def notify_authors_of_published_magazine
-    @magazine = Magazine.find params[:id]
     @magazine.notify_authors_of_published_magazine
     redirect_to request.referer, notice: "Everyone who submitted was notified that they can now view the magazine online"
   end
 
-  def whos_who_n_staff_n_such
+  def staff_list
     @magazine = Magazine.find params[:id]
   end
 

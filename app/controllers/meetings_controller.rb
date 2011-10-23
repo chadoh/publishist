@@ -1,33 +1,37 @@
 class MeetingsController < InheritedResources::Base
-  before_filter :editors_only, :except => [:index, :show]
-  before_filter :coeditor_only, :only => :scores
+  before_filter :authenticate_person!, only: :show
+  before_filter only: [:new, :create] do |c|
+    c.must_orchestrate :any
+  end
+  before_filter only: [:edit, :update, :destroy] do |c|
+    c.must_orchestrate resource
+  end
   before_filter :authenticate_person!
 
-  before_filter :resource, :only => [:scores, :show]
-
-  custom_actions :resource => :search
-
   actions :all
+  custom_actions :resource => [:scores]
 
   respond_to :js, :only => :update
   respond_to :html
 
   def index
-    @magazines = Magazine.all
-    @magazine = params[:m].present? ? Magazine.find(params[:m]) : Magazine.current.presence || Magazine.first
+    @magazines = current_person.magazines_with_meetings
+    @magazine = params[:m].present? ? Magazine.find(params[:m]) : @magazines.first
+    must_view @magazine if @magazine
     @meetings = @magazine.present? ? @magazine.meetings : Meeting.all
   end
 
   def show
+    must_view resource
     @show_author = false
     unless !current_person
       @show_score = current_person.can_enter_scores_for? resource
       @attendee = Attendee.find_by_person_id_and_meeting_id(current_person.id, resource.id)
     end
-    show!
   end
 
   def scores
+    must_score resource
     @attendees = resource.attendees
   end
 

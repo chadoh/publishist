@@ -8,18 +8,19 @@ Then /^"([^"]*)" should be submitted, not draft$/ do |title|
 end
 
 Given /^I have drafted a poem called "([^"]*)"$/ do |title|
-  @user.submissions.create :title => title,
+  @person.submissions.create :title => title,
                            :body => "Yes, I said it. #{title}!"
 end
 
 Given /^I have submitted a poem called "([^"]*)"$/ do |title|
-  @user.submissions.create :title => title,
+  @person.submissions.create :title => title,
                            :body => "Yes, I said it. #{title}!",
                            :state => :submitted
 end
 
 When /^"([^"]*)" is scheduled for a meeting a week from now$/ do |title|
-  meeting = Factory.create :meeting
+  meeting = first_meeting
+  meeting.update_attribute :datetime, 1.week.from_now
   meeting.submissions << Submission.find_by_title(title)
 end
 
@@ -33,9 +34,9 @@ end
 
 Given /^I have gone to the meeting and scored "([^"]*)"$/ do |title|
   submission = Submission.find_by_title title
-  meeting = Factory.create :meeting
+  meeting = first_meeting
   meeting.submissions << submission
-  meeting.people << @user
+  meeting.people << @person
   submission.packlets.first.scores.create :amount => 6, :attendee => meeting.attendees.first
 end
 

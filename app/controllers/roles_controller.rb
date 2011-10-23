@@ -1,21 +1,25 @@
 class RolesController < InheritedResources::Base
-  actions :new, :create, :destroy
+  actions :destroy
   respond_to :html, :js
 
   def new
     session[:return_to] = request.referer
     @role = Role.new position_id: params[:position_id]
+    must_orchestrate @role, :or_adjacent
   end
 
   def create
     params[:role][:person] = Person.find_or_create(params[:role][:person])
-    create! do |wants|
+    @role = Role.create params[:role]
+    must_orchestrate @role, :or_adjacent
+    respond_with(@role) do |wants|
       wants.html { redirect_to session[:return_to] }
       wants.js
     end
   end
 
   def destroy
+    must_orchestrate resource, :or_adjacent
     destroy! do |wants|
       wants.html { redirect_to request.referer }
       wants.js

@@ -120,10 +120,6 @@ h1, h2
 h3
   font-weight: bold
 
-h4
-  @extend .smallcaps
-  text-transform: lowercase
-
 h5, h6
   font-style: italic
 
@@ -220,6 +216,8 @@ dt
     +trailer(0)
   span.arrow
     +inline-block
+    +transition-property
+    +transition-duration(0.4s)
     &.rotated
       +rotate(90deg)
     vertical-align: top
@@ -278,6 +276,16 @@ input[type="radio"], input[type="checkbox"]
 label.boolean
   display: inline-block
   width: 80%
+
+label.collection_check_boxes
+  +inline-block
+  font-weight: normal
+  margin: 0
+  width: 98%
+input[type=checkbox]
+  +inline-block
+div.check_boxes span
+  display: block
 
 label, input[type=button], input[type=submit], button
   cursor: pointer

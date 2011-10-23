@@ -94,12 +94,12 @@ html {
 }
 
 /* line 32, ../../../app/stylesheets/_defaults.sass */
-.mono, pre, code, tt {
+.mono, pre, code, tt, ul.positions > li.position header ul.abilities li {
   font-family: "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, Courier, monospace, sans-serif;
 }
 
 /* line 35, ../../../app/stylesheets/_defaults.sass */
-.caps, .allcaps, h1, h2, caption, .smallcaps, h4, .nocaps {
+.caps, .allcaps, h1, h2, caption, .smallcaps, .nocaps {
   letter-spacing: 0.1em;
 }
 
@@ -109,7 +109,7 @@ html {
 }
 
 /* line 42, ../../../app/stylesheets/_defaults.sass */
-.smallcaps, h4 {
+.smallcaps {
   font-variant: small-caps;
 }
 
@@ -219,87 +219,82 @@ h3 {
 }
 
 /* line 123, ../../../app/stylesheets/_defaults.sass */
-h4 {
-  text-transform: lowercase;
-}
-
-/* line 127, ../../../app/stylesheets/_defaults.sass */
 h5, h6 {
   font-style: italic;
 }
 
 /* Inline -------------------------------------------------------------- */
-/* line 132, ../../../app/stylesheets/_defaults.sass */
+/* line 128, ../../../app/stylesheets/_defaults.sass */
 cite, em, dfn, address, i {
   font-style: italic;
 }
 
-/* line 135, ../../../app/stylesheets/_defaults.sass */
+/* line 131, ../../../app/stylesheets/_defaults.sass */
 strong, dfn, b {
   font-weight: bold;
 }
 
-/* line 138, ../../../app/stylesheets/_defaults.sass */
+/* line 134, ../../../app/stylesheets/_defaults.sass */
 sup, sub {
   font-size: smaller;
   line-height: 0;
 }
 
-/* line 142, ../../../app/stylesheets/_defaults.sass */
+/* line 138, ../../../app/stylesheets/_defaults.sass */
 sup {
   vertical-align: super;
 }
 
-/* line 145, ../../../app/stylesheets/_defaults.sass */
+/* line 141, ../../../app/stylesheets/_defaults.sass */
 sub {
   vertical-align: sub;
 }
 
-/* line 148, ../../../app/stylesheets/_defaults.sass */
+/* line 144, ../../../app/stylesheets/_defaults.sass */
 abbr, acronym {
   border-bottom: 1px dotted;
   cursor: help;
 }
 
-/* line 152, ../../../app/stylesheets/_defaults.sass */
+/* line 148, ../../../app/stylesheets/_defaults.sass */
 ins {
   text-decoration: underline;
 }
 
-/* line 155, ../../../app/stylesheets/_defaults.sass */
+/* line 151, ../../../app/stylesheets/_defaults.sass */
 del {
   text-decoration: line-through;
 }
 
-/* line 158, ../../../app/stylesheets/_defaults.sass */
+/* line 154, ../../../app/stylesheets/_defaults.sass */
 mark {
   background: #ffff99;
   background-color: rgba(255, 255, 0, 0.5);
   text-shadow: none;
 }
 
-/* line 163, ../../../app/stylesheets/_defaults.sass */
+/* line 159, ../../../app/stylesheets/_defaults.sass */
 small {
   font-size: 0.75em;
   line-height: 2em;
 }
 
-/* line 166, ../../../app/stylesheets/_defaults.sass */
+/* line 162, ../../../app/stylesheets/_defaults.sass */
 q {
   font-style: italic;
 }
-/* line 168, ../../../app/stylesheets/_defaults.sass */
+/* line 164, ../../../app/stylesheets/_defaults.sass */
 q em {
   font-style: normal;
 }
 
 /* Block -------------------------------------------------------------- */
-/* line 176, ../../../app/stylesheets/_defaults.sass */
+/* line 172, ../../../app/stylesheets/_defaults.sass */
 p {
   margin-bottom: 1.5em;
 }
 
-/* line 179, ../../../app/stylesheets/_defaults.sass */
+/* line 175, ../../../app/stylesheets/_defaults.sass */
 pre {
   margin: 1.5em;
   white-space: pre;
@@ -308,13 +303,13 @@ pre {
   word-wrap: break-word;
 }
 
-/* line 186, ../../../app/stylesheets/_defaults.sass */
+/* line 182, ../../../app/stylesheets/_defaults.sass */
 blockquote {
   margin: 1.5em;
 }
 
 /* Replaced -------------------------------------------------------------- */
-/* line 191, ../../../app/stylesheets/_defaults.sass */
+/* line 187, ../../../app/stylesheets/_defaults.sass */
 img {
   vertical-align: text-middle;
   max-width: 100%;
@@ -322,41 +317,41 @@ img {
 }
 
 /* Lists -------------------------------------------------------------- */
-/* line 198, ../../../app/stylesheets/_defaults.sass */
+/* line 194, ../../../app/stylesheets/_defaults.sass */
 ol, ul {
   margin-bottom: 1.5em;
   margin-left: 1.5em;
 }
-/* line 201, ../../../app/stylesheets/_defaults.sass */
+/* line 197, ../../../app/stylesheets/_defaults.sass */
 ol ol, ol ul, ul ol, ul ul {
   margin-bottom: 0em;
 }
 
-/* line 204, ../../../app/stylesheets/_defaults.sass */
+/* line 200, ../../../app/stylesheets/_defaults.sass */
 ol {
   list-style: decimal;
 }
 
-/* line 207, ../../../app/stylesheets/_defaults.sass */
+/* line 203, ../../../app/stylesheets/_defaults.sass */
 ul {
   list-style: disc;
 }
-/* line 209, ../../../app/stylesheets/_defaults.sass */
+/* line 205, ../../../app/stylesheets/_defaults.sass */
 li ul {
   list-style-type: circle;
 }
 
-/* line 212, ../../../app/stylesheets/_defaults.sass */
+/* line 208, ../../../app/stylesheets/_defaults.sass */
 dl {
   margin-bottom: 1.5em;
   margin-top: 0em;
 }
 
-/* line 215, ../../../app/stylesheets/_defaults.sass */
+/* line 211, ../../../app/stylesheets/_defaults.sass */
 dt {
   cursor: pointer;
 }
-/* line 217, ../../../app/stylesheets/_defaults.sass */
+/* line 213, ../../../app/stylesheets/_defaults.sass */
 dt p {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -370,20 +365,28 @@ dt p {
 dt p {
   *display: inline;
 }
-/* line 221, ../../../app/stylesheets/_defaults.sass */
+/* line 217, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  -moz-transition-property: all;
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  transition-duration: 0.4s;
   vertical-align: top;
 }
 /* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
 dt span.arrow {
   *display: inline;
 }
-/* line 223, ../../../app/stylesheets/_defaults.sass */
+/* line 221, ../../../app/stylesheets/_defaults.sass */
 dt span.arrow.rotated {
   -moz-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -392,14 +395,14 @@ dt span.arrow.rotated {
   transform: rotate(90deg);
 }
 
-/* line 227, ../../../app/stylesheets/_defaults.sass */
+/* line 225, ../../../app/stylesheets/_defaults.sass */
 dd {
   padding-left: 1.5em;
 }
 
 /* Tables -------------------------------------------------------------- */
 /* tables still need 'cellspacing="0"' in the markup */
-/* line 233, ../../../app/stylesheets/_defaults.sass */
+/* line 231, ../../../app/stylesheets/_defaults.sass */
 table {
   margin-bottom: 1.5em;
   width: 100%;
@@ -407,17 +410,17 @@ table {
   border-spacing: 0;
 }
 
-/* line 239, ../../../app/stylesheets/_defaults.sass */
+/* line 237, ../../../app/stylesheets/_defaults.sass */
 table, td, th {
   vertical-align: middle;
 }
 
-/* line 242, ../../../app/stylesheets/_defaults.sass */
+/* line 240, ../../../app/stylesheets/_defaults.sass */
 th, thead th {
   font-weight: bold;
 }
 
-/* line 245, ../../../app/stylesheets/_defaults.sass */
+/* line 243, ../../../app/stylesheets/_defaults.sass */
 th, td, caption {
   padding: 0.75em;
   padding-bottom: 0;
@@ -425,30 +428,30 @@ th, td, caption {
   font-weight: normal;
 }
 
-/* line 251, ../../../app/stylesheets/_defaults.sass */
+/* line 249, ../../../app/stylesheets/_defaults.sass */
 th {
   border-bottom-style: dotted;
   border-bottom-width: 0.063em;
   padding-bottom: -0.063em;
   width: 70%;
 }
-/* line 254, ../../../app/stylesheets/_defaults.sass */
+/* line 252, ../../../app/stylesheets/_defaults.sass */
 th.headerSortDown:after {
   content: " ˇ";
 }
-/* line 256, ../../../app/stylesheets/_defaults.sass */
+/* line 254, ../../../app/stylesheets/_defaults.sass */
 th.headerSortUp:after {
   content: " ˆ";
 }
 
-/* line 259, ../../../app/stylesheets/_defaults.sass */
+/* line 257, ../../../app/stylesheets/_defaults.sass */
 tfoot {
   font-size: 0.875em;
   line-height: 1.714em;
 }
 
 /* Forms -------------------------------------------------------------- */
-/* line 267, ../../../app/stylesheets/_defaults.sass */
+/* line 265, ../../../app/stylesheets/_defaults.sass */
 fieldset {
   margin-bottom: 1.5em;
   border-style: solid;
@@ -456,37 +459,71 @@ fieldset {
   padding: 1.438em;
 }
 
-/* line 271, ../../../app/stylesheets/_defaults.sass */
+/* line 269, ../../../app/stylesheets/_defaults.sass */
 legend {
   font-size: 1.125em;
   line-height: 1.333em;
   font-weight: bold;
 }
 
-/* line 275, ../../../app/stylesheets/_defaults.sass */
+/* line 273, ../../../app/stylesheets/_defaults.sass */
 input[type="radio"], input[type="checkbox"] {
   vertical-align: baseline;
 }
 
-/* line 278, ../../../app/stylesheets/_defaults.sass */
+/* line 276, ../../../app/stylesheets/_defaults.sass */
 label.boolean {
   display: inline-block;
   width: 80%;
 }
 
-/* line 282, ../../../app/stylesheets/_defaults.sass */
+/* line 280, ../../../app/stylesheets/_defaults.sass */
+label.collection_check_boxes {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  font-weight: normal;
+  margin: 0;
+  width: 98%;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+label.collection_check_boxes {
+  *display: inline;
+}
+
+/* line 285, ../../../app/stylesheets/_defaults.sass */
+input[type=checkbox] {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+input[type=checkbox] {
+  *display: inline;
+}
+
+/* line 287, ../../../app/stylesheets/_defaults.sass */
+div.check_boxes span {
+  display: block;
+}
+
+/* line 290, ../../../app/stylesheets/_defaults.sass */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 285, ../../../app/stylesheets/_defaults.sass */
+/* line 293, ../../../app/stylesheets/_defaults.sass */
 label {
   margin-top: 1.5em;
   display: block;
   font-weight: bold;
 }
 
-/* line 292, ../../../app/stylesheets/_defaults.sass */
+/* line 300, ../../../app/stylesheets/_defaults.sass */
 .textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
   font-family: Cambria, Georgia, serif;
   font-size: 1em;
@@ -510,28 +547,28 @@ label {
   height: 2.571em;
 }
 
-/* line 305, ../../../app/stylesheets/_defaults.sass */
+/* line 313, ../../../app/stylesheets/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 316, ../../../app/stylesheets/_defaults.sass */
+/* line 324, ../../../app/stylesheets/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 318, ../../../app/stylesheets/_defaults.sass */
+/* line 326, ../../../app/stylesheets/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 321, ../../../app/stylesheets/_defaults.sass */
+/* line 329, ../../../app/stylesheets/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 325, ../../../app/stylesheets/_defaults.sass */
+/* line 333, ../../../app/stylesheets/_defaults.sass */
 input[type=submit], button {
   font-size: 1em;
   line-height: 1.5em;
@@ -553,21 +590,21 @@ input[type=submit], button {
   -o-box-shadow: #4a4a4a 1px 1px 2px 0;
   box-shadow: #4a4a4a 1px 1px 2px 0;
 }
-/* line 336, ../../../app/stylesheets/_defaults.sass */
+/* line 344, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:hover, button:hover {
   -moz-box-shadow: #4a4a4a 0 0 2px 0;
   -webkit-box-shadow: #4a4a4a 0 0 2px 0;
   -o-box-shadow: #4a4a4a 0 0 2px 0;
   box-shadow: #4a4a4a 0 0 2px 0;
 }
-/* line 338, ../../../app/stylesheets/_defaults.sass */
+/* line 346, ../../../app/stylesheets/_defaults.sass */
 input[type=submit]:active, button:active {
   -moz-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -webkit-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   -o-box-shadow: #4a4a4a 1px 1px 1px 0 inset;
   box-shadow: #4a4a4a 1px 1px 1px 0 inset;
 }
-/* line 340, ../../../app/stylesheets/_defaults.sass */
+/* line 348, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link, button.link {
   background: transparent;
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
@@ -583,14 +620,14 @@ input[type=submit].link, button.link {
   display: inline;
   color: #db8322;
 }
-/* line 343, ../../../app/stylesheets/_defaults.sass */
+/* line 351, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:hover, button.link:hover {
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   -o-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
   box-shadow: rgba(255, 255, 255, 0) 0 0 0 0;
 }
-/* line 345, ../../../app/stylesheets/_defaults.sass */
+/* line 353, ../../../app/stylesheets/_defaults.sass */
 input[type=submit].link:active, button.link:active {
   -moz-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
   -webkit-box-shadow: rgba(255, 255, 255, 0) 0 0 0 0 false;
@@ -620,16 +657,16 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 353, ../../../app/stylesheets/_defaults.sass */
+/* line 361, ../../../app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 355, ../../../app/stylesheets/_defaults.sass */
+/* line 363, ../../../app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
 
-/* line 359, ../../../app/stylesheets/_defaults.sass */
+/* line 367, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:hover {
   background-color: #e0ca44;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e7d770), color-stop(100%, #e0ca44));
@@ -640,7 +677,7 @@ span[contenteditable]:hover {
   background: linear-gradient(#e7d770, #e0ca44);
   cursor: pointer;
 }
-/* line 363, ../../../app/stylesheets/_defaults.sass */
+/* line 371, ../../../app/stylesheets/_defaults.sass */
 span[contenteditable]:focus {
   background-color: #e7a863;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eec18f), color-stop(100%, #e7a863));
@@ -656,11 +693,11 @@ span[contenteditable]:focus {
   box-shadow: silver 0 0 3px inset;
 }
 
-/* line 375, ../../../app/stylesheets/_defaults.sass */
+/* line 383, ../../../app/stylesheets/_defaults.sass */
 .grayed-out {
   color: silver;
 }
-/* line 372, ../../../app/stylesheets/_defaults.sass */
+/* line 380, ../../../app/stylesheets/_defaults.sass */
 .grayed-out a, .grayed-out input.link, .grayed-out input {
   color: silver;
 }
@@ -694,9 +731,10 @@ a.mailto {
   height: 11px;
   width: 16px;
   display: inline-block;
+  text-indent: -3000em;
 }
 
-/* line 22, ../../../app/stylesheets/screen.sass */
+/* line 23, ../../../app/stylesheets/screen.sass */
 #page {
   *zoom: 1;
   margin: auto;
@@ -709,13 +747,13 @@ a.mailto {
   display: table;
   clear: both;
 }
-/* line 30, ../../../app/stylesheets/screen.sass */
+/* line 31, ../../../app/stylesheets/screen.sass */
 #page > nav {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 32, ../../../app/stylesheets/screen.sass */
+/* line 33, ../../../app/stylesheets/screen.sass */
 #page > nav > ul {
   margin: 0;
   padding: 0;
@@ -732,7 +770,7 @@ a.mailto {
   box-lines: multiple;
   width: 100%;
 }
-/* line 37, ../../../app/stylesheets/screen.sass */
+/* line 38, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li {
   list-style-image: none;
   list-style-type: none;
@@ -756,7 +794,7 @@ a.mailto {
 #page > nav > ul > li {
   *display: inline;
 }
-/* line 45, ../../../app/stylesheets/screen.sass */
+/* line 46, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > a {
   color: #cfb309;
   display: block;
@@ -764,21 +802,21 @@ a.mailto {
   width: 100%;
   text-decoration: underline overline;
 }
-/* line 51, ../../../app/stylesheets/screen.sass */
+/* line 52, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > a:hover {
   text-decoration: underline overline line-through;
 }
-/* line 53, ../../../app/stylesheets/screen.sass */
+/* line 54, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li.current {
   color: #db8322;
   text-decoration: underline overline;
 }
-/* line 56, ../../../app/stylesheets/screen.sass */
+/* line 57, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li.current > a {
   text-shadow: silver 0px 0px 2px;
   color: #db8322;
 }
-/* line 60, ../../../app/stylesheets/screen.sass */
+/* line 61, ../../../app/stylesheets/screen.sass */
 #page > nav > ul > li > ul#account {
   list-style: none;
   font-size: 0.813em;
@@ -790,7 +828,7 @@ a.mailto {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 64, ../../../app/stylesheets/screen.sass */
+/* line 65, ../../../app/stylesheets/screen.sass */
 #page > header {
   background-color: #8bc7c7;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(191, 224, 224, 0.9)), color-stop(100%, rgba(139, 199, 199, 0.9))), url(https://s3.amazonaws.com/pcmag/clouds.png);
@@ -820,13 +858,13 @@ a.mailto {
   margin-left: 0;
   margin-right: 0;
 }
-/* line 77, ../../../app/stylesheets/screen.sass */
+/* line 78, ../../../app/stylesheets/screen.sass */
 #page > header h1 {
   font-size: 1.938em;
   line-height: 1.548em;
   margin-bottom: 0em;
 }
-/* line 82, ../../../app/stylesheets/screen.sass */
+/* line 83, ../../../app/stylesheets/screen.sass */
 #page > #notice {
   clear: both;
   margin-left: 0.885%;
@@ -840,7 +878,7 @@ a.mailto {
   border-bottom-width: 0.063em;
   padding-bottom: -0.063em;
 }
-/* line 88, ../../../app/stylesheets/screen.sass */
+/* line 89, ../../../app/stylesheets/screen.sass */
 #page > article {
   display: inline;
   float: left;
@@ -848,14 +886,14 @@ a.mailto {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 91, ../../../app/stylesheets/screen.sass */
+/* line 92, ../../../app/stylesheets/screen.sass */
 #page > article.full-width {
   display: inline;
   float: left;
   width: 98.23%;
   margin-right: 0.885%;
 }
-/* line 94, ../../../app/stylesheets/screen.sass */
+/* line 95, ../../../app/stylesheets/screen.sass */
 #page > section.sidebar {
   display: inline;
   float: left;
@@ -866,14 +904,14 @@ a.mailto {
   margin-right: 0.885%;
   #margin-left: -0.5em;
 }
-/* line 98, ../../../app/stylesheets/screen.sass */
+/* line 99, ../../../app/stylesheets/screen.sass */
 #page > #page-footer {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
 
-/* line 101, ../../../app/stylesheets/screen.sass */
+/* line 102, ../../../app/stylesheets/screen.sass */
 body > footer {
   *zoom: 1;
   margin: auto;
@@ -886,7 +924,7 @@ body > footer:after {
   display: table;
   clear: both;
 }
-/* line 103, ../../../app/stylesheets/screen.sass */
+/* line 104, ../../../app/stylesheets/screen.sass */
 body > footer > #footer {
   background-color: #8daf25;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(158, 196, 41, 0.9)), color-stop(100%, rgba(107, 133, 28, 0.9))), url(https://s3.amazonaws.com/pcmag/grass.jpg);
@@ -916,7 +954,7 @@ body > footer > #footer {
   margin-left: 0;
   margin-right: 0;
 }
-/* line 115, ../../../app/stylesheets/screen.sass */
+/* line 116, ../../../app/stylesheets/screen.sass */
 body > footer > #footer a {
   color: yellow;
 }
@@ -969,7 +1007,7 @@ body > footer {
 }
 
 @media screen and (max-width: 600px) {
-  /* line 122, ../../../app/stylesheets/screen.sass */
+  /* line 123, ../../../app/stylesheets/screen.sass */
   #page > article, #page > section.sidebar {
     clear: both;
     margin-left: 0.885%;
@@ -978,23 +1016,36 @@ body > footer {
   }
 }
 /* Individual pages --------------------------------- */
-/* line 129, ../../../app/stylesheets/screen.sass */
-section.user-profile h2 {
+/* line 130, ../../../app/stylesheets/screen.sass */
+section.user-profile h2, section.user-profile h3, section.user-profile h4 {
   margin-bottom: 0em;
 }
-/* line 131, ../../../app/stylesheets/screen.sass */
-section.user-profile ul {
-  list-style: none;
-  margin-left: 0;
+/* line 132, ../../../app/stylesheets/screen.sass */
+section.user-profile .avatar {
+  height: 200px;
+  width: 200px;
+  background-color: #f8f8f8;
+  margin-bottom: 1.5em;
+  -moz-box-shadow: #4a4a4a 0 0 9px;
+  -webkit-box-shadow: #4a4a4a 0 0 9px;
+  -o-box-shadow: #4a4a4a 0 0 9px;
+  box-shadow: #4a4a4a 0 0 9px;
 }
-/* line 11, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/lists/_bullets.scss */
-section.user-profile ul li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0px;
+/* line 138, ../../../app/stylesheets/screen.sass */
+section.user-profile .avatar, section.user-profile .avatar img {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
+/* line 140, ../../../app/stylesheets/screen.sass */
+section.user-profile > ul > li > ul {
+  list-style-type: disc;
 }
 
-/* line 135, ../../../app/stylesheets/screen.sass */
+/* line 143, ../../../app/stylesheets/screen.sass */
 li.submission, li.packlet, section.submission {
   list-style-image: none;
   list-style-type: none;
@@ -1010,39 +1061,39 @@ li.submission, li.packlet, section.submission {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-/* line 143, ../../../app/stylesheets/screen.sass */
+/* line 151, ../../../app/stylesheets/screen.sass */
 li.submission ul, li.packlet ul, section.submission ul {
   list-style-type: disc;
 }
-/* line 145, ../../../app/stylesheets/screen.sass */
+/* line 153, ../../../app/stylesheets/screen.sass */
 li.submission ul, li.submission ol, li.packlet ul, li.packlet ol, section.submission ul, section.submission ol {
   margin-bottom: 1.5em;
 }
-/* line 147, ../../../app/stylesheets/screen.sass */
+/* line 155, ../../../app/stylesheets/screen.sass */
 li.submission ul ul, li.submission ul ol, li.submission ol ul, li.submission ol ol, li.packlet ul ul, li.packlet ul ol, li.packlet ol ul, li.packlet ol ol, section.submission ul ul, section.submission ul ol, section.submission ol ul, section.submission ol ol {
   margin-bottom: 0em;
 }
-/* line 149, ../../../app/stylesheets/screen.sass */
+/* line 157, ../../../app/stylesheets/screen.sass */
 li.submission > header h2, li.packlet > header h2, section.submission > header h2 {
   min-height: 24px;
 }
-/* line 151, ../../../app/stylesheets/screen.sass */
+/* line 159, ../../../app/stylesheets/screen.sass */
 li.submission.error, li.packlet.error, section.submission.error {
   border-color: #db4522;
 }
 
-/* line 154, ../../../app/stylesheets/screen.sass */
+/* line 162, ../../../app/stylesheets/screen.sass */
 footer.submission-details {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-/* line 157, ../../../app/stylesheets/screen.sass */
+/* line 165, ../../../app/stylesheets/screen.sass */
 footer.submission-details p, footer.submission-details span {
   margin-bottom: 0em;
   color: silver;
 }
-/* line 161, ../../../app/stylesheets/screen.sass */
-footer.submission-details p.author a:last-child {
+/* line 169, ../../../app/stylesheets/screen.sass */
+footer.submission-details p.author a.name {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -1051,25 +1102,21 @@ footer.submission-details p.author a:last-child {
   width: 85%;
 }
 /* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
-footer.submission-details p.author a:last-child {
+footer.submission-details p.author a.name {
   *display: inline;
 }
-/* line 164, ../../../app/stylesheets/screen.sass */
-footer.submission-details p.author a:first-child {
-  display: inline;
-}
 
-/* line 167, ../../../app/stylesheets/screen.sass */
+/* line 173, ../../../app/stylesheets/screen.sass */
 span.drag-handle-wrap {
   display: none;
 }
 
-/* line 169, ../../../app/stylesheets/screen.sass */
+/* line 175, ../../../app/stylesheets/screen.sass */
 li.submission > input[type=checkbox] {
   display: none;
 }
 
-/* line 173, ../../../app/stylesheets/screen.sass */
+/* line 179, ../../../app/stylesheets/screen.sass */
 article#submissions section, article.meetings section {
   clear: both;
   margin-left: 0.885%;
@@ -1078,12 +1125,12 @@ article#submissions section, article.meetings section {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 174, ../../../app/stylesheets/screen.sass */
+/* line 180, ../../../app/stylesheets/screen.sass */
 article#submissions section > header > h2, article.meetings section > header > h2 {
   margin-bottom: 0em;
 }
 
-/* line 179, ../../../app/stylesheets/screen.sass */
+/* line 185, ../../../app/stylesheets/screen.sass */
 .drop-here {
   border-style: dashed;
   border-width: 0.063em;
@@ -1091,16 +1138,16 @@ article#submissions section > header > h2, article.meetings section > header > h
   border-color: silver;
 }
 
-/* line 183, ../../../app/stylesheets/screen.sass */
+/* line 189, ../../../app/stylesheets/screen.sass */
 article.people ul.submissions {
   margin-left: 0;
 }
 
-/* line 187, ../../../app/stylesheets/screen.sass */
+/* line 193, ../../../app/stylesheets/screen.sass */
 ol.packlets li, ul.submissions li, ol.submissions li {
   position: relative;
 }
-/* line 190, ../../../app/stylesheets/screen.sass */
+/* line 196, ../../../app/stylesheets/screen.sass */
 ol.packlets li span.drag-handle-wrap, ul.submissions li span.drag-handle-wrap, ol.submissions li span.drag-handle-wrap {
   display: block;
   position: absolute;
@@ -1128,19 +1175,19 @@ ol.packlets li span.drag-handle-wrap span.drag-handle, ul.submissions li span.dr
   width: 1.5em;
   cursor: move;
 }
-/* line 192, ../../../app/stylesheets/screen.sass */
+/* line 198, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed, ul.submissions li.collapsed, ol.submissions li.collapsed {
   position: static;
 }
-/* line 194, ../../../app/stylesheets/screen.sass */
+/* line 200, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.packlet, ul.submissions li.collapsed.packlet, ol.submissions li.collapsed.packlet {
   list-style-type: decimal;
 }
-/* line 196, ../../../app/stylesheets/screen.sass */
+/* line 202, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission, ul.submissions li.collapsed.submission, ol.submissions li.collapsed.submission {
   list-style-type: disc;
 }
-/* line 198, ../../../app/stylesheets/screen.sass */
+/* line 204, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission, ol.packlets li.collapsed.packlet, ul.submissions li.collapsed.submission, ul.submissions li.collapsed.packlet, ol.submissions li.collapsed.submission, ol.submissions li.collapsed.packlet {
   border-style: solid;
   border-width: 0em;
@@ -1148,7 +1195,7 @@ ol.packlets li.collapsed.submission, ol.packlets li.collapsed.packlet, ul.submis
   margin-top: 0em;
   margin-bottom: 0em;
 }
-/* line 202, ../../../app/stylesheets/screen.sass */
+/* line 208, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packlet > header, ol.submissions li.collapsed.submission > header, ol.submissions li.collapsed.packlet > header {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1161,15 +1208,15 @@ ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet >
 ol.packlets li.collapsed.submission > header, ol.packlets li.collapsed.packlet > header, ul.submissions li.collapsed.submission > header, ul.submissions li.collapsed.packlet > header, ol.submissions li.collapsed.submission > header, ol.submissions li.collapsed.packlet > header {
   *display: inline;
 }
-/* line 205, ../../../app/stylesheets/screen.sass */
+/* line 211, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > header h2, ol.packlets li.collapsed.packlet > header h2, ul.submissions li.collapsed.submission > header h2, ul.submissions li.collapsed.packlet > header h2, ol.submissions li.collapsed.submission > header h2, ol.submissions li.collapsed.packlet > header h2 {
   margin-bottom: 0em;
 }
-/* line 207, ../../../app/stylesheets/screen.sass */
+/* line 213, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > div.body, ol.packlets li.collapsed.packlet > div.body, ul.submissions li.collapsed.submission > div.body, ul.submissions li.collapsed.packlet > div.body, ol.submissions li.collapsed.submission > div.body, ol.submissions li.collapsed.packlet > div.body {
   display: none;
 }
-/* line 209, ../../../app/stylesheets/screen.sass */
+/* line 215, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > span.drag-handle-wrap, ol.packlets li.collapsed.packlet > span.drag-handle-wrap, ul.submissions li.collapsed.submission > span.drag-handle-wrap, ul.submissions li.collapsed.packlet > span.drag-handle-wrap, ol.submissions li.collapsed.submission > span.drag-handle-wrap, ol.submissions li.collapsed.packlet > span.drag-handle-wrap {
   width: 1em;
   display: -moz-inline-box;
@@ -1206,7 +1253,7 @@ ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, 
 ol.packlets li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.packlets li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ul.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle, ol.submissions li.collapsed.submission > span.drag-handle-wrap > span.drag-handle, ol.submissions li.collapsed.packlet > span.drag-handle-wrap > span.drag-handle {
   *display: inline;
 }
-/* line 211, ../../../app/stylesheets/screen.sass */
+/* line 217, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > input[type=checkbox], ol.packlets li.collapsed.packlet > input[type=checkbox], ul.submissions li.collapsed.submission > input[type=checkbox], ul.submissions li.collapsed.packlet > input[type=checkbox], ol.submissions li.collapsed.submission > input[type=checkbox], ol.submissions li.collapsed.packlet > input[type=checkbox] {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1218,7 +1265,7 @@ ol.packlets li.collapsed.submission > input[type=checkbox], ol.packlets li.colla
 ol.packlets li.collapsed.submission > input[type=checkbox], ol.packlets li.collapsed.packlet > input[type=checkbox], ul.submissions li.collapsed.submission > input[type=checkbox], ul.submissions li.collapsed.packlet > input[type=checkbox], ol.submissions li.collapsed.submission > input[type=checkbox], ol.submissions li.collapsed.packlet > input[type=checkbox] {
   *display: inline;
 }
-/* line 213, ../../../app/stylesheets/screen.sass */
+/* line 219, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packlet > footer, ol.submissions li.collapsed.submission > footer, ol.submissions li.collapsed.packlet > footer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1233,29 +1280,29 @@ ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet >
 ol.packlets li.collapsed.submission > footer, ol.packlets li.collapsed.packlet > footer, ul.submissions li.collapsed.submission > footer, ul.submissions li.collapsed.packlet > footer, ol.submissions li.collapsed.submission > footer, ol.submissions li.collapsed.packlet > footer {
   *display: inline;
 }
-/* line 219, ../../../app/stylesheets/screen.sass */
+/* line 225, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > span.score > form.score, ol.packlets li.collapsed.packlet > footer > span.score > form.score, ul.submissions li.collapsed.submission > footer > span.score > form.score, ul.submissions li.collapsed.packlet > footer > span.score > form.score, ol.submissions li.collapsed.submission > footer > span.score > form.score, ol.submissions li.collapsed.packlet > footer > span.score > form.score {
   display: inline;
 }
-/* line 221, ../../../app/stylesheets/screen.sass */
+/* line 227, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > nav.actions, ol.packlets li.collapsed.packlet > footer > nav.actions, ul.submissions li.collapsed.submission > footer > nav.actions, ul.submissions li.collapsed.packlet > footer > nav.actions, ol.submissions li.collapsed.submission > footer > nav.actions, ol.submissions li.collapsed.packlet > footer > nav.actions {
   display: none;
 }
-/* line 223, ../../../app/stylesheets/screen.sass */
+/* line 229, ../../../app/stylesheets/screen.sass */
 ol.packlets li.collapsed.submission > footer > p.scored, ol.packlets li.collapsed.packlet > footer > p.scored, ul.submissions li.collapsed.submission > footer > p.scored, ul.submissions li.collapsed.packlet > footer > p.scored, ol.submissions li.collapsed.submission > footer > p.scored, ol.submissions li.collapsed.packlet > footer > p.scored {
   display: inline;
 }
 
-/* line 225, ../../../app/stylesheets/screen.sass */
+/* line 231, ../../../app/stylesheets/screen.sass */
 article.magazines ol.submissions li.collapsed.submission {
   list-style-type: decimal;
 }
-/* line 228, ../../../app/stylesheets/screen.sass */
+/* line 234, ../../../app/stylesheets/screen.sass */
 article.magazines ol.submissions li.collapsed.submission > footer p.scored {
   display: none;
 }
 
-/* line 231, ../../../app/stylesheets/screen.sass */
+/* line 237, ../../../app/stylesheets/screen.sass */
 ol.editors_notes {
   list-style: none;
 }
@@ -1265,21 +1312,21 @@ ol.editors_notes li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 233, ../../../app/stylesheets/screen.sass */
+/* line 239, ../../../app/stylesheets/screen.sass */
 ol.editors_notes li {
   margin-bottom: 3em;
 }
 
-/* line 237, ../../../app/stylesheets/screen.sass */
+/* line 243, ../../../app/stylesheets/screen.sass */
 table.table-of-contents th {
   cursor: pointer;
 }
-/* line 239, ../../../app/stylesheets/screen.sass */
+/* line 245, ../../../app/stylesheets/screen.sass */
 table.table-of-contents tr > *:last-child {
   min-width: 3.5em;
 }
 
-/* line 242, ../../../app/stylesheets/screen.sass */
+/* line 248, ../../../app/stylesheets/screen.sass */
 header.add-stuff-trigger {
   margin-left: -3em;
   height: 0;
@@ -1294,7 +1341,7 @@ header.add-stuff-trigger {
 header.add-stuff-trigger {
   *display: inline;
 }
-/* line 247, ../../../app/stylesheets/screen.sass */
+/* line 253, ../../../app/stylesheets/screen.sass */
 header.add-stuff-trigger h2 {
   font-size: 2.5em;
   line-height: 1.2em;
@@ -1310,7 +1357,7 @@ header.add-stuff-trigger h2 {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-/* line 254, ../../../app/stylesheets/screen.sass */
+/* line 260, ../../../app/stylesheets/screen.sass */
 header.add-stuff-trigger h2.tilt-45 {
   -moz-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
@@ -1319,7 +1366,7 @@ header.add-stuff-trigger h2.tilt-45 {
   transform: rotate(45deg);
 }
 
-/* line 256, ../../../app/stylesheets/screen.sass */
+/* line 262, ../../../app/stylesheets/screen.sass */
 section.add-stuff {
   width: 100%;
   display: -moz-inline-box;
@@ -1342,13 +1389,13 @@ section.add-stuff {
 section.add-stuff {
   *display: inline;
 }
-/* line 263, ../../../app/stylesheets/screen.sass */
+/* line 269, ../../../app/stylesheets/screen.sass */
 section.add-stuff.hidden {
   line-height: 0em;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 266, ../../../app/stylesheets/screen.sass */
+/* line 272, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul {
   height: 100%;
   display: -moz-inline-box;
@@ -1368,7 +1415,7 @@ section.add-stuff ul, section.add-stuff ul li {
   padding: 0px;
   display: inline;
 }
-/* line 270, ../../../app/stylesheets/screen.sass */
+/* line 276, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li {
   background-color: #cfb309;
   height: 100%;
@@ -1417,16 +1464,16 @@ section.add-stuff ul li {
 section.add-stuff ul li {
   *display: inline;
 }
-/* line 287, ../../../app/stylesheets/screen.sass */
+/* line 293, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li:before {
   content: "+";
 }
-/* line 291, ../../../app/stylesheets/screen.sass */
+/* line 297, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li:hover {
   color: #4c4c4c;
   border-color: #4c4c4c;
 }
-/* line 294, ../../../app/stylesheets/screen.sass */
+/* line 300, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li:active {
   color: #4c4c4c;
   border-color: #4c4c4c;
@@ -1435,12 +1482,12 @@ section.add-stuff ul li:active {
   -o-box-shadow: #4a4a4a 0 0 5px inset;
   box-shadow: #4a4a4a 0 0 5px inset;
 }
-/* line 298, ../../../app/stylesheets/screen.sass */
+/* line 304, ../../../app/stylesheets/screen.sass */
 section.add-stuff ul li:active p {
   border-color: #db8322;
 }
 
-/* line 302, ../../../app/stylesheets/screen.sass */
+/* line 308, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines {
   list-style: none;
   margin: 0;
@@ -1451,7 +1498,7 @@ section#magazines ul.magazines li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 305, ../../../app/stylesheets/screen.sass */
+/* line 311, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li {
   background-color: #cfb309;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ebdd86), color-stop(100%, #e0ca44));
@@ -1483,17 +1530,17 @@ section#magazines ul.magazines li {
   border-color: silver;
   color: #707070;
 }
-/* line 319, ../../../app/stylesheets/screen.sass */
+/* line 325, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li header p {
   border-bottom: 1px dashed silver;
   margin-bottom: 0em;
 }
-/* line 322, ../../../app/stylesheets/screen.sass */
+/* line 328, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li:hover {
   color: #4c4c4c;
   border-color: #4c4c4c;
 }
-/* line 325, ../../../app/stylesheets/screen.sass */
+/* line 331, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li:active {
   color: #4c4c4c;
   border-color: #4c4c4c;
@@ -1502,15 +1549,15 @@ section#magazines ul.magazines li:active {
   -o-box-shadow: #4a4a4a 0 0 5px inset;
   box-shadow: #4a4a4a 0 0 5px inset;
 }
-/* line 329, ../../../app/stylesheets/screen.sass */
+/* line 335, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines li:active p {
   border-color: #db8322;
 }
-/* line 331, ../../../app/stylesheets/screen.sass */
+/* line 337, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines a.selected {
   cursor: default;
 }
-/* line 333, ../../../app/stylesheets/screen.sass */
+/* line 339, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines a.selected li {
   border-color: #4c4c4c;
   color: #4c4c4c;
@@ -1519,52 +1566,52 @@ section#magazines ul.magazines a.selected li {
   -o-box-shadow: silver 0 0 10px 0;
   box-shadow: silver 0 0 10px 0;
 }
-/* line 337, ../../../app/stylesheets/screen.sass */
+/* line 343, ../../../app/stylesheets/screen.sass */
 section#magazines ul.magazines a.selected li header h3 {
   border-bottom: 1px solid #db8322;
   margin-bottom: 0em;
 }
 
-/* line 343, ../../../app/stylesheets/screen.sass */
+/* line 349, ../../../app/stylesheets/screen.sass */
 li.page form.button_to, li.role form.button_to {
   font-size: 0.375em;
   line-height: 4em;
   line-height: 1em;
 }
-/* line 346, ../../../app/stylesheets/screen.sass */
+/* line 352, ../../../app/stylesheets/screen.sass */
 li.page form.button_to input[type=submit], li.role form.button_to input[type=submit] {
   vertical-align: top;
 }
 
-/* line 350, ../../../app/stylesheets/screen.sass */
+/* line 356, ../../../app/stylesheets/screen.sass */
 span.score form.button_to {
   font-size: 0.563em;
   line-height: 2.667em;
   line-height: 1em;
 }
-/* line 353, ../../../app/stylesheets/screen.sass */
+/* line 359, ../../../app/stylesheets/screen.sass */
 span.score form.button_to input[type=submit] {
   vertical-align: top;
 }
-/* line 355, ../../../app/stylesheets/screen.sass */
+/* line 361, ../../../app/stylesheets/screen.sass */
 span.score form.score {
   display: inline;
 }
-/* line 357, ../../../app/stylesheets/screen.sass */
+/* line 363, ../../../app/stylesheets/screen.sass */
 span.score form.score div {
   display: inline;
 }
-/* line 359, ../../../app/stylesheets/screen.sass */
+/* line 365, ../../../app/stylesheets/screen.sass */
 span.score form.score div label {
   font-weight: normal;
   display: inline;
 }
-/* line 360, ../../../app/stylesheets/screen.sass */
+/* line 366, ../../../app/stylesheets/screen.sass */
 span.score form.score div label:after {
   content: ": ";
 }
 
-/* line 365, ../../../app/stylesheets/screen.sass */
+/* line 371, ../../../app/stylesheets/screen.sass */
 input[type=number] {
   margin-bottom: 0em;
   text-align: center;
@@ -1576,24 +1623,24 @@ input[type=number] {
   padding: 0.015em;
 }
 
-/* line 373, ../../../app/stylesheets/screen.sass */
+/* line 379, ../../../app/stylesheets/screen.sass */
 html.no-number-input input[type=number] {
   width: 1.7em;
 }
-/* line 375, ../../../app/stylesheets/screen.sass */
+/* line 381, ../../../app/stylesheets/screen.sass */
 html.no-number-input input[type=number]::-webkit-outer-spin-button, html.no-number-input input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* line 379, ../../../app/stylesheets/screen.sass */
+/* line 385, ../../../app/stylesheets/screen.sass */
 section#scores {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
   margin-top: 1.5em;
 }
-/* line 382, ../../../app/stylesheets/screen.sass */
+/* line 388, ../../../app/stylesheets/screen.sass */
 section#scores ol#packlet_titles {
   margin-left: 0.885%;
   display: inline;
@@ -1603,11 +1650,11 @@ section#scores ol#packlet_titles {
   margin-bottom: 1.5em;
   list-style-position: inside;
 }
-/* line 387, ../../../app/stylesheets/screen.sass */
+/* line 393, ../../../app/stylesheets/screen.sass */
 section#scores ol#packlet_titles li.title {
   max-height: 24px;
 }
-/* line 389, ../../../app/stylesheets/screen.sass */
+/* line 395, ../../../app/stylesheets/screen.sass */
 section#scores ol#packlet_titles li.title a {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1627,7 +1674,7 @@ section#scores ol#packlet_titles li.title a {
 section#scores ol#packlet_titles li.title a {
   *display: inline;
 }
-/* line 396, ../../../app/stylesheets/screen.sass */
+/* line 402, ../../../app/stylesheets/screen.sass */
 section#scores .scores {
   display: inline;
   float: left;
@@ -1635,7 +1682,7 @@ section#scores .scores {
   margin-right: 0.885%;
   margin-bottom: 1.5em;
 }
-/* line 399, ../../../app/stylesheets/screen.sass */
+/* line 405, ../../../app/stylesheets/screen.sass */
 section#scores .scores:last {
   display: inline;
   float: right;
@@ -1643,13 +1690,13 @@ section#scores .scores:last {
   #margin-left: -0.5em;
 }
 
-/* line 403, ../../../app/stylesheets/screen.sass */
+/* line 409, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 405, ../../../app/stylesheets/screen.sass */
+/* line 411, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1661,11 +1708,11 @@ ul.attendees li.attendee span {
 ul.attendees li.attendee span {
   *display: inline;
 }
-/* line 407, ../../../app/stylesheets/screen.sass */
+/* line 413, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.person {
   width: 15em;
 }
-/* line 409, ../../../app/stylesheets/screen.sass */
+/* line 415, ../../../app/stylesheets/screen.sass */
 ul.attendees li.attendee span.answer {
   width: 33em;
   padding-left: 0.5em;
@@ -1678,7 +1725,7 @@ ul.attendees li.attendee span.answer {
   min-height: 24px;
 }
 
-/* line 414, ../../../app/stylesheets/screen.sass */
+/* line 420, ../../../app/stylesheets/screen.sass */
 form.attendee {
   clear: both;
   margin-left: 0.885%;
@@ -1686,20 +1733,20 @@ form.attendee {
   margin-top: 1.5em;
 }
 
-/* line 419, ../../../app/stylesheets/screen.sass */
+/* line 425, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_body {
   height: 30.857em;
 }
-/* line 421, ../../../app/stylesheets/screen.sass */
+/* line 427, ../../../app/stylesheets/screen.sass */
 article#submit-something textarea#submission_title {
   height: 2.571em;
 }
-/* line 423, ../../../app/stylesheets/screen.sass */
+/* line 429, ../../../app/stylesheets/screen.sass */
 article#submit-something .trigger {
   height: 5px;
 }
 
-/* line 426, ../../../app/stylesheets/screen.sass */
+/* line 432, ../../../app/stylesheets/screen.sass */
 ol.magazines {
   clear: both;
   margin-left: 0.885%;
@@ -1713,7 +1760,7 @@ ol.magazines li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 430, ../../../app/stylesheets/screen.sass */
+/* line 436, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine {
   overflow: hidden;
   *zoom: 1;
@@ -1725,7 +1772,7 @@ ol.magazines > li.magazine {
   margin-right: 0.885%;
   margin-right: 1.5em;
 }
-/* line 436, ../../../app/stylesheets/screen.sass */
+/* line 442, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art {
   position: relative;
   height: 300px;
@@ -1747,7 +1794,7 @@ ol.magazines > li.magazine .cover-art {
   border: 1px solid silver;
   padding: 2px;
 }
-/* line 445, ../../../app/stylesheets/screen.sass */
+/* line 451, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art > * {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
@@ -1773,7 +1820,7 @@ ol.magazines > li.magazine .cover-art > * {
   border-radius: 0.5em;
   padding: 0.5em;
 }
-/* line 454, ../../../app/stylesheets/screen.sass */
+/* line 460, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art > a.img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
@@ -1786,7 +1833,7 @@ ol.magazines > li.magazine .cover-art > a.img {
   -o-box-shadow: 0 0 0;
   box-shadow: 0 0 0;
 }
-/* line 461, ../../../app/stylesheets/screen.sass */
+/* line 467, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art > a.img, ol.magazines > li.magazine .cover-art > a.img > img {
   -moz-border-radius: 0.5em;
   -webkit-border-radius: 0.5em;
@@ -1795,39 +1842,39 @@ ol.magazines > li.magazine .cover-art > a.img, ol.magazines > li.magazine .cover
   -khtml-border-radius: 0.5em;
   border-radius: 0.5em;
 }
-/* line 464, ../../../app/stylesheets/screen.sass */
+/* line 470, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art:hover > * {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
-/* line 466, ../../../app/stylesheets/screen.sass */
+/* line 472, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art .timeframe {
   bottom: 0;
 }
-/* line 468, ../../../app/stylesheets/screen.sass */
+/* line 474, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art header {
   width: 93%;
 }
-/* line 470, ../../../app/stylesheets/screen.sass */
+/* line 476, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art header > a {
   display: block;
 }
-/* line 472, ../../../app/stylesheets/screen.sass */
+/* line 478, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art header h2 {
   margin-bottom: 0em;
 }
-/* line 474, ../../../app/stylesheets/screen.sass */
+/* line 480, ../../../app/stylesheets/screen.sass */
 ol.magazines > li.magazine .cover-art header h2 a {
   color: #4c4c4c;
 }
 
-/* line 478, ../../../app/stylesheets/screen.sass */
+/* line 484, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting, ul.meetings li.meeting {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 480, ../../../app/stylesheets/screen.sass */
+/* line 486, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting .drag-handle-wrap, ul.meetings li.meeting .drag-handle-wrap {
   width: 1em;
   display: -moz-inline-box;
@@ -1864,7 +1911,7 @@ ol.meetings li.meeting .drag-handle-wrap > span.drag-handle, ul.meetings li.meet
 ol.meetings li.meeting .drag-handle-wrap > span.drag-handle, ul.meetings li.meeting .drag-handle-wrap > span.drag-handle {
   *display: inline;
 }
-/* line 482, ../../../app/stylesheets/screen.sass */
+/* line 488, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting > *, ul.meetings li.meeting > * {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1876,16 +1923,16 @@ ol.meetings li.meeting > *, ul.meetings li.meeting > * {
 ol.meetings li.meeting > *, ul.meetings li.meeting > * {
   *display: inline;
 }
-/* line 484, ../../../app/stylesheets/screen.sass */
+/* line 490, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting span.question, ul.meetings li.meeting span.question {
   width: 78%;
   padding-left: 0.1em;
 }
-/* line 487, ../../../app/stylesheets/screen.sass */
+/* line 493, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting span.question, ol.meetings li.meeting span.question > a, ul.meetings li.meeting span.question, ul.meetings li.meeting span.question > a {
   min-height: 24px;
 }
-/* line 489, ../../../app/stylesheets/screen.sass */
+/* line 495, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting span.question a, ul.meetings li.meeting span.question a {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1898,13 +1945,13 @@ ol.meetings li.meeting span.question a, ul.meetings li.meeting span.question a {
 ol.meetings li.meeting span.question a, ul.meetings li.meeting span.question a {
   *display: inline;
 }
-/* line 492, ../../../app/stylesheets/screen.sass */
+/* line 498, ../../../app/stylesheets/screen.sass */
 ol.meetings li.meeting time, ul.meetings li.meeting time {
   width: 16%;
   text-align: right;
 }
 
-/* line 496, ../../../app/stylesheets/screen.sass */
+/* line 502, ../../../app/stylesheets/screen.sass */
 ul#people {
   list-style: none;
   margin-left: 0;
@@ -1915,13 +1962,13 @@ ul#people li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 499, ../../../app/stylesheets/screen.sass */
+/* line 505, ../../../app/stylesheets/screen.sass */
 ul#people li.person {
   clear: both;
   margin-left: 0.885%;
   margin-right: 0.885%;
 }
-/* line 501, ../../../app/stylesheets/screen.sass */
+/* line 507, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.name {
   display: inline;
   float: left;
@@ -1929,7 +1976,7 @@ ul#people li.person span.name {
   margin-right: 0.885%;
   margin-left: 0.885%;
 }
-/* line 504, ../../../app/stylesheets/screen.sass */
+/* line 510, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.rank {
   display: inline;
   float: left;
@@ -1937,14 +1984,14 @@ ul#people li.person span.rank {
   margin-right: 0.885%;
   margin-right: 0;
 }
-/* line 507, ../../../app/stylesheets/screen.sass */
+/* line 513, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to {
   display: inline;
   float: left;
   width: 39.823%;
   margin-right: 0.885%;
 }
-/* line 509, ../../../app/stylesheets/screen.sass */
+/* line 515, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.promote-to > ul {
   list-style-type: none;
 }
@@ -1966,7 +2013,7 @@ ul#people li.person span.promote-to > ul li:last-child:after {
 ul#people li.person span.promote-to > ul li.last:after {
   content: "";
 }
-/* line 511, ../../../app/stylesheets/screen.sass */
+/* line 517, ../../../app/stylesheets/screen.sass */
 ul#people li.person span.actions {
   display: inline;
   float: left;
@@ -1978,11 +2025,11 @@ ul#people li.person span.actions {
   #margin-left: -0.5em;
 }
 
-/* line 515, ../../../app/stylesheets/screen.sass */
+/* line 521, ../../../app/stylesheets/screen.sass */
 form#highest {
   margin-bottom: 1.5em;
 }
-/* line 516, ../../../app/stylesheets/screen.sass */
+/* line 522, ../../../app/stylesheets/screen.sass */
 form#highest * {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1996,18 +2043,18 @@ form#highest * {
 form#highest * {
   *display: inline;
 }
-/* line 520, ../../../app/stylesheets/screen.sass */
+/* line 526, ../../../app/stylesheets/screen.sass */
 form#highest input[type=number] {
   margin-left: 0.3em;
   width: 4em;
 }
 
-/* line 524, ../../../app/stylesheets/screen.sass */
+/* line 530, ../../../app/stylesheets/screen.sass */
 form#publish ol {
   margin-bottom: 0em;
 }
 
-/* line 527, ../../../app/stylesheets/screen.sass */
+/* line 533, ../../../app/stylesheets/screen.sass */
 ul.positions {
   list-style: none;
   margin-left: 0;
@@ -2018,7 +2065,7 @@ ul.positions li {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 530, ../../../app/stylesheets/screen.sass */
+/* line 536, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -2043,44 +2090,185 @@ ul.positions > li.position {
   padding-bottom: 0;
   margin: 0 1.5em 1.5em 0;
 }
-/* line 531, ../../../app/stylesheets/screen.sass */
-ul.positions > li.position h3 {
+/* line 537, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header {
   border-bottom: 1px dashed silver;
+  margin-bottom: 1.5em;
+}
+/* line 540, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header h3 {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  margin-bottom: 0em;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+ul.positions > li.position header h3 {
+  *display: inline;
+}
+/* line 543, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  float: right;
+  margin-left: 0;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+ul.positions > li.position header ul.abilities {
+  *display: inline;
+}
+/* line 547, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li {
+  font-size: 0.8em;
+  font-weight: normal;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  white-space: nowrap;
+  width: 0.6em;
+  overflow: hidden;
+  border: 1px solid silver;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
+  -o-border-radius: 2em;
+  -ms-border-radius: 2em;
+  -khtml-border-radius: 2em;
+  border-radius: 2em;
+  margin-left: 0.7em;
+  line-height: 0.6em;
+  padding: 0.3em;
+  letter-spacing: 0.2em;
+  cursor: default;
+  -moz-box-shadow: silver 0 0 3px, rgba(192, 192, 192, 0.6) 0 0 6px inset;
+  -webkit-box-shadow: silver 0 0 3px, rgba(192, 192, 192, 0.6) 0 0 6px inset;
+  -o-box-shadow: silver 0 0 3px, rgba(192, 192, 192, 0.6) 0 0 6px inset;
+  box-shadow: silver 0 0 3px, rgba(192, 192, 192, 0.6) 0 0 6px inset;
+  -moz-transition-property: all;
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -moz-transition-duration: 0.7s;
+  -webkit-transition-duration: 0.7s;
+  -o-transition-duration: 0.7s;
+  transition-duration: 0.7s;
+  -moz-transition-delay: 0.3s;
+  -webkit-transition-delay: 0.3s;
+  -o-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+}
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+ul.positions > li.position header ul.abilities li {
+  *display: inline;
+}
+/* line 566, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li:first-child {
+  margin-left: 0;
+}
+/* line 568, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li:hover {
+  width: 13em;
+  letter-spacing: normal;
+}
+/* line 571, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_1 {
+  -moz-box-shadow: rgba(139, 199, 199, 0.8) 0 0 6px inset;
+  -webkit-box-shadow: rgba(139, 199, 199, 0.8) 0 0 6px inset;
+  -o-box-shadow: rgba(139, 199, 199, 0.8) 0 0 6px inset;
+  box-shadow: rgba(139, 199, 199, 0.8) 0 0 6px inset;
+}
+/* line 573, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_1:hover {
+  width: 8em;
+}
+/* line 575, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_2 {
+  -moz-box-shadow: rgba(141, 175, 37, 0.8) 0 0 6px inset;
+  -webkit-box-shadow: rgba(141, 175, 37, 0.8) 0 0 6px inset;
+  -o-box-shadow: rgba(141, 175, 37, 0.8) 0 0 6px inset;
+  box-shadow: rgba(141, 175, 37, 0.8) 0 0 6px inset;
+}
+/* line 577, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_2:hover {
+  width: 4em;
+}
+/* line 579, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_3 {
+  -moz-box-shadow: rgba(207, 179, 9, 0.8) 0 0 6px inset;
+  -webkit-box-shadow: rgba(207, 179, 9, 0.8) 0 0 6px inset;
+  -o-box-shadow: rgba(207, 179, 9, 0.8) 0 0 6px inset;
+  box-shadow: rgba(207, 179, 9, 0.8) 0 0 6px inset;
+}
+/* line 581, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_3:hover {
+  width: 8em;
+}
+/* line 583, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_4 {
+  -moz-box-shadow: rgba(219, 131, 34, 0.8) 0 0 6px inset;
+  -webkit-box-shadow: rgba(219, 131, 34, 0.8) 0 0 6px inset;
+  -o-box-shadow: rgba(219, 131, 34, 0.8) 0 0 6px inset;
+  box-shadow: rgba(219, 131, 34, 0.8) 0 0 6px inset;
+}
+/* line 585, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_4:hover {
+  width: 3.5em;
+}
+/* line 587, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_5 {
+  -moz-box-shadow: rgba(192, 192, 192, 0.8) 0 0 6px inset;
+  -webkit-box-shadow: rgba(192, 192, 192, 0.8) 0 0 6px inset;
+  -o-box-shadow: rgba(192, 192, 192, 0.8) 0 0 6px inset;
+  box-shadow: rgba(192, 192, 192, 0.8) 0 0 6px inset;
+}
+/* line 589, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position header ul.abilities li#ability_5:hover {
+  width: 6.5em;
 }
 /* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p180/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
 ul.positions > li.position {
   *display: inline;
 }
-/* line 541, ../../../app/stylesheets/screen.sass */
-ul.positions > li.position ul.people {
+/* line 599, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position ul.roles {
   margin-left: 0;
   margin-bottom: 1.5em;
 }
-/* line 545, ../../../app/stylesheets/screen.sass */
+/* line 602, ../../../app/stylesheets/screen.sass */
+ul.positions > li.position footer {
+  margin-top: -1.5em;
+}
+/* line 604, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position footer > nav {
   display: block;
 }
-/* line 547, ../../../app/stylesheets/screen.sass */
+/* line 606, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position footer > form {
   display: none;
 }
-/* line 550, ../../../app/stylesheets/screen.sass */
+/* line 609, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position footer.add-role > nav {
   display: none;
 }
-/* line 552, ../../../app/stylesheets/screen.sass */
+/* line 611, ../../../app/stylesheets/screen.sass */
 ul.positions > li.position footer.add-role > form {
   display: block;
 }
 
 /*   Odds & Ends
  ******************************* */
-/* line 559, ../../../app/stylesheets/screen.sass */
+/* line 618, ../../../app/stylesheets/screen.sass */
 #your_name_looks_like {
   display: none;
 }
 
-/* line 562, ../../../app/stylesheets/screen.sass */
+/* line 621, ../../../app/stylesheets/screen.sass */
 span.average-score {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -2098,7 +2286,7 @@ span.average-score {
   *display: inline;
 }
 
-/* line 570, ../../../app/stylesheets/screen.sass */
+/* line 629, ../../../app/stylesheets/screen.sass */
 .notify_authors_button {
   margin-top: 4.5em;
   border-top-style: solid;
@@ -2107,18 +2295,18 @@ span.average-score {
   text-align: center;
 }
 
-/* line 575, ../../../app/stylesheets/screen.sass */
+/* line 634, ../../../app/stylesheets/screen.sass */
 input#recaptcha_response_field {
   height: auto;
 }
 
 /* Pagination
  ******************************* */
-/* line 582, ../../../app/stylesheets/screen.sass */
+/* line 641, ../../../app/stylesheets/screen.sass */
 nav.pagination {
   text-align: right;
 }
-/* line 584, ../../../app/stylesheets/screen.sass */
+/* line 643, ../../../app/stylesheets/screen.sass */
 nav.pagination ol.pages {
   list-style-type: none;
 }
@@ -2128,14 +2316,36 @@ nav.pagination ol.pages, nav.pagination ol.pages li {
   padding: 0px;
   display: inline;
 }
-/* line 586, ../../../app/stylesheets/screen.sass */
+/* line 645, ../../../app/stylesheets/screen.sass */
 nav.pagination ol.pages li.page {
   font-size: 1.5em;
   line-height: 1em;
   display: inline-block;
 }
-/* line 589, ../../../app/stylesheets/screen.sass */
+/* line 648, ../../../app/stylesheets/screen.sass */
 nav.pagination ol.pages li.page > a {
   font-size: 0.625em;
   line-height: 2.4em;
+}
+
+/* line 651, ../../../app/stylesheets/screen.sass */
+article.pages > header > h1 {
+  margin-bottom: 0em;
+}
+
+/* line 654, ../../../app/stylesheets/screen.sass */
+img.cover-art {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1.5em;
+  -moz-border-radius: 1.5em;
+  -webkit-border-radius: 1.5em;
+  -o-border-radius: 1.5em;
+  -ms-border-radius: 1.5em;
+  -khtml-border-radius: 1.5em;
+  border-radius: 1.5em;
+  -moz-box-shadow: 0 0 1.5em silver;
+  -webkit-box-shadow: 0 0 1.5em silver;
+  -o-box-shadow: 0 0 1.5em silver;
+  box-shadow: 0 0 1.5em silver;
 }

@@ -15,7 +15,7 @@ gem 'compass-susy-plugin'
 # Controllers
 gem 'aws-s3'
 gem 'gravtastic', '3.1.0'
-gem 'friendly_id'
+gem 'friendly_id', git: 'git://github.com/norman/friendly_id.git', branch: '3.x'
 gem 'inherited_resources'
 gem 'paperclip'
 
@@ -46,8 +46,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rb-fsevent'
   gem 'growl'
-  gem 'spork', '>= 0.9.0.rc'
-  gem 'guard-spork'
 end
 
 group :test do

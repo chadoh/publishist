@@ -11,6 +11,72 @@ describe Magazine do
     should have_many(:roles).through(:positions)
   }
 
+  describe "#accepts_submissions_from" do
+    context "when this is the first magazine" do
+      it "defaults to today" do
+        mag = Magazine.new
+        mag2 = Magazine.new :accepts_submissions_from => Date.today
+        mag.accepts_submissions_from.should == mag2.accepts_submissions_from
+      end
+      it "sets the time part to 00:00:00" do
+        mag = Magazine.create accepts_submissions_from: Time.now
+        mag.accepts_submissions_from.hour.should == 0
+        mag.accepts_submissions_from.min.should == 0
+        mag.accepts_submissions_from.sec.should == 0
+      end
+    end
+
+    context "when there are other magazines" do
+      it "defaults to latest_mag.accepts_submissions_until + 1" do
+        mag = Magazine.create
+        mag2 = Magazine.new
+        mag2.accepts_submissions_from.to_date.should == (mag.accepts_submissions_until.to_date + 1.day)
+      end
+    end
+
+    it "cannot fall within another magazine's range" do
+      orig = Magazine.create
+      mag = Magazine.new :accepts_submissions_from => orig.accepts_submissions_from + 1.day
+      mag.should_not be_valid
+    end
+  end
+
+  describe "#accepts_submissions_until" do
+    it "defaults to six months after accepts_submissions_from" do
+      mag = Magazine.create
+      mag.accepts_submissions_until.to_date.should == mag.accepts_submissions_from.to_date + 6.months
+      # need to test another one, since the way `from` initializes changes with subsequent mags
+      mag2 = Magazine.new
+      mag2.accepts_submissions_until.to_date.should == mag2.accepts_submissions_from.to_date + 6.months
+    end
+    it "sets the time part to 23:59:59" do
+      mag = Magazine.create
+      mag.accepts_submissions_until.hour.should == 23
+      mag.accepts_submissions_until.min.should == 59
+      mag.accepts_submissions_until.sec.should == 59
+    end
+
+    it "must be > self.accepts_submissions_from" do
+      mag = Magazine.new(
+        :accepts_submissions_from  => Date.today,
+        :accepts_submissions_until => Date.yesterday
+      )
+      mag.should_not be_valid
+    end
+
+    it "cannot fall within another magazine's range" do
+      orig = Magazine.create
+      mag = Magazine.new(
+        :accepts_submissions_until => orig.accepts_submissions_until - 1.day,
+        :accepts_submissions_from => Date.yesterday
+      )
+      mag.should_not be_valid
+
+      orig.accepts_submissions_until = orig.accepts_submissions_until - 1.day
+      orig.should be_valid
+    end
+  end
+
   describe "#count_of_scores" do
     it "initializes to 0" do
       m = Magazine.create(count_of_scores: nil)
@@ -39,57 +105,23 @@ describe Magazine do
     end
   end
 
-  describe "#accepts_submissions_from" do
-    context "when this is the first magazine" do
-      it "defaults to today" do
-        mag = Magazine.new
-        mag2 = Magazine.new :accepts_submissions_from => Date.today
-        mag.accepts_submissions_from.should == mag2.accepts_submissions_from
-      end
-    end
+  describe "#positions:" do
+    it "a magazine has the same positions as the previous magazine, by default" do
+      a1 = Ability.create key: 'communicates', description: "Can see the names of submitters and communicate with them."
+      a2 = Ability.create key: 'scores',       description: "Can enter (and see) scores for all submissions."
+      mag1 = Magazine.create title: "the Bow Nur issue"
+      mag1.positions << [
+                          Position.create(name: "Admiral", abilities: [a1]),
+                          Position.create(name: "Chef",    abilities: [a2])
+                        ]
+      mag2 = Magazine.create title: "the salad issue"
+      p1 = mag2.positions.first
+      p2 = mag2.positions.last
 
-    context "when there are other magazines" do
-      it "defaults to the accepts_submissions_until date of the latest magazine" do
-        mag = Magazine.create
-        mag2 = Magazine.new
-        mag2.accepts_submissions_from.should == mag.accepts_submissions_until
-      end
-    end
-
-    it "cannot fall within another magazine's range" do
-      orig = Magazine.create
-      mag = Magazine.new :accepts_submissions_from => orig.accepts_submissions_from + 1.day
-      mag.should_not be_valid
-    end
-  end
-
-  describe "#accepts_submissions_until" do
-    it "defaults to six months after accepts_submissions_from" do
-      mag = Magazine.create
-      mag.accepts_submissions_until.should == mag.accepts_submissions_from + 6.months
-      # need to test another one, since the way `from` initializes changes with subsequent mags
-      mag2 = Magazine.new
-      mag2.accepts_submissions_until.should == mag2.accepts_submissions_from + 6.months
-    end
-
-    it "must be > self.accepts_submissions_from" do
-      mag = Magazine.new(
-        :accepts_submissions_from  => Date.today,
-        :accepts_submissions_until => Date.yesterday
-      )
-      mag.should_not be_valid
-    end
-
-    it "cannot fall within another magazine's range" do
-      orig = Magazine.create
-      mag = Magazine.new(
-        :accepts_submissions_until => orig.accepts_submissions_until - 1.day,
-        :accepts_submissions_from => Date.yesterday
-      )
-      mag.should_not be_valid
-
-      orig.accepts_submissions_until = orig.accepts_submissions_until - 1.day
-      orig.should be_valid
+      p1.name.should == "Admiral"
+      p1.abilities.should == [a1]
+      p2.name.should == "Chef"
+      p2.abilities.should == [a2]
     end
   end
 
@@ -137,8 +169,8 @@ describe Magazine do
       :accepts_submissions_until => Date.yesterday,
       :accepts_submissions_from  => 6.months.ago
     )
-    @sub      = Factory.create :anonymous_submission
-    @sub2     = Factory.create :anonymous_submission
+    @sub      = Factory.create :submission
+    @sub2     = Factory.create :submission
     @meeting  = Meeting.create(:datetime => Date.yesterday) # in mag
     packlet  = Packlet.create  :meeting => @meeting, :submission => @sub
     packlet2 = Packlet.create  :meeting => @meeting, :submission => @sub2
@@ -180,10 +212,10 @@ describe Magazine do
       mag.to_s.should == mag.title
     end
 
-    it "returns 'the <nickname> magazine' if the title isn't set" do
+    it "returns 'the <nickname> issue' if the title isn't set" do
       mag.update_attributes title: nil
-      mag.to_s(:reload).should == "the #{mag.nickname} magazine"
-      mag.present_name.should  == "the #{mag.nickname} magazine"
+      mag.to_s(:reload).should == "the #{mag.nickname} issue"
+      mag.present_name.should  == "the #{mag.nickname} issue"
     end
   end
 
@@ -215,6 +247,14 @@ describe Magazine do
       it "creates 5 pages at minimum: 1 for cover, 1 for Notes, 1 for Staff, 1 for ToC, and 1 per 3 submissions after that" do
         @mag.pages.length.should == 5
       end
+    end
+
+    it "when called correctly destroys any positions that have the 'disappears' ability" do
+      a1 = Ability.create key: 'disappears', description: "This is a temporary position that will disappear once the magazine is published."
+      mag = Magazine.create title: "the cat issue", accepts_submissions_from: 3.months.ago, accepts_submissions_until: Date.yesterday
+      mag.positions << [Position.create(name: "Admiral", abilities: [a1])]
+      mag.publish []
+      mag.positions.reload.should be_empty
     end
   end
 
@@ -309,6 +349,47 @@ describe Magazine do
         @sub.has_been(:published)
         @mag.reload.submissions.should include(@sub)
       end
+    end
+  end
+
+  describe "self.before" do
+    it "returns the magazine that was published before the one provided" do
+      @magazine2 = Magazine.create(
+        accepts_submissions_from:  5.months.ago,
+        accepts_submissions_until: 1.month.ago,
+        title:                     'second'
+      )
+      @magazine1 = Magazine.create(
+        accepts_submissions_from:  12.months.ago,
+        accepts_submissions_until: 6.month.ago,
+        title:                     'first'
+      )
+      @magazine3 = Magazine.create(
+        accepts_submissions_from:  Date.today,
+        accepts_submissions_until: 6.months.from_now,
+        title:                     'third'
+      )
+      Magazine.before(@magazine3).should == @magazine2
+    end
+  end
+  describe "self.after" do
+    it "returns the magazine that was published before the one provided" do
+      @magazine1 = Magazine.create(
+        accepts_submissions_from:  12.months.ago,
+        accepts_submissions_until: 6.month.ago,
+        title:                     'first'
+      )
+      @magazine2 = Magazine.create(
+        accepts_submissions_from:  5.months.ago,
+        accepts_submissions_until: 1.month.ago,
+        title:                     'second'
+      )
+      @magazine3 = Magazine.create(
+        accepts_submissions_from:  Date.today,
+        accepts_submissions_until: 6.months.from_now,
+        title:                     'third'
+      )
+      Magazine.after(@magazine1).should == @magazine2
     end
   end
 

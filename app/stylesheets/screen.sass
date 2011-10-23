@@ -18,6 +18,7 @@ a.mailto
   height: 11px
   width: 16px
   display: inline-block
+  text-indent: -3000em
 
 #page
   +container
@@ -126,11 +127,18 @@ body > footer
 /* Individual pages ---------------------------------
 
 section.user-profile
-  h2
+  h2, h3, h4
     +trailer(0)
-  ul
-    +no-bullets
-    margin-left: 0
+  .avatar
+    height: 200px
+    width: 200px
+    background-color: $noticeable
+    +trailer
+    +box-shadow($dgray 0 0 9px)
+    &, img
+      +border-radius
+  > ul > li > ul
+    list-style-type: disc
 
 li.submission, li.packlet, section.submission
   +no-bullet
@@ -158,11 +166,9 @@ footer.submission-details
     +trailer(0)
     +grayed-out
   p.author
-    a:last-child
+    a.name
       +inline-block
       width: 85%
-    a:first-child
-      display: inline
 
 span.drag-handle-wrap
   display: none
@@ -528,8 +534,60 @@ ul.positions
   +no-bullets
   margin-left: 0
   > li.position
-    h3
+    header
       border-bottom: 1px dashed $lgray
+      +trailer
+      h3
+        +inline-block
+        +trailer(0)
+      ul.abilities
+        +inline-block
+        float: right
+        margin-left: 0
+        li
+          @extend .mono
+          font-size: 0.8em
+          font-weight: normal
+          +inline-block
+          +nowrap
+          width: .6em
+          overflow: hidden
+          border: 1px solid $lgray
+          +border-radius(2em)
+          margin-left: .7em
+          line-height: 0.6em
+          padding: 0.3em
+          letter-spacing: 0.2em
+          cursor: default
+          +box-shadow($lgray 0 0 3px, rgba($lgray, .6) 0 0 6px inset)
+          +transition-property
+          +transition-duration(0.7s)
+          +transition-delay(0.3s)
+          &:first-child
+            margin-left: 0
+          &:hover
+            width: 13em
+            letter-spacing: normal
+          &#ability_1
+            +box-shadow(rgba($blue, 0.8) 0 0 6px inset)
+            &:hover
+              width: 8em
+          &#ability_2
+            +box-shadow(rgba($green, 0.8) 0 0 6px inset)
+            &:hover
+              width: 4em
+          &#ability_3
+            +box-shadow(rgba($yellow, 0.8) 0 0 6px inset)
+            &:hover
+              width: 8em
+          &#ability_4
+            +box-shadow(rgba($orange, 0.8) 0 0 6px inset)
+            &:hover
+              width: 3.5em
+          &#ability_5
+            +box-shadow(rgba($lgray, 0.8) 0 0 6px inset)
+            &:hover
+              width: 6.5em
     +inline-block
     vertical-align: top
     width: 41%
@@ -538,10 +596,11 @@ ul.positions
     +border-radius(1em 0 0)
     padding-bottom: 0
     margin: 0 1.5em 1.5em 0
-    ul.people
+    ul.roles
       margin-left: 0
       +trailer
     footer
+      +leader(-1)
       > nav
         display: block
       > form
@@ -588,3 +647,13 @@ nav.pagination
       display: inline-block
       & > a
         +adjust-font-size-to(10px)
+
+article.pages > header > h1
+  +trailer(0)
+
+img.cover-art
+  display: block
+  margin: 0 auto
+  +leader
+  +border-radius(1.5em)
+  +box-shadow(0 0 1.5em $lgray)

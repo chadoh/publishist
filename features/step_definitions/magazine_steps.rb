@@ -20,13 +20,22 @@ Given /^a magazine's timeframe is freshly over$/ do
   )
 end
 
-Given /^a magazine has been published and I am viewing its cover$/ do
-  mag = Magazine.create(
-    :accepts_submissions_from  => 6.months.ago,
+Given /^the magazine's timeframe is freshly over$/ do
+  Magazine.first.update_attributes(
+    :accepts_submissions_from => 6.months.ago,
     :accepts_submissions_until => Date.yesterday
   )
+end
+
+Given /^a magazine has been published and I am viewing its cover$/ do
+  date = Magazine.first.accepts_submissions_from - 1.day
+  mag = Magazine.create(
+    :title                     => 'banjos',
+    :accepts_submissions_until => date,
+    :accepts_submissions_from  => date - 6.months
+  )
   mag.publish []
-  Given "I am on the first magazine page"
+  visit "/magazines/#{mag.to_param}"
 end
 
 Given /^a magazine titled "([^"]*)" has been published$/ do |title|
@@ -72,10 +81,9 @@ Given /^submissions at meeting 1 have all been scored 1, scored 2 at meeting 2, 
 end
 
 Given /^10 submissions have been scored 1-10$/ do
-  meeting = Factory.create :meeting
-  Magazine.first.meetings << meeting
+  meeting = first_meeting
   10.times {
-    meeting.submissions << Factory.create(:anonymous_submission)
+    meeting.submissions << Factory.create(:submission)
   }
   attendee = Attendee.create meeting: meeting, person: @user
   meeting.packlets.each_with_index do |packlet, i|

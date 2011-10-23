@@ -38,15 +38,15 @@ class Person < ActiveRecord::Base
 
   attr_reader :password
 
-  has_many :ranks,       dependent:   :destroy
-  has_many :submissions, foreign_key: 'author_id'
-  has_many :attendees,   dependent:   :destroy
-  has_many :meetings,    through:     :attendees
-  has_many :roles,       dependent:   :nullify
+  has_many :submissions,        foreign_key: 'author_id'
+  has_many :attendees,          dependent:   :destroy
+  has_many :roles,              dependent:   :destroy
+  has_many :meetings,           through:     :attendees
+  has_many :positions,          through:     :roles
+  has_many :position_abilities, through:     :positions
+  has_many :abilities,          through:     :position_abilities
 
   validates_presence_of :first_name
-
-  default_scope includes(:ranks)
 
   has_friendly_id :name, :use_slug => true
 
@@ -63,76 +63,6 @@ class Person < ActiveRecord::Base
     self.first_name = name.delete_at(0).try(:gsub, /['"]/, '')
     self.last_name = name.delete_at(name.length - 1).try(:gsub, /['"]/, '')
     self.middle_name = name.join(' ')
-  end
-
-  def editor?
-    rank = self.highest_rank
-    rank = rank.rank_type if rank
-    rank == 2 || rank == 3
-  end
-
-  def the_editor?
-    rank = self.highest_rank
-    rank = rank.rank_type if rank
-    rank == 3
-  end
-
-  def the_coeditor?
-    rank = self.highest_rank
-    rank = rank.rank_type if rank
-    rank == 2
-  end
-
-  def is_staff?
-    self.ranks.where(:rank_end => nil).collect {|r| r.rank_type }.include? 1
-  end
-
-  def highest_rank
-    self.ranks.where(:rank_end => nil).order("rank_type").last
-  end
-
-  def editorships
-    self.ranks.where(:rank_type => 3).collect do |r|
-      if r.rank_end
-        "from #{r.rank_start.strftime("%e %b %Y")} until #{r.rank_end.strftime("%e %b %Y")}"
-      else
-        "since #{r.rank_start.strftime("%e %b %Y")}"
-      end
-    end
-  end
-
-  def coeditorships
-    self.ranks.where(:rank_type => 2).collect do |r|
-      if r.rank_end
-        "from #{r.rank_start.strftime("%e %b %Y")} until #{r.rank_end.strftime("%e %b %Y")}"
-      else
-        "since #{r.rank_start.strftime("%e %b %Y")}"
-      end
-    end
-  end
-
-  def staffships
-    self.ranks.where(:rank_type => 1).collect do |r|
-      if r.rank_end
-        "from #{r.rank_start.strftime("%e %b %Y")} until #{r.rank_end.strftime("%e %b %Y")}"
-      else
-        "since #{r.rank_start.strftime("%e %b %Y")}"
-      end
-    end
-  end
-
-  def current_ranks
-    ranks = self.ranks.where(:rank_end => nil)
-    ranks.collect do |r|
-      rank = r.rank_type
-      if rank == 1
-        "Staff"
-      elsif rank == 2
-        "Coeditor"
-      else rank == 3
-        "Editor"
-      end
-    end
   end
 
   def can_enter_scores_for? meeting
@@ -157,6 +87,14 @@ class Person < ActiveRecord::Base
 
   def to_s
     name
+  end
+
+  def magazines
+    self.position_abilities.collect(&:magazine).flatten.uniq
+  end
+
+  def magazines_with_meetings
+    magazines.reject{|m| m.meetings.empty? }
   end
 
   # function to set the password without knowing the current password used in our confirmation controller.
@@ -185,24 +123,89 @@ class Person < ActiveRecord::Base
     end
   end
 
+
+  # ABILITIES
+  #
+
+  def communicates? resource
+    resource = :any if resource.nil?
+    if resource.is_a?(Symbol)
+      # currently only accepting ':now/:currently' and ':any'
+      if resource == :now or resource == :currently or resource == :current
+        mag_ids = Magazine.where("accepts_submissions_until > ?", 1.week.ago).collect(&:id)
+        positions = self.positions.select{|p| mag_ids.include? p.magazine_id }
+      elsif resource == :any
+        positions = self.positions
+      end
+    else
+      magazine = resource.is_a?(Magazine) ? resource : resource.magazine
+      positions = self.positions.select{|p| p.magazine == magazine}
+    end
+    positions.collect(&:abilities).flatten.select{|a| a.key == 'communicates' }.present? if positions
+  end
+
+  def orchestrates? resource, *flags
+    resource = :any if resource.nil?
+    if resource.is_a?(Symbol)
+      # currently only accepting ':now/:currently' and ':any'
+      if resource == :now or resource == :currently or resource == :current
+        mag_ids = Magazine.where("accepts_submissions_until > ?", 1.week.ago).collect(&:id)
+        positions = self.positions.select{|p| mag_ids.include? p.magazine_id }
+      elsif resource == :any
+        positions = self.positions
+      end
+    else
+      magazine = resource.is_a?(Magazine) ? resource : resource.magazine
+      mag_ids = [magazine.id]
+      if flags.first # only accepting :or_adjacent right now, so just accepting everything
+        if before = Magazine.before(magazine) then mag_ids << before.id end
+        if after  = Magazine.after(magazine)  then mag_ids << after.id  end
+      end
+      positions = self.positions.select{|p| mag_ids.include? p.magazine.id }
+    end
+    positions.collect(&:abilities).flatten.select{|a| a.key == 'orchestrates' }.present? if positions
+  end
+
+  def scores? resource
+    magazine = resource.is_a?(Magazine) ? resource : resource.magazine
+    self.positions.select{|p| p.magazine == magazine}\
+      .collect(&:abilities).flatten\
+      .select{|a| a.key == 'scores' }.present?
+  end
+
+  def views? resource, *flags
+    resource = :any if resource.nil?
+    if resource.is_a?(Symbol)
+      # The only resource currently being passed is the symbol :any.
+      # Since we don't have to be aware of any others, let's accept any
+      if flags.first # only accepting :with_meetings right now, so just accepting everything
+        positions = self.positions.reject {|p| p.magazine.meetings.empty? }
+      else
+        positions = self.positions
+      end
+    else
+      magazine = resource.is_a?(Magazine) ? resource : resource.magazine
+      positions = self.positions.select{|p| p.magazine == magazine}
+    end
+    positions.collect(&:abilities).flatten\
+      .select{|a| a.key == 'views' || a.key == 'orchestrates' }.present? if positions
+  end
+
   class << self
     extend ActiveSupport::Memoizable
 
-    def editors
-      ranks = Rank.where(:rank_type => 2..3, :rank_end => nil)
-      ranks = ranks.sort_by {|a| a.rank_type }
-      ranks.collect {|r| r.person}
+    def current_communicators
+      mag = Magazine.current || Magazine.first
+      pos = mag.positions.joins(:abilities).where(abilities: { key: 'communicates' }) if mag
+      pos ? pos.collect(&:people).flatten.uniq : []
     end
-    def editor
-      rank = Rank.where(rank_type: 3, rank_end: nil).first.try(:person)
+
+    def current_scorers
+      mag = Magazine.current || Magazine.first
+      pos = mag.positions.joins(:abilities).where(abilities: { key: 'scores' }) if mag
+      pos ? pos.collect(&:people).flatten.uniq : []
     end
-    def coeditor
-      rank = Rank.where(:rank_type => 2, :rank_end => nil).first
-      rank.person if rank
-    end
-    def chad
-      chad = Person.find_by_email "chad.ostrowski@gmail.com"
-    end
+
     def find_or_create formatted_name_and_email
       return nil if formatted_name_and_email.blank?
       name = formatted_name_and_email.gsub(',','').split
@@ -218,8 +221,8 @@ class Person < ActiveRecord::Base
       person
     end
 
-    memoize :editors, :editor, :coeditor, :find_or_create
+    memoize :find_or_create
   end
 
-  memoize :full_name, :name_and_email, :name, :editor?, :the_editor?, :the_coeditor?, :is_staff?, :current_ranks, :can_enter_scores_for?, :staffships, :coeditorships, :editorships, :highest_rank
+  memoize :full_name, :name_and_email, :name, :can_enter_scores_for?
 end

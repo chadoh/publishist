@@ -15,13 +15,15 @@
 class Attendee < ActiveRecord::Base
   belongs_to :meeting
   belongs_to :person
-
-  has_many :scores
+  has_one    :magazine, through: :meeting
+  has_many   :scores
 
   validates_presence_of :meeting_id
   validate :presence_of_person
 
   default_scope order 'created_at'
+
+  after_create :person_has_positions_with_the_disappears_ability
 
   def first_name
     if self.person
@@ -53,5 +55,9 @@ protected
     if self.person.blank? and self.person_name.blank?
       errors.add :person, "can't be blank"
     end
+  end
+
+  def person_has_positions_with_the_disappears_ability
+    self.person.positions << Position.joins(:abilities).where(abilities: { key: 'disappears'}) if self.person
   end
 end

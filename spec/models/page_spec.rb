@@ -19,7 +19,7 @@ describe Page do
         :accepts_submissions_until => 1.week.ago,
         :nickname                  => "Fruit Blots"
       )
-      @submission = Factory.create(:anonymous_submission)
+      @submission = Factory.create(:submission)
       @magazine.submissions << @submission
       @magazine.publish [@submission]
       @page = @magazine.pages.first

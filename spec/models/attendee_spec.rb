@@ -5,11 +5,12 @@ describe Attendee do
   it {
     should belong_to :meeting
     should belong_to :person
+    should have_one(:magazine).through(:meeting)
     should have_many :scores
     should validate_presence_of :meeting_id
   }
 
-  before(:each) do
+  before do
     @m = Factory.create :meeting
     @p = Factory.create :person
     @a = @m.attendees.new
@@ -48,5 +49,15 @@ describe Attendee do
       @a.first_name.should == @p.first_name
     end
   end
+
+  it "puts the submitter into all positions that have the 'disappears' ability upon creation" do
+    ab  = Ability.create key: 'disappears', description: "Submitters & attendees are automatically added to this group. It will disappear once the magazine is published."
+    pos = Magazine.create.positions.create name: "The Folks", abilities: [ab]
+    @a.person = @p
+    @a.save
+    @p.positions.should be_present
+    @p.positions.first.should == pos
+  end
+
 
 end

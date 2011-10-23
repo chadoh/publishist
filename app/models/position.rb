@@ -14,7 +14,13 @@ class Position < ActiveRecord::Base
   belongs_to :magazine
   has_many :roles, dependent: :destroy
   has_many :people, through: :roles
+  has_many :position_abilities, dependent: :destroy
+  has_many :abilities, through: :position_abilities
 
   validates_presence_of :name
   validates_presence_of :magazine_id
+
+  def to_s
+    name
+  end
 end

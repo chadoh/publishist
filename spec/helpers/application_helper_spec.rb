@@ -60,8 +60,8 @@ describe ApplicationHelper do
 
     context "(when the editor is viewing)" do
       before do
-        helper.stub(:the_editor?).and_return(true)
-        helper.stub(:coeditor_or_author?).and_return(false)
+        helper.stub(:communicates?).and_return(true)
+        helper.stub(:scores_or_is_author?).and_return(false)
       end
 
       it "returns false when viewing meetings#show" do
@@ -78,8 +78,8 @@ describe ApplicationHelper do
 
     context "(when the coeditor is viewing)" do
       before do
-        helper.stub(:the_editor?).and_return false
-        helper.stub(:coeditor_or_author?).and_return true
+        helper.stub(:communicates?).and_return false
+        helper.stub(:scores_or_is_author?).and_return true
       end
 
       it "returns true when viewing meetings#show" do

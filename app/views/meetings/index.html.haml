@@ -3,10 +3,10 @@
 - content_for :sidebar do
   = render partial: 'magazines/sidebar'
 
-- if editor?
+- if orchestrates? @magazine || :any
   %p= link_to t('.new_meeting'), new_meeting_path
 
-- if person_signed_in? and @orphaned_meetings.present?
+- if @orphaned_meetings.present?
   %section
     %header
       %h2 Orphaned Meetings
@@ -15,5 +15,5 @@
         = render :partial => 'meetings/show', :locals => { :meeting => meeting }
 
 %ol.meetings
-  - for meeting in collection
+  - for meeting in @meetings
     = render :partial => 'show', :locals => { :meeting => meeting }

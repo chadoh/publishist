@@ -30,9 +30,9 @@ Feature: a person signs up for the website
     And I should see "Ghengis Khan"
     And I should be on the home page
 
-  @webmember
   Scenario: I edit my profile
-    Given I am on my profile page
+    Given I sign in
+    And I am on my profile page
     When I follow "Edit account details"
     Then I should see "Edit Account"
 
