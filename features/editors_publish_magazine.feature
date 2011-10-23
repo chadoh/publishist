@@ -7,9 +7,9 @@ Feature: an editor views the winners for a magazine and publish the magazine
     Given a magazine's timeframe is freshly over
     And 10 submissions have been scored 1-10
 
-  @editor
   Scenario: I view the winners
-    Given I am on the magazines page
+    Given I'm in a position for said magazine with the "orchestrates" ability
+    And I am on the magazines page
     When I follow "View the highest-scored submissions"
     Then I should see "7" in the "highest" field
     And I should see 7 submissions
@@ -22,9 +22,9 @@ Feature: an editor views the winners for a magazine and publish the magazine
     And  I press "→"
     Then I should see 4 submissions
 
-  @editor
   Scenario: I publish the magazine and send the notification
-    Given I am on the magazines page
+    Given I'm in a position for said magazine with the "orchestrates" ability
+    And I am on the magazines page
     And I follow "View the highest-scored submissions"
     And no emails have been sent
     When I press "Publish checked submissions"

@@ -7,7 +7,7 @@ describe TableOfContents do
       :accepts_submissions_until => 1.week.ago,
       :nickname                  => "Fruit Blots"
     )
-    @submission  = Factory.create(:anonymous_submission)
+    @submission  = Factory.create(:submission)
     @submission2 = Factory.create(:submission)
     @meeting     = Meeting.create(datetime: 2.weeks.ago, question: "orly?")
     @meeting.submissions << [@submission, @submission2]

@@ -195,15 +195,17 @@ protected
   def accepts_from_after_latest_or_perhaps_today
     if self.accepts_submissions_from.blank?
       if Magazine.all.present?
-        self.accepts_submissions_from = Magazine.order("accepts_submissions_until DESC").first.accepts_submissions_until
+        self.accepts_submissions_from = Magazine.unscoped.order("accepts_submissions_until DESC").first.accepts_submissions_until + 1
       else
-        self.accepts_submissions_from = Date.today 
+        self.accepts_submissions_from = Date.today
       end
     end
+    self.accepts_submissions_from = self.accepts_submissions_from.beginning_of_day
   end
 
   def accepts_until_six_months_later
     self.accepts_submissions_until = self.accepts_submissions_from + 6.months if self.accepts_submissions_until.blank?
+    self.accepts_submissions_until = self.accepts_submissions_until.end_of_day
   end
 
   def from_happens_before_until
@@ -222,7 +224,7 @@ protected
       self.accepts_submissions_from
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
-      then errors.add :accepts_submissions_from,  "can't occurr during another magazine"
+      then errors.add :accepts_submissions_from,  "can't occurr during another magazine (#{mags.first} accepts submissions until #{mags.first.accepts_submissions_until})"
     end
     mags = Magazine.where(
       'accepts_submissions_from  < ? AND ' + \
@@ -231,7 +233,7 @@ protected
       self.accepts_submissions_until
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
-      then errors.add :accepts_submissions_until, "can't occurr during another magazine"
+      then errors.add :accepts_submissions_until, "can't occurr during another magazine (#{mags.first} accepts submissions from #{mags.first.accepts_submissions_from})"
     end
   end
 

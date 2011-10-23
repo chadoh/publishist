@@ -15,11 +15,11 @@ Then /^(?:|I )should not see "([^"]*)" under "([^"]*)"/ do |text, heading|
 end
 
 Then /^I should see my name under "([^"]*)"$/ do |heading|
-  find("##{heading.parameterize('_')}").should have_content(@user.name)
+  find("##{heading.parameterize('_')}").should have_content(@person.name)
 end
 
 Then /^I should not see my name under "([^"]*)"$/ do |heading|
-  find("##{heading.parameterize('_')}").should have_no_content(@user.name)
+  find("##{heading.parameterize('_')}").should have_no_content(@person.name)
 end
 
 Then /^(?:|I )should see a "([^"]*)" link$/ do |text|
@@ -46,6 +46,6 @@ Then /^(?:|I )should see "([^"]*)" (\d+)(?:x|X| times?)?$/ do |phrase, count|
 end
 
 When /^I fill in "([^"]*)" with my email address$/ do |field|
-  fill_in(field, :with => @user.email)
+  fill_in(field, :with => @person.email)
 end
 

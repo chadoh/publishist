@@ -5,7 +5,7 @@ describe Attendee do
   it {
     should belong_to :meeting
     should belong_to :person
-    should have_one  :magazine, through: :meeting
+    should have_one(:magazine).through(:meeting)
     should have_many :scores
     should validate_presence_of :meeting_id
   }

@@ -1,12 +1,10 @@
 class MeetingsController < InheritedResources::Base
+  before_filter :authenticate_person!, only: :show
   before_filter only: [:new, :create] do |c|
     c.must_orchestrate :any
   end
   before_filter only: [:edit, :update, :destroy] do |c|
     c.must_orchestrate resource
-  end
-  before_filter only: :show do |c|
-    must_view resource
   end
   before_filter :authenticate_person!
 
@@ -19,7 +17,7 @@ class MeetingsController < InheritedResources::Base
   def index
     @magazines = current_person.magazines_with_meetings
     @magazine = params[:m].present? ? Magazine.find(params[:m]) : @magazines.first
-    must_view @magazine
+    must_view @magazine if @magazine
     @meetings = @magazine.present? ? @magazine.meetings : Meeting.all
   end
 

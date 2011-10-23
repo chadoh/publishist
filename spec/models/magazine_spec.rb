@@ -18,13 +18,19 @@ describe Magazine do
         mag2 = Magazine.new :accepts_submissions_from => Date.today
         mag.accepts_submissions_from.should == mag2.accepts_submissions_from
       end
+      it "sets the time part to 00:00:00" do
+        mag = Magazine.create accepts_submissions_from: Time.now
+        mag.accepts_submissions_from.hour.should == 0
+        mag.accepts_submissions_from.min.should == 0
+        mag.accepts_submissions_from.sec.should == 0
+      end
     end
 
     context "when there are other magazines" do
-      it "defaults to the accepts_submissions_until date of the latest magazine" do
+      it "defaults to latest_mag.accepts_submissions_until + 1" do
         mag = Magazine.create
         mag2 = Magazine.new
-        mag2.accepts_submissions_from.should == mag.accepts_submissions_until
+        mag2.accepts_submissions_from.to_date.should == (mag.accepts_submissions_until.to_date + 1.day)
       end
     end
 
@@ -38,10 +44,16 @@ describe Magazine do
   describe "#accepts_submissions_until" do
     it "defaults to six months after accepts_submissions_from" do
       mag = Magazine.create
-      mag.accepts_submissions_until.should == mag.accepts_submissions_from + 6.months
+      mag.accepts_submissions_until.to_date.should == mag.accepts_submissions_from.to_date + 6.months
       # need to test another one, since the way `from` initializes changes with subsequent mags
       mag2 = Magazine.new
-      mag2.accepts_submissions_until.should == mag2.accepts_submissions_from + 6.months
+      mag2.accepts_submissions_until.to_date.should == mag2.accepts_submissions_from.to_date + 6.months
+    end
+    it "sets the time part to 23:59:59" do
+      mag = Magazine.create
+      mag.accepts_submissions_until.hour.should == 23
+      mag.accepts_submissions_until.min.should == 59
+      mag.accepts_submissions_until.sec.should == 59
     end
 
     it "must be > self.accepts_submissions_from" do
@@ -157,8 +169,8 @@ describe Magazine do
       :accepts_submissions_until => Date.yesterday,
       :accepts_submissions_from  => 6.months.ago
     )
-    @sub      = Factory.create :anonymous_submission
-    @sub2     = Factory.create :anonymous_submission
+    @sub      = Factory.create :submission
+    @sub2     = Factory.create :submission
     @meeting  = Meeting.create(:datetime => Date.yesterday) # in mag
     packlet  = Packlet.create  :meeting => @meeting, :submission => @sub
     packlet2 = Packlet.create  :meeting => @meeting, :submission => @sub2

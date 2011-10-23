@@ -3,9 +3,11 @@ Feature: An editor organizes submissions into packlets
   As an editor or coeditor
   I want to drag and drop them into place from the submissions page
 
-  @editor @javascript
+  @pending
+  @javascript
   Scenario: Scheduling unscheduled submissions into two future meetings
-    Given there is a submission called "Lisa, the Cat"
+    Given I'm in a position for the current magazine with the "orchestrates" ability
+    And there is a submission called "Lisa, the Cat"
     And there are several meetings
     And I am on the submissions page
     When I drag "Lisa, the Cat" to the first meeting
@@ -26,9 +28,10 @@ Feature: An editor organizes submissions into packlets
     Then I should see "Lisa, the Cat" under "Unscheduled"
 
   @pending
-  @editor @javascript
+  @javascript
   Scenario: The editor sorts submissions within the packlet
-    Given the following submissions are scheduled for a meeting a week from now:
+    Given I'm in a position for the current magazine with the "orchestrates" ability
+    And the following submissions are scheduled for a meeting a week from now:
       | title             | body             | author_email       |
       | A Hydrogen Baloon | Oh the humanatee | cookies@yomyom.com |
       | Lunatics' Rant    | Stopstopstopstop | daffy@loony.com    |

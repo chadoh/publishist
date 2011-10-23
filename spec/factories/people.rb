@@ -1,8 +1,8 @@
 Factory.define :person do |f|
-  f.first_name "Chad"
-  f.middle_name "Anthony"
-  f.last_name "Ostrowski"
-  f.sequence(:email) {|n| "chad#{n}@chadoh.com" }
+  f.first_name "Julia"
+  f.middle_name "Ellie"
+  f.last_name "Quinn"
+  f.sequence(:email) {|n| "julia#{n}@example.com" }
   f.password "secret"
   f.password_confirmation "secret"
   f.confirmed_at Time.now

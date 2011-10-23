@@ -87,7 +87,7 @@ class SubmissionsController < InheritedResources::Base
       if current_person.orchestrates?(:current) && params[:commit] != t('preview')
         session[:return_to] || submissions_url
       else
-        person_url(resource.author)
+        @submission.author ? person_url(resource.author) : submission_url(@submission)
       end
     }
 

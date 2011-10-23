@@ -3,9 +3,10 @@ Feature: people of various ranks submit something
   As an annonymous visitor, someone with an account, or the editor,
   I want to submit something!
 
-  @editor
   Scenario: The editor submits something
-    Given I am on the new submission page
+    Given I'm in a position for the current magazine with the "communicates" ability
+    And no emails have been sent
+    And I am on the new submission page
     When I fill in the following:
       | Title | Old King Scole |
       | Body  | Chewed Tobaccy |
@@ -20,9 +21,9 @@ Feature: people of various ranks submit something
     When I follow "Edit"
     Then I should not see "Submit!"
 
-  @editor
   Scenario: The editor submits for someone without making them an account
-    Given I am on the new submission page
+    Given I'm in a position for the current magazine with the "communicates" ability
+    And I am on the new submission page
     When I fill in the following:
       | Title               | Old King Scole      |
       | Body                | Chewed Tobaccy      |
@@ -32,37 +33,36 @@ Feature: people of various ranks submit something
     And I press "Submit!"
     Then the submission should be submitted, not draft
 
-  @editor
   Scenario: The editor edits an anonymous submission
-    Given there is a submission called "The King's Teeth"
+    Given I'm in a position for the current magazine with the "communicates" ability
+    And no emails have been sent
+    And there is a submission called "The King's Teeth"
     And I am on the first submission page
     When I follow "Edit"
     And I press "Save"
     Then I should be on the first submission page
     And I should receive no email
 
-  @editor
   Scenario: The editor edits a scored submission
-    Given scores have been entered for a meeting
+    Given I'm in a position for the current magazine with the "communicates" ability
+    And scores have been entered for a meeting
     And I am on the first submission page
     When I follow "Edit"
     And I press "Save"
     Then I should be on the first submission page
 
   Scenario: Some other signed-in person submits something
-    Given the following user exists:
-      | name         | email             |
-      | Roger Rabbit | roger@example.com |
-    And I sign in as "roger@example.com/password"
+    Given I sign in
+    And no emails have been sent
     And I am on the new submission page
     When I fill in the following:
       | Title | Merry Wives |
-      | Body  | of Pilates  |
+      | Body  | of Pirates  |
     And I press "Submit!"
     Then I should be on my profile page
     When "editor@problemchildmag.com" opens the email
-    Then they should see "Roger Rabbit <admin@problemchildmag.com>" in the email "From" header
-    And they should see "roger@example.com" in the email "Reply-To" header
+    Then they should see "example@example.com <admin@problemchildmag.com>" in the email "From" header
+    And they should see "example@example.com" in the email "Reply-To" header
 
     When I follow "Edit"
     And I press "Save"

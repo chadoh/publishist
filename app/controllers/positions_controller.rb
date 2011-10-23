@@ -36,5 +36,6 @@ class PositionsController < InheritedResources::Base
 
   def destroy
     must_orchestrate @position, :or_adjacent
+    destroy!
   end
 end

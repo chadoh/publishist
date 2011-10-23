@@ -18,7 +18,7 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
 
     when /my profile page/i
-      "/people/#{@user.friendly_id}"
+      "/people/#{@person.friendly_id}"
 
     when /the submit page/i
       "/submit"

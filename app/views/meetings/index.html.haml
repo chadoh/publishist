@@ -3,7 +3,7 @@
 - content_for :sidebar do
   = render partial: 'magazines/sidebar'
 
-- if orchestrates? @magazine
+- if orchestrates? @magazine || :any
   %p= link_to t('.new_meeting'), new_meeting_path
 
 - if @orphaned_meetings.present?

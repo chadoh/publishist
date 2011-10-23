@@ -14,7 +14,7 @@ describe Score do
   before(:each) do
     @meeting      = Factory.create :meeting
     @person       = Factory.create :person
-    @submission   = Factory.create :anonymous_submission
+    @submission   = Factory.create :submission
     @packlet       = Packlet.create(
       :meeting    => @meeting,
       :submission => @submission)

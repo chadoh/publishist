@@ -5,9 +5,9 @@ Feature: An editor organizes submissions onto pages of a magazine
   because _flow matters_.
 
   Background: We've published a magazine
-    Given I am signed in as an editor named "Swati Prasad"
-    And there is a submission called "Everyone Dies, Anyway"
+    Given there is a submission called "Everyone Dies, Anyway"
     And a magazine titled "Fruit Blots" has been published
+    And I'm in a position for the "Fruit Blots" magazine with the "orchestrates" ability
     And I am on the "Fruit Blots" magazine page
 
   Scenario: I see that the vanilla published magazine has sensible defaults

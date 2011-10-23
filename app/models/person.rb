@@ -128,6 +128,7 @@ class Person < ActiveRecord::Base
   #
 
   def communicates? resource
+    resource = :any if resource.nil?
     if resource.is_a?(Symbol)
       # currently only accepting ':now/:currently' and ':any'
       if resource == :now or resource == :currently or resource == :current
@@ -144,6 +145,7 @@ class Person < ActiveRecord::Base
   end
 
   def orchestrates? resource, *flags
+    resource = :any if resource.nil?
     if resource.is_a?(Symbol)
       # currently only accepting ':now/:currently' and ':any'
       if resource == :now or resource == :currently or resource == :current
@@ -172,6 +174,7 @@ class Person < ActiveRecord::Base
   end
 
   def views? resource, *flags
+    resource = :any if resource.nil?
     if resource.is_a?(Symbol)
       # The only resource currently being passed is the symbol :any.
       # Since we don't have to be aware of any others, let's accept any
@@ -193,14 +196,14 @@ class Person < ActiveRecord::Base
 
     def current_communicators
       mag = Magazine.current || Magazine.first
-      pos = mag.positions.joins(:abilities).where(abilities: { key: 'communicates' })
-      pos.collect(&:people).flatten.uniq
+      pos = mag.positions.joins(:abilities).where(abilities: { key: 'communicates' }) if mag
+      pos ? pos.collect(&:people).flatten.uniq : []
     end
 
     def current_scorers
       mag = Magazine.current || Magazine.first
-      pos = mag.positions.joins(:abilities).where(abilities: { key: 'scores' })
-      pos.collect(&:people).flatten.uniq
+      pos = mag.positions.joins(:abilities).where(abilities: { key: 'scores' }) if mag
+      pos ? pos.collect(&:people).flatten.uniq : []
     end
 
     def find_or_create formatted_name_and_email
