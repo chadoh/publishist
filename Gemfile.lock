@@ -101,10 +101,7 @@ GEM
       rspec (~> 2.0)
     erubis (2.7.0)
     escape_utils (0.2.3)
-    factory_girl (2.0.5)
-    factory_girl_rails (1.1.0)
-      factory_girl (~> 2.0.0)
-      railties (>= 3.0.0)
+    factory_girl (2.1.0)
     fattr (2.2.0)
     ffi (1.0.9)
     foreigner (1.1.0)
@@ -118,6 +115,9 @@ GEM
       thor (~> 0.14.6)
     guard-rspec (0.4.0)
       guard (>= 0.4.0)
+    guard-spork (0.2.1)
+      guard (>= 0.2.2)
+      spork (>= 0.8.4)
     haml (3.1.2)
     has_scope (0.5.1)
     heroku (2.4.0)
@@ -219,6 +219,7 @@ GEM
     simple_form (1.4.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    spork (0.9.0.rc9)
     sprockets (2.0.0)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -263,12 +264,13 @@ DEPENDENCIES
   devise
   email_spec
   escape_utils
-  factory_girl_rails
+  factory_girl
   foreigner
   friendly_id!
   gravtastic (= 3.1.0)
   growl
   guard-rspec
+  guard-spork
   haml
   handlers!
   heroku_san
@@ -288,4 +290,5 @@ DEPENDENCIES
   sass
   shoulda
   simple_form
+  spork (>= 0.9.0.rc9)
   workless

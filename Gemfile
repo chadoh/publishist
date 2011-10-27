@@ -46,16 +46,18 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rb-fsevent'
   gem 'growl'
+  gem 'guard-spork'
 end
 
 group :test do
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'email_spec'
-  gem 'factory_girl_rails'
+  gem 'factory_girl'
   gem 'shoulda'
   # gem 'launchy'
   gem 'database_cleaner'
+  gem "spork", ">= 0.9.0.rc9"
 end
 
 group :production do
