@@ -53,6 +53,7 @@ class Submission < ActiveRecord::Base
 
   after_find    :reviewed_if_meeting_has_occurred
   before_create :set_position_to_nil
+  before_create :published_if_for_a_published_magazine
   after_create  :author_has_positions_with_the_disappears_ability
   after_initialize "self.magazine = Magazine.current unless self.magazine"
 
@@ -126,6 +127,12 @@ protected
 
   def set_position_to_nil
     self.position = nil
+  end
+
+  def published_if_for_a_published_magazine
+    if self.magazine
+      self.state = :published if self.magazine.published?
+    end
   end
 
   def author_has_positions_with_the_disappears_ability

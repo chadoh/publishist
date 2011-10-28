@@ -87,6 +87,17 @@ describe Submission do
     end
   end
 
+  it "sets the state to 'published' if the magazine is in the past" do
+    mag = Magazine.create(
+      accepts_submissions_from:  6.months.ago,
+      accepts_submissions_until: Date.yesterday,
+      title: "Gone"
+    )
+    mag.publish []
+    sub = Factory.create :submission, magazine: mag
+    sub.reload.state.should == :published
+  end
+
   it "sets the author_name field to 'anonymous' if there is no associated author" do
     sub = Submission.create :title => "some ugly cat", :author_email => "non@one.me"
     sub.author_name.should == "Anonymous"

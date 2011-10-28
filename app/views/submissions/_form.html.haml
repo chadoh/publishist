@@ -23,6 +23,7 @@
         hint:       "You can even make an account for someone by entering their name & email"
       = f.input :author_name, :label => "To submit for someone without an account, put their name here"
       = f.input :author_email, :label => "...and their email address here"
+      = f.association :magazine, label_method: :to_s
     - else
       = f.input :author_id, :as => :hidden
   = f.button :submit, current_page?('/submit') || current_page?('/submissions') || resource.draft? ? t('submit!') : t('save')
