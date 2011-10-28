@@ -58,6 +58,8 @@ protected
   end
 
   def person_has_positions_with_the_disappears_ability
-    self.person.positions << Position.joins(:abilities).where(abilities: { key: 'disappears'}) if self.person
+    unless self.person.abilities.collect(&:key).include?('disappears')
+      self.person.positions << Position.joins(:abilities).where(abilities: { key: 'disappears'}) if self.person
+    end
   end
 end

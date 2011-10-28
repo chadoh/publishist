@@ -22,7 +22,7 @@ class Meeting < ActiveRecord::Base
   default_scope order("datetime ASC")
 
   after_save :submissions_have_been_reviewed_or_queued
-  before_create :belongs_to_a_magazine
+  after_initialize :belongs_to_a_magazine
 
   validates_presence_of :datetime
 
@@ -30,11 +30,7 @@ protected
 
   def belongs_to_a_magazine
     unless self.magazine.present?
-      mag = Magazine.where(
-        'accepts_submissions_from  < ? AND ' + \
-        'accepts_submissions_until > ?', self.datetime, self.datetime
-      ).first
-      self.magazine = mag.presence || Magazine.order("accepts_submissions_until DESC").first
+      self.magazine = Magazine.current
     end
   end
 

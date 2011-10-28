@@ -46,15 +46,15 @@ describe Meeting do
     end
   end
 
-  describe "#create" do
-    it "will automatically be associated with the magazine in whose range it falls" do
+  describe "#magazine" do
+    it "initializes to the current magazine" do
       mag = Magazine.create
-      meeting = Meeting.create :question => "would you believe it?", :datetime => Date.tomorrow
+      meeting = Meeting.new datetime: 1.year.ago
       meeting.magazine.should == mag
     end
 
-    it "allows changing to a different magazine" do
-      mag = Magazine.create
+    it "can be changed" do
+      mag = Magazine.create accepts_submissions_from: 2.months.ago, accepts_submissions_until: 2.months.from_now
       mag2 = Magazine.create
       meeting = Meeting.create :question => "would you believe it?", :datetime => Date.tomorrow
       meeting.magazine.should == mag
