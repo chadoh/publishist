@@ -33,8 +33,9 @@ Given /^the "([^"]*)" meeting is two hours away$/ do |submission_title|
 end
 
 Given /^I have gone to the meeting and scored "([^"]*)"$/ do |title|
-  submission = Submission.find_by_title title
   meeting = first_meeting
+  submission = Submission.find_by_title title
+  submission.update_attributes magazine: Magazine.first
   meeting.submissions << submission
   meeting.people << @person
   submission.packlets.first.scores.create :amount => 6, :attendee => meeting.attendees.first

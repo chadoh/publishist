@@ -28,11 +28,12 @@
 class Magazine < ActiveRecord::Base
   extend ActiveSupport::Memoizable
 
-  has_many :meetings,   dependent: :nullify, include: :submissions
-  has_many :pages,      dependent: :destroy, order:   :position
-  has_many :positions,  dependent: :destroy
-  has_many :roles,      through:   :positions, dependent: :destroy
-  has_many :abilities,  through:   :positions, dependent: :destroy
+  has_many :meetings,  dependent: :nullify, include: :submissions
+  has_many :pages,     dependent: :destroy, order:   :position
+  has_many :positions, dependent: :destroy
+  has_many :roles,     through:   :positions, dependent: :destroy
+  has_many :abilities, through:   :positions, dependent: :destroy
+  has_many :subs,      dependent: :nullify, class_name: 'Submission'
   has_friendly_id :to_s, :use_slug => true
   has_attached_file :pdf,
     :storage        => :s3,
@@ -66,16 +67,8 @@ class Magazine < ActiveRecord::Base
 
   default_scope order("accepts_submissions_until DESC")
 
-  # TODO: This should be a nested hm:t; waiting for Rails 3.1 which will allow this
-  def submissions options = {}
-    options = options.is_a?(Hash) ? options : { options => true }
-
-    submission_ids = self.meetings.collect(&:packlets).flatten.collect(&:submission_id).uniq
-    if self.published? && options[:all] != true
-      Submission.where(id: submission_ids).where(state: Submission.state(:published))
-    else
-      Submission.where(id: submission_ids)
-    end
+  def submissions(flags = nil)
+    !self.published? || flags == :all ? self.subs : self.subs.published
   end
 
   def average_score
@@ -188,7 +181,7 @@ class Magazine < ActiveRecord::Base
     published_on.present?
   end
 
-  memoize :submissions, :average_score, :to_s
+  memoize :average_score, :to_s
 
 protected
 

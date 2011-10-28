@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110625142017
+# Schema version: 20111024105831
 #
 # Table name: submissions
 #
@@ -19,17 +19,25 @@
 #  cached_slug        :string(255)
 #  page_id            :integer
 #  position           :integer
+#  magazine_id        :integer
 #
 
 class Submission < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   belongs_to :author, :class_name => "Person"
   belongs_to :page
+  belongs_to :magazine
   has_many :packlets, dependent: :destroy
   has_many :meetings, through: :packlets
   has_many :scores,   through: :packlets
-
+  has_attached_file :photo,
+    :storage        => :s3,
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :path           => "/:style/:filename",
+    :styles         => { medium: "510x510>" }
   has_friendly_id :to_slug, use_slug: true
+
+  acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
   acts_as_list scope: :page
 
   validate "errors.add :author_email, 'must be filled in. Or you can sign in.'",
@@ -38,27 +46,17 @@ class Submission < ActiveRecord::Base
     :if => Proc.new {|s| s.author_id.blank? && s.author_name .blank? }
   validate "errors.add :body, 'cannot be blank.'",
     :if => Proc.new {|s| s.body.blank? && s.title.blank? }
-
-  after_find    :reviewed_if_meeting_has_occurred
-  before_create :set_position_to_nil
-  after_create  :author_has_positions_with_the_disappears_ability
-
-  def magazine
-    self.reload.meetings.first.try(:magazine) || Magazine.first
-  end
-
-  acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
-
   validates_attachment_content_type :photo,
     :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
     :if           => Proc.new { |submission| submission.photo.file? },
     :message      => "must be an image"
 
-  has_attached_file :photo,
-    :storage        => :s3,
-    :s3_credentials => "#{Rails.root}/config/s3.yml",
-    :path           => "/:style/:filename",
-    :styles         => { medium: "510x510>" }
+  after_find    :reviewed_if_meeting_has_occurred
+  before_create :set_position_to_nil
+  after_create  :author_has_positions_with_the_disappears_ability
+  after_initialize "self.magazine = Magazine.current unless self.magazine"
+
+  scope :published, where(state: Submission.state(:published))
 
   def author_name
     @author_name ||= if read_attribute :author_id

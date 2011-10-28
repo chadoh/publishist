@@ -137,8 +137,8 @@ describe Magazine do
       mag2     = Factory.create :magazine
       meeting  = Meeting.create(:datetime => Date.tomorrow) # in mag
       meeting2 = Meeting.create(:datetime => Date.tomorrow + 6.months) # in mag2
-      sub      = Factory.create :submission
-      sub2     = Factory.create :submission
+      sub      = Factory.create :submission, magazine: mag
+      sub2     = Factory.create :submission, magazine: mag2
       p        = Factory.create :person
       p2       = Factory.create :person
       a        = Attendee.create :meeting => meeting, :person => p
@@ -264,7 +264,6 @@ describe Magazine do
       mock_mail = mock(:mail)
       mock_mail.stub(:deliver)
       @mag.publish [@sub2]
-      @mag.submissions(:reload)
       [@sub, @sub2].each do |sub|
         Notifications.should_receive(:we_published_a_magazine).with(sub.email, @mag, [sub]).and_return(mock_mail)
       end
@@ -321,33 +320,30 @@ describe Magazine do
       a_magazine_has_just_finished
     end
 
-    it "returns a scope, not an array" do
-      @mag.submissions.class.should == ActiveRecord::Relation
+    it "is scopable" do
+      @mag.submissions.respond_to?(:where).should be_true
     end
 
     it "returns submissions for the specified magazine, not some other magazine" do
       mag2 = Magazine.create(:nickname => "Poopty poopty pants")
       meeting = Meeting.create(:datetime => 1.week.from_now)
-      sub = Factory.create :submission
+      sub = Factory.create :submission, magazine: mag2
       meeting.submissions << sub
       mag2.submissions.should == [sub]
       @mag.submissions.should_not include(sub)
     end
 
-    it "memoizes the result" do
-      @mag.submissions # this result should now be memoized
-
-      sub3 = Factory.create :submission
-      @meeting.submissions << sub3
-      @mag.reload.submissions.should_not include(sub3)
-    end
-
     context "when the magazine has been published" do
-      it "only returns published submissions" do
+      before do
         @mag.update_attribute :published_on, Date.today
+      end
+      it "only returns published submissions" do
         @mag.submissions.should be_blank
         @sub.has_been(:published)
         @mag.reload.submissions.should include(@sub)
+      end
+      it "will return all the submissions if passed :all" do
+        @mag.submissions(:all).should_not be_blank
       end
     end
   end

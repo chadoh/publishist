@@ -5,8 +5,9 @@ describe Submission do
     should have_many(:packlets).dependent(:destroy)
     should have_many(:meetings).through(:packlets)
     should have_many(:scores).through(:packlets)
-    should belong_to(:author)
+    should belong_to :author
     should belong_to :page
+    should belong_to :magazine
   }
 
   it "sets queued submissions to reviewed if their meeting is less than three hours in the future" do
@@ -64,7 +65,7 @@ describe Submission do
   end
 
   describe "#position" do
-    it "defaults to 0" do
+    it "defaults to nil" do
       sub = Submission.create title: 'boring', body: 'poem', author_email: "no@example.com"
       sub.reload.position.should be_nil
     end
@@ -170,16 +171,28 @@ describe Submission do
   end
 
   describe "#magazine" do
-    it "returns the submission's magazine, as told by its first meeting" do
-      magazine = Factory.create :magazine
-      meeting = magazine.meetings.create datetime: Time.now
-      submission = meeting.submissions.create(title: '=', body: 'D', author_email: 'exampleexample.com')
-      submission.reload.magazine.should == magazine
+    it "defaults to the current magazine" do
+      mg1 = Factory.build :magazine
+      mg2 = Factory.build :magazine
+      Magazine.stub(:current).and_return(mg1)
+      sub = Submission.new
+      sub.magazine.should == mg1
     end
-    it "returns the current magazine, if the submission doesn't have one otherwise" do
-      magazine = Magazine.create title: 'the next magazine'
-      sub = Submission.create title: '=', body: 'D', author_email: 'example@example.com'
-      sub.reload.magazine.should == magazine
+    it "does not override the magazine if it's already set" do
+      mg1 = Factory.create :magazine
+      mg2 = Factory.create :magazine
+      sub = Submission.create title: "margeret", body: "tatcher", author_email: "ex@mple.com", magazine: mg1
+      Magazine.stub(:current).and_return(mg2)
+      sub.reload.magazine.should == mg1
     end
   end
+
+  describe "self.published" do
+    it "returns only published submissions" do
+      s1 = Factory.create :submission, state: Submission.state(:published)
+      s2 = Factory.create :submission, state: Submission.state(:rejected)
+      Submission.published.should == [s1]
+    end
+  end
+
 end

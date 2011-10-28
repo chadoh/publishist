@@ -37,18 +37,13 @@ describe Packlet do
     @p3.should be_valid
   end
 
-  it "does not allow a submission to be reviewed in multiple magazines" do
-    magazine1  = Factory.create :magazine
-    magazine2  = Factory.create :magazine
-    meeting1   = Factory.create :meeting, magazine: magazine1
-    meeting2   = Factory.create :meeting, magazine: magazine2
-    submission = Factory.create :submission
-    meeting1.submissions << submission
-    packlet = Packlet.create(
-      :meeting => meeting2,
-      :submission => submission
-    )
-    packlet.should_not be_valid
+  it "does not allow a submission to be reviewed for a magazine that the submission wasn't submitted for" do
+    mag = Factory.create :magazine
+    mg2 = Factory.create :magazine
+    sub = Submission.create title: "pablo", body: "honey", magazine: mag, author_email: "example@example.com"
+    mtg = mg2.meetings.create datetime: Time.now
+    pak = Packlet.new meeting: mtg, submission: sub
+    pak.should_not be_valid
   end
 
   describe "#submission#draft?" do
