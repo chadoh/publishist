@@ -2,16 +2,20 @@
 
 - title "Scores for \"#{resource.question}\""
 :markdown
-  Here you can enter scores for the meeting
-  #{distance_of_time_in_words(Time.now, resource.datetime)} ago.
-  (Some people may have entered scores themselves.)  
+  Some people may have entered scores themselves.  
   #{link_to "Back to meeting", meeting_path(resource)}
 
 %section#scores
-  %ol#packlet_titles
-    - for packlet in resource.packlets
-      = render :partial => "packlets/title", :locals => { :packlet => packlet }
-  - for attendee in @attendees
-    .scores[attendee]
+  .packlet-titles-wrap
+    %ol.packlet-titles
       - for packlet in resource.packlets
-        = render :partial => "scores/form", :locals => { :score => Score.with(attendee, packlet, :entered_by_coeditor => true) }
+        = render :partial => "packlets/title", :locals => { :packlet => packlet }
+  .scores-wrap-container-wrap
+    .border
+    .scores-wrap-container
+      .scores-wrap
+        - for attendee in @attendees
+          .scores[attendee]
+            - for packlet in resource.packlets
+              = render :partial => "scores/form", :locals => { :score => Score.with(attendee, packlet, :entered_by_coeditor => true) }
+    .border

@@ -47,6 +47,7 @@ $(function(){
     }
   });
 
+  $('div.scores-wrap').css({ width: ($('div.scores').length * 55) });
   $('form.score input[type=submit]').hide();
   $('input[type=number]').live('mouseout blur', function(){
     var orig    = $(this).attr('data-original'),

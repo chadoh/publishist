@@ -9,9 +9,6 @@
     = f.input :entered_by_coeditor, :as => :hidden
     - unless request.xhr?
       = f.button :submit, "+", :class => "link"
-  - if score.id
-    = button_to "x", score_path(score),
-                     :method => :delete,
-                     :remote => true,
-                     :class => "link",
-                     :title => "Remove"
+  -# needed the following in order to "unset" scores in old webkit browsers. Removed Oct 2011
+  -# - if score.id
+    = button_to "x", score_path(score), :method => :delete, :remote => true, :class => "link", :title => "Remove"

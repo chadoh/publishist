@@ -38,7 +38,7 @@
               :data => { :average => average = @average.presence || submission.magazine.try(:average_score).presence },
               :value => score = submission.average_score,
               :title => "#{score} out of 10#{" (average: #{average})" if average.present?}" }
-        #{score}#{ " (average: #{average})" if average.present?}
+        #{score}
 
   - if submission.published? and page_appropriate? and !(params['controller'] == 'pages' && params['action'] == 'show')
     %p.published

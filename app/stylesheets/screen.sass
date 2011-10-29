@@ -352,6 +352,7 @@ li.page, li.role
       vertical-align: top
 
 span.score
+  position: relative
   form.button_to
     +adjust-font-size-to(9px)
     line-height: 1em
@@ -359,6 +360,11 @@ span.score
       vertical-align: top
   form.score
     display: inline
+    input[type=submit]
+      +adjust-font-size-to(9px)
+      position: absolute
+      bottom: 0
+      line-height: 2em
     div
       display: inline
       label
@@ -384,25 +390,50 @@ html.no-number-input input[type=number]
 section#scores
   +full
   +leader
-  ol#packlet_titles
+  div.packlet-titles-wrap
     +alpha
-    +columns(2)
-    +trailer
-    list-style-position: inside
-    li.title
-      max-height: $base-line-height
-      a
-        +inline-block
-        vertical-align: inherit
-        min-height: $base-font-size
-        width: 70%
-        +ellipsis
-
-  .scores
-    +columns(1)
-    +trailer
-    &:last
-      +omega
+    +columns(3)
+    ol.packlet-titles
+      li.title
+        max-height: $base-line-height
+        a
+          +inline-block
+          vertical-align: inherit
+          min-height: $base-font-size
+          width: 100%
+          +ellipsis
+  div.scores-wrap-container-wrap
+    +omega
+    +columns(13)
+    +clearfix
+    position: relative
+    .border
+      height: 100%
+      width:  10px
+      position: absolute
+      top: 0
+      z-index: 1
+      &:first-child
+        left: 0
+        +linear-gradient(color-stops(rgba(white, 1), rgba(white, 0)), left)
+      &:last-child
+        right: 0
+        +linear-gradient(color-stops(rgba(white, 1), rgba(white, 0)), right)
+    div.scores-wrap-container
+      width: 100%
+      height: 100%
+      overflow-x: scroll
+      div.scores-wrap
+        margin: 0 12px
+        width: 100em
+        +clearfix
+        +trailer
+        position: relative
+        .scores
+          width: 55px
+          float: left
+          span.score
+            display: block
 
 ul.attendees
   li.attendee
