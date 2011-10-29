@@ -135,8 +135,8 @@ describe Magazine do
     it "returns the average score for the submissions in this magazine" do
       mag      = Factory.create :magazine
       mag2     = Factory.create :magazine
-      meeting  = Meeting.create(:datetime => Date.tomorrow) # in mag
-      meeting2 = Meeting.create(:datetime => Date.tomorrow + 6.months) # in mag2
+      meeting  = Meeting.create(:datetime => Date.tomorrow, magazine: mag)
+      meeting2 = Meeting.create(:datetime => Date.tomorrow + 6.months, magazine: mag2)
       sub      = Factory.create :submission, magazine: mag
       sub2     = Factory.create :submission, magazine: mag2
       p        = Factory.create :person
@@ -249,6 +249,13 @@ describe Magazine do
       end
     end
 
+    it "when called correctly publishes any previous magazines that were for some reason not published themselves" do
+      old_mag = Magazine.create accepts_submissions_from: 1.year.ago, accepts_submissions_until: 6.months.ago, nickname: "old"
+      new_mag = Magazine.create accepts_submissions_from: 6.months.ago, accepts_submissions_until: Date.yesterday, nickname: "new"
+      new_mag.publish []
+      old_mag.reload.should be_published
+    end
+
     it "when called correctly destroys any positions that have the 'disappears' ability" do
       a1 = Ability.create key: 'disappears', description: "This is a temporary position that will disappear once the magazine is published."
       mag = Magazine.create title: "the cat issue", accepts_submissions_from: 3.months.ago, accepts_submissions_until: Date.yesterday
@@ -282,6 +289,14 @@ describe Magazine do
     it "returns true if the magazine has a published_on value" do
       mag.update_attribute :published_on, Date.today
       mag.should be_published
+    end
+  end
+
+  describe "self.unpublished" do
+    it "returns only magazines that have not been published" do
+      pub   = Magazine.create(accepts_submissions_from: 1.week.ago, accepts_submissions_until: Date.yesterday).publish []
+      unpub = Magazine.create
+      Magazine.unpublished.should == [unpub]
     end
   end
 
@@ -326,7 +341,7 @@ describe Magazine do
 
     it "returns submissions for the specified magazine, not some other magazine" do
       mag2 = Magazine.create(:nickname => "Poopty poopty pants")
-      meeting = Meeting.create(:datetime => 1.week.from_now)
+      meeting = Meeting.create(:datetime => 1.week.from_now, magazine: mag2)
       sub = Factory.create :submission, magazine: mag2
       meeting.submissions << sub
       mag2.submissions.should == [sub]

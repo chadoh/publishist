@@ -44,3 +44,7 @@ end
 Then /^the submission should be submitted, not draft$/ do
   Submission.first.state.should == :submitted
 end
+
+Then /^"([^"]*)" should be published$/ do |title|
+  Submission.find_by_title(title).state.should == :published
+end

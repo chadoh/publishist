@@ -66,6 +66,7 @@ class Magazine < ActiveRecord::Base
   after_create     :same_positions_as_previous_mag
 
   default_scope order("accepts_submissions_until DESC")
+  scope :unpublished, where(published_on: nil)
 
   def submissions(flags = nil)
     !self.published? || flags == :all ? self.subs : self.subs.published
@@ -129,6 +130,8 @@ class Magazine < ActiveRecord::Base
           sub.update_attribute :position, i + 1
         end
       end
+      older_unpublished_magazines = Magazine.unpublished.where(accepts_submissions_from < self.accepts_submissions_from)
+      older_unpublished_magazines.each {|m| m.publish [] }
     else
       raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
     end

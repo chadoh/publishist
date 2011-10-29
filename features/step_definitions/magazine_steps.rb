@@ -15,10 +15,27 @@ end
 
 Given /^a magazine's timeframe is freshly over$/ do
   Magazine.create(
-    :accepts_submissions_from => 6.months.ago,
-    :accepts_submissions_until => Date.yesterday
+    accepts_submissions_from: 6.months.ago,
+    accepts_submissions_until: Date.yesterday
   )
 end
+
+Given /^a very old magazine called "([^"]*)"$/ do |nickname|
+  Magazine.create(
+    accepts_submissions_from: 2.years.ago,
+    accepts_submissions_until: 18.months.ago,
+    nickname: nickname
+  ).publish []
+end
+
+Given /^a current magazine called "([^"]*)"$/ do |nickname|
+  Magazine.create(
+    accepts_submissions_from: 3.months.ago,
+    accepts_submissions_until: 3.months.from_now,
+    nickname: nickname
+  )
+end
+
 
 Given /^the magazine's timeframe is freshly over$/ do
   Magazine.first.update_attributes(
