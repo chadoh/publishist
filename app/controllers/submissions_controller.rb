@@ -49,23 +49,25 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def create
-    params[:submission][:author] = Person.find_or_create(params[:submission][:author]) if !!params[:submission][:author]
-    @submission = Submission.new(params[:submission])
+    set_params
+    @submission = Submission.new params[:submission]
 
     respond_with(@submission) do |format|
       if @submission.valid?
         format.html {
           if person_signed_in?
             @submission.save
-            @submission.has_been(:submitted, :by => current_person) if params[:commit] == "Submit!"
-            redirect_to submissions_url and return if current_person.orchestrates?(:current) && params[:commit] != t('preview')
+            redirect_to submissions_url and return if current_person.orchestrates?(:current) && params["preview"]
+            if @submission.published?
+              flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
+              redirect_to new_submission_url and return
+            end
             redirect_to person_url(current_person)
           else
             if recaptcha_valid?
               @submission.save
               flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
               redirect_to session[:return_to] || root_url
-              @submission.has_been(:submitted, :by => current_person) if params[:commit] == "Submit!"
             else
               flash[:notice] = "You might be a bot! If you're fairly certain you're not, please try again. Elsewise, <i>go away</i>.".html_safe
               render action: 'new'
@@ -79,9 +81,9 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def update
-    if !!params[:submission][:author]
-      params[:submission][:author] = Person.find_or_create(params[:submission][:author])
-    end
+    @submission = Submission.find(params[:id])
+    set_params
+    @submission.attributes = params[:submission]
 
     update! {
       if current_person.orchestrates?(:current) && params[:commit] != t('preview')
@@ -90,10 +92,6 @@ class SubmissionsController < InheritedResources::Base
         @submission.author ? person_url(resource.author) : submission_url(@submission)
       end
     }
-
-    if request.referer == new_submission_url or request.referer == edit_submission_url(resource)
-      if params[:commit] == "Submit!" then @submission.has_been(:submitted, :by => current_person) end
-    end
   end
 
   def destroy
@@ -109,6 +107,12 @@ protected
 
   def ensure_current_url
     redirect_to resource, :status => :moved_permanently unless resource.friendly_id_status.best?
+  end
+
+  def set_params
+    params[:submission][:author] = Person.find_or_create(params[:submission][:author]) if !!params[:submission][:author]
+    params[:submission][:updated_by] = current_person
+    params[:submission][:state] = :submitted if params["submit"]
   end
 
 end

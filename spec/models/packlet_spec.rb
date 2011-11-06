@@ -82,7 +82,6 @@ describe Packlet do
 
     it "accepts a {:current_person => blah} parameter without complaining" do
       person = Factory.build :person
-      Person.should_receive(:current_communicators).and_return(["nope"])
       @packlet.destroy :current_person => person
     end
   end

@@ -1,10 +1,5 @@
 Given /^I'm in a position for the current magazine with the "([^"]+)" ability$/ do |key|
-  @person = Person.create(
-    name:                  "example@example.com",
-    email:                 "example@example.com",
-    password:              "secret",
-    password_confirmation: "secret"
-  )
+  @person = Factory.create(:person)
   @person.confirm!
   @magazine = Magazine.create(
     title: 'Awesome Mag',
@@ -21,12 +16,7 @@ Given /^I'm in a position for the current magazine with the "([^"]+)" ability$/ 
 end
 
 Given /^I'm in a position for (?:the "[^"]+"|said) magazine with the "([^"]+)" ability$/ do |key|
-  @person = Person.create(
-    name:                  "example@example.com",
-    email:                 "example@example.com",
-    password:              "secret",
-    password_confirmation: "secret"
-  )
+  @person = Factory.create(:person)
   @person.confirm!
   @magazine = Magazine.first
   @ability = Ability.create key: key, description: "#{key}s stuff"
@@ -39,12 +29,7 @@ Given /^I'm in a position for (?:the "[^"]+"|said) magazine with the "([^"]+)" a
 end
 
 Given /^I'm in a position for the current magazine with the "([^"]+)" and "([^"]+)" abilities$/ do |key1, key2|
-  @person = Person.create(
-    name:                  "example@example.com",
-    email:                 "example@example.com",
-    password:              "secret",
-    password_confirmation: "secret"
-  )
+  @person = Factory.create(:person)
   @person.confirm!
   @magazine = Magazine.create(
     title: 'Awesome Mag',
@@ -59,4 +44,16 @@ Given /^I'm in a position for the current magazine with the "([^"]+)" and "([^"]
   fill_in 'Email', :with => @person.email
   fill_in 'Password', :with => 'secret'
   click_button 'Sign in'
+end
+
+Given /^I have the "([^"]+)" ability for the current magazine$/ do |key|
+  @person = Person.first
+  @magazine = Magazine.create(
+    title: 'Awesome Mag',
+    accepts_submissions_from:  3.months.ago,
+    accepts_submissions_until: 3.months.from_now
+  )
+  @ability = Ability.create key: key, description: "#{key}s stuff"
+  @position = @magazine.positions.create name: 'Kitten', abilities: [@ability]
+  @person.positions << @position
 end

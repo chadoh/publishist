@@ -4,13 +4,13 @@ Feature: People check out a meeting
   But they gots to be signed in.
 
   Scenario: I am not signed in. And I visit a meeting.
-    Given I'm in a position for the current magazine with the "views" ability
-    And I am signed out
+    Given I have an account but am not signed in
+    And I have the "views" ability for the current magazine
     And I am on the first meeting page
     Then I should see "sign in"
 
     When I fill in the following:
       | Email    | example@example.com |
-      | Password | secret                    |
+      | Password | secret              |
     And I press "Sign in"
     Then I should be on the first meeting page

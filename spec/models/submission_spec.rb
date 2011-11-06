@@ -10,6 +10,15 @@ describe Submission do
     should belong_to :magazine
   }
 
+  describe "#title" do
+    it "cannot be more than 255 characters" do
+      sub = Submission.new title: 'x'*256, body: 'oooh, yeah.', author_email: "bob@example.com"
+      sub.should have(1).error_on(:title)
+      sub.title = 'x'*255
+      sub.should be_valid
+    end
+  end
+
   it "sets queued submissions to reviewed if their meeting is less than three hours in the future" do
     meeting = Factory.create :meeting
     submission = Factory.create :submission
@@ -64,6 +73,45 @@ describe Submission do
     end
   end
 
+  context "when updating the state" do
+    context "to :submitted" do
+      it "sends a notification if state was :draft" do
+        sub = Submission.create title: "love", body: "&loss", author: Factory.create(:person), state: :draft
+
+        mock_mail = mock(:mail)
+        mock_mail.stub(:deliver)
+        Notifications.should_receive(:new_submission).with(sub).and_return(mock_mail)
+
+        sub.update_attributes state: :submitted
+      end
+      it "sends a notification if a new submission" do
+        sub = Submission.new title: "love", body: "&loss", author: Factory.create(:person), state: :submitted
+
+        mock_mail = mock(:mail)
+        mock_mail.stub(:deliver)
+        Notifications.should_receive(:new_submission).with(sub).and_return(mock_mail)
+
+        sub.save
+      end
+      it "does not send a notification if state was :reviewed" do
+        sub = Submission.create title: "love", body: "&loss", author: Factory.create(:person), state: :reviewed
+
+        Notifications.should_not_receive(:new_submission)
+
+        sub.update_attributes state: :submitted
+      end
+      it "does not send a notification if was :draft, but is being updated by the person who would get the email" do
+        per = Factory.create(:person)
+        sub = Submission.create title: "love", body: "&loss", author: per, state: :draft
+
+        Person.should_receive(:current_communicators).and_return([per])
+        Notifications.should_not_receive(:new_submission)
+
+        sub.update_attributes state: :submitted, updated_by: per
+      end
+    end
+  end
+
   describe "#position" do
     it "defaults to nil" do
       sub = Submission.create title: 'boring', body: 'poem', author_email: "no@example.com"
@@ -87,7 +135,7 @@ describe Submission do
     end
   end
 
-  it "sets the state to 'published' if the magazine is in the past" do
+  it "sets the state to 'published' if the magazine has already been published" do
     mag = Magazine.create(
       accepts_submissions_from:  6.months.ago,
       accepts_submissions_until: Date.yesterday,
@@ -96,6 +144,7 @@ describe Submission do
     mag.publish []
     sub = Factory.create :submission, magazine: mag
     sub.reload.state.should == :published
+    sub.page.to_s.should == '1'
   end
 
   it "sets the author_name field to 'anonymous' if there is no associated author" do

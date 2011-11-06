@@ -28,6 +28,10 @@ class Page < ActiveRecord::Base
     read_attribute(:title).presence || (self.position - 4).to_s
   end
 
+  def to_s
+    title
+  end
+
   def to_param
     self.title.downcase
   end

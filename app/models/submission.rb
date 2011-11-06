@@ -36,10 +36,12 @@ class Submission < ActiveRecord::Base
     :path           => "/:style/:filename",
     :styles         => { medium: "510x510>" }
   has_friendly_id :to_slug, use_slug: true
+  attr_accessor :updated_by
 
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
   acts_as_list scope: :page
 
+  validates_length_of :title, maximum: 255
   validate "errors.add :author_email, 'must be filled in. Or you can sign in.'",
     :if => Proc.new {|s| s.author_id.blank? && s.author_email.blank? }
   validate "self.author_name = 'Anonymous'",
@@ -51,21 +53,17 @@ class Submission < ActiveRecord::Base
     :if           => Proc.new { |submission| submission.photo.file? },
     :message      => "must be an image"
 
-  after_find    :reviewed_if_meeting_has_occurred
-  before_create :set_position_to_nil
-  before_create :published_if_for_a_published_magazine
-  after_create  :author_has_positions_with_the_disappears_ability
-  after_initialize "self.magazine = Magazine.current unless self.magazine"
+  before_save      :published_if_for_a_published_magazine
+  before_create    :set_position_to_nil
+  after_find       :reviewed_if_meeting_has_occurred
+  after_save       :notify_current_communicator_if_submitted
+  after_create     :author_has_positions_with_the_disappears_ability
+  after_initialize :magazine_is_current_if_blank
 
   scope :published, where(state: Submission.state(:published))
 
   def author_name
-    @author_name ||= if read_attribute :author_id
-      @author ||= Person.find(read_attribute(:author_id))
-      @author.name
-    else
-      read_attribute :author_name
-    end
+    @author_name ||= author.try(:name) || self[:author_name]
   end
 
   def author_first
@@ -87,10 +85,7 @@ class Submission < ActiveRecord::Base
   end
 
   def has_been moved_to_state, options = {}
-    if moved_to_state == :submitted
-      Notifications.new_submission(self).deliver if (options[:by].blank? or Person.current_communicators.first.presence != options[:by])
-    end
-    update_attributes :state => moved_to_state
+    update_attributes :state => moved_to_state, updated_by: options[:by]
   end
 
   [:draft, :submitted, :queued, :reviewed, :scored, :published, :rejected].each do |state|
@@ -108,7 +103,7 @@ class Submission < ActiveRecord::Base
   end
 
   def to_s
-    @to_s ||= strip_tags(self.title).presence || strip_tags(self.body.lines.first)
+    @to_s ||= strip_tags(self.title).presence || strip_tags(self.body.try(:lines).try(:first))
   end
 
   def to_slug
@@ -130,8 +125,10 @@ protected
   end
 
   def published_if_for_a_published_magazine
-    if self.magazine
-      self.state = :published if self.magazine.published?
+    if self.magazine && self.magazine.published?
+      self.state = :published
+      self.magazine.pages.create unless self.magazine.page(1)
+      self.page = self.magazine.page(1)
     end
   end
 
@@ -139,6 +136,17 @@ protected
     if self.author && self.author.abilities.where(key: 'disappears').empty?
       self.author.positions << Position.joins(:abilities).where(abilities: { key: 'disappears'})
     end
+  end
+
+  def notify_current_communicator_if_submitted
+    if state_changed? && state == :submitted && state_was == Submission.state(:draft)
+      notify = updated_by.blank? || (editor = Person.current_communicators.first).blank? || editor != updated_by
+      Notifications.new_submission(self).deliver if notify
+    end
+  end
+
+  def magazine_is_current_if_blank
+    self.magazine = Magazine.current if self.magazine.blank?
   end
 
 end

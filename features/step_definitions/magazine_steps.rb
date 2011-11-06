@@ -21,7 +21,7 @@ Given /^a magazine's timeframe is freshly over$/ do
 end
 
 Given /^a very old magazine called "([^"]*)"$/ do |nickname|
-  Magazine.create(
+  mag = Magazine.create(
     accepts_submissions_from: 2.years.ago,
     accepts_submissions_until: 18.months.ago,
     nickname: nickname
@@ -121,4 +121,11 @@ Then /^each author should receive an email$/ do
   Submission.all.each do |sub|
     Then "\"#{sub.email}\" should receive an email"
   end
+end
+
+Then /^"([^"]*)" should be on page (\d) of (.*)$/ do |sub, page, mag|
+  sub = Submission.find_by_title sub
+  sub.page.to_s.should == page
+  page = sub.page
+  page.magazine.should == Magazine.find_by_nickname(mag)
 end

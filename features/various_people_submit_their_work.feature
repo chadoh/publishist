@@ -60,6 +60,8 @@ Feature: people of various ranks submit something
       | Body  | of Pirates  |
     And I press "Submit!"
     Then I should be on my profile page
+    And "editor@problemchildmag.com" should receive an email
+
     When "editor@problemchildmag.com" opens the email
     Then they should see "example@example.com <admin@problemchildmag.com>" in the email "From" header
     And they should see "example@example.com" in the email "Reply-To" header

@@ -98,6 +98,8 @@ class Magazine < ActiveRecord::Base
     title.presence || "the #{nickname} issue"
   end
 
+  class MagazineStillAcceptingSubmissionsError < StandardError; end
+
   def publish array_of_winners
     if self.accepts_submissions_until <= Time.now
       all_submissions = self.submissions
@@ -130,7 +132,7 @@ class Magazine < ActiveRecord::Base
           sub.update_attribute :position, i + 1
         end
       end
-      older_unpublished_magazines = Magazine.unpublished.where(accepts_submissions_from < self.accepts_submissions_from)
+      older_unpublished_magazines = Magazine.unpublished.where("accepts_submissions_from < ?", self.accepts_submissions_from)
       older_unpublished_magazines.each {|m| m.publish [] }
     else
       raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
@@ -149,10 +151,10 @@ class Magazine < ActiveRecord::Base
   end
 
   def page page_title
+    page_title = page_title.to_s
     if page_title.present?
       Page.find_by_magazine_id_and_title(self.id, page_title).presence || \
-      Page.find_by_magazine_id_and_position(self.id, page_title.to_i + 4).presence || \
-      self.pages.first
+      Page.find_by_magazine_id_and_position(self.id, page_title.to_i + 4).presence
     else
       self.pages.first
     end
