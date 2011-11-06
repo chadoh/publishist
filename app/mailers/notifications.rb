@@ -46,4 +46,21 @@ class Notifications < ActionMailer::Base
     end
   end
 
+  def we_published_a_magazine_a_while_ago(interested_individuals_email, magazine, array_of_her_submissions = [])
+    @email = interested_individuals_email
+    @magazine = magazine
+    @published = array_of_her_submissions.select{|s| s.state == :published }
+    @rejected  = array_of_her_submissions.select{|s| s.state == :rejected }
+    editor = Person.current_communicators.first
+
+    mail(
+      :to => @email,
+      :from => "#{editor.try(:name) || "The Editor"} <admin@problemchildmag.com>",
+      :reply_to => editor.try(:email) || "editor@problemchildmag.com",
+      :subject => "Problem Child's \"#@magazine\" can now be viewed online!"
+    ) do |format|
+      format.text
+      format.html
+    end
+  end
 end

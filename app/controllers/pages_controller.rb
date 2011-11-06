@@ -30,10 +30,10 @@ class PagesController < ApplicationController
   def add_submission
     submission = Submission.find params[:submission_id]
 
-    @page.submissions << submission
+    submission.update_attributes page: @page
     submission.move_to_top
 
-    if submission.page == page
+    if submission.reload.page == @page
       head :accepted
     else
       head :not_acceptable

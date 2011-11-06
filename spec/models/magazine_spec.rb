@@ -277,6 +277,17 @@ describe Magazine do
       @mag.notify_authors_of_published_magazine
       @mag.notification_sent?.should be_true
     end
+    it "uses the :we_published_a_magazine_a_while_ago notification if the magazine was published more than two months ago" do
+      a_magazine_has_just_finished
+      mock_mail = mock(:mail)
+      mock_mail.stub(:deliver)
+      @mag.publish [@sub2]
+      @mag.update_attributes published_on: 3.months.ago
+      [@sub, @sub2].each do |sub|
+        Notifications.should_receive(:we_published_a_magazine_a_while_ago).with(sub.email, @mag, [sub]).and_return(mock_mail)
+      end
+      @mag.notify_authors_of_published_magazine
+    end
   end
 
   describe "#published?" do

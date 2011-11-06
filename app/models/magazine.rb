@@ -145,7 +145,11 @@ class Magazine < ActiveRecord::Base
 
   def notify_authors_of_published_magazine
     self.submissions(:all).group_by(&:email).each do |author_email, her_submissions|
-      Notifications.delay.we_published_a_magazine(author_email, self, her_submissions)
+      if self.published_on >= 2.months.ago
+        Notifications.delay.we_published_a_magazine(author_email, self, her_submissions)
+      else
+        Notifications.delay.we_published_a_magazine_a_while_ago(author_email, self, her_submissions)
+      end
     end
     self.update_attributes notification_sent: true
   end

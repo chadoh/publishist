@@ -1,0 +1,31 @@
+*<%= title = @magazine %>* can now be browsed online!
+=<%= "=" * title.length             %>==========================
+
+Check it out! <%= magazine_url(@magazine) %>
+
+<% if @published.present? %>
+You may know this already, but you've been published in it!
+-----------------------------------------------------------
+
+<% for sub in @published %>
+* [<%= sanitize sub.to_s %>](<%= submission_url(sub) %>)
+<% end %>
+
+made it into this magazine!
+<% end %>
+
+<% if @rejected.present? %>
+Unfortunately, we can't publish everything, though.
+---------------------------------------------------
+
+<% for sub in @rejected %>
+* [<%= sanitize sub.to_s %>](<%= submission_url(sub) %>)
+<% end %>
+
+didn't make into this magazine. You can try editing and
+resubmitting. If you're close to State College, you
+should stop by a meeting or two to get a feel for what
+the Problem Child staff are into. Try stopping by when
+your submissions are being reviewed for some great, honest
+(blunt) feedback!
+<% end %>
