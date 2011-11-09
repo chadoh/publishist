@@ -52,7 +52,7 @@ Given /^a magazine has been published and I am viewing its cover$/ do
     :accepts_submissions_from  => date - 6.months
   )
   mag.publish []
-  visit "/magazines/#{mag.to_param}"
+  visit magazine_path(mag)
 end
 
 Given /^a magazine titled "([^"]*)" has been published$/ do |title|
@@ -128,4 +128,15 @@ Then /^"([^"]*)" should be on page (\d) of (.*)$/ do |sub, page, mag|
   sub.page.to_s.should == page
   page = sub.page
   page.magazine.should == Magazine.find_by_nickname(mag)
+end
+
+Given /^a magazine that has been 'published' but has not yet had the notification sent out to everyone$/ do
+  Magazine.create(
+    accepts_submissions_from: 6.months.ago,
+    accepts_submissions_until: 2.days.ago
+  ).publish []
+end
+
+Given /^that the magazine has its notification sent out$/ do
+  Magazine.first.update_attributes notification_sent: true
 end

@@ -1,4 +1,4 @@
-*<%= title = @magazine.present_name %>* has been published!
+*<%= title = @magazine.to_s %>* has been published!
 =<%= "=" * title.length             %>=====================
 
 Check it out! <%= magazine_url(@magazine) %>

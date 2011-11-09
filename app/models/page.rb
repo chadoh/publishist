@@ -24,6 +24,10 @@ class Page < ActiveRecord::Base
 
   acts_as_list scope: :magazine
 
+  def self.with_content
+    scoped.reject{|page| !page.has_content? }
+  end
+
   def title
     read_attribute(:title).presence || (self.position - 4).to_s
   end

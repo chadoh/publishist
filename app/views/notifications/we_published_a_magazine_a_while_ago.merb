@@ -1,4 +1,4 @@
-*<%= title = @magazine %>* can now be browsed online!
+*<%= title = @magazine.to_s %>* can now be browsed online!
 =<%= "=" * title.length             %>==========================
 
 Check it out! <%= magazine_url(@magazine) %>

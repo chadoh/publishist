@@ -28,7 +28,8 @@ Feature: an editor views the winners for a magazine and publish the magazine
     And I follow "View the highest-scored submissions"
     And no emails have been sent
     When I press "Publish checked submissions"
-    And I press "Let everyone who submitted know"
+
+    When I press "Let everyone who submitted know"
     Then each author should receive an email
     And I should be on the magazine's cover page
 

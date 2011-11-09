@@ -18,10 +18,16 @@ class MagazinesController < InheritedResources::Base
   end
 
   def show
-    if @magazine.published?
-      redirect_to magazine_page_url @magazine, @magazine.pages.first
+    if not resource.published?
+      redirect_to root_url, notice: "That issue hasn't been published yet!" and return
+    elsif not @magazine.notification_sent?
+      unless person_signed_in? && current_person.orchestrates?(@magazine, :or_adjacent)
+        flash[:notice] = "That hasn't been published yet, check back soon!"
+        redirect_to root_url and return
+      end
+      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first and return
     else
-      redirect_to action: :index
+      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first and return
     end
   end
 

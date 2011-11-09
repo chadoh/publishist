@@ -21,7 +21,7 @@ Feature: An editor organizes submissions onto pages of a magazine
 
   Scenario: I can remove a page from the magazine
     When I press "x"
-    Then I should see "Notes Staff ToC 0" for the page numbers
+    Then I should see "Cover Notes ToC 0" for the page numbers
 
   @pending
   @javascript
