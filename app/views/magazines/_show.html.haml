@@ -1,12 +1,15 @@
 %li[magazine]
   .cover-art
-    - if magazine.try(:cover_art?)
-      = link_to [magazine], class: 'img' do
-        = image_tag magazine.cover_art.url(:thumb), alt: ""
+    .img
+      - if magazine.viewable_by?(current_person, :or_adjacent)
+        = link_to [magazine] do
+          = image_tag magazine.cover_art.url(:thumb), alt: "" if magazine.cover_art?
+      - else
+        = image_tag magazine.cover_art.url(:thumb), alt: "" if magazine.cover_art?
     %header
       %h2
         = magazine.published? ? link_to(magazine, [magazine]) : magazine
-      = link_to "Browse online", [magazine]                               if magazine.published?
+      = link_to "Browse online", [magazine]                               if magazine.viewable_by?(current_person, :or_adjacent)
       = link_to "Download pdf",  magazine.pdf.url, 'data-target' => 'new' if magazine.pdf?
       = link_to "View meetings", meetings_path(m: magazine.id)            if views? magazine
       = link_to "Staff list",    staff_for_magazine_path(magazine)        if orchestrates? magazine, :or_adjacent

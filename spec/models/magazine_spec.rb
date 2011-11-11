@@ -253,7 +253,7 @@ describe Magazine do
       old_mag = Magazine.create accepts_submissions_from: 1.year.ago, accepts_submissions_until: 6.months.ago, nickname: "old"
       new_mag = Magazine.create accepts_submissions_from: 6.months.ago, accepts_submissions_until: Date.yesterday, nickname: "new"
       new_mag.publish []
-      old_mag.reload.should be_published
+      old_mag.reload.published_on.should_not be_nil
     end
 
     it "when called correctly destroys any positions that have the 'disappears' ability" do
@@ -297,8 +297,13 @@ describe Magazine do
       mag.should_not be_published
     end
 
-    it "returns true if the magazine has a published_on value" do
+    it "returns false if the magazine has a published_on value but :notificatin_sent == false" do
       mag.update_attribute :published_on, Date.today
+      mag.should_not be_published
+    end
+
+    it "returns true if the notification has been sent" do
+      mag.update_attributes published_on: Date.today, notification_sent: true
       mag.should be_published
     end
   end
@@ -361,7 +366,7 @@ describe Magazine do
 
     context "when the magazine has been published" do
       before do
-        @mag.update_attribute :published_on, Date.today
+        @mag.stub(:published?).and_return(true)
       end
       it "only returns published submissions" do
         @mag.submissions.should be_blank
@@ -371,6 +376,40 @@ describe Magazine do
       it "will return all the submissions if passed :all" do
         @mag.submissions(:all).should_not be_blank
       end
+    end
+  end
+
+  describe "#viewable_by?(person)" do
+    let(:mag) { Magazine.new accepts_submissions_until: Date.yesterday }
+    let(:per) { Factory.build :person }
+    it "returns false if the magazine has not been published" do
+      mag.stub(:published_on).and_return(false)
+      mag.should_not be_viewable_by(per)
+    end
+    it "returns false if the magazine has been published but no notification has been sent and the person does not have the orchestrates ability" do
+      mag.stub(:published_on).and_return(true)
+      per.stub(:orchestrates?).and_return(false)
+      mag.should_not be_viewable_by(per)
+    end
+    it "returns true if the magazine has been published even if no notification has been sent if the person has the orchestrates ability" do
+      mag.stub(:published_on).and_return(true)
+      per.stub(:orchestrates?).and_return(true)
+      mag.should be_viewable_by(per)
+    end
+    it "returns true if the mag has been published but no noti sent and the person orchestrates the mag BEFORE this one, if passed :or_adjacent" do
+      mag.stub(:published_on).and_return(true)
+      mag2 = Magazine.create accepts_submissions_until: 6.months.ago, accepts_submissions_from: 12.months.ago
+      mag2.publish([]).update_attribute :notification_sent, true
+      pos = mag2.positions.create name: "bum", abilities: [Ability.create(key: 'orchestrates', description: ":-I")]
+      per.save; per.positions << pos
+      Magazine.stub(:before).and_return(mag2)
+      per.stub(:orchestrates).with(mag2) { true }
+      mag.should be_viewable_by(per, :or_adjacent)
+    end
+    it "returns true regardless of the person if the magazine has been published and the notification has been sent" do
+      mag.stub(:published_on).and_return(true)
+      mag.stub(:notification_sent).and_return(true)
+      mag.should be_viewable_by(per)
     end
   end
 

@@ -487,14 +487,19 @@ ol.magazines
         +box-shadow(0 0 1em white)
         +border-radius(0.5em)
         padding: 0.5em
-      > a.img
+      > .img
         +opacity(1)
         width: 100%
         max-height: 100%
         padding: 0
         margin: -2px
         +box-shadow(0 0 0)
-        &, & > img
+        height: 100%
+        & > a
+          display: block
+          height: 100%
+          width: 100%
+        &, & > a, & > a > img
           +border-radius(0.5em)
       &:hover
         > *

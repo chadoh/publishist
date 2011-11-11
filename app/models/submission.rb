@@ -125,7 +125,7 @@ protected
   end
 
   def published_if_for_a_published_magazine
-    if !self.published? && self.magazine && self.magazine.published?
+    if !self.published? && self.magazine && self.magazine.published_on.present?
       self.state = :published
       self.magazine.pages.create unless self.magazine.page(1)
       self.page = self.magazine.page(1)

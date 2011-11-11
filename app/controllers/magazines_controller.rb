@@ -18,7 +18,7 @@ class MagazinesController < InheritedResources::Base
   end
 
   def show
-    if not resource.published?
+    if resource.published_on.blank?
       redirect_to root_url, notice: "That issue hasn't been published yet!" and return
     elsif not @magazine.notification_sent?
       unless person_signed_in? && current_person.orchestrates?(@magazine, :or_adjacent)

@@ -134,6 +134,7 @@ class Magazine < ActiveRecord::Base
       end
       older_unpublished_magazines = Magazine.unpublished.where("accepts_submissions_from < ?", self.accepts_submissions_from)
       older_unpublished_magazines.each {|m| m.publish [] }
+      self
     else
       raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
     end
@@ -187,7 +188,11 @@ class Magazine < ActiveRecord::Base
   end
 
   def published?
-    published_on.present?
+    published_on.present? && notification_sent?
+  end
+
+  def viewable_by? person, *args
+    self.published? || (self.published_on.present? && person.orchestrates?(self, *args))
   end
 
   memoize :average_score, :to_s
