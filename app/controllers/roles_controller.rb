@@ -11,10 +11,17 @@ class RolesController < InheritedResources::Base
   def create
     params[:role][:person] = Person.find_or_create(params[:role][:person])
     @role = Role.create params[:role]
+    logger.debug "@role = #@role; @role.valid? #{@role.valid?}"
     must_orchestrate @role, :or_adjacent
     respond_with(@role) do |wants|
       wants.html { redirect_to session[:return_to] }
-      wants.js
+      wants.js {
+        if @role.valid?
+          render :create
+        else
+          render :error
+        end
+      }
     end
   end
 
