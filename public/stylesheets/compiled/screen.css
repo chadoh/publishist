@@ -1899,7 +1899,7 @@ ol.magazines > li.magazine .cover-art > .img > a {
   width: 100%;
 }
 /* line 502, ../../../app/stylesheets/screen.sass */
-ol.magazines > li.magazine .cover-art > .img, ol.magazines > li.magazine .cover-art > .img > a, ol.magazines > li.magazine .cover-art > .img > a > img {
+ol.magazines > li.magazine .cover-art > .img, ol.magazines > li.magazine .cover-art > .img a, ol.magazines > li.magazine .cover-art > .img img {
   -moz-border-radius: 0.5em;
   -webkit-border-radius: 0.5em;
   -o-border-radius: 0.5em;

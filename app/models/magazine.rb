@@ -192,7 +192,7 @@ class Magazine < ActiveRecord::Base
   end
 
   def viewable_by? person, *args
-    self.published? || (self.published_on.present? && person.orchestrates?(self, *args))
+    self.published? || (self.published_on.present? && person.try(:orchestrates?, self, *args))
   end
 
   memoize :average_score, :to_s
