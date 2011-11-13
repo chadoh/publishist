@@ -169,6 +169,14 @@ footer.submission-details
     a.name
       +inline-block
       width: 85%
+  .actions
+    @extend .small
+    @extend .sans
+    position: absolute
+    right: 2em
+    bottom: 1.9em
+    > *
+      padding: 0 2px
 
 span.drag-handle-wrap
   display: none
@@ -196,7 +204,6 @@ ol.packlets, ul.submissions, ol.submissions
     span.drag-handle-wrap
       +drag-handle-expanded
   li.collapsed
-    position: static
     &.packlet
       list-style-type: decimal
     &.submission

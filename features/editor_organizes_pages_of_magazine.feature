@@ -23,6 +23,17 @@ Feature: An editor organizes submissions onto pages of a magazine
     When I press "x"
     Then I should see "Cover Notes ToC 0" for the page numbers
 
+  Scenario: I can unpublish submissions
+    Given I also have the "communicates" ability for the "Fruit Blots" magazine
+    When I follow "1"
+    Then I should see "Everyone Dies, Anyway"
+
+    When I press "ø"
+    Then "Everyone Dies, Anyway" should be rejected
+    And it should not be on a page
+    And it should not have a position
+    And I should be on page 1 of the magazine
+
   @pending
   @javascript
   Scenario: I can rename pages

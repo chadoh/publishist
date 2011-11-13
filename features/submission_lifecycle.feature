@@ -41,7 +41,7 @@ Feature: A poet's work goes from draft to published/rejected
     And "Los Colores" is scheduled for a meeting a week from now
     When I am on my profile page
     Then I should see "Queued"
-    And I should see "Edit" under "Los Colores"
+    And I should see "⚙" under "Los Colores"
     And I should see "Scheduled to be reviewed in"
 
     Given the "Los Colores" meeting is two hours away

@@ -3,10 +3,6 @@ When /^I follow "([^"]*)" under "([^"]*)"$/ do |link_text, heading|
   When %Q{I follow "#{link_text}" within "#{element}"}
 end
 
-Then /^"([^"]*)" should be submitted, not draft$/ do |title|
-  Submission.find_by_title(title).state.should == :submitted
-end
-
 Given /^I have drafted a poem called "([^"]*)"$/ do |title|
   @person.submissions.create :title => title,
                            :body => "Yes, I said it. #{title}!"
@@ -41,10 +37,15 @@ Given /^I have gone to the meeting and scored "([^"]*)"$/ do |title|
   submission.packlets.first.scores.create :amount => 6, :attendee => meeting.attendees.first
 end
 
-Then /^the submission should be submitted, not draft$/ do
-  Submission.first.state.should == :submitted
+Then /^(?:the submission|"([^"]*)") should be (submitted|published|rejected).*$/ do |title, state|
+  sub = title.present? ? Submission.find_by_title(title) : Submission.first
+  sub.state.should == state.to_sym
 end
 
-Then /^"([^"]*)" should be published$/ do |title|
-  Submission.find_by_title(title).state.should == :published
+Then /^it should not be on a page$/ do
+  Submission.first.page.should be_nil
+end
+
+Then /^it should not have a position$/ do
+  Submission.first.position.should be_nil
 end

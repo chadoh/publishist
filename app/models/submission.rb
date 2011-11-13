@@ -53,7 +53,8 @@ class Submission < ActiveRecord::Base
     :if           => Proc.new { |submission| submission.photo.file? },
     :message      => "must be an image"
 
-  before_save      :published_if_for_a_published_magazine
+  before_save      :published_if_for_a_published_magazine, unless: "state_was == Submission.state(:published)" # if being rejected
+  before_save      :no_page_or_position_if_rejected,       if:     "state_was == Submission.state(:published)" # if being rejected
   before_create    :set_position_to_nil
   after_find       :reviewed_if_meeting_has_occurred
   after_save       :notify_current_communicator_if_submitted
@@ -129,6 +130,13 @@ protected
       self.state = :published
       self.magazine.pages.create unless self.magazine.page(1)
       self.page = self.magazine.page(1)
+    end
+  end
+
+  def no_page_or_position_if_rejected
+    if self.rejected?
+      self.page = nil
+      self.position = nil
     end
   end
 

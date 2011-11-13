@@ -147,6 +147,23 @@ describe Submission do
     sub.page.to_s.should == '1'
   end
 
+  it "removes the page and the position when being rejected" do
+    sub = Factory.create :submission
+    mag = Magazine.create(
+      accepts_submissions_from:  6.months.ago,
+      accepts_submissions_until: Date.yesterday,
+      title: "Gone"
+    )
+    mag.publish [sub]
+    sub.reload.state.should == :published
+    sub.page.to_s.should == '1'
+    sub.position.should == 1
+    sub.update_attributes state: :rejected
+    sub.reload.state.should == :rejected
+    sub.page.should be_nil
+    sub.position.should be_nil
+  end
+
   it "sets the author_name field to 'anonymous' if there is no associated author" do
     sub = Submission.create :title => "some ugly cat", :author_email => "non@one.me"
     sub.author_name.should == "Anonymous"

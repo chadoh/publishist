@@ -18,7 +18,7 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
 
     when /my profile page/i
-      "/people/#{@person.friendly_id}"
+      "/people/#{@person.to_param}"
 
     when /the submit page/i
       "/submit"
@@ -28,6 +28,9 @@ module NavigationHelpers
 
     when /the magazine's staff page/i
       staff_for_magazine_path(Magazine.first)
+
+    when /page (.*) of the magazine/i
+      "/magazines/#{Magazine.first.to_param}/#{$1}"
 
     when /the first (.*) page/i
       model = $1.titleize.constantize

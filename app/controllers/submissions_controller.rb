@@ -85,13 +85,27 @@ class SubmissionsController < InheritedResources::Base
     set_params
     @submission.attributes = params[:submission]
 
-    update! {
-      if current_person.orchestrates?(:current) && params[:commit] != t('preview')
-        session[:return_to] || submissions_url
+    # update! {
+    #   if current_person.orchestrates?(:current) && params[:commit] != t('preview')
+    #     session[:return_to] || submissions_url
+    #   else
+    #     @submission.author ? person_url(resource.author) : submission_url(@submission)
+    #   end
+    # }
+    respond_with(@submission) do |format|
+      if @submission.save
+        format.html {
+          if @submission.published?
+            flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
+            redirect_to new_submission_url and return
+          else
+            redirect_to session[:return_to] || request.referer
+          end
+        }
       else
-        @submission.author ? person_url(resource.author) : submission_url(@submission)
+        format.html { render action: "edit" }
       end
-    }
+    end
   end
 
   def destroy

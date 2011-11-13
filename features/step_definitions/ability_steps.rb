@@ -57,3 +57,11 @@ Given /^I have the "([^"]+)" ability for the current magazine$/ do |key|
   @position = @magazine.positions.create name: 'Kitten', abilities: [@ability]
   @person.positions << @position
 end
+
+Given /^I also have the "([^"]+)" ability for the "([^"]+)" magazine$/ do |key, mag|
+  @person = Person.first
+  @magazine = Magazine.find_by_nickname mag
+  @ability = Ability.create key: key, description: "#{key}s stuff"
+  @position = @magazine.positions.create name: 'Kitten', abilities: [@ability]
+  @person.positions << @position
+end
