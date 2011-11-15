@@ -213,6 +213,28 @@ describe Submission do
       )
       @sub.author_name.should == person.name
     end
+
+    it "returns the pseudonym if there is one" do
+      person = Person.create name: 'Miriam Webster', email: 'example@example.com'
+      @sub = Submission.create(
+        :title  => ';-)',
+        :body   => 'he winks and smiles <br><br> both',
+        :author => person,
+        pseudonym: "St. Nicolai"
+      )
+      @sub.author_name.should == "St. Nicolai"
+    end
+
+    it "does not return the pseudonym if it is an empty string" do
+      person = Person.create name: 'Miriam Webster', email: 'example@example.com'
+      @sub = Submission.create(
+        :title  => ';-)',
+        :body   => 'he winks and smiles <br><br> both',
+        :author => person,
+        pseudonym: ""
+      )
+      @sub.author_name.should == person.name
+    end
   end
 
   describe "#average_score" do

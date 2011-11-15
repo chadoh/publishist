@@ -17,7 +17,7 @@ class People::SessionsController < Devise::SessionsController
   # end
 
   def new
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless begin URI(request.referer).path == "/sign_in" rescue false end
     super
   end
 

@@ -64,7 +64,7 @@ class Submission < ActiveRecord::Base
   scope :published, where(state: Submission.state(:published))
 
   def author_name
-    @author_name ||= author.try(:name) || self[:author_name]
+    @author_name ||= pseudonym.presence || author.try(:name) || self[:author_name]
   end
 
   def author_first

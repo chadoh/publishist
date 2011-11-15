@@ -90,3 +90,13 @@ Feature: people of various ranks submit something
     When "editor@problemchildmag.com" opens the email
     Then they should see "I'll never tell! <admin@problemchildmag.com>" in the email "From" header
     And they should see "someone@cool.com" in the email "Reply-To" header
+
+  Scenario: I submit under a psuedonym
+    Given I sign in
+    And I am on the new submission page
+    When I fill in the following:
+      | Title     | Merry Wives   |
+      | Body      | of Pirates    |
+      | Pseudonym | Jorgie Orwell |
+    And I press "Submit!"
+    Then I should see "Jorgie Orwell"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111024105831) do
+ActiveRecord::Schema.define(:version => 20111113152622) do
 
   create_table "abilities", :force => true do |t|
     t.string   "key"
@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(:version => 20111024105831) do
     t.integer  "page_id"
     t.integer  "position"
     t.integer  "magazine_id"
+    t.string   "pseudonym"
   end
 
   add_index "submissions", ["cached_slug"], :name => "index_submissions_on_cached_slug", :unique => true
@@ -212,5 +213,10 @@ ActiveRecord::Schema.define(:version => 20111024105831) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_foreign_key "position_abilities", "abilities", :name => "position_abilities_ability_id_fk"
+  add_foreign_key "position_abilities", "positions", :name => "position_abilities_position_id_fk"
+
+  add_foreign_key "submissions", "magazines", :name => "submissions_magazine_id_fk"
 
 end

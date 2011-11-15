@@ -5,7 +5,7 @@
     = sanitize submission.body
 %footer.submission-details
 
-  - if submission.published? || ((@show_author.nil? or @show_author) and (communicates_or_is_author?(submission) or params[:controller] == 'magazines'))
+  - if submission.published? || ((@show_author.nil? || @show_author) && (communicates_or_is_author?(submission) || params[:controller] == 'magazines'))
     %p.author
       - if communicates?(submission.magazine)
         = mail_to submission.email, submission.email, class: 'mailto'
