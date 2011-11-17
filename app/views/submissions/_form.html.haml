@@ -15,7 +15,7 @@
   = f.input :photo, :label => "Or, submit an image:"
   = f.input :state, :as => :hidden
   - if person_signed_in?
-    = f.input :pseudonym, label: "Pseudonym (if you'd like to obscure your identity for this one)"
+    = f.input :pseudonym_name, label: "Pseudonym (if you'd like to obscure your identity for this one)"
     - if communicates? :any
       = f.input :author,
         as:         :string,

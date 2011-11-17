@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111113152622) do
+ActiveRecord::Schema.define(:version => 20111116015113) do
 
   create_table "abilities", :force => true do |t|
     t.string   "key"
@@ -152,6 +152,14 @@ ActiveRecord::Schema.define(:version => 20111113152622) do
     t.datetime "updated_at"
   end
 
+  create_table "pseudonyms", :force => true do |t|
+    t.string   "name"
+    t.boolean  "link_to_profile", :default => true
+    t.integer  "submission_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roles", :force => true do |t|
     t.integer  "person_id"
     t.integer  "position_id"
@@ -203,7 +211,6 @@ ActiveRecord::Schema.define(:version => 20111113152622) do
     t.integer  "page_id"
     t.integer  "position"
     t.integer  "magazine_id"
-    t.string   "pseudonym"
   end
 
   add_index "submissions", ["cached_slug"], :name => "index_submissions_on_cached_slug", :unique => true
@@ -216,6 +223,8 @@ ActiveRecord::Schema.define(:version => 20111113152622) do
 
   add_foreign_key "position_abilities", "abilities", :name => "position_abilities_ability_id_fk"
   add_foreign_key "position_abilities", "positions", :name => "position_abilities_position_id_fk"
+
+  add_foreign_key "pseudonyms", "submissions", :name => "pseudonyms_submission_id_fk", :dependent => :delete
 
   add_foreign_key "submissions", "magazines", :name => "submissions_magazine_id_fk"
 

@@ -91,6 +91,7 @@ Feature: people of various ranks submit something
     Then they should see "I'll never tell! <admin@problemchildmag.com>" in the email "From" header
     And they should see "someone@cool.com" in the email "Reply-To" header
 
+  @wip
   Scenario: I submit under a psuedonym
     Given I sign in
     And I am on the new submission page

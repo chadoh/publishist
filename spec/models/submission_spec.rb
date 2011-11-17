@@ -193,6 +193,66 @@ describe Submission do
     sub.should be_valid
   end
 
+  describe "#pseudonym" do
+    it "retrieves an associated pseudonym, if there is one" do
+      person = Person.create name: 'Miriam Webster', email: 'example@example.com'
+      @sub = Submission.create(
+        :title  => ';-)',
+        :body   => 'he winks and smiles <br><br> both',
+        :author => person
+      )
+      pseud = Pseudonym.create name: "Cheese Winkle", submission_id: @sub.id
+      @sub.pseudonym.should == pseud
+    end
+  end
+  describe "#pseudonym_name" do
+    it "retrieves an associated pseudonym's name (if there is one)" do
+      sub = Factory.create :submission, pseudonym_name: "Pablo Honey"
+      sub.pseudonym_name.should == "Pablo Honey"
+    end
+  end
+  describe "#pseudonym_link" do
+    it "retrievs an associaoted pseudonym's :link_to_profile (if there is one)" do
+      sub = Factory.create :submission, pseudonym_name: "Pablo Honey"
+      sub.pseudonym_link.should == true
+    end
+  end
+  describe "pseudonym_name=(a_string)" do
+    it "creates a pseudonym with the given string as the name" do
+      person = Person.create name: 'Miriam Webster', email: 'example@example.com'
+      @sub = Submission.create(
+        title: ';-)',
+        body: 'he winks and smiles <br><br> both',
+        author: person,
+        pseudonym_name: "Merry Winkle"
+      )
+      @sub.reload.pseudonym.should == Pseudonym.first
+    end
+    it "updates an already-existent pseudonym with the new name" do
+      person = Person.create name: 'Miriam Webster', email: 'example@example.com'
+      @sub = Submission.create(
+        title: ';-)',
+        body: 'he winks and smiles <br><br> both',
+        author: person,
+        pseudonym_name: "Merry Winkle"
+      )
+      pseud1 = @sub.pseudonym
+      @sub.pseudonym_name = "Bratty Winkle"
+      @sub.pseudonym.reload.name.should == "Bratty Winkle"
+      @sub.pseudonym.id.should == pseud1.id
+    end
+  end
+  describe "#pseudonym_link=(a_boolean)" do
+    it "does not create a pseudonym if one doesn't exist already" do
+      @sub = Factory.create :submission, pseudonym_link: false
+      @sub.pseudonym.should be_nil
+    end
+    it "sets the link_to_profile for an associated pseudonym" do
+      @sub = Factory.create :submission, pseudonym_name: "PHC", pseudonym_link: false
+      @sub.pseudonym.link_to_profile.should be_false
+    end
+  end
+
   describe "#author_name" do
     it "returns the author_name field if there is no associated author" do
       @sub = Submission.create(
@@ -217,10 +277,10 @@ describe Submission do
     it "returns the pseudonym if there is one" do
       person = Person.create name: 'Miriam Webster', email: 'example@example.com'
       @sub = Submission.create(
-        :title  => ';-)',
-        :body   => 'he winks and smiles <br><br> both',
-        :author => person,
-        pseudonym: "St. Nicolai"
+        title:     ';-)',
+        body:      'he winks and smiles <br><br> both',
+        author:    person,
+        pseudonym_name: 'St. Nicolai'
       )
       @sub.author_name.should == "St. Nicolai"
     end
@@ -228,10 +288,10 @@ describe Submission do
     it "does not return the pseudonym if it is an empty string" do
       person = Person.create name: 'Miriam Webster', email: 'example@example.com'
       @sub = Submission.create(
-        :title  => ';-)',
-        :body   => 'he winks and smiles <br><br> both',
-        :author => person,
-        pseudonym: ""
+        title:          ';-)',
+        body:           'he winks and smiles <br><br> both',
+        author:         person,
+        pseudonym_name: ''
       )
       @sub.author_name.should == person.name
     end
@@ -266,6 +326,14 @@ describe Submission do
       @packlet.scores.create :attendee => meeting.attendees.first, :amount => 8
       @packlet.scores.create :attendee => meeting.attendees.last , :amount => 6
       @submission.average_score.should == 6
+    end
+  end
+
+  describe "#destroy" do
+    it "destroys associated pseudonym (if there is one)" do
+      @sub = Factory.create :submission, pseudonym_name: "Pablo Honey"
+      @sub.destroy
+      Pseudonym.count.should == 0
     end
   end
 

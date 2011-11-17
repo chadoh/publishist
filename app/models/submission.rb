@@ -30,6 +30,7 @@ class Submission < ActiveRecord::Base
   has_many :packlets, dependent: :destroy
   has_many :meetings, through: :packlets
   has_many :scores,   through: :packlets
+  has_one  :pseudonym, dependent: :destroy
   has_attached_file :photo,
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
@@ -64,7 +65,24 @@ class Submission < ActiveRecord::Base
   scope :published, where(state: Submission.state(:published))
 
   def author_name
-    @author_name ||= pseudonym.presence || author.try(:name) || self[:author_name]
+    @author_name ||= pseudonym.try(:name).presence || author.try(:name) || self[:author_name]
+  end
+
+  def pseudonym_name
+    self.pseudonym.try(:name)
+  end
+  def pseudonym_link
+    self.pseudonym.try(:link_to_profile)
+  end
+  def pseudonym_name=(a_string)
+    if self.pseudonym
+      self.pseudonym.update_attributes name: a_string
+    else
+      self.pseudonym = Pseudonym.create name: a_string
+    end
+  end
+  def pseudonym_link=(a_boolean)
+    self.pseudonym.update_attributes link_to_profile: a_boolean if self.pseudonym
   end
 
   def author_first
