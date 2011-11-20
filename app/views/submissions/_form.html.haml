@@ -16,6 +16,10 @@
   = f.input :state, :as => :hidden
   - if person_signed_in?
     = f.input :pseudonym_name, label: "Pseudonym (if you'd like to obscure your identity for this one)"
+    = f.input :pseudonym_link,
+      label: "Link this pseudonym to your profile as if it were your real name",
+      hint: "(If you only want to <em>partially</em> obscure your identity for this one.)".html_safe,
+      as: :boolean
     - if communicates? :any
       = f.input :author,
         as:         :string,
@@ -79,6 +83,16 @@
       cloptions.controls = "bold italic underline strikethrough subscript superscript | " +
           "pastetext source"
       $("#submission_title").cleditor(cloptions);
+
+      if ($("#submission_pseudonym_name").val() == '') {
+        $("#submission_pseudonym_link").closest('div').hide(); }
+      $("#submission_pseudonym_name").keyup(function(){
+        var val = $(this).val();
+        if ( !(val.match(/^\s*$/)) && !(val == '')) {
+          $("#submission_pseudonym_link").closest('div').slideDown(); }
+        else {
+          $("#submission_pseudonym_link").closest('div').slideUp(); }
+      });
 
     });
 

@@ -91,8 +91,7 @@ Feature: people of various ranks submit something
     Then they should see "I'll never tell! <admin@problemchildmag.com>" in the email "From" header
     And they should see "someone@cool.com" in the email "Reply-To" header
 
-  @wip
-  Scenario: I submit under a psuedonym
+  Scenario: I submit under a psuedonym linked to my profile
     Given I sign in
     And I am on the new submission page
     When I fill in the following:
@@ -100,4 +99,27 @@ Feature: people of various ranks submit something
       | Body      | of Pirates    |
       | Pseudonym | Jorgie Orwell |
     And I press "Submit!"
+    Then I should be on my profile page
     Then I should see "Jorgie Orwell"
+
+    When I follow "Merry Wives"
+    Then I should see that "Jorgie Orwell" is a link
+
+  Scenario: I submit under a psuedonym that is not linked to my profile
+    Given I sign in
+    And I am on the new submission page
+    When I fill in the following:
+      | Title     | Merry Wives   |
+      | Body      | of Pirates    |
+      | Pseudonym | Jorgie Orwell |
+    And I uncheck "Link"
+    And I press "Submit!"
+    Then I should see "Merry Wives"
+
+    When I follow "Merry Wives"
+    Then I should see that "Jorgie Orwell" is not a link
+
+  Scenario: Someone has work published under an unlinked pseudonym
+    Given "Candace" has a published poem called "Wunderdog" under an unlinked pseudonym
+    When I am on Candace's profile page
+    Then I should not see "Wunderdog"

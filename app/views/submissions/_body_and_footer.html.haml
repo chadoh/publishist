@@ -10,7 +10,8 @@
       - if communicates?(submission.magazine)
         = mail_to submission.email, submission.email, class: 'mailto'
       - if !!submission.author
-        = link_to_unless_current submission.author_name, person_path(submission.author), class: 'name'
+        = link_to_if !current_page?(submission.author) && submission.pseudonym_link,
+            submission.author_name, submission.author, class: 'name'
       - else
         = submission.author_name
 

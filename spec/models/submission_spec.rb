@@ -216,6 +216,10 @@ describe Submission do
       sub = Factory.create :submission, pseudonym_name: "Pablo Honey"
       sub.pseudonym_link.should == true
     end
+    it "defaults to 'true' if there is no pseudonym yet" do
+      sub = Factory.create :submission
+      sub.pseudonym_link.should == true
+    end
   end
   describe "pseudonym_name=(a_string)" do
     it "creates a pseudonym with the given string as the name" do
@@ -241,6 +245,14 @@ describe Submission do
       @sub.pseudonym.reload.name.should == "Bratty Winkle"
       @sub.pseudonym.id.should == pseud1.id
     end
+    it "does not cause problems when updating a submission with no pseudonym" do
+      sub = Factory.create :submission, pseudonym_name: ""
+      sub.pseudonym.should be_nil
+      Pseudonym.count.should == 0
+      sub.update_attributes title: "haheho", pseudonym_name: ""
+      sub.title.should == "haheho"
+      sub.pseudonym.should be_nil
+    end
   end
   describe "#pseudonym_link=(a_boolean)" do
     it "does not create a pseudonym if one doesn't exist already" do
@@ -250,6 +262,11 @@ describe Submission do
     it "sets the link_to_profile for an associated pseudonym" do
       @sub = Factory.create :submission, pseudonym_name: "PHC", pseudonym_link: false
       @sub.pseudonym.link_to_profile.should be_false
+    end
+    it "overrides the link_to_profile for an associated pseudonym, if the submission is being updated" do
+      sub = Factory.create :submission, pseudonym_name: "PHC"
+      sub.update_attributes pseudonym_link: false
+      sub.reload.pseudonym_link.should be_false
     end
   end
 

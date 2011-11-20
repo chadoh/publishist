@@ -22,6 +22,8 @@ class PeopleController < InheritedResources::Base
       @scored    = submissions.where :state => Submission.state(:scored)
       @drafts    = submissions.where :state => Submission.state(:draft)
       @rejected  = submissions.where :state => Submission.state(:rejected)
+    else
+      @published = @published.select{|s| s.pseudonym_link }
     end
   end
 

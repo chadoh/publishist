@@ -657,16 +657,21 @@ input[type=submit].link:focus, button.link:focus {
   outline: thin dotted;
 }
 
-/* line 364, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
+/* line 365, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
+span.hint {
+  display: block;
+}
+
+/* line 368, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
 form.button_to {
   display: inline;
 }
-/* line 366, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
+/* line 370, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
 form.button_to div {
   display: inline;
 }
 
-/* line 370, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
+/* line 374, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
 span[contenteditable]:hover {
   background-color: #e0ca44;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e7d770), color-stop(100%, #e0ca44));
@@ -677,7 +682,7 @@ span[contenteditable]:hover {
   background: linear-gradient(#e7d770, #e0ca44);
   cursor: pointer;
 }
-/* line 374, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
+/* line 378, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
 span[contenteditable]:focus {
   background-color: #e7a863;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eec18f), color-stop(100%, #e7a863));
@@ -693,11 +698,11 @@ span[contenteditable]:focus {
   box-shadow: silver 0 0 3px inset;
 }
 
-/* line 386, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
+/* line 390, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
 .grayed-out {
   color: silver;
 }
-/* line 383, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
+/* line 387, /Users/chad/Code/pc/app/stylesheets/_defaults.sass */
 .grayed-out a, .grayed-out input.link, .grayed-out input {
   color: silver;
 }

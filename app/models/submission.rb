@@ -72,17 +72,23 @@ class Submission < ActiveRecord::Base
     self.pseudonym.try(:name)
   end
   def pseudonym_link
-    self.pseudonym.try(:link_to_profile)
+    if self.pseudonym
+      self.pseudonym.link_to_profile
+    else
+      true
+    end
   end
   def pseudonym_name=(a_string)
     if self.pseudonym
       self.pseudonym.update_attributes name: a_string
-    else
+    elsif a_string.present?
       self.pseudonym = Pseudonym.create name: a_string
     end
   end
   def pseudonym_link=(a_boolean)
-    self.pseudonym.update_attributes link_to_profile: a_boolean if self.pseudonym
+    if self.pseudonym
+      self.pseudonym.update_attributes link_to_profile: a_boolean
+    end
   end
 
   def author_first

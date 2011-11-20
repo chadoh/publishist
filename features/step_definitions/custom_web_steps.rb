@@ -22,6 +22,16 @@ Then /^I should not see my name under "([^"]*)"$/ do |heading|
   find("##{heading.parameterize('_')}").should have_no_content(@person.name)
 end
 
+Then /^I should see that "([^"]*)" is not a link$/ do |text|
+  page.should have_content(text)
+  page.should_not have_css('a', text: text)
+end
+
+Then /^I should see that "([^"]*)" is a link$/ do |text|
+  page.should have_content(text)
+  page.should have_css('a', text: text)
+end
+
 Then /^(?:|I )should see a "([^"]*)" link$/ do |text|
   find("a", :text => text)
 end

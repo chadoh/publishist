@@ -162,6 +162,7 @@ li.submission, li.packlet, section.submission
 footer.submission-details
   +leader
   +trailer
+  position: relative
   p, span
     +trailer(0)
     +grayed-out
@@ -173,8 +174,8 @@ footer.submission-details
     @extend .small
     @extend .sans
     position: absolute
-    right: 2em
-    bottom: 1.9em
+    right: 1em
+    bottom: 0
     > *
       padding: 0 2px
 
