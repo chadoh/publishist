@@ -364,9 +364,10 @@ describe Magazine do
       @mag.submissions.should_not include(sub)
     end
 
-    context "when the magazine has been published" do
+    context "when the notification has been sent but the magazine hasn't even been FULLY published" do
       before do
-        @mag.stub(:published?).and_return(true)
+        @mag.stub(:published?).and_return(false)
+        @mag.stub(:published_on).and_return(Date.yesterday)
       end
       it "only returns published submissions" do
         @mag.submissions.should be_blank

@@ -20,17 +20,14 @@ end
 
 Given /^scores have been entered for a meeting$/ do
   meeting = first_meeting
-  submiss = Submission.create title: "we the", body: "people", author_email: "example@example.com"
+  submiss = Factory.create :submission
   packlet = meeting.packlets.create :submission => submiss
   attende = meeting.attendees.create :person => @user
   packlet.scores.create :amount => 6, :attendee => attende
 end
 
 Given /^there is a submission called "([^"]*)" scheduled for the first meeting$/ do |title|
-  submission = Submission.create(
-    :title => title,
-    :body => "Yes, I said it. #{title}.",
-    :author_email => "chad@chadoh.com")
+  submission = Factory.create :submission, title: title
   meeting = first_meeting
   Packlet.create(
     :meeting => meeting,

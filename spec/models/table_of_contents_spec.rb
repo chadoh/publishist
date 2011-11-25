@@ -7,8 +7,8 @@ describe TableOfContents do
       :accepts_submissions_until => 1.week.ago,
       :nickname                  => "Fruit Blots"
     )
-    @submission  = Factory.create(:submission)
-    @submission2 = Factory.create(:submission_with_signed_in_author)
+    @submission  = Factory.create :submission, pseudonym_name: "Karis", pseudonym_link: false
+    @submission2 = Factory.create :submission
     @meeting     = Meeting.create(datetime: 2.weeks.ago, question: "orly?")
     @meeting.submissions << [@submission, @submission2]
     @magazine.publish [@submission, @submission2]
@@ -22,10 +22,10 @@ describe TableOfContents do
   }
 
   describe "#hash" do
-    it "constructs a hash with each submission, its page, & its author_name or author object" do
+    it "constructs a hash with each submission & its page" do
       hash = @table_of_contents.hash
-      hash[@submission].should == { author: @submission.author_name, page: @submission.page }
-      hash[@submission2].should == { author: @submission2.author, page: @submission2.page }
+      hash[@submission].should == { page: @submission.page }
+      hash[@submission2].should == { page: @submission2.page }
     end
   end
 

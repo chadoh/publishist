@@ -5,63 +5,52 @@ describe "Notifications mailer" do
   include EmailSpec::Matchers
   include Rails.application.routes.url_helpers
 
-  describe "#new_submission" do
-    before :all do
-      @submission = Submission.create(
-        :title => 'mehrrrow <strong>ROAR!</strong>',
-        :body => "He's the fairest of 10,000 to my <sup>soul</sup>",
-        :author_email => 'froyo@doyo.net'
-      )
-      @email = Notifications.new_submission(@submission)
-    end
+  describe "#submitted_while_not_signed_in" do
+    let(:submission) { Factory.build(:submission) }
+    let(:email)      { Notifications.submitted_while_not_signed_in(submission) }
 
-    subject { @email }
-    it {
-      should have_body_text(@submission.title)
-      should have_subject(/mehrrrow ROAR!/)
-      should be_multipart
-    }
+    subject { email }
+
+    it { should be_multipart }
+    it { should have_subject 'Someone (hopefully you!) submitted to Problem Child for you!' }
+    it { should deliver_from '<admin@problemchildmag.com>' }
+    it { should have_reply_to 'editor@problemchildmag.com' }
+    it { should deliver_to submission.author_email }
+    it { should have_body_text "problemchildmag.com#{person_path(submission.author)}" }
+  end
+
+  describe "#new_submission" do
+    let(:submission) { Factory.create :submission }
+    let(:email)      { Notifications.new_submission(submission) }
+
+    subject { email }
+
+    it { should have_body_text(submission.title) }
+    it { should have_subject /#{submission.title}/ }
+    it { should be_multipart }
   end
 
   describe "#we_published_a_magazine" do
-    before :all do
-      @submission = Submission.create(
-        :title => 'mehrrrow <strong>ROAR!</strong>',
-        :body => "He's the fairest of 10,000 to my <sup>soul</sup>",
-        :author_email => 'froyo@doyo.net',
-        :state => Submission.state(:published)
-      )
-      @magazine = Magazine.create
-      @meeting = Meeting.create(:question => "orly?", :datetime => 1.week.from_now)
-      @email = Notifications.we_published_a_magazine(@submission.email, @magazine, [@submission])
-    end
+    let(:submission) { Factory.create :submission, state: :published }
+    let(:magazine)   { Magazine.create }
+    let(:email)      { Notifications.we_published_a_magazine(submission.email, magazine, [submission]) }
 
-    subject { @email }
-    it {
-      should be_multipart
-      should have_body_text "mehrrrow ROAR!"
-      should have_body_text "problemchildmag.com#{submission_path(@submission)}"
-    }
+    subject { email }
+
+    it { should be_multipart }
+    it { should have_body_text submission.title }
+    it { should have_body_text "problemchildmag.com#{submission_path(submission)}" }
   end
 
   describe "#we_published_a_magazine_a_while_ago" do
-    before :all do
-      @submission = Submission.create(
-        :title => 'mehrrrow <strong>ROAR!</strong>',
-        :body => "He's the fairest of 10,000 to my <sup>soul</sup>",
-        :author_email => 'froyo@doyo.net',
-        :state => Submission.state(:published)
-      )
-      @magazine = Magazine.create
-      @meeting = Meeting.create(:question => "orly?", :datetime => 1.week.from_now)
-      @email = Notifications.we_published_a_magazine_a_while_ago(@submission.email, @magazine, [@submission])
-    end
+    let(:submission) { Factory.create :submission, state: :published }
+    let(:magazine)   { Magazine.create }
+    let(:email)      { Notifications.we_published_a_magazine_a_while_ago(submission.email, magazine, [submission]) }
 
-    subject { @email }
-    it {
-      should be_multipart
-      should have_body_text "mehrrrow ROAR!"
-      should have_body_text "problemchildmag.com#{submission_path(@submission)}"
-    }
+    subject { email }
+
+    it { should be_multipart }
+    it { should have_body_text submission.title }
+    it { should have_body_text "problemchildmag.com#{submission_path(submission)}" }
   end
 end

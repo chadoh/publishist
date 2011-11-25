@@ -1,14 +1,14 @@
 Given /^the following users? exists?:$/ do |table|
   table.rows_hash.each do |name, email|
     first_name, last_name = name.split(' ')
-    @person = Person.create(
+    person = Person.create(
       :first_name            => first_name,
       :last_name             => last_name,
       :email                 => email,
       :password              => "password",
       :password_confirmation => "password"
     )
-    @person.confirm!
+    person.confirm!
   end
 end
 

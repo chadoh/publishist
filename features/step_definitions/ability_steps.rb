@@ -47,7 +47,7 @@ Given /^I'm in a position for the current magazine with the "([^"]+)" and "([^"]
 end
 
 Given /^I have the "([^"]+)" ability for the current magazine$/ do |key|
-  @person = Person.first
+  @person ||= Person.first
   @magazine = Magazine.create(
     title: 'Awesome Mag',
     accepts_submissions_from:  3.months.ago,
@@ -59,7 +59,6 @@ Given /^I have the "([^"]+)" ability for the current magazine$/ do |key|
 end
 
 Given /^I also have the "([^"]+)" ability for the "([^"]+)" magazine$/ do |key, mag|
-  @person = Person.first
   @magazine = Magazine.find_by_nickname mag
   @ability = Ability.create key: key, description: "#{key}s stuff"
   @position = @magazine.positions.create name: 'Kitten', abilities: [@ability]

@@ -5,6 +5,23 @@ class Notifications < ActionMailer::Base
   helper :application
   include ActionView::Helpers::SanitizeHelper
 
+  def submitted_while_not_signed_in(submission)
+    @title           = submission.title
+    @author_email    = submission.author_email
+    @profile_url     = person_url(submission.author)
+    @editor          = Person.current_communicators.first
+
+    mail(
+      :to       => @author_email,
+      :from     => "#{@editor.try(:name)} <#{ENV['ADMIN_EMAIL'] || "admin@problemchildmag.com"}>",
+      :reply_to => @editor.try(:email) || ENV['EDITOR_EMAIL'],
+      :subject  => "Someone (hopefully you!) submitted to Problem Child for you!"
+    ) do |format|
+      format.text
+      format.html
+    end
+  end
+
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -18,7 +35,7 @@ class Notifications < ActionMailer::Base
     @url = submission_url(submission)
 
     mail(
-      :to       => ENV['EDITOR_EMAIL'] || Person.current_communicators.first.email,
+      :to       => Person.current_communicators.first.try(:email) || ENV['EDITOR_EMAIL'],
       :from     => "#{submission.author_name} <#{ENV['ADMIN_EMAIL'] || "admin@problemchildmag.com"}>",
       :reply_to => submission.email,
       :subject  => "Submission: \"#{strip_tags(@title)}\" by #{@author}"

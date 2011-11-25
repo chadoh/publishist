@@ -10,15 +10,6 @@ describe Submission do
     should belong_to :magazine
   }
 
-  describe "#title" do
-    it "cannot be more than 255 characters" do
-      sub = Submission.new title: 'x'*256, body: 'oooh, yeah.', author_email: "bob@example.com"
-      sub.should have(1).error_on(:title)
-      sub.title = 'x'*255
-      sub.should be_valid
-    end
-  end
-
   it "sets queued submissions to reviewed if their meeting is less than three hours in the future" do
     meeting = Factory.create :meeting
     submission = Factory.create :submission
@@ -57,7 +48,7 @@ describe Submission do
 
     context "when submitting" do
       it "sends an email to the editor, by default" do
-        sub = Factory.create :submission
+        sub = Factory.create :submission, state: :draft
         mock_mail = mock(:mail)
         mock_mail.stub(:deliver)
         Notifications.should_receive(:new_submission).with(sub).and_return(mock_mail)
@@ -65,7 +56,7 @@ describe Submission do
       end
 
       it "sends no email, if it was submitted by the editor" do
-        sub = Factory.create :submission
+        sub = Factory.create :submission, state: :draft
         Person.should_receive(:current_communicators).and_return(["Blimey, Tim!"])
         Notifications.should_not_receive(:new_submission)
         sub.has_been :submitted, :by => "Blimey, Tim!"
@@ -114,7 +105,7 @@ describe Submission do
 
   describe "#position" do
     it "defaults to nil" do
-      sub = Submission.create title: 'boring', body: 'poem', author_email: "no@example.com"
+      sub = Factory.create :submission
       sub.reload.position.should be_nil
     end
   end
@@ -135,7 +126,36 @@ describe Submission do
     end
   end
 
-  it "sets the state to 'published' if the magazine has already been published" do
+  context "when submitting for a magazine that has already been published" do
+    it "sets the state to 'published' if changed to a magazine that has already been published" do
+      mag = Magazine.create(
+        accepts_submissions_from:  6.months.ago,
+        accepts_submissions_until: Date.yesterday,
+        title: "Gone"
+      )
+      mag.publish []
+      sub = Factory.create :submission, magazine: mag
+      sub.reload.should be_published
+      sub.page.to_s.should == '1'
+    end
+
+    it "does not set the state to 'published' if the submission had already been for this magazine" do
+      mag = Magazine.create(
+        accepts_submissions_from:  6.months.ago,
+        accepts_submissions_until: Date.yesterday,
+        title: "Gone"
+      )
+      sub = Factory.create :submission, magazine: mag
+      mag.publish []
+      sub.reload.should be_rejected
+      sub.save
+      sub.should be_rejected
+      sub.page.should be_nil
+      sub.position.should be_nil
+    end
+  end
+
+  it "sets the page and position if the submission is published" do
     mag = Magazine.create(
       accepts_submissions_from:  6.months.ago,
       accepts_submissions_until: Date.yesterday,
@@ -143,8 +163,23 @@ describe Submission do
     )
     mag.publish []
     sub = Factory.create :submission, magazine: mag
-    sub.reload.state.should == :published
-    sub.page.to_s.should == '1'
+    sub.update_attributes page: nil, position: nil
+    sub.page.should_not be_nil
+    sub.position.should_not be_nil
+  end
+
+  it "does not override page and position if already set" do
+    mag = Magazine.create(
+      accepts_submissions_from:  6.months.ago,
+      accepts_submissions_until: Date.yesterday,
+      title: "Gone"
+    )
+    mag.publish []
+    sub = Factory.create :submission, magazine: mag
+    page = mag.pages.create
+    sub.page = page
+    sub.save
+    sub.page.should == page
   end
 
   it "removes the page and the position when being rejected" do
@@ -164,25 +199,16 @@ describe Submission do
     sub.position.should be_nil
   end
 
-  it "sets the author_name field to 'anonymous' if there is no associated author" do
-    sub = Submission.create :title => "some ugly cat", :author_email => "non@one.me"
-    sub.author_name.should == "Anonymous"
-  end
-
-  it "verifies that there is either an associated author or an author_email" do
+  it "verifies that there is an associated author" do
     sub = Submission.new :title => "Marvin eats an ice cream cone"
     sub.should_not be_valid
 
-    sub.author_email = "marvin@gmail.mars"
-    sub.should be_valid
-
-    sub.author_email = nil
     sub.author = Factory.create :person
     sub.should be_valid
   end
 
   it "verifies that there is either a title or a body" do
-    sub = Submission.new :author_email => "samwell@gamgee.net"
+    sub = Submission.new author: Factory.create(:person)
     sub.should_not be_valid
 
     sub.title = "Who, me?"
@@ -271,14 +297,9 @@ describe Submission do
   end
 
   describe "#author_name" do
-    it "returns the author_name field if there is no associated author" do
-      @sub = Submission.create(
-        :title => ';-)',
-        :body => 'he winks and smiles <br><br> both',
-        :author_email => 'me@you.com',
-        :author_name => "Smeagul Rabbit"
-      )
-      @sub.author_name.should == "Smeagul Rabbit"
+    it "returns blank, if there is no associated author (for new submissions)" do
+      @sub = Submission.new
+      @sub.author_name.should == ''
     end
 
     it "returns the associated author's name if there is an associated author" do
@@ -311,6 +332,113 @@ describe Submission do
         pseudonym_name: ''
       )
       @sub.author_name.should == person.name
+    end
+  end
+
+  describe "#author_email" do
+    it "returns the associated author's email" do
+      sub = Factory.create :submission
+      person = sub.author
+      sub.author_email.should == person.email
+    end
+    it "returns blank if there's no associated author (a new submission)" do
+      sub = Submission.new
+      sub.author_email.should == ''
+    end
+  end
+
+  describe "#author_name=" do
+    it "sets an attribute that is not written to the database" do
+      sub = Factory.create :submission, author_name: 'Pablo Honey'
+      sub.author_name.should == 'Pablo Honey'
+      sub.should == Submission.first
+      Submission.first.author_name.should_not == 'Pablo Honey'
+    end
+  end
+  describe "#author_email=" do
+    it "sets an attribute that is not written to the database" do
+      sub = Factory.create :submission, author_email: 'phc@example.com'
+      sub.author_email.should == 'phc@example.com'
+      sub.should == Submission.first
+      Submission.first.author_email.should_not == 'phc@example.com'
+    end
+  end
+  describe "#author=" do
+    it "sets the author from the given person" do
+      person = Factory.create :person
+      sub = Submission.new title: 'this', body: 'that'
+      sub.author = person
+      sub.save
+      sub.author.should == person
+    end
+  end
+
+  context "when not passed an author" do
+    it "creates a person from a present author_name and author_email" do
+      sub = Submission.create(
+        title: 'this',
+        body:  'that',
+        author_name: 'Pablo Honey',
+        author_email: 'phc@example.com'
+      )
+      person = sub.author
+      person.name.should == 'Pablo Honey'
+      person.email.should == 'phc@example.com'
+    end
+    context "but the given author_email already belongs to someone" do
+      let(:person) { Factory.create :person }
+
+      it "associates the submission with that someone" do
+        sub = Submission.create(
+          title: 'this',
+          body:  'that',
+          author_name: person.name,
+          author_email: person.email
+        )
+        sub.author.should == person
+      end
+      it "sets the pseudonym from the author_name, if different from that someone's name" do
+        sub = Submission.create(
+          title: 'this',
+          body:  'that',
+          author_name: "Dan Deacon",
+          author_email: person.email
+        )
+        sub.pseudonym.to_s.should == "Dan Deacon"
+      end
+    end
+    it "emails the author_email to let them know that someone submitted for them" do
+      sub = Submission.new(
+        title: 'this',
+        body:  'that',
+        author_name: 'Pablo Honey',
+        author_email: 'phc@example.com'
+      )
+      mock_mail = mock(:mail)
+      mock_mail.stub(:deliver)
+      Notifications.should_receive(:submitted_while_not_signed_in).with(sub).and_return(mock_mail)
+      sub.save
+    end
+    it "associates the submission with the author having the given author_name" do
+      person = Factory.create :person
+    end
+    it "gives an error if author_name isn't present" do
+      sub = Submission.create(
+        title: 'this',
+        body:  'that',
+        author_name: '',
+        author_email: 'phc@example.com'
+      )
+      sub.should_not be_valid
+    end
+    it "gives an error if author_email isn't present" do
+      sub = Submission.create(
+        title: 'this',
+        body:  'that',
+        author_email: '',
+        author_email: 'phc@example.com'
+      )
+      sub.should_not be_valid
     end
   end
 
@@ -365,7 +493,82 @@ describe Submission do
     it "does not override the magazine if it's already set" do
       mg1 = Factory.create :magazine
       mg2 = Factory.create :magazine
-      sub = Submission.create title: "margeret", body: "tatcher", author_email: "ex@mple.com", magazine: mg1
+      sub = Submission.create title: "margeret", body: "tatcher", author: Factory.create(:person), magazine: mg1
+      Magazine.stub(:current).and_return(mg2)
+      sub.reload.magazine.should == mg1
+    end
+    it "gives an error if author_name isn't present" do
+      sub = Submission.create(
+        title: 'this',
+        body:  'that',
+        author_name: '',
+        author_email: 'phc@example.com'
+      )
+      sub.should_not be_valid
+    end
+    it "gives an error if author_email isn't present" do
+      sub = Submission.create(
+        title: 'this',
+        body:  'that',
+        author_email: '',
+        author_email: 'phc@example.com'
+      )
+      sub.should_not be_valid
+    end
+  end
+
+  describe "#average_score" do
+    before :each do
+      @magazine = Factory.create :magazine
+      @meeting = @magazine.meetings.create datetime: Time.now
+      @submission = Factory.create :submission
+      @person = Factory.create :person
+      @person2 = Factory.create :person
+
+      @meeting.people = [@person, @person2]
+      @meeting.update_attributes :magazine => @magazine
+      @packlet = @meeting.packlets.create :submission => @submission
+
+      @packlet.scores.create :attendee => @meeting.attendees.first, :amount => 4
+      @packlet.scores.create :attendee => @meeting.attendees.last , :amount => 6
+    end
+
+    it "returns the average score for the submission" do
+      @submission.average_score.should == 5
+    end
+
+    it "returns the average score even if the submission was reviewed at multiple meetings" do
+      meeting = Factory.create :meeting
+      meeting.people = [@person, @person2]
+      meeting.update_attributes :magazine => @magazine
+      @packlet = meeting.packlets.create :submission => @submission
+
+      @packlet.scores.create :attendee => meeting.attendees.first, :amount => 8
+      @packlet.scores.create :attendee => meeting.attendees.last , :amount => 6
+      @submission.average_score.should == 6
+    end
+  end
+
+  describe "#destroy" do
+    it "destroys associated pseudonym (if there is one)" do
+      @sub = Factory.create :submission, pseudonym_name: "Pablo Honey"
+      @sub.destroy
+      Pseudonym.count.should == 0
+    end
+  end
+
+  describe "#magazine" do
+    it "defaults to the current magazine" do
+      mg1 = Factory.build :magazine
+      mg2 = Factory.build :magazine
+      Magazine.stub(:current).and_return(mg1)
+      sub = Submission.new
+      sub.magazine.should == mg1
+    end
+    it "does not override the magazine if it's already set" do
+      mg1 = Factory.create :magazine
+      mg2 = Factory.create :magazine
+      sub = Submission.create title: "margeret", body: "tatcher", author: Factory.create(:person), magazine: mg1
       Magazine.stub(:current).and_return(mg2)
       sub.reload.magazine.should == mg1
     end

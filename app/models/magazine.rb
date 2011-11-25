@@ -69,7 +69,11 @@ class Magazine < ActiveRecord::Base
   scope :unpublished, where(published_on: nil)
 
   def submissions(flags = nil)
-    !self.published? || flags == :all ? self.subs : self.subs.published
+    if !self.published_on.present? || flags == :all
+      self.subs
+    else
+      self.subs.published
+    end
   end
 
   def average_score
@@ -141,7 +145,7 @@ class Magazine < ActiveRecord::Base
   end
 
   def notification_sent?
-    self.notification_sent
+    !!self.notification_sent
   end
 
   def notify_authors_of_published_magazine

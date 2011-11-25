@@ -32,9 +32,9 @@ Feature: An editor organizes submissions into packlets
   Scenario: The editor sorts submissions within the packlet
     Given I'm in a position for the current magazine with the "orchestrates" ability
     And the following submissions are scheduled for a meeting a week from now:
-      | title             | body             | author_email       |
-      | A Hydrogen Baloon | Oh the humanatee | cookies@yomyom.com |
-      | Lunatics' Rant    | Stopstopstopstop | daffy@loony.com    |
+      | title             | body             |
+      | A Hydrogen Baloon | Oh the humanatee |
+      | Lunatics' Rant    | Stopstopstopstop |
     And I am on the first meeting page
     When I drag "Lunatics' Rant" on top
     Then "Lunatics' Rant" should be above "A Hydrogen Baloon"
