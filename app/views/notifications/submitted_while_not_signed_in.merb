@@ -1,5 +1,5 @@
-Perhaps you've heard of <%= title = sanitize @title %>?
-=================================<%= "=" * title.length %>=
+Perhaps you've heard of '<%= title = sanitize @title %>'?
+=========================<%= "=" * title.length %>==
 
 And perhaps not only *heard* of it, but *created it*? Great! It was submitted to
 Problem Child by someone who wasn't signed in. If you submitted it and want to

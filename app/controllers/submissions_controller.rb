@@ -26,7 +26,7 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def new
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless begin URI(request.referer).path == "/submissions" rescue false end
     if person_signed_in?
       @submission = Submission.new :author_id => current_person.id, :state => :draft
     else
@@ -40,7 +40,7 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def edit
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless begin URI(request.referer).path == "/submissions" rescue false end
     @submission = Submission.find(params[:id])
     unless person_signed_in? and (current_person.communicates?(@submission) or @submission.author == current_person)
       flash[:notice] = "You're not allowed to edit that."
