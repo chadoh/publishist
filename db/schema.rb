@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111116015113) do
+ActiveRecord::Schema.define(:version => 20111121123428) do
 
   create_table "abilities", :force => true do |t|
     t.string   "key"
@@ -197,11 +197,9 @@ ActiveRecord::Schema.define(:version => 20111116015113) do
   create_table "submissions", :force => true do |t|
     t.text     "title"
     t.text     "body"
-    t.string   "author_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "author_id"
-    t.string   "author_email"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -221,11 +219,6 @@ ActiveRecord::Schema.define(:version => 20111116015113) do
     t.datetime "updated_at"
   end
 
-  add_foreign_key "position_abilities", "abilities", :name => "position_abilities_ability_id_fk"
-  add_foreign_key "position_abilities", "positions", :name => "position_abilities_position_id_fk"
-
   add_foreign_key "pseudonyms", "submissions", :name => "pseudonyms_submission_id_fk", :dependent => :delete
-
-  add_foreign_key "submissions", "magazines", :name => "submissions_magazine_id_fk"
 
 end

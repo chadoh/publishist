@@ -1,16 +1,14 @@
 # == Schema Information
-# Schema version: 20111024105831
+# Schema version: 20111121123428
 #
 # Table name: submissions
 #
 #  id                 :integer         not null, primary key
 #  title              :text
 #  body               :text
-#  author_name        :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
 #  author_id          :integer
-#  author_email       :string(255)
 #  photo_file_name    :string(255)
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
@@ -42,11 +40,7 @@ class Submission < ActiveRecord::Base
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]
   acts_as_list scope: :page
 
-  validates_length_of :title, maximum: 255
-  validate "errors.add :author_email, 'must be filled in. Or you can sign in.'",
-    :if => Proc.new {|s| s.author_id.blank? && s.author_email.blank? }
-  validate "self.author_name = 'Anonymous'",
-    :if => Proc.new {|s| s.author_id.blank? && s.author_name .blank? }
+  validate :author_present
   validate "errors.add :body, 'cannot be blank.'",
     :if => Proc.new {|s| s.body.blank? && s.title.blank? }
   validates_attachment_content_type :photo,
@@ -54,9 +48,10 @@ class Submission < ActiveRecord::Base
     :if           => Proc.new { |submission| submission.photo.file? },
     :message      => "must be an image"
 
-  before_save      :published_if_for_a_published_magazine, unless: "state_was == Submission.state(:published)" # if being rejected
-  before_save      :no_page_or_position_if_rejected,       if:     "state_was == Submission.state(:published)" # if being rejected
+  before_save      :published_if_for_a_published_magazine, unless: 'state_was == Submission.state(:published)' # if being rejected
+  before_save      :set_page_and_position
   before_create    :set_position_to_nil
+  before_create    :create_author_if_blank
   after_find       :reviewed_if_meeting_has_occurred
   after_save       :notify_current_communicator_if_submitted
   after_create     :author_has_positions_with_the_disappears_ability
@@ -64,9 +59,15 @@ class Submission < ActiveRecord::Base
 
   scope :published, where(state: Submission.state(:published))
 
+  attr_writer :author_name
+  attr_writer :author_email
   def author_name
-    @author_name ||= pseudonym.try(:name).presence || author.try(:name) || self[:author_name]
+    @author_name ||= pseudonym.try(:name).presence || author.try(:name) || ''
   end
+  def author_email
+    @author_email ||= author.try(:email) || ''
+  end
+  alias :email :author_email
 
   def pseudonym_name
     self.pseudonym.try(:name)
@@ -100,15 +101,6 @@ class Submission < ActiveRecord::Base
     end
   end
 
-  def email
-    @email ||= if read_attribute(:author_id)
-      @author ||= Person.find(read_attribute(:author_id))
-      @author.email
-    else
-      read_attribute(:author_email)
-    end
-  end
-
   def has_been moved_to_state, options = {}
     update_attributes :state => moved_to_state, updated_by: options[:by]
   end
@@ -137,6 +129,23 @@ class Submission < ActiveRecord::Base
 
 protected
 
+  def author_present
+    unless author_id.present? || (author_name.present? && author_email.present?)
+      errors.add :author_name, "cannot be blank" if author_name.blank?
+      errors.add :author_email, "cannot be blank" if author_email.blank?
+    end
+  end
+
+  def create_author_if_blank
+    if self.author.blank?
+      person = Person.find_by_email(author_email).presence || \
+               Person.create(name: author_name, email: author_email)
+      self.author = person
+      self.pseudonym_name = author_name if author_name != person.name
+      Notifications.submitted_while_not_signed_in(self).deliver
+    end
+  end
+
   def reviewed_if_meeting_has_occurred
     if queued?
       if meetings.select {|m| m.datetime < Time.now + 3.hours }.present?
@@ -145,24 +154,33 @@ protected
     end
   end
 
-  def set_position_to_nil
-    self.position = nil
-  end
-
   def published_if_for_a_published_magazine
-    if !self.published? && self.magazine && self.magazine.published_on.present?
+    if !self.published? && self.magazine && self.magazine_id != self.magazine_id_was && self.magazine.published_on.present?
       self.state = :published
-      self.magazine.pages.create unless self.magazine.page(1)
-      self.page = self.magazine.page(1)
     end
   end
 
-  def no_page_or_position_if_rejected
-    if self.rejected?
+  def set_page_and_position
+    if published? && magazine && magazine.published_on.present?
+      unless page
+        magazine.pages.create unless magazine.page(1)
+        self.page = magazine.page(1) || magazine.pages.first
+      end
+      unless position
+        self.position = page.submissions.count
+      end
+    end
+    if !self.published?
       self.page = nil
       self.position = nil
     end
   end
+
+  # needed to override the before_create that acts_as_list adds
+  def set_position_to_nil
+    self.position = nil if !self.published?
+  end
+
 
   def author_has_positions_with_the_disappears_ability
     if self.author && self.author.abilities.where(key: 'disappears').empty?

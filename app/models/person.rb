@@ -54,12 +54,12 @@ class Person < ActiveRecord::Base
   gravtastic :size => 200, :default => "http://s3.amazonaws.com/pcmag/children.png", :rating => 'R'
 
   def full_name
-    "#{first_name}#{" #{middle_name}" if middle_name}#{" #{last_name}" if last_name}"
+    [first_name, middle_name, last_name].reject{|n| n.blank? }.join(' ')
   end
   alias :name :full_name
 
   def name= name
-    name = name.split
+    name = name.split(' ')
     self.first_name = name.delete_at(0).try(:gsub, /['"]/, '')
     self.last_name = name.delete_at(name.length - 1).try(:gsub, /['"]/, '')
     self.middle_name = name.join(' ')

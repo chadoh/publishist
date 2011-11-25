@@ -21,7 +21,7 @@ describe ApplicationHelper do
 
     context "when the available `resource` does not have errors" do
       it "returns nil" do
-        sub = Submission.new :author_email => "who@me.net", :title => "smidgen"
+        sub = Factory.create :submission
         sub.should be_valid
         helper.stub(:resource).and_return(sub)
         helper.error_messages.should be_nil

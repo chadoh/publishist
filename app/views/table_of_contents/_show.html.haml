@@ -5,10 +5,10 @@
       %th{ title: "Sort by Author" } Author
       %th.headerSortDown{ title: "Sort by Page Number" } Page
   %tbody
-    - table_of_contents.hash.each do |submission, props|
+    - table_of_contents.hash.each do |sub, props|
       %tr
-        %td= link_to submission.to_s, submission_path(submission)
-        %td= link_to_unless props[:author].is_a?(String), props[:author], person_path(props[:author])
+        %td= link_to sub, sub
+        %td= link_to_if sub.pseudonym_link, sub.author_name, sub.author
         %td= link_to props[:page].title, [props[:page].magazine, props[:page]]
 
 - if orchestrates? @magazine

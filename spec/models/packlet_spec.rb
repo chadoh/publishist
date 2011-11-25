@@ -40,7 +40,7 @@ describe Packlet do
   it "does not allow a submission to be reviewed for a magazine that the submission wasn't submitted for" do
     mag = Factory.create :magazine
     mg2 = Factory.create :magazine
-    sub = Submission.create title: "pablo", body: "honey", magazine: mag, author_email: "example@example.com"
+    sub = Factory.create :submission, magazine: mag
     mtg = mg2.meetings.create datetime: Time.now
     pak = Packlet.new meeting: mtg, submission: sub
     pak.should_not be_valid

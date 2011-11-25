@@ -21,18 +21,6 @@ Feature: people of various ranks submit something
     When I follow "Edit"
     Then I should not see "Submit!"
 
-  Scenario: The editor submits for someone without making them an account
-    Given I'm in a position for the current magazine with the "communicates" ability
-    And I am on the new submission page
-    When I fill in the following:
-      | Title               | Old King Scole      |
-      | Body                | Chewed Tobaccy      |
-      | Author              |                     |
-      | their name          | Someone             |
-      | their email address | someone@example.com |
-    And I press "Submit!"
-    Then the submission should be submitted, not draft
-
   Scenario: The editor edits an anonymous submission
     Given I'm in a position for the current magazine with the "communicates" ability
     And no emails have been sent
@@ -71,13 +59,27 @@ Feature: people of various ranks submit something
     Then I should be on my profile page
     And "editor@problemchildmag.com" should receive no email
 
-  Scenario: An anonymous visitor submits something
+  Scenario: Someone with an account submits something while not signed in
+    Given the following user exists:
+      | name         | email             |
+      | Roger Rabbit | roger@example.com |
+    And I am on the new submission page
+    When I fill in the following:
+      | Your Name          | Pickles           |
+      | Your Email Address | roger@example.com |
+      | Title              | Merry Wives       |
+      | Body               | of Pirates        |
+    And I pass the CAPTCHA
+    And I press "Submit!"
+    Then "roger@example.com" should receive an email with subject "Someone \(hopefully you!\) submitted to Problem Child for you!"
+
+  Scenario: An anonymous visitor submits something & thus signs up
     Given I am on the new submission page
     When I fill in the following:
       | Title              | Jackson, a favorite       |
       | Body               | of both Johnny and Sufjan |
-      | Your Name          | I'll never tell!          |
-      | Your Email Address | someone@cool.com          |
+      | Your Name          | This Person               |
+      | Your Email Address | example@example.com       |
     And I fail the CAPTCHA
     And I press "Submit!"
     Then I should see "You might be a bot!"
@@ -86,10 +88,13 @@ Feature: people of various ranks submit something
     When I pass the CAPTCHA
     And I press "Submit!"
     Then I should be on the home page
+    And I should receive an email with subject "You're nearly signed up for Problem Child!"
+    And I should receive an email with subject "Someone \(hopefully you!\) submitted to Problem Child for you!"
+    And "editor@problemchildmag.com" should receive an email
 
     When "editor@problemchildmag.com" opens the email
-    Then they should see "I'll never tell! <admin@problemchildmag.com>" in the email "From" header
-    And they should see "someone@cool.com" in the email "Reply-To" header
+    Then they should see "This Person <admin@problemchildmag.com>" in the email "From" header
+    And they should see "example@example.com" in the email "Reply-To" header
 
   Scenario: I submit under a psuedonym linked to my profile
     Given I sign in

@@ -14,8 +14,8 @@ class TableOfContents < ActiveRecord::Base
   has_one :magazine, through: :page
 
   def hash
-    self.magazine.submissions.sort_by{|s| s.page.position }.inject({}) do |toc, submission|
-      toc[submission] = {author: submission.author.presence || submission.author_name, page: submission.page}
+    self.magazine.submissions.sort_by{|s| s.page.position }.reverse.inject({}) do |toc, sub|
+      toc[sub] = {page: sub.page}
       toc
     end
   end

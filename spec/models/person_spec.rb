@@ -245,13 +245,13 @@ describe Person do
         it "returns false if the person does not have the 'communicates' ability for the given submission's magazine" do
           magazine = Magazine.create
           meeting  = magazine.meetings.create datetime: Time.now
-          sub      = meeting.submissions.create title: '=', body: 'D', author_email: 'example@example.com'
+          sub      = Factory.create :submission, meetings: [meeting]
           @person.communicates?(sub).should be_false
         end
 
         it "returns true if the person has the 'communicates' ability for the given submission's magazine" do
           meeting  = @magazine.meetings.create datetime: Time.now
-          sub      = meeting.submissions.create title: '=', body: 'D', author_email: 'example@example.com'
+          sub      = Factory.create :submission, meetings: [meeting]
           @person.communicates?(sub).should be_true
         end
       end
