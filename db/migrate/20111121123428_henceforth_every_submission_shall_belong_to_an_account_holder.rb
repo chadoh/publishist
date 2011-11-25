@@ -4,10 +4,10 @@ class HenceforthEverySubmissionShallBelongToAnAccountHolder < ActiveRecord::Migr
     puts "There are #{Submission.where(author_id: nil).count} submissions without authors. Fixing that..."
     Submission.find_each do |sub|
       unless sub.author_id
-        author = Person.where("lower(email) = ?", sub.author_email.downcase).first
+        author = Person.where("lower(email) = ?", sub[:author_email].downcase).first
         author ||= Person.create(
                      name: sub[:author_name],
-                     email: sub.author_email
+                     email: sub[:author_email]
                    )
         pseudonym = sub[:author_name] if author.name != sub[:author_name]
         sub.author = author
