@@ -15,7 +15,6 @@ Pc::Application.routes.draw do
     get "sign_up", to: "devise/registrations#new"
   end
 
-  get "submit" => "submissions#new", :as => :new_submission
   get "welcome/index"
 
   resources :roles, only: [:new, :create, :destroy]
@@ -65,8 +64,10 @@ Pc::Application.routes.draw do
     end
   end
 
-  resources :submissions, :path => 'submissions', :only => [:index, :create]
-  resources :submissions, :path => '', :except => [:index, :create], :path_names => { :new => "/submit" }
+  resources :submissions, path: 'submissions', only: [:index, :create]
+  resources :submissions, path: '', except: [:index, :create], path_names: { :new => "/submit" } do
+    get 'old_new', on: :collection, path: '/submit_the_old_way'
+  end
 
   root :to => "welcome#index"
 end

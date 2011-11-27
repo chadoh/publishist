@@ -25,6 +25,20 @@ class SubmissionsController < InheritedResources::Base
     end
   end
 
+  def old_new
+    session[:return_to] = request.referer unless begin URI(request.referer).path == "/submissions" rescue false end
+    if person_signed_in?
+      @submission = Submission.new :author_id => current_person.id, :state => :draft
+    else
+      @submission = Submission.new :state => :submitted
+    end
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @submission }
+    end
+  end
+
   def new
     session[:return_to] = request.referer unless begin URI(request.referer).path == "/submissions" rescue false end
     if person_signed_in?
