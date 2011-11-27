@@ -20,7 +20,15 @@ module Pc
 
     stylesheets_directory = "#{Rails.root}/app/assets/stylesheets"
     config.assets.precompile << /(^[^_]|\/[^_])[^\/]*/
-    config.sass.preferred_syntax = :sass
+
+    # Because I prefer sass, and use Heroku.
+    # http://joeybeninghove.com/2011/10/01/rails-31-asset-pipeline-sass-syntax-heroku/
+    if Rails.configuration.respond_to?(:sass)
+      Rails.configuration.sass.tap do |config|
+        # Prefer SASS, 'cause that's what real men use :)
+        config.preferred_syntax = :sass
+      end
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
