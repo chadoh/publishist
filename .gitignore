@@ -10,4 +10,3 @@ log/*.log
 public/javascripts/jquery.min.js
 public/javascripts/jquery-ui.min.js
 tmp/**/*
-public/assets/
