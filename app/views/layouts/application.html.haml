@@ -1,42 +1,40 @@
 !!!
 %html
   %head
-    - @content_for_title ||= "Problem Child"
+    - @content_for_title ||= 'Problem Child'
     %title= @content_for_title
-    %link(rel="shortcut icon" href="/images/favicon.ico")
-    = stylesheet_link_tag 'compiled/screen', 'jquery.autocomplete', :media => 'screen, projection'
-    = stylesheet_link_tag 'compiled/print', :media => 'print'
+    %link(rel='shortcut icon' href='/assets/favicon.ico')
+    = stylesheet_link_tag 'application', :media => 'screen, projection'
+    = stylesheet_link_tag 'print', :media => 'print'
     /[if lt IE 8]
-      = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
-    - jquery    = ENV['JQUERY']    || 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'
-    - jquery_ui = ENV['JQUERY_UI'] || 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'
-    = javascript_include_tag jquery, jquery_ui
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+    = javascript_include_tag 'application'
     = csrf_meta_tag
     = yield :head
   %body
     #page
       %nav.site-nav{ :role => 'navigation' }
         %ul
-          %li{ :class => params[:controller] == 'welcome'     && 'current' }= link_to_unless_current "About", root_path
+          %li{ :class => params[:controller] == 'welcome'     && 'current' }= link_to_unless_current 'About', root_path
           - unless orchestrates? :currently
-            %li{ :class => current_page?(new_submission_path)   && 'current' }= link_to_unless_current "Submit", new_submission_path
+            %li{ :class => current_page?(new_submission_path)   && 'current' }= link_to_unless_current 'Submit', new_submission_path
           - if orchestrates? :currently
-            %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current "Submissions", submissions_path
+            %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current 'Submissions', submissions_path
           - if views? :any, :with_meetings
-            %li{ :class => params[:controller] == 'meetings'      && 'current' }= link_to_unless_current "Meetings", meetings_path
-          %li{ :class => params[:controller] == 'magazines'   && 'current' }= link_to_unless_current "Magazines", magazines_path
+            %li{ :class => params[:controller] == 'meetings'      && 'current' }= link_to_unless_current 'Meetings', meetings_path
+          %li{ :class => params[:controller] == 'magazines'   && 'current' }= link_to_unless_current 'Magazines', magazines_path
           %li
             %ul#account
               - if person_signed_in?
                 %li
                   = link_to_unless_current current_person.name, person_path(current_person)
                 %li
-                  = link_to "Sign out", destroy_person_session_path
+                  = link_to 'Sign out', destroy_person_session_path
               - else
                 %li
-                  = link_to_unless_current "Sign in", sign_in_path
+                  = link_to_unless_current 'Sign in', sign_in_path
                 %li
-                  = link_to_unless_current "Sign Up!", sign_up_path
+                  = link_to_unless_current 'Sign Up!', sign_up_path
       %header{ :role => 'banner' }
         %h1 Problem Child
         %p= t 'subtitle'
@@ -59,7 +57,7 @@
     %footer{ :role => 'contentinfo' }
       #footer
         %p Create in Community
-    = javascript_include_tag 'jquery.autocomplete', 'modernizr-1.6.min', 'rails', 'application'
+    -# = javascript_include_tag 'jquery.autocomplete', 'modernizr-1.6.min', 'rails', 'application'
     - if protect_against_forgery?
       :javascript
         var AUTH_TOKEN = #{form_authenticity_token.inspect};

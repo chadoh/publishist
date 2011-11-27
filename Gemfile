@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rake',  '0.8.7'
-gem 'rails', '3.1.1.rc3'
+gem 'rails', '3.1.3'
 gem 'pg', '~> 0.11'
 
 # Views
@@ -9,8 +9,6 @@ gem 'haml'
 gem 'sass'
 gem 'simple_form'
 gem 'rdiscount'
-gem 'compass'
-gem 'compass-susy-plugin'
 
 # Controllers
 gem 'aws-s3'
@@ -40,6 +38,18 @@ group :development do
   gem 'rails3-generators'
   gem 'ruby-debug19'
 end
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.1.0'
+  gem 'coffee-rails', '~> 3.1.0'
+  gem 'uglifier'
+  gem 'compass',      '~> 0.12.alpha'
+  gem 'compass-susy-plugin', require: 'susy'
+end
+
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'railroady'

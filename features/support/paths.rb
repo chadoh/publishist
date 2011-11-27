@@ -18,7 +18,7 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
 
     when /my profile page/i
-      "/people/#{@person.to_param}"
+      "/people/#{@person.reload.to_param}"
 
     when /([^']*)'s profile page/i
       person = Person.find_by_first_name($1)

@@ -119,7 +119,7 @@ end
 
 Then /^each author should receive an email$/ do
   Submission.all.each do |sub|
-    Then "\"#{sub.email}\" should receive an email"
+    step "\"#{sub.email}\" should receive an email"
   end
 end
 

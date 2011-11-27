@@ -39,4 +39,5 @@ Feature: a person signs up for the website
     When I fill in "Name" with "Ghengis"
     And I fill in "Current password" with "secret"
     And press "Save Changes"
-    Then I should see "Ghengis" 2 times
+    Then I should be on my profile page
+    And I should see "Ghengis" 2 times

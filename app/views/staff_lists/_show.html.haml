@@ -7,4 +7,3 @@
   :markdown
     #{link_to "Add a new position", new_position_path(magazine_id: @magazine.id)}  
     #{link_to "Remove the staff list from this page", [@page.staff_list], method: :delete if @page}
-  - javascript 'staff_list.js'

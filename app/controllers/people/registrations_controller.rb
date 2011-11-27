@@ -11,8 +11,8 @@ class People::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def after_sign_in_path_for(resource)
-    session[:return_to] || params[:action] == 'update' ? person_url(resource) : root_url
+  def after_update_path_for(resource)
+    person_url(resource)
   end
 
 end

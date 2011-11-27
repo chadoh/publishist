@@ -61,7 +61,7 @@ $(function(){
     attendee_email = $(this).find("input#attendee_person").val().split(' ').pop();
     if ($(this).attr('data-viewer') == attendee_email) {
       $(this).submit(); }
-    $(this).append("<img src='/images/indicator.gif' class='indicator' alt='loading'/>");
+    $(this).append("<img src='/assets/indicator.gif' class='indicator' alt='loading'/>");
   }).live('ajax:complete', function(){
     $(this).find('img.indicator').remove();
   });

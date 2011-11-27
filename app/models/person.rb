@@ -32,7 +32,7 @@
 class Person < ActiveRecord::Base
   extend ActiveSupport::Memoizable
 
-  devise :database_authenticatable, :omniauthable, :confirmable,
+  devise :database_authenticatable, :confirmable,
          :recoverable, :registerable, :rememberable, :trackable,
          :validatable
 

@@ -21,4 +21,10 @@ Pc::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   Paperclip.options[:command_path] = "DYLD_LIBRARY_PATH='/usr/local/Cellar/imagemagick/6.6.3-9/lib' /usr/local/Cellar/imagemagick/6.6.3-9/bin"
+
+  # Do not compress assets
+  config.assets.compress = false
+
+  # Expands the lines which load the assets
+  config.assets.debug = true
 end

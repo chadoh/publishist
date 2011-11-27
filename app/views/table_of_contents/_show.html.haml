@@ -14,7 +14,6 @@
 - if orchestrates? @magazine
   = link_to "Delete table of contents from this page", [table_of_contents], method: :delete
 
-- javascript "jquery.tablesorter.min"
 :javascript
   $(function(){
     $('table.table-of-contents').tablesorter( {sortList: [[2,0]]} );

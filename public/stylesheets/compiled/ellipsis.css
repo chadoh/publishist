@@ -1,9 +1,0 @@
-/* line 9, ../../../app/stylesheets/ellipsis.scss */
-.ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  -o-text-overflow: ellipsis;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  -moz-binding: url('/stylesheets/xml/ellipsis.xml#ellipsis');
-}
