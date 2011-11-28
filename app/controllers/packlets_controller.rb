@@ -1,6 +1,6 @@
 class PackletsController < InheritedResources::Base
-  before_filter do |c|
-    c.must_orchestrate :currently
+  before_filter except: [:create] do |c|
+    c.must_orchestrate resource
   end
 
   actions :destroy

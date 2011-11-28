@@ -11,14 +11,14 @@
   %section.future[meeting]
     %header
       %h2 To be reviewed on #{link_to pretty_date(meeting.datetime), meeting_url(meeting)}
-    %ol.packlets
+    %ol.packlets.collapsable.schedulable
       - for packlet in meeting.packlets
         = render :partial => 'packlets/show', :locals => { :packlet => packlet }
 
 %section#unscheduled.unscheduled
   %header
     %h2 Unscheduled
-  %ul.submissions
+  %ul.submissions.collapsable.schedulable
     - for submission in @unscheduled_submissions
       = render :partial => 'show', :locals => { :submission => submission }
 
@@ -26,6 +26,6 @@
   %section.past[meeting]
     %header
       %h2 Reviewed on #{link_to pretty_date(meeting.datetime), meeting_url(meeting)}
-    %ol.packlets
+    %ol.packlets.collapsable.schedulable
       - for packlet in meeting.packlets
         = render :partial => 'packlets/show', :locals => { :packlet => packlet }

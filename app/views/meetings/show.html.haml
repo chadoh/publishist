@@ -10,7 +10,7 @@
 %section#packlet
   %header
     %h2 Submissions
-  %ol.packlets
+  %ol.packlets.collapsable.sortable
     - for packlet in @meeting.packlets
       = render :partial => 'packlets/show', :locals => { :packlet => packlet }
   - if scores? @meeting

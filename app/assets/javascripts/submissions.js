@@ -1,11 +1,11 @@
 $(function(){
 
-  $('li:regex(class,(submission|packlet)) header a').live('click', function(e){
+  $('.collapsable li:regex(class,(submission|packlet)) header a').live('click', function(e){
     e.preventDefault();
     $(this).parents('li:regex(class,(submission|packlet))').toggleClass('collapsed');
   });
 
-  $('li:regex(class,(submission|packlet))').draggable({
+  $('.schedulable li:regex(class,(submission|packlet))').draggable({
     handle: 'span.drag-handle-wrap',
     axis: 'y',
     stack: 'article',
@@ -15,7 +15,7 @@ $(function(){
     }
   });
 
-  $('article section').droppable({
+  $('article#submissions section').droppable({
     hoverClass: 'drop-here',
     drop: function( event, ui ) {
       li = ui.draggable;

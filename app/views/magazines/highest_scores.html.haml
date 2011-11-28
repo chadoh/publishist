@@ -13,7 +13,7 @@
 
 - unless @submissions.blank?
   = form_tag publish_magazine_path(@magazine), :id => "publish" do
-    %ol.submissions
+    %ol.submissions.collapsable
       - for submission in @submissions
         = render :partial => 'submissions/show', :locals => { :submission => submission }
     = submit_tag "Publish checked submissions as #{@magazine.present_name}!", confirm: "This will make the published magazine visible to anonymous website visitors!"

@@ -7,11 +7,6 @@ function clearIrrelevantInput(input) {
 
 $(function(){
 
-  $('li.submission header h2').live('click', function(e){
-    e.preventDefault();
-    $(this).parents('li.submission').toggleClass('collapsed');
-  });
-
   $('form#highest input[type=number]').blur(function() {
     clearIrrelevantInput($(this));
   });
