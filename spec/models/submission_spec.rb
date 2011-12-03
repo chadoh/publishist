@@ -183,13 +183,13 @@ describe Submission do
   end
 
   it "removes the page and the position when being rejected" do
-    sub = Factory.create :submission
     mag = Magazine.create(
       accepts_submissions_from:  6.months.ago,
       accepts_submissions_until: Date.yesterday,
       title: "Gone"
     )
-    mag.publish [sub]
+    sub = Factory.create :submission, magazine: mag
+    mag.publish [sub.reload]
     sub.reload.state.should == :published
     sub.page.to_s.should == '1'
     sub.position.should == 1
@@ -445,13 +445,12 @@ describe Submission do
   describe "#average_score" do
     before :each do
       @magazine = Factory.create :magazine
-      @meeting = @magazine.meetings.create datetime: Time.now
-      @submission = Factory.create :submission
+      @meeting = @magazine.meetings.create datetime: Time.now, magazine: @magazine
+      @submission = Factory.create :submission, magazine: @magazine
       @person = Factory.create :person
       @person2 = Factory.create :person
 
       @meeting.people = [@person, @person2]
-      @meeting.update_attributes :magazine => @magazine
       @packlet = @meeting.packlets.create :submission => @submission
 
       @packlet.scores.create :attendee => @meeting.attendees.first, :amount => 4
@@ -486,9 +485,21 @@ describe Submission do
     it "defaults to the current magazine" do
       mg1 = Factory.build :magazine
       mg2 = Factory.build :magazine
-      Magazine.stub(:current).and_return(mg1)
+      Magazine.stub(:current!).and_return(mg1)
       sub = Submission.new
-      sub.magazine.should == mg1
+      sub.magazine.should be mg1
+    end
+    it "creates a new magazine and is set to that if the latest magazine is no longer accepting submissions" do
+      magazine = Magazine.create(
+        accepts_submissions_from:  6.months.ago,
+        accepts_submissions_until: Date.yesterday
+      )
+      sub = Submission.create title: '<', body: '3', author: Factory.create(:person)
+      sub.magazine.should_not == magazine
+    end
+    it "is nil if there are no magazines" do
+      sub = Submission.create title: '<', body: '3', author: Factory.create(:person)
+      sub.magazine.should be_nil
     end
     it "does not override the magazine if it's already set" do
       mg1 = Factory.create :magazine
@@ -561,9 +572,9 @@ describe Submission do
     it "defaults to the current magazine" do
       mg1 = Factory.build :magazine
       mg2 = Factory.build :magazine
-      Magazine.stub(:current).and_return(mg1)
+      Magazine.stub(:current!).and_return(mg1)
       sub = Submission.new
-      sub.magazine.should == mg1
+      sub.magazine.should be mg1
     end
     it "does not override the magazine if it's already set" do
       mg1 = Factory.create :magazine

@@ -6,7 +6,7 @@ Feature: An editor organizes submissions onto pages of a magazine
 
   Background: We've published a magazine
     Given there is a submission called "Everyone Dies, Anyway"
-    And a magazine titled "Fruit Blots" has been published
+    And a magazine nicknamed "Fruit Blots" has been published
     And I'm in a position for the "Fruit Blots" magazine with the "orchestrates" ability
     And I am on the "Fruit Blots" magazine page
 
@@ -32,7 +32,7 @@ Feature: An editor organizes submissions onto pages of a magazine
     Then "Everyone Dies, Anyway" should be rejected
     And it should not be on a page
     And it should not have a position
-    And I should be on page 1 of the magazine
+    And I should be on page 1 of the "Fruit Blots" magazine
 
   @pending
   @javascript

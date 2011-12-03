@@ -113,9 +113,11 @@ class Submission < ActiveRecord::Base
 
   def average_score
     @average_score ||= begin
-      packlet_ids = self.packlets.collect &:id
-      score = Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
-      (score * 100).round.to_f / 100
+      packlet_ids = self.packlets.collect(&:id)
+      unless packlet_ids.empty?
+        score = Score.average 'amount', :conditions => "packlet_id IN (#{packlet_ids.join ','})"
+        (score * 100).round.to_f / 100
+      end
     end
   end
 
@@ -162,11 +164,11 @@ protected
 
   def set_page_and_position
     if published? && magazine && magazine.published_on.present?
-      unless page
+      unless self.page
         magazine.pages.create unless magazine.page(1)
         self.page = magazine.page(1) || magazine.pages.first
       end
-      unless position
+      unless self.position
         self.position = page.submissions.count
       end
     end
@@ -196,7 +198,9 @@ protected
   end
 
   def magazine_is_current_if_blank
-    self.magazine = Magazine.current if self.magazine.blank?
+    unless self.magazine_id.present?
+      self.magazine = Magazine.current!
+    end
   end
 
 end

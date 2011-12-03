@@ -1,3 +1,3 @@
-%ol.submissions{ class: !@magazine.notification_sent? && current_person.orchestrates?(@magazine) && 'collapsable' }
+%ol.submissions{ class: [!@magazine.published? && orchestrates?(@magazine) && 'collapsable', orchestrates?(@magazine) && 'paginatable'] }
   - for submission in submissions
     = render partial: 'submissions/show', locals: { submission: submission, collapsed: false }

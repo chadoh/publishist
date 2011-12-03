@@ -55,17 +55,13 @@ Given /^a magazine has been published and I am viewing its cover$/ do
   visit magazine_path(mag)
 end
 
-Given /^a magazine titled "([^"]*)" has been published$/ do |title|
+Given /^a magazine (?:titled|nicknamed) "([^"]*)" has been published$/ do |title|
   mag = Magazine.create(
     :nickname                  => title,
     :accepts_submissions_from  => 6.months.ago,
     :accepts_submissions_until => Date.yesterday
   )
-  meet = Meeting.create(
-    :question => "orly?",
-    :datetime => 3.weeks.ago
-  )
-  meet.submissions = Submission.all
+  Submission.find_each {|sub| sub.update_attributes magazine: mag }
   mag.publish(Submission.all)
 end
 
@@ -82,8 +78,9 @@ end
 
 Given /^1 person has attended each of these meetings$/ do
   # the viewer (the editor) already counts as 1
+  @person ||= Factory.create :person
   for meeting in Magazine.first.meetings
-    Attendee.create :meeting => meeting, :person => @user
+    Attendee.create :meeting => meeting, :person => @person
   end
 end
 
@@ -99,12 +96,20 @@ end
 
 Given /^10 submissions have been scored 1-10$/ do
   meeting = first_meeting
-  10.times {
-    meeting.submissions << Factory.create(:submission)
+  magazine = Magazine.first
+  10.times {|i|
+    sub = Submission.create(
+      title: "Submission #{i}",
+      magazine: magazine,
+      state: :submitted,
+      author: @person
+    )
+    meeting.submissions << sub
   }
-  attendee = Attendee.create meeting: meeting, person: @user
+  @person ||= Factory.create :person
+  attendee = Attendee.create meeting: meeting, person: @person
   meeting.packlets.each_with_index do |packlet, i|
-    Score.create packlet: packlet, attendee: attendee, amount: i
+    packlet.scores.create attendee: attendee, amount: i
   end
 end
 

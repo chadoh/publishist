@@ -7,9 +7,9 @@ describe TableOfContents do
       :accepts_submissions_until => 1.week.ago,
       :nickname                  => "Fruit Blots"
     )
-    @submission  = Factory.create :submission, pseudonym_name: "Karis", pseudonym_link: false
-    @submission2 = Factory.create :submission
-    @meeting     = Meeting.create(datetime: 2.weeks.ago, question: "orly?")
+    @submission  = Factory.create :submission, pseudonym_name: "Karis", pseudonym_link: false, magazine: @magazine
+    @submission2 = Factory.create :submission, magazine: @magazine
+    @meeting     = Meeting.create datetime: 2.weeks.ago, question: "orly?", magazine: @magazine
     @meeting.submissions << [@submission, @submission2]
     @magazine.publish [@submission, @submission2]
     @page = @magazine.pages.first

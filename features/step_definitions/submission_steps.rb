@@ -49,3 +49,11 @@ end
 Then /^it should not have a position$/ do
   Submission.first.position.should be_nil
 end
+
+Given /^there is a submission called "([^"]*)"$/ do |title|
+  sub = Submission.create(
+    title: title,
+    body: "Yes, I said it. #{title}.",
+    author: Factory.create(:person),
+    state: Submission.state(:submitted))
+end

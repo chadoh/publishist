@@ -250,8 +250,7 @@ describe Person do
         end
 
         it "returns true if the person has the 'communicates' ability for the given submission's magazine" do
-          meeting  = @magazine.meetings.create datetime: Time.now
-          sub      = Factory.create :submission, meetings: [meeting]
+          sub      = Factory.create :submission, magazine: @magazine
           @person.communicates?(sub).should be_true
         end
       end

@@ -33,6 +33,10 @@ module NavigationHelpers
     when /the magazine's staff page/i
       staff_for_magazine_path(Magazine.first)
 
+    when /page (.*) of the "([^"]*)" magazine/i
+      m = Magazine.find_by_nickname $2
+      "/magazines/#{m.to_param}/#{$1}"
+
     when /page (.*) of the magazine/i
       "/magazines/#{Magazine.first.to_param}/#{$1}"
 

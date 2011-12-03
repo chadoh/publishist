@@ -30,7 +30,7 @@ protected
 
   def belongs_to_a_magazine
     unless self.magazine.present?
-      self.magazine = Magazine.current
+      self.magazine = Magazine.current!
     end
   end
 

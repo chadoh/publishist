@@ -1,6 +1,6 @@
 $(function(){
   var width = 200;
-  $('li.submission').draggable({
+  $('.paginatable li.submission').draggable({
     handle: 'span.drag-handle-wrap',
     zIndex: 1,
     helper: function(){
@@ -19,11 +19,14 @@ $(function(){
       top: -10
     }
     ,drag: function(event, ui){
-      ui.position.left = event.pageX + 15;
+      if (event.pageX){
+        ui.position.left = event.pageX + 15; }
+      else {
+        console.log("event.pageX is " + event.pageX); }
     }
   });
 
-  $('li.page').droppable({
+  $('.pagination li.page').droppable({
     hoverClass: 'drop-here',
     drop: function(event, ui) {
       var submission = ui.draggable,

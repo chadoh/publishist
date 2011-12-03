@@ -111,13 +111,7 @@ class Magazine < ActiveRecord::Base
       rejected = all_submissions - published
 
       self.update_attributes :published_on => Date.today
-      for sub in published do sub.has_been(:published) end
-      for sub in rejected  do sub.has_been(:rejected)  end
 
-      # get rid of ALL positions marked with 'disappears' (even if they somehow ended up on other mags)
-      for position in Position.joins(:abilities).where(abilities: { key: 'disappears' })
-        position.destroy
-      end
 
       self.pages = [
         cover = Page.create(:title => 'Cover'),
@@ -128,8 +122,13 @@ class Magazine < ActiveRecord::Base
       toc.table_of_contents = TableOfContents.create
       staff.staff_list = StaffList.create
 
+      # published.each {|sub| sub.has_been(:published) }
+      rejected.each  {|sub| sub.has_been(:rejected)  }
       published.each_slice(3) do |three_submissions|
-        self.pages.create.submissions << three_submissions
+        page = self.pages.create
+        three_submissions.each do |sub|
+          sub.update_attributes page: page, state: :published
+        end
       end
       self.pages.each do |page|
         page.submissions.each_with_index do |sub, i|
@@ -138,6 +137,11 @@ class Magazine < ActiveRecord::Base
       end
       older_unpublished_magazines = Magazine.unpublished.where("accepts_submissions_from < ?", self.accepts_submissions_from)
       older_unpublished_magazines.each {|m| m.publish [] }
+
+      # get rid of ALL positions marked with 'disappears' (even if they somehow ended up on older mags)
+      self.positions.joins(:abilities).where(abilities: { key: 'disappears' }).each do |position|
+        position.destroy
+      end
       self
     else
       raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
@@ -162,8 +166,8 @@ class Magazine < ActiveRecord::Base
   def page page_title
     page_title = page_title.to_s
     if page_title.present?
-      Page.find_by_magazine_id_and_title(self.id, page_title).presence || \
-      Page.find_by_magazine_id_and_position(self.id, page_title.to_i + 4).presence
+      self.pages.find_by_title(page_title).presence || \
+      self.pages.find_by_position(page_title.to_i + 4).presence
     else
       self.pages.first
     end
@@ -177,9 +181,19 @@ class Magazine < ActiveRecord::Base
 
   class << self
     def current
-      where('accepts_submissions_from  < ? AND ' + \
-            'accepts_submissions_until > ?',
-            Date.today, Date.today).try(:first) || self.first
+      self.where('accepts_submissions_from  < ? AND ' + \
+        'accepts_submissions_until > ?',
+        Date.today.end_of_day, Date.today.beginning_of_day).first || self.first
+    end
+
+    def current!
+      mag = self.where('accepts_submissions_from  < ? AND ' + \
+              'accepts_submissions_until > ?',
+              Date.today.end_of_day, Date.today.beginning_of_day).first
+      if !mag && self.count != 0
+        mag = self.create
+      end
+      mag
     end
 
     def before mag

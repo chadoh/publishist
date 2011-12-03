@@ -5,12 +5,13 @@ Feature: an editor views the winners for a magazine and publish the magazine
 
   Background: a semester has passed
     Given a magazine's timeframe is freshly over
+    And I'm in a position for said magazine with the "orchestrates" ability
     And 10 submissions have been scored 1-10
 
   Scenario: I view the winners
-    Given I'm in a position for said magazine with the "orchestrates" ability
-    And I am on the magazines page
+    Given I am on the magazines page
     When I follow "View the highest-scored submissions"
+    And save and open page
     Then I should see "7" in the "highest" field
     And I should see 7 submissions
 
@@ -23,8 +24,7 @@ Feature: an editor views the winners for a magazine and publish the magazine
     Then I should see 4 submissions
 
   Scenario: I publish the magazine and send the notification
-    Given I'm in a position for said magazine with the "orchestrates" ability
-    And I am on the magazines page
+    Given I am on the magazines page
     And I follow "View the highest-scored submissions"
     And no emails have been sent
     When I press "Publish checked submissions"

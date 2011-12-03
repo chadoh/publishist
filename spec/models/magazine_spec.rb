@@ -153,12 +153,37 @@ describe Magazine do
     end
   end
 
-  describe ".current" do
+  describe ".current!" do
     it "returns the magazine that accepts submissions at the current date" do
       mag  = Magazine.create :accepts_submissions_from => Date.yesterday,
                             :accepts_submissions_until => Date.tomorrow
       mag2 = Magazine.create
       Magazine.current.should == mag
+    end
+    it "returns the latest one, even if it's no longer accepting submissions" do
+      mag  = Magazine.create(
+        accepts_submissions_from:  6.months.ago,
+        accepts_submissions_until: Date.yesterday
+      )
+      Magazine.current.should == mag
+      Magazine.count.should be 1
+    end
+  end
+
+  describe ".current!" do
+    it "returns the magazine that accepts submissions at the current date" do
+      mag  = Magazine.create :accepts_submissions_from => Date.yesterday,
+                            :accepts_submissions_until => Date.tomorrow
+      mag2 = Magazine.create
+      Magazine.current!.should == mag
+    end
+    it "creates a new magazine if the latest one is no longer accepting submissions" do
+      mag  = Magazine.create(
+        accepts_submissions_from:  6.months.ago,
+        accepts_submissions_until: Date.yesterday
+      )
+      Magazine.current!.should_not == mag
+      Magazine.count.should be 2
     end
   end
 
@@ -169,9 +194,9 @@ describe Magazine do
       :accepts_submissions_until => Date.yesterday,
       :accepts_submissions_from  => 6.months.ago
     )
-    @sub      = Factory.create :submission
-    @sub2     = Factory.create :submission
-    @meeting  = Meeting.create(:datetime => Date.yesterday) # in mag
+    @sub      = Factory.create :submission, magazine: @mag
+    @sub2     = Factory.create :submission, magazine: @mag
+    @meeting  = Meeting.create datetime: Date.yesterday, magazine: @mag
     packlet  = Packlet.create  :meeting => @meeting, :submission => @sub
     packlet2 = Packlet.create  :meeting => @meeting, :submission => @sub2
     if options[:include_scores].present?
@@ -256,12 +281,18 @@ describe Magazine do
       old_mag.reload.published_on.should_not be_nil
     end
 
-    it "when called correctly destroys any positions that have the 'disappears' ability" do
-      a1 = Ability.create key: 'disappears', description: "This is a temporary position that will disappear once the magazine is published."
-      mag = Magazine.create title: "the cat issue", accepts_submissions_from: 3.months.ago, accepts_submissions_until: Date.yesterday
-      mag.positions << [Position.create(name: "Admiral", abilities: [a1])]
-      mag.publish []
-      mag.positions.reload.should be_empty
+    it "when called correctly destroys positions that have the 'disappears' ability on this and older magazines" do
+      a1 = Ability.create key: 'disappears', description: 'disappears'
+      mag1 = Magazine.create title: "the cat issue", accepts_submissions_from: 3.months.ago, accepts_submissions_until: 2.months.ago
+      mag2 = Magazine.create title: "the dog issue",                                         accepts_submissions_until: 1.month.ago
+      mag3 = Magazine.create title: "the pig issue",                                         accepts_submissions_until: Date.yesterday
+      mag1.positions << [Position.create(name: "Admiral", abilities: [a1])]
+      mag2.positions << [Position.create(name: "Admiral", abilities: [a1])]
+      mag3.positions << [Position.create(name: "Admiral", abilities: [a1])]
+      mag2.publish []
+      mag1.positions.reload.should be_empty
+      mag2.positions.reload.should be_empty
+      mag3.positions.reload.should_not be_empty
     end
   end
 

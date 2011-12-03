@@ -27,6 +27,7 @@ class Packlet < ActiveRecord::Base
   validate :only_reviewed_in_one_magazine
 
   before_create :submission_reviewed_or_queued
+  before_save   :update_submissions_magazine_if_different
 
   def destroy options = {}
     super()
@@ -39,8 +40,18 @@ protected
 
   def only_reviewed_in_one_magazine
     if self.meeting && self.magazine
+      if Packlet.where(submission_id: self.submission).present?
+        if self.submission.magazine != self.magazine
+          errors.add(:submission, "can only be reviewed during the magazine it was submitted for")
+        end
+      end
+    end
+  end
+
+  def update_submissions_magazine_if_different
+    if self.meeting && self.magazine
       if self.submission.magazine != self.magazine
-        errors.add(:submission, "can only be reviewed during the magazine it was submitted for")
+        self.submission.update_attributes magazine: self.magazine
       end
     end
   end

@@ -37,13 +37,32 @@ describe Packlet do
     @p3.should be_valid
   end
 
-  it "does not allow a submission to be reviewed for a magazine that the submission wasn't submitted for" do
+  it "updates a submission's :magazine, if different than the meeting's" do
     mag = Factory.create :magazine
     mg2 = Factory.create :magazine
     sub = Factory.create :submission, magazine: mag
     mtg = mg2.meetings.create datetime: Time.now
-    pak = Packlet.new meeting: mtg, submission: sub
-    pak.should_not be_valid
+    mtg.submissions << sub
+    sub.magazine.should == mg2
+  end
+
+  it "does not allow a submission to be scheduled for meetings in different magazines" do
+    mag = Factory.create :magazine
+    mg2 = Factory.create :magazine
+    sub = Factory.create :submission, magazine: mag
+    mtg = mag.meetings.create datetime: Time.now
+    mtg.submissions << sub
+    mtg2 = mg2.meetings.create datetime: Time.now
+    packlet = Packlet.new meeting: mtg2, submission: sub.reload
+    packlet.should_not be_valid
+  end
+
+  it "updates a packlet's position without a problem" do
+    sub2 = Factory.create :submission
+    packlet2 = @meeting.packlets.create submission: sub2
+    packlet2.position.should be > @packlet.reload.position
+    packlet2.move_to_top
+    packlet2.position.should be < @packlet.reload.position
   end
 
   describe "#submission#draft?" do
