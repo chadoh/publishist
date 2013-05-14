@@ -11,10 +11,10 @@
 development: &DEFAULTS
   adapter: postgresql
   encoding: unicode
-  database: pc_dev
+  database: dev
   pool: 5
-  username: chad
-  password:
+  username: rails
+  password: secret
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -35,12 +35,8 @@ development: &DEFAULTS
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
-  adapter: postgresql
-  encoding: unicode
-  database: pc_test
-  pool: 5
-  username: chad
-  password:
+  <<: *DEFAULTS
+  database: test
   min_messages: warning
 
 production:
