@@ -12,6 +12,7 @@ gem 'rdiscount', github: 'sunaku/rdiscount' # remove when on 1.9.3
 
 # Controllers
 gem 'aws-s3'
+gem 'aws-sdk'
 gem 'gravtastic', '3.1.0'
 gem 'friendly_id', '~>3.0.0'
 gem 'inherited_resources'
