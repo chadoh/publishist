@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
   config.vm.provision :ansible do |ansible|
-    ansible.playbook = "../ansible-starter/playbook.yml"
-    ansible.inventory_file = "../ansible-starter/hosts"
+    ansible.playbook = "ansible/playbook.yml"
+    ansible.inventory_file = "ansible/hosts"
   end
 end
