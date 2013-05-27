@@ -34,7 +34,8 @@ class Magazine < ActiveRecord::Base
   has_many :roles,     through:   :positions, dependent: :destroy
   has_many :abilities, through:   :positions, dependent: :destroy
   has_many :subs,      dependent: :nullify, class_name: 'Submission'
-  has_friendly_id :to_s, :use_slug => true
+  extend FriendlyId
+  friendly_id :to_s, :use => [:slugged, :history]
   has_attached_file :pdf,
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",

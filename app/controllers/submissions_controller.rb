@@ -120,7 +120,9 @@ class SubmissionsController < InheritedResources::Base
 protected
 
   def ensure_current_url
-    redirect_to resource, :status => :moved_permanently unless resource.friendly_id_status.best?
+    if request.path != submission_path(resource)
+      redirect_to resource, :status => :moved_permanently
+    end
   end
 
   def set_params

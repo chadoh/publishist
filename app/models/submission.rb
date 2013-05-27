@@ -34,7 +34,8 @@ class Submission < ActiveRecord::Base
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :path           => "/:style/:filename",
     :styles         => { medium: "510x510>" }
-  has_friendly_id :to_slug, use_slug: true
+  extend FriendlyId
+  friendly_id :to_slug, :use => [:slugged, :history]
   attr_accessor :updated_by
 
   acts_as_enum :state, [:draft, :submitted, :queued, :reviewed, :scored, :rejected, :published]

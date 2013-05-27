@@ -48,7 +48,8 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :first_name
 
-  has_friendly_id :name, :use_slug => true
+  extend FriendlyId
+  friendly_id :name, :use => [:slugged, :history]
 
   include Gravtastic
   gravtastic :size => 200, :default => "http://s3.amazonaws.com/pcmag/children.png", :rating => 'R'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111121123428) do
+ActiveRecord::Schema.define(:version => 20130527223028) do
 
   create_table "abilities", :force => true do |t|
     t.string   "key"
@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(:version => 20111121123428) do
     t.datetime "updated_at"
   end
 
+  create_table "friendly_id_slugs", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "sluggable_id",                 :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
+  add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
+
   create_table "magazines", :force => true do |t|
     t.string   "title"
     t.string   "nickname"
@@ -68,7 +79,6 @@ ActiveRecord::Schema.define(:version => 20111121123428) do
     t.datetime "updated_at"
     t.integer  "count_of_scores",           :default => 0
     t.integer  "sum_of_scores",             :default => 0
-    t.string   "cached_slug"
     t.boolean  "notification_sent",         :default => false
     t.string   "pdf_file_name"
     t.string   "pdf_content_type"
@@ -78,9 +88,10 @@ ActiveRecord::Schema.define(:version => 20111121123428) do
     t.string   "cover_art_content_type"
     t.integer  "cover_art_file_size"
     t.datetime "cover_art_updated_at"
+    t.string   "slug"
   end
 
-  add_index "magazines", ["cached_slug"], :name => "index_magazines_on_cached_slug", :unique => true
+  add_index "magazines", ["slug"], :name => "index_magazines_on_cached_slug", :unique => true
 
   create_table "meetings", :force => true do |t|
     t.datetime "datetime"
@@ -127,13 +138,13 @@ ActiveRecord::Schema.define(:version => 20111121123428) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "password_salt"
-    t.string   "cached_slug"
+    t.string   "slug"
   end
 
-  add_index "people", ["cached_slug"], :name => "index_people_on_cached_slug", :unique => true
   add_index "people", ["confirmation_token"], :name => "index_people_on_confirmation_token", :unique => true
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
   add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
+  add_index "people", ["slug"], :name => "index_people_on_cached_slug", :unique => true
 
   create_table "position_abilities", :force => true do |t|
     t.integer  "position_id"
@@ -176,18 +187,6 @@ ActiveRecord::Schema.define(:version => 20111121123428) do
     t.datetime "updated_at"
   end
 
-  create_table "slugs", :force => true do |t|
-    t.string   "name"
-    t.integer  "sluggable_id"
-    t.integer  "sequence",                     :default => 1, :null => false
-    t.string   "sluggable_type", :limit => 40
-    t.string   "scope"
-    t.datetime "created_at"
-  end
-
-  add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
-  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
-
   create_table "staff_lists", :force => true do |t|
     t.integer  "page_id"
     t.datetime "created_at"
@@ -205,13 +204,13 @@ ActiveRecord::Schema.define(:version => 20111121123428) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "state",              :limit => 8, :default => 0
-    t.string   "cached_slug"
     t.integer  "page_id"
     t.integer  "position"
     t.integer  "magazine_id"
+    t.string   "slug"
   end
 
-  add_index "submissions", ["cached_slug"], :name => "index_submissions_on_cached_slug", :unique => true
+  add_index "submissions", ["slug"], :name => "index_submissions_on_cached_slug", :unique => true
 
   create_table "table_of_contents", :force => true do |t|
     t.integer  "page_id"
