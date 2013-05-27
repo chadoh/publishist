@@ -9,7 +9,6 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
-  require 'shoulda/integrations/rspec2'
   require 'email_spec'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
