@@ -127,7 +127,11 @@ class Submission < ActiveRecord::Base
   end
 
   def to_slug
-    strip_tags(self.title).gsub(/[^0-9A-Z\s]/i, '').presence || strip_tags(self.body.lines.first)
+    if title
+      strip_tags(self.title).gsub(/[^0-9A-Z\s]/i, '')
+    elsif body
+      strip_tags(self.body.lines.first)
+    end
   end
 
 protected
