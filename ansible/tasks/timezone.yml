@@ -1,0 +1,15 @@
+---
+- name: check if timezone has already been set up
+  shell: file -h /etc/localtime | grep symbolic
+  register: localtime_linked
+  ignore_errors: yes
+- name: rm /etc/localtime
+  sudo: yes
+  when: localtime_linked.rc != 0
+  file: path=/etc/localtime state=absent
+- name: link /etc/localtime
+  sudo: yes
+  when: localtime_linked.rc != 0
+  file: src=/usr/share/zoneinfo/America/New_York
+        dest=/etc/localtime
+        state=link mode=0644

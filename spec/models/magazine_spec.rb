@@ -322,7 +322,7 @@ describe Magazine do
   end
 
   describe "#published?" do
-    let (:mag) { Factory.create :magazine }
+    let(:mag) { Factory.create :magazine }
 
     it "returns false if the magazine has no published_on value" do
       mag.should_not be_published

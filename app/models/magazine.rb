@@ -111,7 +111,7 @@ class Magazine < ActiveRecord::Base
       published = array_of_winners
       rejected = all_submissions - published
 
-      self.update_attributes :published_on => Date.today
+      self.update_attribute :published_on, Date.today
 
 
       self.pages = [

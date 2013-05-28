@@ -1,0 +1,10 @@
+# amazon aws s3 credentials
+export S3_KEY={{ lookup('env', 'S3_KEY') }}
+export S3_SECRET={{ lookup('env', 'S3_SECRET') }}
+
+# recaptcha private key
+export CAPTCHA={{ lookup('env', 'CAPTCHA') }}
+
+# keep people's email addresses out of the repo
+export ADMIN_EMAIL={{ lookup('env', 'ADMIN_EMAIL') }}
+export EDITOR_EMAIL={{ lookup('env', 'EDITOR_EMAIL') }}
