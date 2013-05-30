@@ -88,6 +88,7 @@ describe Packlet do
     it "sets the packlet's submission to :submitted if this was its last packlet" do
       sub = @packlet.submission
       @packlet.destroy
+      sub.reload.state.should == :submitted
       sub.should be_submitted
     end
 

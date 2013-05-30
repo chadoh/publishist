@@ -54,20 +54,16 @@ gem 'jquery-rails'
 
 group :development, :test do
   gem 'railroady'
-  gem 'guard-rspec'
   gem 'rspec-rails'
   gem 'rb-fsevent'
-  gem 'growl'
-  gem 'guard-spork'
 end
 
 group :test do
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'capybara', '~>1.1'
   gem 'email_spec'
   gem 'factory_girl', '~> 2.0' # current is 4.x
   gem 'shoulda'
   # gem 'launchy'
   gem 'database_cleaner'
-  gem "spork", ">= 0.9.0.rc9"
 end
