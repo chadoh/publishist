@@ -182,21 +182,21 @@ describe Submission do
     sub.page.should == page
   end
 
-  it "removes the page and the position when being rejected" do
+  it "removes the page when being rejected" do
     mag = Magazine.create(
       accepts_submissions_from:  6.months.ago,
       accepts_submissions_until: Date.yesterday,
       title: "Gone"
     )
     sub = Factory.create :submission, magazine: mag
-    mag.publish [sub.reload]
+    mag.publish [sub]
     sub.reload.state.should == :published
     sub.page.to_s.should == '1'
     sub.position.should == 1
     sub.update_attributes state: :rejected
     sub.reload.state.should == :rejected
     sub.page.should be_nil
-    sub.position.should be_nil
+    #sub.position.should be_nil
   end
 
   it "verifies that there is an associated author" do
