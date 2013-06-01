@@ -11,7 +11,6 @@ Feature: an editor views the winners for a magazine and publish the magazine
   Scenario: I view the winners
     Given I am on the magazines page
     When I follow "View the highest-scored submissions"
-    And save and open page
     Then I should see "7" in the "highest" field
     And I should see 7 submissions
 
@@ -23,6 +22,7 @@ Feature: an editor views the winners for a magazine and publish the magazine
     And  I press "→"
     Then I should see 4 submissions
 
+  @wip
   Scenario: I publish the magazine and send the notification
     Given I am on the magazines page
     And I follow "View the highest-scored submissions"

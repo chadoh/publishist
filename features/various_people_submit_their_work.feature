@@ -39,6 +39,7 @@ Feature: people of various ranks submit something
     And I press "Save"
     Then I should be on the first submission page
 
+  @wip
   Scenario: Some other signed-in person submits something
     Given I sign in
     And no emails have been sent

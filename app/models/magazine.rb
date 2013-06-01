@@ -115,8 +115,8 @@ class Magazine < ActiveRecord::Base
 
 
       self.pages = [
-        cover = Page.create(:title => 'Cover'),
-        notes = Page.create(:title => 'Notes'),
+        Page.create(:title => 'Cover'),
+        Page.create(:title => 'Notes'),
         staff = Page.create(:title => 'Staff'),
         toc   = Page.create(:title => 'ToC'),
       ]
@@ -176,7 +176,7 @@ class Magazine < ActiveRecord::Base
 
   def create_page_at position
     page = self.pages.create
-    page.insert_at position if position.present?
+    page.insert_at position.to_i if position.present?
     page
   end
 

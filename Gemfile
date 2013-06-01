@@ -64,6 +64,5 @@ group :test do
   gem 'email_spec'
   gem 'factory_girl', '~> 2.0' # current is 4.x
   gem 'shoulda'
-  # gem 'launchy'
   gem 'database_cleaner'
 end

@@ -31,7 +31,6 @@ Feature: An editor organizes submissions onto pages of a magazine
     When I press "ø"
     Then "Everyone Dies, Anyway" should be rejected
     And it should not be on a page
-    And it should not have a position
     And I should be on page 1 of the "Fruit Blots" magazine
 
   @pending
