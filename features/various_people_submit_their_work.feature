@@ -39,7 +39,6 @@ Feature: people of various ranks submit something
     And I press "Save"
     Then I should be on the first submission page
 
-  @wip
   Scenario: Some other signed-in person submits something
     Given I sign in
     And no emails have been sent
@@ -52,7 +51,7 @@ Feature: people of various ranks submit something
     And "editor@problemchildmag.com" should receive an email
 
     When "editor@problemchildmag.com" opens the email
-    Then they should see "example@example.com <admin@problemchildmag.com>" in the email "From" header
+    Then they should get an email from '"example@example.com" <admin@problemchildmag.com>'
     And they should see "example@example.com" in the email "Reply-To" header
 
     When I follow "Edit"

@@ -50,6 +50,10 @@ Then /^it should not have a position$/ do
   Submission.first.position.should be_nil
 end
 
+Then /^they should get an email from '([^\']*)'$/ do |text|
+  current_email.should have_header("From", text)
+end
+
 Given /^there is a submission called "([^"]*)"$/ do |title|
   sub = Submission.create(
     title: title,
