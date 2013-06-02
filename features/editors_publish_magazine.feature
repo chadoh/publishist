@@ -22,7 +22,6 @@ Feature: an editor views the winners for a magazine and publish the magazine
     And  I press "→"
     Then I should see 4 submissions
 
-  @wip
   Scenario: I publish the magazine and send the notification
     Given I am on the magazines page
     And I follow "View the highest-scored submissions"
