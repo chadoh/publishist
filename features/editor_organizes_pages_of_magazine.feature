@@ -33,7 +33,7 @@ Feature: An editor organizes submissions onto pages of a magazine
     And it should not be on a page
     And I should be on page 1 of the "Fruit Blots" magazine
 
-  @pending
+  @wip
   @javascript
   Scenario: I can rename pages
     When I follow "1"

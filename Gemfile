@@ -61,6 +61,7 @@ end
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'capybara', '~>1.1'
+  gem 'poltergeist'
   gem 'email_spec'
   gem 'factory_girl', '~> 2.0' # current is 4.x
   gem 'shoulda'
