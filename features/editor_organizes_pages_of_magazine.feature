@@ -36,9 +36,8 @@ Feature: An editor organizes submissions onto pages of a magazine
   @wip
   @javascript
   Scenario: I can rename pages
-    When I follow "1"
-    And I click on "1"
-    And I type "Last" and hit Return
+    When I'm on page "1"
+    And I click on the page title ("1"), type "Last", and hit Return
     And I refresh the page
     Then I should see "Last"
 

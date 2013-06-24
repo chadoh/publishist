@@ -36,6 +36,7 @@ gem 'airbrake'
 group :development do
   gem 'annotate'
   gem 'heroku_san'
+  gem 'taps'
   gem 'rails3-generators'
   gem 'ruby-debug19'
 end

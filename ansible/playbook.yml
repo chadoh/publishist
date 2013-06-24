@@ -16,6 +16,7 @@
     - include: tasks/apt.yml
     - include: tasks/ruby.yml
     - include: tasks/shell_setup.yml
+    - include: tasks/heroku.yml
     - include: tasks/db.yml
     - include: tasks/phantomjs.yml
 
