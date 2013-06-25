@@ -6,7 +6,7 @@ gem 'pg', '~> 0.11'
 
 # Views
 gem 'haml', '3.1.3'
-gem 'sass', '~> 3.1.10'
+gem 'sass'
 gem 'simple_form'
 gem 'rdiscount', github: 'sunaku/rdiscount' # remove when on 1.9.3
 
@@ -35,8 +35,6 @@ gem 'airbrake'
 
 group :development do
   gem 'annotate'
-  gem 'heroku_san'
-  gem 'taps'
   gem 'rails3-generators'
   gem 'ruby-debug19'
 end
@@ -44,11 +42,11 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '3.1.5'
+  gem 'sass-rails'
   gem 'coffee-rails', '~> 3.1.0'
   gem 'uglifier'
-  gem 'compass',      '~> 0.12.alpha'
-  gem 'compass-susy-plugin', require: 'susy'
+  gem 'compass-rails'
+  gem 'susy'
 end
 
 gem 'jquery-rails'

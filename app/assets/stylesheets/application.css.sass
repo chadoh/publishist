@@ -78,9 +78,12 @@ a.mailto
     margin:
       left: 0
       right: 0
+      bottom: 1.5em
     h1
       +adjust-font-size-to(31px)
       +trailer(0, 21px)
+    p
+      margin-bottom: 0
 
 
   & > #notice
@@ -90,13 +93,12 @@ a.mailto
     +horizontal-borders(1px, 0)
 
   & > article
-    +columns($article)
-    +alpha
+    +span-columns($article)
     &.full-width
-      +columns($total-cols)
+      +span-columns($total-columns)
 
   & > section.sidebar
-    +columns($sidebar)
+    +span-columns($sidebar)
     +omega
 
   & > #page-footer
@@ -118,6 +120,8 @@ body > footer
       right: 0
     a
       +links(yellow)
+    p
+      margin-bottom: 0
 
 +sticky-footer($base-rhythm-unit * 4, '#page', '#page-footer', 'body > footer')
 
@@ -402,8 +406,7 @@ section#scores
   +full
   +leader
   div.packlet-titles-wrap
-    +alpha
-    +columns(3)
+    +span-columns(3)
     ol.packlet-titles
       li.title
         max-height: $base-line-height
@@ -415,7 +418,7 @@ section#scores
           +ellipsis
   div.scores-wrap-container-wrap
     +omega
-    +columns(13)
+    +span-columns(13)
     +clearfix
     position: relative
     .border
@@ -452,9 +455,9 @@ ul.attendees
     span
       +inline-block
     span.person
-      width: $sidebar * $col-width
+      width: $sidebar * $column-width
     span.answer
-      width: $article * $col-width
+      width: $article * $column-width
       padding-left: 0.5em
       +border-radius
       min-height: $base-line-height
@@ -478,7 +481,7 @@ ol.magazines
     +clearfix
     +trailer
     margin-left: 0
-    +columns(5)
+    +span-columns(5)
     margin-right: 1.5em
     .cover-art
       position: relative
@@ -551,17 +554,16 @@ ul#people
   li.person
     +full
     span.name
-      +columns(4)
-      +alpha
+      +span-columns(4)
     span.rank
-      +columns(3)
+      +span-columns(3)
       margin-right: 0
     span.promote-to
-      +columns(6.5)
+      +span-columns(6.5)
       & > ul
         +delimited-list
     span.actions
-      +columns(2.5)
+      +span-columns(2.5)
       +omega
 
 form#highest

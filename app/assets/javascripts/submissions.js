@@ -1,6 +1,6 @@
 $(function(){
 
-  $('.collapsable li:regex(class,(submission|packlet)) header a').live('click', function(e){
+  $('.collapsable li:regex(class,(submission|packlet)) header a').on('click', function(e){
     e.preventDefault();
     $(this).parents('li:regex(class,(submission|packlet))').toggleClass('collapsed');
   });

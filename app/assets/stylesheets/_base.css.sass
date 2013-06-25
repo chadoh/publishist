@@ -11,12 +11,12 @@ $base-line-height: 24px
 
 // Grid --------------------------------------------------------------
 
-$total-cols: 16
-$col-width: 3em
+$total-columns: 16
+$column-width: 3em
 $gutter-width: 0.5em
-$side-gutter-width: $gutter-width
+$grid-padding: $gutter-width
 $sidebar: 5
-$article: $total-cols - $sidebar
+$article: $total-columns - $sidebar
 
 // Don't move this @import above the GRID and FONT-SIZE variables.
 @import susy
@@ -83,3 +83,6 @@ $black: $base
     letter-spacing: -1px
     text-indent: 0
     position: static
+
+=full
+  +span-columns($total-columns, $total-columns)

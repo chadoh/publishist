@@ -10,7 +10,6 @@ class UpdateSlugsToFriendlyIdSlugs < ActiveRecord::Migration
 
     rename_table :slugs, :friendly_id_slugs
 
-    add_index :friendly_id_slugs, [:slug, :sluggable_type], :unique => true
     add_index :friendly_id_slugs, :sluggable_type
 
     rename_column :people,      :cached_slug, :slug
@@ -23,7 +22,6 @@ class UpdateSlugsToFriendlyIdSlugs < ActiveRecord::Migration
     rename_column :magazines,   :slug, :cached_slug
     rename_column :submissions, :slug, :cached_slug
 
-    remove_index :friendly_id_slugs, [:slug, :sluggable_type]
     remove_index :friendly_id_slugs, :sluggable_type
 
     rename_table :friendly_id_slugs, :slugs

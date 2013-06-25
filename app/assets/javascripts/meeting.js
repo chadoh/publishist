@@ -16,7 +16,7 @@ function submitScoreWithDelay(score_form_element) {
 
 $(function(){
 
-  $("#attendee_person").live('focus blur', function(event){
+  $("#attendee_person").on('focus blur', function(event){
     if (event.type == 'focusin') {
       $(this).autocomplete("/people/auto_complete_for_person_first_name_middle_name_last_name_email"); }
     else {
@@ -44,7 +44,7 @@ $(function(){
 
   $('div.scores-wrap').css({ width: ($('div.scores').length * 55) });
   $('form.score input[type=submit]').hide();
-  $('input[type=number]').live('mouseout blur', function(){
+  $('input[type=number]').on('mouseout blur', function(){
     var orig    = $(this).attr('data-original'),
         current = $(this).val();
     if (orig != current) {
@@ -52,12 +52,12 @@ $(function(){
     }
   });
 
-  $('form#new_attendee[data-remote]').live('ajax:before', function(){
+  $('form#new_attendee[data-remote]').on('ajax:before', function(){
     attendee_email = $(this).find("input#attendee_person").val().split(' ').pop();
     if ($(this).attr('data-viewer') == attendee_email) {
       $(this).submit(); }
     $(this).append("<img src='/assets/indicator.gif' class='indicator' alt='loading'/>");
-  }).live('ajax:complete', function(){
+  }).on('ajax:complete', function(){
     $(this).find('img.indicator').remove();
   });
 

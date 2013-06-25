@@ -25,7 +25,7 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 
 $(function(){
 
-  $('a[data-target=new]').live('click', function(e){
+  $('a[data-target=new]').on('click', function(e){
     e.preventDefault();
     window.open($(this).attr('href'));
   });
@@ -33,13 +33,13 @@ $(function(){
     return 'value' in document.createElement('meter');
   });
 
-  $('a.toggle_next').next().hide().end().live('click', function(e){
+  $('a.toggle_next').next().hide().end().on('click', function(e){
     e.preventDefault();
     $(this).next().slideToggle();
   });
 
   $('dd').hide();
-  $('dt').live('click', function(e){
+  $('dt').on('click', function(e){
     $(this).find('span.arrow').toggleClass("rotated");
     $(this).next().slideToggle();
   });
@@ -47,7 +47,7 @@ $(function(){
     $('dt').first().click()
   }, 1000);
 
-  $("li.attendee nav.actions form[data-remote]").live("ajax:success", function(){
+  $("li.attendee nav.actions form[data-remote]").on("ajax:success", function(){
     $(this).closest('nav').closest('li').fadeOut();
   });
 
@@ -56,7 +56,7 @@ $(function(){
     $("section.add-stuff").toggleClass('hidden');
   });
 
-  $("[contenteditable]").live({
+  $("[contenteditable]").on({
     blur: function(e){
       var model     = $(this).attr("data-model"),
           attribute = $(this).attr("data-attribute") || $(this).attr("class"),

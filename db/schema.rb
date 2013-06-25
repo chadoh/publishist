@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(:version => 20130527223028) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
   add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
@@ -79,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20130527223028) do
     t.datetime "updated_at"
     t.integer  "count_of_scores",           :default => 0
     t.integer  "sum_of_scores",             :default => 0
+    t.string   "slug"
     t.boolean  "notification_sent",         :default => false
     t.string   "pdf_file_name"
     t.string   "pdf_content_type"
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(:version => 20130527223028) do
     t.string   "cover_art_content_type"
     t.integer  "cover_art_file_size"
     t.datetime "cover_art_updated_at"
-    t.string   "slug"
   end
 
   add_index "magazines", ["slug"], :name => "index_magazines_on_cached_slug", :unique => true
@@ -204,10 +203,10 @@ ActiveRecord::Schema.define(:version => 20130527223028) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "state",              :limit => 8, :default => 0
+    t.string   "slug"
     t.integer  "page_id"
     t.integer  "position"
     t.integer  "magazine_id"
-    t.string   "slug"
   end
 
   add_index "submissions", ["slug"], :name => "index_submissions_on_cached_slug", :unique => true
@@ -218,6 +217,27 @@ ActiveRecord::Schema.define(:version => 20130527223028) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "cover_arts", "pages", :name => "cover_arts_page_id_fk"
+
+  add_foreign_key "editors_notes", "pages", :name => "editors_notes_page_id_fk"
+
+  add_foreign_key "pages", "magazines", :name => "pages_magazine_id_fk", :dependent => :delete
+
+  add_foreign_key "position_abilities", "abilities", :name => "position_abilities_ability_id_fk"
+  add_foreign_key "position_abilities", "positions", :name => "position_abilities_position_id_fk"
+
+  add_foreign_key "positions", "magazines", :name => "positions_magazine_id_fk"
+
   add_foreign_key "pseudonyms", "submissions", :name => "pseudonyms_submission_id_fk", :dependent => :delete
+
+  add_foreign_key "roles", "people", :name => "roles_person_id_fk"
+  add_foreign_key "roles", "positions", :name => "roles_position_id_fk"
+
+  add_foreign_key "staff_lists", "pages", :name => "staff_lists_page_id_fk"
+
+  add_foreign_key "submissions", "magazines", :name => "submissions_magazine_id_fk"
+  add_foreign_key "submissions", "pages", :name => "submissions_page_id_fk", :dependent => :nullify
+
+  add_foreign_key "table_of_contents", "pages", :name => "table_of_contents_page_id_fk"
 
 end

@@ -1,4 +1,0 @@
-apps:
-  # shorthand: heroku
-  production: 'pcmag'
-  staging: 'pcmag-staging'
