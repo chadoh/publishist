@@ -53,7 +53,7 @@
       - if content_for? :sidebar
         %section.sidebar{ :id => "#{@article_id}-sidebar" }
           = yield :sidebar
-      #page-footer &nbsp;
+      #page-footer
     %footer{ :role => 'contentinfo' }
       #footer
         %p Create in Community
