@@ -1,4 +1,4 @@
-var score_timers = [];
+var score_timers = {};
 
 function submitScoreWithDelay(score_form_element) {
   var span = $(score_form_element).closest('span');
@@ -6,9 +6,11 @@ function submitScoreWithDelay(score_form_element) {
 
   /* check to see if there's already a timer running for this score */
   if (!score_timers[score_id]) {
-    /* if not, go ahead and submit this one with a delay */
+    /* if not, go ahead and submit this one, then wait half a second before
+    * allowing it to be submitted again (to avoid multiple form submissions) */
+    score_form_element.submit();
     score_timers[score_id] = setTimeout(function() {
-      score_form_element.submit();
+      delete score_timers[score_id];
     }, 500);
   }
 
@@ -44,7 +46,7 @@ $(function(){
 
   $('div.scores-wrap').css({ width: ($('div.scores').length * 55) });
   $('form.score input[type=submit]').hide();
-  $('input[type=number]').on('mouseout blur', function(){
+  $('.scores-wrap').on('mouseout blur', 'input[type=number]', function(){
     var orig    = $(this).attr('data-original'),
         current = $(this).val();
     if (orig != current) {

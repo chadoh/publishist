@@ -7,7 +7,7 @@
     = f.input :attendee_id, :as => :hidden
     = f.input :packlet_id, :as => :hidden
     = f.input :entered_by_coeditor, :as => :hidden
-    - unless request.xhr?
+    -#- unless request.xhr? # NO JAVASCRIPT IS FOR CHUMPS
       = f.button :submit, "+", :class => "link"
   -# needed the following in order to "unset" scores in old webkit browsers. Removed Oct 2011
   -# - if score.id
