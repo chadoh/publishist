@@ -18,14 +18,14 @@ function submitScoreWithDelay(score_form_element) {
 
 $(function(){
 
-  $("#attendee_person").on('focus blur', function(event){
+  $(document).on('focus blur', "#attendee_person", function(event){
     if (event.type == 'focusin') {
       $(this).autocomplete("/people/auto_complete_for_person_first_name_middle_name_last_name_email"); }
     else {
       if($(this).val() == '')
-        $('span.name').html($(this).val().split(' ')[0].replace(/"/g, ''));
+        $('span.name').html($(this).val().split(' ')[0].replace(/,/g, ''));
       else
-        $('span.name').html($(this).val().split(' ')[0].replace(/"/g, '') + "'s");
+        $('span.name').html($(this).val().split(' ')[0].replace(/,/g, '') + "'s");
     }});
 
   $('ol.packlets.sortable').sortable({
@@ -54,7 +54,7 @@ $(function(){
     }
   });
 
-  $('form#new_attendee[data-remote]').on('ajax:before', function(){
+  $(document).on('ajax:before', 'form#new_attendee[data-remote]', function(){
     attendee_email = $(this).find("input#attendee_person").val().split(' ').pop();
     if ($(this).attr('data-viewer') == attendee_email) {
       $(this).submit(); }

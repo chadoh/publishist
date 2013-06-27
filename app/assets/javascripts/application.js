@@ -25,7 +25,7 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 
 $(function(){
 
-  $('a[data-target=new]').on('click', function(e){
+  $(document).on('click', 'a[data-target=new]', function(e){
     e.preventDefault();
     window.open($(this).attr('href'));
   });
@@ -33,13 +33,14 @@ $(function(){
     return 'value' in document.createElement('meter');
   });
 
-  $('a.toggle_next').next().hide().end().on('click', function(e){
+  $('a.toggle_next').next().hide().end()
+  $(document).on('click', 'a.toggle_next', function(e){
     e.preventDefault();
     $(this).next().slideToggle();
   });
 
   $('dd').hide();
-  $('dt').on('click', function(e){
+  $(document).on('click', 'dt', function(e){
     $(this).find('span.arrow').toggleClass("rotated");
     $(this).next().slideToggle();
   });
@@ -47,7 +48,7 @@ $(function(){
     $('dt').first().click()
   }, 1000);
 
-  $("li.attendee nav.actions form[data-remote]").on("ajax:success", function(){
+  $(document).on("ajax:success", "li.attendee nav.actions form[data-remote]", function(){
     $(this).closest('nav').closest('li').fadeOut();
   });
 
