@@ -12,8 +12,6 @@
 @import compass/typography/text/ellipsis
 @import compass/typography/text/nowrap
 @import compass/css3/images
-@import submissions
-@import scores
 
 nav.actions > ul
   +delimited-list(" | ")
@@ -547,3 +545,170 @@ img.cover-art
   margin: 1.5em auto
   +border-radius(1.5em)
   +box-shadow(0 0 1.5em $lgray)
+
+/*
+ *     SCORES
+ *******************************/
+section#scores
+  +full
+  +leader
+  div.packlet-titles-wrap
+    +span-columns(3)
+    margin-right: 0
+    ol.packlet-titles
+      li.title
+        max-height: $base-line-height
+        a
+          +inline-block
+          vertical-align: inherit
+          min-height: $base-font-size
+          width: 100%
+          +ellipsis
+  div.scores-wrap-container-wrap
+    +omega
+    +span-columns(13)
+    +clearfix
+    position: relative
+    .border
+      height: 100%
+      width:  10px
+      position: absolute
+      top: 0
+      z-index: 1
+      &:first-child
+        left: 0
+        +background-image(linear-gradient(left, rgba(white, 1), rgba(255, 255, 255, 0)))
+      &:last-child
+        right: 0
+        +background-image(linear-gradient(right, rgba(white, 1), rgba(255, 255, 255, 0)))
+    div.scores-wrap-container
+      width: 100%
+      height: 100%
+      overflow-x: scroll
+      div.scores-wrap
+        padding: 0 12px
+        width: 100em
+        +clearfix
+        +trailer
+        position: relative
+        .scores
+          width: 55px
+          float: left
+          span.score
+            display: block
+
+/*
+ * SUBMISSIONS
+ *************************/
+
+article#submit-something
+  textarea#submission_body
+    height: $base-line-height / 14px * 18em
+  textarea#submission_title
+    height: $base-line-height / 14px * 1.5em
+  .trigger
+    height: 5px
+
+li.submission, li.packlet, section.submission
+  +no-bullet
+  +rhythm-borders(1px, 1, $base-font-size, dashed)
+  +padding-trailer(0)
+  border-color: $lgray
+  +leader
+  +trailer
+  ul
+    list-style-type: disc
+  ul, ol
+    +trailer
+    ul, ol
+      +trailer(0)
+  header h2
+    min-height: $base-line-height
+  &.error
+    border-color: $error
+
+footer.submission-details
+  +leader
+  +trailer
+  position: relative
+  p, span
+    +trailer(0)
+    +grayed-out
+  p.author
+    a.name
+      +inline-block
+      width: 85%
+  .actions
+    @extend .small
+    @extend .sans
+    position: absolute
+    right: 1em
+    bottom: 0
+    > *
+      padding: 0 2px
+
+span.drag-handle-wrap
+  display: none
+li.submission > input[type=checkbox]
+  display: none
+
+article#submissions, article.meetings
+  section
+    header > h2
+      +trailer(0)
+    +full
+    +trailer
+    +clearfix
+.drop-here
+  +rhythm-borders(1px, 0, $base-font-size, dashed)
+  border-color: $lgray
+
+article.people ul.submissions
+  margin-left: 0
+
+ol.packlets, ul.submissions, ol.submissions
+  li
+    // not collapsed
+    margin-left: -1.5em
+    position: relative
+    span.drag-handle-wrap
+      +drag-handle-expanded
+  li.collapsed
+    margin-left: 0.5em
+    &.packlet
+      list-style-type: decimal
+    &.submission
+      list-style-type: disc
+    &.submission, &.packlet
+      +rhythm-borders(0px, 0)
+      +leader(0)
+      +trailer(0)
+      header
+        +inline-block
+        width: 60%
+        h2
+          +trailer(0)
+      div.body
+        display: none
+      span.drag-handle-wrap
+        +drag-handle-collapsed
+      input[type=checkbox]
+        +inline-block
+      footer
+        +inline-block
+        width: 35%
+        +trailer(0)
+        +leader(0)
+        span.score
+          form.score
+            display: inline
+        nav.actions
+          display: none
+        p.scored
+          display: inline
+article.magazines ol.submissions li.collapsed.submission
+  list-style-type: decimal
+  footer
+    p.scored
+      display: none
+
