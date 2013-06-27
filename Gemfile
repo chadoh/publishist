@@ -1,8 +1,11 @@
 source 'http://rubygems.org'
+ruby "1.9.2"
 
 gem 'rake',  '10.0.4'
 gem 'rails', '~> 3.1.3'
 gem 'pg', '~> 0.11'
+gem 'unicorn'
+gem 'newrelic_rpm'
 
 # Views
 gem 'haml', '3.1.3'
