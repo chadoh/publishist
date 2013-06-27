@@ -95,7 +95,7 @@ class Person < ActiveRecord::Base
   end
 
   def magazines_with_meetings
-    magazines.reject{|m| m.meetings.empty? }
+    magazines.reject{|m| m.meetings.empty? }.sort_by(&:accepts_submissions_from).reverse
   end
 
   # function to set the password without knowing the current password used in our confirmation controller.
