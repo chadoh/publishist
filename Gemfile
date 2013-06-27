@@ -8,7 +8,7 @@ gem 'pg', '~> 0.11'
 gem 'haml', '3.1.3'
 gem 'sass'
 gem 'simple_form'
-gem 'rdiscount', github: 'sunaku/rdiscount' # remove when on 1.9.3
+gem 'rdiscount', git: 'https://github.com/sunaku/rdiscount.git' # remove when on 1.9.3
 
 # Controllers
 gem 'aws-s3'

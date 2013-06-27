@@ -6,7 +6,7 @@ GIT
       redcarpet (~> 1.12.0)
 
 GIT
-  remote: git://github.com/sunaku/rdiscount.git
+  remote: https://github.com/sunaku/rdiscount.git
   revision: df32724534bde580743591818a82d1304d285d7e
   specs:
     rdiscount (1.6.8)
