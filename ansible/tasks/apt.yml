@@ -11,6 +11,7 @@
     - build-essential
     - fontconfig # needed for phantomjs
     - nodejs
+    - imagemagick
     - curl
     - python-psycopg2
     - postgresql
