@@ -6,6 +6,7 @@ gem 'rails', '~> 3.1.3'
 gem 'pg', '~> 0.11'
 gem 'unicorn'
 gem 'newrelic_rpm'
+gem 'rack-timeout'
 
 # Views
 gem 'haml', '3.1.3'
