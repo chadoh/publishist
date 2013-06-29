@@ -12,3 +12,4 @@ public/javascripts/jquery-ui.min.js
 tmp/**/*
 .vagrant
 latest.dump
+.env
