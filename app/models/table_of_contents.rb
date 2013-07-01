@@ -13,7 +13,7 @@ class TableOfContents < ActiveRecord::Base
   belongs_to :page
   has_one :magazine, through: :page
 
-  def hash
+  def to_h
     self.magazine.submissions.sort_by{|s| s.page.position }.reverse.inject({}) do |toc, sub|
       toc[sub] = {page: sub.page}
       toc

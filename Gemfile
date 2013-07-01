@@ -2,14 +2,14 @@ source 'http://rubygems.org'
 ruby "1.9.2"
 
 gem 'rake',  '10.0.4'
-gem 'rails', '~> 3.1.3'
+gem 'rails', '~> 3.2.0'
 gem 'pg', '~> 0.11'
 gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'rack-timeout'
 
 # Views
-gem 'haml', '3.1.3'
+gem 'haml'
 gem 'sass'
 gem 'simple_form'
 gem 'rdiscount', git: 'https://github.com/sunaku/rdiscount.git' # remove when on 1.9.3
@@ -44,19 +44,18 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', '3.1.7'
-  gem 'coffee-rails', '~> 3.1.0'
-  gem 'uglifier'
+  gem 'sass-rails', '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
   gem 'compass-rails'
   gem 'susy'
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 group :development, :test do
-  gem 'railroady'
   gem 'rspec-rails'
-  gem 'rb-fsevent'
 end
 
 group :test do
