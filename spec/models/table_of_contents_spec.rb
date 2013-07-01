@@ -21,9 +21,9 @@ describe TableOfContents do
     should have_one(:magazine).through(:page)
   }
 
-  describe "#hash" do
+  describe "#to_h" do
     it "constructs a hash with each submission & its page" do
-      hash = @table_of_contents.hash
+      hash = @table_of_contents.to_h
       hash[@submission].should == { page: @submission.page }
       hash[@submission2].should == { page: @submission2.page }
     end

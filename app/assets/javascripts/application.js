@@ -5,7 +5,9 @@
 // the compiled file.
 //
 //= require jquery
-//= require jquery-ui
+//= require jquery.ui.sortable
+//= require jquery.ui.draggable
+//= require jquery.ui.droppable
 //= require jquery_ujs
 //= require_tree .
 //= require_tree ../../../vendor/assets/javascripts
