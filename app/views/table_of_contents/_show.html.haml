@@ -5,7 +5,7 @@
       %th{ title: "Sort by Author" } Author
       %th.headerSortDown{ title: "Sort by Page Number" } Page
   %tbody
-    - table_of_contents.hash.each do |sub, props|
+    - table_of_contents.to_h.each do |sub, props|
       %tr
         %td= link_to sub, sub
         %td= link_to_if sub.pseudonym_link, sub.author_name, sub.author

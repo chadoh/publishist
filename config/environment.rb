@@ -6,5 +6,3 @@ Pc::Application.initialize!
 
 # Needs to be set for submissions to turn out right!
 Haml::Template.options[:ugly] = true
-
-Sass::Plugin.options[:css_location] = 'public/stylesheets/compiled'
