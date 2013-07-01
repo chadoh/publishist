@@ -84,8 +84,9 @@ describe Page do
 
   describe "self.with_content" do
     it "returns only pages with content" do
-      page1 = Page.create magazine_id: 1
-      page2 = Page.create magazine_id: 1
+      magazine = Factory.create(:magazine)
+      page1 = Page.create magazine: magazine
+      page2 = Page.create magazine: magazine
       sub   = Factory.create :submission, state: :published
       page1.submissions << sub
       Page.with_content.should == [page1]

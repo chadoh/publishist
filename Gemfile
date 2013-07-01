@@ -39,8 +39,6 @@ gem 'airbrake'
 
 group :development do
   gem 'annotate'
-  gem 'rails3-generators'
-  gem 'ruby-debug19'
 end
 
 # Gems used only for assets and not required
