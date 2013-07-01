@@ -2,5 +2,8 @@
 - name: install rvm
   shell: \curl -L https://get.rvm.io | bash -s stable --autolibs=3 creates=~/.rvm
 
+- name: update rvm
+  shell: 'executable=/bin/bash . "$HOME/.rvm/scripts/rvm" && rvm get stable'
+
 - name: install ruby
   shell: ~/.rvm/bin/rvm install --default {{ ruby }} creates=~/.rvm/rubies/{{ ruby }}
