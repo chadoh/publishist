@@ -2,7 +2,7 @@
 - hosts: vagrant
   gather_facts: no
   vars:
-    ruby: ruby-1.9.2-p180
+    ruby: 2.0.0-p247
     phantomjs: phantomjs-1.9.0-linux-x86_64
     dev_db: dev
     test_db: test
