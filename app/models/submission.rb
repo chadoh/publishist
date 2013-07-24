@@ -20,8 +20,12 @@
 #  magazine_id        :integer
 #
 
+require "#{Rails.root}/lib/enum_fu"
+
 class Submission < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
+  include EnumFu
+
   belongs_to :author, :class_name => "Person"
   belongs_to :page
   belongs_to :magazine
