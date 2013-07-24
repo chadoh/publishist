@@ -12,7 +12,7 @@
 #
 
 class Page < ActiveRecord::Base
-  extend ActiveSupport::Memoizable
+  extend Memoist
 
   belongs_to :magazine
   has_many   :submissions,       dependent: :nullify, order: :position

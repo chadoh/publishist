@@ -28,8 +28,9 @@ gem 'delayed_job', '~>2.1'
 gem 'devise', '~> 1.5.0'
 gem 'escape_utils'
 gem 'foreigner'
-gem 'rack-recaptcha', require: 'rack/recaptcha'
+gem 'memoist'
 gem 'oa-core'
+gem 'rack-recaptcha', require: 'rack/recaptcha'
 gem 'workless' # automatically start & stop workers (on Heroku or locally) for DJ
 
 # Mailers

@@ -26,7 +26,7 @@
 #
 
 class Magazine < ActiveRecord::Base
-  extend ActiveSupport::Memoizable
+  extend Memoist
 
   has_many :meetings,  dependent: :nullify, include: :submissions
   has_many :pages,     dependent: :destroy, order:   :position

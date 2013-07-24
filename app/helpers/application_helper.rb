@@ -1,5 +1,5 @@
 module ApplicationHelper
-  extend ActiveSupport::Memoizable
+  extend Memoist
   include Rack::Recaptcha::Helpers
 
   def pluralize_phrase(number, singular_phrase, plural_phrase)

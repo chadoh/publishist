@@ -30,7 +30,7 @@
 #require 'digest/sha2'
 
 class Person < ActiveRecord::Base
-  extend ActiveSupport::Memoizable
+  extend Memoist
 
   devise :database_authenticatable, :confirmable,
          :recoverable, :registerable, :rememberable, :trackable,
@@ -193,7 +193,7 @@ class Person < ActiveRecord::Base
   end
 
   class << self
-    extend ActiveSupport::Memoizable
+    extend Memoist
 
     def current_communicators
       mag = Magazine.current || Magazine.first
