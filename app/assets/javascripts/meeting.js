@@ -20,8 +20,14 @@ $(function(){
 
   $(document).on('focus blur', "#attendee_person", function(event){
     if (event.type == 'focusin') {
-      $(this).autocomplete("/people/auto_complete_for_person_first_name_middle_name_last_name_email"); }
-    else {
+      $(this).autocomplete({
+        source: "/people/autocomplete",
+        minLength: 2,
+        select: function(evnt, ui) {
+          $(this).val(ui.item.value);
+        }
+      });
+    } else {
       if($(this).val() == '')
         $('span.name').html($(this).val().split(' ')[0].replace(/,/g, ''));
       else

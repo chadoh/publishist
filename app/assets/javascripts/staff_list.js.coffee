@@ -4,7 +4,11 @@ jQuery ->
     $(this).closest('footer').toggleClass('add-role')
 
   $(document).on 'focusin', 'input[name="role[person]"]', ->
-    $(this).autocomplete("/people/auto_complete_for_person_first_name_middle_name_last_name_email")
+    $(this).autocomplete
+      source: "/people/autocomplete",
+      minLength: 2,
+      select: (evnt, ui) ->
+        $(this).val(ui.item.value)
 
   $(document).on 'keyup', 'input[name="role[person]"]', (e) ->
     $(this).closest('form').find('a.toggle-adding-role').click() if e.keyCode is 27

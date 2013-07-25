@@ -4,8 +4,23 @@ class PeopleController < InheritedResources::Base
   end
   before_filter :ensure_current_url, :only => :show
 
-  auto_complete_for :person, [:first_name, :middle_name, :last_name, :email], :limit => 15 do |people|
-    people.map {|person| "#{person.name}, #{person.email}" }.join "\n"
+  def autocomplete
+    terms = params[:term].split(' ')
+    @people = terms.map do |term|
+                Person.limit(15).
+                  where(
+                    "first_name LIKE :term OR middle_name LIKE :term
+                    OR last_name LIKE :term OR email LIKE :term",
+                    term: "%#{term}%"
+                  )
+              end.flatten.uniq.sort do |a,b|
+                a.first_name <=> b.first_name
+              end.map do |p|
+                { :value => "#{p.name}, #{p.email}" }
+              end
+    respond_to do |wants|
+      wants.any { render json: @people }
+    end
   end
 
   def show

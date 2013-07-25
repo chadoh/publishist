@@ -8,6 +8,7 @@
 //= require jquery.ui.sortable
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
+//= require jquery.ui.autocomplete
 //= require jquery_ujs
 //= require_tree .
 //= require_tree ../../../vendor/assets/javascripts
@@ -16,7 +17,7 @@ jQuery.expr[':'].regex = function(elem, index, match) {
     var matchParams = match[3].split(','),
         validLabels = /^(data|css):/,
         attr = {
-            method: matchParams[0].match(validLabels) ? 
+            method: matchParams[0].match(validLabels) ?
                         matchParams[0].split(':')[0] : 'attr',
             property: matchParams.shift().replace(validLabels,'')
         },

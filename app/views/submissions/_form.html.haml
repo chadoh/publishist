@@ -46,8 +46,13 @@
         if (email != "#{current_person.email}") {
           span.hide(); }
         $("#submission_author")
-          .autocomplete("#{auto_complete_for_person_first_name_middle_name_last_name_email_people_path}")
-          .keyup(function(){
+          .autocomplete({
+            source: "/people/autocomplete",
+            minLength: 2,
+            select: function(evnt, ui) {
+              $(this).val(ui.item.value);
+            }
+          }).keyup(function(){
             var email = $(this).val().split(' ').pop();
             if (email != "#{current_person.email}") {
               span.hide(); }
@@ -122,7 +127,7 @@
         How will you review my submission?
       %dd
         :markdown
-          Your name will be removed when this is reviewed; 
+          Your name will be removed when this is reviewed;
           only the editor
           #{"([#{Person.current_communicators.collect(&:name).to_sentence}][1])" if Person.current_communicators.present?}
           will know you wrote this. And only the coeditor

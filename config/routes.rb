@@ -42,6 +42,7 @@ Pc::Application.routes.draw do
     end
     collection do
       get 'auto_complete_for_person_first_name_middle_name_last_name_email'
+      get 'autocomplete'
     end
   end
 

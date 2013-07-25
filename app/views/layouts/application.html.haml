@@ -57,7 +57,6 @@
     %footer{ :role => 'contentinfo' }
       #footer
         %p Create in Community
-    -# = javascript_include_tag 'jquery.autocomplete', 'modernizr-1.6.min', 'rails', 'application'
     - if protect_against_forgery?
       :javascript
         var AUTH_TOKEN = #{form_authenticity_token.inspect};
