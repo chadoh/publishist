@@ -24,7 +24,7 @@ gem 'paperclip'
 
 # Models
 gem 'acts_as_list'
-gem 'delayed_job', '~>2.1'
+gem 'delayed_job_active_record'
 gem 'devise', '~> 1.5.0'
 gem 'escape_utils'
 gem 'foreigner'

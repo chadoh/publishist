@@ -98,11 +98,12 @@ GEM
       cucumber (>= 1.2.0)
       nokogiri (>= 1.5.0)
       rails (~> 3.0)
-    daemons (1.1.9)
     database_cleaner (1.0.1)
-    delayed_job (2.1.4)
+    delayed_job (3.0.5)
       activesupport (~> 3.0)
-      daemons
+    delayed_job_active_record (0.4.4)
+      activerecord (>= 2.1.0, < 4)
+      delayed_job (~> 3.0)
     devise (1.5.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -293,7 +294,7 @@ DEPENDENCIES
   compass-rails
   cucumber-rails
   database_cleaner
-  delayed_job (~> 2.1)
+  delayed_job_active_record
   devise (~> 1.5.0)
   email_spec
   escape_utils
