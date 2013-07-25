@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/chadoh/handlers.git
-  revision: 906d3f695e3d03238660bc5956390b5ba7e61bd2
+  revision: c5af9d41025d196b487befad09ce7f2bbfad84be
   specs:
-    handlers (0.0.3)
+    handlers (0.0.4)
       redcarpet (~> 1.12.0)
 
 GIT
