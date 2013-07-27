@@ -9,8 +9,8 @@ class PeopleController < InheritedResources::Base
     @people = terms.map do |term|
                 Person.limit(15).
                   where(
-                    "first_name LIKE :term OR middle_name LIKE :term
-                    OR last_name LIKE :term OR email LIKE :term",
+                    "first_name ILIKE :term OR middle_name ILIKE :term
+                    OR last_name ILIKE :term OR email ILIKE :term",
                     term: "%#{term}%"
                   )
               end.flatten.uniq.sort do |a,b|
