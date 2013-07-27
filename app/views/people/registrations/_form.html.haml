@@ -1,6 +1,6 @@
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = error_messages
-  = f.input :name, required: true, autofocus: 'true'
+  = f.input :name, required: true, autofocus: true
   = f.input :email, required: true, placeholder: "This is what you you'll use to sign in."
   - if params[:action] == 'new' || params[:action] == 'create'
     .input.captcha

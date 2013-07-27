@@ -1,6 +1,6 @@
 = simple_form_for @position do |f|
   = error_messages
   = f.input :magazine_id, as: :hidden
-  = f.input :name, autofocus: 'true'
+  = f.input :name, autofocus: true
   = f.association :abilities, as: :check_boxes, label_method: :description
   = f.button :submit, "Save"
