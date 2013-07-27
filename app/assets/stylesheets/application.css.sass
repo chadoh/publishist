@@ -319,10 +319,10 @@ ol.magazines
     margin-left: 0
     +span-columns(5)
     margin-right: 1.5em
-    height: 330px
+    height: 360px
     .cover-art
       position: relative
-      height: 300px
+      height: 330px
       background-color: $noticeable
       +background-image(radial-gradient(67px 67px, lighten($noticeable, 6%) 10px, $noticeable 100px))
       +opacity(1)
@@ -346,12 +346,15 @@ ol.magazines
         margin: -2px
         +box-shadow(0 0 0)
         height: 100%
+        overflow: hidden
         & > a
           display: block
           height: 100%
           width: 100%
         &, a, img
           +border-radius(0.5em)
+        img
+          width: 100%
       &:hover
         > *
           +opacity(1)

@@ -44,7 +44,7 @@ class Magazine < ActiveRecord::Base
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :path           => "/cover_art/:style/:filename",
-    :styles         => { thumb: "300x300>" }
+    :styles         => { thumb: "330x330>" }
 
   validates_presence_of :nickname
   validates_presence_of :accepts_submissions_from
