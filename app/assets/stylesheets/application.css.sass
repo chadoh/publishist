@@ -320,6 +320,8 @@ ol.magazines
     +span-columns(5)
     margin-right: 1.5em
     height: 354px
+    &.bordered .cover-art
+      border: 1px solid $lgray
     .cover-art
       position: relative
       height: 324px
@@ -327,7 +329,6 @@ ol.magazines
       +background-image(radial-gradient(67px 67px, lighten($noticeable, 6%) 10px, $noticeable 100px))
       +opacity(1)
       +border-radius(0.5em)
-      border: 1px solid $lgray
       padding: 2px
       > *
         +opacity(0)
