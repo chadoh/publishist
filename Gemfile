@@ -8,6 +8,8 @@ gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'rack-timeout'
 
+gem 'rails_12factor', group: :production
+
 # Views
 gem 'haml'
 gem 'sass'

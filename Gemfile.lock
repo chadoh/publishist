@@ -197,6 +197,11 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.1)
+    rails_stdout_logging (0.0.1)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -316,6 +321,7 @@ DEPENDENCIES
   rack-recaptcha
   rack-timeout
   rails (~> 3.2.0)
+  rails_12factor
   rake (= 10.0.4)
   rdiscount!
   rspec-rails
