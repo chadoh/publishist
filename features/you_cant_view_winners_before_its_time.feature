@@ -13,8 +13,8 @@ Feature: You can't view the winners before it's time! (Or if you're not an edito
   Scenario: The magazine has stopped accepting submissions, but no scores have been entered for the submissions
     Given I'm in a position for the current magazine with the "orchestrates" ability
     And the magazine's timeframe is freshly over
-    And 10 meetings have occured in it
-    And 10 submissions have been reviewed at these meetings
+    And 1 meeting has occured in it
+    And 1 submission has been reviewed at this meeting
     When I am on the magazines page
     And I follow "highest-scored"
     Then I should see "never entered any scores"

@@ -99,7 +99,7 @@ class SubmissionsController < InheritedResources::Base
             flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
             redirect_to new_submission_url and return
           else
-            redirect_to request.referer
+            redirect_to session[:return_to] || request.referer
           end
         }
       else

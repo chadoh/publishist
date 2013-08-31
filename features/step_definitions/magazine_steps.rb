@@ -65,14 +65,16 @@ Given(/^a magazine (?:titled|nicknamed) "([^"]*)" has been published$/) do |titl
   mag.publish(Submission.all)
 end
 
-Given(/^10 meetings have occured in it$/) do
+Given(/^(\d+) meetings? ha(?:ve|s) occured in it$/) do |num|
   mag = Magazine.first
-  10.times { mag.meetings << Factory.create(:meeting) }
+  num.to_i.times { mag.meetings << Factory.create(:meeting) }
 end
 
-Given(/^(\d+) submissions have been reviewed at these meetings$/) do |total_submissions|
-  for meeting in Magazine.first.meetings
-    (total_submissions.to_i/10).times { meeting.submissions << Factory.create(:submission) }
+Given(/^(\d+) submissions? ha(?:ve|s) been reviewed at th(?:ese|is) meetings?$/) do |total_submissions|
+  mag = Magazine.first
+  total_meetings = mag.meetings.count
+  for meeting in mag.meetings
+    (total_submissions.to_i/total_meetings).times { meeting.submissions << Factory.create(:submission) }
   end
 end
 

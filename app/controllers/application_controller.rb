@@ -4,6 +4,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
 
+  before_filter :reset_return_to_maybe
+
+  def reset_return_to_maybe
+    if session[:return_to]
+      session[:return_to_age] ||= 0
+      session[:return_to_age] += 1
+      if session[:return_to_age] > 1
+        session[:return_to] = nil
+        session[:return_to_age] = nil
+      end
+    end
+  end
+
 protected
 
   def must_orchestrate *args

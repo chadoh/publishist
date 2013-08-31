@@ -14,7 +14,7 @@ class RolesController < InheritedResources::Base
     logger.debug "@role = #@role; @role.valid? #{@role.valid?}"
     must_orchestrate @role, :or_adjacent
     respond_with(@role) do |wants|
-      wants.html { redirect_to session[:return_to] }
+      wants.html { redirect_to session[:return_to] || request.referer }
       wants.js {
         if @role.valid?
           render :create
