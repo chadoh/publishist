@@ -73,7 +73,7 @@ magazines = {
   "2008 Spring" => Magazine.find_by_title('Spring 2008'),
   "2008 Fall"   => Magazine.find_by_title('Fall 2008'),
   "2009 Spring" => Magazine.find_by_title('Spring 2009'),
-  "2008 Fall"   => Magazine.find_by_title('Fall 2009: Diagnosing the Problem Child')
+  "2009 Fall"   => Magazine.find_by_title('Fall 2009: Diagnosing the Problem Child')
 }
 
 # DATA CLEANUP
