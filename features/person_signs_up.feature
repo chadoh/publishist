@@ -3,17 +3,21 @@ Feature: a person signs up for the website
   and vote on shit.
   I need an account.
 
+  Scenario: A bot tries to sign up, and fills out the honeypot fields
+    Given I am on the sign up page
+    When I fill in the following:
+      | Name                            | Ghengis Khan        |
+      | Email                           | example@example.com |
+      | preference (please leave blank) | I'm so a bot        |
+    And I press "Sign Up!"
+    Then I should be on the home page
+    And there should be no new users
+
   Scenario: I sign up on the site
     Given I am on the sign up page
     When I fill in the following:
-      | Name  | Ghengis Khan        |
-      | Email | example@example.com |
-    And I fail the CAPTCHA
-    And I press "Sign Up!"
-    Then I should see "You might not be a human."
-    And all my information should still be filled out in the form
-
-    When I pass the CAPTCHA
+      | Name                            | Ghengis Khan        |
+      | Email                           | example@example.com |
     And I press "Sign Up!"
     Then I should see "Ok! Now go check your email to finish signing up."
     And I should receive an email with subject "You're nearly signed up for Problem Child!"

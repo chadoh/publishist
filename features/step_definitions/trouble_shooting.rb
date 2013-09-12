@@ -1,5 +1,5 @@
-Then /save and open page/ do
-  save_and_open_page
+Then /print page.html/ do
+  print page.html
 end
 
 Then /^p (.*)$/ do |object|

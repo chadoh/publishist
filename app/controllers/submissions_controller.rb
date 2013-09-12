@@ -1,3 +1,5 @@
+require "#{Rails.root}/lib/honey_pot"
+
 class SubmissionsController < InheritedResources::Base
   before_filter :only => [:index] do |c|
     c.must_orchestrate :any
@@ -31,6 +33,7 @@ class SubmissionsController < InheritedResources::Base
       @submission = Submission.new :author_id => current_person.id, :state => :draft
     else
       @submission = Submission.new :state => :submitted
+      @submission.extend HoneyPot
     end
 
     respond_to do |format|
@@ -64,20 +67,17 @@ class SubmissionsController < InheritedResources::Base
             end
             redirect_to person_url(current_person)
           else
-            if recaptcha_valid?
-              @submission.save
-              flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-              redirect_to session[:return_to] || root_url
-            else
-              flash[:notice] = "You might be a bot! If you're fairly certain you're not, please try again. Elsewise, <i>go away</i>.".html_safe
-              render action: 'new'
-            end
+            @submission.save
+            flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
+            redirect_to session[:return_to] || root_url
           end
         }
       else
         format.html { render action: "new" }
       end
     end
+  rescue ActiveRecord::UnknownAttributeError
+    redirect_to root_url
   end
 
   def update
@@ -117,7 +117,7 @@ class SubmissionsController < InheritedResources::Base
     end
   end
 
-protected
+private
 
   def ensure_current_url
     if request.path != submission_path(resource)
@@ -129,6 +129,11 @@ protected
     params[:submission][:author] = Person.find_or_create(params[:submission][:author]) if !!params[:submission][:author]
     params[:submission][:updated_by] = current_person
     params[:submission][:state] = :submitted if params["submit"]
+    drop_blank_fields
+  end
+
+  def  drop_blank_fields
+    params[:submission] = params[:submission].reject {|key, value| value.blank? }
   end
 
 end

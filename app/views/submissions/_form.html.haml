@@ -21,11 +21,16 @@
     - else
       = f.input :author_id, :as => :hidden
   - else
+    - if resource.respond_to? :mean
+      .contextual-info
+        -# this is bullshit; it's a honeypot
+        = f.input :mean, :label => "mean (please leave blank)", input_html: { :tabindex => -1 }
+        = f.input :tolerance, :label => "tolerance (please leave blank)", input_html: { :tabindex => -1 }
+        = f.input :legality, :label => "legality (please leave blank)", input_html: { :tabindex => -1 }
+        = f.input :preference, :label => "preference (please leave blank)", input_html: { :tabindex => -1 }
+        = f.input :encoding, :label => "encoding (please leave blank)", input_html: { :tabindex => -1 }
     = f.input :author_name, :label => "Your Name"
     = f.input :author_email, :label => "Your Email Address"
-    .input.captcha
-      %label{ for: "recaptcha_response_field" } Not a bot?
-      = raw recaptcha_tag(:challenge, display: { theme: 'white' })
   -# submit/preview/save
   - if person_signed_in?
     - if !@submission.draft?

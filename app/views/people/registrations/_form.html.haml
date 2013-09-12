@@ -3,9 +3,14 @@
   = f.input :name, required: true, autofocus: true
   = f.input :email, required: true, placeholder: "This is what you you'll use to sign in."
   - if params[:action] == 'new' || params[:action] == 'create'
-    .input.captcha
-      %label{ for: "recaptcha_response_field" } Prove you're a human
-      = raw recaptcha_tag(:challenge, display: { theme: 'white' })
+    - if resource.respond_to? :mean
+      .contextual-info
+        -# this is bullshit; it's a honeypot
+        = f.input :mean, :label => "mean (please leave blank)"
+        = f.input :tolerance, :label => "tolerance (please leave blank)"
+        = f.input :legality, :label => "legality (please leave blank)"
+        = f.input :preference, :label => "preference (please leave blank)"
+        = f.input :encoding, :label => "encoding (please leave blank)"
   - else
     = f.input :password, :label => 'New password', :required => false
     = f.input :password_confirmation, :label => 'New password again'

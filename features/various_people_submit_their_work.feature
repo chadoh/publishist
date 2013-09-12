@@ -69,23 +69,28 @@ Feature: people of various ranks submit something
       | Your Email Address | roger@example.com |
       | Title              | Merry Wives       |
       | Body               | of Pirates        |
-    And I pass the CAPTCHA
     And I press "Submit!"
     Then "roger@example.com" should receive an email with subject "Someone \(hopefully you!\) submitted to Problem Child for you!"
+
+  Scenario: A bot fills out the honypot fields
+    Given I am on the new submission page
+    When I fill in the following:
+      | Title                           | Jackson, a favorite       |
+      | Body                            | of both Johnny and Sufjan |
+      | Your Name                       | This Person               |
+      | Your Email Address              | example@example.com       |
+      | preference (please leave blank) | I'm so a bot              |
+    And I press "Submit!"
+    Then I should be on the home page
+    And there should be no new submission
 
   Scenario: An anonymous visitor submits something & thus signs up
     Given I am on the new submission page
     When I fill in the following:
-      | Title              | Jackson, a favorite       |
-      | Body               | of both Johnny and Sufjan |
-      | Your Name          | This Person               |
-      | Your Email Address | example@example.com       |
-    And I fail the CAPTCHA
-    And I press "Submit!"
-    Then I should see "You might be a bot!"
-    And my submission should still be filled in
-
-    When I pass the CAPTCHA
+      | Title                           | Jackson, a favorite       |
+      | Body                            | of both Johnny and Sufjan |
+      | Your Name                       | This Person               |
+      | Your Email Address              | example@example.com       |
     And I press "Submit!"
     Then I should be on the home page
     And I should receive an email with subject "You're nearly signed up for Problem Child!"

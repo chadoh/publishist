@@ -12,7 +12,7 @@ Pc::Application.routes.draw do
     confirmations: 'confirmations'
   } do
     get "sign_in", to: "people/sessions#new", as: "sign_in"
-    get "sign_up", to: "devise/registrations#new"
+    get "sign_up", to: "people/registrations#new"
   end
 
   get "submit" => "submissions#new", :as => :new_submission

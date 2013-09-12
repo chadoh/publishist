@@ -39,3 +39,7 @@ Given /^I have an account but am not signed in$/ do
   )
   person.confirm!
 end
+
+Then /^there should be no new users$/ do
+  Person.count == 0
+end

@@ -61,3 +61,7 @@ Given /^there is a submission called "([^"]*)"$/ do |title|
     author: Factory.create(:person),
     state: Submission.state(:submitted))
 end
+
+Then /^there should be no new submission$/ do
+  Submission.count == 0
+end

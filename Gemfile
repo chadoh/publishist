@@ -32,7 +32,6 @@ gem 'escape_utils'
 gem 'foreigner'
 gem 'memoist'
 gem 'oa-core'
-gem 'rack-recaptcha', require: 'rack/recaptcha'
 gem 'workless' # automatically start & stop workers (on Heroku or locally) for DJ
 
 # Mailers

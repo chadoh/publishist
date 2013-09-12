@@ -68,8 +68,5 @@ module Pc
 
     config.action_view.sanitized_allowed_tags = 'font', 's', 'u', 'audio', 'video'
     config.action_view.sanitized_allowed_attributes = 'color', 'style', 'controls'
-
-    config.gem 'rack-recaptcha', :lib => 'rack/recaptcha'
-    config.middleware.use Rack::Recaptcha, public_key: '6LfMRMcSAAAAAHDLgOQjCqu9-eAE26lPU8ZohIuF', private_key: ENV['CAPTCHA']
   end
 end

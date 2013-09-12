@@ -182,8 +182,6 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
-    rack-recaptcha (0.6.6)
-      json
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -318,7 +316,6 @@ DEPENDENCIES
   paperclip
   pg (~> 0.11)
   poltergeist
-  rack-recaptcha
   rack-timeout
   rails (~> 3.2.0)
   rails_12factor

@@ -1,18 +1,26 @@
 class People::RegistrationsController < Devise::RegistrationsController
 
+  def new
+    build_resource {}
+    resource.extend HoneyPot
+    respond_with self.resource
+  end
+
   def create
-    if recaptcha_valid?
-      super
-    else
-      build_resource
-      clean_up_passwords(resource)
-      flash[:notice] = "You might not be a human. Please try this new captcha below."
-      render_with_scope :new
-    end
+    remove_blank_attributes
+    super
+  rescue ActiveRecord::UnknownAttributeError
+    redirect_to :root
   end
 
   def after_update_path_for(resource)
     person_url(resource)
+  end
+
+  private
+
+  def remove_blank_attributes
+    params[:person] = params[:person].reject{|k,v| v.blank? }
   end
 
 end

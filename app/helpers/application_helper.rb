@@ -1,6 +1,5 @@
 module ApplicationHelper
   extend Memoist
-  include Rack::Recaptcha::Helpers
 
   def pluralize_phrase(number, singular_phrase, plural_phrase)
     return singular_phrase if number == 1
