@@ -15,6 +15,7 @@ gem 'haml'
 gem 'sass'
 gem 'simple_form'
 gem 'rdiscount', git: 'https://github.com/sunaku/rdiscount.git' # remove when on 1.9.3
+gem 'font-awesome-rails'
 
 # Controllers
 gem 'aws-s3'

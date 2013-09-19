@@ -59,7 +59,7 @@
           = f.submit "Submit", class: "link"
       = link_to t('edit').html_safe, edit_submission_url(submission), title: "Edit"
       - if (communicates?(submission) || submission.state != :published) && !(params[:controller] == "magazines" && params[:action] == "highest_scores")
-        = button_to t('destroy').html_safe, submission_url(submission),
+        = link_to t('destroy').html_safe, submission_url(submission),
           title: "Delete",
           method: :delete,
           confirm: "Are you really sure you want to totally destroy all record of this submission?#{' If you just want to unschedule it, you can do that by dragging it to the "Unscheduled" section on the "Submissions" page.' if communicates?(submission)}",
@@ -67,7 +67,5 @@
       - if submission.published? && !submission.magazine.notification_sent?
         = form_for submission, html: { class: "button_to" } do |f|
           = f.hidden_field :state, value: Submission.state(:rejected)
-          = f.submit "&oslash;".html_safe,
-            class: "link",
-            title: "Unpublish (#{submission} will no longer be part of #{submission.magazine})",
-            confirm: "Are you sure that #{submission} shouldn't be published in #{submission.magazine}?"
+          %button.link{ title: "Unpublish (#{submission} will no longer be part of #{submission.magazine})", confirm: "Are you sure that #{submission} shouldn't be published in #{submission.magazine}?" }
+            = fa_icon "eject"

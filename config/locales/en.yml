@@ -5,8 +5,8 @@ en:
   subtitle: 'A Penn State Literary Magazine'
   actions: 'Actions'
   show: 'Show'
-  edit: '&#x2699;'
-  destroy: '&times;'
+  edit: '<i class="icon-edit"></i>'
+  destroy: '<i class="icon-remove"></i>'
   are_you_sure: 'Are you sure?'
   submit: 'Submit'
   submit!: 'Submit!'
@@ -35,7 +35,7 @@ en:
     index:
       title: "Meetings"
       new_meeting: "Schedule a new meeting"
-    new: 
+    new:
       title: "New Meeting"
     edit:
       title: "Edit Meeting"
