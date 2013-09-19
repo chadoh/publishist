@@ -3,7 +3,7 @@
 %li[submission]{ :class => collapsed && "collapsed" }
   - if orchestrates?(submission.magazine) && !(params[:controller] == "magazines" && params[:action] == "highest_scores")
     %span.drag-handle-wrap
-      %span.drag-handle &lt;&gt;
+      %span.drag-handle.icon-reorder
   - if params[:controller] == "magazines" && params[:action] == "highest_scores"
     = check_box_tag "submission_ids[]", submission.id, true
   %header
