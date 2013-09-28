@@ -25,12 +25,12 @@ Feature: the staff list shows staff for a magazine and allows the editor to spec
     When I press "X"
     Then I should not see my name under "Editor"
 
-    When I follow "⚙"
+    When I click the edit link
     And I fill in "Name" with "Coeditor"
     And I press "Save"
     Then I should see "Coeditor"
 
-    When I press "×"
+    When I click the remove link
     Then I should not see "Coeditor"
 
   Scenario: I set up a staff list for an unpublished magazine

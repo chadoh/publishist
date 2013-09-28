@@ -59,3 +59,21 @@ When /^I fill in "([^"]*)" with my email address$/ do |field|
   fill_in(field, :with => @person.email)
 end
 
+When(/^I click the edit link$/) do
+  find(:css, "[title^=Edit]").click
+end
+Then(/^I should see an edit link under "(.*?)"/) do |heading|
+  begin
+    find("##{heading.parameterize('_')}").should have_css('[title=Edit]')
+  rescue Capybara::ElementNotFound
+    find("#submission_#{Submission.find_by_title(heading).id}").should have_css('[title=Edit]')
+  end
+end
+
+When(/^I click the remove link$/) do
+  find(:css, "[data-method=delete]").click
+end
+
+When(/^I press the unpublish button$/) do
+  find(:css, "[title^=Unpublish]").click
+end

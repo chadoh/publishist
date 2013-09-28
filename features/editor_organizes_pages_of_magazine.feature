@@ -20,7 +20,7 @@ Feature: An editor organizes submissions onto pages of a magazine
     Then I should see "Cover Notes Staff ToC 1 2" for the page numbers
 
   Scenario: I can remove a page from the magazine
-    When I press "x"
+    When I click the remove link
     Then I should see "Cover Notes ToC 0" for the page numbers
 
   Scenario: I can unpublish submissions
@@ -28,7 +28,7 @@ Feature: An editor organizes submissions onto pages of a magazine
     When I follow "1"
     Then I should see "Everyone Dies, Anyway"
 
-    When I press "ø"
+    When I press the unpublish button
     Then "Everyone Dies, Anyway" should be rejected
     And it should not be on a page
     And I should be on page 1 of the "Fruit Blots" magazine

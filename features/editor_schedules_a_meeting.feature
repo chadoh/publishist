@@ -17,7 +17,7 @@ Feature: Editor schedules a meetings
     Given I'm in a position for the current magazine with the "orchestrates" ability
     And there is a meeting scheduled
     And I am on the meetings page
-    When I follow "⚙"
+    When I click the edit link
     And I fill in "Question" with "What is the energy of your color?"
     And I press "Update Meeting"
     Then I should see "What is the energy of your color?"
