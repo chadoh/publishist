@@ -14,7 +14,7 @@ Feature: an editor records attendee
     And I press "Add"
     Then I should see a "Peas Cold" link under "Attendance"
 
-    When I press "×"
+    When I click the remove link
     Then I should not see "Peas Cold"
 
   @pending
@@ -40,7 +40,7 @@ Feature: an editor records attendee
     Given I'm in a position for the current magazine with the "orchestrates" ability
     And someone named "O. J. Simpson" attended the first meeting
     And I am on the first meeting page
-    When I follow "⚙"
+    When I click the edit link
     And I fill in the following:
       | attendee_person | Cookie Monster |
       | attendee_answer | No more moon!  |
