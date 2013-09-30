@@ -1,3 +1,22 @@
+
+
+#wysihtml5-toolbar{style: "display: none;"}
+  %a{"data-wysihtml5-command" => "bold"} bold
+  %a{"data-wysihtml5-command" => "italic"} italic
+  / Some wysihtml5 commands require extra parameters
+  %a{"data-wysihtml5-command" => "foreColor", "data-wysihtml5-command-value" => "red"} red
+  %a{"data-wysihtml5-command" => "foreColor", "data-wysihtml5-command-value" => "green"} green
+  %a{"data-wysihtml5-command" => "foreColor", "data-wysihtml5-command-value" => "blue"} blue
+  / Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href)
+  %a{"data-wysihtml5-command" => "createLink"} insert link
+  %div{"data-wysihtml5-dialog" => "createLink", style: "display: none;"}
+    %label
+      Link:
+      %input.text{"data-wysihtml5-dialog-field" => "href", value: "http://"}/
+    %a{"data-wysihtml5-dialog-action" => "save"} OK
+    %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
+
+
 = simple_form_for @submission, :html => { :multipart => true } do |f|
   = error_messages
 
@@ -147,3 +166,9 @@
       %dd
         :markdown
           If you have an account on this website, you'll automatically get an email telling you which of your submissions we've published. If you don't... We'll try to remember to email you! Either way, these emails will come around the end of the academic semester (December in the fall, May in the spring).
+
+:javascript
+  var editor = new wysihtml5.Editor("wysihtml5-textarea", { // id of textarea element
+    toolbar:      "wysihtml5-toolbar", // id of toolbar element
+    parserRules:  wysihtml5ParserRules // defined in parser rules set 
+  });
