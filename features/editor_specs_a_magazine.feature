@@ -16,7 +16,7 @@ Feature: An editor specs a magazine
     Given I'm in a position for the current magazine with the "orchestrates" ability
     And there is a magazine
     When I am on the magazines page
-    And I follow "⚙"
+    And I click the edit link
     And I fill in the following:
       | Accepts submissions from  | 2009-02-20 |
       | Accepts submissions until | 2009-08-20 |
