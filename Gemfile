@@ -56,6 +56,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'wysihtml5-rails'
 
 group :development, :test do
   gem 'rspec-rails'
