@@ -56,7 +56,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'wysihtml5-rails'
+gem 'wysihtml5-rails' # should this be in the above 'group :asset'?
 
 group :development, :test do
   gem 'rspec-rails'
