@@ -69,25 +69,25 @@
 = content_for :javascript do
   :javascript
     $(function(){
-      cloptions = {
-        width: '99%',
-        height: 500,
-        useCSS: false,
-        docType: '<!DOCTYPE html>',
-        bodyStyle: 'font-family: Cambria, Georgia, serif;',
-        controls:     // controls to add to the toolbar
-          "bold italic underline strikethrough subscript superscript | " +
-          "color highlight removeformat | bullets numbering | outdent " +
-          "indent | alignleft center alignright justify | " +
-          "rule image link unlink | pastetext source"
-      }
+      / cloptions = {
+      /   width: '99%',
+      /   height: 500,
+      /   useCSS: false,
+      /   docType: '<!DOCTYPE html>',
+      /   bodyStyle: 'font-family: Cambria, Georgia, serif;',
+      /   controls:     // controls to add to the toolbar
+      /     "bold italic underline strikethrough subscript superscript | " +
+      /     "color highlight removeformat | bullets numbering | outdent " +
+      /     "indent | alignleft center alignright justify | " +
+      /     "rule image link unlink | pastetext source"
+      / }
 
-      $("#submission_body").cleditor(cloptions);
+      / $("#submission_body").cleditor(cloptions);
 
-      cloptions.height = 62;
-      cloptions.controls = "bold italic underline strikethrough subscript superscript | " +
-          "pastetext source"
-      $("#submission_title").cleditor(cloptions);
+      / cloptions.height = 62;
+      / cloptions.controls = "bold italic underline strikethrough subscript superscript | " +
+      /     "pastetext source"
+      / $("#submission_title").cleditor(cloptions);
 
       if ($("#submission_pseudonym_name").val() == '') {
         $("#submission_pseudonym_link").closest('div').hide(); }
