@@ -54,10 +54,15 @@ module Pc
 
     # Configure generators values. Many other options are available, be sure to check the documentation.
     config.generators do |g|
-      g.orm             :active_record
-      g.template_engine :haml
-      g.test_framework  :shoulda
-      g.fixture_replacement :factory_girl
+      g.orm                 'active_record'
+      g.template_engine     'haml'
+      g.test_framework      'rspec'
+      g.helper              false
+      g.assets              false
+      g.stylesheets         false
+      g.view_specs          false
+      g.controller_specs    false
+      g.scaffold_controller 'scaffold_controller'
     end
 
     # Configure the default encoding used in templates for Ruby 1.9.
