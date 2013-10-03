@@ -41,10 +41,3 @@ test: &test
   <<: *DEFAULTS
   database: test
   min_messages: warning
-
-production:
-  <<: *DEFAULTS
-  database: pc_production
-
-cucumber:
-  <<: *test
