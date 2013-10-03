@@ -2,8 +2,6 @@ Pc::Application.routes.draw do
 
   resources :publications
 
-  resources :pseudonyms
-
   as :person do
     put '/person/confirmation' => 'confirmations#update', as: :update_user_confirmation
   end
