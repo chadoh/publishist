@@ -1,0 +1,37 @@
+!!!
+%html
+  %head
+    - @content_for_title ||= 'Problem Child'
+    %title= @content_for_title
+    %link(rel='shortcut icon' href='/assets/favicon.ico')
+    = stylesheet_link_tag 'application', :media => 'screen, projection'
+    = stylesheet_link_tag 'print', :media => 'print'
+    /[if lt IE 8]
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+    = javascript_include_tag 'application'
+    = csrf_meta_tag
+    = yield :head
+  %body
+    #page
+      %header{ :role => 'banner' }
+        %h1 Publishist
+        %p You shouldn't be on this page. DNS should prevent it.
+      - if flash[:notice]
+        #notice= flash[:notice]
+      - if flash[:alert]
+        #notice= flash[:alert]
+      %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:sidebar) && 'full-width', params[:controller]] }
+        %header
+          %h1{ :class => params[:controller] == 'submissions' && params[:action] == 'show' && 'nocaps' }<
+            = @content_for_page_heading
+          - if content_for? :header
+            %div
+              = yield :header
+        = yield
+      - if content_for? :sidebar
+        %section.sidebar{ :id => "#{@article_id}-sidebar" }
+          = yield :sidebar
+    - if protect_against_forgery?
+      :javascript
+        var AUTH_TOKEN = #{form_authenticity_token.inspect};
+    = yield :javascript

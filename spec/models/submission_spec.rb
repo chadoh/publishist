@@ -8,6 +8,7 @@ describe Submission do
     should belong_to :author
     should belong_to :page
     should belong_to :magazine
+    should belong_to :publication
   }
 
   it "sets queued submissions to reviewed if their meeting is less than three hours in the future" do

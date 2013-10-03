@@ -28,6 +28,7 @@
 class Magazine < ActiveRecord::Base
   extend Memoist
 
+  belongs_to :publication
   has_many :meetings,  dependent: :nullify, include: :submissions
   has_many :pages,     dependent: :destroy, order:   :position
   has_many :positions, dependent: :destroy

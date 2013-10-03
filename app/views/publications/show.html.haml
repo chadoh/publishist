@@ -1,0 +1,16 @@
+- title t('.title')
+%p
+  = link_to t('back'), publications_path
+  = link_to t('edit'), edit_publication_path(@publication)
+
+%dl
+  %dt= Publication.human_attribute_name :name
+  %dd= @publication.name
+  %dt= Publication.human_attribute_name :tagline
+  %dd= @publication.tagline
+  %dt= Publication.human_attribute_name :address
+  %dd= @publication.address
+  %dt= Publication.human_attribute_name :latitude
+  %dd= @publication.latitude
+  %dt= Publication.human_attribute_name :longitude
+  %dd= @publication.longitude

@@ -1,5 +1,7 @@
 Pc::Application.routes.draw do
 
+  resources :publications
+
   resources :pseudonyms
 
   as :person do
@@ -16,7 +18,6 @@ Pc::Application.routes.draw do
   end
 
   get "submit" => "submissions#new", :as => :new_submission
-  get "welcome/index"
 
   resources :roles, only: [:new, :create, :destroy]
   resources :scores, only: [:create, :update, :destroy]
@@ -69,5 +70,5 @@ Pc::Application.routes.draw do
   resources :submissions, :path => 'submissions', :only => [:index, :create]
   resources :submissions, :path => '', :except => [:index, :create], :path_names => { :new => "/submit" }
 
-  root :to => "welcome#index"
+  root :to => "publications#index"
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725034405) do
+ActiveRecord::Schema.define(:version => 20131003005647) do
 
   create_table "abilities", :force => true do |t|
     t.string   "key"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20130725034405) do
     t.string   "cover_art_content_type"
     t.integer  "cover_art_file_size"
     t.datetime "cover_art_updated_at"
+    t.integer  "publication_id"
   end
 
   add_index "magazines", ["slug"], :name => "index_magazines_on_cached_slug", :unique => true
@@ -171,6 +172,19 @@ ActiveRecord::Schema.define(:version => 20130725034405) do
     t.datetime "updated_at"
   end
 
+  create_table "publications", :force => true do |t|
+    t.string   "domain",     :null => false
+    t.string   "name"
+    t.string   "tagline"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "publications", ["domain"], :name => "index_publications_on_domain", :unique => true
+
   create_table "roles", :force => true do |t|
     t.integer  "person_id"
     t.integer  "position_id"
@@ -208,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20130725034405) do
     t.integer  "page_id"
     t.integer  "position"
     t.integer  "magazine_id"
+    t.integer  "publication_id"
   end
 
   add_index "submissions", ["slug"], :name => "index_submissions_on_cached_slug", :unique => true
@@ -221,6 +236,8 @@ ActiveRecord::Schema.define(:version => 20130725034405) do
   add_foreign_key "cover_arts", "pages", :name => "cover_arts_page_id_fk"
 
   add_foreign_key "editors_notes", "pages", :name => "editors_notes_page_id_fk"
+
+  add_foreign_key "magazines", "publications", :name => "magazines_publication_id_fk"
 
   add_foreign_key "pages", "magazines", :name => "pages_magazine_id_fk", :dependent => :delete
 
@@ -238,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20130725034405) do
 
   add_foreign_key "submissions", "magazines", :name => "submissions_magazine_id_fk"
   add_foreign_key "submissions", "pages", :name => "submissions_page_id_fk", :dependent => :nullify
+  add_foreign_key "submissions", "publications", :name => "submissions_publication_id_fk"
 
   add_foreign_key "table_of_contents", "pages", :name => "table_of_contents_page_id_fk"
 

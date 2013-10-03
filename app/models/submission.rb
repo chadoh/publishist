@@ -29,6 +29,7 @@ class Submission < ActiveRecord::Base
   belongs_to :author, :class_name => "Person"
   belongs_to :page
   belongs_to :magazine
+  belongs_to :publication
   has_many :packlets, dependent: :destroy
   has_many :meetings, through: :packlets
   has_many :scores,   through: :packlets

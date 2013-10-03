@@ -16,6 +16,16 @@ en:
   cancel: "Cancel"
   search: "Search!"
 
+  publications:
+    index:
+      title: "Publications"
+    new:
+      title: "New Publication"
+    edit:
+      title: "Edit Publication"
+    show:
+      edit: "Edit Publication"
+
   submissions:
     index:
       title: "Submissions"

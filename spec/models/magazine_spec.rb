@@ -9,6 +9,7 @@ describe Magazine do
     should have_many(:pages).dependent(:destroy)
     should have_many(:positions).dependent(:destroy)
     should have_many(:roles).through(:positions)
+    should belong_to(:publication)
   }
 
   describe "#accepts_submissions_from" do
