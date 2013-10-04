@@ -1,0 +1,9 @@
+test:
+  database: test
+  adapter: postgresql
+  encoding: unicode
+  template: template0
+  collation: en_US.UTF8
+  ctype: en_US.UTF8
+  pool: 5
+  username: postgres

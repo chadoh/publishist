@@ -49,7 +49,7 @@ describe Meeting do
   describe "#magazine" do
     it "initializes to the current magazine" do
       mag = Magazine.create
-      meeting = Meeting.new datetime: 1.year.ago
+      meeting = Meeting.new datetime: Time.zone.now - 1.year
       meeting.magazine.should == mag
     end
 
