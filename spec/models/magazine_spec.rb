@@ -155,8 +155,8 @@ describe Magazine do
 
   describe ".current!" do
     it "returns the magazine that accepts submissions at the current date" do
-      mag  = Magazine.create :accepts_submissions_from => Date.yesterday,
-                            :accepts_submissions_until => Date.tomorrow
+      mag  = Magazine.create :accepts_submissions_from => Time.zone.now - 1.day,
+                            :accepts_submissions_until => Time.zone.now + 1.day
       mag2 = Magazine.create
       Magazine.current.should == mag
     end
@@ -172,8 +172,8 @@ describe Magazine do
 
   describe ".current!" do
     it "returns the magazine that accepts submissions at the current date" do
-      mag  = Magazine.create :accepts_submissions_from => Date.yesterday,
-                            :accepts_submissions_until => Date.tomorrow
+      mag  = Magazine.create :accepts_submissions_from => Time.zone.now - 1.day,
+                            :accepts_submissions_until => Time.zone.now + 1.day
       mag2 = Magazine.create
       Magazine.current!.should == mag
     end
@@ -257,7 +257,7 @@ describe Magazine do
       end
 
       it "sets the published_on date for the magazine to the current date" do
-        @mag.published_on.to_date.should == Date.today
+        @mag.published_on.to_date.should == Time.zone.now.to_date
       end
 
       it "sets checked magazines to published and the rest to rejected" do

@@ -182,9 +182,9 @@ class Magazine < ActiveRecord::Base
 
   class << self
     def current
-      self.where('accepts_submissions_from  < ? AND ' + \
-        'accepts_submissions_until > ?',
-        Date.today.end_of_day, Date.today.beginning_of_day).first || self.first
+      self.where('accepts_submissions_from  <= :today AND ' + \
+        'accepts_submissions_until >= :today',
+        today: Time.zone.now.to_date).first || self.first
     end
 
     def current!
