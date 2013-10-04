@@ -4,4 +4,5 @@ rvm:
 services: postgresql
 before_script:
   - psql -c 'create database test;' -U postgres
+  - cp config/database.travis.yml config/database.yml
 script: bundle exec rspec && bundle exec cucumber
