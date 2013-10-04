@@ -5,12 +5,12 @@ services: postgresql
 bundler_args: --without development --path=~/.bundle
 install: touch ~/do_not_run_bundle
 before_script:
-- psql -c 'create database test;' -U postgres
-- cp config/database.travis.yml config/database.yml
-- bundle exec rake db:schema:load
 - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
 - gem install bundler bundle_cache
 - bundle_cache_install
+- psql -c 'create database test;' -U postgres
+- cp config/database.travis.yml config/database.yml
+- bundle exec rake db:schema:load
 script:
 - bundle exec rspec
 - bundle exec cucumber
