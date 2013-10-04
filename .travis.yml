@@ -1,4 +1,3 @@
----
 language: ruby
 rvm:
 - 2.0.0
@@ -8,13 +7,14 @@ before_script:
 - psql -c 'create database test;' -U postgres
 - cp config/database.travis.yml config/database.yml
 - bundle exec rake db:schema:load
-- "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+- 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
 - gem install bundler bundle_cache
 - bundle_cache_install
 script: bundle exec rspec && bundle exec cucumber
+after_script:
 - bundle_cache
 env:
   global:
   - secure: HAhPP5zwXa+uZa3MuBT69njbuABoDu4BISUcbbPjgvTwrPBEn3dMjCio0YQyYxfGAEIPA2p8EXKGrDIXofRPqhi6xT4WuEwebCtao4Q8Z0T+mCNeRIKN062XQ/RVg6GiezCUOW8vuYYJadNhkDuqlWXoaOyY2wqW/AgaughDQMY=
   - secure: Ju3gMjMpcWjeUolvCcOjcyM7b3hdB7f7Nk5JkAiiWC0Jmn34fKLacN3NvvfAJqfAc9tNiMoRTC7Jqm9WSDoR8+TQNJBVzx5dBbh9hG3ABrksAB0AeHfSmaFoURp0WwCaRg0j0vahWuZldXI3AAjLE24RtdazAJXRItlAZ9NKii4=
-  - secure: k/93iWMBn4b6UrYn5QMy81a4ntwVbQtDvot7kPID5ScMGBqHcwFkaZHNANXoA9oVnmFEU2XBrk69qYFCXDYXuM8JBFlgbwnYMZGMpKgF9YVGmqcjX2YmPk4W57LvUSvR2bZQAo0WLZmrwfO9CJ04ONhgPngNaucu/LlybkyZZbA=
+  - secure: iFDxIRuPRAqCRkVpE/fnduNPZ7ljxA7K+l9PUEtHlxU4tlEEAmDQSI5OoyUINXg1/Y8lG4u/cEX4V2WyRRfVYShClZU5e/NSxmpO0ENYkBC6z9b03B5n0/zJtvky3A5/oR8tCG/PYW4DVJe22ZAIIuQNQ7TW0eTJQMLu5BCnXDA=
