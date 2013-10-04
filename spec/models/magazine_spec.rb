@@ -154,11 +154,16 @@ describe Magazine do
   end
 
   describe ".current" do
-    it "returns the magazine that accepts submissions at the current date" do
-      mag  = Magazine.create :accepts_submissions_from => Time.zone.now - 1.day,
-                            :accepts_submissions_until => Time.zone.now + 1.day
-      mag2 = Magazine.create
-      Magazine.current.should == mag
+    [ [Time.zone.now - 1.day, Time.zone.now + 1.day],
+      [Time.zone.now.to_date, Time.zone.now + 3.days],
+      [Time.zone.now - 3.days, Time.zone.now.to_date]
+    ].each do |range|
+      it "returns the magazine in #{range}" do
+        mag  = Magazine.create :accepts_submissions_from => range.first,
+                              :accepts_submissions_until => range.last
+        mag2 = Magazine.create
+        Magazine.current.should == mag
+      end
     end
     it "returns the latest one, even if it's no longer accepting submissions" do
       mag  = Magazine.create(
@@ -171,12 +176,6 @@ describe Magazine do
   end
 
   describe ".current!" do
-    it "returns the magazine that accepts submissions at the current date" do
-      mag  = Magazine.create :accepts_submissions_from => Time.zone.now - 1.day,
-                            :accepts_submissions_until => Time.zone.now + 1.day
-      mag2 = Magazine.create
-      Magazine.current!.should == mag
-    end
     it "creates a new magazine if the latest one is no longer accepting submissions" do
       mag  = Magazine.create(
         accepts_submissions_from:  6.months.ago,

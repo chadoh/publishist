@@ -205,7 +205,7 @@ class Magazine < ActiveRecord::Base
       self.where(
         'accepts_submissions_from  <= :today AND ' + \
         'accepts_submissions_until >= :today',
-        today: Time.zone.now.to_date
+        today: Time.zone.now
       ).first
     end
     private :current_magazine
@@ -228,7 +228,7 @@ protected
       if Magazine.all.present?
         self.accepts_submissions_from = Magazine.unscoped.order("accepts_submissions_until DESC").first.accepts_submissions_until + 1
       else
-        self.accepts_submissions_from = Date.today
+        self.accepts_submissions_from = Time.zone.now.to_date
       end
     end
     self.accepts_submissions_from = self.accepts_submissions_from.beginning_of_day
