@@ -3,6 +3,7 @@ rvm:
 - 2.0.0
 services: postgresql
 bundler_args: --without development --path=~/.bundle
+install: touch ~/do_not_run_bundle
 before_script:
 - psql -c 'create database test;' -U postgres
 - cp config/database.travis.yml config/database.yml
@@ -10,7 +11,9 @@ before_script:
 - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
 - gem install bundler bundle_cache
 - bundle_cache_install
-script: bundle exec rspec && bundle exec cucumber
+script:
+- bundle exec rspec
+- bundle exec cucumber
 after_script:
 - bundle_cache
 env:

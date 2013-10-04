@@ -156,7 +156,7 @@ describe Magazine do
   describe ".current" do
     [ [Time.zone.now - 1.day, Time.zone.now + 1.day],
       [Time.zone.now.to_date, Time.zone.now + 3.days],
-      [Time.zone.now - 3.days, Time.zone.now.to_date]
+      [Time.zone.now - 3.days, Time.zone.now.end_of_day]
     ].each do |range|
       it "returns the magazine in #{range}" do
         mag  = Magazine.create :accepts_submissions_from => range.first,
