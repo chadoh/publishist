@@ -153,7 +153,7 @@ describe Magazine do
     end
   end
 
-  describe ".current!" do
+  describe ".current" do
     it "returns the magazine that accepts submissions at the current date" do
       mag  = Magazine.create :accepts_submissions_from => Time.zone.now - 1.day,
                             :accepts_submissions_until => Time.zone.now + 1.day

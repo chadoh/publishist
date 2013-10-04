@@ -182,15 +182,11 @@ class Magazine < ActiveRecord::Base
 
   class << self
     def current
-      self.where('accepts_submissions_from  <= :today AND ' + \
-        'accepts_submissions_until >= :today',
-        today: Time.zone.now.to_date).first || self.first
+      current_magazine || first
     end
 
     def current!
-      mag = self.where('accepts_submissions_from  < ? AND ' + \
-              'accepts_submissions_until > ?',
-              Date.today.end_of_day, Date.today.beginning_of_day).first
+      mag = current_magazine
       if !mag && self.count != 0
         mag = self.create
       end
@@ -204,6 +200,15 @@ class Magazine < ActiveRecord::Base
     def after mag
       all.select{|m| m.accepts_submissions_from >= mag.accepts_submissions_until }.sort_by(&:accepts_submissions_from).first
     end
+
+    def current_magazine
+      self.where(
+        'accepts_submissions_from  <= :today AND ' + \
+        'accepts_submissions_until >= :today',
+        today: Time.zone.now.to_date
+      ).first
+    end
+    private :current_magazine
   end
 
   def published?
