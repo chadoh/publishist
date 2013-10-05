@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003005647) do
+ActiveRecord::Schema.define(:version => 20131003000738) do
 
   create_table "abilities", :force => true do |t|
     t.string   "key"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(:version => 20131003005647) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "person_name"
+  end
+
+  create_table "compositions", :force => true do |t|
+    t.text     "title"
+    t.text     "body"
+    t.string   "author"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "cover_arts", :force => true do |t|
@@ -172,18 +180,24 @@ ActiveRecord::Schema.define(:version => 20131003005647) do
     t.datetime "updated_at"
   end
 
+  create_table "publication_details", :force => true do |t|
+    t.integer "publication_id"
+    t.text    "about"
+    t.text    "meetings_info"
+    t.string  "address"
+    t.float   "latitude"
+    t.float   "longitude"
+  end
+
   create_table "publications", :force => true do |t|
-    t.string   "domain",     :null => false
+    t.string   "subdomain",  :null => false
     t.string   "name"
     t.string   "tagline"
-    t.string   "address"
-    t.float    "latitude"
-    t.float    "longitude"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "publications", ["domain"], :name => "index_publications_on_domain", :unique => true
+  add_index "publications", ["subdomain"], :name => "index_publications_on_subdomain", :unique => true
 
   create_table "roles", :force => true do |t|
     t.integer  "person_id"
@@ -247,6 +261,8 @@ ActiveRecord::Schema.define(:version => 20131003005647) do
   add_foreign_key "positions", "magazines", :name => "positions_magazine_id_fk"
 
   add_foreign_key "pseudonyms", "submissions", :name => "pseudonyms_submission_id_fk", :dependent => :delete
+
+  add_foreign_key "publication_details", "publications", :name => "publication_details_publication_id_fk"
 
   add_foreign_key "roles", "people", :name => "roles_person_id_fk"
   add_foreign_key "roles", "positions", :name => "roles_position_id_fk"

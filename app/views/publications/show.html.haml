@@ -1,7 +1,4 @@
-- title t('.title')
-%p
-  = link_to t('back'), publications_path
-  = link_to t('edit'), edit_publication_path(@publication)
+- title 'Welcome'
 
 %dl
   %dt= Publication.human_attribute_name :name

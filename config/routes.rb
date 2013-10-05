@@ -68,5 +68,6 @@ Pc::Application.routes.draw do
   resources :submissions, :path => 'submissions', :only => [:index, :create]
   resources :submissions, :path => '', :except => [:index, :create], :path_names => { :new => "/submit" }
 
+  match '', :to => 'publications#show', constraints: { subdomain: /.+/ }
   root :to => "publications#index"
 end

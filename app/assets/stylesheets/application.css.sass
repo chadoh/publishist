@@ -67,7 +67,7 @@ a.mailto
 
   & > header
     background-color: $blue
-    +background(linear-gradient(rgba(lighten($blue, 15%), 0.9), rgba($blue, 0.9)), image-url('https://s3.amazonaws.com/pcmag/clouds.png'))
+    +background(linear-gradient(rgba(lighten($blue, 15%), 0.9), rgba($blue, 0.9)))
     +full
     +box-shadow($lgray 0 0 3px inset)
     width: 100%
@@ -82,6 +82,8 @@ a.mailto
     h1
       +adjust-font-size-to(31px)
       +trailer(0, 21px)
+    a
+      color: $base
     p
       margin-bottom: 0
 
@@ -105,7 +107,7 @@ body > footer
   +container
   & > #footer
     background-color: $green
-    +background(linear-gradient(rgba(lighten($green, 5%), 0.9), rgba(darken($green, 10%), 0.9)), image-url('https://s3.amazonaws.com/pcmag/grass.jpg'))
+    +background(linear-gradient(rgba(lighten($green, 5%), 0.9), rgba(darken($green, 10%), 0.9)))
     +full
     +box-shadow($lgray 0 0 3px inset)
     +opacity(0.92)

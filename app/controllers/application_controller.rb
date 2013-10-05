@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  layout 'application'
 
   before_filter :reset_return_to_maybe
+  before_filter :find_publication
 
   def reset_return_to_maybe
     if session[:return_to]
@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
         session[:return_to_age] = nil
       end
     end
+  end
+
+  def find_publication
+    @publication = Publication.find_by_subdomain(request.subdomain)
   end
 
 protected

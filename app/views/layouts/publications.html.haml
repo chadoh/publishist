@@ -1,9 +1,8 @@
 !!!
 %html
   %head
-    - @content_for_title ||= 'Problem Child'
+    - @content_for_title ||= 'Publishist'
     %title= @content_for_title
-    %link(rel='shortcut icon' href='/assets/favicon.ico')
     = stylesheet_link_tag 'application', :media => 'screen, projection'
     = stylesheet_link_tag 'print', :media => 'print'
     /[if lt IE 8]
