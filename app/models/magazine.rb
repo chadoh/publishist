@@ -1,30 +1,3 @@
-# == Schema Information
-# Schema version: 20110904221228
-#
-# Table name: magazines
-#
-#  id                        :integer         not null, primary key
-#  title                     :string(255)
-#  nickname                  :string(255)
-#  accepts_submissions_from  :datetime
-#  accepts_submissions_until :datetime
-#  published_on              :datetime
-#  created_at                :datetime
-#  updated_at                :datetime
-#  count_of_scores           :integer         default(0)
-#  sum_of_scores             :integer         default(0)
-#  cached_slug               :string(255)
-#  notification_sent         :boolean
-#  pdf_file_name             :string(255)
-#  pdf_content_type          :string(255)
-#  pdf_file_size             :integer
-#  pdf_updated_at            :datetime
-#  cover_art_file_name       :string(255)
-#  cover_art_content_type    :string(255)
-#  cover_art_file_size       :integer
-#  cover_art_updated_at      :datetime
-#
-
 class Magazine < ActiveRecord::Base
   extend Memoist
 
@@ -123,7 +96,6 @@ class Magazine < ActiveRecord::Base
       toc.table_of_contents = TableOfContents.create
       staff.staff_list = StaffList.create
 
-      # published.each {|sub| sub.has_been(:published) }
       rejected.each  {|sub| sub.has_been(:rejected)  }
       published.each_slice(3) do |three_submissions|
         page = self.pages.create
