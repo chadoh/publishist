@@ -55,6 +55,7 @@ class Score < ActiveRecord::Base
   end
 
   def update_attributes(attributes)
+    attributes = HashWithIndifferentAccess.new(attributes)
     if attributes['amount'].blank?
       self.destroy
     else

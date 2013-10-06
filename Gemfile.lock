@@ -48,8 +48,6 @@ GEM
       activesupport
       builder
       json
-    annotate (2.5.0)
-      rake
     arel (3.0.2)
     aws-s3 (0.6.3)
       builder
@@ -293,7 +291,6 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   airbrake
-  annotate
   aws-s3
   aws-sdk
   capybara (~> 1.1)
