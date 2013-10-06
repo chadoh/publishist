@@ -1,72 +1,68 @@
-/<h1><i class="icon-twitter"></i>Font Awesome!!</h1>
-/<p>Why? <i class="icon-ok-circle"></i> Because!!</p>
-/%a{"data-wysihtml5-command" => "formatBlock", "data-wysihtml5-command-value" => "h1"} H1
-
-/ the helper method fa_icon returns an 'undefined method' error. not sure why.
 / wyishtml5 toolbar
-%ul#wysihtml5-toolbar{style: "display: none;"}
-  / %a{"data-wysihtml5-command" => "formatBlock", "data-wysihtml5-command-value" => "h1"} H1
-  / %a{"data-wysihtml5-command" => "formatBlock", "data-wysihtml5-command-value" => "h2"} H2
-  / %a{"data-wysihtml5-command" => "formatBlock", "data-wysihtml5-command-value" => "div"} Normal Text
-  %li
-    .btn-group
-      %a.btn{"data-wysihtml5-command" => "bold"}
-        %i.icon-bold
-      %a.btn{"data-wysihtml5-command" => "italic"}
-        %i.icon-italic
-      %a.btn{"data-wysihtml5-command" => "underline"}
-        %i.icon-underline
-  %li
-    .btn-group  
-      %a.btn{"data-wysihtml5-command" => "insertOrderedList"}
-        %i.icon-list-ol
-      %a.btn{"data-wysihtml5-command" => "insertUnorderedList"}
-        %i.icon-list-ul
-  %li
-    .btn-group
-      %a.btn{"data-wysihtml5-command" => "Outdent"}
-        %i.icon-indent-left
-      %a.btn{"data-wysihtml5-command" => "Indent"}
-        %i.icon-indent-right
-  %li
-    .btn-group
-      %a.btn{"data-wysihtml5-command" => "justifyCenter"}
-        %i.icon-align-center
-      %a.btn{"data-wysihtml5-command" => "justifyLeft"}
-        %i.icon-align-left
-      %a.btn{"data-wysihtml5-command" => "justifyRight"}
-        %i.icon-align-right
-      %a.btn{"data-wysihtml5-command" => "justifyFull"}
-        %i.icon-align-justify
-  %li
-    .btn-group
-      %a.btn{"data-wysihtml5-command" => "insertImage"}
-        %i.icon-picture
-  %li
-    .btn-group
-      %a.btn{"data-wysihtml5-command" => "createLink"}
-        %i.icon-link
-  %div{"data-wysihtml5-dialog" => "createLink", style: "display: none;"}
-    %label#linkto
-      Link to:
-      %input.text{"data-wysihtml5-dialog-field" => "href", value: "http://"}
-    %a{"data-wysihtml5-dialog-action" => "save"} OK
-    %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
-  %div{"data-wysihtml5-dialog" => "insertImage", style: "display: none;"}
-    %label#linkto
-      Picture:
-      %input.text{"data-wysihtml5-dialog-field" => "src", value: "http://"}
-    %a{"data-wysihtml5-dialog-action" => "save"} OK
-    %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
-
-
-
-  / note "input_html: {id: 'wysihtml5-textarea' }"
-  / this is a simple_form, not haml, method.
+/ note "input_html: {id: 'wysihtml5-textarea' }"
+/ this is a simple_form, not haml, method.
 = simple_form_for @submission, :html => { :multipart => true } do |f|
   = error_messages
-  = f.input :title, :label => "Title"
-  = f.input :body, :label => "Body", :required => false, input_html: { id: 'wysihtml5-textarea', class: 'body_height'}
+  = f.input :title, label: false, input_html: { :id => 'no_outline', :placeholder => 'Your Title Goes Here' }
+
+  %label.text.optional(for="submission_body") Body
+  %div#border_is
+    %ul#wysihtml5-toolbar{style: "display: none;"}
+      %li
+        .btn-group
+          %a.btn{"data-wysihtml5-command" => "bold"}
+            %i.icon-bold
+          %a.btn{"data-wysihtml5-command" => "italic"}
+            %i.icon-italic
+          %a.btn{"data-wysihtml5-command" => "underline"}
+            %i.icon-underline
+      %li
+        .btn-group  
+          %a.btn{"data-wysihtml5-command" => "insertOrderedList"}
+            %i.icon-list-ol
+          %a.btn{"data-wysihtml5-command" => "insertUnorderedList"}
+            %i.icon-list-ul
+      %li
+        .btn-group
+          %a.btn{"data-wysihtml5-command" => "Outdent"}
+            %i.icon-indent-left
+          %a.btn{"data-wysihtml5-command" => "Indent"}
+            %i.icon-indent-right
+      %li
+        .btn-group
+          %a.btn{"data-wysihtml5-command" => "justifyCenter"}
+            %i.icon-align-center
+          %a.btn{"data-wysihtml5-command" => "justifyLeft"}
+            %i.icon-align-left
+          %a.btn{"data-wysihtml5-command" => "justifyRight"}
+            %i.icon-align-right
+          %a.btn{"data-wysihtml5-command" => "justifyFull"}
+            %i.icon-align-justify
+      %li
+        .btn-group
+          %a.btn{"data-wysihtml5-command" => "insertImage"}
+            %i.icon-picture
+          %a.btn{"data-wysihtml5-command" => "createLink"}
+            %i.icon-link
+      %li
+        .btn-group
+          %a.btn{"data-wysihtml5-action" => "change_view"}
+            %i.icon-code
+      %div#position_absolute{"data-wysihtml5-dialog" => "createLink", style: "display: none;"}
+        %label#linkto
+          Link to:
+          %input.text{"data-wysihtml5-dialog-field" => "href", value: "http://"}
+        %a{"data-wysihtml5-dialog-action" => "save"} OK
+        %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
+      %div#position_absolute{"data-wysihtml5-dialog" => "insertImage", style: "display: none;"}
+        %label#linkto
+          Picture:
+          %input.text{"data-wysihtml5-dialog-field" => "src", value: "http://"}
+        %a{"data-wysihtml5-dialog-action" => "save"} OK
+        %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
+    %form  
+      %textarea#wysihtml5-textarea{ :placeholder => "And Submission Content Here" }
+
   = f.input :photo, :label => "Or, submit an image:", input_html: { id: 'margin_bottom' }
   = f.input :state, :as => :hidden
   - if person_signed_in?

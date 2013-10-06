@@ -1,6 +1,7 @@
+
 ul
   &#wysihtml5-toolbar
-    margin: -6px 0px 10px -4px
+    margin: -1px 0 0 -5px
     &::after
       clear: both
       display: table
@@ -9,12 +10,15 @@ ul
       float: left
       list-style: none
     a
+      cursor: pointer
       &[data-wysihtml5-command=bold]
         font-weight: bold
       &[data-wysihtml5-command=italic]
         font-style: italic
       &[data-wysihtml5-command=underline]
         text-decoration: underline
+      &[data-wysihtml5-action=change_view]
+        border-right: none
       &.btn.wysihtml5-command-active
         -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05)
         -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05)
@@ -24,7 +28,7 @@ ul
 
 .btn
   padding: 6px 12px
-  width: 14px
+  width: 1.184em
   font-size: 14px
   line-height: 1.45
   text-align: center
@@ -46,9 +50,6 @@ ul
   *display: inline
   /* IE7 inline-block hack
   *zoom: 1
-  -webkit-box-shadow: rgb(139, 199, 199) 0px 0px 3px 0px
-  box-shadow: rgb(139, 199, 199) 0px 0px 3px 0px
-  *zoom: 1
   *margin-left: .3em
   &:after
     display: table
@@ -60,7 +61,6 @@ ul
 
 #linkto
   display: inline-block
-  margin: 6px 0 0 4px
 
 .body_height
   height: 300px
@@ -70,3 +70,49 @@ label
 
 #margin_bottom
   margin-bottom: 10px
+
+#position_absolute
+  position: absolute
+  right: 4px
+  top: 38px
+  width: 274px
+  font-size: 15px
+  padding: 2px 0px 3px 8px
+  background: white
+  -webkit-box-shadow: rgb(192, 192, 192) 0px 0px 3px 0px
+  box-shadow: rgb(192, 192, 192) 0px 0px 3px 0px
+  border: 1px solid rgb(192, 192, 192)
+  a
+    color: rgb(219, 131, 34)
+
+#border_is
+  position: relative
+  -webkit-box-shadow: rgb(139, 199, 199) 0px 0px 3px 0px
+  box-shadow: rgb(139, 199, 199) 0px 0px 3px 0px
+  border: 1px solid rgb(192, 192, 192)
+  margin-bottom: 11px
+
+#wysihtml5-textarea
+  border: none
+  box-shadow: none
+  -webkit-box-shadow: none
+  margin-top: -7px
+  &:focus
+    outline: none
+
+#no_outline
+  height: 41px
+  outline: none
+  text-shadow: 0px 0px 2px rgb(192, 192, 192)
+  font-size: 21px !important
+  color: rgb(76, 76, 76)
+  line-height: 1.14286em
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  font: inherit
+  vertical-align: baseline
+  -webkit-font-smoothing: antialiased
+  &[placeholder]:focus::-webkit-input-placeholder
+    color: white
+    text-shadow: none
+
