@@ -561,6 +561,8 @@ section#scores
     +span-columns(3)
     margin-right: 0
     ol.packlet-titles
+      list-style: none
+      margin-left: 0
       li.title
         max-height: $base-line-height
         a
@@ -705,8 +707,13 @@ ol.packlets, ul.submissions, ol.submissions
         +trailer(0)
         +leader(0)
         span.score
-          form.score
+          form.new_score, form.edit_score
             display: inline
+        label
+          display: inline-block
+          margin:
+            right: 0.5em
+            top: 0
         nav.actions
           display: none
         p.scored
