@@ -1,4 +1,4 @@
-Then /print page.html/ do
+Then /print page\.html/ do
   print page.html
 end
 
