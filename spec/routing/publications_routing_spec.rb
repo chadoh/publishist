@@ -3,16 +3,18 @@ require "spec_helper"
 describe PublicationsController do
   describe "routing" do
 
-    it "routes to #index" do
-      get("/publications").should route_to("publications#index")
+    it "routes to #index at the root url with no subdomain" do
+      get("/publications").should_not route_to("publications#index")
+      get("/").should route_to("publications#index")
     end
 
     it "routes to #new" do
       get("/publications/new").should route_to("publications#new")
     end
 
-    it "routes to #show" do
-      get("/publications/1").should route_to("publications#show", :id => "1")
+    it "routes to #show with a subdomain only" do
+      expect(get "http://pc.example.com/").to route_to("publications#show")
+      expect(get "/publications/1").not_to route_to("publications#show")
     end
 
     it "routes to #edit" do

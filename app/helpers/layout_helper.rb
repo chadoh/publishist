@@ -6,7 +6,7 @@ module LayoutHelper
   def title(page_heading, append_to_page_title = "")
     @content_for_title = strip_tags(page_heading.to_s)
     @content_for_title += append_to_page_title
-    @content_for_title += " | #{@publication.try(:name) || 'Publishist'}"
+    @content_for_title += " • #{@publication.try(:name) || 'Publishist'}"
     @content_for_page_heading = page_heading.to_s
     @article_id = page_heading.parameterize
   end

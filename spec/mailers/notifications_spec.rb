@@ -16,7 +16,7 @@ describe "Notifications mailer" do
     it { should deliver_from '<admin@problemchildmag.com>' }
     it { should have_reply_to 'editor@problemchildmag.com' }
     it { should deliver_to submission.author_email }
-    it { should have_body_text "problemchildmag.com#{person_path(submission.author)}" }
+    it { should have_body_text "publishist.dev:3000#{person_path(submission.author)}" }
   end
 
   describe "#new_submission" do
@@ -39,7 +39,7 @@ describe "Notifications mailer" do
 
     it { should be_multipart }
     it { should have_body_text submission.title }
-    it { should have_body_text "problemchildmag.com#{submission_path(submission)}" }
+    it { should have_body_text "publishist.dev:3000#{submission_path(submission)}" }
   end
 
   describe "#we_published_a_magazine_a_while_ago" do
@@ -51,6 +51,6 @@ describe "Notifications mailer" do
 
     it { should be_multipart }
     it { should have_body_text submission.title }
-    it { should have_body_text "problemchildmag.com#{submission_path(submission)}" }
+    it { should have_body_text "publishist.dev:3000#{submission_path(submission)}" }
   end
 end
