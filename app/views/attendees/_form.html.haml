@@ -1,4 +1,4 @@
-= simple_form_for attendee, :remote => true, :html => { 'data-viewer' => current_person.email } do |f|
+= simple_form_for attendee, :remote => true, :html => { class: 'attendee', 'data-viewer' => current_person.email } do |f|
   = error_messages
 
   = f.input :person,

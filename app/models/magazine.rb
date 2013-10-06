@@ -1,30 +1,3 @@
-# == Schema Information
-# Schema version: 20110904221228
-#
-# Table name: magazines
-#
-#  id                        :integer         not null, primary key
-#  title                     :string(255)
-#  nickname                  :string(255)
-#  accepts_submissions_from  :datetime
-#  accepts_submissions_until :datetime
-#  published_on              :datetime
-#  created_at                :datetime
-#  updated_at                :datetime
-#  count_of_scores           :integer         default(0)
-#  sum_of_scores             :integer         default(0)
-#  cached_slug               :string(255)
-#  notification_sent         :boolean
-#  pdf_file_name             :string(255)
-#  pdf_content_type          :string(255)
-#  pdf_file_size             :integer
-#  pdf_updated_at            :datetime
-#  cover_art_file_name       :string(255)
-#  cover_art_content_type    :string(255)
-#  cover_art_file_size       :integer
-#  cover_art_updated_at      :datetime
-#
-
 class Magazine < ActiveRecord::Base
   extend Memoist
 
@@ -111,7 +84,7 @@ class Magazine < ActiveRecord::Base
       published = array_of_winners
       rejected = all_submissions - published
 
-      self.update_attribute :published_on, Date.today
+      self.update_attribute :published_on, Time.zone.now
 
 
       self.pages = [
@@ -123,7 +96,6 @@ class Magazine < ActiveRecord::Base
       toc.table_of_contents = TableOfContents.create
       staff.staff_list = StaffList.create
 
-      # published.each {|sub| sub.has_been(:published) }
       rejected.each  {|sub| sub.has_been(:rejected)  }
       published.each_slice(3) do |three_submissions|
         page = self.pages.create
@@ -182,15 +154,11 @@ class Magazine < ActiveRecord::Base
 
   class << self
     def current
-      self.where('accepts_submissions_from  < ? AND ' + \
-        'accepts_submissions_until > ?',
-        Date.today.end_of_day, Date.today.beginning_of_day).first || self.first
+      current_magazine || first
     end
 
     def current!
-      mag = self.where('accepts_submissions_from  < ? AND ' + \
-              'accepts_submissions_until > ?',
-              Date.today.end_of_day, Date.today.beginning_of_day).first
+      mag = current_magazine
       if !mag && self.count != 0
         mag = self.create
       end
@@ -204,6 +172,15 @@ class Magazine < ActiveRecord::Base
     def after mag
       all.select{|m| m.accepts_submissions_from >= mag.accepts_submissions_until }.sort_by(&:accepts_submissions_from).first
     end
+
+    def current_magazine
+      self.where(
+        'accepts_submissions_from  <= :today AND ' + \
+        'accepts_submissions_until >= :today',
+        today: Time.zone.now
+      ).first
+    end
+    private :current_magazine
   end
 
   def published?
@@ -223,7 +200,7 @@ protected
       if Magazine.all.present?
         self.accepts_submissions_from = Magazine.unscoped.order("accepts_submissions_until DESC").first.accepts_submissions_until + 1
       else
-        self.accepts_submissions_from = Date.today
+        self.accepts_submissions_from = Time.zone.now.to_date
       end
     end
     self.accepts_submissions_from = self.accepts_submissions_from.beginning_of_day
