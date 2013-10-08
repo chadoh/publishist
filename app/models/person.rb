@@ -165,18 +165,6 @@ class Person < ActiveRecord::Base
   class << self
     extend Memoist
 
-    def current_communicators
-      mag = Magazine.current || Magazine.first
-      pos = mag.positions.joins(:abilities).where(abilities: { key: 'communicates' }) if mag
-      pos ? pos.collect(&:people).flatten.uniq : []
-    end
-
-    def current_scorers
-      mag = Magazine.current || Magazine.first
-      pos = mag.positions.joins(:abilities).where(abilities: { key: 'scores' }) if mag
-      pos ? pos.collect(&:people).flatten.uniq : []
-    end
-
     def find_or_create formatted_name_and_email
       return nil if formatted_name_and_email.blank?
       name = formatted_name_and_email.gsub(',','').split

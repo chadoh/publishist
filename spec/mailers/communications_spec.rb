@@ -30,7 +30,7 @@ describe "Communications mailer" do
       should have_body_text("We have similar names!")
       should have_subject(/Paul Miel/)
       should be_multipart
-      should deliver_from "Paul Miel <admin@problemchildmag.com>"
+      should deliver_from "Paul Miel <donotreply@publishist.com>"
       should deliver_to "pablo.honey@example.com"
       should have_reply_to "paul.miel@example.com"
     }

@@ -59,7 +59,7 @@ class Submission < ActiveRecord::Base
   before_create    :set_position_to_nil
   before_create    :create_author_if_blank
   after_find       :reviewed_if_meeting_has_occurred
-  after_save       :notify_current_communicator_if_submitted
+  after_save       :notify_editor_if_submitted
   after_create     :author_has_positions_with_the_disappears_ability
   after_initialize :magazine_is_current_if_blank
 
@@ -200,10 +200,9 @@ protected
     end
   end
 
-  def notify_current_communicator_if_submitted
+  def notify_editor_if_submitted
     if state_changed? && state == :submitted && state_was == Submission.state(:draft)
-      notify = updated_by.blank? || (editor = Person.current_communicators.first).blank? || editor != updated_by
-      Notifications.new_submission(self).deliver if notify
+      Notifications.new_submission(self).deliver unless submitted_by_editor?
     end
   end
 
@@ -212,5 +211,10 @@ protected
       self.magazine = Magazine.current!
     end
   end
+
+  private
+    def submitted_by_editor?
+      updated_by.present? && publication.try(:editor) == updated_by
+    end
 
 end

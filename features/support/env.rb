@@ -6,6 +6,7 @@
 
 require 'cucumber/rails'
 require 'coveralls'
+require 'cucumber/rspec/doubles'
 Coveralls.wear!
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -62,4 +63,9 @@ Before do
   pc = Publication.create(:subdomain => 'pc', :name => 'Problem Child', :tagline => 'A Penn State Literary Magazine')
   pc.publication_detail = PublicationDetail.new(:about => 'woo')
   Capybara.default_host = "http://pc.example.com"
+
+  @editor = double("editor", name: "Spec Helper Editor", email: "woo@woo.woo").as_null_object
+  publication = double("publication", name: '...', editor: @editor).as_null_object
+  Submission.any_instance.stub(:publication).and_return(publication)
+  Magazine.any_instance.stub(:publication).and_return(publication)
 end

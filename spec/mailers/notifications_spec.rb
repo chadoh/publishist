@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe "Notifications mailer" do
+  let(:editor) { double("editor", name: "Spec Helper Editor", email: "woo@woo.woo").as_null_object }
+  let(:publication) { double("publication", editor: editor).as_null_object }
+  before do
+    Magazine.any_instance.stub(:publication).and_return(publication)
+  end
+
   include EmailSpec::Helpers
   include EmailSpec::Matchers
   include Rails.application.routes.url_helpers
@@ -12,9 +18,9 @@ describe "Notifications mailer" do
     subject { email }
 
     it { should be_multipart }
-    it { should have_subject 'Someone (hopefully you!) submitted to Problem Child for you!' }
-    it { should deliver_from '<admin@problemchildmag.com>' }
-    it { should have_reply_to 'editor@problemchildmag.com' }
+    it { should have_subject /Someone \(hopefully you!\) submitted to .+ for you!/ }
+    it { should deliver_from "#{editor.name} <donotreply@publishist.com>" }
+    it { should have_reply_to editor.email }
     it { should deliver_to submission.author_email }
     it { should have_body_text "publishist.dev:3000#{person_path(submission.author)}" }
   end

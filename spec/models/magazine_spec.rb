@@ -106,8 +106,8 @@ describe Magazine do
     end
   end
 
-  describe "#positions:" do
-    it "a magazine has the same positions as the previous magazine, by default" do
+  describe "#positions" do
+    it "defaults to those of the previous magazine" do
       a1 = Ability.create key: 'communicates', description: "Can see the names of submitters and communicate with them."
       a2 = Ability.create key: 'scores',       description: "Can enter (and see) scores for all submissions."
       mag1 = Magazine.create title: "the Bow Nur issue"
@@ -123,6 +123,20 @@ describe Magazine do
       p1.abilities.should == [a1]
       p2.name.should == "Chef"
       p2.abilities.should == [a2]
+    end
+  end
+
+  describe "#communicators" do
+    let(:magazine) { Factory.create :magazine }
+    let(:communicates) { Factory.create :ability, key: 'communicates' }
+    let(:scores) { Factory.create :ability, key: 'scores' }
+    let(:position) { Factory.create :position, magazine: magazine, abilities: [communicates] }
+    let(:position2) { Factory.create :position, magazine: magazine, abilities: [scores] }
+    let(:person) { Factory.create :person, positions: [position] }
+    let(:person2) { Factory.create :person, positions: [position2] }
+    it "returns people in a position with the 'communicates' ability" do
+      person2 # instantiate
+      expect(magazine.communicators).to eq([person])
     end
   end
 

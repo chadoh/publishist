@@ -33,7 +33,7 @@ en:
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
     mailer:
       confirmation_instructions:
-        subject: "You're nearly signed up for Problem Child!"
+        subject: "You're nearly signed up!"
       reset_password_instructions:
         subject: 'Reset password instructions'
       unlock_instructions:

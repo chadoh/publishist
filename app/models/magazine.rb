@@ -6,6 +6,7 @@ class Magazine < ActiveRecord::Base
   has_many :pages,     dependent: :destroy, order:   :position
   has_many :positions, dependent: :destroy
   has_many :roles,     through:   :positions, dependent: :destroy
+  has_many :people,    through:   :roles
   has_many :abilities, through:   :positions, dependent: :destroy
   has_many :subs,      dependent: :nullify, class_name: 'Submission'
   extend FriendlyId
@@ -120,6 +121,10 @@ class Magazine < ActiveRecord::Base
     else
       raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
     end
+  end
+
+  def communicators
+    people.joins(:abilities).where(abilities: { key: 'communicates' })
   end
 
   def notification_sent?

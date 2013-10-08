@@ -132,20 +132,13 @@
         How will you review my submission?
       %dd
         :markdown
-          Your name will be removed when this is reviewed;
-          only the editor
-          #{"([#{Person.current_communicators.collect(&:name).to_sentence}][1])" if Person.current_communicators.present?}
-          will know you wrote this. And only the coeditor
-          #{"([#{Person.current_scorers.collect(&:name).to_sentence}][2])" if Person.current_scorers.present?}
-          will know how people score it.
-          Everyone else has the privilege of judging it objectively.
-
-            [1]: #{begin person_path(Person.current_communicators.first) rescue "/people" end}
-            [2]: #{begin person_path(Person.current_scorers.first) rescue "/people" end}
+          Your name will be removed when this is reviewed; only the editor will
+          know you wrote this. And only the coeditor will know how people score
+          it. Everyone else has the privilege of judging it objectively.
 
           "Everyone else" means anyone who wanders into the weekly meeting
           at which your submission is reviewed (you can go, too! It's a good
-          way to get very honest feedback). For more info on meetings, visit the [about page](#{root_path}).
+          way to get very honest feedback).
       %dt
         %span.arrow &raquo;
         What can I submit?

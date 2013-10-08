@@ -20,7 +20,7 @@ Feature: a person signs up for the website
       | Email                           | example@example.com |
     And I press "Sign Up!"
     Then I should see "Ok! Now go check your email to finish signing up."
-    And I should receive an email with subject "You're nearly signed up for Problem Child!"
+    And I should receive an email with subject "You're nearly signed up!"
 
     When I open the email
     And I follow "set your password" in the email

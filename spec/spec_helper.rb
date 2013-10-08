@@ -33,15 +33,18 @@ RSpec.configure do |config|
   config.include(EmailSpec::Matchers)
 
   config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :truncation
   end
 
   config.before(:each) do
-      DatabaseCleaner.start
+    DatabaseCleaner.start
+    editor = double("editor", name: "Spec Helper Editor", email: "woo@woo.woo").as_null_object
+    publication = double("publication", editor: editor).as_null_object
+    Submission.any_instance.stub(:publication).and_return(publication)
   end
 
   config.after(:each) do
-      DatabaseCleaner.clean
+    DatabaseCleaner.clean
   end
 
   config.treat_symbols_as_metadata_keys_with_true_values = true

@@ -87,36 +87,6 @@ describe Person do
     end
   end
 
-  describe "self.current_communicators" do
-    it "returns all people with the 'communicates' ability for the most recent magazine" do
-      ability = Ability.create key: 'communicates', description: 'communicates things'
-      mag1 = Magazine.create title: 'first', accepts_submissions_from: 1.week.ago
-      mag2 = Magazine.create title: 'second'
-      pos1 = Position.create name:  'Editor', abilities: [ability], magazine: mag1
-      pos2 = Position.create name:  'Editor', abilities: [ability], magazine: mag2
-      per1 = Person  .create name:  'sir roderick', email: 'roderick@example.com'
-      per2 = Person  .create name:  'ser roderick', email: 'serroderick@example.com'
-      pos1.people << per1
-      pos2.people << per2
-      Person.current_communicators.should == [per1]
-    end
-  end
-
-  describe "self.current_scorers" do
-    it "returns all people with the 'scores' ability for the most recent magazine" do
-      ability = Ability.create key: 'scores', description: 'communicates things'
-      mag1 = Magazine.create title: 'first', accepts_submissions_from: 1.week.ago
-      mag2 = Magazine.create title: 'second'
-      pos1 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag1
-      pos2 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag2
-      per1 = Person  .create name:  'sir roderick', email: 'roderick@example.com'
-      per2 = Person  .create name:  'ser roderick', email: 'serroderick@example.com'
-      pos1.people << per1
-      pos2.people << per2
-      Person.current_scorers.should == [per1]
-    end
-  end
-
   describe "#can_enter_scores_for?(meeting)" do
     let(:person)  { Factory.create :person }
     let(:meeting) { Factory.create :meeting }

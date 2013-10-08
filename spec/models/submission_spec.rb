@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Submission do
+  let(:editor) { double("editor", email: "woo@woo.woo").as_null_object }
+  let(:publication) { double("publication", editor: editor).as_null_object }
+  before do
+    Submission.any_instance.stub(:publication).and_return(publication)
+  end
   it {
     should have_many(:packlets).dependent(:destroy)
     should have_many(:meetings).through(:packlets)
@@ -48,19 +53,24 @@ describe Submission do
     end
 
     context "when submitting" do
-      it "sends an email to the editor, by default" do
-        sub = Factory.create :submission, state: :draft
-        mock_mail = mock(:mail)
-        mock_mail.stub(:deliver)
-        Notifications.should_receive(:new_submission).with(sub).and_return(mock_mail)
-        sub.has_been :submitted
+      context "when submitted by the editor" do
+        let(:publication) { Factory.create :publication }
+        it "sends no email, if it was submitted by the editor" do
+          sub = Factory.create :submission, state: :draft, publication: publication
+          publication.should_receive(:editor).and_return("Blimey, Tim!")
+          Notifications.should_not_receive(:new_submission)
+          sub.has_been :submitted, :by => "Blimey, Tim!"
+        end
       end
 
-      it "sends no email, if it was submitted by the editor" do
-        sub = Factory.create :submission, state: :draft
-        Person.should_receive(:current_communicators).and_return(["Blimey, Tim!"])
-        Notifications.should_not_receive(:new_submission)
-        sub.has_been :submitted, :by => "Blimey, Tim!"
+      context "when submitted by anyone else" do
+        it "sends an email to the editor, by default" do
+          sub = Factory.create :submission, state: :draft
+          mock_mail = mock(:mail)
+          mock_mail.stub(:deliver)
+          Notifications.should_receive(:new_submission).with(sub).and_return(mock_mail)
+          sub.has_been :submitted
+        end
       end
     end
   end
@@ -91,15 +101,6 @@ describe Submission do
         Notifications.should_not_receive(:new_submission)
 
         sub.update_attributes state: :submitted
-      end
-      it "does not send a notification if was :draft, but is being updated by the person who would get the email" do
-        per = Factory.create(:person)
-        sub = Submission.create title: "love", body: "&loss", author: per, state: :draft
-
-        Person.should_receive(:current_communicators).and_return([per])
-        Notifications.should_not_receive(:new_submission)
-
-        sub.update_attributes state: :submitted, updated_by: per
       end
     end
   end

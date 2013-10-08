@@ -52,6 +52,10 @@ Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails?$/ do |address, a
   unread_emails_for(address).size.should == parse_email_count(amount)
 end
 
+Then /^the editor should receive (an|no|\d+) emails?$/ do |amount|
+  unread_emails_for(@editor.email).size.should == parse_email_count(amount)
+end
+
 Then /^(?:I|they|"([^"]*?)") should have (an|no|\d+) emails?$/ do |address, amount|
   mailbox_for(address).size.should == parse_email_count(amount)
 end
@@ -71,6 +75,10 @@ end
 # Opens the most recently received email
 When /^(?:I|they|"([^"]*?)") opens? the email$/ do |address|
   open_email(address)
+end
+
+When /^the editor opens? the email$/ do
+  open_email(@editor.email)
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with subject "([^"]*?)"$/ do |address, subject|
