@@ -57,7 +57,7 @@ Pc::Application.routes.draw do
     resources :submissions, path: "", except: [:index, :create], path_names: { :new => "/submit" }
 
 
-    get "" => "publications#show", as: "publication"
+    get "" => "publications#show"
   end # subdomain
 
   resources :publications, except: [:index, :show]

@@ -14,7 +14,11 @@ class MagazinesController < InheritedResources::Base
   custom_actions :resource => [:highest_scores, :publish]
 
   def index
-    @magazines = person_signed_in? ? Magazine.all : Magazine.where('published_on IS NOT ?', nil)
+    @magazines = if person_signed_in?
+                   @publication.magazines
+                 else
+                   @publication.magazines.where('published_on IS NOT NULL')
+                 end
   end
 
   def show

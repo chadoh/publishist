@@ -14,14 +14,18 @@ Coveralls.wear!
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+module RequestHelpers
+  def sign_in(person: nil)
+    unless person
+      person = Factory.create :person
+      person.confirm!
+    end
+    ApplicationController.any_instance.stub(:person_signed_in?).and_return(true)
+    ApplicationController.any_instance.stub(:current_person).and_return(person)
+  end
+end
+
 RSpec.configure do |config|
-  # == Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
   config.mock_with :rspec
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -50,6 +54,8 @@ RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
+
+  config.include RequestHelpers, type: :request
 end
 
 FactoryGirl.definition_file_paths = [
