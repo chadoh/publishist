@@ -40,6 +40,8 @@ gem 'handlers', :git => "git://github.com/chadoh/handlers.git"
 
 gem 'airbrake'
 
+gem 'coveralls', require: false
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

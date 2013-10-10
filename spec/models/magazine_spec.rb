@@ -15,7 +15,7 @@ describe Magazine do
     context "when this is the first magazine" do
       it "defaults to today" do
         mag = Magazine.new
-        mag2 = Magazine.new :accepts_submissions_from => Time.zone.now
+        mag2 = Magazine.new :accepts_submissions_from => Time.zone.now.to_date
         mag.accepts_submissions_from.should == mag2.accepts_submissions_from
       end
       it "sets the time part to 00:00:00" do
