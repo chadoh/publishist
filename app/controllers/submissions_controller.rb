@@ -8,13 +8,13 @@ class SubmissionsController < InheritedResources::Base
 
   def index
     @magazines = current_person.magazines
-    @magazine = params[:m].present? ? Magazine.find(params[:m]) : Magazine.current.presence || Magazine.first
+    @magazine = @publication.magazines.where(id: params[:m]).first.presence || @publication.magazines.current
     @average = @magazine.try(:average_score)
-    @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : Meeting.all
+    @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : []
     @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
     @show_author = false unless current_person.communicates?(@magazine)
-    @unscheduled_submissions = Submission.where(:state => Submission.state(:submitted))
+    @unscheduled_submissions = @publication.submissions.where(:state => Submission.state(:submitted))
   end
 
   def show

@@ -15,13 +15,14 @@ Coveralls.wear!
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 module RequestHelpers
-  def sign_in(person: nil)
-    unless person
-      person = Factory.create :person
-      person.confirm!
-    end
+  def sign_in(as: '')
+    @person = Factory.create :person
+    @person.confirm!
     ApplicationController.any_instance.stub(:person_signed_in?).and_return(true)
-    ApplicationController.any_instance.stub(:current_person).and_return(person)
+    ApplicationController.any_instance.stub(:current_person).and_return(@person)
+    if as.to_sym == :editor
+      ApplicationController.any_instance.stub(:must_orchestrate).and_return(true)
+    end
   end
 end
 
