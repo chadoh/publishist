@@ -3,67 +3,57 @@
 / this is a simple_form, not haml, method.
 = simple_form_for @submission, :html => { :multipart => true } do |f|
   = error_messages
-  = f.input :title, label: false, input_html: { :id => 'no_outline', :placeholder => 'Your Title Goes Here' }
 
-  %label.text.optional(for="submission_body") Body
-  %div#border_is
-    %ul#wysihtml5-toolbar{style: "display: none;"}
-      %li
-        .btn-group
-          %a.btn{"data-wysihtml5-command" => "bold"}
-            %i.icon-bold
-          %a.btn{"data-wysihtml5-command" => "italic"}
-            %i.icon-italic
-          %a.btn{"data-wysihtml5-command" => "underline"}
-            %i.icon-underline
-      %li
-        .btn-group  
-          %a.btn{"data-wysihtml5-command" => "insertOrderedList"}
-            %i.icon-list-ol
-          %a.btn{"data-wysihtml5-command" => "insertUnorderedList"}
-            %i.icon-list-ul
-      %li
-        .btn-group
-          %a.btn{"data-wysihtml5-command" => "Outdent"}
-            %i.icon-indent-left
-          %a.btn{"data-wysihtml5-command" => "Indent"}
-            %i.icon-indent-right
-      %li
-        .btn-group
-          %a.btn{"data-wysihtml5-command" => "justifyCenter"}
-            %i.icon-align-center
-          %a.btn{"data-wysihtml5-command" => "justifyLeft"}
-            %i.icon-align-left
-          %a.btn{"data-wysihtml5-command" => "justifyRight"}
-            %i.icon-align-right
-          %a.btn{"data-wysihtml5-command" => "justifyFull"}
-            %i.icon-align-justify
-      %li
-        .btn-group
-          %a.btn{"data-wysihtml5-command" => "insertImage"}
-            %i.icon-picture
-          %a.btn{"data-wysihtml5-command" => "createLink"}
-            %i.icon-link
-      %li
-        .btn-group
-          %a.btn{"data-wysihtml5-action" => "change_view"}
-            %i.icon-code
-      %div#position_absolute{"data-wysihtml5-dialog" => "createLink", style: "display: none;"}
-        %label#linkto
+  %label{ :for => 'submission_title'} Title
+  %h1
+    %textarea{ :id => 'submission_title'}
+
+  %label{ :for => 'submission_body'} Body
+  %div#submission-body-container
+    #wysihtml5-toolbar{style: "display: none;"}
+      %a.btn{"data-wysihtml5-command" => "bold"}>
+        %i.icon-bold
+      %a.btn{"data-wysihtml5-command" => "italic"}>
+        %i.icon-italic
+      %a.btn{"data-wysihtml5-command" => "underline"}>
+        %i.icon-underline 
+      %a.btn.btn-group-separator{"data-wysihtml5-command" => "insertOrderedList"}>
+        %i.icon-list-ol
+      %a.btn{"data-wysihtml5-command" => "insertUnorderedList"}>
+        %i.icon-list-ul
+      %a.btn.btn-group-separator{"data-wysihtml5-command" => "Outdent"}>
+        %i.icon-indent-left
+      %a.btn{"data-wysihtml5-command" => "Indent"}>
+        %i.icon-indent-right
+      %a.btn.btn-group-separator{"data-wysihtml5-command" => "justifyCenter"}>
+        %i.icon-align-center
+      %a.btn{"data-wysihtml5-command" => "justifyLeft"}>
+        %i.icon-align-left
+      %a.btn{"data-wysihtml5-command" => "justifyRight"}>
+        %i.icon-align-right
+      %a.btn{"data-wysihtml5-command" => "justifyFull"}>
+        %i.icon-align-justify
+      %a.btn.btn-group-separator{"data-wysihtml5-command" => "insertImage"}>
+        %i.icon-picture
+      %a.btn{"data-wysihtml5-command" => "createLink"}>
+        %i.icon-link
+      %a.btn.btn-group-separator{"data-wysihtml5-action" => "change_view"}>
+        %i.icon-code
+      %div#add-link{"data-wysihtml5-dialog" => "createLink", style: "display: none;"}
+        %label
           Link to:
           %input.text{"data-wysihtml5-dialog-field" => "href", value: "http://"}
         %a{"data-wysihtml5-dialog-action" => "save"} OK
         %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
-      %div#position_absolute{"data-wysihtml5-dialog" => "insertImage", style: "display: none;"}
-        %label#linkto
+      %div#add-image{"data-wysihtml5-dialog" => "insertImage", style: "display: none;"}
+        %label
           Picture:
           %input.text{"data-wysihtml5-dialog-field" => "src", value: "http://"}
         %a{"data-wysihtml5-dialog-action" => "save"} OK
         %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
-    %form  
-      %textarea#wysihtml5-textarea{ :placeholder => "And Submission Content Here" }
+    %textarea#wysihtml5-textarea
 
-  = f.input :photo, :label => "Or, submit an image:", input_html: { id: 'margin_bottom' }
+  = f.input :photo, :label => "Or, submit an image:"
   = f.input :state, :as => :hidden
   - if person_signed_in?
     = f.input :pseudonym_name, label: "Pseudonym (if you'd like to obscure your identity for this one)"
