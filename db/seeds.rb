@@ -84,7 +84,7 @@ disappears =   Ability.find_or_create_by_key_and_description 'disappears', "Subm
   water = Submission.find_or_create_by_author_id_and_magazine_id(person3.id, mag3.id)
   water.update_attributes(
     :title => "This is Water",
-    :body => "Probably the most dangerous thing aboutan academic education, at least in my own case, is that it enables my tendency to over-intellectualize stuff, to get lost in abstract thinking instead of simply paying attention to what's going on in front of me.",
+    :body => "Probably the most dangerous thing about an academic education, at least in my own case, is that it enables my tendency to over-intellectualize stuff, to get lost in abstract thinking instead of simply paying attention to what's going on in front of me.",
     :state => :submitted,
     :magazine_id => mag3,
     :publication_id => publication.id

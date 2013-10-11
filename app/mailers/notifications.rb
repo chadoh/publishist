@@ -1,5 +1,5 @@
 class Notifications < ActionMailer::Base
-  default_url_options[:host] = "problemchildmag.com"
+  default_url_options[:host] = "publishist.com"
 
   helper :application
   include ActionView::Helpers::SanitizeHelper

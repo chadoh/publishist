@@ -57,7 +57,7 @@ Feature: people of various ranks submit something
     When I follow "Edit"
     And I press "Save"
     Then I should be on my profile page
-    And "editor@problemchildmag.com" should receive no email
+    And the editor should receive no email
 
   Scenario: Someone with an account submits something while not signed in
     Given the following user exists:

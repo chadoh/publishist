@@ -2,16 +2,16 @@ Perhaps you've heard of '<%= title = sanitize @title %>'?
 =========================<%= "=" * title.length %>==
 
 And perhaps not only *heard* of it, but *created it*? Great! It was submitted to
-Problem Child by someone who wasn't signed in. If you submitted it and want to
-avoid getting this sort of email in the future, just sign in before you submit
-next time.
+a publication using Publishist.com by someone who wasn't signed in. If you
+submitted it and want to avoid getting this sort of email in the future, just
+sign in before you submit next time.
 
 No, I have not. What is going on?
 =================================
 
-Oh, my! Someone submitted it to Problem Child under your name! If that's upsetting,
-don't worry, you can just go ahead and delete it by visiting [your profile
-page][1] and clicking the 'x' in the bottom right corner of the submission
-(you'll have to be signed in).
+Oh, my! Someone submitted it under your name! If that's upsetting, don't worry,
+you can just go ahead and delete it by visiting [your profile page][1] and
+clicking the 'x' in the bottom right corner of the submission (you'll have to
+be signed in).
 
   [1]: <%= @profile_url %>

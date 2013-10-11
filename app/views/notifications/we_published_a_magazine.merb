@@ -18,14 +18,14 @@ made it into this magazine!
 Unfortunately, we can't publish everything, though.
 ---------------------------------------------------
 
+The following didn't make into this magazine:
+
 <% for sub in @rejected %>
 * [<%= sanitize sub.to_s %>](<%= submission_url(sub) %>)
 <% end %>
 
-didn't make into this magazine. You can try editing and
-resubmitting. If you're close to State College, you
-should stop by a meeting or two to get a feel for what
-the Problem Child staff are into. Try stopping by when
-your submissions are being reviewed for some great, honest
-(blunt) feedback!
+You can try editing and resubmitting.
 <% end %>
+
+Thank you for sharing your craft and your self with us. We hope you like what
+we've put together here.

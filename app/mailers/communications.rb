@@ -12,7 +12,7 @@ class Communications < ActionMailer::Base
       :from     => "#{@fromm.name} <donotreply@publishist.com>",
       :reply_to => @fromm.email,
       :to       => @to.email,
-      :subject  => "#{@fromm.name} sent you a message from your profile on Problem Child"
+      :subject  => "#{@fromm.name} sent you a message from your profile on Publishist"
     ) do |format|
       format.text
       format.html
