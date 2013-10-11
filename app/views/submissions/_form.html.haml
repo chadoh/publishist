@@ -1,12 +1,13 @@
 / wyishtml5 toolbar
 / note "input_html: {id: 'wysihtml5-textarea' }"
 / this is a simple_form, not haml, method.
+
 = simple_form_for @submission, :html => { :multipart => true } do |f|
   = error_messages
 
   %label{ :for => 'submission_title'} Title
   %h1
-    %textarea{ :id => 'submission_title'}
+    %textarea{ :id => 'submission_title', :tabindex => '1'}
 
   %label{ :for => 'submission_body'} Body
   %div#submission-body-container
@@ -79,8 +80,8 @@
         = f.input :legality, :label => "legality (please leave blank)", input_html: { :tabindex => -1 }
         = f.input :preference, :label => "preference (please leave blank)", input_html: { :tabindex => -1 }
         = f.input :encoding, :label => "encoding (please leave blank)", input_html: { :tabindex => -1 }
-    = f.input :author_name, :label => "Your Name"
-    = f.input :author_email, :label => "Your Email Address"
+    = f.input :author_name, :label => "Your Name", input_html: { tabindex: '3'}
+    = f.input :author_email, :label => "Your Email Address", input_html: { tabindex: '4'}
   -# submit/preview/save
   - if person_signed_in?
     - if !@submission.draft?
@@ -213,6 +214,10 @@
     });
   });
 
+:javascript
+  $( function () {
+    $('.wysihtml5-sandbox').attr('tabindex', '2');
+  });
 / wysihtml5 Implementation Resources:
 / http://quickworx.info/using-wysihtml5-editor-in-rails-3-2/
 / https://github.com/refinery/ui/blob/master/app/views/home/_wysiwyg.html.haml
