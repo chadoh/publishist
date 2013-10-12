@@ -23,7 +23,7 @@ Feature: a person signs up for the website
     And I should receive an email with subject "You're nearly signed up!"
 
     When I open the email
-    And I follow "set your password" in the email
+    And I follow the link in the email
     Then I should see "Almost there"
 
     When I fill in the following:

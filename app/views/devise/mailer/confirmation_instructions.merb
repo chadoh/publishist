@@ -3,12 +3,12 @@ You almost have a full-fledged account, <%=  @resource.first_name  %>!
 
 You're almost signed up on Publishist.com, a new, organic network of literary
 magazines and writing circles. Your account will let you submit to, track your
-submissions, maintain a public profile, and promote any of the publications
-using this platform.
+submissions on, maintain a public profile on, and promote any of the
+publications using this platform.
 
 To finish signing up, please click the following link:
 
-* <%= confirmation_url @resource, confirmation_token: @resource.confirmation_token %>
+* [<%= confirmation_url @resource, confirmation_token: @resource.confirmation_token %>][1]
 
 
 You say you didn't sign up?
@@ -28,3 +28,5 @@ signed up with your email address by accident. Don't worry, nothing malicious
 can be done with the account that this person made as you. Any content they may
 have submitted will be considered "draft" and not fully submitted until you
 complete the sign up process by clicking the link above.
+
+  [1]: <%= confirmation_url @resource, confirmation_token: @resource.confirmation_token %>

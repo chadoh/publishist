@@ -1,7 +1,7 @@
-Then /print page\.html/ do
+Then(/print page\.html/) do
   print page.html
 end
 
-Then /^p (.*)$/ do |object|
+Then(/^p (.*)$/) do |object|
   p eval(object)
 end

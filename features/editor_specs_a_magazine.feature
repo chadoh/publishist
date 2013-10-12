@@ -14,7 +14,6 @@ Feature: An editor specs a magazine
 
   Scenario: I edit a magazine
     Given I'm in a position for the current magazine with the "orchestrates" ability
-    And there is a magazine
     When I am on the magazines page
     And I click the edit link
     And I fill in the following:

@@ -8,7 +8,8 @@ Given /^"([^"]*)" has a published poem called "([^"]*)" under an unlinked pseudo
   mag = Magazine.create(
     accepts_submissions_from:  6.months.ago,
     accepts_submissions_until: 2.days.ago,
-    published_on:              Date.yesterday
+    published_on:              Date.yesterday,
+    publication: Publication.first
   )
   poem = Submission.create(
     title: title,

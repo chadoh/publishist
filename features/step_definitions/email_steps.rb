@@ -175,6 +175,10 @@ When /^(?:I|they) follow "([^"]*?)" in the email$/ do |link|
   visit_in_email(link)
 end
 
+When(/^I follow the link in the email$/) do
+  visit(parse_email_for_link(current_email, 'http'))
+end
+
 When /^(?:I|they) click the first link in the email$/ do
   click_first_link_in_email
 end
