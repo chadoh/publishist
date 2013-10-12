@@ -11,5 +11,5 @@ script:
 - bundle exec cucumber
 env:
   global:
-  - secure: HAhPP5zwXa+uZa3MuBT69njbuABoDu4BISUcbbPjgvTwrPBEn3dMjCio0YQyYxfGAEIPA2p8EXKGrDIXofRPqhi6xT4WuEwebCtao4Q8Z0T+mCNeRIKN062XQ/RVg6GiezCUOW8vuYYJadNhkDuqlWXoaOyY2wqW/AgaughDQMY=
-  - secure: Ju3gMjMpcWjeUolvCcOjcyM7b3hdB7f7Nk5JkAiiWC0Jmn34fKLacN3NvvfAJqfAc9tNiMoRTC7Jqm9WSDoR8+TQNJBVzx5dBbh9hG3ABrksAB0AeHfSmaFoURp0WwCaRg0j0vahWuZldXI3AAjLE24RtdazAJXRItlAZ9NKii4=
+  - ADMIN_EMAIL: admin@problemchildmag.com
+  - EDITOR_EMAIL: editor@problemchildmag.com
