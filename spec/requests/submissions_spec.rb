@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "Submissions" do
   describe "GET /submissions" do
     let!(:publications) { [Factory.create(:publication), Factory.create(:publication)] }
+    let!(:publications) { [Factory.create(:publication), Factory.create(:publication)] }
     let(:submissions) { [Factory.create(:submission, publication: publications.first),
                        Factory.create(:submission, publication: publications.last)] }
     let(:magazines) { [Factory.create(:magazine, publication: publications.first, published_on: Time.zone.now - 1.week),
@@ -26,6 +27,23 @@ describe "Submissions" do
         @person.stub(:magazines).and_return([magazines.last])
         visit submissions_url(subdomain: publications.last.subdomain, m: magazines.first)
         expect(page).to     have_selector("h3", text: magazines.last.title)
+      end
+    end
+  end
+
+  describe "GET /submit" do
+    let(:publication) { Factory.create(:publication) }
+    context "when signed out" do
+      it "assigns the submission to the current publication" do
+        visit new_submission_url(subdomain: publication.subdomain)
+        expect(page).to have_selector "input#submission_publication_id[value=\"#{publication.id}\"]"
+      end
+    end
+    context "when signed in" do
+      it "assigns the submission to the current publication" do
+        sign_in
+        visit new_submission_url(subdomain: publication.subdomain)
+        expect(page).to have_selector "input#submission_publication_id[value=\"#{publication.id}\"]"
       end
     end
   end

@@ -30,9 +30,9 @@ class SubmissionsController < InheritedResources::Base
   def new
     session[:return_to] = request.referer unless begin URI(request.referer).path == "/submissions" rescue false end
     if person_signed_in?
-      @submission = Submission.new :author_id => current_person.id, :state => :draft
+      @submission = Submission.new author_id: current_person.id, state: :draft, publication_id: @publication.id
     else
-      @submission = Submission.new :state => :submitted
+      @submission = Submission.new state: :submitted, publication_id: @publication.id
       @submission.extend HoneyPot
     end
 

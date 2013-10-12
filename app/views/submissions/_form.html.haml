@@ -1,6 +1,7 @@
 = simple_form_for @submission, :html => { :multipart => true } do |f|
   = error_messages
 
+  = f.input :publication_id, as: 'hidden'
   = f.input :title, :label => 'Title'
   = f.input :body, :label => "Body", :required => false
   = f.input :photo, :label => "Or, submit an image:"
