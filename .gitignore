@@ -13,3 +13,4 @@ tmp/**/*
 .vagrant
 latest.dump
 .env
+coverage
