@@ -7,46 +7,46 @@
 
   %label{ :for => 'submission_title'} Title
   %h1
-    %textarea{ :id => 'submission_title', :tabindex => '1'}
+    %textarea{ :id => 'submission_title', :autofocus => 'autofocus' }
 
   %label{ :for => 'submission_body'} Body
   %div#submission-body-container
     #wysihtml5-toolbar{style: "display: none;"}
-      %a.btn{"data-wysihtml5-command" => "bold"}>
+      %a.btn{"data-wysihtml5-command" => "bold", :tabindex => '-1'}>
         %i.icon-bold
-      %a.btn{"data-wysihtml5-command" => "italic"}>
+      %a.btn{"data-wysihtml5-command" => "italic", :tabindex => '-1'}>
         %i.icon-italic
-      %a.btn{"data-wysihtml5-command" => "underline"}>
+      %a.btn{"data-wysihtml5-command" => "underline", :tabindex => '-1'}>
         %i.icon-underline 
-      %a.btn.btn-group-separator{"data-wysihtml5-command" => "insertOrderedList"}>
+      %a.btn.btn-group-separator{"data-wysihtml5-command" => "insertOrderedList", :tabindex => '-1'}>
         %i.icon-list-ol
-      %a.btn{"data-wysihtml5-command" => "insertUnorderedList"}>
+      %a.btn{"data-wysihtml5-command" => "insertUnorderedList", :tabindex => '-1'}>
         %i.icon-list-ul
-      %a.btn.btn-group-separator{"data-wysihtml5-command" => "Outdent"}>
+      %a.btn.btn-group-separator{"data-wysihtml5-command" => "Outdent", :tabindex => '-1'}>
         %i.icon-indent-left
-      %a.btn{"data-wysihtml5-command" => "Indent"}>
+      %a.btn{"data-wysihtml5-command" => "Indent", :tabindex => '-1'}>
         %i.icon-indent-right
-      %a.btn.btn-group-separator{"data-wysihtml5-command" => "justifyCenter"}>
+      %a.btn.btn-group-separator{"data-wysihtml5-command" => "justifyCenter", :tabindex => '-1'}>
         %i.icon-align-center
-      %a.btn{"data-wysihtml5-command" => "justifyLeft"}>
+      %a.btn{"data-wysihtml5-command" => "justifyLeft", :tabindex => '-1'}>
         %i.icon-align-left
-      %a.btn{"data-wysihtml5-command" => "justifyRight"}>
+      %a.btn{"data-wysihtml5-command" => "justifyRight", :tabindex => '-1'}>
         %i.icon-align-right
-      %a.btn{"data-wysihtml5-command" => "justifyFull"}>
+      %a.btn{"data-wysihtml5-command" => "justifyFull", :tabindex => '-1'}>
         %i.icon-align-justify
-      %a.btn.btn-group-separator{"data-wysihtml5-command" => "insertImage"}>
+      %a.btn.btn-group-separator{"data-wysihtml5-command" => "insertImage", :tabindex => '-1'}>
         %i.icon-picture
-      %a.btn{"data-wysihtml5-command" => "createLink"}>
+      %a.btn{"data-wysihtml5-command" => "createLink", :tabindex => '-1'}>
         %i.icon-link
-      %a.btn.btn-group-separator{"data-wysihtml5-action" => "change_view"}>
+      %a.btn.btn-group-separator{"data-wysihtml5-action" => "change_view", :tabindex => '-1'}>
         %i.icon-code
-      %div#add-link{"data-wysihtml5-dialog" => "createLink", style: "display: none;"}
+      %div#add-link{"data-wysihtml5-dialog" => "createLink", style: "display: none;", :tabindex => '-1'}
         %label
           Link to:
           %input.text{"data-wysihtml5-dialog-field" => "href", value: "http://"}
         %a{"data-wysihtml5-dialog-action" => "save"} OK
         %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
-      %div#add-image{"data-wysihtml5-dialog" => "insertImage", style: "display: none;"}
+      %div#add-image{"data-wysihtml5-dialog" => "insertImage", style: "display: none;", :tabindex => '-1'}
         %label
           Picture:
           %input.text{"data-wysihtml5-dialog-field" => "src", value: "http://"}
@@ -80,8 +80,8 @@
         = f.input :legality, :label => "legality (please leave blank)", input_html: { :tabindex => -1 }
         = f.input :preference, :label => "preference (please leave blank)", input_html: { :tabindex => -1 }
         = f.input :encoding, :label => "encoding (please leave blank)", input_html: { :tabindex => -1 }
-    = f.input :author_name, :label => "Your Name", input_html: { tabindex: '3'}
-    = f.input :author_email, :label => "Your Email Address", input_html: { tabindex: '4'}
+    = f.input :author_name, :label => "Your Name", input_html: { tabindex: ''}
+    = f.input :author_email, :label => "Your Email Address", input_html: { tabindex: ''}
   -# submit/preview/save
   - if person_signed_in?
     - if !@submission.draft?
@@ -214,10 +214,10 @@
     });
   });
 
-:javascript
-  $( function () {
-    $('.wysihtml5-sandbox').attr('tabindex', '2');
-  });
+/ :javascript
+/   $( function () {
+/     $('.wysihtml5-sandbox').attr('tabindex', '2');
+/   });
 / wysihtml5 Implementation Resources:
 / http://quickworx.info/using-wysihtml5-editor-in-rails-3-2/
 / https://github.com/refinery/ui/blob/master/app/views/home/_wysiwyg.html.haml
