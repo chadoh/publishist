@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-  attr_accessible :name, :first_name, :middle_name, :last_name, :email, :primary_publication_id, :primary_publication
+  attr_accessible :name, :first_name, :middle_name, :last_name, :email, :password, :password_confirmation, :primary_publication_id, :primary_publication
 
   extend Memoist
 

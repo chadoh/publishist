@@ -10,7 +10,7 @@ class People::RegistrationsController < Devise::RegistrationsController
   def create
     remove_blank_attributes
     super
-  rescue ActiveRecord::UnknownAttributeError
+  rescue ActiveModel::MassAssignmentSecurity::Error
     redirect_to :root
   end
 
