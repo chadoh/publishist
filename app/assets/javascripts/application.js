@@ -10,6 +10,8 @@
 //= require jquery.ui.droppable
 //= require jquery.ui.autocomplete
 //= require jquery_ujs
+//= require wysihtml5
+//= require parser_rules/advanced
 //= require_tree .
 //= require_tree ../../../vendor/assets/javascripts
 
@@ -47,9 +49,6 @@ $(function(){
     $(this).find('span.arrow').toggleClass("rotated");
     $(this).next().slideToggle();
   });
-  setTimeout(function(){
-    $('dt').first().click()
-  }, 1000);
 
   $(document).on("ajax:success", "li.attendee nav.actions form[data-remote]", function(){
     $(this).closest('nav').closest('li').fadeOut();
