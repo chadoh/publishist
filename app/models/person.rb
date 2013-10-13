@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
+  attr_accessible :name, :first_name, :middle_name, :last_name, :email, :primary_publication_id, :primary_publication
+
   extend Memoist
 
   devise :database_authenticatable, :confirmable,
@@ -6,6 +8,8 @@ class Person < ActiveRecord::Base
          :validatable
 
   attr_reader :password
+
+  belongs_to :primary_publication, class_name: "Publication"
 
   has_many :submissions,        foreign_key: 'author_id'
   has_many :attendees,          dependent:   :destroy
@@ -165,14 +169,14 @@ class Person < ActiveRecord::Base
   class << self
     extend Memoist
 
-    def find_or_create formatted_name_and_email
+    def find_or_create formatted_name_and_email, attrs = {}
       return nil if formatted_name_and_email.blank?
       name = formatted_name_and_email.gsub(',','').split
       email = name.delete_at(name.length - 1).gsub(/[<>]/, '')
       person = Person.find_by_email email
       unless person
         if name.present? && email.present?
-          person = Person.new(email: email)
+          person = Person.new attrs.merge(email: email)
           person.name = name.join(' ')
           person = person.save ? person : nil
         end

@@ -32,6 +32,7 @@
         = f.input :encoding, :label => "encoding (please leave blank)", input_html: { :tabindex => -1 }
     = f.input :author_name, :label => "Your Name"
     = f.input :author_email, :label => "Your Email Address"
+    = f.input :author_primary_publication_id, as: "hidden"
   -# submit/preview/save
   - if person_signed_in?
     - if !@submission.draft?

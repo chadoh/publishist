@@ -5,6 +5,7 @@ describe Publication do
   it {
     should have_many(:magazines).dependent(:destroy)
     should have_many(:submissions).dependent(:destroy)
+    should have_many(:people)
     should have_one(:publication_detail).dependent(:destroy)
   }
   [:address,

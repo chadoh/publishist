@@ -3,6 +3,7 @@
   = f.input :name, required: true, autofocus: true
   = f.input :email, required: true, placeholder: "This is what you you'll use to sign in."
   - if params[:action] == 'new' || params[:action] == 'create'
+    = f.input :primary_publication_id, as: "hidden"
     - if resource.respond_to? :mean
       .contextual-info
         -# this is bullshit; it's a honeypot

@@ -32,7 +32,7 @@ class SubmissionsController < InheritedResources::Base
     if person_signed_in?
       @submission = Submission.new author_id: current_person.id, state: :draft, publication_id: @publication.id
     else
-      @submission = Submission.new state: :submitted, publication_id: @publication.id
+      @submission = Submission.new state: :submitted, publication_id: @publication.id, author_primary_publication_id: @publication.id
       @submission.extend HoneyPot
     end
 
@@ -65,7 +65,7 @@ class SubmissionsController < InheritedResources::Base
               flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
               redirect_to new_submission_url and return
             end
-            redirect_to person_url(current_person)
+            redirect_to person_url(current_person, subdomain: @publication.subdomain)
           else
             @submission.save
             flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
@@ -85,13 +85,6 @@ class SubmissionsController < InheritedResources::Base
     set_params
     @submission.attributes = params[:submission]
 
-    # update! {
-    #   if current_person.orchestrates?(:current) && params[:commit] != t('preview')
-    #     session[:return_to] || submissions_url
-    #   else
-    #     @submission.author ? person_url(resource.author) : submission_url(@submission)
-    #   end
-    # }
     respond_with(@submission) do |format|
       if @submission.save
         format.html {
@@ -126,7 +119,10 @@ private
   end
 
   def set_params
-    params[:submission][:author] = Person.find_or_create(params[:submission][:author]) if !!params[:submission][:author]
+    if !!params[:submission][:author]
+      person = Person.find_or_create params[:submission].delete(:author), primary_publication_id: @publication.id
+      params[:submission][:author] = person
+    end
     params[:submission][:updated_by] = current_person
     params[:submission][:state] = :submitted if params["submit"]
     drop_blank_fields

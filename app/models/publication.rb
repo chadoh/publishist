@@ -3,11 +3,12 @@ class Publication < ActiveRecord::Base
 
   has_many :magazines, dependent: :destroy
   has_many :submissions, dependent: :destroy
+  has_many :people, foreign_key: "primary_publication_id"
   has_one  :publication_detail, dependent: :destroy
 
   validates_uniqueness_of :subdomain
 
-  delegate :address, :latitude, :longitude, :about, :meetings_info, :to => :publication_detail
+  delegate :address, :latitude, :longitude, :about, :meetings_info, to: :publication_detail
   accepts_nested_attributes_for :publication_detail
 
   def editor

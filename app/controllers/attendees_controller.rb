@@ -18,7 +18,7 @@ class AttendeesController < InheritedResources::Base
     create! do |wants|
       wants.html do
         flash[:notice] = "Hello, #{resource.first_name}."
-        redirect_to parent_url
+        redirect_to parent_url(subdomain: @publication.subdomain)
       end
       wants.js
     end
@@ -53,7 +53,7 @@ class AttendeesController < InheritedResources::Base
   end
 
   def set_person_param_from_string attendee
-    if person = Person.find_or_create(attendee[:person])
+    if person = Person.find_or_create(attendee[:person], primary_publication_id: @publication.id)
       attendee[:person] = person
     else
       attendee[:person_name] = attendee.delete :person

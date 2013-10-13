@@ -65,8 +65,8 @@ class Submission < ActiveRecord::Base
 
   scope :published, where(state: Submission.state(:published))
 
-  attr_writer :author_name
-  attr_writer :author_email
+  attr_accessor :author_primary_publication_id
+  attr_writer :author_name, :author_email
   def author_name
     @author_name ||= pseudonym.try(:name).presence || author.try(:name) || ''
   end
@@ -151,7 +151,7 @@ protected
   def create_author_if_blank
     if self.author.blank?
       person = Person.find_by_email(author_email).presence || \
-               Person.create(name: author_name, email: author_email)
+               Person.create(name: author_name, email: author_email, primary_publication_id: author_primary_publication_id)
       self.author = person
       self.pseudonym_name = author_name if author_name != person.name
       Notifications.submitted_while_not_signed_in(self).deliver

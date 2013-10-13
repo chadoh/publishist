@@ -18,10 +18,14 @@ module RequestHelpers
   def sign_in(as: '')
     @person = Factory.create :person
     @person.confirm!
+    ApplicationController.any_instance.stub(:authenticate_person!).and_return(true)
     ApplicationController.any_instance.stub(:person_signed_in?).and_return(true)
     ApplicationController.any_instance.stub(:current_person).and_return(@person)
     if as.to_sym == :editor
       ApplicationController.any_instance.stub(:must_orchestrate).and_return(true)
+      ApplicationController.any_instance.stub(:must_view).and_return(true)
+      @person.stub(:communicates?).and_return(true)
+      @person.stub(:orchestrates?).and_return(true)
     end
   end
 end

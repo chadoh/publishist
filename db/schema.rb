@@ -134,11 +134,11 @@ ActiveRecord::Schema.define(:version => 20131003000738) do
     t.string   "encrypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "verified",             :default => false
+    t.boolean  "verified",               :default => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",        :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20131003000738) do
     t.datetime "confirmation_sent_at"
     t.string   "password_salt"
     t.string   "slug"
+    t.integer  "primary_publication_id"
   end
 
   add_index "people", ["confirmation_token"], :name => "index_people_on_confirmation_token", :unique => true
@@ -254,6 +255,8 @@ ActiveRecord::Schema.define(:version => 20131003000738) do
   add_foreign_key "magazines", "publications", :name => "magazines_publication_id_fk"
 
   add_foreign_key "pages", "magazines", :name => "pages_magazine_id_fk", :dependent => :delete
+
+  add_foreign_key "people", "publications", :name => "people_primary_publication_id_fk", :column => "primary_publication_id"
 
   add_foreign_key "position_abilities", "abilities", :name => "position_abilities_ability_id_fk"
   add_foreign_key "position_abilities", "positions", :name => "position_abilities_position_id_fk"

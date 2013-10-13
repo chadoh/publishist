@@ -3,7 +3,6 @@ require 'spec_helper'
 describe "Submissions" do
   describe "GET /submissions" do
     let!(:publications) { [Factory.create(:publication), Factory.create(:publication)] }
-    let!(:publications) { [Factory.create(:publication), Factory.create(:publication)] }
     let(:submissions) { [Factory.create(:submission, publication: publications.first),
                        Factory.create(:submission, publication: publications.last)] }
     let(:magazines) { [Factory.create(:magazine, publication: publications.first, published_on: Time.zone.now - 1.week),

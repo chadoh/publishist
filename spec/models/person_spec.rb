@@ -5,6 +5,7 @@ require 'spec_helper'
 describe Person do
 
   it {
+    should belong_to(:primary_publication)
     should have_many(:attendees)
     should have_many(:meetings).through(:attendees)
     should validate_presence_of(:first_name)
@@ -172,6 +173,12 @@ describe Person do
         person.last_name.to_s.should == new[5]
         person.email.to_s.should == new[7]
       end
+    end
+
+    it "allows passing in additional params for the new user" do
+      publication = Factory.create :publication
+      person = Person.find_or_create("Placebo Williams, pl@ce.bo", primary_publication: publication)
+      expect(person.primary_publication).to eq(publication)
     end
   end
 

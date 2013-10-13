@@ -17,11 +17,13 @@ class CreatePublications < ActiveRecord::Migration
     end
     add_column(:magazines, :publication_id, :integer)
     add_column(:submissions, :publication_id, :integer)
+    add_column(:people, :primary_publication_id, :integer)
 
     add_index(:publications, :subdomain, :unique => true)
 
     add_foreign_key(:publication_details, :publications)
     add_foreign_key(:magazines, :publications)
     add_foreign_key(:submissions, :publications)
+    add_foreign_key(:people, :publications, column: "primary_publication_id")
   end
 end

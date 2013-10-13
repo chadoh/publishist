@@ -7,7 +7,7 @@ class PeopleController < InheritedResources::Base
   def autocomplete
     terms = params[:term].split(' ')
     @people = terms.map do |term|
-                Person.limit(15).
+                @publication.people.limit(15).
                   where(
                     "first_name ILIKE :term OR middle_name ILIKE :term
                     OR last_name ILIKE :term OR email ILIKE :term",

@@ -1,5 +1,4 @@
 class MeetingsController < InheritedResources::Base
-  before_filter :authenticate_person!, only: :show
   before_filter only: [:new, :create] do |c|
     c.must_orchestrate :any
   end

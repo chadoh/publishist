@@ -1,5 +1,4 @@
 class People::SessionsController < Devise::SessionsController
-  layout "publications"
 
   ## For legacy reference only.
   # def create

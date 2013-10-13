@@ -2,6 +2,7 @@ class People::RegistrationsController < Devise::RegistrationsController
 
   def new
     build_resource {}
+    resource.primary_publication_id = @publication.id
     resource.extend HoneyPot
     respond_with self.resource
   end
