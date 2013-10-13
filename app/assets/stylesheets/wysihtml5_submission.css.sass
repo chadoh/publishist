@@ -1,17 +1,8 @@
 //VARIABLES
 $border: 1px solid $lgray
 
-//HTML ELEMENTS
-textarea, input
-  &:focus
-    outline: none
-  resize: none
-
 //CLASSES
-.wysihtml5-command-active
-  +box-shadow($lgray 0 1px 6px inset)
-
-.btn
+a.btn
   &:hover
     +box-shadow($lgray 0 1px 6px inset)
   border-right: $border
@@ -20,12 +11,21 @@ textarea, input
   height: 35px
   text-align: center
   line-height: 35px
+  display: inline-block
+  color: $base
+
+.wysihtml5-command-active
+  +box-shadow($lgray 0 1px 6px inset)
 
 .btn-group-separator
   margin-left: 5px
   border-left: $border
 
 //IDs
+#no-focus-outline
+  &:focus
+    outline: none
+
 #wysihtml5-toolbar
   [data-wysihtml5-command=bold]
     font-weight: bold
@@ -33,14 +33,12 @@ textarea, input
     font-style: italic
   [data-wysihtml5-command=underline]
     text-decoration: underline
-  a
-    display: inline-block
-    color: $base
 
 #wysihtml5-textarea
   border: none
   box-shadow: none
   -webkit-box-shadow: none
+  @extend #no-focus-outline
 
 #add-link, #add-image
   position: absolute
@@ -55,8 +53,6 @@ textarea, input
     display: inline
   a
     cursor: pointer
-    &:hover
-      color: $orange
 
 #submission-body-container
   position: relative

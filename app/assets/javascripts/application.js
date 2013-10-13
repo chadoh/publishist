@@ -49,9 +49,6 @@ $(function(){
     $(this).find('span.arrow').toggleClass("rotated");
     $(this).next().slideToggle();
   });
-  setTimeout(function(){
-    $('dt').first().click()
-  }, 1000);
 
   $(document).on("ajax:success", "li.attendee nav.actions form[data-remote]", function(){
     $(this).closest('nav').closest('li').fadeOut();

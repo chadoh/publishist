@@ -3,7 +3,7 @@
 
   %label{ :for => 'submission_title'} Title
   %h1
-    = f.text_area :title, :autofocus => true
+    = f.text_field :title, :autofocus => true, id: 'no-focus-outline'
   %label{ :for => 'wysihtml5-textarea'} Body
   #submission-body-container
     #wysihtml5-toolbar{style: "display: none;"}
@@ -124,8 +124,6 @@
         else {
           $("#submission_pseudonym_link").closest('div').slideUp(); }
       });
-    });
-    $(function(){
       var editor = new wysihtml5.Editor("wysihtml5-textarea", {
         toolbar:      "wysihtml5-toolbar",
         stylesheets:  "#{stylesheet_path('wysiwyg')}",
@@ -134,30 +132,9 @@
     });
 
 - content_for :sidebar do
-  %section#tips
-    %header
-      %h2 Tips
-    %dl
-      %dt
-        %span.arrow &raquo;
-        :markdown
-          Use the *Paste as Text* option in the toolbar when pasting from Word
-      %dd
-        :markdown
-          Your submission will be badly mangled if you don't. It won't look like it now, but just you wait until it's submitted!
-
-      %dt
-        %span.arrow &raquo;
-        :markdown
-          Don't add formatting to your whole title; it will already be formatted as a heading!
-      %dd
-        :markdown
-          If you add bold or centering or anything else, it will just make your heading
-          look inconsistent from the rest of the headings. Please refrain!
-
   %section#answers
     %header
-      %h2 Answers
+      %h2 FAQ
     %dl
       %dt
         %span.arrow &raquo;
