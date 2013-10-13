@@ -3,7 +3,7 @@
 
   %label{ :for => 'submission_title'} Title
   %h1
-    = f.text_field :title, :autofocus => true, id: 'no-focus-outline'
+    = f.text_field :title, :autofocus => true, class: 'no-focus-outline'
   %label{ :for => 'wysihtml5-textarea'} Body
   #submission-body-container
     #wysihtml5-toolbar{style: "display: none;"}
@@ -47,7 +47,7 @@
           %input.text{"data-wysihtml5-dialog-field" => "src", value: "http://"}
         %a{"data-wysihtml5-dialog-action" => "save"} OK
         %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
-    = f.text_area :body, id: 'wysihtml5-textarea'
+    = f.text_area :body, id: 'wysihtml5-textarea', class: 'no-focus-outline'
 
   = f.input :photo, :label => "Or, submit an image:"
   = f.input :state, :as => :hidden

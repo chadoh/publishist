@@ -14,6 +14,10 @@ a.btn
   display: inline-block
   color: $base
 
+.no-focus-outline
+  &:focus
+    outline: none
+
 .wysihtml5-command-active
   +box-shadow($lgray 0 1px 6px inset)
 
@@ -22,10 +26,6 @@ a.btn
   border-left: $border
 
 //IDs
-#no-focus-outline
-  &:focus
-    outline: none
-
 #wysihtml5-toolbar
   [data-wysihtml5-command=bold]
     font-weight: bold
@@ -38,7 +38,6 @@ a.btn
   border: none
   box-shadow: none
   -webkit-box-shadow: none
-  @extend #no-focus-outline
 
 #add-link, #add-image
   position: absolute
