@@ -38,12 +38,12 @@ describe PeopleController do
     context "when given no subdomain" do
       let(:domain) { "" }
 
-      it "still all works fine" do
-        expect(get "#{domain}/sign_up").to route_to("people/registrations#new")
-        expect(post "#{domain}/people").to route_to("people/registrations#create")
-        expect(get "#{domain}/people/1/edit").to route_to("people#edit", id: "1")
-        expect(put "#{domain}/people/1").to route_to("people#update", id: "1")
-        expect(delete "#{domain}/people/1").to route_to("people#destroy", id: "1")
+      it "doesn't route to anything" do
+        expect(get "#{domain}/sign_up").not_to route_to("people/registrations#new")
+        expect(post "#{domain}/people").not_to route_to("people/registrations#create")
+        expect(get "#{domain}/people/1/edit").not_to route_to("people#edit", id: "1")
+        expect(put "#{domain}/people/1").not_to route_to("people#update", id: "1")
+        expect(delete "#{domain}/people/1").not_to route_to("people#destroy", id: "1")
       end
     end
   end

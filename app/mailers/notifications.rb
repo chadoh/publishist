@@ -8,7 +8,7 @@ class Notifications < ActionMailer::Base
     @publication     = submission.publication
     @title           = submission.title
     @author_email    = submission.author_email
-    @profile_url     = person_url(submission.author)
+    @profile_url     = person_url(submission.author, subdomain: @publication.subdomain)
     @editor          = @publication.editor
 
     mail(
@@ -33,7 +33,7 @@ class Notifications < ActionMailer::Base
     @title = submission.title
     @submission_body = submission.body # using @body causes problems
     @author = submission.author_name
-    @url = submission_url(submission)
+    @url = submission_url(submission, subdomain: @publication.subdomain)
 
     mail(
       :to       => @publication.editor.email,

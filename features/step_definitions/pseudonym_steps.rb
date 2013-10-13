@@ -3,7 +3,8 @@ Given /^"([^"]*)" has a published poem called "([^"]*)" under an unlinked pseudo
     first_name: first_name,
     email:      "#{first_name}@example.com",
     password:   'secret',
-    password_confirmation: 'secret'
+    password_confirmation: 'secret',
+    primary_publication: Publication.first
   )
   mag = Magazine.create(
     accepts_submissions_from:  6.months.ago,

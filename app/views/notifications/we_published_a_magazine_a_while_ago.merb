@@ -1,14 +1,14 @@
 *<%= title = @magazine.to_s %>* can now be browsed online!
 =<%= "=" * title.length             %>==========================
 
-Check it out! <%= magazine_url(@magazine) %>
+Check it out! <%= magazine_url(@magazine, subdomain: @publication.subdomain) %>
 
 <% if @published.present? %>
 You may know this already, but you've been published in it!
 -----------------------------------------------------------
 
 <% for sub in @published %>
-* [<%= sanitize sub.to_s %>](<%= submission_url(sub) %>)
+* [<%= sanitize sub.to_s %>](<%= submission_url(sub, subdomain: @publication.subdomain) %>)
 <% end %>
 
 made it into this magazine!
@@ -21,7 +21,7 @@ Unfortunately, we can't publish everything, though.
 The following didn't make into this magazine:
 
 <% for sub in @rejected %>
-* [<%= sanitize sub.to_s %>](<%= submission_url(sub) %>)
+* [<%= sanitize sub.to_s %>](<%= submission_url(sub, subdomain: @publication.subdomain) %>)
 <% end %>
 
 You can try editing and resubmitting.

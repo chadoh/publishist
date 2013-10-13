@@ -1,24 +1,25 @@
 Pc::Application.routes.draw do
 
-  as :person do
-    put "/person/confirmation" => "confirmations#update", as: :update_user_confirmation
-  end
-
-  devise_for :people, controllers: {
-    sessions: "people/sessions",
-    registrations: "people/registrations",
-    confirmations: "confirmations"
-  } do
-    get "sign_in", to: "people/sessions#new", as: "sign_in"
-    get "sign_up", to: "people/registrations#new"
-  end
-
-  resources :people, except: [:index, :new] do
-    member { post "contact" }
-    collection { get "autocomplete" }
-  end
-
   constraints subdomain: /.+/ do
+    as :person do
+      put "/person/confirmation" => "confirmations#update", as: :update_user_confirmation
+    end
+
+    devise_controller_overrides = {
+      sessions: "people/sessions",
+      registrations: "people/registrations",
+      confirmations: "confirmations"
+    }
+    devise_for :people, controllers: devise_controller_overrides do
+      get "sign_in", to: "people/sessions#new", as: "sign_in"
+      get "sign_up", to: "people/registrations#new"
+    end
+
+    resources :people, except: [:index, :new] do
+      member { post "contact" }
+      collection { get "autocomplete" }
+    end
+
     resources :roles, only: [:new, :create, :destroy]
     resources :scores, only: [:create, :update, :destroy]
     resources :positions, :editors_notes, except: :index

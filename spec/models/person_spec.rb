@@ -176,6 +176,7 @@ describe Person do
     end
 
     it "allows passing in additional params for the new user" do
+      Person.any_instance.unstub(:primary_publication)
       publication = Factory.create :publication
       person = Person.find_or_create("Placebo Williams, pl@ce.bo", primary_publication: publication)
       expect(person.primary_publication).to eq(publication)

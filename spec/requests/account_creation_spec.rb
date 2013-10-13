@@ -4,6 +4,9 @@ describe "Creating An Account" do
   let(:publication) { Factory.create(:publication) }
   let(:magazine) { Factory.create(:magazine, publication: publication) }
   let(:meeting) { Factory.create(:meeting, magazine: magazine) }
+  before do
+    Person.any_instance.unstub(:primary_publication)
+  end
 
   describe "when using the sign up form on a subdomain" do
     it "associates the newcomer with the given publication" do

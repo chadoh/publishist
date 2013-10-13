@@ -43,11 +43,13 @@ end
 Given /^(?:there is )a person named "([^"]*)" with email address "([^"]*)"$/ do |name, email|
   name = name.split
   p = Person.create(
-    :first_name => name.first,
-    :last_name  => name.last,
-    :email      => email,
-    :password   => 'secret',
-    :password_confirmation => 'secret')
+    first_name: name.first,
+    last_name: name.last,
+    email: email,
+    password: 'secret',
+    password_confirmation: 'secret',
+    primary_publication: Publication.first
+  )
   p.confirm!
 end
 

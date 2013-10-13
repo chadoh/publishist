@@ -48,8 +48,9 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.start
     editor = double("editor", name: "Spec Helper Editor", email: "woo@woo.woo").as_null_object
-    publication = double("publication", editor: editor).as_null_object
+    publication = double("publication", editor: editor, subdomain: "pub").as_null_object
     Submission.any_instance.stub(:publication).and_return(publication)
+    Person.any_instance.stub(:primary_publication).and_return(publication)
   end
 
   config.after(:each) do

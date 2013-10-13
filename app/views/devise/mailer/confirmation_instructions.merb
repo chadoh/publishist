@@ -8,7 +8,7 @@ publications using this platform.
 
 To finish signing up, please click the following link:
 
-* [<%= confirmation_url @resource, confirmation_token: @resource.confirmation_token %>][1]
+* [<%= confirmation_url @resource, subdomain: @resource.primary_publication.subdomain, confirmation_token: @resource.confirmation_token %>][1]
 
 
 You say you didn't sign up?
@@ -20,6 +20,7 @@ entered it into the website for you. This created a profile for you, which will
 give you great visibility into the review process and all the work you've
 submitted. Click the link above to see what's going on.
 
+
 You've never submitted to any such publication?
 ===============================================
 
@@ -29,4 +30,4 @@ can be done with the account that this person made as you. Any content they may
 have submitted will be considered "draft" and not fully submitted until you
 complete the sign up process by clicking the link above.
 
-  [1]: <%= confirmation_url @resource, confirmation_token: @resource.confirmation_token %>
+  [1]: <%= confirmation_url @resource, subdomain: @resource.primary_publication.subdomain, confirmation_token: @resource.confirmation_token %>
