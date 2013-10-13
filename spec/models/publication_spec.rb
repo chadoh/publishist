@@ -44,7 +44,9 @@ describe Publication do
     end
     context "when there are no communicators" do
       it "raises an error saying so" do
-        expect{ publication.editor }.to raise_error(NoEditorForPublication)
+        mag1; mag2 # instantiate
+        expect(publication.editor).to be_kind_of(OpenStruct)
+        expect(publication.editor.email).to match("publishist.com")
       end
     end
   end

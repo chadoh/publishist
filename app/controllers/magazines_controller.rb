@@ -21,6 +21,10 @@ class MagazinesController < InheritedResources::Base
                  end
   end
 
+  def new
+    @magazine = Magazine.new publication_id: @publication.id
+  end
+
   def show
     if resource.published_on.blank?
       redirect_to root_url, notice: "That issue hasn't been published yet!" and return

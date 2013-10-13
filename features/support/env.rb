@@ -67,5 +67,4 @@ Before do
   @editor = double("editor", name: "Spec Helper Editor", email: "woo@woo.woo").as_null_object
   publication = double("publication", name: '...', editor: @editor).as_null_object
   Submission.any_instance.stub(:publication).and_return(publication)
-  Magazine.any_instance.stub(:publication).and_return(publication)
 end

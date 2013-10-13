@@ -5,6 +5,7 @@ describe "Notifications mailer" do
   let(:publication) { Factory.build(:publication) }
   before do
     Submission.any_instance.unstub(:publication)
+    Magazine.any_instance.unstub(:publication)
     Person.any_instance.unstub(:primary_publication)
     publication.stub(:editor).and_return(editor)
   end

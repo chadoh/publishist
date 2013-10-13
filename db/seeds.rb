@@ -12,35 +12,35 @@ disappears =   Ability.find_or_create_by_key_and_description 'disappears', "Subm
 ].each do |publication|
   publication.publication_detail ||= PublicationDetail.create(:about => "We #{publication.name}, and that's all there really is to it! We'd like you to join us.")
 
-  person1 = Person.find_or_create_by_first_name_and_email('Simeon', "editor@#{publication.subdomain}.com")
+  person1 = Person.find_or_create_by_first_name_and_email_and_primary_publication_id('Simeon', "editor@#{publication.subdomain}.com", publication.id)
   person1.update_attributes(
     :last_name => 'Pantalidis',
     :password => 'bubbles',
     :password_confirmation => 'bubbles',
   )
   person1.confirm!
-  person2 = Person.find_or_create_by_first_name_and_email('Cheryl', "coeditor@#{publication.subdomain}.com")
+  person2 = Person.find_or_create_by_first_name_and_email_and_primary_publication_id('Cheryl', "coeditor@#{publication.subdomain}.com", publication.id)
   person2.update_attributes(
     :last_name => 'Fong',
     :password => 'bubbles',
     :password_confirmation => 'bubbles',
   )
   person2.confirm!
-  person3 = Person.find_or_create_by_first_name_and_email('McKenzie', "mckenzie@#{publication.subdomain}.com")
+  person3 = Person.find_or_create_by_first_name_and_email_and_primary_publication_id('McKenzie', "mckenzie@#{publication.subdomain}.com", publication.id)
   person3.update_attributes(
     :last_name => 'Gupta',
     :password => 'bubbles',
     :password_confirmation => 'bubbles',
   )
   person3.confirm!
-  person4 = Person.find_or_create_by_first_name_and_email('Swati', "swati@#{publication.subdomain}.com")
+  person4 = Person.find_or_create_by_first_name_and_email_and_primary_publication_id('Swati', "swati@#{publication.subdomain}.com", publication.id)
   person4.update_attributes(
     :last_name => 'Prasad',
     :password => 'bubbles',
     :password_confirmation => 'bubbles',
   )
   person4.confirm!
-  person5 = Person.find_or_create_by_first_name_and_email('Janell', "janell@#{publication.subdomain}.com")
+  person5 = Person.find_or_create_by_first_name_and_email_and_primary_publication_id('Janell', "janell@#{publication.subdomain}.com", publication.id)
   person5.update_attributes(
     :last_name => 'Anema',
     :password => 'bubbles',
@@ -48,19 +48,19 @@ disappears =   Ability.find_or_create_by_key_and_description 'disappears', "Subm
   )
   person5.confirm!
 
-  mag1 = Magazine.find_or_create_by_nickname_and_title('published', "#{publication.name} vol. 1")
+  mag1 = Magazine.find_or_create_by_nickname_and_title_and_publication_id('published', "#{publication.name} vol. 1", publication.id)
   mag1.update_attributes(
     :accepts_submissions_from  => Time.zone.now - 13.months,
     :accepts_submissions_until => Time.zone.now - 7.months,
     :publication_id => publication.id
   )
-  mag2 = Magazine.find_or_create_by_nickname_and_title('almost published', "#{publication.name} vol. 2")
+  mag2 = Magazine.find_or_create_by_nickname_and_title_and_publication_id('almost published', "#{publication.name} vol. 2", publication.id)
   mag2.update_attributes(
     :accepts_submissions_from  => Time.zone.now - 7.months + 1.day,
     :accepts_submissions_until => Time.zone.now - 1.month,
     :publication_id => publication.id
   )
-  mag3 = Magazine.find_or_create_by_nickname_and_title('next', "#{publication.name} vol. 3")
+  mag3 = Magazine.find_or_create_by_nickname_and_title_and_publication_id('next', "#{publication.name} vol. 3", publication.id)
   mag3.update_attributes(
     :publication_id => publication.id
   )

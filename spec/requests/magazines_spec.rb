@@ -22,4 +22,13 @@ describe "Magazines" do
       end
     end
   end
+
+  describe "GET /magazines/new" do
+    let(:publication) { Factory.create(:publication) }
+    it "sets the magazine's publication to the current publication" do
+      sign_in as: :editor
+      visit new_magazine_url(subdomain: publication.subdomain)
+      expect(page).to have_selector "input#magazine_publication_id[value=\"#{publication.id}\"]"
+    end
+  end
 end

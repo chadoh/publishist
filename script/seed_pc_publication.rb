@@ -13,3 +13,4 @@ details.update_attributes(
 )
 Magazine.  update_all(:publication_id => pc.id)
 Submission.update_all(:publication_id => pc.id)
+Person.    update_all(:primary_publication_id => pc.id)

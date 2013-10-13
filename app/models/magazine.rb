@@ -1,7 +1,7 @@
 class Magazine < ActiveRecord::Base
   extend Memoist
 
-  belongs_to :publication
+  belongs_to :publication, inverse_of: :magazines
   has_many :meetings,  dependent: :nullify, include: :submissions
   has_many :pages,     dependent: :destroy, order:   :position
   has_many :positions, dependent: :destroy
@@ -110,7 +110,6 @@ class Magazine < ActiveRecord::Base
           sub.update_attribute :position, i + 1
         end
       end
-      older_unpublished_magazines = Magazine.unpublished.where("accepts_submissions_from < ?", self.accepts_submissions_from)
       older_unpublished_magazines.each {|m| m.publish [] }
 
       # get rid of ALL positions marked with 'disappears' (even if they somehow ended up on older mags)
@@ -172,11 +171,13 @@ class Magazine < ActiveRecord::Base
     end
 
     def before mag
-      all.select{|m| m.accepts_submissions_until <= mag.accepts_submissions_from }.sort_by(&:accepts_submissions_until).reverse.first
+      # ordered by "accepts_submissions_untl DESC", which means most recent first
+      mag.publication.magazines.where("accepts_submissions_until <= ?", mag.accepts_submissions_from).first
     end
 
     def after mag
-      all.select{|m| m.accepts_submissions_from >= mag.accepts_submissions_until }.sort_by(&:accepts_submissions_from).first
+      # ordered by "accepts_submissions_untl DESC", which means most recent first
+      mag.publication.magazines.where("accepts_submissions_from >= ?", mag.accepts_submissions_until).last
     end
 
     def current_magazine
@@ -197,14 +198,18 @@ class Magazine < ActiveRecord::Base
     self.published? || (self.published_on.present? && person.try(:orchestrates?, self, *args))
   end
 
+  def older_unpublished_magazines
+    publication.magazines.unpublished.where("accepts_submissions_from < ?", self.accepts_submissions_from)
+  end
+
   memoize :average_score, :to_s
 
 protected
 
   def accepts_from_after_latest_or_perhaps_today
     if self.accepts_submissions_from.blank?
-      if Magazine.all.present?
-        self.accepts_submissions_from = Magazine.unscoped.order("accepts_submissions_until DESC").first.accepts_submissions_until + 1
+      if publication && publication.magazines.present?
+        self.accepts_submissions_from = publication.magazines.first.accepts_submissions_until + 1
       else
         self.accepts_submissions_from = Time.zone.now.to_date
       end
@@ -226,16 +231,15 @@ protected
   end
 
   def magazine_ranges_dont_conflict
-    mags = Magazine.where(
-      'accepts_submissions_from  < ? AND ' + \
-      'accepts_submissions_until > ?',
-      self.accepts_submissions_from,
-      self.accepts_submissions_from
+    mags = publication.magazines.where(
+      'accepts_submissions_from  < :from AND ' + \
+      'accepts_submissions_until > :from',
+      from: self.accepts_submissions_from
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
-      then errors.add :accepts_submissions_from,  "can't occurr during another magazine (#{mags.first} accepts submissions until #{mags.first.accepts_submissions_until})"
+      errors.add :accepts_submissions_from,  "can't occurr during another magazine (#{mags.first} accepts submissions until #{mags.first.accepts_submissions_until})"
     end
-    mags = Magazine.where(
+    mags = publication.magazines.where(
       'accepts_submissions_from  < ? AND ' + \
       'accepts_submissions_until > ?',
       self.accepts_submissions_until,
@@ -254,7 +258,7 @@ protected
   end
 
   def same_positions_as_previous_mag
-    previous_mag = Magazine.where("accepts_submissions_from < ?", self.accepts_submissions_from).first
+    previous_mag = publication.magazines.where("accepts_submissions_from < ?", self.accepts_submissions_from).first
     if previous_mag
       for position in previous_mag.positions
         self.positions << Position.create(name: position.name, abilities: position.abilities)
