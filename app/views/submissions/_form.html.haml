@@ -1,7 +1,3 @@
-/ wyishtml5 toolbar
-/ note "input_html: {id: 'wysihtml5-textarea' }"
-/ this is a simple_form, not haml, method.
-
 = simple_form_for @submission, :html => { :multipart => true } do |f|
   = error_messages
 
@@ -116,8 +112,6 @@
           });
       });
 
-/ why the content_for call? isn't that for calling blocks of JS later?
-/ where does #submission_pseudonym_link come from?
 = content_for :javascript do
   :javascript
     $(function(){
@@ -130,7 +124,13 @@
         else {
           $("#submission_pseudonym_link").closest('div').slideUp(); }
       });
-
+    });
+    $(function(){
+      var editor = new wysihtml5.Editor("wysihtml5-textarea", {
+        toolbar:      "wysihtml5-toolbar",
+        stylesheets:  "#{stylesheet_path('wysiwyg')}",
+        parserRules:  wysihtml5ParserRules
+      });
     });
 
 - content_for :sidebar do
@@ -198,47 +198,3 @@
       %dd
         :markdown
           If you have an account on this website, you'll automatically get an email telling you which of your submissions we've published. If you don't... We'll try to remember to email you! Either way, these emails will come around the end of the academic semester (December in the fall, May in the spring).
-
-/ initialize wysihtml5
-/ not sure that i need the .ready jquery call.
-/ the reason i added it was because the wysihtml5 start guide says to make sure this particular
-/ script loads after the rest of the page. does having it at the bottom of the page guarantee it will
-/ load last anyway?
-:javascript
-  $( document ).ready(function() {
-    var editor = new wysihtml5.Editor("wysihtml5-textarea", {
-      toolbar:      "wysihtml5-toolbar",
-      stylesheets:  "#{stylesheet_path('wysiwyg')}",
-      parserRules:  wysihtml5ParserRules
-    });
-  });
-
-/ :javascript
-/   $( function () {
-/     $('.wysihtml5-sandbox').attr('tabindex', '2');
-/   });
-/ wysihtml5 Implementation Resources:
-/ http://quickworx.info/using-wysihtml5-editor-in-rails-3-2/
-/ https://github.com/refinery/ui/blob/master/app/views/home/_wysiwyg.html.haml
-/ NOTE: these are nonstandard resources i came across. The documentation is of course very important.
-
-/ CLEditor - removed code
-// cloptions = {
-//   width: '99%',
-//   height: 500,
-//   useCSS: false,
-//   docType: '<!DOCTYPE html>',
-//   bodyStyle: 'font-family: Cambria, Georgia, serif;',
-//   controls:     // controls to add to the toolbar
-//     "bold italic underline strikethrough subscript superscript | " +
-//     "color highlight removeformat | bullets numbering | outdent " +
-//     "indent | alignleft center alignright justify | " +
-//     "rule image link unlink | pastetext source"
-// }
-
-// $("#submission_body").cleditor(cloptions);
-
-// cloptions.height = 62;
-// cloptions.controls = "bold italic underline strikethrough subscript superscript | " +
-//     "pastetext source"
-// $("#submission_title").cleditor(cloptions);
