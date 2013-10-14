@@ -1,3 +1,5 @@
+require 'honey_pot'
+
 class People::RegistrationsController < Devise::RegistrationsController
 
   def new
