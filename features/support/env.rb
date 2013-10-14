@@ -64,7 +64,5 @@ Before do
   pc.publication_detail = PublicationDetail.new(:about => 'woo')
   Capybara.default_host = "http://pc.example.com"
 
-  @editor = double("editor", name: "Spec Helper Editor", email: "woo@woo.woo").as_null_object
-  publication = double("publication", name: '...', editor: @editor).as_null_object
-  Submission.any_instance.stub(:publication).and_return(publication)
+  Submission.any_instance.stub(:publication).and_return(pc)
 end

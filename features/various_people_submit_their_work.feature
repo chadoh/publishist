@@ -70,7 +70,7 @@ Feature: people of various ranks submit something
       | Title              | Merry Wives       |
       | Body               | of Pirates        |
     And I press "Submit!"
-    Then "roger@example.com" should receive an email with subject "Someone \(hopefully you!\) submitted to ... for you!"
+    Then "roger@example.com" should receive an email with subject "Someone \(hopefully you!\) submitted to Problem Child for you!"
 
   Scenario: A bot fills out the honypot fields
     Given I am on the new submission page
@@ -94,7 +94,7 @@ Feature: people of various ranks submit something
     And I press "Submit!"
     Then I should be on the home page
     And I should receive an email with subject "You're nearly signed up!"
-    And I should receive an email with subject "Someone \(hopefully you!\) submitted to ... for you!"
+    And I should receive an email with subject "Someone \(hopefully you!\) submitted to Problem Child for you!"
     And the editor should receive an email
 
     When the editor opens the email

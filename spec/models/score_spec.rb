@@ -94,10 +94,10 @@ describe Score do
 
   def a_magazine_is_in_process
     @mag = Magazine.create(:nickname => "Wholly Mammoth",
-      :accepts_submissions_from  => 3.months.ago,
-      :accepts_submissions_until => 3.months.from_now
+      accepts_submissions_from: 3.months.ago,
+      accepts_submissions_until: 3.months.from_now
     )
-    @meeting = Meeting.create(:datetime => Date.yesterday) # in mag
+    @meeting = Meeting.create(datetime: Date.yesterday, magazine: @mag)
     @sub     = Factory.create :submission
     @sub2    = Factory.create :submission
     @p        = Factory.create :person

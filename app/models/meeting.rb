@@ -22,17 +22,10 @@ class Meeting < ActiveRecord::Base
   default_scope order("datetime ASC")
 
   after_save :submissions_have_been_reviewed_or_queued
-  after_initialize :belongs_to_a_magazine
 
   validates_presence_of :datetime
 
 protected
-
-  def belongs_to_a_magazine
-    unless self.magazine.present?
-      self.magazine = Magazine.current!
-    end
-  end
 
   def submissions_have_been_reviewed_or_queued
     if datetime < Time.now + 3.hours

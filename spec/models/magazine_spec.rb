@@ -226,43 +226,6 @@ describe Magazine do
     end
   end
 
-  describe ".current" do
-    [ [Time.zone.now - 1.day, Time.zone.now + 1.day],
-      [Time.zone.now.to_date, Time.zone.now + 3.days],
-      [Time.zone.now - 3.days, Time.zone.now.end_of_day]
-    ].each do |range|
-      it "returns the magazine in #{range}" do
-        mag  = Magazine.create :accepts_submissions_from => range.first,
-                              :accepts_submissions_until => range.last
-        mag2 = Magazine.create
-        Magazine.current.should == mag
-      end
-    end
-    it "returns the latest one, even if it's no longer accepting submissions" do
-      mag  = Magazine.create(
-        accepts_submissions_from:  6.months.ago,
-        accepts_submissions_until: Date.yesterday
-      )
-      Magazine.current.should == mag
-      Magazine.count.should be 1
-    end
-  end
-
-  describe ".current!" do
-    let!(:old) { Magazine.create(
-        accepts_submissions_from:  6.months.ago,
-        accepts_submissions_until: Date.yesterday,
-        publication_id: publications.first.id
-    )}
-    before { Magazine.any_instance.unstub(:publication) }
-    let(:new) { Magazine.current! }
-
-    it "creates a new magazine if the latest one is no longer accepting submissions" do
-      expect(new).not_to eq(old)
-      Magazine.count.should be 2
-    end
-  end
-
   def a_magazine_has_just_finished options = {}
     @mag      = Magazine.create(
       :nickname => "Diner",

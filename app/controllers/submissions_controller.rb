@@ -8,7 +8,7 @@ class SubmissionsController < InheritedResources::Base
 
   def index
     @magazines = current_person.magazines
-    @magazine = @publication.magazines.where(id: params[:m]).first.presence || @publication.magazines.current
+    @magazine = @publication.magazines.where(id: params[:m]).first.presence || @publication.current_magazine
     @average = @magazine.try(:average_score)
     @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : []
     @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}

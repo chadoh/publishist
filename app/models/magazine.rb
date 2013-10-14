@@ -158,18 +158,6 @@ class Magazine < ActiveRecord::Base
   end
 
   class << self
-    def current
-      current_magazine || first
-    end
-
-    def current!
-      mag = current_magazine
-      if !mag && self.count != 0
-        mag = self.create
-      end
-      mag
-    end
-
     def before mag
       # ordered by "accepts_submissions_untl DESC", which means most recent first
       mag.publication.magazines.where("accepts_submissions_until <= ?", mag.accepts_submissions_from).first
@@ -179,15 +167,6 @@ class Magazine < ActiveRecord::Base
       # ordered by "accepts_submissions_untl DESC", which means most recent first
       mag.publication.magazines.where("accepts_submissions_from >= ?", mag.accepts_submissions_until).last
     end
-
-    def current_magazine
-      self.where(
-        'accepts_submissions_from  <= :today AND ' + \
-        'accepts_submissions_until >= :today',
-        today: Time.zone.now
-      ).first
-    end
-    private :current_magazine
   end
 
   def published?

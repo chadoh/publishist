@@ -1,5 +1,5 @@
 Given /^I'm in a position for the current magazine with the "([^"]+)" ability$/ do |key|
-  @person ||= Factory.create(:person)
+  @person ||= Factory.create(:person, primary_publication: Publication.first)
   @person.confirm!
   @magazine = Magazine.create(
     title: 'Awesome Mag',
@@ -18,7 +18,7 @@ end
 
 Given /^I'm in a position for (the "[^"]+"|said) magazine with the "([^"]+)" ability$/ do |mag, key|
   title = mag.sub(/[^"]*"/, '').sub('"', '')
-  @person ||= Factory.create(:person)
+  @person ||= Factory.create(:person, primary_publication: Publication.first)
   @person.confirm!
   @magazine = Magazine.find_by_nickname(title) || Magazine.first
   @ability = Ability.create key: key, description: "#{key}s stuff"
@@ -31,7 +31,7 @@ Given /^I'm in a position for (the "[^"]+"|said) magazine with the "([^"]+)" abi
 end
 
 Given /^I'm in a position for the current magazine with the "([^"]+)" and "([^"]+)" abilities$/ do |key1, key2|
-  @person ||= Factory.create(:person)
+  @person ||= Factory.create(:person, primary_publication: Publication.first)
   @person.confirm!
   @magazine = Magazine.create(
     title: 'Awesome Mag',

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Notifications mailer" do
   let(:editor) { double("editor", name: "Spec Helper Editor", email: "woo@woo.woo").as_null_object }
-  let(:publication) { Factory.build(:publication) }
+  let(:publication) { Factory.create(:publication) }
   before do
     Submission.any_instance.unstub(:publication)
     Magazine.any_instance.unstub(:publication)
@@ -15,7 +15,7 @@ describe "Notifications mailer" do
   include Rails.application.routes.url_helpers
 
   describe "#submitted_while_not_signed_in" do
-    let(:submission) { Factory.build(:submission, publication: publication) }
+    let(:submission) { Submission.new(title: 'woo', body: 'tang', publication: publication, author: Factory.create(:person)) }
     let(:email)      { Notifications.submitted_while_not_signed_in(submission) }
 
     subject { email }
@@ -31,7 +31,7 @@ describe "Notifications mailer" do
   end
 
   describe "#new_submission" do
-    let(:submission) { Factory.create :submission, publication: publication }
+    let(:submission) { Submission.create(title: 'woo', body: 'tang', publication: publication, author: Factory.create(:person)) }
     let(:email)      { Notifications.new_submission(submission) }
 
     subject { email }
@@ -44,10 +44,10 @@ describe "Notifications mailer" do
   end
 
   describe "#we_published_a_magazine" do
-    let(:published) { Factory.create :submission, state: :published, publication: publication }
-    let(:rejected) { Factory.create :submission, state: :rejected, publication: publication, author: published.author }
-    let(:magazine)   { Magazine.create publication: publication }
-    let(:email)      { Notifications.we_published_a_magazine(published.email, magazine, [published, rejected]) }
+    let(:published) { Submission.create state: :published, publication: publication, title: 'woo', body: 'tang', author: Factory.create(:person) }
+    let(:rejected) { Submission.create state: :rejected, publication: publication, title: 'woo', body: 'tang', author: published.author }
+    let(:magazine) { Magazine.create publication: publication }
+    let(:email) { Notifications.we_published_a_magazine(published.email, magazine, [published, rejected]) }
 
     subject { email }
 
@@ -60,11 +60,11 @@ describe "Notifications mailer" do
     it { should have_body_text "//#{publication.subdomain}.publishist" }
   end
 
-  describe "#we_published_a_magazine" do
-    let(:published) { Factory.create :submission, state: :published, publication: publication }
-    let(:rejected) { Factory.create :submission, state: :rejected, publication: publication, author: published.author }
-    let(:magazine)   { Magazine.create publication: publication }
-    let(:email)      { Notifications.we_published_a_magazine_a_while_ago(published.email, magazine, [published, rejected]) }
+  describe "#we_published_a_magazine_a_while_ago" do
+    let(:published) { Submission.create state: :published, publication: publication, title: 'woo', body: 'tang', author: Factory.create(:person) }
+    let(:rejected) { Submission.create state: :rejected, publication: publication, title: 'woo', body: 'tang', author: published.author }
+    let(:magazine) { Magazine.create publication: publication }
+    let(:email) { Notifications.we_published_a_magazine_a_while_ago(published.email, magazine, [published, rejected]) }
 
     subject { email }
 

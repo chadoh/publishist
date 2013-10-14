@@ -51,4 +51,41 @@ describe Publication do
     end
   end
 
+  describe "#current_magazine" do
+    before { publication.save }
+    [ [Time.zone.now - 1.day, Time.zone.now + 1.day],
+      [Time.zone.now.to_date, Time.zone.now + 3.days],
+      [Time.zone.now - 3.days, Time.zone.now.end_of_day]
+    ].each do |range|
+      it "returns the magazine in #{range}" do
+        mag1 = publication.magazines.create :accepts_submissions_from => range.first,
+                                                 :accepts_submissions_until => range.last
+        mag2 = publication.magazines.create
+        expect(publication.current_magazine).to eq(mag1)
+      end
+    end
+    it "returns the latest one, even if it's no longer accepting submissions" do
+      mag  = publication.magazines.create(
+        accepts_submissions_from:  6.months.ago,
+        accepts_submissions_until: Time.zone.now - 1.day
+      )
+      expect(publication.current_magazine).to eq(mag)
+      expect(publication.magazines.count).to eq(1)
+    end
+  end
+
+  describe "#current_magazine!" do
+    before { publication.save }
+    let!(:old) { publication.magazines.create(
+        accepts_submissions_from:  6.months.ago,
+        accepts_submissions_until: Date.yesterday
+    )}
+    let(:new) { publication.current_magazine! }
+
+    it "creates a new magazine if the latest one is no longer accepting submissions" do
+      expect(new).not_to eq(old)
+      publication.magazines.count.should be 2
+    end
+  end
+
 end

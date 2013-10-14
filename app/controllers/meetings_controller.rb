@@ -36,7 +36,7 @@ class MeetingsController < InheritedResources::Base
 
   def new
     session[:return_to] = request.referer
-    new!
+    @meeting = Meeting.new magazine: @publication.current_magazine
   end
 
   def create

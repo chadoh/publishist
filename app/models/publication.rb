@@ -19,4 +19,22 @@ class Publication < ActiveRecord::Base
     return @editor unless @editor.is_a?(Array)
     @editor = OpenStruct.new email: "chad+unknown.editor@publishist.com"
   end
+
+  def current_magazine
+     actual_current_magazine || magazines.first
+  end
+
+  def current_magazine!
+    actual_current_magazine || magazines.create
+  end
+
+  private
+
+    def actual_current_magazine
+      magazines.where(
+        'accepts_submissions_from  <= :today AND ' + \
+        'accepts_submissions_until >= :today',
+        today: Time.zone.now
+      ).first
+    end
 end

@@ -2,10 +2,9 @@ require 'spec_helper'
 
 describe Submission do
   let(:editor) { double("editor", email: "woo@woo.woo").as_null_object }
-  let(:publication) { double("publication", editor: editor).as_null_object }
-  before do
-    Submission.any_instance.stub(:publication).and_return(publication)
-  end
+  let(:magazine) { Factory.create :magazine }
+  let(:publication) { double("publication", editor: editor, current_magazine!: magazine, current_magazine: magazine).as_null_object }
+  before { Submission.any_instance.stub(:publication).and_return(publication) }
   it {
     should have_many(:packlets).dependent(:destroy)
     should have_many(:meetings).through(:packlets)
@@ -484,49 +483,30 @@ describe Submission do
   end
 
   describe "#magazine" do
+    before { Submission.any_instance.unstub(:publication) }
+    let(:publication) { Factory.create(:publication) }
     it "defaults to the current magazine" do
-      mg1 = Factory.build :magazine
-      mg2 = Factory.build :magazine
-      Magazine.stub(:current!).and_return(mg1)
-      sub = Submission.new
+      mg1 = Factory.build :magazine, publication: publication
+      mg2 = Factory.build :magazine, publication: publication
+      publication.stub(:current_magazine!).and_return(mg1)
+      sub = Submission.new publication: publication
       sub.magazine.should be mg1
     end
     it "creates a new magazine and is set to that if the latest magazine is no longer accepting submissions" do
       magazine = Magazine.create(
         accepts_submissions_from:  6.months.ago,
-        accepts_submissions_until: Date.yesterday
+        accepts_submissions_until: Date.yesterday,
+        publication: publication
       )
-      sub = Submission.create title: '<', body: '3', author: Factory.create(:person)
+      sub = Submission.create title: '<', body: '3', author: Factory.create(:person), publication: publication
       sub.magazine.should_not == magazine
     end
-    it "is nil if there are no magazines" do
-      sub = Submission.create title: '<', body: '3', author: Factory.create(:person)
-      sub.magazine.should be_nil
-    end
     it "does not override the magazine if it's already set" do
-      mg1 = Factory.create :magazine
-      mg2 = Factory.create :magazine
+      mg1 = Factory.create :magazine, publication: publication
+      mg2 = Factory.create :magazine, publication: publication
       sub = Submission.create title: "margeret", body: "tatcher", author: Factory.create(:person), magazine: mg1
-      Magazine.stub(:current).and_return(mg2)
+      publication.stub(:current_magazine!).and_return(mg2)
       sub.reload.magazine.should == mg1
-    end
-    it "gives an error if author_name isn't present" do
-      sub = Submission.create(
-        title: 'this',
-        body:  'that',
-        author_name: '',
-        author_email: 'phc@example.com'
-      )
-      sub.should_not be_valid
-    end
-    it "gives an error if author_email isn't present" do
-      sub = Submission.create(
-        title: 'this',
-        body:  'that',
-        author_email: '',
-        author_email: 'phc@example.com'
-      )
-      sub.should_not be_valid
     end
   end
 
@@ -567,23 +547,6 @@ describe Submission do
       @sub = Factory.create :submission, pseudonym_name: "Pablo Honey"
       @sub.destroy
       Pseudonym.count.should == 0
-    end
-  end
-
-  describe "#magazine" do
-    it "defaults to the current magazine" do
-      mg1 = Factory.build :magazine
-      mg2 = Factory.build :magazine
-      Magazine.stub(:current!).and_return(mg1)
-      sub = Submission.new
-      sub.magazine.should be mg1
-    end
-    it "does not override the magazine if it's already set" do
-      mg1 = Factory.create :magazine
-      mg2 = Factory.create :magazine
-      sub = Submission.create title: "margeret", body: "tatcher", author: Factory.create(:person), magazine: mg1
-      Magazine.stub(:current).and_return(mg2)
-      sub.reload.magazine.should == mg1
     end
   end
 

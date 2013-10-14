@@ -53,7 +53,7 @@ Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails?$/ do |address, a
 end
 
 Then /^the editor should receive (an|no|\d+) emails?$/ do |amount|
-  unread_emails_for(@editor.email).size.should == parse_email_count(amount)
+  unread_emails_for(Publication.first.editor.email).size.should == parse_email_count(amount)
 end
 
 Then /^(?:I|they|"([^"]*?)") should have (an|no|\d+) emails?$/ do |address, amount|
@@ -78,7 +78,7 @@ When /^(?:I|they|"([^"]*?)") opens? the email$/ do |address|
 end
 
 When /^the editor opens? the email$/ do
-  open_email(@editor.email)
+  open_email(Publication.first.editor.email)
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with subject "([^"]*?)"$/ do |address, subject|

@@ -208,7 +208,7 @@ protected
 
   def magazine_is_current_if_blank
     unless self.magazine_id.present?
-      self.magazine = Magazine.current!
+      self.magazine = publication.current_magazine!
     end
   end
 
