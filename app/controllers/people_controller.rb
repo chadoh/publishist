@@ -1,6 +1,6 @@
 class PeopleController < InheritedResources::Base
   before_filter :only => [:destroy] do |c|
-    c.orchestrates :any
+    c.orchestrates @publication
   end
   before_filter :ensure_current_url, :only => :show
 

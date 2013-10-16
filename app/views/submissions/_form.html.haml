@@ -58,7 +58,7 @@
       label: "Link this pseudonym to your profile as if it were your real name",
       hint: "(If you only want to <em>partially</em> obscure your identity for this one.)".html_safe,
       as: :boolean
-    - if communicates? :any
+    - if communicates? @publication
       = f.input :author,
         as:         :string,
         label:      "Author (you can submit for anyone)",
@@ -90,7 +90,7 @@
   - else
     =   f.button :submit, t('submit!'), name: "submit"
 
-- if communicates? :any
+- if communicates? @publication
   = content_for :javascript do
     :javascript
       $(function(){

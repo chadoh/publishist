@@ -1,6 +1,6 @@
 class MeetingsController < InheritedResources::Base
   before_filter only: [:new, :create] do |c|
-    c.must_orchestrate :any
+    c.must_orchestrate @publication
   end
   before_filter only: [:edit, :update, :destroy] do |c|
     c.must_orchestrate resource

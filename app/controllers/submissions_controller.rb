@@ -2,7 +2,7 @@ require "#{Rails.root}/lib/honey_pot"
 
 class SubmissionsController < InheritedResources::Base
   before_filter :only => [:index] do |c|
-    c.must_orchestrate :any
+    c.must_orchestrate @publication
   end
   before_filter :ensure_current_url, :only => :show
 
@@ -60,7 +60,7 @@ class SubmissionsController < InheritedResources::Base
         format.html {
           if person_signed_in?
             @submission.save
-            redirect_to submissions_url and return if current_person.orchestrates?(:current) && params["preview"]
+            redirect_to submissions_url and return if current_person.orchestrates?(@publication, :nowish) && params["preview"]
             if @submission.published?
               flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
               redirect_to new_submission_url and return

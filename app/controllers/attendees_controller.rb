@@ -6,7 +6,7 @@ class AttendeesController < InheritedResources::Base
   respond_to :js
 
   before_filter only: :create do |c|
-    c.must_orchestrate :any
+    c.must_orchestrate @publication
   end
   before_filter only: [:edit, :update, :destroy] do |c|
     c.must_orchestrate resource

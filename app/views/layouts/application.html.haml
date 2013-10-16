@@ -14,7 +14,7 @@
     #page
       %nav.site-nav{ :role => 'navigation' }
         %ul
-          - if !orchestrates? :currently
+          - if !orchestrates? @publication, :nowish
             %li{ :class => current_page?(new_submission_path)   && 'current' }= link_to_unless_current 'Submit', new_submission_path
           - else
             %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current 'Submissions', submissions_path

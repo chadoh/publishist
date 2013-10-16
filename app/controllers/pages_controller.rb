@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   respond_to :js, only: [:update, :add_submission]
 
   before_filter except: :show do |c|
-    c.must_orchestrate :any
+    c.must_orchestrate @publication
   end
 
   def show

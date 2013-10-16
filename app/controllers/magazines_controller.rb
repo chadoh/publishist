@@ -1,6 +1,6 @@
 class MagazinesController < InheritedResources::Base
   before_filter only: [:new, :create] do |c|
-    c.must_orchestrate :any
+    c.must_orchestrate @publication
   end
   before_filter only: [:edit, :update, :destroy, :staff_list] do |c|
     c.must_orchestrate resource, :or_adjacent
