@@ -22,7 +22,7 @@ describe "Notifications mailer" do
 
     it { should be_multipart }
     it { should have_subject /Someone \(hopefully you!\) submitted to .+ for you!/ }
-    it { should deliver_from "#{editor.name} <donotreply@publishist.com>" }
+    it { should deliver_from "#{editor.name} <support@publishist.com>" }
     it { should have_reply_to editor.email }
     it { should deliver_to submission.author_email }
     it { should have_body_text "publishist.dev#{person_path(submission.author)}" }

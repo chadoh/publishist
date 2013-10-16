@@ -9,7 +9,7 @@ class Communications < ActionMailer::Base
     @fromm = from
     @to = to
     mail(
-      :from     => "#{@fromm.name} <donotreply@publishist.com>",
+      :from     => "#{@fromm.name} <support@publishist.com>",
       :reply_to => @fromm.email,
       :to       => @to.email,
       :subject  => "#{@fromm.name} sent you a message from your profile on Publishist"

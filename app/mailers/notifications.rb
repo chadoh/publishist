@@ -13,7 +13,7 @@ class Notifications < ActionMailer::Base
 
     mail(
       :to       => @author_email,
-      :from     => "#{@editor.try(:name)} <donotreply@publishist.com>",
+      :from     => "#{@editor.try(:name)} <support@publishist.com>",
       :reply_to => @editor.email,
       :subject  => "Someone (hopefully you!) submitted to #{@publication.name} for you!"
     ) do |format|
@@ -37,7 +37,7 @@ class Notifications < ActionMailer::Base
 
     mail(
       :to       => @publication.editor.email,
-      :from     => "#{submission.author_name} <donotreply@publishist.com>",
+      :from     => "#{submission.author_name} <support@publishist.com>",
       :reply_to => submission.email,
       :subject  => "Submission: \"#{strip_tags(@title)}\" by #{@author}"
     ) do |format|
@@ -56,7 +56,7 @@ class Notifications < ActionMailer::Base
 
     mail(
       :to => @email,
-      :from => "#{editor.name} <donotreply@publishist.com>",
+      :from => "#{editor.name} <support@publishist.com>",
       :reply_to => editor.email,
       :subject => "#{@publication.name} published a magazine!"
     ) do |format|
@@ -75,7 +75,7 @@ class Notifications < ActionMailer::Base
 
     mail(
       :to => @email,
-      :from => "#{editor.name} <donotreply@publishist.com>",
+      :from => "#{editor.name} <support@publishist.com>",
       :reply_to => editor.email,
       :subject => "#{@publication.name}'s \"#@magazine\" can now be viewed online!"
     ) do |format|

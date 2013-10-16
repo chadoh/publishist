@@ -20,7 +20,7 @@ describe "Communications mailer" do
     it { should have_body_text("Nifty") }
     it { should have_subject(/#{contacter.name}/) }
     it { should be_multipart }
-    it { should deliver_from "#{contacter.name} <donotreply@publishist.com>" }
+    it { should deliver_from "#{contacter.name} <support@publishist.com>" }
     it { should deliver_to contactee.email }
     it { should have_reply_to contacter.email }
     it { should_not have_body_text "//publishist" }

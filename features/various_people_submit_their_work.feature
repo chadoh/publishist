@@ -51,7 +51,7 @@ Feature: people of various ranks submit something
     And the editor should receive an email
 
     When the editor opens the email
-    Then they should get an email from '"example@example.com" <donotreply@publishist.com>'
+    Then they should get an email from '"example@example.com" <support@publishist.com>'
     And they should see "example@example.com" in the email "Reply-To" header
 
     When I follow "Edit"
@@ -98,7 +98,7 @@ Feature: people of various ranks submit something
     And the editor should receive an email
 
     When the editor opens the email
-    Then they should see "This Person <donotreply@publishist.com>" in the email "From" header
+    Then they should see "This Person <support@publishist.com>" in the email "From" header
     And they should see "example@example.com" in the email "Reply-To" header
 
   Scenario: I submit under a psuedonym linked to my profile
