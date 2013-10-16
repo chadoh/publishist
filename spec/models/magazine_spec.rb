@@ -45,10 +45,12 @@ describe Magazine do
       context "in different publications" do
         before { Magazine.any_instance.unstub(:publication) }
         it "ignores them and uses the default of today" do
-          mag = Magazine.create publication: publications.first
+          reference = Magazine.new
+
+          in_1st_publication = Magazine.create publication: publications.first
           publications.first.magazines.reload
-          mag2 = Magazine.new publication: publications.last
-          mag2.accepts_submissions_from.to_date.should == Time.zone.now.to_date
+          in_2nd_publication = Magazine.new publication: publications.last
+          in_2nd_publication.accepts_submissions_from.should == reference.accepts_submissions_from
         end
         it "can fall within one of those magazine's ranges just fine" do
           orig = Magazine.create publication: publications.first
