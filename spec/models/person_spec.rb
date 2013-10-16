@@ -186,22 +186,15 @@ describe Person do
   context "permissions" do
     let!(:publication) { Factory.create :publication }
     let!(:person) { Factory.create :person, primary_publication: publication }
-    let!(:magazine) { Factory.create :magazine,
-      title: 'vast mental capabilities',
-      publication: publication
-    }
-    let!(:position) do
-      pos = magazine.positions.create name: 'khaleesi'
-      person.positions << pos
-      pos
-    end
+    let!(:magazine) { Factory.create :magazine, title: 'vast mental capabilities', publication: publication }
+    let!(:position) { Factory.create :position, magazine: magazine, people: [person] }
     before do
       Person.any_instance.unstub(:primary_publication)
       Magazine.any_instance.unstub(:publication)
       Submission.any_instance.unstub(:publication)
     end
 
-    describe "#communicates?(resource)" do
+    describe "#communicates?(resource, *flags)" do
       let(:ability) { Factory.create :ability, key: "communicates" }
       context "when resource.is_a Publication" do
         it "returns true if the person has the 'communicates' ability for any magazine in the given publication" do
@@ -221,17 +214,26 @@ describe Person do
           position2.abilities << ability
           expect(person.communicates? publication).to be_false
         end
-      end
-      context "when resource == :now" do
-        it "returns false if the person has the 'communicates' ability for the a magazine that's no longer accepting submissions" do
-          magazine.update_attributes accepts_submissions_from: 2.weeks.ago, accepts_submissions_until: 1.week.ago
-          position.abilities << ability
-          person.communicates?(:now).should be_false
-        end
-        it "returns true if the person has the 'communicates' ability for the a magazine that's still accepting submissions" do
-          position.abilities << ability
-          magazine.update_attribute :accepts_submissions_until, Date.today
-          person.communicates?(:now).should be_true
+        context "and passed the :nowish flag" do
+          it "returns false if the person has the 'communicates' ability for a magazine that's no longer accepting submissions" do
+            magazine.update_attributes accepts_submissions_from: 3.weeks.ago, accepts_submissions_until: 2.week.ago
+            position.abilities << ability
+            person.communicates?(publication, :nowish).should be_false
+          end
+          it "returns true if the person has the 'communicates' ability for a magazine that's still accepting submissions" do
+            position.abilities << ability
+            person.communicates?(publication, :nowish).should be_true
+          end
+          it "returns false if they have the 'communicates' ability for a current magazine but a different publication" do
+            publication2 = Factory.create(:publication)
+
+            magazine2 = Factory.create(:magazine, publication: publication2)
+            position2 = Factory.create(:position, magazine: magazine2, abilities: [ability])
+            person.positions << position2
+
+            position2.abilities << ability
+            person.communicates?(publication, :nowish).should be_false
+          end
         end
       end
       context "when resource.is_a Submission" do
@@ -299,18 +301,6 @@ describe Person do
         end
       end
 
-      context "when passed :currently or :now" do
-        before { position.abilities << ability }
-
-        it "returns false if the person is in a position with the 'orchestrates' ability for a magazine that no longer accepts submissions" do
-          magazine.update_attributes accepts_submissions_from: 2.weeks.ago, accepts_submissions_until: 1.week.ago
-          person.orchestrates?(:currently).should be_false
-        end
-
-        it "returns true if the person is in a position with the 'orchestrates' ability for a magazine that still accepts submissions" do
-          person.orchestrates?(:currently).should be_true
-        end
-      end
       context "when resource.is_a Publication" do
         it "returns true if the person has the 'orchestrates' ability for any magazine in the given publication" do
           position.abilities << ability
@@ -328,6 +318,28 @@ describe Person do
 
           position2.abilities << ability
           expect(person.orchestrates? publication).to be_false
+        end
+        context "and passed the :nowish flag" do
+
+          it "returns false if the person is in a position with the 'orchestrates' ability for a magazine that no longer accepts submissions" do
+            position.abilities << ability
+            magazine.update_attributes accepts_submissions_from: 2.weeks.ago, accepts_submissions_until: 1.week.ago
+            person.orchestrates?(publication, :nowish).should be_false
+          end
+          it "returns true if the person is in a position with the 'orchestrates' ability for a magazine that still accepts submissions" do
+            position.abilities << ability
+            person.orchestrates?(publication, :nowish).should be_true
+          end
+          it "returns false if they have the 'orchestrates' ability for a current magazine but a different publication" do
+            publication2 = Factory.create(:publication)
+
+            magazine2 = Factory.create(:magazine, publication: publication2)
+            position2 = Factory.create(:position, magazine: magazine2, abilities: [ability])
+            person.positions << position2
+
+            position2.abilities << ability
+            person.communicates?(publication, :nowish).should be_false
+          end
         end
       end
     end

@@ -102,23 +102,15 @@ class Person < ActiveRecord::Base
   # ABILITIES
   #
 
-  def communicates? resource
+  def communicates? resource, *flags
     resource = primary_publication if resource.nil?
-    if resource.is_a?(Symbol) # currently only accepting ':now/:currently'
-      positions = current_positions
-    else
-      positions = positions_for resource
-    end
+    positions = positions_for resource, *flags
     positions.joins(:abilities).where(:abilities => { :key => "communicates" }).present?
   end
 
   def orchestrates? resource, *flags
     resource = primary_publication if resource.nil?
-    if resource.is_a?(Symbol) # currently only accepting ':now/:currently'
-      positions = current_positions
-    else
-      positions = positions_for(resource, *flags)
-    end
+    positions = positions_for(resource, *flags)
     positions.joins(:abilities).where(:abilities => { :key => "orchestrates" }).present?
   end
 
@@ -127,7 +119,7 @@ class Person < ActiveRecord::Base
     positions.joins(:abilities).where(:abilities => { :key => "scores" }).present?
   end
 
-  def views? resource, *flags
+  def views? resource
     positions = positions_for(resource)
     positions.joins(:abilities).where("abilities.key in (?)", %w[communicates scores orchestrates views]).present?
   end
@@ -157,20 +149,15 @@ class Person < ActiveRecord::Base
 
   private
 
-    def current_positions
-      mag_ids = Magazine.where("accepts_submissions_until > ?", 1.week.ago).collect(&:id)
-      positions = self.positions.where("magazine_id IN (?)", mag_ids)
-    end
-
     def positions_for(resource, *flags)
-      return positions_for_publication(resource) if resource.is_a?(Publication)
+      return positions_for_publication(resource, *flags) if resource.is_a?(Publication)
       positions_for_magazine(resource, *flags)
     end
 
     def positions_for_magazine(resource, *flags)
       resource = resource.magazine unless resource.is_a?(Magazine)
       magazines = [resource]
-      if flags.first # only accepting :or_adjacent right now, so just accepting everything
+      if flags.include? :or_adjacent
         magazines << Magazine.before(resource)
         magazines << Magazine.after(resource)
         magazines.compact!
@@ -178,7 +165,9 @@ class Person < ActiveRecord::Base
       self.positions.where("magazine_id IN (?)", magazines.map(&:id))
     end
 
-    def positions_for_publication(publication)
-      self.positions.joins(:magazine).where(:magazines => { :publication_id => publication.id })
+    def positions_for_publication(publication, *flags)
+      this = positions.joins(:magazine).where(:magazines => { :publication_id => publication.id })
+      return this unless flags.include? :nowish
+      this.where("magazines.accepts_submissions_until > ?", 1.week.ago)
     end
 end
