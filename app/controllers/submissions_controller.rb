@@ -6,6 +6,12 @@ class SubmissionsController < InheritedResources::Base
   end
   before_filter :ensure_current_url, :only => :show
 
+  # before_filter :submission_agreement, :only => :new
+
+  # def submission_agreement
+  #   redirect_to root_url
+  # end
+
   def index
     @magazines = current_person.magazines
     @magazine = params[:m].present? ? Magazine.find(params[:m]) : Magazine.current.presence || Magazine.first
@@ -17,6 +23,10 @@ class SubmissionsController < InheritedResources::Base
     @unscheduled_submissions = Submission.where(:state => Submission.state(:submitted))
   end
 
+  def submission_agreement
+
+  end
+  
   def show
     @submission = Submission.find(params[:id])
     @average = @submission.magazine.try(:average_score).presence
