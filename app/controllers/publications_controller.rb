@@ -1,4 +1,4 @@
-require 'hook_submission'
+require 'homepage'
 
 class PublicationsController < ApplicationController
   respond_to :html
@@ -16,8 +16,7 @@ class PublicationsController < ApplicationController
 
   def show
     @publication = Publication.includes(:publication_detail).find_by_subdomain(request.subdomain)
-    @hook = @publication.submissions.published.order("random()").first
-    @hook.extend HookSubmission
+    @homepage = Homepage.new(@publication)
 
     respond_to do |format|
       format.html

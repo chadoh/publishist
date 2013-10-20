@@ -65,4 +65,6 @@ Before do
   Capybara.default_host = "http://pc.example.com"
 
   Submission.any_instance.stub(:publication).and_return(pc)
+
+  Homepage.any_instance.stub(:hook).and_return(double)
 end
