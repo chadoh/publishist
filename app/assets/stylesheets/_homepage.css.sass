@@ -1,0 +1,29 @@
+@import base
+@import compass/css3/images
+
+#hook
+  margin-bottom: 3em
+  padding-bottom: 3em
+  border-bottom: 1px dashed $lgray
+
+  .body
+    font-size: 2em
+    line-height: 2em
+    margin: 3em
+    position: relative
+
+  .fadeout
+    +background-image(linear-gradient(rgba(255,255,255,0), white 70%))
+    bottom: 0
+    height: 7em
+    position: absolute
+    width: 100%
+
+  .read-more
+    position: absolute
+    bottom: 0
+    left: 0
+
+  .body:first-letter // drop cap
+    font-size: 3em
+    line-height: 10px

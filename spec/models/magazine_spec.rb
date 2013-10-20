@@ -14,6 +14,14 @@ describe Magazine do
     should belong_to(:publication)
   }
 
+  describe ".published" do
+    it "returns only magazines that've been published" do
+      magazines = [Factory.create(:magazine),
+                   Factory.create(:magazine, published_on: Date.yesterday)]
+      expect(Magazine.published).to eq [magazines.last]
+    end
+  end
+
   describe "#accepts_submissions_from" do
     context "when this is the first magazine" do
       it "defaults to today" do

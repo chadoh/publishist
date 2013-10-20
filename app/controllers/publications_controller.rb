@@ -1,3 +1,5 @@
+require 'hook_submission'
+
 class PublicationsController < ApplicationController
   respond_to :html
   layout 'application', only: [:show]
@@ -13,7 +15,9 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    @publication = Publication.find_by_subdomain(request.subdomain)
+    @publication = Publication.includes(:publication_detail).find_by_subdomain(request.subdomain)
+    @hook = @publication.submissions.published.order("random()").first
+    @hook.extend HookSubmission
 
     respond_to do |format|
       format.html

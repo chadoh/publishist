@@ -1,13 +1,18 @@
-- title 'Welcome'
+#hook
+  .body
+    = sanitize @hook.body
+    - if @hook.truncated?
+      .fadeout
+      = link_to "Read More", magazine_page_path(@hook.magazine, @hook.page), class: "read-more"
+  %footer
+    – #{link_to @hook.title, magazine_page_path(@hook.magazine, @hook.page)}
+    by #{link_to @hook.author, @hook.author}
+    %br
+    published in #{link_to @hook.magazine, @hook.magazine}
 
-%dl
-  %dt= Publication.human_attribute_name :name
-  %dd= @publication.name
-  %dt= Publication.human_attribute_name :tagline
-  %dd= @publication.tagline
-  %dt= Publication.human_attribute_name :address
-  %dd= @publication.address
-  %dt= Publication.human_attribute_name :latitude
-  %dd= @publication.latitude
-  %dt= Publication.human_attribute_name :longitude
-  %dd= @publication.longitude
+#about
+  %h1 Welcome to #{@publication.name}
+  :markdown
+    #{@publication.about}
+  - if orchestrates? @publication, :nowish
+    = link_to t("edit").html_safe, edit_publication_path(@publication)

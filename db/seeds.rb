@@ -10,7 +10,7 @@ disappears =   Ability.find_or_create_by_key_and_description 'disappears', "Subm
   Publication.find_or_create_by_subdomain_and_name_and_tagline('problemchild', 'Problem Child', 'A Penn State Literary Magazine'),
   Publication.find_or_create_by_subdomain_and_name_and_tagline('conspire', 'Conspire', 'Scheme Goodness Together'),
 ].each do |publication|
-  publication.publication_detail ||= PublicationDetail.create(:about => "We #{publication.name}, and that's all there really is to it! We'd like you to join us.")
+  publication.publication_detail ||= PublicationDetail.create(about: "We believe in three things... what are they?\n\n1. Have the Courage to be all in\n2. Honor yourself, family and teammates by always competing!\n3. Commit to the finish!")
 
   person1 = Person.find_or_create_by_first_name_and_email_and_primary_publication_id('Simeon', "editor@#{publication.subdomain}.com", publication.id)
   person1.update_attributes(
@@ -92,7 +92,7 @@ disappears =   Ability.find_or_create_by_key_and_description 'disappears', "Subm
   hold = Submission.find_or_create_by_author_id_and_magazine_id(person4.id, mag2.id)
   hold.update_attributes(
     :title => "To Hold",
-    :body => "One day we'll lie down and not get up again.<br>One day all we hold will be surrendered.",
+    :body => "So we’re dust. In the meantime, my wife and I<br>make the bed. Holding opposite edges of the sheet,<br>we raise it, billowing, then pull it tight,<br>measuring by eye as it falls into alignment<br>between us. We tug, fold, tuck. And if I’m lucky,<br>she’ll remember a recent dream and tell me.<br><br>One day we’ll lie down and not get up.<br>One day, all we guard will be surrendered.<br><br>Until then, we’ll go on learning to recognize<br>what we love, and what it takes<br>to tend what isn’t for our having.<br>So often, fear has led me<br>to abandon what I know I must relinquish<br>in time. But for the moment,<br>I’ll listen to her dream,<br>and she to mine, our mutual hearing calling<br>more and more detail into the light<br>of a joint and fragile keeping.",
     :state => :submitted,
     :magazine_id => mag2,
     :publication_id => publication.id
