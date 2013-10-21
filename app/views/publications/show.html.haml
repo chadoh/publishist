@@ -1,12 +1,11 @@
 #hook
-  = @homepage.hook do |hook|
+  - @homepage.hook do |hook|
     .body
       = sanitize hook.body
-      - if hook.truncated?
-        .fadeout
-        = link_to "Read More", magazine_page_path(hook.magazine, hook.page), class: "read-more"
+      .fadeout
+      = link_to "Read More", magazine_page_path(hook.magazine, hook.page), class: "read-more"
     %footer
-      – #{link_to hook.title, magazine_page_path(hook.magazine, hook.page)}
+      – #{link_to strip_tags(hook.title), magazine_page_path(hook.magazine, hook.page)}
       by #{link_to hook.author, hook.author}
       %br
       published in #{link_to hook.magazine, hook.magazine}

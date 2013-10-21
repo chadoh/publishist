@@ -29,14 +29,6 @@ ActiveRecord::Schema.define(:version => 20131003000738) do
     t.string   "person_name"
   end
 
-  create_table "compositions", :force => true do |t|
-    t.text     "title"
-    t.text     "body"
-    t.string   "author"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "cover_arts", :force => true do |t|
     t.integer  "page_id"
     t.datetime "created_at"

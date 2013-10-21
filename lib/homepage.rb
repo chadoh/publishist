@@ -1,9 +1,11 @@
-require 'hook_submission'
-
 class Homepage
   def initialize(publication)
-    @hook = publication.submissions.published.order("random()").first
-    @hook.extend HookSubmission
+    magazine = publication.magazines.published.order("random()").first
+    @hook = nil unless magazine
+    defined?(@hook) or @hook = loop do
+      hook = magazine.submissions.published.order("random()").first
+      break hook unless hook.photo?
+    end
   end
 
   def hook(&block)

@@ -11,7 +11,7 @@ describe "Publications" do
   describe "GET \#{publication.subdomain}.publishist.com" do
     it "loads up a random published submission from the publication and info about the publication" do
       publication = Factory.create(:publication)
-      magazine = Factory.create(:magazine, publication: publication, published_on: Date.yesterday)
+      magazine = Factory.create(:magazine, publication: publication, published_on: Date.yesterday, notification_sent: true)
       submission = Factory.create(:submission, publication: publication, magazine: magazine, state: :published)
 
       visit root_url(subdomain: publication.subdomain)
