@@ -6,12 +6,6 @@ class SubmissionsController < InheritedResources::Base
   end
   before_filter :ensure_current_url, :only => :show
 
-  # before_filter :submission_agreement, :only => :new
-
-  # def submission_agreement
-  #   redirect_to root_url
-  # end
-
   def index
     @magazines = current_person.magazines
     @magazine = params[:m].present? ? Magazine.find(params[:m]) : Magazine.current.presence || Magazine.first
@@ -38,6 +32,11 @@ class SubmissionsController < InheritedResources::Base
   end
 
   def new
+
+    unless params[:submission_agreement]
+      redirect_to submission_agreement_url and return
+    end
+
     session[:return_to] = request.referer unless begin URI(request.referer).path == "/submissions" rescue false end
     if person_signed_in?
       @submission = Submission.new :author_id => current_person.id, :state => :draft
