@@ -10,6 +10,8 @@ describe "Creating An Account" do
 
   describe "when using the sign up form on a subdomain" do
     it "associates the newcomer with the given publication" do
+      Homepage.any_instance.stub(:hook).and_return(double)
+
       visit sign_up_url(subdomain: publication.subdomain)
       fill_in "person_name", with: "Cleetus Browtopper"
       fill_in "person_email", with: "browtopper@cleet.us"

@@ -1,4 +1,4 @@
-= simple_form_for(@publication) do |f|
+= simple_form_for @publication, html_options: { action: publications_path(subdomain: '') } do |f|
   - if @publication.errors.any?
     #error_explanation
       %h2
@@ -15,9 +15,6 @@
     = f.input :tagline
     = f.simple_fields_for :publication_detail do |deets|
       = deets.input :about
-      = deets.input :address
-      = deets.input :latitude, as: :string
-      = deets.input :longitude, as: :string
 
   .actions
     = f.button :submit

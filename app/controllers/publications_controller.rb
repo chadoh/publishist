@@ -1,3 +1,5 @@
+require 'homepage'
+
 class PublicationsController < ApplicationController
   respond_to :html
   layout 'application', only: [:show]
@@ -13,7 +15,8 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    @publication = Publication.find_by_subdomain(request.subdomain)
+    @publication = Publication.includes(:publication_detail).find_by_subdomain(request.subdomain)
+    @homepage = Homepage.new(@publication)
 
     respond_to do |format|
       format.html
