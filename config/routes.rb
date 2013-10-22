@@ -62,6 +62,6 @@ Pc::Application.routes.draw do
   end # subdomain
 
   resources :publications, except: [:index, :show]
-  get "" => "publications#index", as: "publications"
+  get "" => "publications#index"
   root to: "publications#index"
 end

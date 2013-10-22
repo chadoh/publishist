@@ -9,6 +9,6 @@ class Homepage
   end
 
   def hook(&block)
-    yield(@hook)
+    yield(@hook) if @hook
   end
 end
