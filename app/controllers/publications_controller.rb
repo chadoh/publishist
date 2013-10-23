@@ -16,6 +16,7 @@ class PublicationsController < ApplicationController
 
   def show
     @publication = Publication.includes(:publication_detail).find_by_subdomain(request.subdomain)
+    @publication ||= Publication.includes(:publication_detail).find_by_subdomain("problemchild")
     @homepage = Homepage.new(@publication)
 
     respond_to do |format|
