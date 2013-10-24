@@ -16,10 +16,20 @@ class ApplicationController < ActionController::Base
   end
 
   def find_publication
-    @publication = Publication.find_by_subdomain(request.subdomain)
+    @publication = current_publication
   end
 
-protected
+private
+
+  def current_publication
+    @publication ||= Publication.find_by_subdomain(request.subdomain)
+    @publication ||= Publication.find_by_custom_domain(request.host)
+    @publication or not_found
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
 
   def must_orchestrate *args
     unless person_signed_in? && current_person.orchestrates?(*args)

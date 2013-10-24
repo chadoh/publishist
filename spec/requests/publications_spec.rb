@@ -12,4 +12,9 @@ describe "Publications" do
       expect(page).to have_content(publication.about)
     end
   end
+  describe "GET \#{some unrecognized subdomain}.publishist.com" do
+    it "renders 404" do
+      expect { visit root_url(subdomain: "nonsense") }.to raise_error(ActionController::RoutingError)
+    end
+  end
 end

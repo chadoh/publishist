@@ -4,6 +4,7 @@ class CreatePublications < ActiveRecord::Migration
       t.string :subdomain, null: false
       t.string :name
       t.string :tagline
+      t.string :custom_domain
 
       t.timestamps
     end
@@ -20,6 +21,7 @@ class CreatePublications < ActiveRecord::Migration
     add_column(:people, :primary_publication_id, :integer)
 
     add_index(:publications, :subdomain, :unique => true)
+    add_index(:publications, :custom_domain, :unique => true)
 
     add_foreign_key(:publication_details, :publications)
     add_foreign_key(:magazines, :publications)

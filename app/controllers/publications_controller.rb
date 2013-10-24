@@ -2,7 +2,7 @@ require 'homepage'
 
 class PublicationsController < ApplicationController
   respond_to :html
-  layout 'application', only: [:show]
+  layout 'application', only: [:show, :edit]
 
   skip_before_filter :find_publication
 
@@ -15,8 +15,7 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    @publication = Publication.includes(:publication_detail).find_by_subdomain(request.subdomain)
-    @publication ||= Publication.includes(:publication_detail).find_by_subdomain("problemchild")
+    @publication = current_publication
     @homepage = Homepage.new(@publication)
 
     respond_to do |format|

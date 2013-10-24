@@ -11,7 +11,7 @@
       published in #{link_to hook.magazine, hook.magazine}
 
 #about
-  %h1 Welcome to #{@publication.name} from #{request.host}
+  %h1 Welcome to #{@publication.name}
   :markdown
     #{@publication.about}
   - if orchestrates? @publication, :nowish
