@@ -64,6 +64,8 @@ Pc::Application.routes.draw do
     end
   end
 
+  get 'submission_agreement', to: 'submissions#submission_agreement'
+
   resources :submissions, :path => 'submissions', :only => [:index, :create]
   resources :submissions, :path => '', :except => [:index, :create], :path_names => { :new => "/submit" }
 

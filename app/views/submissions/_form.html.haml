@@ -3,7 +3,7 @@
 
   %label{ :for => 'submission_title'} Title
   %h1
-    = f.text_field :title, :autofocus => true, class: 'no-focus-outline'
+    = f.text_field :title, :autofocus => true, class: 'no-focus-outline max-width'
   %label{ :for => 'wysihtml5-textarea'} Body
   #submission-body-container
     #wysihtml5-toolbar{style: "display: none;"}
@@ -130,48 +130,3 @@
         parserRules:  wysihtml5ParserRules
       });
     });
-
-- content_for :sidebar do
-  %section#answers
-    %header
-      %h2 FAQ
-    %dl
-      %dt
-        %span.arrow &raquo;
-        How will you review my submission?
-      %dd
-        :markdown
-          Your name will be removed when this is reviewed;
-          only the editor
-          #{"([#{Person.current_communicators.collect(&:name).to_sentence}][1])" if Person.current_communicators.present?}
-          will know you wrote this. And only the coeditor
-          #{"([#{Person.current_scorers.collect(&:name).to_sentence}][2])" if Person.current_scorers.present?}
-          will know how people score it.
-          Everyone else has the privilege of judging it objectively.
-
-            [1]: #{begin person_path(Person.current_communicators.first) rescue "/people" end}
-            [2]: #{begin person_path(Person.current_scorers.first) rescue "/people" end}
-
-          "Everyone else" means anyone who wanders into the weekly meeting
-          at which your submission is reviewed (you can go, too! It's a good
-          way to get very honest feedback). For more info on meetings, visit the [about page](#{root_path}).
-      %dt
-        %span.arrow &raquo;
-        What can I submit?
-      %dd
-        :markdown
-          * Art: We accept photographs & scanned art.
-          * Poetry: There are no hard and fast rules for the poetry we accept. Insider’s tip – we strongly dislike centered poetry. Of course, that could change if it’s centered for a brilliant reason.
-          * Prose: We ask that you keep your prose to 1,000 words at most, though we’ve published pieces that are wonderful & a bit over the limit.
-      %dt
-        %span.arrow &raquo;
-        What gets in?
-      %dd
-        :markdown
-          We pride ourselves on considering each submission at length, discussing lines we love, potential deeper meanings, or where the piece falls just short of our expectations. We also like to hold a poem on its side to see if it makes a groovy shape. Each staff member gives each submission a number from 1 – 10, and at the end of the semester we average all the scores for all the pieces. The top 50 (give or take) make it in!
-      %dt
-        %span.arrow &raquo;
-        How do I know if I made it?
-      %dd
-        :markdown
-          If you have an account on this website, you'll automatically get an email telling you which of your submissions we've published. If you don't... We'll try to remember to email you! Either way, these emails will come around the end of the academic semester (December in the fall, May in the spring).
