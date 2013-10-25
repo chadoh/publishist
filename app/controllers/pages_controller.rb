@@ -10,10 +10,10 @@ class PagesController < ApplicationController
 
   def show
     if not @page
-      redirect_to magazines_url
+      redirect_to magazines_url subdomain: @publication.subdomain
     elsif not @page.magazine.viewable_by?(current_person, :or_adjacent)
       flash[:notice] = "That hasn't been published yet, check back soon!"
-      redirect_to root_url and return
+      redirect_to root_url(subdomain: @publication.subdomain) and return
     end
   end
 

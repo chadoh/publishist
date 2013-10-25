@@ -1,8 +1,9 @@
-pc = Publication.find_or_create_by_subdomain_and_name_and_tagline_and_custom_domain(
-  'problemchild',
-  'Problem Child',
-  'A Penn State Literary Magazine',
-  'www.problemchildmag.com'
+pc = Publication.find_or_create_by_subdomain_and_name_and_tagline_and_custom_domain_and_meta_description(
+  "problemchild",
+  "Problem Child",
+  "A Penn State Literary Magazine",
+  "www.problemchildmag.com",
+  "Problem Child Literary Magazine delivers fresh poetry, prose, and art from emerging and established artists at Penn State and beyond. Join us!"
 )
 details = pc.publication_detail || PublicationDetail.create(:publication => pc)
 details.update_attributes(

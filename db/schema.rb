@@ -183,12 +183,13 @@ ActiveRecord::Schema.define(:version => 20131003000738) do
   end
 
   create_table "publications", :force => true do |t|
-    t.string   "subdomain",     :null => false
+    t.string   "subdomain",        :null => false
     t.string   "name"
     t.string   "tagline"
     t.string   "custom_domain"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.string   "meta_description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "publications", ["custom_domain"], :name => "index_publications_on_custom_domain", :unique => true

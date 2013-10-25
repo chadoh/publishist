@@ -19,37 +19,37 @@ class ApplicationController < ActionController::Base
     @publication = current_publication
   end
 
-private
+  protected
 
-  def current_publication
-    @publication ||= Publication.find_by_subdomain(request.subdomain)
-    @publication ||= Publication.find_by_custom_domain(request.host)
-    @publication or not_found
-  end
-
-  def not_found
-    raise ActionController::RoutingError.new('Not Found')
-  end
-
-  def must_orchestrate *args
-    unless person_signed_in? && current_person.orchestrates?(*args)
-      flash[:notice] = "You're not allowed to see that"
-      redirect_to root_url and return
+    def must_orchestrate *args
+      unless person_signed_in? && current_person.orchestrates?(*args)
+        flash[:notice] = "You're not allowed to see that"
+        redirect_to root_url(subdomain: @publication.subdomain) and return
+      end
     end
-  end
 
-  def must_score *args
-    unless person_signed_in? && current_person.scores?(*args)
-      flash[:notice] = "You're not allowed to see that."
-      redirect_to root_url
+    def must_score *args
+      unless person_signed_in? && current_person.scores?(*args)
+        flash[:notice] = "You're not allowed to see that."
+        redirect_to root_url(subdomain: @publication.subdomain)
+      end
     end
-  end
 
-  def must_view *args
-    unless person_signed_in? && current_person.views?(*args)
-      flash[:notice] = "You're not allowed to see that."
-      redirect_to root_url
+    def must_view *args
+      unless person_signed_in? && current_person.views?(*args)
+        flash[:notice] = "You're not allowed to see that."
+        redirect_to root_url(subdomain: @publication.subdomain)
+      end
     end
-  end
+
+    def current_publication
+      @publication ||= Publication.find_by_subdomain(request.subdomain)
+      @publication ||= Publication.find_by_custom_domain(request.host)
+      @publication or not_found
+    end
+
+    def not_found
+      raise ActionController::RoutingError.new('Not Found')
+    end
 
 end

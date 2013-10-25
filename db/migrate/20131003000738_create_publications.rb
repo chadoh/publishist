@@ -5,6 +5,7 @@ class CreatePublications < ActiveRecord::Migration
       t.string :name
       t.string :tagline
       t.string :custom_domain
+      t.string :meta_description
 
       t.timestamps
     end

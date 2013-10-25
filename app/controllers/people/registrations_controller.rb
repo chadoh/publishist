@@ -17,7 +17,7 @@ class People::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    person_url(resource)
+    person_url(resource, subdomain: @publication.subdomain)
   end
 
   private

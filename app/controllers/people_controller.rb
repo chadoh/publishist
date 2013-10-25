@@ -49,7 +49,7 @@ class PeopleController < InheritedResources::Base
     @message = params[:contact_person][:message]
     Communications.contact_person(@to, @from, @subject, @message).deliver
     flash[:notice] = "Your message has been sent!"
-    redirect_to person_url(@to)
+    redirect_to person_url(@to, subdomain: @publication.subdomain)
   end
 
 protected

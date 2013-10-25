@@ -60,16 +60,16 @@ class SubmissionsController < InheritedResources::Base
         format.html {
           if person_signed_in?
             @submission.save
-            redirect_to submissions_url and return if current_person.orchestrates?(@publication, :nowish) && params["preview"]
+            redirect_to submissions_url(subdomain: @publication.subdomain) and return if current_person.orchestrates?(@publication, :nowish) && params["preview"]
             if @submission.published?
               flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
-              redirect_to new_submission_url and return
+              redirect_to new_submission_url(subdomain: @publication.subdomain) and return
             end
             redirect_to person_url(current_person, subdomain: @publication.subdomain)
           else
             @submission.save
             flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-            redirect_to session[:return_to] || root_url
+            redirect_to session[:return_to] || root_url(subdomain: @publication.subdomain)
           end
         }
       else
@@ -77,7 +77,7 @@ class SubmissionsController < InheritedResources::Base
       end
     end
   rescue ActiveRecord::UnknownAttributeError
-    redirect_to root_url
+    redirect_to root_url subdomain: @publication.subdomain
   end
 
   def update
@@ -90,7 +90,7 @@ class SubmissionsController < InheritedResources::Base
         format.html {
           if @submission.published?
             flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
-            redirect_to new_submission_url and return
+            redirect_to new_submission_url(subdomain: @publication.subdomain) and return
           else
             redirect_to session[:return_to] || request.referer
           end
@@ -104,7 +104,7 @@ class SubmissionsController < InheritedResources::Base
   def destroy
     unless person_signed_in? and (current_person.communicates?(resource) || current_person == resource.author)
       flash[:notice] = "You're not allowed to see that."
-      redirect_to(root_url) and return
+      redirect_to(root_url subdomain: @publication.subdomain) and return
     else
       destroy!(:notice => "It is gone.") { request.referer }
     end

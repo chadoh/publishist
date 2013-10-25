@@ -27,15 +27,15 @@ class MagazinesController < InheritedResources::Base
 
   def show
     if resource.published_on.blank?
-      redirect_to root_url, notice: "That issue hasn't been published yet!" and return
+      redirect_to root_url(subdomain: @publication.subdomain), notice: "That issue hasn't been published yet!" and return
     elsif not @magazine.notification_sent?
       unless person_signed_in? && current_person.orchestrates?(@magazine, :or_adjacent)
         flash[:notice] = "That hasn't been published yet, check back soon!"
-        redirect_to root_url and return
+        redirect_to root_url(subdomain: @publication.subdomain) and return
       end
-      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first and return
+      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first, subdomain: @publication.subdomain and return
     else
-      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first and return
+      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first, subdomain: @publication.subdomain and return
     end
   end
 
@@ -44,9 +44,9 @@ class MagazinesController < InheritedResources::Base
       success.html do
         flash.now[:notice] = nil
         if current_person.orchestrates? @magazine, :or_adjacent
-          redirect_to staff_for_magazine_url(@magazine)
+          redirect_to staff_for_magazine_url(@magazine, subdomain: @publication.subdomain)
         else
-          redirect_to magazines_url
+          redirect_to magazines_url subdomain: @publication.subdomain
         end
       end
       failure.html { render :edit }
@@ -77,7 +77,7 @@ class MagazinesController < InheritedResources::Base
     flash[:notice] += "rename the current page by simply clicking on its name. "
     flash[:notice] += "When it's looking really nice, you can send a notification to everyone who "
     flash[:notice] += "submitted by using the button at the bottom of the page."
-    redirect_to magazine_page_url @magazine, @magazine.pages.first
+    redirect_to magazine_page_url @magazine, @magazine.pages.first, subdomain: @publication.subdomain
   end
 
   def notify_authors_of_published_magazine

@@ -3,9 +3,9 @@ require "spec_helper"
 describe PublicationsController do
   describe "routing" do
 
-    it "routes to #index at the root url with no subdomain" do
+    it "does not route to #index" do
       get("/publications").should_not route_to("publications#index")
-      get("/").should route_to("publications#index")
+      get("/").should_not route_to("publications#index")
     end
 
     it "routes to #new" do
