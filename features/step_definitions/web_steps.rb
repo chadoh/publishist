@@ -43,12 +43,10 @@ end
 
 Given /^(?:|I )(?:am on|visit) (.+)$/ do |page_name|
   visit path_to(page_name)
-  # visit "/submit?submission_agreement=true"
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
-  # visit new_submission_path(:submission_agreement => true)
 end
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
