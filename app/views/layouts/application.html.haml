@@ -43,8 +43,9 @@
         #notice= flash[:alert]
       %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:sidebar) && 'full-width', params[:controller]] }
         %header
-          %h1{ :class => params[:controller] == 'submissions' && params[:action] == 'show' && 'nocaps' }<
-            = @content_for_page_heading
+          - if @content_for_page_heading
+            %h1{ :class => params[:controller] == 'submissions' && params[:action] == 'show' && 'nocaps' }<
+              = @content_for_page_heading
           - if content_for? :header
             %div
               = yield :header
