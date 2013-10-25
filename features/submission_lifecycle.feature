@@ -5,14 +5,13 @@ Feature: A poet's work goes from draft to published/rejected
 
   Scenario: I write a poem and then submit it later with edits
     Given I sign in
-    And I am on the new submission page
+    And I am on the submit page
     When I fill in the following:
       | Title | Each raindrop   |
       | Body  | started as dust |
     And press "Preview"
     Then I should be on my profile page
     And I should see "Drafts"
-
     When I follow "Edit" under "Each raindrop"
     And I press "Submit!"
     Then I should be on my profile page

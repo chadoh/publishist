@@ -43,10 +43,12 @@ end
 
 Given /^(?:|I )(?:am on|visit) (.+)$/ do |page_name|
   visit path_to(page_name)
+  # visit "/submit?submission_agreement=true"
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
+  # visit new_submission_path(:submission_agreement => true)
 end
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
@@ -185,7 +187,7 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
 end
 
 Then /^(?:|I )should be on (.+)$/ do |page_name|
-  current_path = URI.parse(current_url).path
+  current_path = URI.parse(current_url).request_uri
   if current_path.respond_to? :should
     current_path.should == path_to(page_name)
   else

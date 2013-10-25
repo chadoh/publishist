@@ -25,7 +25,8 @@ module NavigationHelpers
       "/people/#{person.to_param}"
 
     when /the submit page/i
-      "/submit"
+      # "/submit"
+      "/submit?submission_agreement=true"
 
     when /the magazine's cover page/i
       "/magazines/#{Magazine.first.to_param}/#{Page.where(position: 1).first.to_param}"

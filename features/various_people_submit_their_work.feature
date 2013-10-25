@@ -6,7 +6,7 @@ Feature: people of various ranks submit something
   Scenario: The editor submits something
     Given I'm in a position for the current magazine with the "communicates" ability
     And no emails have been sent
-    And I am on the new submission page
+    And I am on the submit page
     When I fill in the following:
       | Title | Old King Scole |
       | Body  | Chewed Tobaccy |
@@ -42,7 +42,7 @@ Feature: people of various ranks submit something
   Scenario: Some other signed-in person submits something
     Given I sign in
     And no emails have been sent
-    And I am on the new submission page
+    And I am on the submit page
     When I fill in the following:
       | Title | Merry Wives |
       | Body  | of Pirates  |
@@ -63,7 +63,7 @@ Feature: people of various ranks submit something
     Given the following user exists:
       | name         | email             |
       | Roger Rabbit | roger@example.com |
-    And I am on the new submission page
+    And I am on the submit page
     When I fill in the following:
       | Your Name          | Pickles           |
       | Your Email Address | roger@example.com |
@@ -73,7 +73,7 @@ Feature: people of various ranks submit something
     Then "roger@example.com" should receive an email with subject "Someone \(hopefully you!\) submitted to Problem Child for you!"
 
   Scenario: A bot fills out the honypot fields
-    Given I am on the new submission page
+    Given I am on the submit page
     When I fill in the following:
       | Title                           | Jackson, a favorite       |
       | Body                            | of both Johnny and Sufjan |
@@ -85,7 +85,7 @@ Feature: people of various ranks submit something
     And there should be no new submission
 
   Scenario: An anonymous visitor submits something & thus signs up
-    Given I am on the new submission page
+    Given I am on the submit page
     When I fill in the following:
       | Title                           | Jackson, a favorite       |
       | Body                            | of both Johnny and Sufjan |
@@ -103,7 +103,7 @@ Feature: people of various ranks submit something
 
   Scenario: I submit under a psuedonym linked to my profile
     Given I sign in
-    And I am on the new submission page
+    And I am on the submit page
     When I fill in the following:
       | Title     | Merry Wives   |
       | Body      | of Pirates    |
@@ -117,7 +117,7 @@ Feature: people of various ranks submit something
 
   Scenario: I submit under a psuedonym that is not linked to my profile
     Given I sign in
-    And I am on the new submission page
+    And I am on the submit page
     When I fill in the following:
       | Title     | Merry Wives   |
       | Body      | of Pirates    |

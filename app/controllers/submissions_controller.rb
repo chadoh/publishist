@@ -72,7 +72,8 @@ class SubmissionsController < InheritedResources::Base
             redirect_to submissions_url and return if current_person.orchestrates?(:current) && params["preview"]
             if @submission.published?
               flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
-              redirect_to new_submission_url and return
+              redirect_to new_submission_url(:submission_agreement => true) and return
+              # redirect_to new_submission_url and return
             end
             redirect_to person_url(current_person)
           else
@@ -106,7 +107,8 @@ class SubmissionsController < InheritedResources::Base
         format.html {
           if @submission.published?
             flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
-            redirect_to new_submission_url and return
+            # redirect_to new_submission_url and return
+            redirect_to new_submission_url(:submission_agreement => true) and return
           else
             redirect_to session[:return_to] || request.referer
           end
