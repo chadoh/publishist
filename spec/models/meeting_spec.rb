@@ -45,21 +45,4 @@ describe Meeting do
       @submission.reload.should be_rejected
     end
   end
-
-  describe "#magazine" do
-    it "initializes to the current magazine" do
-      mag = Magazine.create
-      meeting = Meeting.new datetime: Time.zone.now - 1.year
-      meeting.magazine.should == mag
-    end
-
-    it "can be changed" do
-      mag = Magazine.create accepts_submissions_from: 2.months.ago, accepts_submissions_until: 2.months.from_now
-      mag2 = Magazine.create
-      meeting = Meeting.create :question => "would you believe it?", :datetime => Date.tomorrow
-      meeting.magazine.should == mag
-      meeting.update_attributes :magazine => mag2
-      meeting.magazine.should == mag2
-    end
-  end
 end

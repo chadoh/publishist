@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
+  attr_accessible :name, :first_name, :middle_name, :last_name, :email, :password, :password_confirmation, :primary_publication_id, :primary_publication
+
   extend Memoist
 
   devise :database_authenticatable, :confirmable,
@@ -6,6 +8,8 @@ class Person < ActiveRecord::Base
          :validatable
 
   attr_reader :password
+
+  belongs_to :primary_publication, class_name: "Publication"
 
   has_many :submissions,        foreign_key: 'author_id'
   has_many :attendees,          dependent:   :destroy
@@ -98,93 +102,39 @@ class Person < ActiveRecord::Base
   # ABILITIES
   #
 
-  def communicates? resource
-    resource = :any if resource.nil?
-    if resource.is_a?(Symbol)
-      # currently only accepting ':now/:currently' and ':any'
-      if resource == :now or resource == :currently or resource == :current
-        mag_ids = Magazine.where("accepts_submissions_until > ?", 1.week.ago).collect(&:id)
-        positions = self.positions.select{|p| mag_ids.include? p.magazine_id }
-      elsif resource == :any
-        positions = self.positions
-      end
-    else
-      magazine = resource.is_a?(Magazine) ? resource : resource.magazine
-      positions = self.positions.select{|p| p.magazine == magazine}
-    end
-    positions.collect(&:abilities).flatten.select{|a| a.key == 'communicates' }.present? if positions
+  def communicates? resource, *flags
+    resource = primary_publication if resource.nil?
+    positions = positions_for resource, *flags
+    positions.joins(:abilities).where(:abilities => { :key => "communicates" }).present?
   end
 
   def orchestrates? resource, *flags
-    resource = :any if resource.nil?
-    if resource.is_a?(Symbol)
-      # currently only accepting ':now/:currently' and ':any'
-      if resource == :now or resource == :currently or resource == :current
-        mag_ids = Magazine.where("accepts_submissions_until > ?", 1.week.ago).collect(&:id)
-        positions = self.positions.select{|p| mag_ids.include? p.magazine_id }
-      elsif resource == :any
-        positions = self.positions
-      end
-    else
-      magazine = resource.is_a?(Magazine) ? resource : resource.magazine
-      mag_ids = [magazine.id]
-      if flags.first # only accepting :or_adjacent right now, so just accepting everything
-        if before = Magazine.before(magazine) then mag_ids << before.id end
-        if after  = Magazine.after(magazine)  then mag_ids << after.id  end
-      end
-      positions = self.positions.select{|p| mag_ids.include? p.magazine.id }
-    end
-    positions.collect(&:abilities).flatten.select{|a| a.key == 'orchestrates' }.present? if positions
+    resource = primary_publication if resource.nil?
+    positions = positions_for(resource, *flags)
+    positions.joins(:abilities).where(:abilities => { :key => "orchestrates" }).present?
   end
 
   def scores? resource
-    magazine = resource.is_a?(Magazine) ? resource : resource.magazine
-    self.positions.select{|p| p.magazine == magazine}\
-      .collect(&:abilities).flatten\
-      .select{|a| a.key == 'scores' }.present?
+    positions = positions_for(resource)
+    positions.joins(:abilities).where(:abilities => { :key => "scores" }).present?
   end
 
-  def views? resource, *flags
-    resource = :any if resource.nil?
-    if resource.is_a?(Symbol)
-      # The only resource currently being passed is the symbol :any.
-      # Since we don't have to be aware of any others, let's accept any
-      if flags.first # only accepting :with_meetings right now, so just accepting everything
-        positions = self.positions.reject {|p| p.magazine.meetings.empty? }
-      else
-        positions = self.positions
-      end
-    else
-      magazine = resource.is_a?(Magazine) ? resource : resource.magazine
-      positions = self.positions.select{|p| p.magazine == magazine}
-    end
-    positions.collect(&:abilities).flatten\
-      .select{|a| a.key == 'views' || a.key == 'orchestrates' }.present? if positions
+  def views? resource
+    positions = positions_for(resource)
+    positions.joins(:abilities).where("abilities.key in (?)", %w[communicates scores orchestrates views]).present?
   end
 
   class << self
     extend Memoist
 
-    def current_communicators
-      mag = Magazine.current || Magazine.first
-      pos = mag.positions.joins(:abilities).where(abilities: { key: 'communicates' }) if mag
-      pos ? pos.collect(&:people).flatten.uniq : []
-    end
-
-    def current_scorers
-      mag = Magazine.current || Magazine.first
-      pos = mag.positions.joins(:abilities).where(abilities: { key: 'scores' }) if mag
-      pos ? pos.collect(&:people).flatten.uniq : []
-    end
-
-    def find_or_create formatted_name_and_email
+    def find_or_create formatted_name_and_email, attrs = {}
       return nil if formatted_name_and_email.blank?
       name = formatted_name_and_email.gsub(',','').split
       email = name.delete_at(name.length - 1).gsub(/[<>]/, '')
       person = Person.find_by_email email
       unless person
         if name.present? && email.present?
-          person = Person.new(email: email)
+          person = Person.new attrs.merge(email: email)
           person.name = name.join(' ')
           person = person.save ? person : nil
         end
@@ -196,4 +146,28 @@ class Person < ActiveRecord::Base
   end
 
   memoize :full_name, :name_and_email, :name, :can_enter_scores_for?
+
+  private
+
+    def positions_for(resource, *flags)
+      return positions_for_publication(resource, *flags) if resource.is_a?(Publication)
+      positions_for_magazine(resource, *flags)
+    end
+
+    def positions_for_magazine(resource, *flags)
+      resource = resource.magazine unless resource.is_a?(Magazine)
+      magazines = [resource]
+      if flags.include? :or_adjacent
+        magazines << Magazine.before(resource)
+        magazines << Magazine.after(resource)
+        magazines.compact!
+      end
+      self.positions.where("magazine_id IN (?)", magazines.map(&:id))
+    end
+
+    def positions_for_publication(publication, *flags)
+      this = positions.joins(:magazine).where(:magazines => { :publication_id => publication.id })
+      return this unless flags.include? :nowish
+      this.where("magazines.accepts_submissions_until > ?", 1.week.ago)
+    end
 end

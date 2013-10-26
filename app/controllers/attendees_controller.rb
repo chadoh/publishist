@@ -6,7 +6,7 @@ class AttendeesController < InheritedResources::Base
   respond_to :js
 
   before_filter only: :create do |c|
-    c.must_orchestrate :any
+    c.must_orchestrate @publication
   end
   before_filter only: [:edit, :update, :destroy] do |c|
     c.must_orchestrate resource
@@ -18,7 +18,7 @@ class AttendeesController < InheritedResources::Base
     create! do |wants|
       wants.html do
         flash[:notice] = "Hello, #{resource.first_name}."
-        redirect_to parent_url
+        redirect_to parent_url(subdomain: @publication.subdomain)
       end
       wants.js
     end
@@ -37,7 +37,7 @@ class AttendeesController < InheritedResources::Base
     end
 
     update! do |success, failure|
-      success.html { redirect_to parent_url }
+      success.html { redirect_to parent_url(subdomain: @publication.subdomain) }
       failure.html { render :edit }
 
       success.js
@@ -53,7 +53,7 @@ class AttendeesController < InheritedResources::Base
   end
 
   def set_person_param_from_string attendee
-    if person = Person.find_or_create(attendee[:person])
+    if person = Person.find_or_create(attendee[:person], primary_publication_id: @publication.id)
       attendee[:person] = person
     else
       attendee[:person_name] = attendee.delete :person
@@ -63,7 +63,7 @@ class AttendeesController < InheritedResources::Base
 
   def destroy
     destroy! do |wants|
-      wants.html { redirect_to parent_url }
+      wants.html { redirect_to parent_url(subdomain: @publication.subdomain) }
       wants.js
     end
   end

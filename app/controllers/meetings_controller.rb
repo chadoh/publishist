@@ -1,7 +1,6 @@
 class MeetingsController < InheritedResources::Base
-  before_filter :authenticate_person!, only: :show
   before_filter only: [:new, :create] do |c|
-    c.must_orchestrate :any
+    c.must_orchestrate @publication
   end
   before_filter only: [:edit, :update, :destroy] do |c|
     c.must_orchestrate resource
@@ -37,7 +36,7 @@ class MeetingsController < InheritedResources::Base
 
   def new
     session[:return_to] = request.referer
-    new!
+    @meeting = Meeting.new magazine: @publication.current_magazine
   end
 
   def create
@@ -50,11 +49,11 @@ class MeetingsController < InheritedResources::Base
   end
 
   def update
-    update!{ session[:return_to].presence || magazines_url }
+    update!{ session[:return_to].presence || magazines_url(subdomain: @publication.subdomain) }
   end
 
   def destroy
-    destroy!{ magazines_url }
+    destroy!{ magazines_url(subdomain: @publication.subdomain) }
   end
 
 end

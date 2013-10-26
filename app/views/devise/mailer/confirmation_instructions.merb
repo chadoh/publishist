@@ -1,28 +1,33 @@
 You almost have a full-fledged account, <%=  @resource.first_name  %>!
 ===============================================
 
-Just [one click to set your password][1] and you can start enjoying the
-Problem Child website to the fullest!
+You're almost signed up on Publishist.com, a new, organic network of literary
+magazines and writing circles. Your account will let you submit to, track your
+submissions on, maintain a public profile on, and promote any of the
+publications using this platform.
 
-  [1]: <%= confirmation_url @resource, confirmation_token: @resource.confirmation_token %>
+To finish signing up, please click the following link:
+
+* [<%= confirmation_url @resource, subdomain: @resource.primary_publication.subdomain, confirmation_token: @resource.confirmation_token %>][1]
+
 
 You say you didn't sign up?
 ===========================
 
-If you didn't make an account, then the editor probably signed you up. This
-is super cool because it will let the editor and you see everything you've
-submitted in one nice place, it will let the coeditor and you keep track of
-how everything you've submitted is scored, and when you have things published
-they will show up on your profile for everyone to see. Neat!
+If you didn't make an account, then the editor probably signed you up. If you
+recently submitted to a publication via email, it's possible that the editor
+entered it into the website for you. This created a profile for you, which will
+give you great visibility into the review process and all the work you've
+submitted. Click the link above to see what's going on.
 
-So go ahead and give that link up there a click. It'll be swell.
 
-You've never submitted to Problem Child nor have you heard of it?
-=================================================================
+You've never submitted to any such publication?
+===============================================
 
 If you have no idea why you might be getting this email, someone probably
-signed up with your email address by accident. We encourage you to [check out
-our little literary magazine][2] anyhow. Don't worry, nothing malicious can be
-done with the account that this person made as you.
+signed up with your email address by accident. Don't worry, nothing malicious
+can be done with the account that this person made as you. Any content they may
+have submitted will be considered "draft" and not fully submitted until you
+complete the sign up process by clicking the link above.
 
-  [2]: http://problemchildmag.com
+  [1]: <%= confirmation_url @resource, subdomain: @resource.primary_publication.subdomain, confirmation_token: @resource.confirmation_token %>

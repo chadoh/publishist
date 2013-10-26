@@ -48,16 +48,16 @@ Feature: people of various ranks submit something
       | Body  | of Pirates  |
     And I press "Submit!"
     Then I should be on my profile page
-    And "editor@problemchildmag.com" should receive an email
+    And the editor should receive an email
 
-    When "editor@problemchildmag.com" opens the email
-    Then they should get an email from '"example@example.com" <admin@problemchildmag.com>'
+    When the editor opens the email
+    Then they should get an email from '"example@example.com" <support@publishist.com>'
     And they should see "example@example.com" in the email "Reply-To" header
 
     When I follow "Edit"
     And I press "Save"
     Then I should be on my profile page
-    And "editor@problemchildmag.com" should receive no email
+    And the editor should receive no email
 
   Scenario: Someone with an account submits something while not signed in
     Given the following user exists:
@@ -93,12 +93,12 @@ Feature: people of various ranks submit something
       | Your Email Address              | example@example.com       |
     And I press "Submit!"
     Then I should be on the home page
-    And I should receive an email with subject "You're nearly signed up for Problem Child!"
+    And I should receive an email with subject "You're nearly signed up!"
     And I should receive an email with subject "Someone \(hopefully you!\) submitted to Problem Child for you!"
-    And "editor@problemchildmag.com" should receive an email
+    And the editor should receive an email
 
-    When "editor@problemchildmag.com" opens the email
-    Then they should see "This Person <admin@problemchildmag.com>" in the email "From" header
+    When the editor opens the email
+    Then they should see "This Person <support@publishist.com>" in the email "From" header
     And they should see "example@example.com" in the email "Reply-To" header
 
   Scenario: I submit under a psuedonym linked to my profile

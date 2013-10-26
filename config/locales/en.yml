@@ -2,7 +2,6 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  subtitle: 'A Penn State Literary Magazine'
   actions: 'Actions'
   show: 'Show'
   edit: '<i class="icon-edit"></i>'
@@ -15,6 +14,14 @@ en:
   back: "Back"
   cancel: "Cancel"
   search: "Search!"
+
+  publications:
+    index:
+      title: "Publications"
+    new:
+      title: "New Publication"
+    edit:
+      title: "Settings"
 
   submissions:
     index:

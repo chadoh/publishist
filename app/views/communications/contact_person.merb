@@ -7,5 +7,5 @@
 
 [<%= @fromm.name %>][1] used the contact form on [your profile page][2] to send this to you.
 
-  [1]: <%= person_url(@fromm) %>
-  [2]: <%= person_url(@to) %>
+  [1]: <%= person_url(@fromm, subdomain: @fromm.primary_publication.subdomain) %>
+  [2]: <%= person_url(@to, subdomain: @to.primary_publication.subdomain) %>

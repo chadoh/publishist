@@ -5,15 +5,15 @@ class PagesController < ApplicationController
   respond_to :js, only: [:update, :add_submission]
 
   before_filter except: :show do |c|
-    c.must_orchestrate :any
+    c.must_orchestrate @publication
   end
 
   def show
     if not @page
-      redirect_to magazines_url
+      redirect_to magazines_url subdomain: @publication.subdomain
     elsif not @page.magazine.viewable_by?(current_person, :or_adjacent)
       flash[:notice] = "That hasn't been published yet, check back soon!"
-      redirect_to root_url and return
+      redirect_to root_url(subdomain: @publication.subdomain) and return
     end
   end
 

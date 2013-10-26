@@ -1,12 +1,13 @@
 Given /^I'm in a position for the current magazine with the "([^"]+)" ability$/ do |key|
-  @person ||= Factory.create(:person)
+  @person ||= Factory.create(:person, primary_publication: Publication.first)
   @person.confirm!
   @magazine = Magazine.create(
     title: 'Awesome Mag',
     accepts_submissions_from:  3.months.ago,
-    accepts_submissions_until: 3.months.from_now
+    accepts_submissions_until: 3.months.from_now,
+    publication: Publication.first
   )
-  @ability = Ability.create key: key, description: "#{key}s stuff"
+  @ability = Ability.create key: key, description: "#{key} stuff"
   @position = @magazine.positions.create name: 'Kitten', abilities: [@ability]
   @person.positions << @position
   visit '/sign_in'
@@ -17,7 +18,7 @@ end
 
 Given /^I'm in a position for (the "[^"]+"|said) magazine with the "([^"]+)" ability$/ do |mag, key|
   title = mag.sub(/[^"]*"/, '').sub('"', '')
-  @person ||= Factory.create(:person)
+  @person ||= Factory.create(:person, primary_publication: Publication.first)
   @person.confirm!
   @magazine = Magazine.find_by_nickname(title) || Magazine.first
   @ability = Ability.create key: key, description: "#{key}s stuff"
@@ -30,12 +31,13 @@ Given /^I'm in a position for (the "[^"]+"|said) magazine with the "([^"]+)" abi
 end
 
 Given /^I'm in a position for the current magazine with the "([^"]+)" and "([^"]+)" abilities$/ do |key1, key2|
-  @person ||= Factory.create(:person)
+  @person ||= Factory.create(:person, primary_publication: Publication.first)
   @person.confirm!
   @magazine = Magazine.create(
     title: 'Awesome Mag',
     accepts_submissions_from:  3.months.ago,
-    accepts_submissions_until: 3.months.from_now
+    accepts_submissions_until: 3.months.from_now,
+    publication: Publication.first
   )
   @ability1 = Ability.create key: key1, description: "#{key1}s stuff"
   @ability2 = Ability.create key: key2, description: "#{key2}s stuff"
@@ -52,7 +54,8 @@ Given /^I have the "([^"]+)" ability for the current magazine$/ do |key|
   @magazine = Magazine.create(
     title: 'Awesome Mag',
     accepts_submissions_from:  3.months.ago,
-    accepts_submissions_until: 3.months.from_now
+    accepts_submissions_until: 3.months.from_now,
+    publication: Publication.first
   )
   @ability = Ability.create key: key, description: "#{key}s stuff"
   @position = @magazine.positions.create name: 'Kitten', abilities: [@ability]

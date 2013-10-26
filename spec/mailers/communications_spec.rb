@@ -6,33 +6,24 @@ describe "Communications mailer" do
   include Rails.application.routes.url_helpers
 
   describe "#contact_person" do
-    before :all do
-      @person = Person.create(
-        :first_name            => "Pablo",
-        :last_name             => "Honey",
-        :email                 => "pablo.honey@example.com",
-        :password              => "password",
-        :password_confirmation => "password"
-      )
-      @person2 = Person.create(
-        :first_name            => "Paul",
-        :last_name             => "Miel",
-        :email                 => "paul.miel@example.com",
-        :password              => "password",
-        :password_confirmation => "password"
-      )
-      @email = Communications.contact_person(@person, @person2, "We have similar names!", "Nifty.")
+    let(:publication) { Factory.build :publication }
+    let(:contacter) { Factory.build :person, slug: "contacter", primary_publication: publication }
+    let(:contactee) { Factory.build :person, slug: "contactee", primary_publication: publication }
+    let(:email) { Communications.contact_person contactee, contacter, "We have similar names!", "Nifty." }
+    before do
+      Person.any_instance.unstub(:primary_publication)
     end
 
-    subject { @email }
-    it {
-      should have_body_text("Nifty")
-      should have_body_text("We have similar names!")
-      should have_subject(/Paul Miel/)
-      should be_multipart
-      should deliver_from "Paul Miel <admin@problemchildmag.com>"
-      should deliver_to "pablo.honey@example.com"
-      should have_reply_to "paul.miel@example.com"
-    }
+    subject { email }
+
+    it { should have_body_text("We have similar names!") }
+    it { should have_body_text("Nifty") }
+    it { should have_subject(/#{contacter.name}/) }
+    it { should be_multipart }
+    it { should deliver_from "#{contacter.name} <support@publishist.com>" }
+    it { should deliver_to contactee.email }
+    it { should have_reply_to contacter.email }
+    it { should_not have_body_text "//publishist" }
+    it { should have_body_text "//#{publication.subdomain}.publishist" }
   end
 end

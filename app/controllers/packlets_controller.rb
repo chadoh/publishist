@@ -3,9 +3,6 @@ class PackletsController < InheritedResources::Base
     c.must_orchestrate resource
   end
 
-  actions :destroy
-  custom_actions resource: :update_position
-
   respond_to :js
 
   def create

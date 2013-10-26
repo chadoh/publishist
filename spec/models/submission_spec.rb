@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Submission do
+  let(:editor) { double("editor", email: "woo@woo.woo").as_null_object }
+  let(:magazine) { Factory.create :magazine }
+  let(:publication) { double("publication", editor: editor, current_magazine!: magazine, current_magazine: magazine).as_null_object }
+  before { Submission.any_instance.stub(:publication).and_return(publication) }
   it {
     should have_many(:packlets).dependent(:destroy)
     should have_many(:meetings).through(:packlets)
@@ -8,6 +12,7 @@ describe Submission do
     should belong_to :author
     should belong_to :page
     should belong_to :magazine
+    should belong_to :publication
   }
 
   it "sets queued submissions to reviewed if their meeting is less than three hours in the future" do
@@ -47,19 +52,24 @@ describe Submission do
     end
 
     context "when submitting" do
-      it "sends an email to the editor, by default" do
-        sub = Factory.create :submission, state: :draft
-        mock_mail = mock(:mail)
-        mock_mail.stub(:deliver)
-        Notifications.should_receive(:new_submission).with(sub).and_return(mock_mail)
-        sub.has_been :submitted
+      context "when submitted by the editor" do
+        let(:publication) { Factory.create :publication }
+        it "sends no email, if it was submitted by the editor" do
+          sub = Factory.create :submission, state: :draft, publication: publication
+          publication.should_receive(:editor).and_return("Blimey, Tim!")
+          Notifications.should_not_receive(:new_submission)
+          sub.has_been :submitted, :by => "Blimey, Tim!"
+        end
       end
 
-      it "sends no email, if it was submitted by the editor" do
-        sub = Factory.create :submission, state: :draft
-        Person.should_receive(:current_communicators).and_return(["Blimey, Tim!"])
-        Notifications.should_not_receive(:new_submission)
-        sub.has_been :submitted, :by => "Blimey, Tim!"
+      context "when submitted by anyone else" do
+        it "sends an email to the editor, by default" do
+          sub = Factory.create :submission, state: :draft
+          mock_mail = mock(:mail)
+          mock_mail.stub(:deliver)
+          Notifications.should_receive(:new_submission).with(sub).and_return(mock_mail)
+          sub.has_been :submitted
+        end
       end
     end
   end
@@ -90,15 +100,6 @@ describe Submission do
         Notifications.should_not_receive(:new_submission)
 
         sub.update_attributes state: :submitted
-      end
-      it "does not send a notification if was :draft, but is being updated by the person who would get the email" do
-        per = Factory.create(:person)
-        sub = Submission.create title: "love", body: "&loss", author: per, state: :draft
-
-        Person.should_receive(:current_communicators).and_return([per])
-        Notifications.should_not_receive(:new_submission)
-
-        sub.update_attributes state: :submitted, updated_by: per
       end
     end
   end
@@ -482,49 +483,30 @@ describe Submission do
   end
 
   describe "#magazine" do
+    before { Submission.any_instance.unstub(:publication) }
+    let(:publication) { Factory.create(:publication) }
     it "defaults to the current magazine" do
-      mg1 = Factory.build :magazine
-      mg2 = Factory.build :magazine
-      Magazine.stub(:current!).and_return(mg1)
-      sub = Submission.new
+      mg1 = Factory.build :magazine, publication: publication
+      mg2 = Factory.build :magazine, publication: publication
+      publication.stub(:current_magazine!).and_return(mg1)
+      sub = Submission.new publication: publication
       sub.magazine.should be mg1
     end
     it "creates a new magazine and is set to that if the latest magazine is no longer accepting submissions" do
       magazine = Magazine.create(
         accepts_submissions_from:  6.months.ago,
-        accepts_submissions_until: Date.yesterday
+        accepts_submissions_until: Date.yesterday,
+        publication: publication
       )
-      sub = Submission.create title: '<', body: '3', author: Factory.create(:person)
+      sub = Submission.create title: '<', body: '3', author: Factory.create(:person), publication: publication
       sub.magazine.should_not == magazine
     end
-    it "is nil if there are no magazines" do
-      sub = Submission.create title: '<', body: '3', author: Factory.create(:person)
-      sub.magazine.should be_nil
-    end
     it "does not override the magazine if it's already set" do
-      mg1 = Factory.create :magazine
-      mg2 = Factory.create :magazine
+      mg1 = Factory.create :magazine, publication: publication
+      mg2 = Factory.create :magazine, publication: publication
       sub = Submission.create title: "margeret", body: "tatcher", author: Factory.create(:person), magazine: mg1
-      Magazine.stub(:current).and_return(mg2)
+      publication.stub(:current_magazine!).and_return(mg2)
       sub.reload.magazine.should == mg1
-    end
-    it "gives an error if author_name isn't present" do
-      sub = Submission.create(
-        title: 'this',
-        body:  'that',
-        author_name: '',
-        author_email: 'phc@example.com'
-      )
-      sub.should_not be_valid
-    end
-    it "gives an error if author_email isn't present" do
-      sub = Submission.create(
-        title: 'this',
-        body:  'that',
-        author_email: '',
-        author_email: 'phc@example.com'
-      )
-      sub.should_not be_valid
     end
   end
 
@@ -565,23 +547,6 @@ describe Submission do
       @sub = Factory.create :submission, pseudonym_name: "Pablo Honey"
       @sub.destroy
       Pseudonym.count.should == 0
-    end
-  end
-
-  describe "#magazine" do
-    it "defaults to the current magazine" do
-      mg1 = Factory.build :magazine
-      mg2 = Factory.build :magazine
-      Magazine.stub(:current!).and_return(mg1)
-      sub = Submission.new
-      sub.magazine.should be mg1
-    end
-    it "does not override the magazine if it's already set" do
-      mg1 = Factory.create :magazine
-      mg2 = Factory.create :magazine
-      sub = Submission.create title: "margeret", body: "tatcher", author: Factory.create(:person), magazine: mg1
-      Magazine.stub(:current).and_return(mg2)
-      sub.reload.magazine.should == mg1
     end
   end
 

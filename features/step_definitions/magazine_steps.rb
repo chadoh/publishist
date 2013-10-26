@@ -1,5 +1,5 @@
 Given(/^there is a magazine$/) do
-  Magazine.create
+  Magazine.create publication: Publication.first
 end
 
 Then(/^I should see a link to the magazine$/) do
@@ -9,14 +9,16 @@ end
 Given(/^a magazine's timeframe is \*nearly\* over$/) do
   Magazine.create(
     :accepts_submissions_from => 6.months.ago,
-    :accepts_submissions_until => Date.tomorrow
+    :accepts_submissions_until => Date.tomorrow,
+    publication: Publication.first
   )
 end
 
 Given(/^a magazine's timeframe is freshly over$/) do
   Magazine.create(
     accepts_submissions_from: 6.months.ago,
-    accepts_submissions_until: Date.yesterday
+    accepts_submissions_until: Date.yesterday,
+    publication: Publication.first
   )
 end
 
@@ -24,7 +26,8 @@ Given(/^a very old magazine called "([^"]*)"$/) do |nickname|
   mag = Magazine.create(
     accepts_submissions_from: 2.years.ago,
     accepts_submissions_until: 18.months.ago,
-    nickname: nickname
+    nickname: nickname,
+    publication: Publication.first
   ).publish []
 end
 
@@ -32,7 +35,8 @@ Given(/^a current magazine called "([^"]*)"$/) do |nickname|
   Magazine.create(
     accepts_submissions_from: 3.months.ago,
     accepts_submissions_until: 3.months.from_now,
-    nickname: nickname
+    nickname: nickname,
+    publication: Publication.first
   )
 end
 
@@ -49,7 +53,8 @@ Given(/^a magazine has been published and I am viewing its cover$/) do
   mag = Magazine.create(
     :title                     => 'banjos',
     :accepts_submissions_until => date,
-    :accepts_submissions_from  => date - 6.months
+    :accepts_submissions_from  => date - 6.months,
+    publication: Publication.first
   )
   mag.publish []
   visit magazine_path(mag)
@@ -59,7 +64,8 @@ Given(/^a magazine (?:titled|nicknamed) "([^"]*)" has been published$/) do |titl
   mag = Magazine.create(
     :nickname                  => title,
     :accepts_submissions_from  => 6.months.ago,
-    :accepts_submissions_until => Date.yesterday
+    :accepts_submissions_until => Date.yesterday,
+    publication: Publication.first
   )
   Submission.find_each {|sub| sub.update_attributes magazine: mag }
   mag.publish(Submission.all)
@@ -140,7 +146,8 @@ end
 Given(/^a magazine that has been 'published' but has not yet had the notification sent out to everyone$/) do
   Magazine.create(
     accepts_submissions_from: 6.months.ago,
-    accepts_submissions_until: 2.days.ago
+    accepts_submissions_until: 2.days.ago,
+    publication: Publication.first
   ).publish []
 end
 

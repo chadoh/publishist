@@ -17,7 +17,6 @@ Feature: an editor records attendee
     When I click the remove link
     Then I should not see "Peas Cold"
 
-  @pending
   Scenario: Creating an account for a new person by recording attendee correctly
     Given I'm in a position for the current magazine with the "orchestrates" ability
     And I am on the first meeting page

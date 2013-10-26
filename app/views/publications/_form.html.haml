@@ -1,0 +1,22 @@
+= simple_form_for @publication, html_options: { action: publications_path(subdomain: '') } do |f|
+  - if @publication.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@publication.errors.count, "error")
+        prohibited this publication from being saved:
+
+      %ul
+      - @publication.errors.full_messages.each do |msg|
+        %li= msg
+
+  .inputs
+    = f.input :subdomain
+    = f.input :name
+    = f.input :tagline
+    = f.input :meta_description, hint: "This is what Google, etc display in search results. Check out #{link_to "these pro tips", "http://searchenginewatch.com/article/2067564/How-To-Use-HTML-Meta-Tags"}."
+    = f.input :custom_domain, hint: "Check out our #{link_to "guide to using a custom domain with your Publishist site", "http://publishist.com/custom-domains.html"}."
+    = f.simple_fields_for :publication_detail do |deets|
+      = deets.input :about
+
+  .actions
+    = f.button :submit

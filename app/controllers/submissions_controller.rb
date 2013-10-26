@@ -2,19 +2,19 @@ require "#{Rails.root}/lib/honey_pot"
 
 class SubmissionsController < InheritedResources::Base
   before_filter :only => [:index] do |c|
-    c.must_orchestrate :any
+    c.must_orchestrate @publication
   end
   before_filter :ensure_current_url, :only => :show
 
   def index
     @magazines = current_person.magazines
-    @magazine = params[:m].present? ? Magazine.find(params[:m]) : Magazine.current.presence || Magazine.first
+    @magazine = @publication.magazines.where(id: params[:m]).first.presence || @publication.current_magazine
     @average = @magazine.try(:average_score)
-    @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : Meeting.all
+    @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : []
     @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
     @show_author = false unless current_person.communicates?(@magazine)
-    @unscheduled_submissions = Submission.where(:state => Submission.state(:submitted))
+    @unscheduled_submissions = @publication.submissions.where(:state => Submission.state(:submitted))
   end
 
   def show
@@ -30,9 +30,9 @@ class SubmissionsController < InheritedResources::Base
   def new
     session[:return_to] = request.referer unless begin URI(request.referer).path == "/submissions" rescue false end
     if person_signed_in?
-      @submission = Submission.new :author_id => current_person.id, :state => :draft
+      @submission = Submission.new author_id: current_person.id, state: :draft, publication_id: @publication.id
     else
-      @submission = Submission.new :state => :submitted
+      @submission = Submission.new state: :submitted, publication_id: @publication.id, author_primary_publication_id: @publication.id
       @submission.extend HoneyPot
     end
 
@@ -60,16 +60,16 @@ class SubmissionsController < InheritedResources::Base
         format.html {
           if person_signed_in?
             @submission.save
-            redirect_to submissions_url and return if current_person.orchestrates?(:current) && params["preview"]
+            redirect_to submissions_url(subdomain: @publication.subdomain) and return if current_person.orchestrates?(@publication, :nowish) && params["preview"]
             if @submission.published?
               flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
-              redirect_to new_submission_url and return
+              redirect_to new_submission_url(subdomain: @publication.subdomain) and return
             end
-            redirect_to person_url(current_person)
+            redirect_to person_url(current_person, subdomain: @publication.subdomain)
           else
             @submission.save
             flash[:notice] = "Thank you for helping make the world more beautiful! We look forward to reviewing it."
-            redirect_to session[:return_to] || root_url
+            redirect_to session[:return_to] || root_url(subdomain: @publication.subdomain)
           end
         }
       else
@@ -77,7 +77,7 @@ class SubmissionsController < InheritedResources::Base
       end
     end
   rescue ActiveRecord::UnknownAttributeError
-    redirect_to root_url
+    redirect_to root_url subdomain: @publication.subdomain
   end
 
   def update
@@ -85,19 +85,12 @@ class SubmissionsController < InheritedResources::Base
     set_params
     @submission.attributes = params[:submission]
 
-    # update! {
-    #   if current_person.orchestrates?(:current) && params[:commit] != t('preview')
-    #     session[:return_to] || submissions_url
-    #   else
-    #     @submission.author ? person_url(resource.author) : submission_url(@submission)
-    #   end
-    # }
     respond_with(@submission) do |format|
       if @submission.save
         format.html {
           if @submission.published?
             flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
-            redirect_to new_submission_url and return
+            redirect_to new_submission_url(subdomain: @publication.subdomain) and return
           else
             redirect_to session[:return_to] || request.referer
           end
@@ -111,7 +104,7 @@ class SubmissionsController < InheritedResources::Base
   def destroy
     unless person_signed_in? and (current_person.communicates?(resource) || current_person == resource.author)
       flash[:notice] = "You're not allowed to see that."
-      redirect_to(root_url) and return
+      redirect_to(root_url subdomain: @publication.subdomain) and return
     else
       destroy!(:notice => "It is gone.") { request.referer }
     end
@@ -126,7 +119,10 @@ private
   end
 
   def set_params
-    params[:submission][:author] = Person.find_or_create(params[:submission][:author]) if !!params[:submission][:author]
+    if !!params[:submission][:author]
+      person = Person.find_or_create params[:submission].delete(:author), primary_publication_id: @publication.id
+      params[:submission][:author] = person
+    end
     params[:submission][:updated_by] = current_person
     params[:submission][:state] = :submitted if params["submit"]
     drop_blank_fields

@@ -40,6 +40,10 @@ module NavigationHelpers
     when /page (.*) of the magazine/i
       "/magazines/#{Magazine.first.to_param}/#{$1}"
 
+    when /the first meeting page/i
+      meeting = Meeting.first || Factory.create(:meeting, magazine: Magazine.first)
+      meeting_path(meeting)
+
     when /the first (.*) page/i
       model = $1.titleize.constantize
       instance = if model.count > 0

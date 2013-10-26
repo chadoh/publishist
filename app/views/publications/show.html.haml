@@ -1,0 +1,18 @@
+- @homepage.hook do |hook|
+  #hook
+    .body
+      = sanitize hook.body
+      .fadeout
+      = link_to "Read More", magazine_page_path(hook.magazine, hook.page), class: "read-more"
+    %footer
+      – #{link_to strip_tags(hook.title), magazine_page_path(hook.magazine, hook.page)}
+      by #{link_to hook.author, hook.author}
+      %br
+      published in #{link_to hook.magazine, hook.magazine}
+
+#about
+  %h1 Welcome to #{@publication.name}
+  :markdown
+    #{@publication.about}
+  - if orchestrates? @publication, :nowish
+    = link_to t("edit").html_safe, edit_publication_path(@publication)

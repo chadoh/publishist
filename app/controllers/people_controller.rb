@@ -1,13 +1,13 @@
 class PeopleController < InheritedResources::Base
   before_filter :only => [:destroy] do |c|
-    c.orchestrates :any
+    c.orchestrates @publication
   end
   before_filter :ensure_current_url, :only => :show
 
   def autocomplete
     terms = params[:term].split(' ')
     @people = terms.map do |term|
-                Person.limit(15).
+                @publication.people.limit(15).
                   where(
                     "first_name ILIKE :term OR middle_name ILIKE :term
                     OR last_name ILIKE :term OR email ILIKE :term",
@@ -49,7 +49,7 @@ class PeopleController < InheritedResources::Base
     @message = params[:contact_person][:message]
     Communications.contact_person(@to, @from, @subject, @message).deliver
     flash[:notice] = "Your message has been sent!"
-    redirect_to person_url(@to)
+    redirect_to person_url(@to, subdomain: @publication.subdomain)
   end
 
 protected

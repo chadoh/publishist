@@ -1,5 +1,5 @@
-Problem Child Literary Magazine
-===============================
+Publishist.com
+==============
 
 [![Build Status](https://travis-ci.org/chadoh/pcmag.png?branch=master)](https://travis-ci.org/chadoh/pcmag)
 [![Coverage Status](https://coveralls.io/repos/chadoh/pcmag/badge.png?branch=master)](https://coveralls.io/r/chadoh/pcmag?branch=master)

@@ -1,0 +1,18 @@
+- title t('.title')
+
+%table
+  %thead
+    %tr
+      %th= Publication.human_attribute_name :subdomain
+      %th= Publication.human_attribute_name :name
+      %th= Publication.human_attribute_name :tagline
+      %th{:colspan => 2}= t 'actions'
+
+  %tbody
+    - for publication in @publications
+      %tr{ :class => cycle(:odd, :even) }
+        %td= link_to publication.subdomain, root_url(subdomain: publication.subdomain)
+        %td= publication.name
+        %td= publication.tagline
+        %td.action= link_to t('edit').html_safe, edit_publication_path(publication)
+        %td.action= link_to t('destroy').html_safe, publication, :confirm => t('are_you_sure'), :method => :delete

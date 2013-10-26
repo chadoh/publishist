@@ -9,7 +9,7 @@ class RolesController < InheritedResources::Base
   end
 
   def create
-    params[:role][:person] = Person.find_or_create(params[:role][:person])
+    params[:role][:person] = Person.find_or_create(params[:role][:person], primary_publication_id: @publication.id)
     @role = Role.create params[:role]
     logger.debug "@role = #@role; @role.valid? #{@role.valid?}"
     must_orchestrate @role, :or_adjacent

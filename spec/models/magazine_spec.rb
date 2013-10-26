@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Magazine do
+  let(:publications) { [Factory.create(:publication), Factory.create(:publication)] }
+
   it {
     should validate_presence_of :nickname
     should validate_presence_of :accepts_submissions_from
@@ -9,7 +11,17 @@ describe Magazine do
     should have_many(:pages).dependent(:destroy)
     should have_many(:positions).dependent(:destroy)
     should have_many(:roles).through(:positions)
+    should belong_to(:publication)
   }
+
+  describe ".published" do
+    it "returns only magazines that've been published and that have had their notification sent" do
+      magazines = [Factory.create(:magazine),
+                   Factory.create(:magazine, published_on: Date.yesterday),
+                   Factory.create(:magazine, published_on: Date.yesterday, notification_sent: true)]
+      expect(Magazine.published).to eq [magazines.last]
+    end
+  end
 
   describe "#accepts_submissions_from" do
     context "when this is the first magazine" do
@@ -27,17 +39,46 @@ describe Magazine do
     end
 
     context "when there are other magazines" do
-      it "defaults to latest_mag.accepts_submissions_until + 1" do
-        mag = Magazine.create
-        mag2 = Magazine.new
-        mag2.accepts_submissions_from.to_date.should == (mag.accepts_submissions_until.to_date + 1.day)
+      context "in the same publication" do
+        it "defaults to latest_mag.accepts_submissions_until + 1" do
+          mag = Magazine.create
+          mag2 = Magazine.new
+          mag2.accepts_submissions_from.to_date.should == (mag.accepts_submissions_until.to_date + 1.day)
+        end
+        it "cannot fall within another magazine's range" do
+          orig = Magazine.create
+          mag = Magazine.new accepts_submissions_from: orig.accepts_submissions_from + 1.day
+          mag.should_not be_valid
+        end
       end
-    end
+      context "in different publications" do
+        before { Magazine.any_instance.unstub(:publication) }
+        it "ignores them and uses the default of today" do
+          reference = Magazine.new
 
-    it "cannot fall within another magazine's range" do
-      orig = Magazine.create
-      mag = Magazine.new :accepts_submissions_from => orig.accepts_submissions_from + 1.day
-      mag.should_not be_valid
+          in_1st_publication = Magazine.create publication: publications.first
+          publications.first.magazines.reload
+          in_2nd_publication = Magazine.new publication: publications.last
+          in_2nd_publication.accepts_submissions_from.should == reference.accepts_submissions_from
+        end
+        it "can fall within one of those magazine's ranges just fine" do
+          orig = Magazine.create publication: publications.first
+          publications.first.magazines.reload
+          mag = Magazine.new publication: publications.last, accepts_submissions_from: orig.accepts_submissions_from + 1.day
+          mag.should be_valid
+        end
+      end
+      context "in both this and other publications" do
+        before { Magazine.any_instance.unstub(:publication) }
+        it "only considers its own publication's magazines when calculating the default" do
+          samesies  = Magazine.create publication: publications.first
+          different = Magazine.create publication: publications.last, accepts_submissions_from: Time.zone.now + 6.months
+          publications.first.magazines.reload
+          publications.last.magazines.reload
+          mag = Magazine.new publication: publications.first
+          mag.accepts_submissions_from.to_date.should == (samesies.accepts_submissions_until.to_date + 1.day)
+        end
+      end
     end
   end
 
@@ -63,17 +104,33 @@ describe Magazine do
       )
       mag.should_not be_valid
     end
+    context "when there are other magazines" do
+      context "in the same publication" do
+        it "cannot fall within one of their ranges" do
+          orig = Magazine.create
+          mag = Magazine.new(
+            accepts_submissions_until: orig.accepts_submissions_until - 1.day,
+            accepts_submissions_from: Date.yesterday
+          )
+          mag.should_not be_valid
 
-    it "cannot fall within another magazine's range" do
-      orig = Magazine.create
-      mag = Magazine.new(
-        :accepts_submissions_until => orig.accepts_submissions_until - 1.day,
-        :accepts_submissions_from => Date.yesterday
-      )
-      mag.should_not be_valid
-
-      orig.accepts_submissions_until = orig.accepts_submissions_until - 1.day
-      orig.should be_valid
+          orig.accepts_submissions_until = orig.accepts_submissions_until - 1.day
+          expect(orig).to be_valid
+        end
+      end
+      context "in different publications" do
+        before { Magazine.any_instance.unstub(:publication) }
+        it "can fall within one of those magazine's ranges just fine" do
+          orig = Magazine.create publication: publications.first
+          publications.first.magazines.reload
+          mag = Magazine.new(
+            accepts_submissions_until: orig.accepts_submissions_until - 1.day,
+            accepts_submissions_from: Date.yesterday,
+            publication: publications.last
+          )
+          expect(mag).to be_valid
+        end
+      end
     end
   end
 
@@ -105,23 +162,50 @@ describe Magazine do
     end
   end
 
-  describe "#positions:" do
-    it "a magazine has the same positions as the previous magazine, by default" do
-      a1 = Ability.create key: 'communicates', description: "Can see the names of submitters and communicate with them."
-      a2 = Ability.create key: 'scores',       description: "Can enter (and see) scores for all submissions."
+  describe "#positions" do
+    let(:communicates) { Factory.create :ability, key: "communicates" }
+    let(:scores) { Factory.create :ability, key: "scores" }
+
+    it "defaults to those of the previous magazine in the same publication" do
       mag1 = Magazine.create title: "the Bow Nur issue"
       mag1.positions << [
-                          Position.create(name: "Admiral", abilities: [a1]),
-                          Position.create(name: "Chef",    abilities: [a2])
+                          Position.create(name: "Admiral", abilities: [communicates]),
+                          Position.create(name: "Chef",    abilities: [scores])
                         ]
       mag2 = Magazine.create title: "the salad issue"
       p1 = mag2.positions.first
       p2 = mag2.positions.last
 
-      p1.name.should == "Admiral"
-      p1.abilities.should == [a1]
-      p2.name.should == "Chef"
-      p2.abilities.should == [a2]
+      expect(p1.name).to eq "Admiral"
+      expect(p1.abilities).to eq [communicates]
+      expect(p2.name).to eq "Chef"
+      expect(p2.abilities).to eq [scores]
+    end
+    it "ignores positions of magazines in other publications" do
+      Magazine.any_instance.unstub(:publication)
+      mag1 = Magazine.create title: "the Bow Nur issue", publication: publications.first
+      mag1.positions << [
+                          Position.create(name: "Admiral", abilities: [communicates]),
+                          Position.create(name: "Chef",    abilities: [scores])
+                        ]
+      publications.first.magazines.reload
+
+      mag2 = Magazine.create title: "the salad issue", publication: publications.last
+      expect(mag2.positions).to eq([])
+    end
+  end
+
+  describe "#communicators" do
+    let(:magazine) { Factory.create :magazine }
+    let(:communicates) { Factory.create :ability, key: 'communicates' }
+    let(:scores) { Factory.create :ability, key: 'scores' }
+    let(:position) { Factory.create :position, magazine: magazine, abilities: [communicates] }
+    let(:position2) { Factory.create :position, magazine: magazine, abilities: [scores] }
+    let(:person) { Factory.create :person, positions: [position] }
+    let(:person2) { Factory.create :person, positions: [position2] }
+    it "returns people in a position with the 'communicates' ability" do
+      person2 # instantiate
+      expect(magazine.communicators).to eq([person])
     end
   end
 
@@ -150,39 +234,6 @@ describe Magazine do
       packlet.scores << [Score.create('amount' => 5, :attendee => a), Score.create('amount' => 4, :attendee => a2)]
       packlet2.scores << [Score.create('amount' => 10, :attendee => a3), Score.create('amount' => 10, :attendee => a4)]
       mag.reload.average_score.should == 4.5
-    end
-  end
-
-  describe ".current" do
-    [ [Time.zone.now - 1.day, Time.zone.now + 1.day],
-      [Time.zone.now.to_date, Time.zone.now + 3.days],
-      [Time.zone.now - 3.days, Time.zone.now.end_of_day]
-    ].each do |range|
-      it "returns the magazine in #{range}" do
-        mag  = Magazine.create :accepts_submissions_from => range.first,
-                              :accepts_submissions_until => range.last
-        mag2 = Magazine.create
-        Magazine.current.should == mag
-      end
-    end
-    it "returns the latest one, even if it's no longer accepting submissions" do
-      mag  = Magazine.create(
-        accepts_submissions_from:  6.months.ago,
-        accepts_submissions_until: Date.yesterday
-      )
-      Magazine.current.should == mag
-      Magazine.count.should be 1
-    end
-  end
-
-  describe ".current!" do
-    it "creates a new magazine if the latest one is no longer accepting submissions" do
-      mag  = Magazine.create(
-        accepts_submissions_from:  6.months.ago,
-        accepts_submissions_until: Date.yesterday
-      )
-      Magazine.current!.should_not == mag
-      Magazine.count.should be 2
     end
   end
 
@@ -444,44 +495,50 @@ describe Magazine do
     end
   end
 
-  describe "self.before" do
-    it "returns the magazine that was published before the one provided" do
-      @magazine2 = Magazine.create(
-        accepts_submissions_from:  5.months.ago,
-        accepts_submissions_until: 1.month.ago,
-        title:                     'second'
-      )
-      @magazine1 = Magazine.create(
-        accepts_submissions_from:  12.months.ago,
-        accepts_submissions_until: 6.month.ago,
-        title:                     'first'
-      )
-      @magazine3 = Magazine.create(
-        accepts_submissions_from:  Date.today,
-        accepts_submissions_until: 6.months.from_now,
-        title:                     'third'
-      )
-      Magazine.before(@magazine3).should == @magazine2
+  describe ".before" do
+    let(:magazines) { [Magazine.create(publication_id: publications.first.id),
+                       Magazine.create(publication_id: publications.first.id),
+                       Magazine.create(publication_id: publications.first.id),
+                       Magazine.create(publication_id: publications.last.id),
+                       Magazine.create(publication_id: publications.last.id),
+                       Magazine.create(publication_id: publications.last.id)] }
+    it "returns the magazine that was published before the one provided, in the same publication" do
+      Magazine.any_instance.unstub(:publication)
+      Magazine.before(magazines[5]).should == magazines[4]
+      Magazine.before(magazines[4]).should == magazines[3]
+      Magazine.before(magazines[3]).should == nil
+      Magazine.before(magazines[2]).should == magazines[1]
+      Magazine.before(magazines[1]).should == magazines[0]
+      Magazine.before(magazines[0]).should == nil
     end
   end
-  describe "self.after" do
-    it "returns the magazine that was published before the one provided" do
-      @magazine1 = Magazine.create(
-        accepts_submissions_from:  12.months.ago,
-        accepts_submissions_until: 6.month.ago,
-        title:                     'first'
-      )
-      @magazine2 = Magazine.create(
-        accepts_submissions_from:  5.months.ago,
-        accepts_submissions_until: 1.month.ago,
-        title:                     'second'
-      )
-      @magazine3 = Magazine.create(
-        accepts_submissions_from:  Date.today,
-        accepts_submissions_until: 6.months.from_now,
-        title:                     'third'
-      )
-      Magazine.after(@magazine1).should == @magazine2
+  describe ".after" do
+    let(:magazines) { [Magazine.create(publication_id: publications.first.id),
+                       Magazine.create(publication_id: publications.first.id),
+                       Magazine.create(publication_id: publications.first.id),
+                       Magazine.create(publication_id: publications.last.id),
+                       Magazine.create(publication_id: publications.last.id),
+                       Magazine.create(publication_id: publications.last.id)] }
+    it "returns the magazine that was published after the one provided, in the same publication" do
+      Magazine.any_instance.unstub(:publication)
+      Magazine.after(magazines[0]).should == magazines[1]
+      Magazine.after(magazines[1]).should == magazines[2]
+      Magazine.after(magazines[2]).should == nil
+      Magazine.after(magazines[3]).should == magazines[4]
+      Magazine.after(magazines[4]).should == magazines[5]
+      Magazine.after(magazines[5]).should == nil
+    end
+  end
+
+  describe "#older_unpublished_magazines" do
+    before { Magazine.any_instance.unstub(:publication) }
+    it "scopes by the current publication" do
+      older_mags = [Factory.create(:magazine, publication: publications.first, accepts_submissions_from: Time.zone.now - 18.months),
+                    Factory.create(:magazine, publication: publications.last, accepts_submissions_from: Time.zone.now - 18.months) ]
+      mag = Magazine.create publication_id: publications.first.id
+      publications.first.magazines.reload
+      publications.last.magazines.reload
+      expect(mag.older_unpublished_magazines).to eq [older_mags.first]
     end
   end
 

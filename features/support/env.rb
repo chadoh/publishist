@@ -6,6 +6,7 @@
 
 require 'cucumber/rails'
 require 'coveralls'
+require 'cucumber/rspec/doubles'
 Coveralls.wear!
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -58,3 +59,12 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+Before do
+  pc = Publication.create(:subdomain => 'pc', :name => 'Problem Child', :tagline => 'A Penn State Literary Magazine')
+  pc.publication_detail = PublicationDetail.new(:about => 'woo')
+  Capybara.default_host = "http://pc.example.com"
+
+  Submission.any_instance.stub(:publication).and_return(pc)
+
+  Homepage.any_instance.stub(:hook).and_return(double)
+end

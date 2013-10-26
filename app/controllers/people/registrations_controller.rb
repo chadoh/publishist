@@ -4,6 +4,7 @@ class People::RegistrationsController < Devise::RegistrationsController
 
   def new
     build_resource {}
+    resource.primary_publication_id = @publication.id
     resource.extend HoneyPot
     respond_with self.resource
   end
@@ -11,12 +12,12 @@ class People::RegistrationsController < Devise::RegistrationsController
   def create
     remove_blank_attributes
     super
-  rescue ActiveRecord::UnknownAttributeError
+  rescue ActiveModel::MassAssignmentSecurity::Error
     redirect_to :root
   end
 
   def after_update_path_for(resource)
-    person_url(resource)
+    person_url(resource, subdomain: @publication.subdomain)
   end
 
   private

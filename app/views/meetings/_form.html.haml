@@ -1,4 +1,4 @@
-= simple_form_for(resource) do |f|
+= simple_form_for @meeting do |f|
   = error_messages
 
   = f.input :datetime, :label => "When", :as => :string, :input_html => { :value => (resource.datetime ? resource.datetime.strftime("%Y-%m-%d %I:%M %p") : nil) }

@@ -7,7 +7,7 @@
 
   - if submission.published? || ((@show_author.nil? || @show_author) && (communicates_or_is_author?(submission) || params[:controller] == 'magazines'))
     %p.author
-      - if communicates?(submission.magazine)
+      - if communicates?(submission)
         = mail_to submission.email, submission.email, class: 'mailto'
       - if !!submission.author
         = link_to_if !current_page?(submission.author) && submission.pseudonym_link,

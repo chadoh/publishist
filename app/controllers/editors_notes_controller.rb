@@ -1,5 +1,4 @@
 class EditorsNotesController < InheritedResources::Base
-  actions :create, :update
   respond_to :html, except: [:new, :edit]
   respond_to :js, only: :new
 

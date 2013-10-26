@@ -1,9 +1,9 @@
 !!!
 %html
   %head
-    - @content_for_title ||= 'Problem Child'
+    - @content_for_title ||= @publication.name
     %title= @content_for_title
-    %link(rel='shortcut icon' href='/assets/favicon.ico')
+    %meta{ name: "description", content: @publication.meta_description }
     = stylesheet_link_tag 'application', :media => 'screen, projection'
     = stylesheet_link_tag 'print', :media => 'print'
     /[if lt IE 8]
@@ -15,13 +15,11 @@
     #page
       %nav.site-nav{ :role => 'navigation' }
         %ul
-          %li{ :class => params[:controller] == 'welcome'     && 'current' }= link_to_unless_current 'About', root_path
-          - unless orchestrates? :currently
+          - if !orchestrates? @publication, :nowish
             %li{ :class => current_page?(new_submission_path)   && 'current' }= link_to_unless_current 'Submit', new_submission_path
-          - if orchestrates? :currently
+          - else
             %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current 'Submissions', submissions_path
-          - if views? :any, :with_meetings
-            %li{ :class => params[:controller] == 'meetings'      && 'current' }= link_to_unless_current 'Meetings', meetings_path
+          %li{ :class => params[:controller] == 'meetings'      && 'current' }= link_to_unless_current 'Meetings', meetings_path
           %li{ :class => params[:controller] == 'magazines'   && 'current' }= link_to_unless_current 'Magazines', magazines_path
           %li
             %ul#account
@@ -36,16 +34,18 @@
                 %li
                   = link_to_unless_current 'Sign Up!', sign_up_path
       %header{ :role => 'banner' }
-        %h1 Problem Child
-        %p= t 'subtitle'
+        %h1
+          = link_to @publication.name, root_url
+        %p= @publication.tagline
       - if flash[:notice]
         #notice= flash[:notice]
       - if flash[:alert]
         #notice= flash[:alert]
       %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:sidebar) && 'full-width', params[:controller]] }
         %header
-          %h1{ :class => params[:controller] == 'submissions' && params[:action] == 'show' && 'nocaps' }<
-            = @content_for_page_heading
+          - if @content_for_page_heading
+            %h1{ :class => params[:controller] == 'submissions' && params[:action] == 'show' && 'nocaps' }<
+              = @content_for_page_heading
           - if content_for? :header
             %div
               = yield :header
@@ -56,7 +56,7 @@
       #page-footer
     %footer{ :role => 'contentinfo' }
       #footer
-        %p Create in Community
+        %p &nbsp;
     - if protect_against_forgery?
       :javascript
         var AUTH_TOKEN = #{form_authenticity_token.inspect};

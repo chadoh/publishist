@@ -5,6 +5,7 @@
   = f.input :nickname
   = f.input :accepts_submissions_from,  as: :string, input_html: { value: resource.accepts_submissions_from .strftime("%Y-%m-%d") }
   = f.input :accepts_submissions_until, as: :string, input_html: { value: resource.accepts_submissions_until.strftime("%Y-%m-%d") }
+  = f.input :publication_id, as: :hidden
   - if @magazine.published?
     = f.input :published_on,            as: :string, input_html: { value: resource.published_on             .strftime("%Y-%m-%d") }
   = f.input :pdf, label: "Upload a #{'different ' if @magazine.pdf?}pdf of the magazine",

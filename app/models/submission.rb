@@ -29,6 +29,7 @@ class Submission < ActiveRecord::Base
   belongs_to :author, :class_name => "Person"
   belongs_to :page
   belongs_to :magazine
+  belongs_to :publication
   has_many :packlets, dependent: :destroy
   has_many :meetings, through: :packlets
   has_many :scores,   through: :packlets
@@ -58,14 +59,14 @@ class Submission < ActiveRecord::Base
   before_create    :set_position_to_nil
   before_create    :create_author_if_blank
   after_find       :reviewed_if_meeting_has_occurred
-  after_save       :notify_current_communicator_if_submitted
+  after_save       :notify_editor_if_submitted
   after_create     :author_has_positions_with_the_disappears_ability
   after_initialize :magazine_is_current_if_blank
 
   scope :published, where(state: Submission.state(:published))
 
-  attr_writer :author_name
-  attr_writer :author_email
+  attr_accessor :author_primary_publication_id
+  attr_writer :author_name, :author_email
   def author_name
     @author_name ||= pseudonym.try(:name).presence || author.try(:name) || ''
   end
@@ -150,7 +151,7 @@ protected
   def create_author_if_blank
     if self.author.blank?
       person = Person.find_by_email(author_email).presence || \
-               Person.create(name: author_name, email: author_email)
+               Person.create(name: author_name, email: author_email, primary_publication_id: author_primary_publication_id)
       self.author = person
       self.pseudonym_name = author_name if author_name != person.name
       Notifications.submitted_while_not_signed_in(self).deliver
@@ -199,17 +200,21 @@ protected
     end
   end
 
-  def notify_current_communicator_if_submitted
+  def notify_editor_if_submitted
     if state_changed? && state == :submitted && state_was == Submission.state(:draft)
-      notify = updated_by.blank? || (editor = Person.current_communicators.first).blank? || editor != updated_by
-      Notifications.new_submission(self).deliver if notify
+      Notifications.new_submission(self).deliver unless submitted_by_editor?
     end
   end
 
   def magazine_is_current_if_blank
     unless self.magazine_id.present?
-      self.magazine = Magazine.current!
+      self.magazine = publication.current_magazine!
     end
   end
+
+  private
+    def submitted_by_editor?
+      updated_by.present? && publication.try(:editor) == updated_by
+    end
 
 end
