@@ -1,5 +1,5 @@
 class Publication < ActiveRecord::Base
-  attr_accessible :address, :subdomain, :latitude, :longitude, :name, :tagline, :about, :meetings_info, :publication_detail_attributes, :custom_domain
+  attr_accessible :address, :subdomain, :latitude, :longitude, :name, :tagline, :about, :meetings_info, :publication_detail_attributes, :custom_domain, :meta_description
 
   has_many :magazines, dependent: :destroy, inverse_of: :publication
   has_many :submissions, dependent: :destroy
