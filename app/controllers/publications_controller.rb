@@ -20,12 +20,6 @@ class PublicationsController < ApplicationController
   end
 
   def new
-    @publication = Publication.new
-    @publication.publication_detail = PublicationDetail.new
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def edit

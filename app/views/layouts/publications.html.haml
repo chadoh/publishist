@@ -1,37 +1,17 @@
 !!!
 %html
   %head
-    - @content_for_title ||= 'Publishist'
-    %title= @content_for_title
-    = stylesheet_link_tag 'application', :media => 'screen, projection'
-    = stylesheet_link_tag 'print', :media => 'print'
+    %title Publishist
+    = stylesheet_link_tag 'application'
     /[if lt IE 8]
       = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
     = javascript_include_tag 'application'
     = csrf_meta_tag
     = yield :head
   %body
-    #page
+    #page(style="text-align: center")
       %header{ :role => 'banner' }
         %h1 Publishist
-        %p You shouldn't be on this page. DNS should prevent it.
-      - if flash[:notice]
-        #notice= flash[:notice]
-      - if flash[:alert]
-        #notice= flash[:alert]
-      %article{ :id => "#{@article_id}", :role => 'main', :class => [!content_for?(:sidebar) && 'full-width', params[:controller]] }
-        %header
-          - if @content_for_page_heading
-            %h1{ :class => params[:controller] == 'submissions' && params[:action] == 'show' && 'nocaps' }<
-              = @content_for_page_heading
-          - if content_for? :header
-            %div
-              = yield :header
+        %p Organize your literary community. Inspire your world.
+      %article{ role: 'main', style: "float: none; display: inline-block" }
         = yield
-      - if content_for? :sidebar
-        %section.sidebar{ :id => "#{@article_id}-sidebar" }
-          = yield :sidebar
-    - if protect_against_forgery?
-      :javascript
-        var AUTH_TOKEN = #{form_authenticity_token.inspect};
-    = yield :javascript

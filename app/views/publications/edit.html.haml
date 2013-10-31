@@ -1,5 +1,39 @@
 - title t('.title')
-%p
-  = link_to t('back'), publications_path
-  = link_to t('show'), @publication
-= render 'form'
+= simple_form_for @publication, html_options: { action: publications_path(subdomain: '') } do |f|
+  - if @publication.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@publication.errors.count, "error")
+        prohibited this publication from being saved:
+
+      %ul
+      - @publication.errors.full_messages.each do |msg|
+        %li= msg
+
+  .inputs
+    = f.input :name
+    = f.input :tagline
+    = f.input :meta_description,
+      as: :text,
+      hint: "This is what Google, etc display in search results. Check out #{link_to "these pro tips", "http://searchenginewatch.com/article/2067564/How-To-Use-HTML-Meta-Tags", "data-target" => "new"}.",
+      input_html: { style: "height: 3.8em" }
+    = f.simple_fields_for :publication_detail do |deets|
+      = deets.input :about
+
+  .actions
+    = f.button :submit, "Save"
+
+  .inputs
+    %br
+    %br
+    %h2 Danger Zone
+    %p.error Warning! Changing this stuff will change the URL used to visit your Publishist website. People may no longer be able to get to it! Make sure you know what you're doing.
+    - subdomain_warning = "Changing this will break all links to #{link_to "#{@publication.subdomain}.publishist.com", root_url(subdomain: @publication.subdomain), "data-target" => "new"}"
+    - subdomain_warning += " and require reconfiguring your custom domain" if @publication.custom_domain
+    = f.input :subdomain,
+      hint: subdomain_warning
+    = f.input :custom_domain,
+      hint: "Check out our #{link_to "guide to using a custom domain with your Publishist site", "http://publishist.com/custom-domains.html?subdomain=#{@publication.subdomain}", "data-target" => "new"}."
+
+  .actions
+    = f.button :submit, "Save"

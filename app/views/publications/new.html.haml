@@ -1,3 +1,5 @@
-- title t('.title')
-%p= link_to t('back'), publications_path
-= render 'form'
+%p Welcome! You're minutes away from easier publication management than you ever dreamed possible.
+= form_tag publications_path do
+  = text_field_tag :editor_email, nil, placeholder: "Your email address", autocomplete: "off"
+  = text_field_tag :publication_name, nil, placeholder: "Name of your publication", autocomplete: "off"
+  = submit_tag "Try it out now!"

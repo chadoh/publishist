@@ -1,6 +1,10 @@
 Pc::Application.routes.draw do
 
+  get "" => "publications#new", constraints: { subdomain: 'secret-sign-up' }
+
   constraints subdomain: /.+/ do
+    resources :publications, except: [:index, :new]
+
     as :person do
       put "/person/confirmation" => "confirmations#update", as: :update_user_confirmation
     end
@@ -61,7 +65,5 @@ Pc::Application.routes.draw do
     get "" => "publications#show"
   end # subdomain
 
-  resources :publications, except: [:index, :show]
-  get "" => "publications#show"
   root to: "publications#show"
 end
