@@ -43,10 +43,12 @@ the "Features" in the `features` directory.
 To start the app locally and run it in your browser, first you'll need to:
 
     rake db:setup
+    echo RACK_ENV=development > .env && echo PORT=3000 >> .env
 
 (If you haven't already.) This creates the database, loads in the schema from
 `db/schema.rb`, then runs `rake db:seed` which loads in all of the data from
-`db/seeds.rb`.
+`db/seeds.rb`. Then it creates a ".env" app that is used by Unicorn but not
+commited in git.
 
 Then, run
 

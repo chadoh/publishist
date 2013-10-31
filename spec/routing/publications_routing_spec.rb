@@ -31,10 +31,10 @@ describe PublicationsController do
         expect(delete "#{domain}/publications/1").to route_to("publications#destroy", :id => "1")
       end
     end
-    context "when given a subdomain of 'secret_sign_up'" do
+    context "when given a subdomain of 'secret-sign-up'" do
       let(:domain) { "http://secret-sign-up.example.com" }
       it "routes to #new at /" do
-        expect(get "#{domain}/publications/new").to route_to("publications#new")
+        expect(get "#{domain}/").to route_to("publications#new")
       end
     end
     context "when given no subdomain" do
