@@ -1,14 +1,26 @@
 class Homepage
   def initialize(publication)
-    magazine = publication.magazines.published.order("random()").first
+    magazine = magazine_for(publication)
     @hook = nil unless magazine
-    defined?(@hook) or @hook = loop do
-      hook = magazine.submissions.published.order("random()").first
-      break hook unless hook.photo?
-    end
+    defined?(@hook) or @hook = submission_for(magazine)
   end
 
   def hook(&block)
     yield(@hook) if @hook
   end
+
+  private
+
+    def magazine_for(publication)
+      publication.magazines.
+        published.
+        order("random()").first
+    end
+
+    def submission_for(magazine)
+      magazine.submissions.
+        published.
+        where("photo_file_name IS NULL").
+        order("random()").first
+    end
 end
