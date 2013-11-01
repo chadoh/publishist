@@ -17,4 +17,13 @@ describe "Publications" do
       expect { visit root_url(subdomain: "nonsense") }.to raise_error(ActionController::RoutingError)
     end
   end
+  describe "POST some-subdomain.publishist.com" do
+    it "creates a publication and an editor for that publication" do
+      post "http://whatever.publishist.com/publications", publication_name: "Fancy Prance", editor_email: "hello@there.you"
+      expect(Publcation.count).to eq 1
+      expect(Person.count).to eq 1
+      expect(response.path).to eq "/"
+      expect(response.body).to match "hello@there.you"
+    end
+  end
 end
