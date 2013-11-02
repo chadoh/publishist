@@ -27,7 +27,10 @@ class PublicationsController < ApplicationController
   end
 
   def create
-    publication = PublicationCreator.new(params).create_publication
+    creator = PublicationCreator.new(params)
+    publication = creator.create_publication
+    editor = creator.create_editor
+    sign_in editor, bypass: true
     redirect_to root_url(subdomain: publication.subdomain)
   end
 

@@ -19,7 +19,6 @@ class Person < ActiveRecord::Base
   has_many :position_abilities, through:     :positions
   has_many :abilities,          through:     :position_abilities
 
-  validates_presence_of :first_name
   validates_presence_of :email
 
   extend FriendlyId
@@ -29,7 +28,11 @@ class Person < ActiveRecord::Base
   gravtastic :size => 200, :default => "http://s3.amazonaws.com/pcmag/children.png", :rating => 'R'
 
   def full_name
-    [first_name, middle_name, last_name].reject{|n| n.blank? }.join(' ')
+    if first_name || middle_name || last_name
+      [first_name, middle_name, last_name].reject(&:blank?).join(' ')
+    else
+      email
+    end
   end
   alias :name :full_name
 

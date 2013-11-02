@@ -18,11 +18,16 @@ describe "Publications" do
     end
   end
   describe "POST some-subdomain.publishist.com" do
+    before do
+      post "http://whatever.publishist.dev/publications", "publication_name" => "Fancy Prance", "editor_email" => "hello@there.you"
+    end
     it "creates a publication and an editor for that publication" do
-      post "http://whatever.publishist.com/publications", publication_name: "Fancy Prance", editor_email: "hello@there.you"
-      expect(Publcation.count).to eq 1
+      expect(Publication.count).to eq 1
       expect(Person.count).to eq 1
-      expect(response.path).to eq "/"
+    end
+    it "signs in the newly created editor" do
+      expect(response).to redirect_to("http://fancyprance.publishist.dev/")
+      follow_redirect!
       expect(response.body).to match "hello@there.you"
     end
   end

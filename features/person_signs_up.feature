@@ -19,7 +19,7 @@ Feature: a person signs up for the website
       | Name                            | Ghengis Khan        |
       | Email                           | example@example.com |
     And I press "Sign Up!"
-    Then I should see "Ok! Now go check your email to finish signing up."
+    Then I should see "Welcome! Enjoy a look around"
     And I should receive an email with subject "You're nearly signed up!"
 
     When I open the email
