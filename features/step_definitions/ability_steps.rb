@@ -39,8 +39,8 @@ Given /^I'm in a position for the current magazine with the "([^"]+)" and "([^"]
     accepts_submissions_until: 3.months.from_now,
     publication: Publication.first
   )
-  @ability1 = Ability.create key: key1, description: "#{key1}s stuff"
-  @ability2 = Ability.create key: key2, description: "#{key2}s stuff"
+  @ability1 = Ability.create key: key1, description: "#{key1} stuff"
+  @ability2 = Ability.create key: key2, description: "#{key2} stuff"
   @position = @magazine.positions.create name: 'Kitten', abilities: [@ability1, @ability2]
   @person.positions << @position
   visit '/sign_in'

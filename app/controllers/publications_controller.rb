@@ -30,8 +30,11 @@ class PublicationsController < ApplicationController
     creator = PublicationCreator.new(params)
     publication = creator.create_publication
     editor = creator.create_editor
-    sign_in editor, bypass: true
-    redirect_to root_url(subdomain: publication.subdomain)
+    SampleDataCreator.new(publication: publication, editor: editor).seed_data
+    sign_in editor
+    redirect_to root_url(subdomain: publication.subdomain),
+      notice: "Welcome! We're seeding some sample data so you have something to
+      look at. In the meantime, you've got some new email from us. :-)"
   end
 
   def update

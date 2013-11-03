@@ -7,6 +7,7 @@ describe Publication do
     should have_many(:submissions).dependent(:destroy)
     should have_many(:people)
     should have_one(:publication_detail).dependent(:destroy)
+    should have_many(:meetings).through(:magazines)
   }
   [:address,
    :latitude,
@@ -19,15 +20,15 @@ describe Publication do
     end
   end
 
-  describe ".editor" do
+  describe "#editor" do
     let(:publication) { Factory.create :publication }
     let(:ability) { Factory :ability, key: "communicates" }
     let(:mag1) { publication.magazines.create title: 'first', accepts_submissions_from: 1.week.ago }
     let(:mag2) { publication.magazines.create title: 'second' }
     let(:pos1) { mag1.positions.create name:  'Editor', abilities: [ability] }
     let(:pos2) { mag2.positions.create name:  'Editor', abilities: [ability] }
-    let(:per1) { Person  .create name:  'sir roderick', email: 'roderick@example.com' }
-    let(:per2) { Person  .create name:  'ser roderick', email: 'serroderick@example.com' }
+    let(:per1) { Person  .create name:  'sir roderick', email: 'roderick@example.com', primary_publication: publication }
+    let(:per2) { Person  .create name:  'ser roderick', email: 'serroderick@example.com', primary_publication: publication }
     context "when the publication's most recent magazine has at least one person with the 'communicates' ability" do
       it "returns that person" do
         pos1.people << per1
@@ -43,10 +44,16 @@ describe Publication do
       end
     end
     context "when there are no communicators" do
-      it "raises an error saying so" do
+      it "returns the first person in the publication" do
+        mag1; mag2; per1 # instantiate
+        expect(publication.editor).to eq per1
+      end
+    end
+    context "when there are no communicators and, somehow, no people!" do
+      it "gracefully returns an OpenStruct that has an email method" do
         mag1; mag2 # instantiate
         expect(publication.editor).to be_kind_of(OpenStruct)
-        expect(publication.editor.email).to match("publishist.com")
+        expect(publication.editor.email).to match "@publishist.com"
       end
     end
   end

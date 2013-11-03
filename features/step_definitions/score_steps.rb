@@ -4,13 +4,13 @@ end
 Given(/^I attend the first meeting$/) do
   Attendee.create(
     :meeting => first_meeting,
-    :person => Person.first)
+    :person => @person)
 end
 
 Given(/^I and (\d) more people attend the first meeting$/) do |number|
   att = Attendee.create(
     :meeting => first_meeting,
-    :person => Person.first)
+    :person => @person)
   number.to_i.times do
     Attendee.create(
       :meeting => first_meeting,

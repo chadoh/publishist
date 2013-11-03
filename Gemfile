@@ -27,13 +27,13 @@ gem 'paperclip'
 
 # Models
 gem 'acts_as_list'
-gem 'delayed_job_active_record'
 gem 'devise', '~> 1.5.0'
 gem 'escape_utils'
 gem 'foreigner'
 gem 'memoist'
 gem 'oa-core'
-gem 'workless' # automatically start & stop workers (on Heroku or locally) for DJ
+gem 'delayed_job_active_record'
+gem 'workless', '~> 1.1.3' # automatically start & stop workers (on Heroku or locally) for DJ
 
 # Mailers
 gem 'handlers', :git => "git://github.com/chadoh/handlers.git"
@@ -58,6 +58,10 @@ gem 'wysihtml5-rails'
 
 group :development, :test do
   gem 'rspec-rails'
+end
+
+group :development do
+  gem 'daemons' # for running DJ
 end
 
 group :test do

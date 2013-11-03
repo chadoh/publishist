@@ -14,10 +14,10 @@ class MeetingsController < InheritedResources::Base
   respond_to :html
 
   def index
-    @magazines = current_person.magazines_with_meetings
+    @magazines = current_person.magazines.with_meetings
     @magazine = params[:m].present? ? Magazine.find(params[:m]) : @magazines.first
     must_view @magazine if @magazine
-    @meetings = @magazine.present? ? @magazine.meetings : Meeting.all
+    @meetings = @magazine.present? ? @magazine.meetings : @publication.meetings
   end
 
   def show

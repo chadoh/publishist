@@ -6,7 +6,13 @@
       = link_to "Read More", magazine_page_path(hook.magazine, hook.page), class: "read-more"
     %footer
       – #{link_to strip_tags(hook.title), magazine_page_path(hook.magazine, hook.page)}
-      by #{link_to hook.author, hook.author}
+      by
+      %span.author
+        - if !!hook.author
+          = link_to_if !current_page?(hook.author) && hook.pseudonym_link,
+              hook.author_name, hook.author, class: 'name'
+        - else
+          = hook.author_name
       %br
       published in #{link_to hook.magazine, hook.magazine}
 

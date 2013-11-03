@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'publication_creator'
 
 describe PublicationCreator do
   let(:publication_name) { "Fancy Prance" }

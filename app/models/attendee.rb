@@ -1,17 +1,3 @@
-# == Schema Information
-# Schema version: 20110516234654
-#
-# Table name: attendees
-#
-#  id          :integer         not null, primary key
-#  meeting_id  :integer
-#  person_id   :integer
-#  answer      :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#  person_name :string(255)
-#
-
 class Attendee < ActiveRecord::Base
   belongs_to :meeting
   belongs_to :person

@@ -18,7 +18,7 @@ class PublicationCreator
   alias :publication :create_publication
 
   def create_editor
-    Person.create(
+    @editor ||= Person.create(
       email: editor_email,
       primary_publication: publication
     )
@@ -33,7 +33,7 @@ class PublicationCreator
     end
 
     def publication_description
-      "#{publication_name} is an awesome organization because we're made up of awesome people. We hope you like what you find."
+      "#{publication_name} is an awesome publication because we're made up of awesome people. We hope you like what you find."
     end
 
 end

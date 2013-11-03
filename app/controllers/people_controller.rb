@@ -47,7 +47,7 @@ class PeopleController < InheritedResources::Base
     @from = Person.find(params[:contact_person][:from])
     @subject = params[:contact_person][:subject]
     @message = params[:contact_person][:message]
-    Communications.contact_person(@to, @from, @subject, @message).deliver
+    Communications.delay.contact_person(@to, @from, @subject, @message)
     flash[:notice] = "Your message has been sent!"
     redirect_to person_url(@to, subdomain: @publication.subdomain)
   end

@@ -52,18 +52,13 @@ disappears =   Ability.find_or_create_by_key_and_description 'disappears', "Subm
   mag1.update_attributes(
     :accepts_submissions_from  => Time.zone.now - 13.months,
     :accepts_submissions_until => Time.zone.now - 7.months,
-    :publication_id => publication.id
   )
   mag2 = Magazine.find_or_create_by_nickname_and_title_and_publication_id('almost published', "#{publication.name} vol. 2", publication.id)
   mag2.update_attributes(
     :accepts_submissions_from  => Time.zone.now - 7.months + 1.day,
     :accepts_submissions_until => Time.zone.now - 1.month,
-    :publication_id => publication.id
   )
   mag3 = Magazine.find_or_create_by_nickname_and_title_and_publication_id('next', "#{publication.name} vol. 3", publication.id)
-  mag3.update_attributes(
-    :publication_id => publication.id
-  )
 
   saturnus = Submission.find_or_create_by_author_id_and_magazine_id(person1.id, mag3.id)
   saturnus.update_attributes(

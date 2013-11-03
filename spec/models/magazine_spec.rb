@@ -23,6 +23,15 @@ describe Magazine do
     end
   end
 
+  describe ".with_meetings" do
+    let!(:magazine1) { Factory.create(:magazine) }
+    let!(:magazine2) { Factory.create(:magazine) }
+    let!(:meeting)   { Factory.create(:meeting, magazine: magazine1) }
+    it "returns magazines with meetings & not those without" do
+      expect(Magazine.with_meetings).to eq [magazine1]
+    end
+  end
+
   describe "#accepts_submissions_from" do
     context "when this is the first magazine" do
       it "defaults to today" do

@@ -30,26 +30,6 @@ describe Person do
     end
   end
 
-  describe "#magazines_with_meetings" do
-    it "returns magazines for which I have some ability, and not those for which I don't, but only those which have meetings" do
-      ability = Ability.create key: 'scores', description: 'communicates things'
-      mag1 = Magazine.create title: 'first'
-      mag2 = Magazine.create title: 'second'
-      mag3 = Magazine.create title: 'third'
-      mag2.meetings.create datetime: Time.now
-      mag3.meetings.create datetime: Time.now
-      pos1 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag1
-      pos1 = Position.create name:  'Editor',   abilities: [ability], magazine: mag1
-      pos2 = Position.create name:  'Editor',   abilities: [ability], magazine: mag1
-      pos3 = Position.create name:  'Editor',   abilities: [ability], magazine: mag3
-      per1 = Person  .create name:  'sir roderick', email: 'roderick@example.com'
-      pos1.people << per1
-      pos2.people << per1
-      pos3.people << per1
-      per1.magazines_with_meetings.should == [mag3]
-    end
-  end
-
   describe "#name_and_email" do
     it "formats someone's name as 'first last, email@ddress'" do
       person = Person.create(

@@ -18,6 +18,7 @@ class Person < ActiveRecord::Base
   has_many :positions,          through:     :roles
   has_many :position_abilities, through:     :positions
   has_many :abilities,          through:     :position_abilities
+  has_many :magazines,          through:     :positions, uniq: true
 
   validates_presence_of :email
 
@@ -65,14 +66,6 @@ class Person < ActiveRecord::Base
 
   def to_s
     name
-  end
-
-  def magazines
-    self.position_abilities.collect(&:magazine).flatten.uniq
-  end
-
-  def magazines_with_meetings
-    magazines.reject{|m| m.meetings.empty? }.sort_by(&:accepts_submissions_from).reverse
   end
 
   # function to set the password without knowing the current password used in our confirmation controller.

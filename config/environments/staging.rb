@@ -61,4 +61,8 @@ Pc::Application.configure do
   # config.assets.manifest = YOUR_PATH
 
   config.assets.js_compressor  = :uglifier
+
+  config.after_initialize do
+    Delayed::Job.scaler = :heroku_cedar
+  end
 end
