@@ -1,4 +1,6 @@
 class ConfirmationsController < Devise::PasswordsController
+  skip_before_filter :require_no_authentication
+
   # PUT /person/confirmation
   def update
     with_unconfirmed_confirmable do
@@ -16,7 +18,6 @@ class ConfirmationsController < Devise::PasswordsController
     end
 
     if !@confirmable.errors.empty?
-      p @confirmable.errors
       render_with_scope :new
     end
   end

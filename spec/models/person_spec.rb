@@ -8,7 +8,7 @@ describe Person do
     should belong_to(:primary_publication)
     should have_many(:attendees)
     should have_many(:meetings).through(:attendees)
-    should validate_presence_of(:first_name)
+    should validate_presence_of(:email)
     should have_many(:roles).dependent(:destroy)
     should have_many(:positions).through(:roles)
     should have_many(:position_abilities).through(:positions)
@@ -27,26 +27,6 @@ describe Person do
       pos1.people << per1
       pos2.people << per1
       per1.magazines.should == [mag1]
-    end
-  end
-
-  describe "#magazines_with_meetings" do
-    it "returns magazines for which I have some ability, and not those for which I don't, but only those which have meetings" do
-      ability = Ability.create key: 'scores', description: 'communicates things'
-      mag1 = Magazine.create title: 'first'
-      mag2 = Magazine.create title: 'second'
-      mag3 = Magazine.create title: 'third'
-      mag2.meetings.create datetime: Time.now
-      mag3.meetings.create datetime: Time.now
-      pos1 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag1
-      pos1 = Position.create name:  'Editor',   abilities: [ability], magazine: mag1
-      pos2 = Position.create name:  'Editor',   abilities: [ability], magazine: mag1
-      pos3 = Position.create name:  'Editor',   abilities: [ability], magazine: mag3
-      per1 = Person  .create name:  'sir roderick', email: 'roderick@example.com'
-      pos1.people << per1
-      pos2.people << per1
-      pos3.people << per1
-      per1.magazines_with_meetings.should == [mag3]
     end
   end
 
@@ -85,6 +65,38 @@ describe Person do
       person.first_name.should == 'Wes'
       person.middle_name.should == "Thomas A. 'Neo'"
       person.last_name.should == 'Anderson'
+    end
+  end
+
+  describe "#name" do
+    let(:first_name) { "Tucker" }
+    let(:middle_name) { "Adrian" }
+    let(:last_name) { "Watts" }
+    let(:email) { "tucker@gmale.com" }
+    let(:person) { Person.new(attributes) }
+    context "when they only have a first_name" do
+      let(:attributes) { { first_name: first_name } }
+      it "returns only that" do
+        expect(person.name).to eq first_name
+      end
+    end
+    context "when they only have a last_name" do
+      let(:attributes) { { last_name: last_name } }
+      it "returns only that" do
+        expect(person.name).to eq last_name
+      end
+    end
+    context "when they have a first, middle, & last name" do
+      let(:attributes) { { first_name: first_name, middle_name: middle_name, last_name: last_name } }
+      it "returns all three separated by spaces" do
+        expect(person.name).to eq "#{first_name} #{middle_name} #{last_name}"
+      end
+    end
+    context "when they have no name set" do
+      let(:attributes) { { email: email } }
+      it "returns their email address" do
+        expect(person.name).to eq email
+      end
     end
   end
 

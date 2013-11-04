@@ -61,6 +61,7 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Before do
   pc = Publication.create(:subdomain => 'pc', :name => 'Problem Child', :tagline => 'A Penn State Literary Magazine')
+  editor = Person.create(email: "editor@pubilishist.com", primary_publication: pc)
   pc.publication_detail = PublicationDetail.new(:about => 'woo')
   Capybara.default_host = "http://pc.example.com"
 

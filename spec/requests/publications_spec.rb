@@ -17,4 +17,28 @@ describe "Publications" do
       expect { visit root_url(subdomain: "nonsense") }.to raise_error(ActionController::RoutingError)
     end
   end
+  describe "POST some-subdomain.publishist.com" do
+    let(:email) { "hello@there.you" }
+    let(:name) { "Fancy Prance" }
+    let(:editor) { Person.find_by_email(email) }
+    let(:publication) { Publication.find_by_name(name) }
+    before do
+      post "http://whatever.publishist.dev/publications", "publication_name" => name, "editor_email" => email
+    end
+    it "creates a publication, an editor, sample data, and signs the editor in" do
+      expect(Publication.count).to eq 1
+      expect(publication.people.count).to eq 2
+
+      expect(response).to redirect_to("http://#{name.downcase.tr(' ','')}.publishist.dev/")
+      follow_redirect!
+      expect(response.body).to match email
+      expect(response.body).to match "seeding"
+
+      expect(publication.editor).to eq editor
+
+      expect(Magazine.count).not_to eq 0
+      expect(Submission.count).not_to eq 0
+      expect(Meeting.count).not_to eq 0
+    end
+  end
 end

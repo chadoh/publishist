@@ -44,6 +44,7 @@ class Magazine < ActiveRecord::Base
   default_scope order("accepts_submissions_until DESC")
   scope :unpublished, where(published_on: nil)
   scope :published, where("published_on IS NOT NULL AND notification_sent = true")
+  scope :with_meetings, where("EXISTS(SELECT 1 from meetings where magazines.id = meetings.magazine_id)")
 
   def submissions(flags = nil)
     if !self.published_on.present? || flags == :all

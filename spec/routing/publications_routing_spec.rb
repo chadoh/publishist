@@ -15,6 +15,10 @@ describe PublicationsController do
         expect(get "#{domain}/").to route_to("publications#show")
       end
 
+      it "does not route to #show at /publications/:id" do
+        expect(get "#{domain}/publications/1").not_to route_to("publications#show", id: "1")
+      end
+
       it "routes to #edit at /publications/:id/edit" do
         expect(get "#{domain}/publications/1/edit").to route_to("publications#edit", id: "1")
       end

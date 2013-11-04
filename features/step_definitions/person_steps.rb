@@ -33,14 +33,14 @@ Given /^I (?:am signed|sign) out$/ do
 end
 
 Given /^I have an account but am not signed in$/ do
-  person = Person.create(
+  @person = Person.create(
     first_name:            "example@example.com",
     email:                 "example@example.com",
     password:              "secret",
     password_confirmation: "secret",
     primary_publication: Publication.first
   )
-  person.confirm!
+  @person.confirm!
 end
 
 Then /^there should be no new users$/ do

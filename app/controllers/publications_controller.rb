@@ -1,14 +1,14 @@
 require 'homepage'
 
 class PublicationsController < ApplicationController
-  before_filter :except => [:show, :new] do |c|
+  before_filter :except => [:show, :new, :create] do |c|
     c.must_orchestrate @publication
   end
 
   respond_to :html
   layout 'application', only: [:show, :edit]
 
-  skip_before_filter :find_publication, only: [:show, :new]
+  skip_before_filter :find_publication, only: [:show, :new, :create]
 
   def show
     @publication = current_publication
@@ -27,15 +27,14 @@ class PublicationsController < ApplicationController
   end
 
   def create
-    @publication = Publication.new(params[:publication])
-
-    respond_to do |format|
-      if @publication.save
-        format.html { redirect_to root_url(subdomain: @publication.subdomain) }
-      else
-        format.html { render action: "new" }
-      end
-    end
+    creator = PublicationCreator.new(params)
+    publication = creator.create_publication
+    editor = creator.create_editor
+    SampleDataCreator.new(publication: publication, editor: editor).seed_data
+    sign_in editor
+    redirect_to root_url(subdomain: publication.subdomain),
+      notice: "Welcome! We're seeding some sample data so you have something to
+      look at. In the meantime, you've got some new email from us. :-)"
   end
 
   def update
