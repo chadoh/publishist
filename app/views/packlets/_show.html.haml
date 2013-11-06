@@ -1,7 +1,7 @@
 %li.collapsed[packlet]
   - if orchestrates? packlet.meeting
     %span.drag-handle-wrap
-      %span.drag-handle.icon-reorder
+      %span.drag-handle.fa.fa-bars
   %header
     %a{ :href => submission_url(packlet.submission) }
       %h2.nocaps= sanitize packlet.submission.title

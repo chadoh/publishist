@@ -5,9 +5,9 @@
     - for page in @magazine.pages
       - if orchestrates?(@magazine) || page.has_content?
         - if page == @page && orchestrates?(@magazine)
-          %li[page]{ contenteditable: 'true', data: { model: "page", attribute: "title", path: magazine_page_path(@magazine, page), original: page.title } }<
+          %li[page]<
             = page.title
-            = link_to t('destroy').html_safe, [@magazine, page],
+            = link_to fa_icon("times"), [@magazine, page],
                              :method => :delete,
                              :class => "link",
                              :title => "Remove this page (its content will go to the next page)"
