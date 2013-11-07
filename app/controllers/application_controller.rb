@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
 
   def set_tips
     @tips = PageTips.new("#{params[:controller]}##{params[:action]}", current_person, @show_conditional_tips).tips
+    @show_tips_at_page_load = css_display_for_tips
   end
 
   protected
@@ -55,6 +56,14 @@ class ApplicationController < ActionController::Base
 
     def not_found
       raise ActionController::RoutingError.new('Not Found')
+    end
+
+    def css_display_for_tips
+      if @tips && current_person.show_tips_at_page_load
+        "block"
+      else
+        "none"
+      end
     end
 
 end

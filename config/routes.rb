@@ -20,7 +20,10 @@ Pc::Application.routes.draw do
     end
 
     resources :people, except: [:index, :new] do
-      member { post "contact" }
+      member do
+        post "contact"
+        post "toggle_default_tips", as: "toggle_default_tips_for"
+      end
       collection { get "autocomplete" }
     end
 
