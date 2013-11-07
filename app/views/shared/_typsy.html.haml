@@ -1,0 +1,13 @@
+- if @tips
+  .tips{ "data-behavior" => "typsy-toggle" }
+    = link_to fa_icon("question-circle"), "#toggle-tips"
+  .tip-container{ "data-behavior" => "typsy-container" }
+    %ol
+      = render "shared/each_tip"
+    .actions
+      %small
+        = check_box_tag "show_by_default", true, true
+        %label(for="show_by_default") Show these tips at page load
+      %span.right
+        %button{ "data-behavior" => "typsy-toggle" }
+          OK

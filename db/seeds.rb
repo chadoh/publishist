@@ -53,7 +53,7 @@ disappears =   Ability.find_or_create_by_key_and_description 'disappears', "Subm
     :accepts_submissions_from  => Time.zone.now - 13.months,
     :accepts_submissions_until => Time.zone.now - 7.months,
   )
-  mag2 = Magazine.find_or_create_by_nickname_and_title_and_publication_id('almost published', "#{publication.name} vol. 2", publication.id)
+  mag2 = Magazine.find_or_create_by_nickname_and_title_and_publication_id('could be published', "#{publication.name} vol. 2", publication.id)
   mag2.update_attributes(
     :accepts_submissions_from  => Time.zone.now - 7.months + 1.day,
     :accepts_submissions_until => Time.zone.now - 1.month,
@@ -168,7 +168,6 @@ disappears =   Ability.find_or_create_by_key_and_description 'disappears', "Subm
   score.update_attributes(:amount => 5)
   score = Score.find_or_create_by_packlet_id_and_attendee_id(packlet.id, attendee3.id)
   score.update_attributes(:amount => 5, :entered_by_coeditor => true)
-  mag2.publish([hold])
 
   ###############
   ### ISSUE 3 ###

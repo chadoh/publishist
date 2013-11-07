@@ -1,5 +1,3 @@
-require 'homepage'
-
 class PublicationsController < ApplicationController
   before_filter :except => [:show, :new, :create] do |c|
     c.must_orchestrate @publication
@@ -13,6 +11,8 @@ class PublicationsController < ApplicationController
   def show
     @publication = current_publication
     @homepage = Homepage.new(@publication)
+    @show_conditional_tips = !!@homepage.hook_present?
+    set_tips
 
     respond_to do |format|
       format.html

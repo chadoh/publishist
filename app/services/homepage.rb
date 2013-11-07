@@ -9,6 +9,10 @@ class Homepage
     yield(@hook) if @hook
   end
 
+  def hook_present?
+    !!@hook
+  end
+
   private
 
     def magazine_for(publication)

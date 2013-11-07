@@ -19,6 +19,8 @@ class MagazinesController < InheritedResources::Base
                  else
                    @publication.magazines.where('published_on IS NOT NULL')
                  end
+    @show_conditional_tips = @magazines.any?(&:timeframe_freshly_over?)
+    set_tips
   end
 
   def new

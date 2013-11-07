@@ -98,14 +98,12 @@ class Person < ActiveRecord::Base
   # ABILITIES
   #
 
-  def communicates? resource, *flags
-    resource = primary_publication if resource.nil?
+  def communicates? resource = primary_publication, *flags
     positions = positions_for resource, *flags
     positions.joins(:abilities).where(:abilities => { :key => "communicates" }).present?
   end
 
-  def orchestrates? resource, *flags
-    resource = primary_publication if resource.nil?
+  def orchestrates? resource = primary_publication, *flags
     positions = positions_for(resource, *flags)
     positions.joins(:abilities).where(:abilities => { :key => "orchestrates" }).present?
   end

@@ -551,4 +551,31 @@ describe Magazine do
     end
   end
 
+  describe "#timeframe_freshly_over?" do
+    let(:magazine) { stub_model(Magazine, published_on: nil) }
+
+    context "when published_on is nil" do
+      context "when #accepts_submissions_until is in the past" do
+        it "returns true" do
+          magazine.stub(:accepts_submissions_until).and_return(Time.zone.now - 1.minute)
+          expect(magazine.timeframe_freshly_over?).to be_true
+        end
+      end
+      context "when #accepts_submissions_until is in the future" do
+        it "returns false" do
+          magazine.stub(:accepts_submissions_until).and_return(Time.zone.now + 1.minute)
+          expect(magazine.timeframe_freshly_over?).to be_false
+        end
+      end
+    end
+
+    context "when published_on is present" do
+      it "returns false, even when #accepts_submissions_from is in the past" do
+        magazine.stub(:published_on).and_return(Time.zone.now)
+        magazine.stub(:accepts_submissions_until).and_return(Time.zone.now - 1.minute)
+        expect(magazine.timeframe_freshly_over?).to be_false
+      end
+    end
+  end
+
 end

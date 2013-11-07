@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :reset_return_to_maybe
   before_filter :find_publication
+  before_filter :set_tips
 
   def reset_return_to_maybe
     if session[:return_to]
@@ -17,6 +18,10 @@ class ApplicationController < ActionController::Base
 
   def find_publication
     @publication = current_publication
+  end
+
+  def set_tips
+    @tips = PageTips.new("#{params[:controller]}##{params[:action]}", current_person, @show_conditional_tips).tips
   end
 
   protected

@@ -98,6 +98,7 @@ a.mailto
 
   & > article
     +span-columns($article)
+    position: relative
     &.full-width
       +span-columns($total-columns)
 
@@ -732,3 +733,42 @@ article.magazines ol.submissions li.collapsed.submission
   left: -3000em
   *
     height: 0
+
+.tips
+  position: absolute
+  right: 0
+  top: 0
+  z-index: 2
+  a
+    color: $base
+.tip-container
+  border: 1px solid $lgray
+  border-radius: 0.5em
+  box-shadow: 1px 3px 15px rgba(0,0,0,0.3)
+  background-color: white
+  padding: 1em 0 0
+  position: absolute
+  right: 0
+  top: 4px
+  width: 25em
+  z-index: 1
+  ol
+    list-style-type: none
+    margin: 0
+  .fa, .tip-text, .actions > *
+    +inline-block
+    vertical-align: middle
+  .fa
+    width: 13%
+  .tip-text
+    width: 85%
+  li:not(:last-child)
+    margin-bottom: 1em
+  .actions
+    padding: 1em 1em 0.5em
+    label, button
+      font-weight: normal
+      display: inline
+    button
+      padding: 0 0.6em
+      margin: 0
