@@ -29,8 +29,13 @@ class PageTips
     when "magazines#staff_list"
       { "This is your main command center. All of the permissions for the whole website are based on what's on these staff lists; controlled issue-by-issue." => "info",
         "Mouse over the little circular letters next to the name of each position to see what abilities people in that position have." => "info",
-        "You can edit the abilities for a position by clicking the pencil icons. You can also rename positions that way." => "info",
+        "You don't have to name your positions this way. Each issue can have uniquely-named positions, and different permission structures. Click the pencil icons to see." => "info",
         "To keep everything from breaking, if someone has the \"orchestrates\" ability for an issue, they'll be able to edit the staff lists of adjacent issues." => "info"
+      }
+    when "meetings#index"
+      { "Publishist encourages you to have regularly-scheduled, real-life meetings of your staff where you read submissions aloud, discuss, and score them." => "info",
+        "You don't have to do that, but be aware that scores can only be entered from a meeting's page, so you'll have to at least pretend you have coordinated meetings." => "info",
+        "Each meeting has a \"Question\". Answering a creative question makes roll call way more fun." => "info",
       }
     end
     tips = remove_conditional(tips) unless @include_conditional_tips

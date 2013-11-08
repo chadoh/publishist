@@ -74,8 +74,8 @@ a.mailto
     +box-shadow($lgray 0 0 3px inset)
     width: 100%
     background-color: $blue
+    position: relative
     text-align: center
-    +opacity(0.9)
     +border-radius(20px 0)
     margin:
       left: 0
@@ -98,7 +98,6 @@ a.mailto
 
   & > article
     +span-columns($article)
-    position: relative
     &.full-width
       +span-columns($total-columns)
 
@@ -735,9 +734,9 @@ article.magazines ol.submissions li.collapsed.submission
     height: 0
 
 .tips
+  line-height: 1.9em // somehow fixes the position??
   position: absolute
   right: 0
-  top: 0
   z-index: 2
   a
     color: $base
@@ -749,7 +748,7 @@ article.magazines ol.submissions li.collapsed.submission
   padding: 1em 0 0
   position: absolute
   right: 0
-  top: 4px
+  text-align: left
   width: 25em
   z-index: 1
   ol
@@ -759,9 +758,9 @@ article.magazines ol.submissions li.collapsed.submission
     +inline-block
     vertical-align: middle
   .fa
-    width: 13%
+    width: 11%
   .tip-text
-    width: 80%
+    width: 83%
   li:not(:last-child)
     margin-bottom: 1em
   .actions

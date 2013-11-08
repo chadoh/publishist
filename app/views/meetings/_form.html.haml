@@ -3,7 +3,7 @@
 
   = f.input :datetime, :label => "When", :as => :string, :input_html => { :value => (resource.datetime ? resource.datetime.strftime("%Y-%m-%d %I:%M %p") : nil) }
   = f.input :question
-  = f.association :magazine, :label_method => :present_name
+  = f.association :magazine, :label_method => :present_name, collection: @publication.magazines
   = f.button :submit
 
 = content_for :javascript do
