@@ -10,12 +10,21 @@ class PageTips
 
     tips = case @page
     when "publications#show"
-      { "This is your home page. You can edit the content on it with the link at the bottom." => "info",
-        "This page features one of your published works, randomly selected on each page load." => "key",
+      { "This page features one of your published works, randomly selected on each page load." => "key",
+        "This is your home page. You can edit the content on it with the link at the bottom." => "info",
       }
     when "magazines#index"
-      { "Click 'Staff List' for any issue to fine-tune who can view submissions' authors, scores, and meetings for that issue." => "info",
-        "It looks like an issue's submission period is over, so you can review its highest-scored submissions." => "key"
+      { "It looks like an issue's submission period is over, so you can review its highest-scored submissions." => "key",
+        "Click 'Staff List' for any issue to fine-tune who can view submissions' authors, scores, and meetings for that issue." => "info",
+      }
+    when "magazines#highest_scores"
+      { "These are the highest-scored submissions for this issue. You can uncheck some, if you don't want them published." => "info",
+      }
+    when "pages#show"
+      { "This will not be publicly browsable until you click \"Let everyone who submitted know it's been published\"." => "key",
+        "Use the inline controls in the pagination to add & remove pages." => "info",
+        "You can click the right edge of a submission and drag to a new page (note: it will drop onto the page with the dotted outline, not necessarily the one you're moused over. :-/ )" => "info",
+        "Click the big plus at the bottom left to add notes or special items to pages." => "info",
       }
     end
     tips = remove_conditional(tips) unless @include_conditional_tips

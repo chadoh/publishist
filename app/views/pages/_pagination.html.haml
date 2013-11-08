@@ -1,10 +1,10 @@
 %nav.pagination<
   %ol.pages<
-    - if orchestrates? @magazine
+    - if orchestrates? @publication
       = render partial: "pages/form", locals: { position: :beginning }
     - for page in @magazine.pages
-      - if orchestrates?(@magazine) || page.has_content?
-        - if page == @page && orchestrates?(@magazine)
+      - if orchestrates?(@publication) || page.has_content?
+        - if page == @page && orchestrates?(@publication)
           %li[page]<
             = page.title
             = link_to fa_icon("times"), [@magazine, page],
@@ -14,5 +14,5 @@
         - else
           %li[page]<
             = link_to_unless page == @page, page.title, magazine_page_path(@magazine, page)
-    - if orchestrates? @magazine
+    - if orchestrates? @publication
       = render partial: "pages/form", locals: { position: :end }

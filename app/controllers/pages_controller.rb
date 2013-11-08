@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   respond_to :html
   respond_to :js, only: [:update, :add_submission]
 
+  include ApplicationHelper
+
   before_filter except: :show do |c|
     c.must_orchestrate @publication
   end
@@ -15,6 +17,8 @@ class PagesController < ApplicationController
       flash[:notice] = "That hasn't been published yet, check back soon!"
       redirect_to root_url(subdomain: @publication.subdomain) and return
     end
+    @show_conditional_tips = orchestrates?(@magazine) && !@magazine.notification_sent
+    set_tips
   end
 
   def create

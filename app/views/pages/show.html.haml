@@ -18,7 +18,7 @@
   - if submissions = @page.submissions
     = render "submissions/index", submissions: submissions
     - collapse_resources = true unless submissions.empty?
-  - if orchestrates? @magazine
+  - if orchestrates? @publication
     = render "add_resources", collapse: collapse_resources
   = render "pagination"
   - if orchestrates? @magazine and not @magazine.notification_sent?
