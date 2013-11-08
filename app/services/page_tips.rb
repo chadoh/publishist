@@ -50,6 +50,12 @@ class PageTips
         "If you want to re-review a submission at multiple meetings, drag it from the old meeting to the new one." => "info",
         "See a list of all the submissions for some other issue by clicking that issue in the sidebar." => "info",
       }
+    when "submissions#new"
+      { "Most people will be see \"Submit\" in the nav bar instead of \"Submissions\", so it will be easy for them to get here. You see \"Submissions\" because you have the \"orchestrates\" ability (see a magazine's staff list page to learn about abilities)." => "info",
+        "Anonymous, not-signed-in visitors can submit and will be signed up in the process." => "info",
+        "You can backfill old issues by submitting here as usual, but select the older issue from the list at the bottom." => "info",
+        "As you can see at the bottom, you can submit for anyone. This is because you have the \"communicates\" ability for an issue. (Again, visit a staff list to learn about abilities.)" => "key",
+      }
     end
     tips = remove_conditional(tips) unless @include_conditional_tips
     tips

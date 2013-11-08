@@ -6,6 +6,8 @@ class SubmissionsController < InheritedResources::Base
   end
   before_filter :ensure_current_url, :only => :show
 
+  include ApplicationHelper
+
   def index
     @magazines = current_person.magazines
     @magazine = @publication.magazines.where(id: params[:m]).first.presence || @publication.current_magazine
@@ -20,11 +22,6 @@ class SubmissionsController < InheritedResources::Base
   def show
     @submission = Submission.find(params[:id])
     @average = @submission.magazine.try(:average_score).presence
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @submission }
-    end
   end
 
   def new
@@ -36,10 +33,8 @@ class SubmissionsController < InheritedResources::Base
       @submission.extend HoneyPot
     end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @submission }
-    end
+    @show_conditional_tips = communicates? @publication
+    set_tips
   end
 
   def edit
