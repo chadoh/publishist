@@ -1,5 +1,5 @@
 - title @person.full_name
-- unless @person == current_person || @published.present?
+- if @person != current_person && @published.empty?
   = render :partial => 'about', :locals => { :person => @person }
 - else
   - content_for :sidebar do

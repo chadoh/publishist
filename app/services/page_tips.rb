@@ -11,10 +11,10 @@ class PageTips
     tips = case @page
     when "publications#show"
       { "This page features one of your published works, randomly selected on each page load." => "key",
-        "This is your home page. You can edit the content on it with the link at the bottom." => "info",
+        "This is your home page. You can edit the content on it with the pencil link at the bottom." => "info",
       }
     when "magazines#index"
-      { "It looks like an issue's submission period is over, so you can review its highest-scored submissions." => "key",
+      { "It looks like an issue's submission period is over! You can review it's highest scored submissions and then publish it so everyone in the world can come read it." => "key",
         "Click 'Staff List' for any issue to fine-tune who can view submissions' authors, scores, and meetings for that issue." => "info",
       }
     when "magazines#highest_scores"
@@ -55,6 +55,11 @@ class PageTips
         "Anonymous, not-signed-in visitors can submit and will be signed up in the process." => "info",
         "You can backfill old issues by submitting here as usual, but select the older issue from the list at the bottom." => "info",
         "As you can see at the bottom, you can submit for anyone. This is because you have the \"communicates\" ability for an issue. (Again, visit a staff list to learn about abilities.)" => "key",
+      }
+    when "people#show"
+      { "On your own page, you can keep track of everything you've submitted. You can see what's been scheduled for review, what's been scored & how it's been scored, works that made it & works that didn't." => "info",
+        "All other visitors to your page will see only your published works." => "info",
+        "We at Publishist think that the list of positions you accrue in the sidebar looks great on a resumé. ;-)" => "info",
       }
     end
     tips = remove_conditional(tips) unless @include_conditional_tips
