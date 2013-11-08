@@ -29,7 +29,7 @@ class PageTips
     when "magazines#staff_list"
       { "This is your main command center. All of the permissions for the whole website are based on what's on these staff lists; controlled issue-by-issue." => "info",
         "Mouse over the little circular letters next to the name of each position to see what abilities people in that position have." => "info",
-        "You don't have to name your positions this way. Each issue can have uniquely-named positions, and different permission structures. Click the pencil icons to see." => "info",
+        "You don't have to name your positions this way. Each issue can have uniquely-named positions, and different permission structures. Use the pencil icons to change it up." => "info",
         "To keep everything from breaking, if someone has the \"orchestrates\" ability for an issue, they'll be able to edit the staff lists of adjacent issues." => "info"
       }
     when "meetings#index"
@@ -42,6 +42,13 @@ class PageTips
         "Attendees listed at the bottom can enter their own scores for the submissions at the top. (Bring laptops to the meeting & do it there!)" => "info",
         "If attendees don't enter their own scores, then someone with the \"scores\" ability can for them (control permissions on the staff list page, accessed from the magazines list)." => "info",
         "Each attendee can also edit their own answer to the attendance question by mousing over & clicking their current answer." => "info",
+      }
+    when "submissions#index"
+      { "Think of this as your Publishist inbox. When people submit, the submissions show up here." => "info",
+        "Schedule submissions for meetings by dragging and dropping them." => "info",
+        "You can reorder submissions within a meeting by clicking through to the meeting's page (the orange dates are the links you want)." => "info",
+        "If you want to re-review a submission at multiple meetings, drag it from the old meeting to the new one." => "info",
+        "See a list of all the submissions for some other issue by clicking that issue in the sidebar." => "info",
       }
     end
     tips = remove_conditional(tips) unless @include_conditional_tips
