@@ -37,6 +37,12 @@ class PageTips
         "You don't have to do that, but be aware that scores can only be entered from a meeting's page, so you'll have to at least pretend you have coordinated meetings." => "info",
         "Each meeting has a \"Question\". Answering a creative question makes roll call way more fun." => "info",
       }
+    when "meetings#show"
+      { "This is where you'll probably spend most of your time, if you have regular staff meetings." => "info",
+        "Attendees listed at the bottom can enter their own scores for the submissions at the top. (Bring laptops to the meeting & do it there!)" => "info",
+        "If attendees don't enter their own scores, then someone with the \"scores\" ability can for them (control permissions on the staff list page, accessed from the magazines list)." => "info",
+        "Each attendee can also edit their own answer to the attendance question by mousing over & clicking their current answer." => "info",
+      }
     end
     tips = remove_conditional(tips) unless @include_conditional_tips
     tips
