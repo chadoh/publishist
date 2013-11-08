@@ -24,6 +24,7 @@ describe "Publications" do
     let(:publication) { Publication.find_by_name(name) }
     before do
       post "http://whatever.publishist.dev/publications", "publication_name" => name, "editor_email" => email
+      Person.any_instance.stub(:orchestrates?).and_return(false)
     end
     it "creates a publication, an editor, sample data, and signs the editor in" do
       expect(Publication.count).to eq 1

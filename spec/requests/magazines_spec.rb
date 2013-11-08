@@ -13,7 +13,7 @@ describe "Magazines" do
       end
     end
 
-    context "when not signed in" do
+    context "when signed in" do
       it "only shows magazines from the current publication" do
         sign_in
         visit magazines_url(subdomain: publications.first.subdomain)

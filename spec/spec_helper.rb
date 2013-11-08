@@ -21,6 +21,7 @@ module RequestHelpers
     ApplicationController.any_instance.stub(:authenticate_person!).and_return(true)
     ApplicationController.any_instance.stub(:person_signed_in?).and_return(true)
     ApplicationController.any_instance.stub(:current_person).and_return(@person)
+    @person.stub(:orchestrates?).and_return(false)
     if as.to_sym == :editor
       ApplicationController.any_instance.stub(:must_orchestrate).and_return(true)
       ApplicationController.any_instance.stub(:must_view).and_return(true)

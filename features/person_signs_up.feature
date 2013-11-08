@@ -13,6 +13,7 @@ Feature: a person signs up for the website
     Then I should be on the home page
     And there should be no new users
 
+  @wip
   Scenario: I sign up on the site
     Given I am on the sign up page
     When I fill in the following:
