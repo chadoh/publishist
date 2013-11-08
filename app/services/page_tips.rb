@@ -26,6 +26,12 @@ class PageTips
         "You can click the right edge of a submission and drag to a new page (note: it will drop onto the page with the dotted outline, not necessarily the one you're moused over. :-/ )" => "info",
         "Click the big plus at the bottom left to add notes or special items to pages." => "info",
       }
+    when "magazines#staff_list"
+      { "This is your main command center. All of the permissions for the whole website are based on what's on these staff lists; controlled issue-by-issue." => "info",
+        "Mouse over the little circular letters next to the name of each position to see what abilities people in that position have." => "info",
+        "You can edit the abilities for a position by clicking the pencil icons. You can also rename positions that way." => "info",
+        "To keep everything from breaking, if someone has the \"orchestrates\" ability for an issue, they'll be able to edit the staff lists of adjacent issues." => "info"
+      }
     end
     tips = remove_conditional(tips) unless @include_conditional_tips
     tips
