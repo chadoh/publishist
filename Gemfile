@@ -62,6 +62,7 @@ end
 
 group :development do
   gem 'daemons' # for running DJ
+  gem 'quiet_assets'
 end
 
 group :test do

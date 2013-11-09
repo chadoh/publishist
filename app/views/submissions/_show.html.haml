@@ -1,7 +1,7 @@
 - collapsed   = collapsed.nil?   ? true : collapsed
 - show_author = show_author.nil? ? true : show_author
 %li[submission]{ :class => collapsed && "collapsed" }
-  - if orchestrates?(submission.magazine) && !(params[:controller] == "magazines" && params[:action] == "highest_scores")
+  - if orchestrates?(@publication) && !(params[:controller] == "magazines" && params[:action] == "highest_scores")
     %span.drag-handle-wrap
       %span.drag-handle.fa.fa-bars
   - if params[:controller] == "magazines" && params[:action] == "highest_scores"

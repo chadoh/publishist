@@ -4,6 +4,10 @@ class PeopleController < InheritedResources::Base
   end
   before_filter :ensure_current_url, :only => :show
 
+  respond_to :js, only: :toggle_default_tips
+
+  skip_before_filter :find_publication, only: :toggle_default_tips
+
   def autocomplete
     terms = params[:term].split(' ')
     @people = terms.map do |term|
@@ -50,6 +54,12 @@ class PeopleController < InheritedResources::Base
     Communications.delay.contact_person(@to, @from, @subject, @message)
     flash[:notice] = "Your message has been sent!"
     redirect_to person_url(@to, subdomain: @publication.subdomain)
+  end
+
+  def toggle_default_tips
+    person = Person.find(params[:id])
+    person.update_attribute :show_tips_at_page_load, !person.show_tips_at_page_load
+    head :ok
   end
 
 protected

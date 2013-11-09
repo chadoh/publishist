@@ -185,6 +185,10 @@ class Magazine < ActiveRecord::Base
 
   memoize :average_score, :to_s
 
+  def timeframe_freshly_over?
+    published_on.nil? && accepts_submissions_until < Time.zone.now
+  end
+
 protected
 
   def accepts_from_after_latest_or_perhaps_today

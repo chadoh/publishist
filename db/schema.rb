@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003000738) do
+ActiveRecord::Schema.define(:version => 20131107021705) do
 
   create_table "abilities", :force => true do |t|
     t.string   "key"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20131003000738) do
     t.string   "password_salt"
     t.string   "slug"
     t.integer  "primary_publication_id"
+    t.boolean  "show_tips_at_page_load", :default => true
   end
 
   add_index "people", ["confirmation_token"], :name => "index_people_on_confirmation_token", :unique => true

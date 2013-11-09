@@ -37,6 +37,7 @@
         %h1
           = link_to @publication.name, root_url
         %p= @publication.tagline
+        = render "shared/typsy"
       - if flash[:notice]
         #notice= flash[:notice]
       - if flash[:alert]

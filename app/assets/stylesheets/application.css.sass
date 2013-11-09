@@ -21,6 +21,7 @@ a.mailto
   width: 16px
   display: inline-block
   text-indent: -3000em
+  vertical-align: middle
 
 .inline-block
   display: inline-block
@@ -74,8 +75,8 @@ a.mailto
     +box-shadow($lgray 0 0 3px inset)
     width: 100%
     background-color: $blue
+    position: relative
     text-align: center
-    +opacity(0.9)
     +border-radius(20px 0)
     margin:
       left: 0
@@ -732,3 +733,42 @@ article.magazines ol.submissions li.collapsed.submission
   left: -3000em
   *
     height: 0
+
+.tips
+  line-height: 1.1em // somehow fixes the position??
+  position: absolute
+  right: 0
+  z-index: 2
+  a
+    color: $base
+.tip-container
+  border: 1px solid $lgray
+  border-radius: 0.5em
+  box-shadow: 1px 3px 15px rgba(0,0,0,0.3)
+  background-color: white
+  padding: 1em 0 0
+  position: absolute
+  right: 0
+  text-align: left
+  width: 25em
+  z-index: 1
+  ol
+    list-style-type: none
+    margin: 0
+  .fa, .tip-text, .actions > *
+    +inline-block
+    vertical-align: middle
+  .fa
+    width: 11%
+  .tip-text
+    width: 83%
+  li:not(:last-child)
+    margin-bottom: 1em
+  .actions
+    padding: 1em 1em 0.5em
+    label, button
+      font-weight: normal
+      display: inline
+    button
+      padding: 0 0.6em
+      margin: 0

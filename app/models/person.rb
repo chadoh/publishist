@@ -68,14 +68,13 @@ class Person < ActiveRecord::Base
     name
   end
 
-  # function to set the password without knowing the current password used in our confirmation controller.
-  def attempt_set_password(params)
-    p = {}
-    p[:password] = params[:password]
-    p[:password_confirmation] = params[:password_confirmation]
-    update_attributes(p)
+  def attempt_to_set_password(params)
+    parms = {}
+    parms[:password] = params[:password]
+    parms[:password_confirmation] = params[:password_confirmation]
+    update_attributes(parms)
   end
-  # function to return whether a password has been set
+
   def has_no_password?
     self.encrypted_password.blank?
   end
@@ -98,14 +97,12 @@ class Person < ActiveRecord::Base
   # ABILITIES
   #
 
-  def communicates? resource, *flags
-    resource = primary_publication if resource.nil?
+  def communicates? resource = primary_publication, *flags
     positions = positions_for resource, *flags
     positions.joins(:abilities).where(:abilities => { :key => "communicates" }).present?
   end
 
-  def orchestrates? resource, *flags
-    resource = primary_publication if resource.nil?
+  def orchestrates? resource = primary_publication, *flags
     positions = positions_for(resource, *flags)
     positions.joins(:abilities).where(:abilities => { :key => "orchestrates" }).present?
   end
