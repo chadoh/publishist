@@ -13,10 +13,6 @@ class PublicationsController < ApplicationController
     @homepage = Homepage.new(@publication)
     @show_conditional_tips = !!@homepage.hook_present?
     set_tips
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def new
