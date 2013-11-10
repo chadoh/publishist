@@ -36,7 +36,7 @@ describe SampleDataCreator do
       expect( mags[2].submissions.count ).to eq 4
 
       # editor's submissions
-      states = %i(published rejected submitted)
+      states = %i(rejected published submitted)
       expect( editor.submissions.map(&:state) ).to eq states
 
       # meetings
