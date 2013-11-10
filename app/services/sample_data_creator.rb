@@ -47,6 +47,10 @@ class SampleDataCreator
       @mag1.update_attributes(
         :accepts_submissions_from  => Time.zone.now - 12.months,
         :accepts_submissions_until => Time.zone.now - 6.months,
+        :cover_art_file_name => "sample-cover-1.jpg",
+        :cover_art_content_type => "image/jpeg",
+        :cover_art_file_size => 340181,
+        :cover_art_updated_at => Time.zone.now,
       )
       @mag1
     end
@@ -58,6 +62,10 @@ class SampleDataCreator
       @mag2.update_attributes(
         :accepts_submissions_from  => Time.zone.now - 6.months + 1.day,
         :accepts_submissions_until => Time.zone.now - 2.weeks,
+        :cover_art_file_name => "sample-cover-2.jpg",
+        :cover_art_content_type => "image/jpeg",
+        :cover_art_file_size => 558488,
+        :cover_art_updated_at => Time.zone.now,
       )
       @mag2
     end
