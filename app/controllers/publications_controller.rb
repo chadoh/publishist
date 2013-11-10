@@ -38,7 +38,7 @@ class PublicationsController < ApplicationController
 
     respond_to do |format|
       if @publication.update_attributes(params[:publication])
-        format.html { redirect_to root_url(subdomain: @publication.subdomain) }
+        format.html { redirect_to root_url }
       else
         format.html { render action: "edit" }
       end
@@ -50,7 +50,7 @@ class PublicationsController < ApplicationController
     @publication.destroy
 
     respond_to do |format|
-      format.html { redirect_to publications_url(subdomain: @publication.subdomain) }
+      format.html { redirect_to publications_url }
     end
   end
 end

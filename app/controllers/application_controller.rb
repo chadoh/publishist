@@ -30,21 +30,21 @@ class ApplicationController < ActionController::Base
     def must_orchestrate *args
       unless person_signed_in? && current_person.orchestrates?(*args)
         flash[:notice] = "You're not allowed to see that"
-        redirect_to root_url(subdomain: @publication.subdomain) and return
+        redirect_to root_url and return
       end
     end
 
     def must_score *args
       unless person_signed_in? && current_person.scores?(*args)
         flash[:notice] = "You're not allowed to see that."
-        redirect_to root_url(subdomain: @publication.subdomain)
+        redirect_to root_url
       end
     end
 
     def must_view *args
       unless person_signed_in? && current_person.views?(*args)
         flash[:notice] = "You're not allowed to see that."
-        redirect_to root_url(subdomain: @publication.subdomain)
+        redirect_to root_url
       end
     end
 

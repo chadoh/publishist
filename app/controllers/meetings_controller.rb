@@ -49,11 +49,11 @@ class MeetingsController < InheritedResources::Base
   end
 
   def update
-    update!{ session[:return_to].presence || magazines_url(subdomain: @publication.subdomain) }
+    update!{ session[:return_to].presence || magazines_url }
   end
 
   def destroy
-    destroy!{ magazines_url(subdomain: @publication.subdomain) }
+    destroy!{ magazines_url }
   end
 
 end

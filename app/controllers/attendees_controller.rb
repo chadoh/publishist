@@ -17,7 +17,7 @@ class AttendeesController < InheritedResources::Base
 
     create! do |wants|
       wants.html do
-        redirect_to parent_url(subdomain: @publication.subdomain)
+        redirect_to parent_url
       end
       wants.js
     end
@@ -36,7 +36,7 @@ class AttendeesController < InheritedResources::Base
     end
 
     update! do |success, failure|
-      success.html { redirect_to parent_url(subdomain: @publication.subdomain) }
+      success.html { redirect_to parent_url }
       failure.html { render :edit }
 
       success.js
@@ -62,7 +62,7 @@ class AttendeesController < InheritedResources::Base
 
   def destroy
     destroy! do |wants|
-      wants.html { redirect_to parent_url(subdomain: @publication.subdomain) }
+      wants.html { redirect_to parent_url }
       wants.js
     end
   end

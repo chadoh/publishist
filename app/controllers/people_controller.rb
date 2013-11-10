@@ -53,7 +53,7 @@ class PeopleController < InheritedResources::Base
     @message = params[:contact_person][:message]
     Communications.delay.contact_person(@to, @from, @subject, @message)
     flash[:notice] = "Your message has been sent!"
-    redirect_to person_url(@to, subdomain: @publication.subdomain)
+    redirect_to person_url(@to)
   end
 
   def toggle_default_tips

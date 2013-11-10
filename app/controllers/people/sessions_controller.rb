@@ -22,11 +22,11 @@ class People::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for(resource)
-    session[:return_to] || root_url(subdomain: @publication.subdomain)
+    session[:return_to] || root_url
   end
 
   def after_sign_out_path_for(resource)
-    request.referer || root_url(subdomain: @publication.subdomain)
+    request.referer || root_url
   end
 
 end

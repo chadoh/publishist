@@ -29,15 +29,15 @@ class MagazinesController < InheritedResources::Base
 
   def show
     if resource.published_on.blank?
-      redirect_to root_url(subdomain: @publication.subdomain), notice: "That issue hasn't been published yet!" and return
+      redirect_to root_url, notice: "That issue hasn't been published yet!" and return
     elsif not @magazine.notification_sent?
       unless person_signed_in? && current_person.orchestrates?(@magazine, :or_adjacent)
         flash[:notice] = "That hasn't been published yet, check back soon!"
-        redirect_to root_url(subdomain: @publication.subdomain) and return
+        redirect_to root_url and return
       end
-      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first, subdomain: @publication.subdomain and return
+      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first and return
     else
-      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first, subdomain: @publication.subdomain and return
+      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first and return
     end
   end
 
@@ -46,9 +46,9 @@ class MagazinesController < InheritedResources::Base
       success.html do
         flash.now[:notice] = nil
         if current_person.orchestrates? @magazine, :or_adjacent
-          redirect_to staff_for_magazine_url(@magazine, subdomain: @publication.subdomain)
+          redirect_to staff_for_magazine_url(@magazine)
         else
-          redirect_to magazines_url subdomain: @publication.subdomain
+          redirect_to magazines_url
         end
       end
       failure.html { render :edit }
@@ -73,7 +73,7 @@ class MagazinesController < InheritedResources::Base
     winners = Submission.where(id: params[:submission_ids])
     resource.publish winners
     current_person.update_attribute :show_tips_at_page_load, true
-    redirect_to magazine_page_url @magazine, @magazine.pages.first, subdomain: @publication.subdomain
+    redirect_to magazine_page_url @magazine, @magazine.pages.first
   end
 
   def notify_authors_of_published_magazine
