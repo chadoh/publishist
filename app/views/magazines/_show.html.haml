@@ -9,7 +9,7 @@
     %header
       %h2
         = magazine.published? ? link_to(magazine, [magazine]) : magazine
-      = link_to "Browse online", [magazine]                               if magazine.viewable_by?(current_person, :or_adjacent)
+      = link_to "Browse",        [magazine]                               if magazine.viewable_by?(current_person, :or_adjacent)
       = link_to "Download pdf",  magazine.pdf.url, 'data-target' => 'new' if magazine.pdf?
       = link_to "View meetings", meetings_path(m: magazine.id)            if views? magazine
       = link_to "Staff list",    staff_for_magazine_path(magazine)        if orchestrates? magazine, :or_adjacent

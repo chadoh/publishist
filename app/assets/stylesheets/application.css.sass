@@ -338,7 +338,6 @@ ol.magazines
       +background-image(radial-gradient(67px 67px, lighten($noticeable, 6%) 10px, $noticeable 100px))
       +opacity(1)
       +border-radius(0.5em)
-      padding: 2px
       > *
         +opacity(0)
         +transition-property(all)
@@ -353,7 +352,6 @@ ol.magazines
         width: 100%
         max-height: 100%
         padding: 0
-        margin: -2px
         +box-shadow(0 0 0)
         height: 100%
         overflow: hidden
@@ -371,9 +369,12 @@ ol.magazines
       .timeframe
         bottom: 0
       header
-        width: 93%
+        width: 94%
         > a
           display: block
+          color: $mgray
+          &:hover
+            color: $base
         h2
           +trailer(0)
           a
