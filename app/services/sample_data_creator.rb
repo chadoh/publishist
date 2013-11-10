@@ -136,9 +136,9 @@ class SampleDataCreator
     end
 
     def sample_works_by_editor
-      [ { title: "Sample reject", body: "This is a sample work that was created at sign up. <i>#{publication.name}</i> didn't like it enough to publish it. :-(", },
-        { title: "Sample published", body: "This is a sample work that was created at sign up. <i>#{publication.name}</i> apparently liked it enough to publish it!", },
-        { title: "Sample submission, so you can learn. Click this here title!", body: "You can see everything you've submitted, had published, <i>&c</i> on <a href='/people/#{editor.slug}'>your profile page</a>.", },
+      [ { title: "Sample reject", body: "This is a sample.<br>Alas, it was not published.<br>We hope you're not sad.", },
+        { title: "Sample published", body: "This is a sample.<br>A haiku. It was published!<br>Just so you can see.", },
+        { title: "Sample submission, so you can learn. Click this here title!", body: "You can see everything you've submitted, had published, and more on <a href='/people/#{editor.slug}'>your profile page</a>.", },
       ]
     end
 

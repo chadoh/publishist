@@ -17,7 +17,6 @@ class AttendeesController < InheritedResources::Base
 
     create! do |wants|
       wants.html do
-        flash[:notice] = "Hello, #{resource.first_name}."
         redirect_to parent_url(subdomain: @publication.subdomain)
       end
       wants.js
