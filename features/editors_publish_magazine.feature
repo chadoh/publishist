@@ -26,7 +26,7 @@ Feature: an editor views the winners for a magazine and publish the magazine
     Given I am on the magazines page
     And I follow "View the highest-scored submissions"
     And no emails have been sent
-    When I press "Publish checked submissions"
+    When I press "Start organizing the layout"
 
     When I press "Let everyone who submitted know"
     Then each author should receive an email

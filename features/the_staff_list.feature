@@ -7,7 +7,8 @@ Feature: the staff list shows staff for a magazine and allows the editor to spec
   Scenario: I set up a staff list
     Given I'm in a position for the current magazine with the "orchestrates" ability
     And a magazine has been published and I am viewing its cover
-    When I follow "Add a new position"
+    When I follow "Staff"
+    And I follow "Add a new position"
     And I fill in "Name" with "Editor"
     And I press "Save"
     Then I should see "Person" under "Editor"

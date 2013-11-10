@@ -92,11 +92,12 @@ class Magazine < ActiveRecord::Base
 
 
       self.pages = [
-        Page.create(:title => 'Cover'),
-        Page.create(:title => 'Notes'),
+        cover = Page.create(:title => 'Cover'),
+                Page.create(:title => 'Notes'),
         staff = Page.create(:title => 'Staff'),
         toc   = Page.create(:title => 'ToC'),
       ]
+      cover.cover_art = CoverArt.create
       toc.table_of_contents = TableOfContents.create
       staff.staff_list = StaffList.create
 

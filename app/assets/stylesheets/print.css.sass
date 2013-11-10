@@ -73,5 +73,14 @@ li.packlet, li.submission
     nav.actions, form
       display: none
 
-span.drag-handle, section#attendance, input, article > header > div, .actions
+span.drag-handle, section#attendance, input, article > header > div, .actions, .no-print
   display: none !important
+
+meter:after
+  content: attr(value)
+  display: inline-block
+  width: 5em
+  text-align: center
+  color: black
+  position: relative
+  top: -0.3em

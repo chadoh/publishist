@@ -12,12 +12,12 @@
     %h2.inline-block Submissions
     .right
       = link_to "javascript:if(window.print)window.print()" do
-        = fa_icon "print", text: "Print or PDF"
+        = fa_icon "print", text: "Print this page"
   %ol.packlets.collapsable.sortable
     - for packlet in @meeting.packlets
       = render :partial => 'packlets/show', :locals => { :packlet => packlet }
   - if scores? @meeting
-    %p= link_to "Enter scores for everyone", scores_for_meeting_path(@meeting)
+    %p.no-print= link_to "Enter scores for everyone", scores_for_meeting_path(@meeting)
 
 %section#attendance
   %header
