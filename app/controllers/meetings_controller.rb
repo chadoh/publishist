@@ -14,10 +14,10 @@ class MeetingsController < InheritedResources::Base
   respond_to :html
 
   def index
-    @magazines = current_person.magazines.with_meetings
-    @magazine = params[:m].present? ? Magazine.find(params[:m]) : @magazines.first
-    must_view @magazine if @magazine
-    @meetings = @magazine.present? ? @magazine.meetings : @publication.meetings
+    @issues = current_person.issues.with_meetings
+    @issue = params[:m].present? ? Issue.find(params[:m]) : @issues.first
+    must_view @issue if @issue
+    @meetings = @issue.present? ? @issue.meetings : @publication.meetings
   end
 
   def show
@@ -36,7 +36,7 @@ class MeetingsController < InheritedResources::Base
 
   def new
     session[:return_to] = request.referer
-    @meeting = Meeting.new magazine: @publication.current_magazine
+    @meeting = Meeting.new issue: @publication.current_issue
   end
 
   def create
@@ -49,11 +49,11 @@ class MeetingsController < InheritedResources::Base
   end
 
   def update
-    update!{ session[:return_to].presence || magazines_url }
+    update!{ session[:return_to].presence || issues_url }
   end
 
   def destroy
-    destroy!{ magazines_url }
+    destroy!{ issues_url }
   end
 
 end

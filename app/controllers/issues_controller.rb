@@ -1,11 +1,11 @@
-class MagazinesController < InheritedResources::Base
+class IssuesController < InheritedResources::Base
   before_filter only: [:new, :create] do |c|
     c.must_orchestrate @publication
   end
   before_filter only: [:edit, :update, :destroy, :staff_list] do |c|
     c.must_orchestrate resource, :or_adjacent
   end
-  before_filter only: [:publish, :highest_scores, :notify_authors_of_published_magazine] do |c|
+  before_filter only: [:publish, :highest_scores, :notify_authors_of_published_issue] do |c|
     c.must_orchestrate resource
   end
   before_filter :ensure_current_url,   only:   :show
@@ -14,30 +14,30 @@ class MagazinesController < InheritedResources::Base
   custom_actions :resource => [:highest_scores, :publish]
 
   def index
-    @magazines = if person_signed_in?
-                   @publication.magazines
+    @issues = if person_signed_in?
+                   @publication.issues
                  else
-                   @publication.magazines.where('published_on IS NOT NULL')
+                   @publication.issues.where('published_on IS NOT NULL')
                  end
-    @show_conditional_tips = @magazines.any?(&:timeframe_freshly_over?)
+    @show_conditional_tips = @issues.any?(&:timeframe_freshly_over?)
     set_tips
   end
 
   def new
-    @magazine = Magazine.new publication_id: @publication.id
+    @issue = Issue.new publication_id: @publication.id
   end
 
   def show
     if resource.published_on.blank?
       redirect_to root_url, notice: "That issue hasn't been published yet!" and return
-    elsif not @magazine.notification_sent?
-      unless person_signed_in? && current_person.orchestrates?(@magazine, :or_adjacent)
+    elsif not @issue.notification_sent?
+      unless person_signed_in? && current_person.orchestrates?(@issue, :or_adjacent)
         flash[:notice] = "That hasn't been published yet, check back soon!"
         redirect_to root_url and return
       end
-      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first and return
+      redirect_to issue_page_url @issue, @issue.pages.with_content.first and return
     else
-      redirect_to magazine_page_url @magazine, @magazine.pages.with_content.first and return
+      redirect_to issue_page_url @issue, @issue.pages.with_content.first and return
     end
   end
 
@@ -45,10 +45,10 @@ class MagazinesController < InheritedResources::Base
     create! do |success, failure|
       success.html do
         flash.now[:notice] = nil
-        if current_person.orchestrates? @magazine, :or_adjacent
-          redirect_to staff_for_magazine_url(@magazine)
+        if current_person.orchestrates? @issue, :or_adjacent
+          redirect_to staff_for_issue_url(@issue)
         else
-          redirect_to magazines_url
+          redirect_to issues_url
         end
       end
       failure.html { render :edit }
@@ -56,7 +56,7 @@ class MagazinesController < InheritedResources::Base
   end
 
   def update
-    update!(:notice => nil)   { magazines_path }
+    update!(:notice => nil)   { issues_path }
   end
 
   def highest_scores
@@ -73,22 +73,22 @@ class MagazinesController < InheritedResources::Base
     winners = Submission.where(id: params[:submission_ids])
     resource.publish winners
     current_person.update_attribute :show_tips_at_page_load, true
-    redirect_to magazine_page_url @magazine, @magazine.pages.first
+    redirect_to issue_page_url @issue, @issue.pages.first
   end
 
-  def notify_authors_of_published_magazine
-    @magazine.notify_authors_of_published_magazine
-    redirect_to request.referer, notice: "Everyone who submitted was notified that they can now view the magazine online"
+  def notify_authors_of_published_issue
+    @issue.notify_authors_of_published_issue
+    redirect_to request.referer, notice: "Everyone who submitted was notified that they can now view the issue online"
   end
 
   def staff_list
-    @magazine = Magazine.find params[:id]
+    @issue = Issue.find params[:id]
   end
 
 protected
 
   def ensure_current_url
-    if request.path != magazine_path(resource)
+    if request.path != issue_path(resource)
       redirect_to resource, :status => :moved_permanently
     end
   end

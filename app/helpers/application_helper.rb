@@ -83,7 +83,7 @@ module ApplicationHelper
     (
       scores_or_is_author?(submission) || \
       (
-        params[:controller] == 'magazines' && \
+        params[:controller] == 'issues' && \
         params[:action]     == 'highest_scores'))
   end
 

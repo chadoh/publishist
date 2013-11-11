@@ -17,7 +17,7 @@
 #  cached_slug        :string(255)
 #  page_id            :integer
 #  position           :integer
-#  magazine_id        :integer
+#  issue_id        :integer
 #
 
 require "#{Rails.root}/lib/enum_fu"
@@ -28,7 +28,7 @@ class Submission < ActiveRecord::Base
 
   belongs_to :author, :class_name => "Person"
   belongs_to :page
-  belongs_to :magazine
+  belongs_to :issue
   belongs_to :publication
   has_many :packlets, dependent: :destroy
   has_many :meetings, through: :packlets
@@ -54,14 +54,14 @@ class Submission < ActiveRecord::Base
     :if           => Proc.new { |submission| submission.photo.file? },
     :message      => "must be an image"
 
-  before_save      :published_if_for_a_published_magazine, unless: 'state_was == Submission.state(:published)' # if being rejected
+  before_save      :published_if_for_a_published_issue, unless: 'state_was == Submission.state(:published)' # if being rejected
   before_save      :set_page_and_position
   before_create    :set_position_to_nil
   before_create    :create_author_if_blank
   after_find       :reviewed_if_meeting_has_occurred
   after_save       :notify_editor_if_submitted
   after_create     :author_has_positions_with_the_disappears_ability
-  after_initialize :magazine_is_current_if_blank
+  after_initialize :issue_is_current_if_blank
 
   scope :published, where(state: Submission.state(:published))
 
@@ -166,17 +166,17 @@ protected
     end
   end
 
-  def published_if_for_a_published_magazine
-    if !self.published? && self.magazine && self.magazine_id != self.magazine_id_was && self.magazine.published_on.present?
+  def published_if_for_a_published_issue
+    if !self.published? && self.issue && self.issue_id != self.issue_id_was && self.issue.published_on.present?
       self.state = :published
     end
   end
 
   def set_page_and_position
-    if published? && magazine && magazine.published_on.present?
+    if published? && issue && issue.published_on.present?
       unless self.page
-        magazine.pages.create unless magazine.page(1)
-        self.page = magazine.page(1) || magazine.pages.first
+        issue.pages.create unless issue.page(1)
+        self.page = issue.page(1) || issue.pages.first
       end
       unless self.position
         self.position = page.submissions.count
@@ -206,9 +206,9 @@ protected
     end
   end
 
-  def magazine_is_current_if_blank
-    unless self.magazine_id.present?
-      self.magazine = publication.current_magazine!
+  def issue_is_current_if_blank
+    unless self.issue_id.present?
+      self.issue = publication.current_issue!
     end
   end
 

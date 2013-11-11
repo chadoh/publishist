@@ -12,8 +12,8 @@ describe SampleDataCreator do
     before { creator.seed_data }
 
     it "creates all of the expected data" do
-      # two magazines; one old, one current
-      mags = Magazine.all.reverse
+      # two issues; one old, one current
+      mags = Issue.all.reverse
       expect( mags[0].published_on.to_date ).to eq Time.zone.now.to_date
       expect( mags[0].accepts_submissions_until.to_date ).to eq (Time.zone.now - 6.months).to_date
       expect( mags[1].accepts_submissions_until.to_date ).to eq (Time.zone.now - 2.weeks).to_date

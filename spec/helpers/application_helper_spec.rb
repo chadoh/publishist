@@ -69,8 +69,8 @@ describe ApplicationHelper do
         helper.current_person_can_see_score_for?(@sub).should be_false
       end
 
-      it "returns true when viewing magazine#highest_scores" do
-        parameters = {:controller => 'magazines', :action => 'highest_scores'}
+      it "returns true when viewing issue#highest_scores" do
+        parameters = {:controller => 'issues', :action => 'highest_scores'}
         helper.stub(:params).and_return(parameters)
         helper.current_person_can_see_score_for?(@sub).should be_true
       end
@@ -87,8 +87,8 @@ describe ApplicationHelper do
         helper.current_person_can_see_score_for?(@sub).should be_true
       end
 
-      it "returns true when viewing magazine#highest_scores" do
-        parameters = {:controller => 'magazines', :action => 'highest_scores'}
+      it "returns true when viewing issue#highest_scores" do
+        parameters = {:controller => 'issues', :action => 'highest_scores'}
         helper.stub(:params).and_return(parameters)
         helper.current_person_can_see_score_for?(@sub).should be_true
       end

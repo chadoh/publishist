@@ -1,9 +1,9 @@
 - title t('.title')
 
 - content_for :sidebar do
-  = render partial: 'magazines/sidebar'
+  = render partial: 'issues/sidebar'
 
-- if orchestrates? @magazine || @publication
+- if orchestrates? @issue || @publication
   %p= link_to t('.new_meeting'), new_meeting_path
 
 - if @orphaned_meetings.present?

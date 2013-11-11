@@ -2,23 +2,23 @@ require 'spec_helper'
 
 describe TableOfContents do
   before :each do
-    @magazine = Magazine.create(
+    @issue = Issue.create(
       :accepts_submissions_from  => 6.months.ago,
       :accepts_submissions_until => 1.week.ago,
       :nickname                  => "Fruit Blots"
     )
-    @submission  = Factory.create :submission, pseudonym_name: "Karis", pseudonym_link: false, magazine: @magazine
-    @submission2 = Factory.create :submission, magazine: @magazine
-    @meeting     = Meeting.create datetime: 2.weeks.ago, question: "orly?", magazine: @magazine
+    @submission  = Factory.create :submission, pseudonym_name: "Karis", pseudonym_link: false, issue: @issue
+    @submission2 = Factory.create :submission, issue: @issue
+    @meeting     = Meeting.create datetime: 2.weeks.ago, question: "orly?", issue: @issue
     @meeting.submissions << [@submission, @submission2]
-    @magazine.publish [@submission, @submission2]
-    @page = @magazine.pages.first
+    @issue.publish [@submission, @submission2]
+    @page = @issue.pages.first
     @table_of_contents = @page.table_of_contents = TableOfContents.new(page: @page)
   end
 
   it {
     should belong_to :page
-    should have_one(:magazine).through(:page)
+    should have_one(:issue).through(:page)
   }
 
   describe "#to_h" do

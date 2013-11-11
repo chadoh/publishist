@@ -92,12 +92,12 @@ describe Score do
     @submission.reload.should be_scored
   end
 
-  def a_magazine_is_in_process
-    @mag = Magazine.create(:nickname => "Wholly Mammoth",
+  def an_issue_is_in_process
+    @issue = Issue.create(:nickname => "Wholly Mammoth",
       accepts_submissions_from: 3.months.ago,
       accepts_submissions_until: 3.months.from_now
     )
-    @meeting = Meeting.create(datetime: Date.yesterday, magazine: @mag)
+    @meeting = Meeting.create(datetime: Date.yesterday, issue: @issue)
     @sub     = Factory.create :submission
     @sub2    = Factory.create :submission
     @p        = Factory.create :person
@@ -110,26 +110,26 @@ describe Score do
 
   context "when created" do
     before do
-      a_magazine_is_in_process
+      an_issue_is_in_process
       Score.create :packlet => @packlet, :attendee => @a, :amount => '5'
     end
 
-    it "increments its submission's magazine count_of_scores by 1" do
-      @mag.reload.count_of_scores.should == 1
+    it "increments its submission's issue count_of_scores by 1" do
+      @issue.reload.count_of_scores.should == 1
     end
 
-    it "increments its submission's magazine sum_of_scores by its :amount" do
-      @mag.reload  .sum_of_scores.should == 5
+    it "increments its submission's issue sum_of_scores by its :amount" do
+      @issue.reload  .sum_of_scores.should == 5
     end
   end
 
   context "when updated" do
-    it "changes its submission's magazine sum_of_scores by its :amount delta" do
-      a_magazine_is_in_process
+    it "changes its submission's issue sum_of_scores by its :amount delta" do
+      an_issue_is_in_process
       score = Score.create :packlet => @packlet, :attendee => @a, :amount => '5'
       score.update_attributes 'amount' => 8
-      @mag.reload.count_of_scores.should == 1
-      @mag.reload.sum_of_scores.should == 8
+      @issue.reload.count_of_scores.should == 1
+      @issue.reload.sum_of_scores.should == 8
     end
   end
 
@@ -150,20 +150,20 @@ describe Score do
       @submission.reload.should be_scored
     end
 
-    describe "self.packlet.magazine" do
+    describe "self.packlet.issue" do
       before do
-        a_magazine_is_in_process
+        an_issue_is_in_process
         score = Score.create :packlet => @packlet, :attendee => @a, :amount => '5'
         score.destroy
-        @mag = score.packlet.meeting.magazine
+        @issue = score.packlet.meeting.issue
       end
 
       it "reduces :count_of_scores by 1" do
-        @mag.count_of_scores.should == 0
+        @issue.count_of_scores.should == 0
       end
 
       it "reduces :sum_of_scores by its :amount" do
-        @mag.sum_of_scores.should == 0
+        @issue.sum_of_scores.should == 0
       end
     end
   end

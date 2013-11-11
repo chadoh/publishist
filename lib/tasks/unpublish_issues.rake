@@ -1,8 +1,8 @@
-desc "Unpublish all magazines"
-task unpublish_magazines: [:environment] do
-  puts "Unpublishing all magazines...\n\n"
+desc "Unpublish all issues"
+task unpublish_issues: [:environment] do
+  puts "Unpublishing all issues...\n\n"
 
-  Magazine.update_all(
+  Issue.update_all(
     published_on:      nil,
     notification_sent: false
   )

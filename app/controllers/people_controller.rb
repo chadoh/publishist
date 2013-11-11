@@ -29,8 +29,8 @@ class PeopleController < InheritedResources::Base
 
   def show
     @person = Person.find params[:id]
-    @positions_by_magazine = @person.positions.reject{|p| p.abilities.collect(&:key).include?('disappears') }\
-      .group_by(&:magazine).sort_by {|mag, poses| mag.accepts_submissions_from }.reverse
+    @positions_by_issue = @person.positions.reject{|p| p.abilities.collect(&:key).include?('disappears') }\
+      .group_by(&:issue).sort_by {|issue, poses| issue.accepts_submissions_from }.reverse
     submissions = @person.submissions
     submissions.reload # fixes weird queued-to-reviewed bug
     @published = submissions.where :state => Submission.state(:published)

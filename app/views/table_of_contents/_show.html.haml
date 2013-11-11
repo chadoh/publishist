@@ -9,9 +9,9 @@
       %tr
         %td= link_to sub, sub
         %td= link_to_if sub.pseudonym_link, sub.author_name, sub.author
-        %td= link_to props[:page].title, [props[:page].magazine, props[:page]]
+        %td= link_to props[:page].title, [props[:page].issue, props[:page]]
 
-- if orchestrates? @magazine
+- if orchestrates? @issue
   = link_to "Delete table of contents from this page", [table_of_contents], method: :delete
 
 :javascript

@@ -5,7 +5,7 @@ describe "Notifications mailer" do
   let(:publication) { Factory.create(:publication) }
   before do
     Submission.any_instance.unstub(:publication)
-    Magazine.any_instance.unstub(:publication)
+    Issue.any_instance.unstub(:publication)
     Person.any_instance.unstub(:primary_publication)
     publication.stub(:editor).and_return(editor)
   end
@@ -43,11 +43,11 @@ describe "Notifications mailer" do
     it { should have_body_text "//#{publication.subdomain}.publishist" }
   end
 
-  describe "#we_published_a_magazine" do
+  describe "#we_published_an_issue" do
     let(:published) { Submission.create state: :published, publication: publication, title: 'woo', body: 'tang', author: Factory.create(:person) }
     let(:rejected) { Submission.create state: :rejected, publication: publication, title: 'woo', body: 'tang', author: published.author }
-    let(:magazine) { Magazine.create publication: publication }
-    let(:email) { Notifications.we_published_a_magazine(published.email, magazine, [published, rejected]) }
+    let(:issue) { Issue.create publication: publication }
+    let(:email) { Notifications.we_published_an_issue(published.email, issue, [published, rejected]) }
 
     subject { email }
 
@@ -60,11 +60,11 @@ describe "Notifications mailer" do
     it { should have_body_text "//#{publication.subdomain}.publishist" }
   end
 
-  describe "#we_published_a_magazine_a_while_ago" do
+  describe "#we_published_an_issue_a_while_ago" do
     let(:published) { Submission.create state: :published, publication: publication, title: 'woo', body: 'tang', author: Factory.create(:person) }
     let(:rejected) { Submission.create state: :rejected, publication: publication, title: 'woo', body: 'tang', author: published.author }
-    let(:magazine) { Magazine.create publication: publication }
-    let(:email) { Notifications.we_published_a_magazine_a_while_ago(published.email, magazine, [published, rejected]) }
+    let(:issue) { Issue.create publication: publication }
+    let(:email) { Notifications.we_published_an_issue_a_while_ago(published.email, issue, [published, rejected]) }
 
     subject { email }
 

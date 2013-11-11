@@ -1,10 +1,10 @@
 - title t('.title')
 
 - content_for :sidebar do
-  = render partial: 'magazines/sidebar'
+  = render partial: 'issues/sidebar'
 
 :markdown
-  #{link_to "Submit something", new_submission_path}  
+  #{link_to "Submit something", new_submission_path}
   #{link_to "Schedule a new meeting", new_meeting_path}
 
 - for meeting in @meetings_to_come

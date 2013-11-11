@@ -9,19 +9,19 @@ class SubmissionsController < InheritedResources::Base
   include ApplicationHelper
 
   def index
-    @magazines = current_person.magazines
-    @magazine = @publication.magazines.where(slug: params[:m]).first.presence || @publication.current_magazine
-    @average = @magazine.try(:average_score)
-    @meetings = @magazine.present? ? @magazine.meetings.sort {|a,b| b.datetime <=> a.datetime } : []
+    @issues = current_person.issues
+    @issue = @publication.issues.where(slug: params[:m]).first.presence || @publication.current_issue
+    @average = @issue.try(:average_score)
+    @meetings = @issue.present? ? @issue.meetings.sort {|a,b| b.datetime <=> a.datetime } : []
     @meetings_to_come = @meetings.select {|m| Time.now - m.datetime < 0}
     @meetings_gone_by = @meetings - @meetings_to_come
-    @show_author = false unless current_person.communicates?(@magazine)
+    @show_author = false unless current_person.communicates?(@issue)
     @unscheduled_submissions = @publication.submissions.where(:state => Submission.state(:submitted))
   end
 
   def show
     @submission = Submission.find(params[:id])
-    @average = @submission.magazine.try(:average_score).presence
+    @average = @submission.issue.try(:average_score).presence
   end
 
   def new
@@ -57,7 +57,7 @@ class SubmissionsController < InheritedResources::Base
             @submission.save
             redirect_to submissions_url and return if current_person.orchestrates?(@publication, :nowish) && params["preview"]
             if @submission.published?
-              flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
+              flash[:notice] = "#@submission has been published and is on <a href='/issues/#{@submission.issue.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.issue}</a>.".html_safe
               redirect_to new_submission_url and return
             end
             redirect_to person_url(current_person)
@@ -84,7 +84,7 @@ class SubmissionsController < InheritedResources::Base
       if @submission.save
         format.html {
           if @submission.published?
-            flash[:notice] = "#@submission has been published and is on <a href='/magazines/#{@submission.magazine.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.magazine}</a>.".html_safe
+            flash[:notice] = "#@submission has been published and is on <a href='/issues/#{@submission.issue.to_param}/#{@submission.page.to_param}'>page #{@submission.page} of #{@submission.issue}</a>.".html_safe
             redirect_to new_submission_url and return
           else
             redirect_to session[:return_to] || request.referer

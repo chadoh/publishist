@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Submission do
   let(:editor) { double("editor", email: "woo@woo.woo").as_null_object }
-  let(:magazine) { Factory.create :magazine }
-  let(:publication) { double("publication", editor: editor, current_magazine!: magazine, current_magazine: magazine).as_null_object }
+  let(:issue) { Factory.create :issue }
+  let(:publication) { double("publication", editor: editor, current_issue!: issue, current_issue: issue).as_null_object }
   before { Submission.any_instance.stub(:publication).and_return(publication) }
   it {
     should have_many(:packlets).dependent(:destroy)
@@ -11,7 +11,7 @@ describe Submission do
     should have_many(:scores).through(:packlets)
     should belong_to :author
     should belong_to :page
-    should belong_to :magazine
+    should belong_to :issue
     should belong_to :publication
   }
 
@@ -28,8 +28,8 @@ describe Submission do
 
   describe "#author_has_positions_with_the_disappears_ability" do
     before do
-      @ab  = Ability.create key: 'disappears', description: "Submitters & attendees are automatically added to this group. It will disappear once the magazine is published."
-      @pos = Magazine.create.positions.create name: "The Folks", abilities: [@ab]
+      @ab  = Ability.create key: 'disappears', description: "Submitters & attendees are automatically added to this group. It will disappear once the issue is published."
+      @pos = Issue.create.positions.create name: "The Folks", abilities: [@ab]
       @per = Person.create name: "Baxter", email: 'example@example.com'
       @sub = @per.submissions.create title: "marblecake", body: "also, the game"
     end
@@ -127,27 +127,27 @@ describe Submission do
     end
   end
 
-  context "when submitting for a magazine that has already been published" do
-    it "sets the state to 'published' if changed to a magazine that has already been published" do
-      mag = Magazine.create(
+  context "when submitting for a issue that has already been published" do
+    it "sets the state to 'published' if changed to a issue that has already been published" do
+      issue = Issue.create(
         accepts_submissions_from:  6.months.ago,
         accepts_submissions_until: Date.yesterday,
         title: "Gone"
       )
-      mag.publish []
-      sub = Factory.create :submission, magazine: mag
+      issue.publish []
+      sub = Factory.create :submission, issue: issue
       sub.reload.should be_published
       sub.page.to_s.should == '1'
     end
 
-    it "does not set the state to 'published' if the submission had already been for this magazine" do
-      mag = Magazine.create(
+    it "does not set the state to 'published' if the submission had already been for this issue" do
+      issue = Issue.create(
         accepts_submissions_from:  6.months.ago,
         accepts_submissions_until: Date.yesterday,
         title: "Gone"
       )
-      sub = Factory.create :submission, magazine: mag
-      mag.publish []
+      sub = Factory.create :submission, issue: issue
+      issue.publish []
       sub.reload.should be_rejected
       sub.save
       sub.should be_rejected
@@ -157,40 +157,40 @@ describe Submission do
   end
 
   it "sets the page and position if the submission is published" do
-    mag = Magazine.create(
+    issue = Issue.create(
       accepts_submissions_from:  6.months.ago,
       accepts_submissions_until: Date.yesterday,
       title: "Gone"
     )
-    mag.publish []
-    sub = Factory.create :submission, magazine: mag
+    issue.publish []
+    sub = Factory.create :submission, issue: issue
     sub.update_attributes page: nil, position: nil
     sub.page.should_not be_nil
     sub.position.should_not be_nil
   end
 
   it "does not override page and position if already set" do
-    mag = Magazine.create(
+    issue = Issue.create(
       accepts_submissions_from:  6.months.ago,
       accepts_submissions_until: Date.yesterday,
       title: "Gone"
     )
-    mag.publish []
-    sub = Factory.create :submission, magazine: mag
-    page = mag.pages.create
+    issue.publish []
+    sub = Factory.create :submission, issue: issue
+    page = issue.pages.create
     sub.page = page
     sub.save
     sub.page.should == page
   end
 
   it "removes the page when being rejected" do
-    mag = Magazine.create(
+    issue = Issue.create(
       accepts_submissions_from:  6.months.ago,
       accepts_submissions_until: Date.yesterday,
       title: "Gone"
     )
-    sub = Factory.create :submission, magazine: mag
-    mag.publish [sub]
+    sub = Factory.create :submission, issue: issue
+    issue.publish [sub]
     sub.reload.state.should == :published
     sub.page.to_s.should == '1'
     sub.position.should == 1
@@ -445,9 +445,9 @@ describe Submission do
 
   describe "#average_score" do
     before :each do
-      @magazine = Factory.create :magazine
-      @meeting = @magazine.meetings.create datetime: Time.now, magazine: @magazine
-      @submission = Factory.create :submission, magazine: @magazine
+      @issue = Factory.create :issue
+      @meeting = @issue.meetings.create datetime: Time.now, issue: @issue
+      @submission = Factory.create :submission, issue: @issue
       @person = Factory.create :person
       @person2 = Factory.create :person
 
@@ -465,7 +465,7 @@ describe Submission do
     it "returns the average score even if the submission was reviewed at multiple meetings" do
       meeting = Factory.create :meeting
       meeting.people = [@person, @person2]
-      meeting.update_attributes :magazine => @magazine
+      meeting.update_attributes :issue => @issue
       @packlet = meeting.packlets.create :submission => @submission
 
       @packlet.scores.create :attendee => meeting.attendees.first, :amount => 8
@@ -482,44 +482,44 @@ describe Submission do
     end
   end
 
-  describe "#magazine" do
+  describe "#issue" do
     before { Submission.any_instance.unstub(:publication) }
     let(:publication) { Factory.create(:publication) }
-    it "defaults to the current magazine" do
-      mg1 = Factory.build :magazine, publication: publication
-      mg2 = Factory.build :magazine, publication: publication
-      publication.stub(:current_magazine!).and_return(mg1)
+    it "defaults to the current issue" do
+      mg1 = Factory.build :issue, publication: publication
+      mg2 = Factory.build :issue, publication: publication
+      publication.stub(:current_issue!).and_return(mg1)
       sub = Submission.new publication: publication
-      sub.magazine.should be mg1
+      sub.issue.should be mg1
     end
-    it "creates a new magazine and is set to that if the latest magazine is no longer accepting submissions" do
-      magazine = Magazine.create(
+    it "creates a new issue and is set to that if the latest issue is no longer accepting submissions" do
+      issue = Issue.create(
         accepts_submissions_from:  6.months.ago,
         accepts_submissions_until: Date.yesterday,
         publication: publication
       )
       sub = Submission.create title: '<', body: '3', author: Factory.create(:person), publication: publication
-      sub.magazine.should_not == magazine
+      sub.issue.should_not == issue
     end
-    it "does not override the magazine if it's already set" do
-      mg1 = Factory.create :magazine, publication: publication
-      mg2 = Factory.create :magazine, publication: publication
-      sub = Submission.create title: "margeret", body: "tatcher", author: Factory.create(:person), magazine: mg1
-      publication.stub(:current_magazine!).and_return(mg2)
-      sub.reload.magazine.should == mg1
+    it "does not override the issue if it's already set" do
+      mg1 = Factory.create :issue, publication: publication
+      mg2 = Factory.create :issue, publication: publication
+      sub = Submission.create title: "margeret", body: "tatcher", author: Factory.create(:person), issue: mg1
+      publication.stub(:current_issue!).and_return(mg2)
+      sub.reload.issue.should == mg1
     end
   end
 
   describe "#average_score" do
     before :each do
-      @magazine = Factory.create :magazine
-      @meeting = @magazine.meetings.create datetime: Time.now
+      @issue = Factory.create :issue
+      @meeting = @issue.meetings.create datetime: Time.now
       @submission = Factory.create :submission
       @person = Factory.create :person
       @person2 = Factory.create :person
 
       @meeting.people = [@person, @person2]
-      @meeting.update_attributes :magazine => @magazine
+      @meeting.update_attributes :issue => @issue
       @packlet = @meeting.packlets.create :submission => @submission
 
       @packlet.scores.create :attendee => @meeting.attendees.first, :amount => 4
@@ -533,7 +533,7 @@ describe Submission do
     it "returns the average score even if the submission was reviewed at multiple meetings" do
       meeting = Factory.create :meeting
       meeting.people = [@person, @person2]
-      meeting.update_attributes :magazine => @magazine
+      meeting.update_attributes :issue => @issue
       @packlet = meeting.packlets.create :submission => @submission
 
       @packlet.scores.create :attendee => meeting.attendees.first, :amount => 8

@@ -3,10 +3,10 @@ class Publication < ActiveRecord::Base
     :about, :meetings_info, :publication_detail_attributes, :custom_domain,
     :meta_description, :publication_detail
 
-  has_many :magazines, dependent: :destroy, inverse_of: :publication
+  has_many :issues, dependent: :destroy, inverse_of: :publication
   has_many :submissions, dependent: :destroy
   has_many :people, foreign_key: "primary_publication_id"
-  has_many :meetings, through: :magazines
+  has_many :meetings, through: :issues
   has_one  :publication_detail, dependent: :destroy
 
   validates_uniqueness_of :subdomain
@@ -20,12 +20,12 @@ class Publication < ActiveRecord::Base
     @editor ||= OpenStruct.new email: "chad+unknown.editor@publishist.com"
   end
 
-  def current_magazine
-    actual_current_magazine || magazines.first
+  def current_issue
+    actual_current_issue || issues.first
   end
 
-  def current_magazine!
-    actual_current_magazine || magazines.create
+  def current_issue!
+    actual_current_issue || issues.create
   end
 
   def to_s
@@ -35,15 +35,15 @@ class Publication < ActiveRecord::Base
   private
 
   def first_communicator
-    @first_communicator ||= magazine_ids.each do |id|
-      communicator = Magazine.find(id).communicators.first
+    @first_communicator ||= issue_ids.each do |id|
+      communicator = Issue.find(id).communicators.first
       break communicator if communicator
     end
     return @first_communicator unless @first_communicator.is_a?(Array)
   end
 
-  def actual_current_magazine
-    magazines.where(
+  def actual_current_issue
+    issues.where(
       'accepts_submissions_from  <= :today AND ' + \
       'accepts_submissions_until >= :today',
       today: Time.zone.now

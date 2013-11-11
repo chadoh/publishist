@@ -1,4 +1,4 @@
-- title @magazine.to_s, ": #{@page.title}"
+- title @issue.to_s, ": #{@page.title}"
 
 .content
   = render "pagination"
@@ -7,7 +7,7 @@
     = render "editors_notes/index", editors_notes: notes
     - collapse_resources = true
   - if cover_art = @page.cover_art
-    = render "cover_arts/show", magazine: @magazine, cover_art: cover_art
+    = render "cover_arts/show", issue: @issue, cover_art: cover_art
     - collapse_resources = true
   - if toc = @page.table_of_contents
     = render "table_of_contents/show", table_of_contents: toc
@@ -21,9 +21,9 @@
   - if orchestrates? @publication
     = render "add_resources", collapse: collapse_resources
   = render "pagination"
-  - if orchestrates? @magazine and not @magazine.notification_sent?
+  - if orchestrates? @issue and not @issue.notification_sent?
     .notify_authors_button
       Looking good?
       = button_to "Let everyone who submitted know it's been published!",
-        notify_authors_of_published_magazine_path(@magazine),
-        class: 'inline', confirm: "This will email everyone who submitted to let them know which of their submissions made it and which didn't. It will also link them to the magazine on the website, so you should be confident that it's looking nice & spiffy!"
+        notify_authors_of_published_issue_path(@issue),
+        class: 'inline', confirm: "This will email everyone who submitted to let them know which of their submissions made it and which didn't. It will also link them to the issue on the website, so you should be confident that it's looking nice & spiffy!"

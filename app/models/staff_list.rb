@@ -11,5 +11,5 @@
 
 class StaffList < ActiveRecord::Base
   belongs_to :page
-  has_one :magazine, through: :page
+  has_one :issue, through: :page
 end

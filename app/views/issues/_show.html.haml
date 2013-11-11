@@ -1,0 +1,33 @@
+%li[issue]{ :class => !issue.cover_art? && 'bordered' }
+  .cover-art
+    .img
+      - if issue.viewable_by?(current_person, :or_adjacent)
+        = link_to [issue] do
+          = image_tag issue.cover_art.url(:thumb), alt: "" if issue.cover_art?
+      - else
+        = image_tag issue.cover_art.url(:thumb), alt: "" if issue.cover_art?
+    %header
+      %h2
+        = issue.published? ? link_to(issue, [issue]) : issue
+      = link_to "Browse",        [issue]                               if issue.viewable_by?(current_person, :or_adjacent)
+      = link_to "Download pdf",  issue.pdf.url, 'data-target' => 'new' if issue.pdf?
+      = link_to "View meetings", meetings_path(m: issue.id)            if views? issue
+      = link_to "Staff list",    staff_for_issue_path(issue)        if orchestrates? issue, :or_adjacent
+    %span.timeframe
+      - if issue.published?
+        Published on
+        %time{ :datetime => issue.published_on }= pretty_date(issue.published_on)
+      - elsif issue.accepts_submissions_until < Time.now
+        = timeframe(issue.accepts_submissions_from, issue.accepts_submissions_until)
+      - else
+        Submit by #{pretty_date(issue.accepts_submissions_until)}
+    - if orchestrates? issue
+      .small.right
+        = link_to t('edit').html_safe, edit_issue_url(issue), title: 'Edit issue details; upload cover art & a pdf.'
+        = link_to t('destroy').html_safe, issue_url(issue),
+          method: :delete,
+          confirm: "You're saying this issue never actually happened. All of its meetings will be unassociated with any issue. If this issue has been published, all of the submissions submitted for it will be simply \"Scored\" again.",
+          class: 'link destroy',
+          title: "Destroy this issue and everything associated with it."
+  - if orchestrates?(issue) && issue.timeframe_freshly_over?
+    %div= link_to "View the highest-scored submissions", highest_scored_for_issue_path(issue)

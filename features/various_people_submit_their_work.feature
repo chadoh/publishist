@@ -4,7 +4,7 @@ Feature: people of various ranks submit something
   I want to submit something!
 
   Scenario: The editor submits something
-    Given I'm in a position for the current magazine with the "communicates" ability
+    Given I'm in a position for the current issue with the "communicates" ability
     And no emails have been sent
     And I am on the new submission page
     When I fill in the following:
@@ -22,7 +22,7 @@ Feature: people of various ranks submit something
     Then I should not see "Submit!"
 
   Scenario: The editor edits an anonymous submission
-    Given I'm in a position for the current magazine with the "communicates" ability
+    Given I'm in a position for the current issue with the "communicates" ability
     And no emails have been sent
     And there is a submission called "The King's Teeth"
     And I am on the first submission page
@@ -32,7 +32,7 @@ Feature: people of various ranks submit something
     And I should receive no email
 
   Scenario: The editor edits a scored submission
-    Given I'm in a position for the current magazine with the "communicates" ability
+    Given I'm in a position for the current issue with the "communicates" ability
     And scores have been entered for a meeting
     And I am on the first submission page
     When I follow "Edit"

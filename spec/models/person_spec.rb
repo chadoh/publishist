@@ -15,18 +15,18 @@ describe Person do
     should have_many(:abilities).through(:position_abilities)
   }
 
-  describe "#magazines" do
-    it "returns magazines for which I have some ability, and not those for which I don't" do
+  describe "#issues" do
+    it "returns issues for which I have some ability, and not those for which I don't" do
       ability = Ability.create key: 'scores', description: 'communicates things'
-      mag1 = Magazine.create title: 'first'
-      mag2 = Magazine.create title: 'second'
-      pos1 = Position.create name:  'CoEditor', abilities: [ability], magazine: mag1
-      pos2 = Position.create name:  'Editor',   abilities: [ability], magazine: mag1
-      pos3 = Position.create name:  'Editor',   abilities: [ability], magazine: mag2
+      mag1 = Issue.create title: 'first'
+      mag2 = Issue.create title: 'second'
+      pos1 = Position.create name:  'CoEditor', abilities: [ability], issue: mag1
+      pos2 = Position.create name:  'Editor',   abilities: [ability], issue: mag1
+      pos3 = Position.create name:  'Editor',   abilities: [ability], issue: mag2
       per1 = Person  .create name:  'sir roderick', email: 'roderick@example.com'
       pos1.people << per1
       pos2.people << per1
-      per1.magazines.should == [mag1]
+      per1.issues.should == [mag1]
     end
   end
 
@@ -198,49 +198,49 @@ describe Person do
   context "permissions" do
     let!(:publication) { Factory.create :publication }
     let!(:person) { Factory.create :person, primary_publication: publication }
-    let!(:magazine) { Factory.create :magazine, title: 'vast mental capabilities', publication: publication }
-    let!(:position) { Factory.create :position, magazine: magazine, people: [person] }
+    let!(:issue) { Factory.create :issue, title: 'vast mental capabilities', publication: publication }
+    let!(:position) { Factory.create :position, issue: issue, people: [person] }
     before do
       Person.any_instance.unstub(:primary_publication)
-      Magazine.any_instance.unstub(:publication)
+      Issue.any_instance.unstub(:publication)
       Submission.any_instance.unstub(:publication)
     end
 
     describe "#communicates?(resource, *flags)" do
       let(:ability) { Factory.create :ability, key: "communicates" }
       context "when resource.is_a Publication" do
-        it "returns true if the person has the 'communicates' ability for any magazine in the given publication" do
+        it "returns true if the person has the 'communicates' ability for any issue in the given publication" do
           position.abilities << ability
           person.communicates?(publication).should be_true
         end
-        it "returns false if the person does not have the 'communicates' ability for any magazine whatsoever" do
+        it "returns false if the person does not have the 'communicates' ability for any issue whatsoever" do
           person.communicates?(publication).should be_false
         end
-        it "returns false if the person has the 'communicates' ability for a magazine in a different publication" do
+        it "returns false if the person has the 'communicates' ability for a issue in a different publication" do
           publication2 = Factory.create(:publication)
 
-          magazine2 = Factory.create(:magazine, publication: publication2)
-          position2 = Factory.create(:position, magazine: magazine2)
+          issue2 = Factory.create(:issue, publication: publication2)
+          position2 = Factory.create(:position, issue: issue2)
           person.positions << position2
 
           position2.abilities << ability
           expect(person.communicates? publication).to be_false
         end
         context "and passed the :nowish flag" do
-          it "returns false if the person has the 'communicates' ability for a magazine that's no longer accepting submissions" do
-            magazine.update_attributes accepts_submissions_from: 3.weeks.ago, accepts_submissions_until: 2.week.ago
+          it "returns false if the person has the 'communicates' ability for a issue that's no longer accepting submissions" do
+            issue.update_attributes accepts_submissions_from: 3.weeks.ago, accepts_submissions_until: 2.week.ago
             position.abilities << ability
             person.communicates?(publication, :nowish).should be_false
           end
-          it "returns true if the person has the 'communicates' ability for a magazine that's still accepting submissions" do
+          it "returns true if the person has the 'communicates' ability for a issue that's still accepting submissions" do
             position.abilities << ability
             person.communicates?(publication, :nowish).should be_true
           end
-          it "returns false if they have the 'communicates' ability for a current magazine but a different publication" do
+          it "returns false if they have the 'communicates' ability for a current issue but a different publication" do
             publication2 = Factory.create(:publication)
 
-            magazine2 = Factory.create(:magazine, publication: publication2)
-            position2 = Factory.create(:position, magazine: magazine2, abilities: [ability])
+            issue2 = Factory.create(:issue, publication: publication2)
+            position2 = Factory.create(:position, issue: issue2, abilities: [ability])
             person.positions << position2
 
             position2.abilities << ability
@@ -252,61 +252,61 @@ describe Person do
         before do
           position.abilities << ability
         end
-        it "returns false if the person does not have the 'communicates' ability for the given submission's magazine" do
-          magazine = Magazine.create publication: publication
-          submission = Submission.create title: "<", body: "3", author: person, publication: publication, magazine: magazine
+        it "returns false if the person does not have the 'communicates' ability for the given submission's issue" do
+          issue = Issue.create publication: publication
+          submission = Submission.create title: "<", body: "3", author: person, publication: publication, issue: issue
           person.communicates?(submission).should be_false
         end
 
-        it "returns true if the person has the 'communicates' ability for the given submission's magazine" do
-          submission = Submission.create title: "<", body: "3", author: person, publication: publication, magazine: magazine
+        it "returns true if the person has the 'communicates' ability for the given submission's issue" do
+          submission = Submission.create title: "<", body: "3", author: person, publication: publication, issue: issue
           person.communicates?(submission).should be_true
         end
       end
     end
     describe "#orchestrates?(resource)" do
       let(:ability) { Factory.create :ability, key: "orchestrates" }
-      context "when passed a magazine" do
-        it "returns true if the person is in a position with the 'orchestrates' ability for the given magazine" do
+      context "when passed a issue" do
+        it "returns true if the person is in a position with the 'orchestrates' ability for the given issue" do
           position.abilities << ability
-          person.orchestrates?(magazine).should be_true
+          person.orchestrates?(issue).should be_true
         end
-        it "returns false if the person is in a position with the 'orchestrates' ability for a different magazine" do
-          magazine2 = Magazine.create publication: publication
-          position2 = magazine2.positions.create name: 'Smithy'
+        it "returns false if the person is in a position with the 'orchestrates' ability for a different issue" do
+          issue2 = Issue.create publication: publication
+          position2 = issue2.positions.create name: 'Smithy'
           person.positions << position2
           position2.abilities << ability
-          person.orchestrates?(magazine).should be_false
+          person.orchestrates?(issue).should be_false
         end
 
         context "and also passed an :or_adjacent option" do
           before { position.abilities << ability }
-          it "returns true if the person orchestrates the magazine right before the one given" do
-            later = Magazine.create publication: publication
+          it "returns true if the person orchestrates the issue right before the one given" do
+            later = Issue.create publication: publication
             person.orchestrates?(later, :or_adjacent).should be_true
           end
-          it "returns true if the person orchestrates the magazine right after the one given" do
-            earlier = Magazine.create(
+          it "returns true if the person orchestrates the issue right after the one given" do
+            earlier = Issue.create(
               publication: publication,
-              accepts_submissions_from:  magazine.accepts_submissions_from - 6.months - 1.day,
-              accepts_submissions_until: magazine.accepts_submissions_from - 1.day
+              accepts_submissions_from:  issue.accepts_submissions_from - 6.months - 1.day,
+              accepts_submissions_until: issue.accepts_submissions_from - 1.day
             )
-            Magazine.all.should == publication.magazines
+            Issue.all.should == publication.issues
             person.orchestrates?(earlier, :or_adjacent).should be_true
           end
         end
       end
 
       context "when passed a meeting" do
-        let(:meeting) { Factory.create :meeting, magazine: magazine }
-        it "returns true if the person is in a position with the 'orchestrates' ability for the given meeting's magazine" do
+        let(:meeting) { Factory.create :meeting, issue: issue }
+        it "returns true if the person is in a position with the 'orchestrates' ability for the given meeting's issue" do
           position.abilities << ability
           person.orchestrates?(meeting).should be_true
         end
-        it "returns false if the person is in a position with the 'orchestrates' ability for a different meeting's magazine" do
-          magazine2 = Magazine.create publication: publication
-          position2 = magazine2.positions.create name: 'Smithy'
-          meeting2 = Factory.create :meeting, magazine: magazine2
+        it "returns false if the person is in a position with the 'orchestrates' ability for a different meeting's issue" do
+          issue2 = Issue.create publication: publication
+          position2 = issue2.positions.create name: 'Smithy'
+          meeting2 = Factory.create :meeting, issue: issue2
           person.positions << position2
           position2.abilities << ability
           person.orchestrates?(meeting).should be_false
@@ -314,18 +314,18 @@ describe Person do
       end
 
       context "when resource.is_a Publication" do
-        it "returns true if the person has the 'orchestrates' ability for any magazine in the given publication" do
+        it "returns true if the person has the 'orchestrates' ability for any issue in the given publication" do
           position.abilities << ability
           person.orchestrates?(publication).should be_true
         end
-        it "returns false if the person does not have the 'orchestrates' ability for any magazine whatsoever" do
+        it "returns false if the person does not have the 'orchestrates' ability for any issue whatsoever" do
           person.orchestrates?(publication).should be_false
         end
-        it "returns false if the person has the 'orchestrates' ability for a magazine in a different publication" do
+        it "returns false if the person has the 'orchestrates' ability for a issue in a different publication" do
           publication2 = Factory.create(:publication)
 
-          magazine2 = Factory.create(:magazine, publication: publication2)
-          position2 = Factory.create(:position, magazine: magazine2)
+          issue2 = Factory.create(:issue, publication: publication2)
+          position2 = Factory.create(:position, issue: issue2)
           person.positions << position2
 
           position2.abilities << ability
@@ -333,20 +333,20 @@ describe Person do
         end
         context "and passed the :nowish flag" do
 
-          it "returns false if the person is in a position with the 'orchestrates' ability for a magazine that no longer accepts submissions" do
+          it "returns false if the person is in a position with the 'orchestrates' ability for a issue that no longer accepts submissions" do
             position.abilities << ability
-            magazine.update_attributes accepts_submissions_from: 2.weeks.ago, accepts_submissions_until: 1.week.ago
+            issue.update_attributes accepts_submissions_from: 2.weeks.ago, accepts_submissions_until: 1.week.ago
             person.orchestrates?(publication, :nowish).should be_false
           end
-          it "returns true if the person is in a position with the 'orchestrates' ability for a magazine that still accepts submissions" do
+          it "returns true if the person is in a position with the 'orchestrates' ability for a issue that still accepts submissions" do
             position.abilities << ability
             person.orchestrates?(publication, :nowish).should be_true
           end
-          it "returns false if they have the 'orchestrates' ability for a current magazine but a different publication" do
+          it "returns false if they have the 'orchestrates' ability for a current issue but a different publication" do
             publication2 = Factory.create(:publication)
 
-            magazine2 = Factory.create(:magazine, publication: publication2)
-            position2 = Factory.create(:position, magazine: magazine2, abilities: [ability])
+            issue2 = Factory.create(:issue, publication: publication2)
+            position2 = Factory.create(:position, issue: issue2, abilities: [ability])
             person.positions << position2
 
             position2.abilities << ability
@@ -358,10 +358,10 @@ describe Person do
 
     describe "#scores?(resource)" do
       let(:ability) { Factory.create :ability, key: "scores" }
-      let(:meeting) { Factory.create :meeting, magazine: magazine }
+      let(:meeting) { Factory.create :meeting, issue: issue }
       before { position.abilities << ability }
 
-      it "returns true if the person is in a position with the 'orchestrates' ability for the given meeting's magazine" do
+      it "returns true if the person is in a position with the 'orchestrates' ability for the given meeting's issue" do
         person.scores?(meeting).should be_true
       end
     end
@@ -369,25 +369,25 @@ describe Person do
     describe "#views?(resource, *flags)" do
       %w(views orchestrates scores communicates).each do |ability_key|
         let(:ability) { Factory.create :ability, key: ability_key }
-        context "when resource.is_a Magazine" do
-          it "returns true when the person has #{ability_key} ability for that magazine" do
+        context "when resource.is_a Issue" do
+          it "returns true when the person has #{ability_key} ability for that issue" do
             position.abilities << ability
-            person.views?(magazine).should be_true
+            person.views?(issue).should be_true
           end
         end
         context "when resource.is_a Publication" do
-          it "returns true if the person has the #{ability_key} ability for any magazine in the given publication" do
+          it "returns true if the person has the #{ability_key} ability for any issue in the given publication" do
             position.abilities << ability
             person.views?(publication).should be_true
           end
-          it "returns false if the person does not have the #{ability_key} ability for any magazine whatsoever" do
+          it "returns false if the person does not have the #{ability_key} ability for any issue whatsoever" do
             person.views?(publication).should be_false
           end
-          it "returns false if the person has the #{ability_key} ability for a magazine in a different publication" do
+          it "returns false if the person has the #{ability_key} ability for a issue in a different publication" do
             publication2 = Factory.create(:publication)
 
-            magazine2 = Factory.create(:magazine, publication: publication2)
-            position2 = Factory.create(:position, magazine: magazine2)
+            issue2 = Factory.create(:issue, publication: publication2)
+            position2 = Factory.create(:position, issue: issue2)
             person.positions << position2
 
             position2.abilities << ability

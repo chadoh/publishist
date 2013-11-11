@@ -1,7 +1,0 @@
-- title t('.title')
-- if orchestrates? @publication
-  %p= link_to t('.new_magazine'), new_magazine_path
-
-%ol.magazines
-  - for magazine in @magazines
-    = render 'show', :magazine => magazine

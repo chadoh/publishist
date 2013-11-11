@@ -3,9 +3,9 @@
     .body
       = sanitize hook.body
       .fadeout
-      = link_to "Read More", magazine_page_path(hook.magazine, hook.page), class: "read-more"
+      = link_to "Read More", issue_page_path(hook.issue, hook.page), class: "read-more"
     %footer
-      – #{link_to strip_tags(hook.title), magazine_page_path(hook.magazine, hook.page)}
+      – #{link_to strip_tags(hook.title), issue_page_path(hook.issue, hook.page)}
       by
       %span.author
         - if !!hook.author
@@ -14,7 +14,7 @@
         - else
           = hook.author_name
       %br
-      published in #{link_to hook.magazine, hook.magazine}
+      published in #{link_to hook.issue, hook.issue}
 
 #about
   %h1 Welcome to #{@publication.name}

@@ -9,7 +9,7 @@ class EditorsNotesController < InheritedResources::Base
 
   def create
     create! do |wants|
-      wants.html { redirect_to [@editors_note.page.magazine, @editors_note.page] }
+      wants.html { redirect_to [@editors_note.page.issue, @editors_note.page] }
     end
   end
 
@@ -21,7 +21,7 @@ class EditorsNotesController < InheritedResources::Base
   end
   def update
     update! do |wants|
-      wants.html { redirect_to [@editors_note.page.magazine, @editors_note.page] }
+      wants.html { redirect_to [@editors_note.page.issue, @editors_note.page] }
     end
   end
 
@@ -29,7 +29,7 @@ class EditorsNotesController < InheritedResources::Base
     @editors_note = EditorsNote.find params[:id]
     @editors_note.destroy
     respond_with(@editors_note) do |wants|
-      wants.html { redirect_to [@editors_note.page.magazine, @editors_note.page] }
+      wants.html { redirect_to [@editors_note.page.issue, @editors_note.page] }
     end
   end
 

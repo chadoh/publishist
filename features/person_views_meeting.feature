@@ -5,7 +5,7 @@ Feature: People check out a meeting
 
   Scenario: I am not signed in. And I visit a meeting.
     Given I have an account but am not signed in
-    And I have the "views" ability for the current magazine
+    And I have the "views" ability for the current issue
     And I am on the first meeting page
     Then I should see "sign in"
 

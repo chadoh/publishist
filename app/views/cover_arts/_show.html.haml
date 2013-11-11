@@ -1,8 +1,8 @@
-- if magazine.cover_art?
-  = image_tag magazine.cover_art.url, alt: "Cover Art", class: 'cover-art'
-- elsif orchestrates? @magazine
+- if issue.cover_art?
+  = image_tag issue.cover_art.url, alt: "Cover Art", class: 'cover-art'
+- elsif orchestrates? @issue
   %p
-    You haven't added any cover art to this magazine!
-    = link_to("Add cover art", edit_magazine_path(magazine)) + '.'
-- if orchestrates? @magazine
+    You haven't added any cover art to this issue!
+    = link_to("Add cover art", edit_issue_path(issue)) + '.'
+- if orchestrates? @issue
   %p= link_to "Remove cover art from this page", [cover_art], method: :delete

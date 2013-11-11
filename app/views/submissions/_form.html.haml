@@ -64,7 +64,7 @@
         label:      "Author (you can submit for anyone)",
         input_html: { :value => "#{resource.author(true).name_and_email if @submission.author(true)}" },
         hint:       "You can even make an account for someone by entering their name & email"
-      = f.association :magazine, label_method: :to_s, collection: @publication.magazines
+      = f.association :issue, label_method: :to_s, collection: @publication.issues
     - else
       = f.input :author_id, :as => :hidden
   - else

@@ -31,7 +31,7 @@ end
 Given /^I have gone to the meeting and scored "([^"]*)"$/ do |title|
   meeting = first_meeting
   submission = Submission.find_by_title title
-  submission.update_attributes magazine: Magazine.first
+  submission.update_attributes issue: Issue.first
   meeting.submissions << submission
   meeting.people << @person
   submission.packlets.first.scores.create :amount => 6, :attendee => meeting.attendees.first

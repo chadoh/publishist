@@ -4,7 +4,7 @@ Feature: Editor schedules a meetings
   I want to create a meeting
 
   Scenario: Editor creates a meeting from the meetings index page
-    Given I'm in a position for the current magazine with the "orchestrates" ability
+    Given I'm in a position for the current issue with the "orchestrates" ability
     And I am on the meetings page
     When I follow "Schedule a new meeting"
     And I fill in the following:
@@ -14,7 +14,7 @@ Feature: Editor schedules a meetings
     Then I should see "Does he love you?"
 
   Scenario: Editor changes a meeting's question
-    Given I'm in a position for the current magazine with the "orchestrates" ability
+    Given I'm in a position for the current issue with the "orchestrates" ability
     And there is a meeting scheduled
     And I am on the meetings page
     When I click the edit link

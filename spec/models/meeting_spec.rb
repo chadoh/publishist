@@ -6,7 +6,7 @@ describe Meeting do
     should have_many(:people).through(:attendees)
     should have_many(:packlets).dependent(:destroy)
     should have_many(:submissions).through(:packlets)
-    should belong_to(:magazine)
+    should belong_to(:issue)
     should validate_presence_of(:datetime)
   }
 

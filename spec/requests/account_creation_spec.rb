@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "Creating An Account" do
   let(:publication) { Factory.create(:publication) }
-  let(:magazine) { Factory.create(:magazine, publication: publication) }
-  let(:meeting) { Factory.create(:meeting, magazine: magazine) }
+  let(:issue) { Factory.create(:issue, publication: publication) }
+  let(:meeting) { Factory.create(:meeting, issue: issue) }
   before do
     Person.any_instance.unstub(:primary_publication)
   end
@@ -59,10 +59,10 @@ describe "Creating An Account" do
     end
   end
   describe "when an editor signs someone up from the staff list" do
-    let!(:position) { Factory.create(:position, magazine: magazine) }
+    let!(:position) { Factory.create(:position, issue: issue) }
     it "associates that person with the editor's publication" do
       sign_in as: :editor
-      visit staff_for_magazine_url(magazine, subdomain: publication.subdomain)
+      visit staff_for_issue_url(issue, subdomain: publication.subdomain)
       fill_in "role_person", with: "Cleetus Horald, horald@cleet.us"
       click_button "Save"
       person = Person.last

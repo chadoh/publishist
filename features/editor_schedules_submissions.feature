@@ -6,7 +6,7 @@ Feature: An editor organizes submissions into packlets
   @pending
   @javascript
   Scenario: Scheduling unscheduled submissions into two future meetings
-    Given I'm in a position for the current magazine with the "orchestrates" ability
+    Given I'm in a position for the current issue with the "orchestrates" ability
     And there is a submission called "Lisa, the Cat"
     And there are several meetings
     And I am on the submissions page
@@ -30,7 +30,7 @@ Feature: An editor organizes submissions into packlets
   @pending
   @javascript
   Scenario: The editor sorts submissions within the packlet
-    Given I'm in a position for the current magazine with the "orchestrates" ability
+    Given I'm in a position for the current issue with the "orchestrates" ability
     And the following submissions are scheduled for a meeting a week from now:
       | title             | body             |
       | A Hydrogen Baloon | Oh the humanatee |

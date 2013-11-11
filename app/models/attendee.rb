@@ -1,7 +1,7 @@
 class Attendee < ActiveRecord::Base
   belongs_to :meeting
   belongs_to :person
-  has_one    :magazine, through: :meeting
+  has_one    :issue, through: :meeting
   has_many   :scores
 
   validates_presence_of :meeting_id

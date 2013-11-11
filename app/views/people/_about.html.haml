@@ -8,11 +8,11 @@
     - else
       = image_tag @person.gravatar_url, :alt => "A picture of #{person.first_name}"
 
-  %ul.positions-by-magazine
-    - @positions_by_magazine.each do |magazine, positions|
+  %ul.positions-by-issue
+    - @positions_by_issue.each do |issue, positions|
       %li
         #{positions.to_sentence} for
-        = link_to_if magazine.published?, magazine, magazine
+        = link_to_if issue.published?, issue, issue
 
 - if current_person && current_person != @person
   %a.toggle_next{:href => "#"}

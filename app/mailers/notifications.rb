@@ -46,10 +46,10 @@ class Notifications < ActionMailer::Base
     end
   end
 
-  def we_published_a_magazine(interested_individuals_email, magazine, array_of_her_submissions = [])
+  def we_published_an_issue(interested_individuals_email, issue, array_of_her_submissions = [])
     @email = interested_individuals_email
-    @magazine = magazine
-    @publication = magazine.publication
+    @issue = issue
+    @publication = issue.publication
     @published = array_of_her_submissions.select{|s| s.state == :published }
     @rejected  = array_of_her_submissions.select{|s| s.state == :rejected }
     editor = @publication.editor
@@ -58,17 +58,17 @@ class Notifications < ActionMailer::Base
       :to => @email,
       :from => "#{editor.name} <support@publishist.com>",
       :reply_to => editor.email,
-      :subject => "#{@publication.name} published a magazine!"
+      :subject => "#{@publication.name} published a issue!"
     ) do |format|
       format.text
       format.html
     end
   end
 
-  def we_published_a_magazine_a_while_ago(interested_individuals_email, magazine, array_of_her_submissions = [])
+  def we_published_an_issue_a_while_ago(interested_individuals_email, issue, array_of_her_submissions = [])
     @email = interested_individuals_email
-    @magazine = magazine
-    @publication = magazine.publication
+    @issue = issue
+    @publication = issue.publication
     @published = array_of_her_submissions.select{|s| s.state == :published }
     @rejected  = array_of_her_submissions.select{|s| s.state == :rejected }
     editor = @publication.editor
@@ -77,7 +77,7 @@ class Notifications < ActionMailer::Base
       :to => @email,
       :from => "#{editor.name} <support@publishist.com>",
       :reply_to => editor.email,
-      :subject => "#{@publication.name}'s \"#@magazine\" can now be viewed online!"
+      :subject => "#{@publication.name}'s \"#@issue\" can now be viewed online!"
     ) do |format|
       format.text
       format.html

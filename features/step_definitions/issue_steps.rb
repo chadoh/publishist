@@ -1,29 +1,29 @@
-Given(/^there is a magazine$/) do
-  Magazine.create publication: Publication.first
+Given(/^there is a issue$/) do
+  Issue.create publication: Publication.first
 end
 
-Then(/^I should see a link to the magazine$/) do
-  find('a', text: Magazine.first.to_s)
+Then(/^I should see a link to the issue$/) do
+  find('a', text: Issue.first.to_s)
 end
 
-Given(/^a magazine's timeframe is \*nearly\* over$/) do
-  Magazine.create(
+Given(/^a issue's timeframe is \*nearly\* over$/) do
+  Issue.create(
     :accepts_submissions_from => 6.months.ago,
     :accepts_submissions_until => Date.tomorrow,
     publication: Publication.first
   )
 end
 
-Given(/^a magazine's timeframe is freshly over$/) do
-  Magazine.create(
+Given(/^a issue's timeframe is freshly over$/) do
+  Issue.create(
     accepts_submissions_from: 6.months.ago,
     accepts_submissions_until: Date.yesterday,
     publication: Publication.first
   )
 end
 
-Given(/^a very old magazine called "([^"]*)"$/) do |nickname|
-  mag = Magazine.create(
+Given(/^a very old issue called "([^"]*)"$/) do |nickname|
+  issue = Issue.create(
     accepts_submissions_from: 2.years.ago,
     accepts_submissions_until: 18.months.ago,
     nickname: nickname,
@@ -31,8 +31,8 @@ Given(/^a very old magazine called "([^"]*)"$/) do |nickname|
   ).publish []
 end
 
-Given(/^a current magazine called "([^"]*)"$/) do |nickname|
-  Magazine.create(
+Given(/^a current issue called "([^"]*)"$/) do |nickname|
+  Issue.create(
     accepts_submissions_from: 3.months.ago,
     accepts_submissions_until: 3.months.from_now,
     nickname: nickname,
@@ -41,45 +41,45 @@ Given(/^a current magazine called "([^"]*)"$/) do |nickname|
 end
 
 
-Given(/^the magazine's timeframe is freshly over$/) do
-  Magazine.first.update_attributes(
+Given(/^the issue's timeframe is freshly over$/) do
+  Issue.first.update_attributes(
     :accepts_submissions_from => 6.months.ago,
     :accepts_submissions_until => Date.yesterday
   )
 end
 
-Given(/^a magazine has been published and I am viewing its cover$/) do
-  date = Magazine.first.accepts_submissions_from - 1.day
-  mag = Magazine.create(
+Given(/^a issue has been published and I am viewing its cover$/) do
+  date = Issue.first.accepts_submissions_from - 1.day
+  issue = Issue.create(
     :title                     => 'banjos',
     :accepts_submissions_until => date,
     :accepts_submissions_from  => date - 6.months,
     publication: Publication.first
   )
-  mag.publish []
-  visit magazine_path(mag)
+  issue.publish []
+  visit issue_path(issue)
 end
 
-Given(/^a magazine (?:titled|nicknamed) "([^"]*)" has been published$/) do |title|
-  mag = Magazine.create(
+Given(/^a issue (?:titled|nicknamed) "([^"]*)" has been published$/) do |title|
+  issue = Issue.create(
     :nickname                  => title,
     :accepts_submissions_from  => 6.months.ago,
     :accepts_submissions_until => Date.yesterday,
     publication: Publication.first
   )
-  Submission.find_each {|sub| sub.update_attributes magazine: mag }
-  mag.publish(Submission.all)
+  Submission.find_each {|sub| sub.update_attributes issue: issue }
+  issue.publish(Submission.all)
 end
 
 Given(/^(\d+) meetings? ha(?:ve|s) occured in it$/) do |num|
-  mag = Magazine.first
-  num.to_i.times { mag.meetings << Factory.create(:meeting) }
+  issue = Issue.first
+  num.to_i.times { issue.meetings << Factory.create(:meeting) }
 end
 
 Given(/^(\d+) submissions? ha(?:ve|s) been reviewed at th(?:ese|is) meetings?$/) do |total_submissions|
-  mag = Magazine.first
-  total_meetings = mag.meetings.count
-  for meeting in mag.meetings
+  issue = Issue.first
+  total_meetings = issue.meetings.count
+  for meeting in issue.meetings
     (total_submissions.to_i/total_meetings).times { meeting.submissions << Factory.create(:submission) }
   end
 end
@@ -87,13 +87,13 @@ end
 Given(/^1 person has attended each of these meetings$/) do
   # the viewer (the editor) already counts as 1
   @person ||= Factory.create :person
-  for meeting in Magazine.first.meetings
+  for meeting in Issue.first.meetings
     Attendee.create :meeting => meeting, :person => @person
   end
 end
 
 Given(/^submissions at meeting 1 have all been scored 1, scored 2 at meeting 2, etc$/) do
-  Magazine.first.meetings.each_with_index do |meeting, i|
+  Issue.first.meetings.each_with_index do |meeting, i|
     for packlet in meeting.packlets
       for attendee in meeting.attendees
         Score.create :packlet => packlet, :attendee => attendee, :amount => i
@@ -104,11 +104,11 @@ end
 
 Given(/^10 submissions have been scored 1-10$/) do
   meeting = first_meeting
-  magazine = Magazine.first
+  issue = Issue.first
   10.times {|i|
     sub = Submission.create(
       title: "Submission #{i}",
-      magazine: magazine,
+      issue: issue,
       state: :submitted,
       author: @person
     )
@@ -136,23 +136,23 @@ Then(/^each author should receive an email$/) do
   end
 end
 
-Then(/^"([^"]*)" should be on page (\d) of (.*)$/) do |sub, page, mag|
+Then(/^"([^"]*)" should be on page (\d) of (.*)$/) do |sub, page, issue|
   sub = Submission.find_by_title sub
   sub.page.to_s.should == page
   page = sub.page
-  page.magazine.should == Magazine.find_by_nickname(mag)
+  page.issue.should == Issue.find_by_nickname(issue)
 end
 
-Given(/^a magazine that has been 'published' but has not yet had the notification sent out to everyone$/) do
-  Magazine.create(
+Given(/^a issue that has been 'published' but has not yet had the notification sent out to everyone$/) do
+  Issue.create(
     accepts_submissions_from: 6.months.ago,
     accepts_submissions_until: 2.days.ago,
     publication: Publication.first
   ).publish []
 end
 
-Given(/^that the magazine has its notification sent out$/) do
-  Magazine.first.update_attributes notification_sent: true
+Given(/^that the issue has its notification sent out$/) do
+  Issue.first.update_attributes notification_sent: true
 end
 
 When(/^I'm on page "(.*?)"$/) do |name|

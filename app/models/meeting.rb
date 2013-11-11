@@ -8,11 +8,11 @@
 #  question    :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
-#  magazine_id :integer
+#  issue_id :integer
 #
 
 class Meeting < ActiveRecord::Base
-  belongs_to :magazine
+  belongs_to :issue
 
   has_many :attendees, :dependent => :destroy
   has_many :people, :through => :attendees

@@ -4,7 +4,7 @@ class PositionsController < InheritedResources::Base
 
   def new
     session[:return_to] = request.referer
-    @position = Position.new magazine_id: params[:magazine_id]
+    @position = Position.new issue_id: params[:issue_id]
     must_orchestrate @position, :or_adjacent
   end
 

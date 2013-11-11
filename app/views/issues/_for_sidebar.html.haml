@@ -1,0 +1,9 @@
+%li[issue]{ class: issue == @issue && 'selected' }
+  %header
+    - if issue == @issue
+      %h3= issue
+    - else
+      %p= issue
+  = pluralize issue.meetings.count, 'meeting'
+  %br
+  = timeframe issue.accepts_submissions_from, issue.accepts_submissions_until

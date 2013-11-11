@@ -27,21 +27,21 @@ module NavigationHelpers
     when /the submit page/i
       "/submit"
 
-    when /the magazine's cover page/i
-      "/magazines/#{Magazine.first.to_param}/#{Page.where(position: 1).first.to_param}"
+    when /the issue's cover page/i
+      "/issues/#{Issue.first.to_param}/#{Page.where(position: 1).first.to_param}"
 
-    when /the magazine's staff page/i
-      staff_for_magazine_path(Magazine.first)
+    when /the issue's staff page/i
+      staff_for_issue_path(Issue.first)
 
-    when /page (.*) of the "([^"]*)" magazine/i
-      m = Magazine.find_by_nickname $2
-      "/magazines/#{m.to_param}/#{$1}"
+    when /page (.*) of the "([^"]*)" issue/i
+      m = Issue.find_by_nickname $2
+      "/issues/#{m.to_param}/#{$1}"
 
-    when /page (.*) of the magazine/i
-      "/magazines/#{Magazine.first.to_param}/#{$1}"
+    when /page (.*) of the issue/i
+      "/issues/#{Issue.first.to_param}/#{$1}"
 
     when /the first meeting page/i
-      meeting = Meeting.first || Factory.create(:meeting, magazine: Magazine.first)
+      meeting = Meeting.first || Factory.create(:meeting, issue: Issue.first)
       meeting_path(meeting)
 
     when /the first (.*) page/i
@@ -53,9 +53,9 @@ module NavigationHelpers
                  end
       eval "#{model.base_class.to_s.underscore}_path('#{instance.to_param}')"
 
-    when /the "([^"]*)" magazine page/i
-      m = Magazine.find_by_nickname $1
-      eval "magazine_path('#{m.id}')"
+    when /the "([^"]*)" issue page/i
+      m = Issue.find_by_nickname $1
+      eval "issue_path('#{m.id}')"
 
     else
       begin

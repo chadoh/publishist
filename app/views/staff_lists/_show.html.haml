@@ -1,9 +1,9 @@
-- if (positions = @magazine.positions).present?
+- if (positions = @issue.positions).present?
   %ul.positions
     - for position in positions
       = render partial: 'positions/position', locals: { position: position }
 
-- if orchestrates? @magazine, :or_adjacent
+- if orchestrates? @issue, :or_adjacent
   :markdown
-    #{link_to "Add a new position", new_position_path(magazine_id: @magazine.id)}  
+    #{link_to "Add a new position", new_position_path(issue_id: @issue.id)}
     #{link_to "Remove the staff list from this page", [@page.staff_list], method: :delete if @page}

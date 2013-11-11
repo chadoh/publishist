@@ -37,20 +37,20 @@ describe Packlet do
     @p3.should be_valid
   end
 
-  it "updates a submission's :magazine, if different than the meeting's" do
-    mag = Factory.create :magazine
-    mg2 = Factory.create :magazine
-    sub = Factory.create :submission, magazine: mag
+  it "updates a submission's :issue, if different than the meeting's" do
+    issue = Factory.create :issue
+    mg2 = Factory.create :issue
+    sub = Factory.create :submission, issue: issue
     mtg = mg2.meetings.create datetime: Time.now
     mtg.submissions << sub
-    sub.magazine.should == mg2
+    sub.issue.should == mg2
   end
 
-  it "does not allow a submission to be scheduled for meetings in different magazines" do
-    mag = Factory.create :magazine
-    mg2 = Factory.create :magazine
-    sub = Factory.create :submission, magazine: mag
-    mtg = mag.meetings.create datetime: Time.now
+  it "does not allow a submission to be scheduled for meetings in different issues" do
+    issue = Factory.create :issue
+    mg2 = Factory.create :issue
+    sub = Factory.create :submission, issue: issue
+    mtg = issue.meetings.create datetime: Time.now
     mtg.submissions << sub
     mtg2 = mg2.meetings.create datetime: Time.now
     packlet = Packlet.new meeting: mtg2, submission: sub.reload

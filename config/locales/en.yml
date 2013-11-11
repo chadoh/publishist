@@ -47,17 +47,17 @@ en:
     show:
       edit: "Edit Meeting"
 
-  magazines:
+  issues:
     index:
-      title: "Magazines"
-      new_magazine: "Set up a new magazine"
+      title: "Issues"
+      new_issue: "Set up a new issue"
       new_meeting: "Schedule a new meeting"
     new:
-      title: "New Magazine"
+      title: "New Issue"
     edit:
-      title: "Edit Magazine"
+      title: "Edit Issue"
     show:
-      edit: "Edit Magazine"
+      edit: "Edit Issue"
 
   flash:
     submissions:
@@ -83,6 +83,6 @@ en:
       score:
         create: "Save"
         update: "Save"
-      magazine:
+      issue:
         create: "Save"
         update: "Save"

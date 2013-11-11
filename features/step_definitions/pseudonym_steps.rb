@@ -6,7 +6,7 @@ Given /^"([^"]*)" has a published poem called "([^"]*)" under an unlinked pseudo
     password_confirmation: 'secret',
     primary_publication: Publication.first
   )
-  mag = Magazine.create(
+  issue = Issue.create(
     accepts_submissions_from:  6.months.ago,
     accepts_submissions_until: 2.days.ago,
     published_on:              Date.yesterday,
@@ -15,7 +15,7 @@ Given /^"([^"]*)" has a published poem called "([^"]*)" under an unlinked pseudo
   poem = Submission.create(
     title: title,
     body:  "#{title}, y'all",
-    magazine: mag,
+    issue: issue,
     author: person,
     pseudonym_name: "wall-e",
     pseudonym_link: false

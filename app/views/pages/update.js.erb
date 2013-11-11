@@ -1,5 +1,5 @@
 $('nav.pagination').replaceWith("<%=
   escape_javascript(
-    render partial: "pagination", locals: { magazine: @magazine, current_page: @page }
+    render partial: "pagination", locals: { issue: @issue, current_page: @page }
   )
 %>");

@@ -12,28 +12,28 @@ class PagesController < ApplicationController
 
   def show
     if not @page
-      redirect_to magazines_url
-    elsif not @page.magazine.viewable_by?(current_person, :or_adjacent)
+      redirect_to issues_url
+    elsif not @page.issue.viewable_by?(current_person, :or_adjacent)
       flash[:notice] = "That hasn't been published yet, check back soon!"
       redirect_to root_url and return
     end
-    @show_conditional_tips = orchestrates?(@magazine) && !@magazine.notification_sent
+    @show_conditional_tips = orchestrates?(@issue) && !@issue.notification_sent
     set_tips
   end
 
   def create
     coming_from_page = request.referer.split('/').last
-    return_to = @magazine.pages.where("lower(title) = ?", coming_from_page).first || \
-                @magazine.pages.where("position = ?", coming_from_page.to_i + 4).first
-    @page = @magazine.create_page_at params[:page][:position]
+    return_to = @issue.pages.where("lower(title) = ?", coming_from_page).first || \
+                @issue.pages.where("position = ?", coming_from_page.to_i + 4).first
+    @page = @issue.create_page_at params[:page][:position]
 
-    redirect_to magazine_page_path(@magazine, return_to.reload)
+    redirect_to issue_page_path(@issue, return_to.reload)
   end
 
   def update
     @page.update_attributes params[:page]
 
-    respond_with [@magazine, @page.reload]
+    respond_with [@issue, @page.reload]
   end
 
   def add_submission
@@ -50,20 +50,20 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    new_page = @magazine.pages.where("position = ?", @page.position + 1).first || \
-               @magazine.pages.where("position = ?", @page.position - 1).first
+    new_page = @issue.pages.where("position = ?", @page.position + 1).first || \
+               @issue.pages.where("position = ?", @page.position - 1).first
 
     new_page.submissions << @page.submissions
     @page.destroy
 
-    respond_with [@magazine, @page = new_page.reload]
+    respond_with [@issue, @page = new_page.reload]
   end
 
 protected
 
   def resource
-    @magazine = Magazine.find params[:magazine_id]
-    @page     = @magazine.pages.where("lower(title) = ?", params[:id]).first || \
-                @magazine.pages.where("position = ?", params[:id].to_i + 4).first
+    @issue = Issue.find params[:issue_id]
+    @page     = @issue.pages.where("lower(title) = ?", params[:id]).first || \
+                @issue.pages.where("position = ?", params[:id].to_i + 4).first
   end
 end

@@ -1,12 +1,12 @@
-Feature: the staff list shows staff for a magazine and allows the editor to specify them
+Feature: the staff list shows staff for a issue and allows the editor to specify them
   As an editor,
-  I want to specify who held various roles for a magazine.
+  I want to specify who held various roles for a issue.
   As an interested patron,
   I want to see who played a part.
 
   Scenario: I set up a staff list
-    Given I'm in a position for the current magazine with the "orchestrates" ability
-    And a magazine has been published and I am viewing its cover
+    Given I'm in a position for the current issue with the "orchestrates" ability
+    And a issue has been published and I am viewing its cover
     When I follow "Staff"
     And I follow "Add a new position"
     And I fill in "Name" with "Editor"
@@ -34,10 +34,10 @@ Feature: the staff list shows staff for a magazine and allows the editor to spec
     When I click the remove link
     Then I should not see "Coeditor"
 
-  Scenario: I set up a staff list for an unpublished magazine
-    Given I'm in a position for the current magazine with the "orchestrates" ability
-    And there is a magazine
-    And I am on the magazines page
+  Scenario: I set up a staff list for an unpublished issue
+    Given I'm in a position for the current issue with the "orchestrates" ability
+    And there is a issue
+    And I am on the issues page
     Then I should see "Staff list"
 
     When I follow "Staff list"

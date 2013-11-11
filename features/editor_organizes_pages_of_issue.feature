@@ -1,37 +1,37 @@
-Feature: An editor organizes submissions onto pages of a magazine
-  A magazine has been published!
+Feature: An editor organizes submissions onto pages of a issue
+  A issue has been published!
   As an editor,
   I want to arrange it the same way on the web as it is when printed
   because _flow matters_.
 
-  Background: We've published a magazine
+  Background: We've published a issue
     Given there is a submission called "Everyone Dies, Anyway"
-    And a magazine nicknamed "Fruit Blots" has been published
-    And I'm in a position for the "Fruit Blots" magazine with the "orchestrates" ability
-    And I am on the "Fruit Blots" magazine page
+    And a issue nicknamed "Fruit Blots" has been published
+    And I'm in a position for the "Fruit Blots" issue with the "orchestrates" ability
+    And I am on the "Fruit Blots" issue page
 
-  Scenario: I see that the vanilla published magazine has sensible defaults
+  Scenario: I see that the vanilla published issue has sensible defaults
     Then I should see "Cover Notes Staff ToC 1" for the page numbers
     And I should see "Fruit Blots"
     And I should see "Cover Art"
 
-  Scenario: I can add pages to the magazine
+  Scenario: I can add pages to the issue
     When I press "+"
     Then I should see "Cover Notes Staff ToC 1 2" for the page numbers
 
-  Scenario: I can remove a page from the magazine
+  Scenario: I can remove a page from the issue
     When I click the remove link
     Then I should see "Notes Staff ToC 0" for the page numbers
 
   Scenario: I can unpublish submissions
-    Given I also have the "communicates" ability for the "Fruit Blots" magazine
+    Given I also have the "communicates" ability for the "Fruit Blots" issue
     When I follow "1"
     Then I should see "Everyone Dies, Anyway"
 
     When I press the unpublish button
     Then "Everyone Dies, Anyway" should be rejected
     And it should not be on a page
-    And I should be on page 1 of the "Fruit Blots" magazine
+    And I should be on page 1 of the "Fruit Blots" issue
 
   @pending
   @javascript

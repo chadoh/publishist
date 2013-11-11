@@ -4,7 +4,7 @@
 # Table name: pages
 #
 #  id          :integer         not null, primary key
-#  magazine_id :integer
+#  issue_id :integer
 #  position    :integer
 #  title       :string(255)
 #  created_at  :datetime
@@ -14,15 +14,15 @@
 class Page < ActiveRecord::Base
   extend Memoist
 
-  belongs_to :magazine
+  belongs_to :issue
   has_many   :submissions,       dependent: :nullify, order: :position
   has_one    :cover_art,         dependent: :destroy
   has_one    :table_of_contents, dependent: :destroy
   has_one    :staff_list,        dependent: :destroy
   has_many   :editors_notes,     dependent: :destroy
-  validates_presence_of :magazine_id
+  validates_presence_of :issue_id
 
-  acts_as_list scope: :magazine
+  acts_as_list scope: :issue
 
   def self.with_content
     scoped.reject{|page| !page.has_content? }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107021705) do
+ActiveRecord::Schema.define(:version => 20131110165910) do
 
   create_table "abilities", :force => true do |t|
     t.string   "key"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20131107021705) do
   add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
-  create_table "magazines", :force => true do |t|
+  create_table "issues", :force => true do |t|
     t.string   "title"
     t.string   "nickname"
     t.datetime "accepts_submissions_from"
@@ -92,14 +92,14 @@ ActiveRecord::Schema.define(:version => 20131107021705) do
     t.integer  "publication_id"
   end
 
-  add_index "magazines", ["slug"], :name => "index_magazines_on_cached_slug", :unique => true
+  add_index "issues", ["slug"], :name => "index_issues_on_slug", :unique => true
 
   create_table "meetings", :force => true do |t|
     t.datetime "datetime"
     t.string   "question"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "magazine_id"
+    t.integer  "issue_id"
   end
 
   create_table "packlets", :force => true do |t|
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(:version => 20131107021705) do
   end
 
   create_table "pages", :force => true do |t|
-    t.integer  "magazine_id"
+    t.integer  "issue_id"
     t.integer  "position"
     t.string   "title"
     t.datetime "created_at"
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(:version => 20131107021705) do
   add_index "position_abilities", ["position_id"], :name => "index_position_abilities_on_position_id"
 
   create_table "positions", :force => true do |t|
-    t.integer  "magazine_id"
+    t.integer  "issue_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -232,7 +232,7 @@ ActiveRecord::Schema.define(:version => 20131107021705) do
     t.string   "slug"
     t.integer  "page_id"
     t.integer  "position"
-    t.integer  "magazine_id"
+    t.integer  "issue_id"
     t.integer  "publication_id"
   end
 
@@ -248,16 +248,18 @@ ActiveRecord::Schema.define(:version => 20131107021705) do
 
   add_foreign_key "editors_notes", "pages", :name => "editors_notes_page_id_fk"
 
-  add_foreign_key "magazines", "publications", :name => "magazines_publication_id_fk"
+  add_foreign_key "issues", "publications", :name => "issues_publication_id_fk"
 
-  add_foreign_key "pages", "magazines", :name => "pages_magazine_id_fk", :dependent => :delete
+  add_foreign_key "meetings", "issues", :name => "meetings_issue_id_fk"
+
+  add_foreign_key "pages", "issues", :name => "pages_issue_id_fk"
 
   add_foreign_key "people", "publications", :name => "people_primary_publication_id_fk", :column => "primary_publication_id"
 
   add_foreign_key "position_abilities", "abilities", :name => "position_abilities_ability_id_fk"
   add_foreign_key "position_abilities", "positions", :name => "position_abilities_position_id_fk"
 
-  add_foreign_key "positions", "magazines", :name => "positions_magazine_id_fk"
+  add_foreign_key "positions", "issues", :name => "positions_issue_id_fk"
 
   add_foreign_key "pseudonyms", "submissions", :name => "pseudonyms_submission_id_fk", :dependent => :delete
 
@@ -268,7 +270,7 @@ ActiveRecord::Schema.define(:version => 20131107021705) do
 
   add_foreign_key "staff_lists", "pages", :name => "staff_lists_page_id_fk"
 
-  add_foreign_key "submissions", "magazines", :name => "submissions_magazine_id_fk"
+  add_foreign_key "submissions", "issues", :name => "submissions_issue_id_fk"
   add_foreign_key "submissions", "pages", :name => "submissions_page_id_fk", :dependent => :nullify
   add_foreign_key "submissions", "publications", :name => "submissions_publication_id_fk"
 

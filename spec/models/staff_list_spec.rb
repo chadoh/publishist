@@ -7,7 +7,7 @@ describe StaffList do
 
   it {
     should belong_to :page
-    should have_one(:magazine).through(:page)
+    should have_one(:issue).through(:page)
   }
 
 end

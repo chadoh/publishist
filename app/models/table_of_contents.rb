@@ -11,10 +11,10 @@
 
 class TableOfContents < ActiveRecord::Base
   belongs_to :page
-  has_one :magazine, through: :page
+  has_one :issue, through: :page
 
   def to_h
-    self.magazine.submissions.sort_by{|s| s.page.position }.reverse.inject({}) do |toc, sub|
+    self.issue.submissions.sort_by{|s| s.page.position }.reverse.inject({}) do |toc, sub|
       toc[sub] = {page: sub.page}
       toc
     end

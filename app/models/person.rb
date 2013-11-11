@@ -18,7 +18,7 @@ class Person < ActiveRecord::Base
   has_many :positions,          through:     :roles
   has_many :position_abilities, through:     :positions
   has_many :abilities,          through:     :position_abilities
-  has_many :magazines,          through:     :positions, uniq: true
+  has_many :issues,          through:     :positions, uniq: true
 
   validates_presence_of :email
 
@@ -144,23 +144,23 @@ class Person < ActiveRecord::Base
 
     def positions_for(resource, *flags)
       return positions_for_publication(resource, *flags) if resource.is_a?(Publication)
-      positions_for_magazine(resource, *flags)
+      positions_for_issue(resource, *flags)
     end
 
-    def positions_for_magazine(resource, *flags)
-      resource = resource.magazine unless resource.is_a?(Magazine)
-      magazines = [resource]
+    def positions_for_issue(resource, *flags)
+      resource = resource.issue unless resource.is_a?(Issue)
+      issues = [resource]
       if flags.include? :or_adjacent
-        magazines << Magazine.before(resource)
-        magazines << Magazine.after(resource)
-        magazines.compact!
+        issues << Issue.before(resource)
+        issues << Issue.after(resource)
+        issues.compact!
       end
-      self.positions.where("magazine_id IN (?)", magazines.map(&:id))
+      self.positions.where("issue_id IN (?)", issues.map(&:id))
     end
 
     def positions_for_publication(publication, *flags)
-      this = positions.joins(:magazine).where(:magazines => { :publication_id => publication.id })
+      this = positions.joins(:issue).where(:issues => { :publication_id => publication.id })
       return this unless flags.include? :nowish
-      this.where("magazines.accepts_submissions_until > ?", 1.week.ago)
+      this.where("issues.accepts_submissions_until > ?", 1.week.ago)
     end
 end

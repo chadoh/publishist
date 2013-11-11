@@ -1,3 +1,3 @@
 Factory.define :page do |p|
-  p.association :magazine
+  p.association :issue
 end

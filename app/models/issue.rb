@@ -1,7 +1,7 @@
-class Magazine < ActiveRecord::Base
+class Issue < ActiveRecord::Base
   extend Memoist
 
-  belongs_to :publication, inverse_of: :magazines
+  belongs_to :publication, inverse_of: :issues
   has_many :meetings,  dependent: :nullify, include: :submissions
   has_many :pages,     dependent: :destroy, order:   :position
   has_many :positions, dependent: :destroy
@@ -14,7 +14,7 @@ class Magazine < ActiveRecord::Base
   has_attached_file :pdf,
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
-    :path           => "/magazines/:filename"
+    :path           => "/issues/:filename"
   has_attached_file :cover_art,
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
@@ -25,26 +25,26 @@ class Magazine < ActiveRecord::Base
   validates_presence_of :accepts_submissions_from
   validates_presence_of :accepts_submissions_until
   validate :from_happens_before_until
-  validate :magazine_ranges_dont_conflict
+  validate :issue_ranges_dont_conflict
   validates_attachment_content_type :pdf,
     :content_type => [ 'application/pdf' ],
     :if           => Proc.new { |submission| submission.pdf.file? },
     :message      => "has to be a valid pdf"
   validates_attachment_content_type :cover_art,
     :content_type => [ 'image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/tiff', 'image/vnd.microsoft.icon' ],
-    :if           => Proc.new { |magazine| magazine.cover_art.file? },
+    :if           => Proc.new { |issue| issue.cover_art.file? },
     :message      => "must be an image"
 
   after_initialize "self.nickname = 'next' if self.nickname.blank?"
   after_initialize :accepts_from_after_latest_or_perhaps_today
   after_initialize :accepts_until_six_months_later
   after_initialize :score_counters_cannot_be_nil
-  after_create     :same_positions_as_previous_mag
+  after_create     :same_positions_as_previous_issue
 
   default_scope order("accepts_submissions_until DESC")
   scope :unpublished, where(published_on: nil)
   scope :published, where("published_on IS NOT NULL AND notification_sent = true")
-  scope :with_meetings, where("EXISTS(SELECT 1 from meetings where magazines.id = meetings.magazine_id)")
+  scope :with_meetings, where("EXISTS(SELECT 1 from meetings where issues.id = meetings.issue_id)")
 
   def submissions(flags = nil)
     if !self.published_on.present? || flags == :all
@@ -80,7 +80,7 @@ class Magazine < ActiveRecord::Base
     title.presence || "the #{nickname} issue"
   end
 
-  class MagazineStillAcceptingSubmissionsError < StandardError; end
+  class IssueStillAcceptingSubmissionsError < StandardError; end
 
   def publish array_of_winners
     if self.accepts_submissions_until <= Time.now
@@ -113,7 +113,7 @@ class Magazine < ActiveRecord::Base
           sub.update_attribute :position, i + 1
         end
       end
-      older_unpublished_magazines.each {|m| m.publish [] }
+      older_unpublished_issues.each {|m| m.publish [] }
 
       # get rid of ALL positions marked with 'disappears' (even if they somehow ended up on older mags)
       self.positions.joins(:abilities).where(abilities: { key: 'disappears' }).each do |position|
@@ -121,7 +121,7 @@ class Magazine < ActiveRecord::Base
       end
       self
     else
-      raise MagazineStillAcceptingSubmissionsError, "You cannot publish a magazine that is still accepting submissions"
+      raise IssueStillAcceptingSubmissionsError, "You cannot publish a issue that is still accepting submissions"
     end
   end
 
@@ -133,12 +133,12 @@ class Magazine < ActiveRecord::Base
     !!self.notification_sent
   end
 
-  def notify_authors_of_published_magazine
+  def notify_authors_of_published_issue
     self.submissions(:all).group_by(&:email).each do |author_email, her_submissions|
       if self.published_on >= 2.months.ago
-        Notifications.delay.we_published_a_magazine(author_email, self, her_submissions)
+        Notifications.delay.we_published_an_issue(author_email, self, her_submissions)
       else
-        Notifications.delay.we_published_a_magazine_a_while_ago(author_email, self, her_submissions)
+        Notifications.delay.we_published_an_issue_a_while_ago(author_email, self, her_submissions)
       end
     end
     self.update_attributes notification_sent: true
@@ -161,14 +161,14 @@ class Magazine < ActiveRecord::Base
   end
 
   class << self
-    def before mag
+    def before issue
       # ordered by "accepts_submissions_untl DESC", which means most recent first
-      mag.publication.magazines.where("accepts_submissions_until <= ?", mag.accepts_submissions_from).first
+      issue.publication.issues.where("accepts_submissions_until <= ?", issue.accepts_submissions_from).first
     end
 
-    def after mag
+    def after issue
       # ordered by "accepts_submissions_untl DESC", which means most recent first
-      mag.publication.magazines.where("accepts_submissions_from >= ?", mag.accepts_submissions_until).last
+      issue.publication.issues.where("accepts_submissions_from >= ?", issue.accepts_submissions_until).last
     end
   end
 
@@ -180,8 +180,8 @@ class Magazine < ActiveRecord::Base
     self.published? || (self.published_on.present? && person.try(:orchestrates?, self, *args))
   end
 
-  def older_unpublished_magazines
-    publication.magazines.unpublished.where("accepts_submissions_from < ?", self.accepts_submissions_from)
+  def older_unpublished_issues
+    publication.issues.unpublished.where("accepts_submissions_from < ?", self.accepts_submissions_from)
   end
 
   memoize :average_score, :to_s
@@ -194,8 +194,8 @@ protected
 
   def accepts_from_after_latest_or_perhaps_today
     if self.accepts_submissions_from.blank?
-      if publication && publication.magazines.present?
-        self.accepts_submissions_from = publication.magazines.first.accepts_submissions_until + 1
+      if publication && publication.issues.present?
+        self.accepts_submissions_from = publication.issues.first.accepts_submissions_until + 1
       else
         self.accepts_submissions_from = Time.zone.now.to_date
       end
@@ -216,23 +216,23 @@ protected
     end
   end
 
-  def magazine_ranges_dont_conflict
-    mags = publication.magazines.where(
+  def issue_ranges_dont_conflict
+    mags = publication.issues.where(
       'accepts_submissions_from  < :from AND ' + \
       'accepts_submissions_until > :from',
       from: self.accepts_submissions_from
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
-      errors.add :accepts_submissions_from,  "can't occurr during another magazine (#{mags.first} accepts submissions until #{mags.first.accepts_submissions_until})"
+      errors.add :accepts_submissions_from,  "can't occurr during another issue (#{mags.first} accepts submissions until #{mags.first.accepts_submissions_until})"
     end
-    mags = publication.magazines.where(
+    mags = publication.issues.where(
       'accepts_submissions_from  < ? AND ' + \
       'accepts_submissions_until > ?',
       self.accepts_submissions_until,
       self.accepts_submissions_until
     )
     if mags.present? && (mags.length > 1 || mags.first != self)
-      then errors.add :accepts_submissions_until, "can't occurr during another magazine (#{mags.first} accepts submissions from #{mags.first.accepts_submissions_from})"
+      then errors.add :accepts_submissions_until, "can't occurr during another issue (#{mags.first} accepts submissions from #{mags.first.accepts_submissions_from})"
     end
   end
 
@@ -243,10 +243,10 @@ protected
     end
   end
 
-  def same_positions_as_previous_mag
-    previous_mag = publication.magazines.where("accepts_submissions_from < ?", self.accepts_submissions_from).first
-    if previous_mag
-      for position in previous_mag.positions
+  def same_positions_as_previous_issue
+    previous_issue = publication.issues.where("accepts_submissions_from < ?", self.accepts_submissions_from).first
+    if previous_issue
+      for position in previous_issue.positions
         self.positions << Position.create(name: position.name, abilities: position.abilities)
       end
     end

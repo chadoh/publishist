@@ -4,7 +4,7 @@ Feature: The coeditor enters scores in bulk
   so that their scores will count for something.
 
   Scenario: The coeditor enters scores
-    Given I'm in a position for the current magazine with the "scores" and "views" abilities
+    Given I'm in a position for the current issue with the "scores" and "views" abilities
     And I and 2 more people attend the first meeting
     And there is a submission called "The Wasteland" scheduled for the first meeting
     When I go to the first meeting page
@@ -13,7 +13,7 @@ Feature: The coeditor enters scores in bulk
     Then I should see 3 score fields
 
   Scenario: The coeditor checks scores
-    Given I'm in a position for the current magazine with the "scores" and "orchestrates" abilities
+    Given I'm in a position for the current issue with the "scores" and "orchestrates" abilities
     And scores have been entered for a meeting
     When I am on the submissions page
     Then I should see "Score:"

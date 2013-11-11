@@ -1,0 +1,11 @@
+%section#issues
+  %header
+    %h2
+      Issues
+  %ul.issues
+    - for issue in @issues
+      - if issue != @issue
+        %a{ href: url_for(m: issue.to_param) }
+          = render 'issues/for_sidebar', issue: issue
+      - else
+        = render 'issues/for_sidebar', issue: issue

@@ -16,7 +16,7 @@ class Packlet < ActiveRecord::Base
   belongs_to :submission, :include => :author
 
   has_many :scores
-  has_one :magazine, through: :meeting
+  has_one :issue, through: :meeting
 
   acts_as_list :scope => :meeting
 
@@ -24,10 +24,10 @@ class Packlet < ActiveRecord::Base
   validates_presence_of :submission_id
   validates_uniqueness_of :submission_id, scope: :meeting_id
 
-  validate :only_reviewed_in_one_magazine
+  validate :only_reviewed_in_one_issue
 
   before_create :submission_reviewed_or_queued
-  before_save   :update_submissions_magazine_if_different
+  before_save   :update_submissions_issue_if_different
 
   def destroy options = {}
     super()
@@ -38,20 +38,20 @@ class Packlet < ActiveRecord::Base
 
 protected
 
-  def only_reviewed_in_one_magazine
-    if self.meeting && self.magazine
+  def only_reviewed_in_one_issue
+    if self.meeting && self.issue
       if Packlet.where(submission_id: self.submission).present?
-        if self.submission.magazine != self.magazine
-          errors.add(:submission, "can only be reviewed during the magazine it was submitted for")
+        if self.submission.issue != self.issue
+          errors.add(:submission, "can only be reviewed during the issue it was submitted for")
         end
       end
     end
   end
 
-  def update_submissions_magazine_if_different
-    if self.meeting && self.magazine
-      if self.submission.magazine != self.magazine
-        self.submission.update_attributes magazine: self.magazine
+  def update_submissions_issue_if_different
+    if self.meeting && self.issue
+      if self.submission.issue != self.issue
+        self.submission.update_attributes issue: self.issue
       end
     end
   end

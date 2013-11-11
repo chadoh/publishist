@@ -3,7 +3,7 @@
     %h2= note.title
   :markdown
     #{note.body}
-  - if orchestrates? @magazine
+  - if orchestrates? @issue
     %nav.actions
       %ul
         %li= link_to "Edit", edit_editors_note_path(note), remote: true

@@ -1,24 +1,24 @@
-*<%= title = @magazine.to_s %>* has been published!
-=<%= "=" * title.length             %>=====================
+*<%= title = @issue.to_s %>* can now be browsed online!
+=<%= "=" * title.length             %>==========================
 
-Check it out! <%= magazine_url(@magazine, subdomain: @publication.subdomain) %>
+Check it out! <%= issue_url(@issue, subdomain: @publication.subdomain) %>
 
 <% if @published.present? %>
-Congratulations! You've been published in it!
----------------------------------------------
+You may know this already, but you've been published in it!
+-----------------------------------------------------------
 
 <% for sub in @published %>
 * [<%= sanitize sub.to_s %>](<%= submission_url(sub, subdomain: @publication.subdomain) %>)
 <% end %>
 
-made it into this magazine!
+made it into this issue!
 <% end %>
 
 <% if @rejected.present? %>
 Unfortunately, we can't publish everything, though.
 ---------------------------------------------------
 
-The following didn't make into this magazine:
+The following didn't make into this issue:
 
 <% for sub in @rejected %>
 * [<%= sanitize sub.to_s %>](<%= submission_url(sub, subdomain: @publication.subdomain) %>)

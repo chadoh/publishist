@@ -43,15 +43,15 @@ Pc::Application.routes.draw do
       member { put "update_position" }
     end
 
-    resources :magazines do
+    resources :issues do
       member do
         get "highest_scores", as: "highest_scored_for"
         get "staff_list", as: "staff_for"
         post :publish
-        post :notify_authors_of_published_magazine, as: "notify_authors_of_published"
+        post :notify_authors_of_published_issue, as: "notify_authors_of_published"
       end
     end
-    resources :magazines, only: [] do
+    resources :issues, only: [] do
       resources :pages, path: "pages", only: [:create]
       resources :pages, path: "", only: [:show, :update, :destroy] do
         member do

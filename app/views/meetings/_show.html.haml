@@ -1,7 +1,7 @@
 %li[meeting]
   %span.question= link_to meeting.question, meeting
   %time{ :datetime => meeting.datetime }= pretty_date meeting.datetime
-  - if orchestrates? @magazine
+  - if orchestrates? @issue
     .small.sans
       = link_to t('edit').html_safe, edit_meeting_url(meeting), title: "Edit"
       = link_to t('destroy').html_safe, meeting_url(meeting),

@@ -4,8 +4,8 @@ describe "Publications" do
   describe "GET \#{publication.subdomain}.publishist.com" do
     it "loads up a random published submission from the publication and info about the publication" do
       publication = Factory.create(:publication)
-      magazine = Factory.create(:magazine, publication: publication, published_on: Date.yesterday, notification_sent: true)
-      submission = Factory.create(:submission, publication: publication, magazine: magazine, state: :published)
+      issue = Factory.create(:issue, publication: publication, published_on: Date.yesterday, notification_sent: true)
+      submission = Factory.create(:submission, publication: publication, issue: issue, state: :published)
 
       visit root_url(subdomain: publication.subdomain)
       expect(page).to have_content(submission.title)
@@ -37,7 +37,7 @@ describe "Publications" do
 
       expect(publication.editor).to eq editor
 
-      expect(Magazine.count).not_to eq 0
+      expect(Issue.count).not_to eq 0
       expect(Submission.count).not_to eq 0
       expect(Meeting.count).not_to eq 0
     end

@@ -5,7 +5,7 @@
     .right
       = link_to "javascript:if(window.print)window.print()" do
         = fa_icon "print", text: "Print this page"
-    = form_tag highest_scored_for_magazine_path(@magazine), :method => :get, :id => "highest" do
+    = form_tag highest_scored_for_issue_path(@issue), :method => :get, :id => "highest" do
       = label_tag :highest, "View the highest"
       = number_field_tag :highest, @highest.presence, :in => 1..@max
 
@@ -15,8 +15,8 @@
 
 - if @submissions.present?
   :markdown
-    The average score was **#{@magazine.average_score}**
-  = form_tag publish_magazine_path(@magazine), :id => "publish" do
+    The average score was **#{@issue.average_score}**
+  = form_tag publish_issue_path(@issue), :id => "publish" do
     %ol.submissions.collapsable
       - for submission in @submissions
         = render :partial => 'submissions/show', :locals => { :submission => submission }
@@ -24,4 +24,4 @@
     = submit_tag "Start organizing the layout"
 
 - else
-  %p Uh oh! You never entered any scores for this magazine!!
+  %p Uh oh! You never entered any scores for this issue!!

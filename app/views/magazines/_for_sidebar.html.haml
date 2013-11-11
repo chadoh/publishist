@@ -1,9 +1,0 @@
-%li[mag]{ class: mag == @magazine && 'selected' }
-  %header
-    - if mag == @magazine
-      %h3= mag
-    - else
-      %p= mag
-  = pluralize mag.meetings.count, 'meeting'
-  %br
-  = timeframe mag.accepts_submissions_from, mag.accepts_submissions_until

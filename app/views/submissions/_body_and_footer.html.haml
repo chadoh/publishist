@@ -5,7 +5,7 @@
     = sanitize submission.body
 %footer.submission-details
 
-  - if submission.published? || ((@show_author.nil? || @show_author) && (communicates_or_is_author?(submission) || params[:controller] == 'magazines'))
+  - if submission.published? || ((@show_author.nil? || @show_author) && (communicates_or_is_author?(submission) || params[:controller] == 'issues'))
     %p.author
       - if communicates?(submission)
         = mail_to submission.email, submission.email, class: 'mailto'
@@ -36,18 +36,18 @@
     %p.scored
       Score:
       %meter{ :min => 0, :max => 10,
-              :data => { :average => average = @average.presence || submission.magazine.try(:average_score).presence },
+              :data => { :average => average = @average.presence || submission.issue.try(:average_score).presence },
               :value => score = submission.average_score,
               :title => "#{score} out of 10#{" (average: #{average})" if average.present?}" }
         #{score}
 
   - if submission.published? and page_appropriate? and !(params['controller'] == 'pages' && params['action'] == 'show')
     %p.published
-      Published in #{link_to submission.magazine.present_name, magazine_path(submission.magazine)}
+      Published in #{link_to submission.issue.present_name, issue_path(submission.issue)}
 
   - if submission.rejected? and page_appropriate?
     %p.rejected
-      This didn't quite make it into #{link_to submission.magazine.present_name, magazine_path(submission.magazine)}.
+      This didn't quite make it into #{link_to submission.issue.present_name, issue_path(submission.issue)}.
       - if submission.author == current_person
         Please #{link_to "try again", new_submission_path}.
 
@@ -58,14 +58,14 @@
           = f.hidden_field :state, value: Submission.state(:submitted)
           = f.submit "Submit", class: "link"
       = link_to t('edit').html_safe, edit_submission_url(submission), title: "Edit"
-      - if (communicates?(submission) || submission.state != :published) && !(params[:controller] == "magazines" && params[:action] == "highest_scores")
+      - if (communicates?(submission) || submission.state != :published) && !(params[:controller] == "issues" && params[:action] == "highest_scores")
         = link_to t('destroy').html_safe, submission_url(submission),
           title: "Delete",
           method: :delete,
           confirm: "Are you really sure you want to totally destroy all record of this submission?#{' If you just want to unschedule it, you can do that by dragging it to the "Unscheduled" section on the "Submissions" page.' if communicates?(submission)}",
           class: "link destroy"
-      - if submission.published? && !submission.magazine.notification_sent?
+      - if submission.published? && !submission.issue.notification_sent?
         = form_for submission, html: { class: "button_to" } do |f|
           = f.hidden_field :state, value: Submission.state(:rejected)
-          %button.link{ title: "Unpublish (#{submission} will no longer be part of #{submission.magazine})", confirm: "Are you sure that #{submission} shouldn't be published in #{submission.magazine}?" }
+          %button.link{ title: "Unpublish (#{submission} will no longer be part of #{submission.issue})", confirm: "Are you sure that #{submission} shouldn't be published in #{submission.issue}?" }
             = fa_icon "eject"

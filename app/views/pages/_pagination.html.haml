@@ -2,17 +2,17 @@
   %ol.pages<
     - if orchestrates? @publication
       = render partial: "pages/form", locals: { position: :beginning }
-    - for page in @magazine.pages
+    - for page in @issue.pages
       - if orchestrates?(@publication) || page.has_content?
         - if page == @page && orchestrates?(@publication)
           %li[page]<
             = page.title
-            = link_to fa_icon("times"), [@magazine, page],
+            = link_to fa_icon("times"), [@issue, page],
                              :method => :delete,
                              :class => "link",
                              :title => "Remove this page (its content will go to the next page)"
         - else
           %li[page]<
-            = link_to_unless page == @page, page.title, magazine_page_path(@magazine, page)
+            = link_to_unless page == @page, page.title, issue_page_path(@issue, page)
     - if orchestrates? @publication
       = render partial: "pages/form", locals: { position: :end }

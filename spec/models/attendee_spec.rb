@@ -5,7 +5,7 @@ describe Attendee do
   it {
     should belong_to :meeting
     should belong_to :person
-    should have_one(:magazine).through(:meeting)
+    should have_one(:issue).through(:meeting)
     should have_many :scores
     should validate_presence_of :meeting_id
   }
@@ -51,8 +51,8 @@ describe Attendee do
   end
 
   it "puts the submitter into all positions that have the 'disappears' ability upon creation" do
-    ab  = Ability.create key: 'disappears', description: "Submitters & attendees are automatically added to this group. It will disappear once the magazine is published."
-    pos = Magazine.create.positions.create name: "The Folks", abilities: [ab]
+    ab  = Ability.create key: 'disappears', description: "Submitters & attendees are automatically added to this group. It will disappear once the issue is published."
+    pos = Issue.create.positions.create name: "The Folks", abilities: [ab]
     @a.person = @p
     @a.save
     @p.positions.should be_present

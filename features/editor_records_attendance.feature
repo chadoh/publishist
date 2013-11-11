@@ -5,7 +5,7 @@ Feature: an editor records attendee
   I want to record attendee
 
   Scenario: Recording attendee for someone who has an account
-    Given I'm in a position for the current magazine with the "orchestrates" ability
+    Given I'm in a position for the current issue with the "orchestrates" ability
     And there is a person named "Peas Porridge Cold" with email address "chad@chadoh.com"
     And I am on the first meeting page
     When I fill in the following:
@@ -18,7 +18,7 @@ Feature: an editor records attendee
     Then I should not see "Peas Cold"
 
   Scenario: Creating an account for a new person by recording attendee correctly
-    Given I'm in a position for the current magazine with the "orchestrates" ability
+    Given I'm in a position for the current issue with the "orchestrates" ability
     And I am on the first meeting page
     When I fill in the following:
       | attendee_person | Cookie Monster, cookies@yomyom.com   |
@@ -27,7 +27,7 @@ Feature: an editor records attendee
     Then I should see a "Cookie Monster" link under "Attendance"
 
   Scenario: Recording attendee for someone without making them an account
-    Given I'm in a position for the current magazine with the "orchestrates" ability
+    Given I'm in a position for the current issue with the "orchestrates" ability
     And I am on the first meeting page
     When I fill in the following:
       | attendee_person | Cookie Monster |
@@ -36,7 +36,7 @@ Feature: an editor records attendee
     Then I should see "Cookie Monster" under "Attendance"
 
   Scenario: I edit an attendance record with javascript turned off
-    Given I'm in a position for the current magazine with the "orchestrates" ability
+    Given I'm in a position for the current issue with the "orchestrates" ability
     And someone named "O. J. Simpson" attended the first meeting
     And I am on the first meeting page
     When I click the edit link

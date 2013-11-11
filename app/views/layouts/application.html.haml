@@ -20,7 +20,7 @@
           - else
             %li{ :class => params[:controller] == 'submissions' && 'current' }= link_to_unless_current 'Submissions', submissions_path
           %li{ :class => params[:controller] == 'meetings'      && 'current' }= link_to_unless_current 'Meetings', meetings_path
-          %li{ :class => params[:controller] == 'magazines'   && 'current' }= link_to_unless_current 'Magazines', magazines_path
+          %li{ :class => params[:controller] == 'issues'   && 'current' }= link_to_unless_current 'Issues', issues_path
           %li
             %ul#account
               - if person_signed_in?

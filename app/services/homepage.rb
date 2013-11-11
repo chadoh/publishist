@@ -1,8 +1,8 @@
 class Homepage
   def initialize(publication)
-    magazine = magazine_for(publication)
-    @hook = nil unless magazine
-    defined?(@hook) or @hook = submission_for(magazine)
+    issue = issue_for(publication)
+    @hook = nil unless issue
+    defined?(@hook) or @hook = submission_for(issue)
   end
 
   def hook(&block)
@@ -15,14 +15,14 @@ class Homepage
 
   private
 
-    def magazine_for(publication)
-      publication.magazines.
+    def issue_for(publication)
+      publication.issues.
         published.
         order("random()").first
     end
 
-    def submission_for(magazine)
-      magazine.submissions.
+    def submission_for(issue)
+      issue.submissions.
         published.
         where("photo_file_name IS NULL").
         order("random()").first

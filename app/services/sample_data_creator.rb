@@ -5,17 +5,17 @@ class SampleDataCreator
   end
 
   def seed_data
-    seed_magazines
+    seed_issues
 
-    seed_submissions_for_first_magazine
-    seed_meeting_for_first_magazine
-    publish_first_magazine
+    seed_submissions_for_first_issue
+    seed_meeting_for_first_issue
+    publish_first_issue
 
-    seed_submissions_for_second_magazine
-    seed_meeting_for_second_magazine
+    seed_submissions_for_second_issue
+    seed_meeting_for_second_issue
 
-    seed_submissions_for_third_magazine
-    seed_meetings_for_third_magazine
+    seed_submissions_for_third_issue
+    seed_meetings_for_third_issue
 
     seed_positions
     return publication
@@ -28,22 +28,22 @@ class SampleDataCreator
 
     def communicates; @communicates ||= Ability.find_or_create_by_key_and_description 'communicates', "Can see the names of submitters and communicate with them."; end
     def scores;       @scores ||= Ability.find_or_create_by_key_and_description 'scores', "Can enter (and see) scores for all submissions."; end
-    def orchestrates; @orchestrates ||= Ability.find_or_create_by_key_and_description 'orchestrates', "Can organize meetings, record attendance, publish magazines, and specify staff."; end
+    def orchestrates; @orchestrates ||= Ability.find_or_create_by_key_and_description 'orchestrates', "Can organize meetings, record attendance, publish issues, and specify staff."; end
     def views;        @views ||= Ability.find_or_create_by_key_and_description 'views', "Can view meetings and attendees."; end
-    def disappears;   @disappears ||= Ability.find_or_create_by_key_and_description 'disappears', "Submitters & attendees are automatically added to this group. It will disappear once the magazine is published."; end
+    def disappears;   @disappears ||= Ability.find_or_create_by_key_and_description 'disappears', "Submitters & attendees are automatically added to this group. It will disappear once the issue is published."; end
 
-    def seed_magazines
-      @magazines = [
-        seed_first_magazine,
-        seed_second_magazine,
-        seed_third_magazine,
+    def seed_issues
+      @issues = [
+        seed_first_issue,
+        seed_second_issue,
+        seed_third_issue,
       ]
     end
-    alias :magazines :seed_magazines
+    alias :issues :seed_issues
 
     def mag1
       return @mag1 if defined? @mag1
-      @mag1 ||= Magazine.find_or_create_by_nickname_and_title_and_publication_id('sample published issue', "#{publication.name} vol. 1", publication.id)
+      @mag1 ||= Issue.find_or_create_by_nickname_and_title_and_publication_id('sample published issue', "#{publication.name} vol. 1", publication.id)
       @mag1.update_attributes(
         :accepts_submissions_from  => Time.zone.now - 12.months,
         :accepts_submissions_until => Time.zone.now - 6.months,
@@ -54,11 +54,11 @@ class SampleDataCreator
       )
       @mag1
     end
-    alias :seed_first_magazine :mag1
+    alias :seed_first_issue :mag1
 
     def mag2
       return @mag2 if defined? @mag2
-      @mag2 ||= Magazine.find_or_create_by_nickname_and_title_and_publication_id('sample published issue', "#{publication.name} vol. 2", publication.id)
+      @mag2 ||= Issue.find_or_create_by_nickname_and_title_and_publication_id('sample published issue', "#{publication.name} vol. 2", publication.id)
       @mag2.update_attributes(
         :accepts_submissions_from  => Time.zone.now - 6.months + 1.day,
         :accepts_submissions_until => Time.zone.now - 2.weeks,
@@ -69,18 +69,18 @@ class SampleDataCreator
       )
       @mag2
     end
-    alias :seed_second_magazine :mag2
+    alias :seed_second_issue :mag2
 
     def mag3
-      @mag3 ||= Magazine.find_or_create_by_nickname_and_publication_id('next', publication.id)
+      @mag3 ||= Issue.find_or_create_by_nickname_and_publication_id('next', publication.id)
     end
-    alias :seed_third_magazine :mag3
+    alias :seed_third_issue :mag3
 
     def positions
-      @positions ||= magazines.inject([]) do |positions, mag|
-        positions << Position.find_or_create_by_magazine_id_and_name(mag.id, "Editor")
-        positions << Position.find_or_create_by_magazine_id_and_name(mag.id, "Coeditor")
-        positions << Position.find_or_create_by_magazine_id_and_name(mag.id, "Staff")
+      @positions ||= issues.inject([]) do |positions, issue|
+        positions << Position.find_or_create_by_issue_id_and_name(issue.id, "Editor")
+        positions << Position.find_or_create_by_issue_id_and_name(issue.id, "Coeditor")
+        positions << Position.find_or_create_by_issue_id_and_name(issue.id, "Staff")
         positions
       end
     end
@@ -112,9 +112,9 @@ class SampleDataCreator
       add_abilities_to_positions
     end
 
-    def publish_first_magazine
+    def publish_first_issue
       mag1.publish published_submissions
-      mag1.notify_authors_of_published_magazine
+      mag1.notify_authors_of_published_issue
     end
 
     def dummy_person
@@ -142,7 +142,7 @@ class SampleDataCreator
       ]
     end
 
-    def seed_submissions_for_first_magazine
+    def seed_submissions_for_first_issue
       seed_published_submissions
       seed_rejected_submissions
     end
@@ -163,7 +163,7 @@ class SampleDataCreator
     end
     alias :seed_rejected_submissions :rejected_submissions
 
-    def seed_submissions_for_second_magazine
+    def seed_submissions_for_second_issue
       public_domain_works[3..6].map do |submission|
         create_submission_for(mag2, from: submission)
       end
@@ -176,13 +176,13 @@ class SampleDataCreator
       end
       @new_submissions << create_submission_for(mag3, from: sample_works_by_editor[2], submission_date: Time.zone.now, author: editor)
     end
-    alias :seed_submissions_for_third_magazine :new_submissions
+    alias :seed_submissions_for_third_issue :new_submissions
 
-    def create_submission_for(magazine, options)
+    def create_submission_for(issue, options)
       from = options.fetch(:from)
       date = options[:submission_date] || Time.zone.now - 5.months
       author = options[:author] || dummy_person
-      submission = Submission.find_or_create_by_magazine_id_and_author_id_and_title(magazine.id, author.id, from[:title])
+      submission = Submission.find_or_create_by_issue_id_and_author_id_and_title(issue.id, author.id, from[:title])
       submission.update_attributes(
         :publication_id => publication.id,
         :state => :submitted,
@@ -198,8 +198,8 @@ class SampleDataCreator
       Pseudonym.find_or_create_by_submission_id_and_name_and_link_to_profile(submission.id, pseudonym, false)
     end
 
-    def seed_meeting_for_first_magazine
-      meeting = Meeting.find_or_create_by_magazine_id(mag1.id)
+    def seed_meeting_for_first_issue
+      meeting = Meeting.find_or_create_by_issue_id(mag1.id)
       meeting.update_attributes(
         :datetime => Time.zone.now - 7.months,
         :question => "What is your spirit animal?"
@@ -207,8 +207,8 @@ class SampleDataCreator
       review_submissions_at(meeting, mag1.submissions(:all))
     end
 
-    def seed_meeting_for_second_magazine
-      meeting = Meeting.find_or_create_by_magazine_id(mag2.id)
+    def seed_meeting_for_second_issue
+      meeting = Meeting.find_or_create_by_issue_id(mag2.id)
       meeting.update_attributes(
         :datetime => Time.zone.now - 2.months,
         :question => "What was your first pet?"
@@ -216,10 +216,10 @@ class SampleDataCreator
       review_submissions_at(meeting, mag2.submissions(:all))
     end
 
-    def seed_meetings_for_third_magazine
-      meeting1 = Meeting.find_or_create_by_magazine_id_and_question(mag3.id, "Who is your alter ego and what is he/she/it like?")
+    def seed_meetings_for_third_issue
+      meeting1 = Meeting.find_or_create_by_issue_id_and_question(mag3.id, "Who is your alter ego and what is he/she/it like?")
       meeting1.update_attribute :datetime, Time.zone.now + 2.weeks
-      meeting2 = Meeting.find_or_create_by_magazine_id_and_question(mag3.id, "What's the ideal place to have a #{publication.name} social?")
+      meeting2 = Meeting.find_or_create_by_issue_id_and_question(mag3.id, "What's the ideal place to have a #{publication.name} social?")
       meeting2.update_attribute :datetime, Time.zone.now + 4.weeks
     end
 
