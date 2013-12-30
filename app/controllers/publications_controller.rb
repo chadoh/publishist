@@ -12,7 +12,6 @@ class PublicationsController < ApplicationController
     @publication = current_publication
     @homepage = Homepage.new(@publication)
     @show_conditional_tips = !!@homepage.hook_present?
-    set_tips
   end
 
   def new

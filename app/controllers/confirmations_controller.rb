@@ -1,6 +1,5 @@
 class ConfirmationsController < Devise::PasswordsController
   skip_before_filter :require_no_authentication
-  skip_before_filter :set_tips
 
   # PUT /person/confirmation
   def update

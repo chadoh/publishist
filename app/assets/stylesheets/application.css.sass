@@ -735,14 +735,15 @@ article.issues ol.submissions li.collapsed.submission
   *
     height: 0
 
-.tips
+[data-typsy-toggle]
   line-height: 1.1em // somehow fixes the position??
   position: absolute
   right: 0
   z-index: 2
   a
     color: $base
-.tip-container
+[data-typsy-container]
+  display: none
   border: 1px solid $lgray
   border-radius: 0.5em
   box-shadow: 1px 3px 15px rgba(0,0,0,0.3)
@@ -753,15 +754,18 @@ article.issues ol.submissions li.collapsed.submission
   text-align: left
   width: 25em
   z-index: 1
+  h1
+    display: none
   ol
     list-style-type: none
     margin: 0
-  .fa, .tip-text, .actions > *
+  .typsy-tip-icon, .typsy-tip-text, .actions > *
     +inline-block
     vertical-align: middle
-  .fa
+  .typsy-tip-icon
     width: 11%
-  .tip-text
+    text-align: center
+  .typsy-tip-text
     width: 83%
   li:not(:last-child)
     margin-bottom: 1em
@@ -773,3 +777,4 @@ article.issues ol.submissions li.collapsed.submission
     button
       padding: 0 0.6em
       margin: 0
+      margin-right: 1em

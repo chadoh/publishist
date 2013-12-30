@@ -1,13 +1,4 @@
-- if @tips
-  .tips{ "data-behavior" => "typsy-toggle" }
+- if orchestrates? @publication
+  .tips(data-typsy-toggle)
     = link_to fa_icon("question-circle"), "#toggle-tips"
-  .tip-container{ style: "display: #{@show_tips_at_page_load}", data: { behavior: "typsy-container", user: current_person.id } }
-    %ol
-      = render "shared/each_tip"
-    .actions
-      %small
-        = check_box_tag "show_by_default", true, current_person.show_tips_at_page_load
-        %label(for="show_by_default") Show these tips at page load
-      %span.right
-        %button{ "data-behavior" => "typsy-toggle" }
-          OK
+  .tip-container{ data: { "typsy-container" => "", app: "e497f632-fdc4-4ab5-9eac-8b58f5761a41", page: "#{params[:controller]}##{params[:action]}", user: current_person.id, show_conditionals: @show_conditional_tips } }

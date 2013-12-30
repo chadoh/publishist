@@ -18,7 +18,6 @@ class PagesController < ApplicationController
       redirect_to root_url and return
     end
     @show_conditional_tips = orchestrates?(@issue) && !@issue.notification_sent
-    set_tips
   end
 
   def create

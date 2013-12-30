@@ -34,7 +34,6 @@ class SubmissionsController < InheritedResources::Base
     end
 
     @show_conditional_tips = communicates? @publication
-    set_tips
   end
 
   def edit

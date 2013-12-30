@@ -20,7 +20,6 @@ class IssuesController < InheritedResources::Base
                    @publication.issues.where('published_on IS NOT NULL')
                  end
     @show_conditional_tips = @issues.any?(&:timeframe_freshly_over?)
-    set_tips
   end
 
   def new
